@@ -18,12 +18,9 @@ jobs:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
-            ${{ github.actor }} created commit:
-            Commit message: ${{ github.event.commits[0].message }}
-            
-            Repository: ${{ github.repository }}
-            
-            See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
+            Commit from: ${{ github.actor }}
+            Commit message: ${{ github.event.commits[0].message }}            
+            Commit changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
 
       - uses: yanzay/notify-telegram@v0.1.0
         if: always()
