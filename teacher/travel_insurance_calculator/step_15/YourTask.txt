@@ -1,0 +1,29 @@
+Ваша задача: ментор обратил ваше внимание на то,
+что даты в ответе показываются в странном формате.
+
+Вопрос:
+{
+"personFirstName" : "Vasja",
+"personLastName" : "Pupkin",
+"agreementDateFrom" : "2021-05-25",
+"agreementDateTo" : "2021-05-29"
+}
+
+
+Ответ:
+{
+    "errors": null,
+    "personFirstName": "Vasja",
+    "personLastName": "Pupkin",
+    "agreementDateFrom": "2021-05-25T00:00:00.000+00:00",
+    "agreementDateTo": "2021-05-29T00:00:00.000+00:00",
+    "agreementPrice": 4
+}
+
+Ваша задача заключается в том, чтобы поменять формат даты
+в ответе на "yyyy-MM-dd".
+
+Для этого ментор вам посоветовал воспользоваться библиотекой:
+	implementation('com.fasterxml.jackson.core:jackson-core:2.14.2')
+
+и аннотацией @JsonFormat.

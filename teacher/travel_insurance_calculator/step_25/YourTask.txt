@@ -1,0 +1,6 @@
+Ваша задача: превратите ответ (TravelCalculatePremiumResponse)
+в строку (формат JSON) и залогируйте его в систему логирования.
+
+
+Примерный ожидаемый результат на консоли:
+2023-03-13 07:54:56,629 [http-nio-8080-exec-2] INFO  l.j.j.i.r.TravelCalculatePremiumResponseLogger - RESPONSE: {"errors":null,"personFirstName":"Vasja","personLastName":"Pupkin","agreementDateFrom":"2025-01-01","agreementDateTo":"2025-01-10","agreementPrice":9}

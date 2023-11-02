@@ -1,0 +1,24 @@
+Ментор обращает ваше внимание на качество кода.
+Хорошее ИТ решение это не просто решение, которое выполняет
+все предъявленные к нему требования. Это решение, которое
+легко понять и легко расширять и изменять. Поэтому, чтобы
+стать профессионалом, нужно следить за качеством кода,
+который вы создаёте.
+
+Рефакторинг (англ. refactoring) — это процесс изменения
+внутренней структуры программы, не затрагивающий её внешнего
+поведения и имеющий целью облегчить понимание её работы.
+
+
+На тему рефакторинга классической является книга авторов
+Martin Fowler, Kent Beck, Refactoring: Improving the Design of Existing Code:
+First edition: https://www.amazon.com/Refactoring-Improving-Design-Existing-Code/dp/0201485672
+Second edition: https://www.amazon.com/Refactoring-Improving-Existing-Addison-Wesley-Signature/dp/0134757599
+
+На тему clean code классикой является The Clean Coder (by Robert C. Martin):
+https://www.amazon.com/Robert-Martinand-Professional-Programmers-Paperback/dp/B07VK8VZ9B
+
+
+Ваша задача: написать тесты для класса
+TravelCalculatePremiumServiceImpl и улучшить
+его код (провести рефакторинг) если это возможно.
