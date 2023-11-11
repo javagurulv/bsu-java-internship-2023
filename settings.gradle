@@ -6,6 +6,7 @@ include 'student_snezhko_leu'
 include 'student_koktysh_anton'
 include 'student_kalesnik_ivan'
 include 'student_bezmen_nikolay'
+include 'student_kozyro_ilya'
 
 include 'teacher:travel_insurance_calculator:step_1'
 include 'teacher:travel_insurance_calculator:step_2'
