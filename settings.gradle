@@ -4,6 +4,7 @@ include 'student_revinskaya_ekaterina'
 include 'student_trofimovich_timofey'
 include 'student_snezhko_leu'
 include 'student_koktysh_anton'
+include 'student-kalesnik_ivan'
 
 include 'teacher:travel_insurance_calculator:step_1'
 include 'teacher:travel_insurance_calculator:step_2'
