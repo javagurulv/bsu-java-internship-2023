@@ -8,6 +8,7 @@ include 'student_kalesnik_ivan'
 include 'student_bezmen_nikolay'
 include 'student_kozyro_ilya'
 include 'student_frolova_ilona'
+include 'student_tsiarenstyey_ivan'
 
 include 'teacher:travel_insurance_calculator:step_1'
 include 'teacher:travel_insurance_calculator:step_2'
