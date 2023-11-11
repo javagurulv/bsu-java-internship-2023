@@ -2,7 +2,7 @@ include 'student_lastname_firstname'
 include 'student_polyakov_andrey'
 include 'student_revinskaya_ekaterina'
 include 'student_trofimovich_timofey'
-
+include 'student_snezhko_leu'
 
 include 'teacher:travel_insurance_calculator:step_1'
 include 'teacher:travel_insurance_calculator:step_2'
