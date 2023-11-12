@@ -9,7 +9,12 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
 
     @Override
     public TravelCalculatePremiumResponse calculatePremium(TravelCalculatePremiumRequest request) {
-        return new TravelCalculatePremiumResponse();
+        TravelCalculatePremiumResponse temp = new TravelCalculatePremiumResponse();
+        temp.setPersonFirstName(request.getPersonFirstName());
+        temp.setPersonLastName(request.getPersonLastName());
+        temp.setAgreementDateFrom(request.getAgreementDateFrom());
+        temp.setAgreementDateTo(request.getAgreementDateTo());
+        return temp;
     }
 
 }
