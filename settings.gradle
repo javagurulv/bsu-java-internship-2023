@@ -15,6 +15,7 @@ include 'student_zaitsau_stanislau'
 include 'student_kroshinsky_eugene'
 include 'student_golovach_vladislav'
 include 'student_lobosov_matvei'
+include 'student_traskevich_aleksei'
 
 include 'teacher:travel_insurance_calculator:step_1'
 include 'teacher:travel_insurance_calculator:step_2'

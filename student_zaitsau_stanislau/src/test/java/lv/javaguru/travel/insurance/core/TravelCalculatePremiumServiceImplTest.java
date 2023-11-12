@@ -3,17 +3,15 @@ package lv.javaguru.travel.insurance.core;
 import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumResponse;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 class TravelCalculatePremiumServiceImplTest {
-    private final DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+    private final DateFormat dateFormat = DateTimeService.getDateFormat();
     private final TravelCalculatePremiumService service = new TravelCalculatePremiumServiceImpl();
     @ParameterizedTest
     @CsvSource({
@@ -35,6 +33,7 @@ class TravelCalculatePremiumServiceImplTest {
         Assertions.assertEquals(request.getPersonLastName(), response.getPersonLastName());
         Assertions.assertEquals(request.getAgreementDateFrom(), response.getAgreementDateFrom());
         Assertions.assertEquals(request.getAgreementDateTo(), response.getAgreementDateTo());
+        Assertions.assertEquals(DateTimeService.getDaysDifference(request.getAgreementDateFrom(), response.getAgreementDateTo()), response.getAgreementPrice());
     }
 
 }

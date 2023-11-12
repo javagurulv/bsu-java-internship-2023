@@ -1,7 +1,7 @@
 package lv.javaguru.travel.insurance.core;
 
-import lv.javaguru.travel.insurance.validation.TravelCalculatePremiumRequest;
-import lv.javaguru.travel.insurance.validation.TravelCalculatePremiumResponse;
+import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumResponse;
 
 public interface TravelCalculatePremiumService {
 
