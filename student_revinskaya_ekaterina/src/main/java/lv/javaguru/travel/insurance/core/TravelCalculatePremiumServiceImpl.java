@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 @Component
 class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService {
     @Autowired
-    private TravelCalculatePremiumRequestValidator requestValidator;
+    private TravelCalculatePremiumRequestValidator requestValidator = new TravelCalculatePremiumRequestValidator();
 
     private BigDecimal calculateDiffBetweenDays(Date date1, Date date2){
         return BigDecimal.valueOf(TimeUnit.MILLISECONDS.toDays(date1.getTime() - date2.getTime()));
