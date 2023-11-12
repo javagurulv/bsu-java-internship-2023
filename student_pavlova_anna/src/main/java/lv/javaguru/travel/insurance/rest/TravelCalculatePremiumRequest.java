@@ -1,23 +1,17 @@
 package lv.javaguru.travel.insurance.rest;
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.time.Duration;
-import java.time.Instant;
 import java.util.Date;
 
-public class TravelCalculatePremiumResponse {
+public class TravelCalculatePremiumRequest {
 
     private String personFirstName;
     private String personLastName;
     private Date agreementDateFrom;
     private Date agreementDateTo;
 
-    private BigDecimal agreementPrice;
+    public TravelCalculatePremiumRequest() { }
 
-    public TravelCalculatePremiumResponse() {}
-
-    public TravelCalculatePremiumResponse(String personFirstName,
+    public TravelCalculatePremiumRequest(String personFirstName,
                                          String personLastName,
                                          Date agreementDateFrom,
                                          Date agreementDateTo) {
@@ -25,27 +19,7 @@ public class TravelCalculatePremiumResponse {
         this.personLastName = personLastName;
         this.agreementDateFrom = agreementDateFrom;
         this.agreementDateTo = agreementDateTo;
-
-        this.agreementPrice = new BigDecimal(
-                BigInteger.valueOf(getDifferenceInDays(this.agreementDateFrom, this.agreementDateTo))
-        );
     }
-
-    private long getDifferenceInDays(Date date1, Date date2) {
-        Instant instant1 = date1.toInstant();
-        Instant instant2 = date2.toInstant();
-
-        Duration duration = Duration.between(instant1, instant2);
-        return duration.toDays();
-    }
-
-    public BigDecimal getAgreementPrice() {
-        return agreementPrice;
-    } // ?
-
-    public void setAgreementPrice(BigDecimal agreementPrice) {
-        this.agreementPrice = agreementPrice;
-    } // ?
 
     public String getPersonFirstName() {
         return personFirstName;
