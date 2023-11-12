@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import static org.assertj.core.api.Assertions.*;
 
+import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -34,6 +35,8 @@ class TravelCalculatePremiumServiceImplTest {
         assertThat(response.getPersonLastName()).isEqualTo(request.getPersonLastName());
         assertThat(response.getAgreementDateFrom()).isEqualTo(request.getAgreementDateFrom());
         assertThat(response.getAgreementDateTo()).isEqualTo(request.getAgreementDateTo());
+        long daysBetween = (request.getAgreementDateFrom().getTime() - request.getAgreementDateTo().getTime()) / 1000 * 60 * 60 * 24;
+        assertThat(response.getAgreementPrice()).isEqualTo(new BigDecimal(daysBetween));
     }
 
 
