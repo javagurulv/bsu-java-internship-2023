@@ -22,6 +22,7 @@ include 'student_filon_ivan'
 include 'student_lankut_alexandr'
 include 'student_pavlova_anna'
 include 'student_bosko_anton'
+include 'student_kvetko_matvey'
 
 include 'teacher:travel_insurance_calculator:step_1'
 include 'teacher:travel_insurance_calculator:step_2'
