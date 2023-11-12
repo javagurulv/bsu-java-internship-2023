@@ -18,6 +18,7 @@ include 'student_lobosov_matvei'
 include 'student_traskevich_aleksei'
 include 'student_vorobey_artyom'
 include 'student_filon_ivan'
+include 'student_lankut_alexandr'
 
 include 'teacher:travel_insurance_calculator:step_1'
 include 'teacher:travel_insurance_calculator:step_2'
