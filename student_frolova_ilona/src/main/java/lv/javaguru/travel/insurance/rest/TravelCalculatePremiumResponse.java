@@ -1,6 +1,9 @@
 package lv.javaguru.travel.insurance.rest;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.Date;
 
 public class TravelCalculatePremiumResponse {
@@ -14,8 +17,6 @@ public class TravelCalculatePremiumResponse {
 
     public TravelCalculatePremiumResponse() {}
 
-    // should I add agreementPrice to constructor?
-
     public TravelCalculatePremiumResponse(String personFirstName,
                                          String personLastName,
                                          Date agreementDateFrom,
@@ -24,6 +25,18 @@ public class TravelCalculatePremiumResponse {
         this.personLastName = personLastName;
         this.agreementDateFrom = agreementDateFrom;
         this.agreementDateTo = agreementDateTo;
+
+        this.agreementPrice = new BigDecimal(
+                BigInteger.valueOf(getDifferenceInDays(this.agreementDateFrom, this.agreementDateTo))
+        );
+    }
+
+    private long getDifferenceInDays(Date date1, Date date2) {
+        Instant instant1 = date1.toInstant();
+        Instant instant2 = date2.toInstant();
+
+        Duration duration = Duration.between(instant1, instant2);
+        return duration.toDays();
     }
 
     public BigDecimal getAgreementPrice() {
