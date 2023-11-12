@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -13,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 public class CoreResponse {
 
-    private List<ValidationError> errors;
+    private List<ValidationError> errors = new ArrayList<>();
 
     public boolean hasErrors() {
         return errors != null && !errors.isEmpty();
