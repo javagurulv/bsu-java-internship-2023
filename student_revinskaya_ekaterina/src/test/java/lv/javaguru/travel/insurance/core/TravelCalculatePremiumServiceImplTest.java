@@ -2,37 +2,43 @@ package lv.javaguru.travel.insurance.core;
 
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumResponse;
+import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.Test;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 class TravelCalculatePremiumServiceImplTest {
 
+    TravelCalculatePremiumRequestValidator requestValidator = new TravelCalculatePremiumRequestValidator();
+
     @Test
-    public void responseShouldContainErrorTest() {
-        TravelCalculatePremiumServiceImpl serviceImpl = new TravelCalculatePremiumServiceImpl();
-        GregorianCalendar date1 = new GregorianCalendar();
-        date1.set(2018, Calendar.JULY, 4);
-        GregorianCalendar date2 = new GregorianCalendar();
-        date1.set(2018, Calendar.AUGUST, 23);
-        TravelCalculatePremiumResponse response = serviceImpl.calculatePremium(
-                new TravelCalculatePremiumRequest("","Petrov", date1.getTime(),date2.getTime()));
-        assertEquals(response.getErrors().size(), 1);
-        assertEquals(response.getErrors().get(0).getField(), "personFirstName");
-        assertEquals(response.getErrors().get(0).getMessage(), "Must not be empty!");
+    public void responseShouldContainErrorEmptyNameTest() {
+        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        when(request.getPersonFirstName()).thenReturn("");
+        List<ValidationError> errors = requestValidator.validate(request);
+        assertEquals(errors.size(), 1);
+        assertEquals(errors.get(0).getMessage(), "Must not be empty!");
+    }
+    @Test
+    public void responseShouldContainErrorNullNameTest() {
+        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        when(request.getPersonFirstName()).thenReturn(null);
+        List<ValidationError> errors = requestValidator.validate(request);
+        assertEquals(errors.size(), 1);
+        assertEquals(errors.get(0).getMessage(), "Must not be empty!");
     }
     @Test
     public void responseNotContainErrorTest() {
-        TravelCalculatePremiumServiceImpl serviceImpl = new TravelCalculatePremiumServiceImpl();
-        GregorianCalendar date1 = new GregorianCalendar();
-        date1.set(2018, Calendar.JULY, 4);
-        GregorianCalendar date2 = new GregorianCalendar();
-        date1.set(2018, Calendar.AUGUST, 23);
-        TravelCalculatePremiumResponse response = serviceImpl.calculatePremium(
-                new TravelCalculatePremiumRequest("Misha","Petrov", date1.getTime(),date2.getTime()));
-        assertEquals(response.getErrors().size(), 0);
+        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        when(request.getPersonFirstName()).thenReturn("Misha");
+        List<ValidationError> errors = requestValidator.validate(request);
+        assertEquals(errors.size(), 0);
     }
 
 }
