@@ -68,9 +68,9 @@ class TravelCalculatePremiumServiceImplTest {
         when(request.getPersonLastName()).thenReturn(null);
         Calendar data = new GregorianCalendar();
         data.set(2018, Calendar.JULY, 8);
-        when(request.getAgreementDateTo()).thenReturn(data.getTime());
-        data.set(2018, Calendar.AUGUST, 18);
         when(request.getAgreementDateFrom()).thenReturn(data.getTime());
+        data.set(2018, Calendar.AUGUST, 18);
+        when(request.getAgreementDateTo()).thenReturn(data.getTime());
         List<ValidationError> errors = requestValidator.validate(request);
         assertEquals(errors.size(), 1);
         assertEquals(errors.get(0).getField(), "personLastName");
@@ -104,6 +104,22 @@ class TravelCalculatePremiumServiceImplTest {
         assertEquals(errors.size(), 1);
         assertEquals(errors.get(0).getField(),"agreementDateTo" );
         assertEquals(errors.get(0).getMessage(),"Must not be empty!" );
+    }
+    @Test
+    public void responseShouldContainErrorDateFromMoreToTest() {
+        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        when(request.getPersonFirstName()).thenReturn("Misha");
+        when(request.getPersonLastName()).thenReturn("Popov");
+        when(request.getAgreementDateFrom()).thenReturn(null);
+        Calendar data = new GregorianCalendar();
+        data.set(2018, Calendar.AUGUST, 18);
+        when(request.getAgreementDateFrom()).thenReturn(data.getTime());
+        data.set(2017, Calendar.AUGUST, 18);
+        when(request.getAgreementDateTo()).thenReturn(data.getTime());
+        List<ValidationError> errors = requestValidator.validate(request);
+        assertEquals(errors.size(), 1);
+        assertEquals(errors.get(0).getField(),"agreementDateFrom" );
+        assertEquals(errors.get(0).getMessage(),"agreementDateFrom must be less than agreementDateTo!" );
     }
     @Test
     public void responseNotContainErrorTest() {

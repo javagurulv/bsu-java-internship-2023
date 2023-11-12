@@ -19,6 +19,9 @@ public class TravelCalculatePremiumResponse {
         this.personLastName = personLastName;
         this.agreementDateFrom = agreementDateFrom;
         this.agreementDateTo = agreementDateTo;
+
+        BigDecimal milliseconds = new BigDecimal(agreementDateTo.getTime() - agreementDateFrom.getTime());
+        this.agreementPrice =  milliseconds.divide(BigDecimal.valueOf(24 * 60 * 60 * 1000));
     }
 
     public String getPersonFirstName() {
@@ -51,5 +54,13 @@ public class TravelCalculatePremiumResponse {
 
     public void setAgreementDateTo(Date agreementDateTo) {
         this.agreementDateTo = agreementDateTo;
+    }
+
+    public BigDecimal getAgreementPrice() {
+        return agreementPrice;
+    }
+
+    public void setAgreementPrice(BigDecimal agreementPrice) {
+        this.agreementPrice = agreementPrice;
     }
 }
