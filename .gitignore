@@ -5,6 +5,9 @@
 #log specific
 *.log
 
+#Mac
+**/.DS_Store
+
 ### Gradle ###
 .gradle
 **/build/
