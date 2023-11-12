@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class TravelCalculatePremiumServiceImplTest {
     private static TravelCalculatePremiumRequest request;
     @BeforeAll
-    public static void setUp(){
+    public static void init(){
         request = new TravelCalculatePremiumRequest(
                 "Eugene",
                 "Kroshinsky",
