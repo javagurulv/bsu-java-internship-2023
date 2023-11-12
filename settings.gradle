@@ -27,6 +27,7 @@ include 'student_kedank_valeryia'
 include 'student_stasevich_vladimir'
 include 'student_pardaev_aleksey'
 include 'student_lebedev_denis'
+include 'student_shrubok_anna'
 
 include 'teacher:travel_insurance_calculator:step_1'
 include 'teacher:travel_insurance_calculator:step_2'
