@@ -13,6 +13,7 @@ include 'student_mironova_kseniya'
 include 'student_Kozlovskiy_Anton'
 include 'student_zaitsau_stanislau'
 include 'student_kroshinsky_eugene'
+include 'student_golovach_vladislav'
 
 include 'teacher:travel_insurance_calculator:step_1'
 include 'teacher:travel_insurance_calculator:step_2'
