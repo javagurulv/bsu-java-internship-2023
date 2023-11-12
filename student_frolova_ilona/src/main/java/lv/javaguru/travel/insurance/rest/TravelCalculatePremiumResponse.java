@@ -1,5 +1,6 @@
 package lv.javaguru.travel.insurance.rest;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class TravelCalculatePremiumResponse {
@@ -9,7 +10,11 @@ public class TravelCalculatePremiumResponse {
     private Date agreementDateFrom;
     private Date agreementDateTo;
 
+    private BigDecimal agreementPrice;
+
     public TravelCalculatePremiumResponse() {}
+
+    // should I add agreementPrice to constructor?
 
     public TravelCalculatePremiumResponse(String personFirstName,
                                          String personLastName,
@@ -20,6 +25,14 @@ public class TravelCalculatePremiumResponse {
         this.agreementDateFrom = agreementDateFrom;
         this.agreementDateTo = agreementDateTo;
     }
+
+    public BigDecimal getAgreementPrice() {
+        return agreementPrice;
+    } // ?
+
+    public void setAgreementPrice(BigDecimal agreementPrice) {
+        this.agreementPrice = agreementPrice;
+    } // ?
 
     public String getPersonFirstName() {
         return personFirstName;
