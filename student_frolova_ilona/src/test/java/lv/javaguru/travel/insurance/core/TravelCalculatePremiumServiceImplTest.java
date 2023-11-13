@@ -9,8 +9,6 @@ import java.math.RoundingMode;
 import java.util.Date;
 import java.util.Objects;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 class TravelCalculatePremiumServiceImplTest {
 
     @Test
@@ -26,7 +24,7 @@ class TravelCalculatePremiumServiceImplTest {
                 Objects.equals(response.getPersonFirstName(), request.getPersonFirstName()) &&
                 response.getAgreementDateFrom() == request.getAgreementDateFrom() &&
                 response.getAgreementDateTo() == request.getAgreementDateTo()
-              );
+             );
     }
 
     @Test
