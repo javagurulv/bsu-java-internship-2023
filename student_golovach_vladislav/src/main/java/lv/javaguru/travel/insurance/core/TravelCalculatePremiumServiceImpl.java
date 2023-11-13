@@ -4,6 +4,8 @@ import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumResponse;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
+
 @Component
 class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService {
 
@@ -14,6 +16,8 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
         response.setPersonLastName(request.getPersonLastName());
         response.setAgreementDateFrom(request.getAgreementDateFrom());
         response.setAgreementDateTo(request.getAgreementDateTo());
+        var daysBetween=response.calculateDaysBetween(request.getAgreementDateFrom(),request.getAgreementDateTo());
+        response.setAgreementPrice(BigDecimal.valueOf(daysBetween));
         return response;
     }
 
