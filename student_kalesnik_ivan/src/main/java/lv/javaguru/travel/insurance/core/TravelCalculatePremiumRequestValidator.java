@@ -1,8 +1,9 @@
 package lv.javaguru.travel.insurance.core;
 
 import lv.javaguru.travel.insurance.validation.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
+//import lv.javaguru.travel.insurance.core.DateTimeService;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -10,7 +11,8 @@ import java.util.Optional;
 
 @Component
 class TravelCalculatePremiumRequestValidator {
-
+    @Autowired
+    private DateTimeService dateTimeService;
     public List<ValidationError> validate(TravelCalculatePremiumRequest request) {  //ErrorList
         List<ValidationError> errors = new ArrayList<>();
         validatePersonFirstName(request).ifPresent(errors::add);
@@ -18,6 +20,8 @@ class TravelCalculatePremiumRequestValidator {
         validateAgreementDateFrom(request).ifPresent(errors::add);
         validateAgreementDateTo(request).ifPresent(errors::add);
         validateDateFromLessThenDateTo(request).ifPresent(errors::add);
+        validateDateToInFuture(request).ifPresent(errors::add);
+        validateDateFromInFuture(request).ifPresent(errors::add);
         return errors;
     }
 
@@ -51,6 +55,22 @@ class TravelCalculatePremiumRequestValidator {
         return (dateFrom != null && dateTo != null
                 && (dateFrom.equals(dateTo) || dateFrom.after(dateTo)))
                 ? Optional.of(new ValidationError("agreementDateFrom", "Must be less then agreementDateTo!"))
+                : Optional.empty();
+    }
+
+    private Optional<ValidationError> validateDateFromInFuture(TravelCalculatePremiumRequest request) {
+        Date dateFrom = request.getAgreementDateFrom();
+        Date currentDateTime = dateTimeService.getCurrentDateTime();
+        return (dateFrom != null && dateFrom.before(currentDateTime))
+                ? Optional.of(new ValidationError("agreementDateFrom", "Must be in the future!"))
+                : Optional.empty();
+    }
+
+    private Optional<ValidationError> validateDateToInFuture(TravelCalculatePremiumRequest request) {
+        Date dateTo = request.getAgreementDateTo();
+        Date currentDateTime = dateTimeService.getCurrentDateTime();
+        return (dateTo != null && dateTo.before(currentDateTime))
+                ? Optional.of(new ValidationError("agreementDateTo", "Must be in the future!"))
                 : Optional.empty();
     }
 }
