@@ -69,4 +69,17 @@ class TravelCalculatePremiumRequestValidatorTest {
         List<ValidationError> errors = requestValidator.validate(request);
         assertTrue(errors.isEmpty());
     }
+
+    @Test
+    public void shouldReturnErrorWhenAgreementDateFromIsNull() {
+        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        when(request.getPersonFirstName()).thenReturn("firstName");
+        when(request.getPersonLastName()).thenReturn("lastName");
+        when(request.getAgreementDateFrom()).thenReturn(null);
+        List<ValidationError> errors = requestValidator.validate(request);
+        assertFalse(errors.isEmpty());
+        assertEquals(errors.size(), 1);
+        assertEquals(errors.get(0).getField(), "agreementDateFrom");
+        assertEquals(errors.get(0).getMessage(), "Must not be empty!");
+    }
 }
