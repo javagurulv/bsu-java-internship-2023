@@ -4,6 +4,8 @@ import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Component
@@ -15,5 +17,13 @@ public class DateTimeService {
         difference = difference.divide(BigDecimal.valueOf(86400.0), MathContext.DECIMAL128);
 
         return difference;
+    }
+
+    public Date createDate(String dateStr) {
+        try {
+            return new SimpleDateFormat("dd.MM.yyyy").parse(dateStr);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
