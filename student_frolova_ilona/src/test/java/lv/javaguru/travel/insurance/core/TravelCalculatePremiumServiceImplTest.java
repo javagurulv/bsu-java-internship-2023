@@ -11,9 +11,16 @@ import java.util.Objects;
 
 class TravelCalculatePremiumServiceImplTest {
 
+    TravelCalculatePremiumServiceImpl service;
+
+    TravelCalculatePremiumServiceImplTest() {
+        service = new TravelCalculatePremiumServiceImpl();
+        service.setDateTimeService(new DateTimeService());
+    }
+
     @Test
     public void responseParametersEqualToRequestParametersWhenReturnedByController() {
-        TravelCalculatePremiumServiceImpl service = new TravelCalculatePremiumServiceImpl();
+
         TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest(
                 "Surname", "Name", new Date(12L), new Date(1212L)
         );
@@ -29,7 +36,6 @@ class TravelCalculatePremiumServiceImplTest {
 
     @Test
     public void calculatingAgreementPriceAsDifferenceInDays() {
-        TravelCalculatePremiumServiceImpl service = new TravelCalculatePremiumServiceImpl();
         TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest(
                 "Surname", "Name", new Date(12L), new Date(129600018L)
         );
