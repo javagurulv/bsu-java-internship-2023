@@ -2,6 +2,7 @@ package lv.javaguru.travel.insurance.core;
 
 import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -13,7 +14,8 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
                 request.getPersonFirstName(),
                 request.getPersonLastName(),
                 request.getAgreementDateFrom(),
-                request.getAgreementDateTo()
+                request.getAgreementDateTo(),
+                TravelCalculatePremiumResponse.getDifferenceInDays(request.getAgreementDateFrom(), request.getAgreementDateTo())
         );
     }
 
