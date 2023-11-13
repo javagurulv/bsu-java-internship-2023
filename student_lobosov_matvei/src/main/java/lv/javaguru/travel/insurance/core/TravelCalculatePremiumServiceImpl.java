@@ -3,6 +3,7 @@ package lv.javaguru.travel.insurance.core;
 import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumResponse;
 import org.springframework.stereotype.Component;
+import java.math.BigDecimal;
 
 @Component
 class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService {
