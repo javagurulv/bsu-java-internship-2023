@@ -1,15 +1,15 @@
-package lv.javaguru.travel.insurance.rest;
+package lv.javaguru.travel.insurance.dto;
 
 import lombok.*;
+import lv.javaguru.travel.insurance.dto.CoreResponse;
 
 import java.math.BigDecimal;
-import java.math.MathContext;
 import java.util.Date;
 
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class TravelCalculatePremiumResponse {
+public class TravelCalculatePremiumResponse extends CoreResponse {
 
     private String personFirstName;
     private String personLastName;
