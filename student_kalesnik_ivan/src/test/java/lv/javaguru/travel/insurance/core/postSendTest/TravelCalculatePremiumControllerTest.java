@@ -22,21 +22,74 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 public class TravelCalculatePremiumControllerTest {
+
     @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired private MockMvc mockMvc;
 
     @Autowired private JsonFileReader jsonFileReader;
-    private ObjectMapper mapper = new ObjectMapper();
 
     @Test
-    public void simpleRestControllerTest() throws Exception {
-        finishComparing("TravelCalculatePremiumRequest.json", "TravelCalculatePremiumResponse.json");
+    public void successRequest() throws Exception {
+        executeAndCompare(
+                "TravelCalculatePremiumRequest_success.json",
+                "TravelCalculatePremiumResponse_success.json"
+        );
     }
 
-    private void finishComparing(String jsonRequestFilePath, String jsonResponseFilePath) throws Exception {
+    @Test
+    public void firstNameNotProvided() throws Exception {
+        executeAndCompare(
+                "TravelCalculatePremiumRequest_firstName_not_provided.json",
+                "TravelCalculatePremiumResponse_firstName_not_provided.json"
+        );
+    }
+
+    @Test
+    public void lastNameNotProvided() throws Exception {
+        executeAndCompare(
+                "TravelCalculatePremiumRequest_lastName_not_provided.json",
+                "TravelCalculatePremiumResponse_lastName_not_provided.json"
+        );
+    }
+
+    @Test
+    public void agreementDateFromNotProvided() throws Exception {
+        executeAndCompare(
+                "TravelCalculatePremiumRequest_agreementDateFrom_not_provided.json",
+                "TravelCalculatePremiumResponse_agreementDateFrom_not_provided.json"
+        );
+    }
+
+    @Test
+    public void agreementDateToNotProvided() throws Exception {
+        executeAndCompare(
+                "TravelCalculatePremiumRequest_agreementDateTo_not_provided.json",
+                "TravelCalculatePremiumResponse_agreementDateTo_not_provided.json"
+        );
+    }
+
+    @Test
+    public void agreementDateToLessThenAgreementDateFrom() throws Exception {
+        executeAndCompare(
+                "TravelCalculatePremiumRequest_dateTo_lessThen_dateFrom.json",
+                "TravelCalculatePremiumResponse_dateTo_lessThen_dateFrom.json"
+        );
+    }
+
+    @Test
+    public void allFieldsNotProvided() throws Exception {
+        executeAndCompare(
+                "TravelCalculatePremiumRequest_allFields_not_provided.json",
+                "TravelCalculatePremiumResponse_allFields_not_provided.json"
+        );
+    }
+
+    private void executeAndCompare(String jsonRequestFilePath, String jsonResponseFilePath) throws Exception {
         String jsonRequest = readJsonFromFile(jsonRequestFilePath);
-        String jsonResponse = performPostRequest(jsonRequest);
-        compareResponseWithExpected(jsonResponse, jsonResponseFilePath);
+        String actualResponse = performPostRequest(jsonRequest);
+        String expectedResponse = readJsonFromFile(jsonResponseFilePath);
+
+        assertJsonEquals(expectedResponse, actualResponse);
     }
 
     private String readJsonFromFile(String filePath) throws IOException {
@@ -53,9 +106,9 @@ public class TravelCalculatePremiumControllerTest {
         return result.getResponse().getContentAsString();
     }
 
-    private void compareResponseWithExpected(String response, String expectedResponseFilePath) throws IOException {
-        String expectedResponse = readJsonFromFile(expectedResponseFilePath);
-        assertEquals(mapper.readTree(response), mapper.readTree(expectedResponse));
+    private void assertJsonEquals(String expectedJson, String actualJson) throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        assertEquals(mapper.readTree(expectedJson), mapper.readTree(actualJson));
     }
 
 
