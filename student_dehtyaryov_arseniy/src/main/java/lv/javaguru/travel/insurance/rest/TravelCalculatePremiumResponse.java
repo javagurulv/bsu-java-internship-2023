@@ -1,14 +1,9 @@
 package lv.javaguru.travel.insurance.rest;
 
-import java.math.BigDecimal;
-import java.time.Duration;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.Date;
-import java.util.concurrent.TimeUnit;
 
 public class TravelCalculatePremiumResponse {
-    BigDecimal agreementPrice;
+
     private String personFirstName;
     private String personLastName;
     private Date agreementDateFrom;
@@ -48,11 +43,4 @@ public class TravelCalculatePremiumResponse {
         this.agreementDateTo = agreementDateTo;
     }
 
-    public void setAgreementPrice(BigDecimal agreementPrice) {
-        this.agreementPrice = agreementPrice;
-    }
-    public long calculateDaysBetween(Date date1, Date date2) {
-        long elapsedms = date1.getTime() - date2.getTime();
-        return TimeUnit.DAYS.convert(elapsedms, TimeUnit.MILLISECONDS);
-    }
 }
