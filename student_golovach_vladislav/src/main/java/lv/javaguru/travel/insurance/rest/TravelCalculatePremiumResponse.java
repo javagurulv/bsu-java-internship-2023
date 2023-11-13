@@ -1,9 +1,10 @@
 package lv.javaguru.travel.insurance.rest;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class TravelCalculatePremiumResponse {
-
+    BigDecimal agreementPrice;
     private String personFirstName;
     private String personLastName;
     private Date agreementDateFrom;
