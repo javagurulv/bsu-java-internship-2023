@@ -2,6 +2,8 @@ package lv.javaguru.travel.insurance.rest;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Date;
@@ -26,17 +28,15 @@ public class TravelCalculatePremiumResponse {
         this.agreementDateFrom = agreementDateFrom;
         this.agreementDateTo = agreementDateTo;
 
-        this.agreementPrice = new BigDecimal(
-                BigInteger.valueOf(getDifferenceInDays(this.agreementDateFrom, this.agreementDateTo))
-        );
+        this.agreementPrice = getDifferenceInDays(this.agreementDateFrom, this.agreementDateTo);
     }
 
-    private long getDifferenceInDays(Date date1, Date date2) {
-        Instant instant1 = date1.toInstant();
-        Instant instant2 = date2.toInstant();
+    private BigDecimal getDifferenceInDays(Date date1, Date date2) {
+        BigDecimal difference = new BigDecimal(date2.getTime() - date1.getTime());
+        difference = difference.divide(BigDecimal.valueOf(1000.0), MathContext.DECIMAL128);
+        difference = difference.divide(BigDecimal.valueOf(86400.0), MathContext.DECIMAL128);
 
-        Duration duration = Duration.between(instant1, instant2);
-        return duration.toDays();
+        return difference;
     }
 
     public BigDecimal getAgreementPrice() {
