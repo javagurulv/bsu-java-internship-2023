@@ -21,7 +21,7 @@ class TravelCalculatePremiumServiceImplTest {
                 new Date(2023, 11, 01),
                 new Date(2023 ,11, 12)
         );
-        agreementPrice = BigDecimal.valueOf(11);
+        agreementPrice = new BigDecimal(11);
     }
     @Test
     public void calculatePremiumTest() {

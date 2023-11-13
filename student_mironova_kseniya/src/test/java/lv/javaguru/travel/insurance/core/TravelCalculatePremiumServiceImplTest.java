@@ -6,7 +6,6 @@ class TravelCalculatePremiumServiceImplTest {
 
     @Test
     public void deleteMe() {
-
     }
 
 }
