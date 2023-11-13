@@ -11,27 +11,32 @@ import java.util.List;
 
 @Component
 class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService {
-    @Autowired
-    private DateTimeService dateTimeService;
-    @Autowired
-    private TravelCalculatePremiumRequestValidator requestValidator;
+    @Autowired private TravelCalculatePremiumRequestValidator requestValidator;
+    @Autowired private DateTimeService dateTimeService;
+
     @Override
     public TravelCalculatePremiumResponse calculatePremium(TravelCalculatePremiumRequest request) {
-        //Validation
         List<ValidationError> errors = requestValidator.validate(request);
-        if (!errors.isEmpty()) {
-            return new TravelCalculatePremiumResponse(errors);
-        }
+        return errors.isEmpty()
+                ? buildResponse(request)
+                : buildResponse(errors);
+    }
 
-        //Body
+    private TravelCalculatePremiumResponse buildResponse(List<ValidationError> errors) {
+        return new TravelCalculatePremiumResponse(errors);
+    }
+
+    private TravelCalculatePremiumResponse buildResponse(TravelCalculatePremiumRequest request) {
         TravelCalculatePremiumResponse response = new TravelCalculatePremiumResponse();
         response.setPersonFirstName(request.getPersonFirstName());
         response.setPersonLastName(request.getPersonLastName());
         response.setAgreementDateFrom(request.getAgreementDateFrom());
         response.setAgreementDateTo(request.getAgreementDateTo());
+
         var daysBetween = dateTimeService.getDaysBetween(request.getAgreementDateFrom(), request.getAgreementDateTo());
         response.setAgreementPrice(new BigDecimal(daysBetween));
+
         return response;
     }
-
 }
+
