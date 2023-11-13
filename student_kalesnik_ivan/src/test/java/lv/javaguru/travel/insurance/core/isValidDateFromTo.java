@@ -125,7 +125,7 @@ public class isValidDateFromTo {
         assertFalse(errors.isEmpty());
         assertEquals(errors.size(), 1);
         assertEquals(errors.get(0).getField(), "agreementDateFrom");
-        assertEquals(errors.get(0).getMessage(), "Must be less then agreementDateTo!");
+        assertEquals(errors.get(0).getMessage(), "Must be less then agreementDateToo!");
     }
 
     @Test
