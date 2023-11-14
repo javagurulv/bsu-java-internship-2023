@@ -16,9 +16,8 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
     @Autowired
     private TravelCalculatePremiumRequestValidator requestValidator = new TravelCalculatePremiumRequestValidator();
 
-    private BigDecimal calculateDiffBetweenDays(Date date1, Date date2){
-        return BigDecimal.valueOf(TimeUnit.MILLISECONDS.toDays(date1.getTime() - date2.getTime()));
-    }
+    private TravelCalculateUnderwriting calculateUnderwriting = new TravelCalculateUnderwriting();
+
 
     @Override
     public TravelCalculatePremiumResponse calculatePremium(TravelCalculatePremiumRequest request) {
@@ -32,7 +31,7 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
         response.setAgreementDateFrom(request.getAgreementDateFrom());
         response.setAgreementDateTo(request.getAgreementDateTo());
 
-        response.setAgreementPrice(calculateDiffBetweenDays(response.getAgreementDateFrom(), response.getAgreementDateTo()));
+        response.setAgreementPrice(calculateUnderwriting.calculateAgreementPrice(request));
         return response;
     }
 
