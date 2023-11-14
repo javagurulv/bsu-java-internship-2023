@@ -44,9 +44,42 @@ public class TravelCalculatePremiumRequestValidatorTest {
     void shouldNotReturnError() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getPersonFirstName()).thenReturn("firstName");
+        when(request.getPersonLastName()).thenReturn("lastName");
+        List<ValidationError> errors = requestValidator.validate(request);
+        assertThat(errors.size()).isEqualTo(0);
+    }
+    @Test
+    void shouldContainTwoErrors() {
+        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        when(request.getPersonFirstName()).thenReturn(null);
+        when(request.getPersonLastName()).thenReturn(null);
+        List<ValidationError> errors = requestValidator.validate(request);
+        assertThat(errors.size()).isEqualTo(2);
+    }
+
+    @Test
+    void shouldReturnErrorWhenLastNameIsNull() {
+        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        when(request.getPersonFirstName()).thenReturn("firstName");
+        when(request.getPersonLastName()).thenReturn(null);
         List<ValidationError> errors = requestValidator.validate(request);
         assertAll(
-                () -> assertThat(errors.size()).isEqualTo(0)
+                () -> assertThat(errors.size()).isGreaterThan(0),
+                () -> assertThat(errors.get(0).getField()).isEqualTo("personLastName"),
+                () -> assertThat(errors.get(0).getMessage()).isEqualTo("Must not be empty!")
+        );
+    }
+
+    @Test
+    void shouldReturnErrorWhenLastNameIsEmpty() {
+        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        when(request.getPersonFirstName()).thenReturn("firstName");
+        when(request.getPersonLastName()).thenReturn("");
+        List<ValidationError> errors = requestValidator.validate(request);
+        assertAll(
+                () -> assertThat(errors.size()).isGreaterThan(0),
+                () -> assertThat(errors.get(0).getField()).isEqualTo("personLastName"),
+                () -> assertThat(errors.get(0).getMessage()).isEqualTo("Must not be empty!")
         );
     }
 }
