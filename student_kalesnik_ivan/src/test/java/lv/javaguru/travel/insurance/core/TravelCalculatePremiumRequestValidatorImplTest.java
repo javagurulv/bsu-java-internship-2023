@@ -1,6 +1,6 @@
 package lv.javaguru.travel.insurance.core;
 
-import lv.javaguru.travel.insurance.core.valids.*;
+import lv.javaguru.travel.insurance.core.valids.TravelCalculatePremiumRequestValidatorImpl;
 import lv.javaguru.travel.insurance.core.valids.TravelRequestValidation;
 import lv.javaguru.travel.insurance.validation.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.validation.ValidationError;
@@ -19,9 +19,10 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class isValidDateFromTo {
+public class TravelCalculatePremiumRequestValidatorImplTest {
+
     @InjectMocks
-    private TravelCalculatePremiumRequestValidatorImpl requestValidator;
+    private TravelCalculatePremiumRequestValidatorImpl validator;
 
     @Test
     public void shouldNotReturnErrors() {
@@ -33,8 +34,8 @@ public class isValidDateFromTo {
         List<TravelRequestValidation> travelValidations = List.of(
                 validation1, validation2
         );
-        ReflectionTestUtils.setField(requestValidator, "travelValidations", travelValidations);
-        List<ValidationError> errors = requestValidator.validate(request);
+        ReflectionTestUtils.setField(validator, "travelValidations", travelValidations);
+        List<ValidationError> errors = validator.validate(request);
         assertTrue(errors.isEmpty());
     }
 
@@ -48,8 +49,9 @@ public class isValidDateFromTo {
         List<TravelRequestValidation> travelValidations = List.of(
                 validation1, validation2
         );
-        ReflectionTestUtils.setField(requestValidator, "travelValidations", travelValidations);
-        List<ValidationError> errors = requestValidator.validate(request);
+        ReflectionTestUtils.setField(validator, "travelValidations", travelValidations);
+        List<ValidationError> errors = validator.validate(request);
         assertEquals(errors.size(), 2);
     }
+
 }
