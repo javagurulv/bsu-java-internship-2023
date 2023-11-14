@@ -14,7 +14,7 @@ public class DateServiceImpl implements DateService{
     DateFormat dateFormat;
 
     public DateServiceImpl(
-            @Value("${date.format}")
+            @Value("${dateService.format}")
             String dateStringFormat
     ) {
         dateFormat = new SimpleDateFormat(dateStringFormat);
