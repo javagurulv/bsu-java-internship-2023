@@ -11,7 +11,7 @@ import java.util.List;
 @Component
 class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService {
     @Autowired private DateDifferenceService dateTimeService = new DateDifferenceService();
-    @Autowired private TravelCalculatePremiumRequestValidator requestValidator;
+    @Autowired private TravelCalculatePremiumRequestValidator requestValidator = new TravelCalculatePremiumRequestValidator();
     @Override
     public TravelCalculatePremiumResponse calculatePremium(TravelCalculatePremiumRequest request) {
         List<ValidationError> errors = requestValidator.validate(request);
