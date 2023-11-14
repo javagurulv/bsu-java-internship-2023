@@ -1,6 +1,5 @@
-package lv.javaguru.travel.insurance.core;
+package lv.javaguru.travel.insurance.core.valids;
 
-import lv.javaguru.travel.insurance.core.valids.TravelRequestValidation;
 import lv.javaguru.travel.insurance.validation.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.validation.ValidationError;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,8 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
-class TravelCalculatePremiumRequestValidator {
+public
+class TravelCalculatePremiumRequestValidatorImpl implements TravelCalculatePremiumRequestValidator {
 
     @Autowired
     private List<TravelRequestValidation> travelValidations;
