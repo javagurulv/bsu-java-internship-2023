@@ -1,25 +1,17 @@
 package lv.javaguru.travel.insurance.rest;
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.math.MathContext;
-import java.math.RoundingMode;
-import java.time.Duration;
-import java.time.Instant;
 import java.util.Date;
 
-public class TravelCalculatePremiumResponse {
+public class TravelCalculatePremiumRequest {
 
     private String personFirstName;
     private String personLastName;
     private Date agreementDateFrom;
     private Date agreementDateTo;
 
-    private BigDecimal agreementPrice;
+    public TravelCalculatePremiumRequest() { }
 
-    public TravelCalculatePremiumResponse() {}
-
-    public TravelCalculatePremiumResponse(String personFirstName,
+    public TravelCalculatePremiumRequest(String personFirstName,
                                          String personLastName,
                                          Date agreementDateFrom,
                                          Date agreementDateTo) {
@@ -27,25 +19,7 @@ public class TravelCalculatePremiumResponse {
         this.personLastName = personLastName;
         this.agreementDateFrom = agreementDateFrom;
         this.agreementDateTo = agreementDateTo;
-
-        this.agreementPrice = getDifferenceInDays(this.agreementDateFrom, this.agreementDateTo);
     }
-
-    private BigDecimal getDifferenceInDays(Date date1, Date date2) {
-        BigDecimal difference = new BigDecimal(date2.getTime() - date1.getTime());
-        difference = difference.divide(BigDecimal.valueOf(1000.0), MathContext.DECIMAL128);
-        difference = difference.divide(BigDecimal.valueOf(86400.0), MathContext.DECIMAL128);
-
-        return difference;
-    }
-
-    public BigDecimal getAgreementPrice() {
-        return agreementPrice;
-    } // ?
-
-    public void setAgreementPrice(BigDecimal agreementPrice) {
-        this.agreementPrice = agreementPrice;
-    } // ?
 
     public String getPersonFirstName() {
         return personFirstName;
