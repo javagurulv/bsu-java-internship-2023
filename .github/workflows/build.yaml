@@ -16,7 +16,7 @@ jobs:
         run: |
           msg_text='Commit from: ${{ github.actor }} Commit message: ${{ github.event.commits[0].message }} Commit changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}'
           curl -s -X POST 'https://api.telegram.org/bot${{ secrets.TELEGRAM_TO }}/sendMessage' \
-          -d "chat_id=${{ secrets.TELEGRAM_TOKEN }}&text=${msg_text}&reply_to_message_id=${{ 872 }}"
+          -d "chat_id=${{ secrets.TELEGRAM_TOKEN }}&text=${msg_text}&reply_to_message_id=${{874}}"
 
       - uses: yanzay/notify-telegram@v0.1.0
         if: always()
