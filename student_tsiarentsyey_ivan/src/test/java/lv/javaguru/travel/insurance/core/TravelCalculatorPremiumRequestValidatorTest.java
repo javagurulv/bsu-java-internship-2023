@@ -19,10 +19,17 @@ public class TravelCalculatorPremiumRequestValidatorTest {
 
     TravelCalculatePremiumRequest requestFirstNameError = new TravelCalculatePremiumRequest("", "last", new Date(5000), new Date(100000));
     TravelCalculatePremiumRequest requestLastNameError = new TravelCalculatePremiumRequest("first", "", new Date(5000), new Date(100000));
+    TravelCalculatePremiumRequest requestAgreementDateFromError = new TravelCalculatePremiumRequest("name", "last",null, new Date(100000));
+
+    TravelCalculatePremiumRequest requestAgreementDateToError = new TravelCalculatePremiumRequest("name", "last",new Date(500), null);
     TravelCalculatePremiumRequest requestOk = new TravelCalculatePremiumRequest("name", "last", new Date(5000), new Date(100000));
+
 
     ValidationError firstNameError = new ValidationError("personFirstName", "Must not be empty!");
     ValidationError lastNameError = new ValidationError("personLastName", "Must not be empty!");
+
+    ValidationError agreementDateFromError = new ValidationError("agreementDateFrom", "Must not be empty!");
+    ValidationError agreementDateToError = new ValidationError("agreementDateTo", "Must not be empty!");
 
 
     @Test
@@ -33,6 +40,17 @@ public class TravelCalculatorPremiumRequestValidatorTest {
     @Test
     void validatePersonLastName() {
         assertThat(!validator.validate(requestLastNameError).contains(lastNameError)).isEqualTo(true);
+        assertThat(!validator.validate(requestOk).isEmpty()).isEqualTo(false);
+    }
+    @Test
+    void validateAgreementDateFrom() {
+        assertThat(!validator.validate(requestAgreementDateFromError).contains(agreementDateFromError)).isEqualTo(true);
+        assertThat(!validator.validate(requestOk).isEmpty()).isEqualTo(false);
+    }
+
+    @Test
+    void validateAgreementDateTo() {
+        assertThat(!validator.validate(requestAgreementDateToError).contains(agreementDateToError)).isEqualTo(true);
         assertThat(!validator.validate(requestOk).isEmpty()).isEqualTo(false);
     }
 
