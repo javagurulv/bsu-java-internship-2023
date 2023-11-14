@@ -8,13 +8,13 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 @Component
-class DateTimeService {
+public class DateTimeService {
 
     long getDaysBetween(Date date1, Date date2) {
         return TimeUnit.DAYS.convert(date2.getTime() - date1.getTime(), TimeUnit.MILLISECONDS);
     }
 
-    Date getCurrentDateTime() {
+    public Date getCurrentDateTime() {
         ZonedDateTime zonedDateTime = ZonedDateTime.now(ZoneId.of("Europe/Moscow"));
         return Date.from(zonedDateTime.toInstant());
     }
