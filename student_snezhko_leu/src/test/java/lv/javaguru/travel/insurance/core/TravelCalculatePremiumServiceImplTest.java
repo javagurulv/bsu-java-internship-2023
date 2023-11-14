@@ -17,7 +17,14 @@ import static org.mockito.Mockito.when;
 class TravelCalculatePremiumServiceImplTest {
 
     @Test
-    public void TravelCalculatePremiumServiceImplFirstNameTest() {
-
+    public void TravelCalculatePremiumServiceImplTest() {
+        TravelCalculatePremiumServiceImpl test = new TravelCalculatePremiumServiceImpl();
+        Date date = new Date();
+        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest("FirstName", "LastName", date, date);
+        TravelCalculatePremiumResponse response = test.calculatePremium(request);
+        assertEquals(request.getPersonFirstName(), response.getPersonFirstName());
+        assertEquals(request.getPersonLastName(), response.getPersonLastName());
+        assertEquals(request.getAgreementDateFrom(), response.getAgreementDateFrom());
+        assertEquals(request.getAgreementDateTo(), response.getAgreementDateTo());
     }
 }
