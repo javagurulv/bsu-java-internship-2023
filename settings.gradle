@@ -31,6 +31,7 @@ include 'student_shrubok_anna'
 include 'student_utrushkin_ivan'
 include 'student_sokolov_evgeniy'
 include 'student_lim_vitaly'
+include 'student_filonchyk_artem'
 
 include 'teacher:travel_insurance_calculator:step_1'
 include 'teacher:travel_insurance_calculator:step_2'
