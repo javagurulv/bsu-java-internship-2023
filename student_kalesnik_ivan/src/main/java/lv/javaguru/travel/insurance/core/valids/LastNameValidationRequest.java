@@ -9,7 +9,7 @@ import java.util.Optional;
 class LastNameValidationRequest implements TravelRequestValidation
 {
     public Optional<ValidationError> execute(TravelCalculatePremiumRequest request) {
-        return (request.getPersonFirstName() == null || request.getPersonFirstName().isEmpty())
+        return (request.getPersonLastName() == null || request.getPersonLastName().isEmpty())
                 ? Optional.of(new ValidationError("personLastName", "Must not be empty!"))
                 : Optional.empty();
     }
