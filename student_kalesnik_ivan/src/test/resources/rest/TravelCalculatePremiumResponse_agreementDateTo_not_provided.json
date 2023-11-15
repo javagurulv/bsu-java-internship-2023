@@ -1,9 +1,9 @@
 {
   "errors": [
     {
-      "field": "personFirstName",
+      "field": "agreementDateTo",
       "message": "Must not be empty!",
-      "errorMessage": "Must not be empty!"
+      "errorMessage":"Must not be empty!"
     }
   ],
   "personFirstName": null,
