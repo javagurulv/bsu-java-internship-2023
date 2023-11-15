@@ -17,6 +17,9 @@ public class TravelCalculatorPremiumRequestValidator {
         validatePersonLastName(request).ifPresent(errors::add);
         validateAgreementDateFrom(request).ifPresent(errors::add);
         validateAgreementDateTo(request).ifPresent(errors::add);
+        if (errors.isEmpty()){
+            validateAgreementTimeRange(request).ifPresent(errors::add);
+        }
         return errors;
     }
 
@@ -32,13 +35,20 @@ public class TravelCalculatorPremiumRequestValidator {
     }
 
     private Optional<ValidationError> validateAgreementDateFrom(TravelCalculatePremiumRequest request) {
-        return (request.getAgreementDateFrom() == null)
+        return  request.getAgreementDateFrom() == null
                 ? Optional.of(new ValidationError("agreementDateFrom", "Must not be empty!"))
                 : Optional.empty();
     }
     private Optional<ValidationError> validateAgreementDateTo(TravelCalculatePremiumRequest request) {
-        return (request.getAgreementDateTo() == null)
+        return  request.getAgreementDateTo() == null
                 ? Optional.of(new ValidationError("agreementDateTo", "Must not be empty!"))
                 : Optional.empty();
+    }
+
+    private Optional<ValidationError> validateAgreementTimeRange(TravelCalculatePremiumRequest request) {
+        return (request.getAgreementDateTo().getTime() - request.getAgreementDateFrom().getTime()) <= 0
+                ? Optional.of(new ValidationError("agreementTimeRange", "Must be positive!"))
+                : Optional.empty();
+
     }
 }
