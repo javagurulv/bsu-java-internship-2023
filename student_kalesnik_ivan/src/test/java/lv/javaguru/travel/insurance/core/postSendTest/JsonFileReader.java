@@ -2,7 +2,7 @@ package lv.javaguru.travel.insurance.core.postSendTest;
 
 import org.springframework.stereotype.Component;
 import org.springframework.util.ResourceUtils;
-
+import lv.javaguru.travel.insurance.core.*;
 import java.io.File;
 import java.nio.file.Files;
 

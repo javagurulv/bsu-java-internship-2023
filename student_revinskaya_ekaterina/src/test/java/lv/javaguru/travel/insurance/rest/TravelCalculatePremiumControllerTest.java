@@ -13,11 +13,12 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.util.ResourceUtils;
 
 import java.io.File;
-import java.io.IOException;
 import java.nio.file.Files;
 
+import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
@@ -25,28 +26,25 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 public class TravelCalculatePremiumControllerTest {
 
-    @Autowired
-    private MockMvc mockMvc;
+    @Autowired private MockMvc mockMvc;
 
     @Test
     public void simpleRestControllerTest() throws Exception {
-
         ObjectMapper mapper = new ObjectMapper();
         String response = mockMvc.perform(post("/insurance/travel/")
                         .content(parseJSONIntoString("TravelCalculatePremiumControllerRequest.json"))
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
-                        .andExpect(status().isOk())
-                        .andReturn().getResponse()
-                        .getContentAsString();
-        assertEquals(mapper.readTree(parseJSONIntoString("TravelCalculatePremiumControllerResponse.json")), mapper.readTree(response));
+                .andExpect(status().isOk())
+                .andReturn().getResponse().getContentAsString();
+        assertEquals(mapper.readTree(response), mapper.readTree(parseJSONIntoString("TravelCalculatePremiumControllerResponse.json")));
     }
-
-    private String parseJSONIntoString(String fileName) throws IOException {
+    private String parseJSONIntoString(String filePath){
         try {
-            File file = ResourceUtils.getFile("classpath:" + fileName);
+            File file = ResourceUtils.getFile("classpath:" + filePath);
             return new String(Files.readAllBytes(file.toPath()));
-        } catch (IOException e) {
-            throw new IOException("JSON file " + fileName + " can't be read");
+        } catch (Exception ex) {
+            throw new RuntimeException();
         }
     }
+
 }
