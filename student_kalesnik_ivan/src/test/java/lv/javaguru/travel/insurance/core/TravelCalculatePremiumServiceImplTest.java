@@ -1,5 +1,6 @@
 package lv.javaguru.travel.insurance.core;
 
+import lv.javaguru.travel.insurance.core.valids.TravelCalculatePremiumRequestValidatorImpl;
 import lv.javaguru.travel.insurance.validation.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.validation.TravelCalculatePremiumResponse;
 import lv.javaguru.travel.insurance.validation.ValidationError;
@@ -23,7 +24,7 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 public class TravelCalculatePremiumServiceImplTest {
 
-    @Mock private TravelCalculatePremiumRequestValidator requestValidator;
+    @Mock private TravelCalculatePremiumRequestValidatorImpl requestValidator;
     @Mock private DateTimeService dateTimeService;
 
     @InjectMocks
