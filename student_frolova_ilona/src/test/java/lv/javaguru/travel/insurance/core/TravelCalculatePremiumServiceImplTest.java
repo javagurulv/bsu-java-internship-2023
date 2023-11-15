@@ -19,7 +19,7 @@ class TravelCalculatePremiumServiceImplTest {
 
     @InjectMocks private TravelCalculatePremiumServiceImpl service;
 
-    /*@Test
+    @Test
     public void responseParametersEqualToRequestParametersWhenReturnedByController() {
 
         TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest(
@@ -33,5 +33,5 @@ class TravelCalculatePremiumServiceImplTest {
                 response.getAgreementDateFrom() == request.getAgreementDateFrom() &&
                 response.getAgreementDateTo() == request.getAgreementDateTo()
              );
-    }*/
+    }
 }
