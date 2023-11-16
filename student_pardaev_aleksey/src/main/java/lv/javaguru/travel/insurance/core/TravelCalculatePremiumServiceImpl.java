@@ -11,6 +11,7 @@ import java.math.BigDecimal;
 class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService {
 
     @Autowired private DateTimeService dateTimeService;
+
     @Override
     public TravelCalculatePremiumResponse calculatePremium(TravelCalculatePremiumRequest request) {
         TravelCalculatePremiumResponse response = new TravelCalculatePremiumResponse();
@@ -19,7 +20,8 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
         response.setAgreementDateFrom(request.getAgreementDateFrom());
         response.setAgreementDateTo(request.getAgreementDateTo());
 
-        response.setAgreementPrice(dateTimeService.getDaysBetweenDates(response.getAgreementDateFrom(), response.getAgreementDateTo()));
+        var daysBetween = dateTimeService.getDaysBetween(request.getAgreementDateFrom(), request.getAgreementDateTo());
+        response.setAgreementPrice(new BigDecimal(daysBetween));
 
         return response;
     }
