@@ -5,6 +5,7 @@ import lv.javaguru.travel.insurance.rest.ValidationError;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -58,4 +59,25 @@ class TravelCalculatePremiumRequestValidatorTest {
         assertEquals("personLastName", errors.get(0).getField());
         assertEquals("Must not be empty!", errors.get(0).getMessage());
     }
+    @Test
+    void validateAgrementDataFromIsNull() {
+        var request = new TravelCalculatePremiumRequest("John", "Wick", null, new Date());
+        var validator=new TravelCalculatePremiumRequestValidator();
+        var errors=validator.validate(request);
+        assertFalse(errors.isEmpty());
+        assertEquals(1, errors.size());
+        assertEquals("agrementDataFrom", errors.get(0).getField());
+        assertEquals("Must not be empty!", errors.get(0).getMessage());
+    }
+    @Test
+    void validateAgrementDataFromIsEmpty() {
+        var request = new TravelCalculatePremiumRequest("John", "Wick", new Date(), new Date());
+        var validator=new TravelCalculatePremiumRequestValidator();
+        var errors=validator.validate(request);
+        assertFalse(errors.isEmpty());
+        assertEquals(errors.size(), 1);
+        assertEquals("agrementDataFrom", errors.get(0).getField());
+        assertEquals("Must not be empty!", errors.get(0).getMessage());
+    }
+
 }
