@@ -14,9 +14,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class TravelCalculatePremiumRequestValidatorTest {
 
     private final TravelCalculatePremiumRequestValidator validator;
+    private final DateTimeService dateTimeService;
 
     TravelCalculatePremiumRequestValidatorTest() {
         validator = new TravelCalculatePremiumRequestValidator();
+        dateTimeService = new DateTimeService();
     }
 
     @Test
@@ -203,8 +205,6 @@ public class TravelCalculatePremiumRequestValidatorTest {
                 null
         );
 
-        DateTimeService service = new DateTimeService();
-
         List<ValidationError> errors = validator.validate(request);
 
         ArrayList<ValidationError> expected = new ArrayList<ValidationError>(Arrays.asList(
@@ -213,6 +213,44 @@ public class TravelCalculatePremiumRequestValidatorTest {
                 new ValidationError("agreementDateFrom", "Must not be empty!"),
                 new ValidationError("agreementDateTo", "Must not be empty!")
         ));
+
+        assertEquals(errors, expected);
+    }
+
+    @Test
+    public void returnErrorIfDateFromAfterDateTo() {
+        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest(
+                "Ilona",
+                "Frolova",
+                dateTimeService.createDate("12.04.2018"),
+                dateTimeService.createDate("11.04.2018")
+        );
+
+        List<ValidationError> errors = validator.validate(request);
+
+        ArrayList<ValidationError> expected = new ArrayList<ValidationError>(Arrays.asList(
+                new ValidationError("agreementDateTo", "Must be after agreementDateFrom!")
+        ));
+
+        assertEquals(errors, expected);
+    }
+
+    @Test
+    public void returnNothingIfDateFromBeforeDateTo() {
+        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest(
+                "Ilona",
+                "Frolova",
+                dateTimeService.createDate("12.04.2018"),
+                dateTimeService.createDate("13.04.2018")
+        );
+
+        List<ValidationError> errors = validator.validate(request);
+
+        ArrayList<ValidationError> expected = new ArrayList<ValidationError>();
+
+        assertEquals(errors, expected);
+
+        request.setAgreementDateTo(request.getAgreementDateFrom());
 
         assertEquals(errors, expected);
     }
