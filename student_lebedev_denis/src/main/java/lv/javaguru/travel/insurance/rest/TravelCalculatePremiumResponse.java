@@ -1,7 +1,12 @@
 package lv.javaguru.travel.insurance.rest;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.Temporal;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 public class TravelCalculatePremiumResponse {
 
@@ -20,6 +25,10 @@ public class TravelCalculatePremiumResponse {
         this.personLastName = personLastName;
         this.agreementDateFrom = agreementDateFrom;
         this.agreementDateTo = agreementDateTo;
+
+        long diff = agreementDateTo.getTime() - agreementDateFrom.getTime();
+        long days = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+        this.agreementPrice = new BigDecimal(days);
     }
 
     @Override
@@ -35,7 +44,8 @@ public class TravelCalculatePremiumResponse {
         return this.personFirstName.equals(anotherRequest.personFirstName) &&
                 this.personLastName.equals(anotherRequest.personLastName) &&
                 this.agreementDateFrom.equals(anotherRequest.agreementDateFrom) &&
-                this.agreementDateTo.equals(anotherRequest.agreementDateTo);
+                this.agreementDateTo.equals(anotherRequest.agreementDateTo) &&
+                this.agreementPrice.equals(anotherRequest.agreementPrice);
     }
 
     public String getPersonFirstName() {
