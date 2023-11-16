@@ -32,6 +32,18 @@ class TravelCalculatePremiumServiceImplTest {
                 Objects.equals(response.getPersonFirstName(), request.getPersonFirstName()) &&
                 response.getAgreementDateFrom() == request.getAgreementDateFrom() &&
                 response.getAgreementDateTo() == request.getAgreementDateTo()
-             );
+              );
+    }
+
+    @Test
+    public void responseConsistsOfErrorsIfRequestIsInvalid() {
+
+        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest(
+                "", "Name", new Date(12L), new Date(1212L)
+        );
+
+        TravelCalculatePremiumResponse response = service.calculatePremium(request);
+
+        assert(response.hasErrors());
     }
 }

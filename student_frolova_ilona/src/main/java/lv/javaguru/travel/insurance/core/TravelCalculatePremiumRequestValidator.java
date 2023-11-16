@@ -15,17 +15,18 @@ import java.util.Optional;
 public class TravelCalculatePremiumRequestValidator {
 
     public List<ValidationError> validate(TravelCalculatePremiumRequest request) {
+
+        System.out.println("started to validate");
+
         List<ValidationError> errors = new ArrayList<ValidationError>();
 
         validatePersonFirstName(request).ifPresent(errors::add);
         validatePersonLastName(request).ifPresent(errors::add);
         validateAgreementDateFrom(request).ifPresent(errors::add);
         validateAgreementDateTo(request).ifPresent(errors::add);
+        validateDateSequence(request).ifPresent(errors::add);
 
-        if (!errors.contains(new ValidationError("agreementDateTo", "Must not be empty!")) &&
-                !errors.contains(new ValidationError("agreementDateFrom", "Must not be empty!"))) {
-            validateDateSequence(request).ifPresent(errors::add);
-        }
+        System.out.println("inner validator errors: " + errors);
 
         return errors;
     }
@@ -55,6 +56,10 @@ public class TravelCalculatePremiumRequestValidator {
     }
 
     private Optional<ValidationError> validateDateSequence(TravelCalculatePremiumRequest request) {
+
+        if (request.getAgreementDateFrom() == null || request.getAgreementDateTo() == null)
+            return Optional.empty();
+
         return (request.getAgreementDateTo().getTime() - request.getAgreementDateFrom().getTime() < 0)
                 ? Optional.of(new ValidationError("agreementDateTo", "Must be after agreementDateFrom!"))
                 : Optional.empty();
