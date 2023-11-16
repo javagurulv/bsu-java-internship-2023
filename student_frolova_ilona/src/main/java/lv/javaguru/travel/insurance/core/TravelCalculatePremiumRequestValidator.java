@@ -21,7 +21,11 @@ public class TravelCalculatePremiumRequestValidator {
         validatePersonLastName(request).ifPresent(errors::add);
         validateAgreementDateFrom(request).ifPresent(errors::add);
         validateAgreementDateTo(request).ifPresent(errors::add);
-        validateDateSequence(request).ifPresent(errors::add);
+
+        if (!errors.contains(new ValidationError("agreementDateTo", "Must not be empty!")) &&
+                !errors.contains(new ValidationError("agreementDateFrom", "Must not be empty!"))) {
+            validateDateSequence(request).ifPresent(errors::add);
+        }
 
         return errors;
     }
