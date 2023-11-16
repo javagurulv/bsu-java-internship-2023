@@ -3,8 +3,15 @@ package lv.javaguru.travel.insurance.core;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -12,20 +19,20 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+@ExtendWith(MockitoExtension.class)
 class TravelCalculatePremiumRequestValidatorTest {
-
-    private final TravelCalculatePremiumRequestValidator requestValidator = new TravelCalculatePremiumRequestValidator();
+@InjectMocks
+    TravelCalculatePremiumRequestValidator requestValidator = new TravelCalculatePremiumRequestValidator();
+    @Mock DateTimeService dateTimeService;
+    @Mock TravelCalculatePremiumRequest request;
 
     @Test
     public void responseShouldContainErrorEmptyFirstNameTest() {
-        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        when(dateTimeService.getCurrentDateTime()).thenReturn(createDate("16.11.2023"));
         when(request.getPersonFirstName()).thenReturn("");
         when(request.getPersonLastName()).thenReturn("Frolov");
-        Calendar data = new GregorianCalendar();
-        data.set(2018, Calendar.JULY, 8);
-        when(request.getAgreementDateFrom()).thenReturn(data.getTime());
-        data.set(2018, Calendar.AUGUST, 18);
-        when(request.getAgreementDateTo()).thenReturn(data.getTime());
+        when(request.getAgreementDateFrom()).thenReturn(createDate("8.07.2024"));
+        when(request.getAgreementDateTo()).thenReturn(createDate("8.08.2024"));
         List<ValidationError> errors = requestValidator.validate(request);
         assertEquals(errors.size(), 1);
         assertEquals(errors.get(0).getField(), "personFirstName");
@@ -33,14 +40,11 @@ class TravelCalculatePremiumRequestValidatorTest {
     }
     @Test
     public void responseShouldContainErrorNullFirstNameTest() {
-        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        when(dateTimeService.getCurrentDateTime()).thenReturn(createDate("16.11.2023"));
         when(request.getPersonFirstName()).thenReturn(null);
         when(request.getPersonLastName()).thenReturn("Ignatov");
-        Calendar data = new GregorianCalendar();
-        data.set(2018, Calendar.JULY, 8);
-        when(request.getAgreementDateFrom()).thenReturn(data.getTime());
-        data.set(2018, Calendar.AUGUST, 18);
-        when(request.getAgreementDateTo()).thenReturn(data.getTime());
+        when(request.getAgreementDateFrom()).thenReturn(createDate("8.07.2024"));
+        when(request.getAgreementDateTo()).thenReturn(createDate("8.08.2024"));
         List<ValidationError> errors = requestValidator.validate(request);
         assertEquals(errors.size(), 1);
         assertEquals(errors.get(0).getField(), "personFirstName");
@@ -48,14 +52,11 @@ class TravelCalculatePremiumRequestValidatorTest {
     }
     @Test
     public void responseShouldContainErrorEmptyLastNameTest(){
-        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        when(dateTimeService.getCurrentDateTime()).thenReturn(createDate("16.11.2023"));
         when(request.getPersonFirstName()).thenReturn("Sasha");
         when(request.getPersonLastName()).thenReturn("");
-        Calendar data = new GregorianCalendar();
-        data.set(2018, Calendar.JULY, 8);
-        when(request.getAgreementDateFrom()).thenReturn(data.getTime());
-        data.set(2018, Calendar.AUGUST, 18);
-        when(request.getAgreementDateTo()).thenReturn(data.getTime());
+        when(request.getAgreementDateFrom()).thenReturn(createDate("8.07.2024"));
+        when(request.getAgreementDateTo()).thenReturn(createDate("8.08.2024"));
         List<ValidationError> errors = requestValidator.validate(request);
         assertEquals(errors.size(), 1);
         assertEquals(errors.get(0).getField(), "personLastName");
@@ -63,14 +64,11 @@ class TravelCalculatePremiumRequestValidatorTest {
     }
     @Test
     public void responseShouldContainErrorNullLastNameTest(){
-        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        when(dateTimeService.getCurrentDateTime()).thenReturn(createDate("16.11.2023"));
         when(request.getPersonFirstName()).thenReturn("Nikita");
         when(request.getPersonLastName()).thenReturn(null);
-        Calendar data = new GregorianCalendar();
-        data.set(2018, Calendar.JULY, 8);
-        when(request.getAgreementDateFrom()).thenReturn(data.getTime());
-        data.set(2018, Calendar.AUGUST, 18);
-        when(request.getAgreementDateTo()).thenReturn(data.getTime());
+        when(request.getAgreementDateFrom()).thenReturn(createDate("8.07.2024"));
+        when(request.getAgreementDateTo()).thenReturn(createDate("8.08.2024"));
         List<ValidationError> errors = requestValidator.validate(request);
         assertEquals(errors.size(), 1);
         assertEquals(errors.get(0).getField(), "personLastName");
@@ -78,13 +76,11 @@ class TravelCalculatePremiumRequestValidatorTest {
     }
     @Test
     public void responseShouldContainErrorNullDateFromTest() {
-        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        when(dateTimeService.getCurrentDateTime()).thenReturn(createDate("16.11.2023"));
         when(request.getPersonFirstName()).thenReturn("Misha");
         when(request.getPersonLastName()).thenReturn("Popov");
         when(request.getAgreementDateFrom()).thenReturn(null);
-        Calendar data = new GregorianCalendar();
-        data.set(2018, Calendar.AUGUST, 18);
-        when(request.getAgreementDateTo()).thenReturn(data.getTime());
+        when(request.getAgreementDateTo()).thenReturn(createDate("8.08.2024"));
         List<ValidationError> errors = requestValidator.validate(request);
         assertEquals(errors.size(), 1);
         assertEquals(errors.get(0).getField(),"agreementDateFrom" );
@@ -92,47 +88,55 @@ class TravelCalculatePremiumRequestValidatorTest {
     }
     @Test
     public void responseShouldContainErrorNullDateToTest() {
-        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        when(dateTimeService.getCurrentDateTime()).thenReturn(createDate("16.11.2023"));
         when(request.getPersonFirstName()).thenReturn("Misha");
         when(request.getPersonLastName()).thenReturn("Popov");
-        when(request.getAgreementDateFrom()).thenReturn(null);
-        Calendar data = new GregorianCalendar();
-        data.set(2018, Calendar.AUGUST, 18);
-        when(request.getAgreementDateFrom()).thenReturn(data.getTime());
         when(request.getAgreementDateTo()).thenReturn(null);
+        when(request.getAgreementDateFrom()).thenReturn(createDate("8.07.2024"));
         List<ValidationError> errors = requestValidator.validate(request);
         assertEquals(errors.size(), 1);
         assertEquals(errors.get(0).getField(),"agreementDateTo" );
         assertEquals(errors.get(0).getMessage(),"Must not be empty!" );
     }
     @Test
-    public void responseShouldContainErrorDateFromMoreToTest() {
-        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+    public void responseShouldContainDateFromOfFutureTimeTest() {
+        when(dateTimeService.getCurrentDateTime()).thenReturn(createDate("16.11.2023"));
         when(request.getPersonFirstName()).thenReturn("Misha");
         when(request.getPersonLastName()).thenReturn("Popov");
-        when(request.getAgreementDateFrom()).thenReturn(null);
-        Calendar data = new GregorianCalendar();
-        data.set(2018, Calendar.AUGUST, 18);
-        when(request.getAgreementDateFrom()).thenReturn(data.getTime());
-        data.set(2017, Calendar.AUGUST, 18);
-        when(request.getAgreementDateTo()).thenReturn(data.getTime());
+        when(request.getAgreementDateFrom()).thenReturn(createDate("8.07.2023"));
+        when(request.getAgreementDateTo()).thenReturn(createDate("8.08.2024"));
         List<ValidationError> errors = requestValidator.validate(request);
         assertEquals(errors.size(), 1);
         assertEquals(errors.get(0).getField(),"agreementDateFrom" );
-        assertEquals(errors.get(0).getMessage(),"agreementDateFrom must be less than agreementDateTo!" );
+        assertEquals(errors.get(0).getMessage(),"agreementDateFrom must be future date" );
+    }
+    @Test
+    public void responseShouldContainErrorDateFromMoreToTest() {
+        when(dateTimeService.getCurrentDateTime()).thenReturn(createDate("16.11.2023"));
+        when(request.getPersonFirstName()).thenReturn("Misha");
+        when(request.getPersonLastName()).thenReturn("Popov");
+        when(request.getAgreementDateFrom()).thenReturn(createDate("8.07.2024"));
+        when(request.getAgreementDateTo()).thenReturn(createDate("8.08.2023"));
+        List<ValidationError> errors = requestValidator.validate(request);
+        assertEquals(errors.size(), 2);
+        assertEquals(errors.get(1).getField(),"agreementDateTo" );
+        assertEquals(errors.get(1).getMessage(),"agreementDateTo must be future date" );
     }
     @Test
     public void responseNotContainErrorTest() {
-        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        when(dateTimeService.getCurrentDateTime()).thenReturn(createDate("16.11.2023"));
         when(request.getPersonFirstName()).thenReturn("Misha");
         when(request.getPersonLastName()).thenReturn("Popov");
-        Calendar data = new GregorianCalendar();
-        data.set(2018, Calendar.JULY, 8);
-        when(request.getAgreementDateFrom()).thenReturn(data.getTime());
-        data.set(2018, Calendar.AUGUST, 18);
-        when(request.getAgreementDateTo()).thenReturn(data.getTime());
+        when(request.getAgreementDateFrom()).thenReturn(createDate("8.07.2024"));
+        when(request.getAgreementDateTo()).thenReturn(createDate("8.08.2024"));
         List<ValidationError> errors = requestValidator.validate(request);
         assertEquals(errors.size(), 0);
     }
-
+    private Date createDate(String dateStr) {
+        try {
+            return new SimpleDateFormat("dd.MM.yyyy").parse(dateStr);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
