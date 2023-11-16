@@ -1,26 +1,25 @@
 package lv.javaguru.travel.insurance.logger;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
 import lv.javaguru.travel.insurance.validation.TravelCalculatePremiumRequest;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import lv.javaguru.travel.insurance.core.*;
+@Slf4j
 @Component
 public
 class TravelCalculatePremiumRequestLogger {
 
-    private static final Logger logger = LoggerFactory.getLogger(TravelCalculatePremiumRequestLogger.class);
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     public void log(TravelCalculatePremiumRequest request) {
-        ObjectMapper objectMapper = new ObjectMapper();
         try {
             String json = objectMapper.writeValueAsString(request);
-            logger.info("REQUEST: " + json);
+            log.info("REQUEST: " + json);
         } catch (JsonProcessingException e) {
-            logger.error("Error to convert request to JSON", e);
+            log.error("Error to convert request to JSON", e);
         }
     }
-
 }
+
