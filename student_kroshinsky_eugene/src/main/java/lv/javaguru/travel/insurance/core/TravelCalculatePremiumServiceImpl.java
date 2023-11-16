@@ -19,7 +19,6 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
             return new TravelCalculatePremiumResponse(errors);
         }
 
-
         TravelCalculatePremiumResponse response = new TravelCalculatePremiumResponse();
         response.setPersonFirstName(request.getPersonFirstName());
         response.setPersonLastName(request.getPersonLastName());

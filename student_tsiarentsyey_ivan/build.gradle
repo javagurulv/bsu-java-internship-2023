@@ -4,6 +4,8 @@ dependencies {
 
 	testImplementation('org.springframework.boot:spring-boot-starter-test:2.7.5')
 
+	testImplementation 'org.mockito:mockito-core:2.1.0'
+
 	compileOnly('org.projectlombok:lombok:1.18.24')
 	annotationProcessor('org.projectlombok:lombok:1.18.24')
 

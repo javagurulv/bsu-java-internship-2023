@@ -12,15 +12,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TravelCalculatePremiumServiceImplTest {
     private static BigDecimal agreementPrice;
-    private static TravelCalculatePremiumRequest request;
+    private static TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest();;
     @BeforeAll
     public static void init(){
-        request = new TravelCalculatePremiumRequest(
-                "Eugene",
-                "Kroshinsky",
-                new Date(2023, 11, 01),
-                new Date(2023 ,11, 12)
-        );
+        request.setPersonFirstName("Eugene");
+        request.setPersonLastName("Kroshinsky");
+        request.setAgreementDateFrom(new Date(2023, 11, 01));
+        request.setAgreementDateTo(new Date(2023 ,11, 12));
         agreementPrice = new BigDecimal(11);
     }
     @Test

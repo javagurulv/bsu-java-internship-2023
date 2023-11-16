@@ -1,6 +1,7 @@
 package lv.javaguru.travel.insurance.rest;
 
-import org.testng.annotations.Test;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -9,8 +10,13 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.util.ResourceUtils;
+
+import java.io.File;
+import java.nio.file.Files;
 
 import static org.hamcrest.Matchers.is;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -24,21 +30,21 @@ public class TravelCalculatePremiumControllerTest {
 
     @Test
     public void simpleRestControllerTest() throws Exception {
-        mockMvc.perform(post("/insurance/travel/")
-                        .content("{" +
-                                "\"personFirstName\" : \"Vasja\",\n" +
-                                "\"personLastName\" : \"Pupkin\",\n" +
-                                "\"agreementDateFrom\" : \"2021-05-25\",\n" +
-                                "\"agreementDateTo\" : \"2021-05-29\"\n" +
-                                "}")
+        ObjectMapper mapper = new ObjectMapper();
+        String response = mockMvc.perform(post("/insurance/travel/")
+                        .content(parseJSONIntoString("TravelCalculatePremiumControllerRequest.json"))
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("personFirstName", is("Vasja")))
-                .andExpect(jsonPath("personLastName", is("Pupkin")))
-                .andExpect(jsonPath("agreementDateFrom", is("2021-05-25")))
-                .andExpect(jsonPath("agreementDateTo", is("2021-05-29")))
-                .andExpect(jsonPath("agreementPrice", is(4)))
-                .andReturn();
+                .andReturn().getResponse().getContentAsString();
+        assertEquals(mapper.readTree(response), mapper.readTree(parseJSONIntoString("TravelCalculatePremiumControllerResponse.json")));
+    }
+    private String parseJSONIntoString(String filePath){
+        try {
+            File file = ResourceUtils.getFile("classpath:" + filePath);
+            return new String(Files.readAllBytes(file.toPath()));
+        } catch (Exception ex) {
+            throw new RuntimeException();
+        }
     }
 
 }
