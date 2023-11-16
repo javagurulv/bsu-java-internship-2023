@@ -31,7 +31,7 @@ public class TravelPremiumUnderwritingTest {
         when(request.getAgreementDateTo()).thenReturn(createDate("10.01.2023"));
         when(dateTimeService.getDaysBetween(request.getAgreementDateFrom(), request.getAgreementDateTo())).thenReturn(9L);
         BigDecimal premium = premiumUnderwriting.calculatePremium(request);
-        assertEquals(premium, new BigDecimal(8));
+        assertEquals(premium, new BigDecimal(9));
     }
 
     private Date createDate(String dateStr) {

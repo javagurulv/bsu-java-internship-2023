@@ -32,13 +32,15 @@ class TravelCalculatePremiumRequestValidator {
                 : Optional.empty();
     }
     private Optional<ValidationError> validateAgreementDateFrom(TravelCalculatePremiumRequest request) {
-        return (request.getAgreementDateFrom() == null)
+        return request.getAgreementDateFrom() == null
                 ? Optional.of(new ValidationError("agreementDateFrom", "Must not be null!"))
-                : Optional.empty();
+                :Optional.empty();
     }
     private Optional<ValidationError> validateAgreementDateTo(TravelCalculatePremiumRequest request) {
         return (request.getAgreementDateTo() == null)
                 ? Optional.of(new ValidationError("agreementDateTo", "Must not be null!"))
-                : Optional.empty();
+                : ((request.getAgreementDateTo().before(request.getAgreementDateFrom()))
+                ? Optional.of(new ValidationError("agreementDateTo", "Must not be before agreementDateFrom!!!"))
+                :Optional.empty());
     }
 }

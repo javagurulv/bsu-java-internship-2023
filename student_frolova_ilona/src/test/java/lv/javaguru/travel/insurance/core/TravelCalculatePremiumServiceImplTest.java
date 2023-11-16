@@ -3,18 +3,21 @@ package lv.javaguru.travel.insurance.core;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumResponse;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Date;
 import java.util.Objects;
 
+@ExtendWith(MockitoExtension.class)
 class TravelCalculatePremiumServiceImplTest {
 
-    TravelCalculatePremiumServiceImpl service;
+    @Mock private TravelCalculatePremiumRequestValidator requestValidator;
+    @Mock private DateTimeService dateTimeService;
 
-    TravelCalculatePremiumServiceImplTest() {
-        service = new TravelCalculatePremiumServiceImpl();
-        service.setDateTimeService(new DateTimeService());
-    }
+    @InjectMocks private TravelCalculatePremiumServiceImpl service;
 
     @Test
     public void responseParametersEqualToRequestParametersWhenReturnedByController() {
