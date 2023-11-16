@@ -26,19 +26,48 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 public class TravelCalculatePremiumControllerTest {
 
-    @Autowired private MockMvc mockMvc;
+    @Autowired
+    private MockMvc mockMvc;
 
     @Test
-    public void simpleRestControllerTest() throws Exception {
+    public void testRequestWithoutErrors() throws Exception {
+        equalsJsonFiles("ControllerRequestWithoutErrors.json", "ControllerResponseWithoutErrors.json");
+    }
+    @Test
+    public void testRequestWithoutFirstName() throws Exception {
+        equalsJsonFiles("ControllerRequestWithoutFirstName.json", "ControllerResponseWithoutFirstName.json");
+    }
+    @Test
+    public void testRequestWithoutLastName() throws Exception {
+        equalsJsonFiles("ControllerRequestWithoutLastName.json", "ControllerResponseWithoutLastName.json");
+    }
+    @Test
+    public void testRequestWithoutDateFrom() throws Exception {
+        equalsJsonFiles("ControllerRequestWithoutDateFrom.json", "ControllerResponseWithoutDateFrom.json");
+    }
+    @Test
+    public void testRequestWithoutDateTo() throws Exception {
+        equalsJsonFiles("ControllerRequestWithoutDateTo.json", "ControllerResponseWithoutDateTo.json");
+    }
+    @Test
+    public void testRequestWithNoFields() throws Exception {
+        equalsJsonFiles("ControllerRequestWithNoFields.json", "ControllerResponseWithNoFields.json");
+    }
+    @Test
+    public void testRequestWithDateFromMoreThanDateTo() throws Exception {
+        equalsJsonFiles("ControllerRequestWithDateFromMoreThanTo.json", "ControllerResponseWithDateFromMoreThanTo.json");
+    }
+    public void equalsJsonFiles(String requestFile, String responseFile) throws Exception {
         ObjectMapper mapper = new ObjectMapper();
         String response = mockMvc.perform(post("/insurance/travel/")
-                        .content(parseJSONIntoString("TravelCalculatePremiumControllerRequest.json"))
+                        .content(parseJSONIntoString(requestFile))
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
                 .andReturn().getResponse().getContentAsString();
-        assertEquals(mapper.readTree(response), mapper.readTree(parseJSONIntoString("TravelCalculatePremiumControllerResponse.json")));
+        assertEquals(mapper.readTree(response), mapper.readTree(parseJSONIntoString(responseFile)));
     }
-    private String parseJSONIntoString(String filePath){
+
+    private String parseJSONIntoString(String filePath) {
         try {
             File file = ResourceUtils.getFile("classpath:" + filePath);
             return new String(Files.readAllBytes(file.toPath()));
