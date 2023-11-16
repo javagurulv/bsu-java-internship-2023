@@ -20,7 +20,7 @@ public class TravelCalculatePremiumRequestValidatorTest {
     }
 
     @Test
-    public void returnNothingIfNamesOk() {
+    public void returnNothingIfEverythingIsOk() {
         TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest(
                 "Ilona",
                 "Frolova",
@@ -149,6 +149,69 @@ public class TravelCalculatePremiumRequestValidatorTest {
         ArrayList<ValidationError> expected = new ArrayList<ValidationError>(Arrays.asList(
                 new ValidationError("personFirstName", "Must not be empty!"),
                 new ValidationError("personLastName", "Must not be empty!")
+        ));
+
+        assertEquals(errors, expected);
+    }
+
+    @Test
+    public void returnErrorIfDateFromNotOk() {
+        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest(
+                "Ilona",
+                "Frolova",
+                null,
+                new Date()
+        );
+
+        DateTimeService service = new DateTimeService();
+
+        List<ValidationError> errors = validator.validate(request);
+
+        ArrayList<ValidationError> expected = new ArrayList<ValidationError>(Arrays.asList(
+                new ValidationError("agreementDateFrom", "Must not be empty!")
+        ));
+
+        assertEquals(errors, expected);
+    }
+
+    @Test
+    public void returnErrorIfDateToNotOk() {
+        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest(
+                "Ilona",
+                "Frolova",
+                new Date(),
+                null
+        );
+
+        DateTimeService service = new DateTimeService();
+
+        List<ValidationError> errors = validator.validate(request);
+
+        ArrayList<ValidationError> expected = new ArrayList<ValidationError>(Arrays.asList(
+                new ValidationError("agreementDateTo", "Must not be empty!")
+        ));
+
+        assertEquals(errors, expected);
+    }
+
+    @Test
+    public void returnErrorsIfEverythingNotOk() {
+        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest(
+                "  ",
+                "  ",
+                null,
+                null
+        );
+
+        DateTimeService service = new DateTimeService();
+
+        List<ValidationError> errors = validator.validate(request);
+
+        ArrayList<ValidationError> expected = new ArrayList<ValidationError>(Arrays.asList(
+                new ValidationError("personFirstName", "Must not be empty!"),
+                new ValidationError("personLastName", "Must not be empty!"),
+                new ValidationError("agreementDateFrom", "Must not be empty!"),
+                new ValidationError("agreementDateTo", "Must not be empty!")
         ));
 
         assertEquals(errors, expected);
