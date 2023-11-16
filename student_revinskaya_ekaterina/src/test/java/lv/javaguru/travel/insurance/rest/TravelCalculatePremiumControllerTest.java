@@ -57,6 +57,14 @@ public class TravelCalculatePremiumControllerTest {
     public void testRequestWithDateFromMoreThanDateTo() throws Exception {
         equalsJsonFiles("ControllerRequestWithDateFromMoreThanTo.json", "ControllerResponseWithDateFromMoreThanTo.json");
     }
+    @Test
+    public void testRequestWithDateFromInPast() throws Exception {
+        equalsJsonFiles("ControllerRequestWithDateFromInPast.json", "ControllerResponseWithDateFromInPast.json");
+    }
+    @Test
+    public void testRequestWithDateToInPast() throws Exception {
+        equalsJsonFiles("ControllerRequestWithDateToInPast.json", "ControllerResponseWithDateToInPast.json");
+    }
     public void equalsJsonFiles(String requestFile, String responseFile) throws Exception {
         ObjectMapper mapper = new ObjectMapper();
         String response = mockMvc.perform(post("/insurance/travel/")
