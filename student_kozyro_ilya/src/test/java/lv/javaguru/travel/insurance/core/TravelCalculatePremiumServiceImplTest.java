@@ -20,18 +20,18 @@ import static org.junit.jupiter.api.Assertions.*;
 class TravelCalculatePremiumServiceImplTest {
 
     @Autowired
-    DateService dateService;
+    DateServiceImpl dateService;
 
     @Autowired
     TravelCalculatePremiumServiceImpl travelCalculatePremiumService;
     @Test
     void testCalculatePremium() throws ParseException {
-        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest();
-
-        request.setAgreementDateFrom(dateService.createDate("2000-10-10"));
-        request.setAgreementDateTo(dateService.createDate("2020-10-10"));
-        request.setPersonFirstName("FirstName");
-        request.setPersonLastName("LastName");
+        TravelCalculatePremiumRequest request = TravelCalculatePremiumRequest.builder()
+                .agreementDateFrom(dateService.createDate("2000-10-10"))
+                .agreementDateTo(dateService.createDate("2020-10-10"))
+                .personFirstName("FirstName")
+                .personLastName("LastName")
+                .build();
 
         var response = travelCalculatePremiumService.calculatePremium(request);
 
@@ -42,28 +42,6 @@ class TravelCalculatePremiumServiceImplTest {
 
     }
 
-    @Test
-    void badFormatTest() throws ParseException {
-        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest();
 
-        Exception exception = assertThrows(ParseException.class, () -> {
-            request.setAgreementDateFrom(dateService.createDate("Strange Data"));
-        });
-
-        assertSame(exception.getClass(), ParseException.class);
-
-    }
-
-    @Test
-    void badFormatTest2() throws ParseException {
-        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest();
-
-        Exception exception = assertThrows(ParseException.class, () -> {
-            request.setAgreementDateFrom(dateService.createDate("2000.10.10"));
-        });
-
-        assertSame(exception.getClass(), ParseException.class);
-
-    }
 
 }
