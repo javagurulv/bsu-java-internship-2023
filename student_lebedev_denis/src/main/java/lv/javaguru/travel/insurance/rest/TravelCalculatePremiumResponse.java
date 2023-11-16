@@ -9,7 +9,32 @@ public class TravelCalculatePremiumResponse {
     private Date agreementDateFrom;
     private Date agreementDateTo;
 
-    public TravelCalculatePremiumResponse() {}
+    public TravelCalculatePremiumResponse() {
+    }
+
+    public TravelCalculatePremiumResponse(String personFirstName, String personLastName,
+                                          Date agreementDateFrom, Date agreementDateTo) {
+        this.personFirstName = personFirstName;
+        this.personLastName = personLastName;
+        this.agreementDateFrom = agreementDateFrom;
+        this.agreementDateTo = agreementDateTo;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || this.getClass() != obj.getClass()) {
+            return false;
+        }
+
+        TravelCalculatePremiumResponse anotherRequest = (TravelCalculatePremiumResponse) obj;
+        return this.personFirstName.equals(anotherRequest.personFirstName) &&
+                this.personLastName.equals(anotherRequest.personLastName) &&
+                this.agreementDateFrom.equals(anotherRequest.agreementDateFrom) &&
+                this.agreementDateTo.equals(anotherRequest.agreementDateTo);
+    }
 
     public String getPersonFirstName() {
         return personFirstName;
