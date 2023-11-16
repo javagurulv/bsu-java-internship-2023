@@ -38,6 +38,8 @@ include 'student_dehtyaryov_arseniy'
 include 'student_konovalova_alina'
 include 'student_grib_nikita'
 include 'student_leonchik_vladislav'
+include 'student_chernookiy_dmitry'
+
 
 include 'teacher:travel_insurance_calculator:step_1'
 include 'teacher:travel_insurance_calculator:step_2'
