@@ -19,14 +19,14 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 public class TravelCalculateUnderwritingTest {
     @Mock
-    private CalculatorDate calculatorDate;
+    private DateTimeService calculatorDate;
     @InjectMocks
     private TravelCalculateUnderwriting calculateUnderwriting;
 
     @Test
     public void rightCalculateUnderwriting(){
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
-        when(request.getAgreementDateFrom()).thenReturn(createDate("03.07.2022"));
+        when(request.getAgreementDateFrom()).thenReturn(createDate("03.07.2023"));
         when(request.getAgreementDateTo()).thenReturn(createDate("07.07.2023"));
         when(calculatorDate.calculateDiffBetweenDays(request.getAgreementDateFrom(), request.getAgreementDateTo())).thenReturn(BigDecimal.valueOf(4));
         assertEquals(calculateUnderwriting.calculateAgreementPrice(request), BigDecimal.valueOf(4));

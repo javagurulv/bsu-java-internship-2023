@@ -2,12 +2,15 @@ package lv.javaguru.travel.insurance.core;
 
 import org.springframework.stereotype.Component;
 
-import java.math.BigDecimal;
-import java.time.temporal.ChronoUnit;
-import java.util.*;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
+
 @Component
 class DateTimeService {
-    BigDecimal getDaysBetweenDates(Date dateFrom, Date dateTo){
-        return BigDecimal.valueOf(ChronoUnit.DAYS.between(dateFrom.toInstant(), dateTo.toInstant()));
+
+    long getDaysBetween(Date date1, Date date2) {
+        long diff = date2.getTime() - date1.getTime();
+        return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
     }
+
 }
