@@ -19,6 +19,7 @@ public class TravelCalculatePremiumRequestValidatorTest {
         when(reqMock.getPersonFirstName()).thenReturn("");
         when(reqMock.getPersonLastName()).thenReturn("Pupkin");
         when(reqMock.getAgreementDateFrom()).thenReturn(new Date());
+        when(reqMock.getAgreementDateTo()).thenReturn(new Date());
         List<ValidationError> errorsList = reqVal.validate(reqMock);
         assertFalse(errorsList.isEmpty());
         assertEquals(errorsList.get(0).getField(), "personFirstName");
@@ -33,6 +34,7 @@ public class TravelCalculatePremiumRequestValidatorTest {
         when(reqMock.getPersonFirstName()).thenReturn(null);
         when(reqMock.getPersonLastName()).thenReturn("Pupkin");
         when(reqMock.getAgreementDateFrom()).thenReturn(new Date());
+        when(reqMock.getAgreementDateTo()).thenReturn(new Date());
         List<ValidationError> errorsList = reqVal.validate(reqMock);
         assertFalse(errorsList.isEmpty());
         assertEquals(errorsList.get(0).getField(), "personFirstName");
@@ -47,6 +49,7 @@ public class TravelCalculatePremiumRequestValidatorTest {
         when(reqMock.getPersonFirstName()).thenReturn("Vasya");
         when(reqMock.getPersonLastName()).thenReturn("");
         when(reqMock.getAgreementDateFrom()).thenReturn(new Date());
+        when(reqMock.getAgreementDateTo()).thenReturn(new Date());
         List<ValidationError> errorsList = reqVal.validate(reqMock);
         assertFalse(errorsList.isEmpty());
         assertEquals(errorsList.get(0).getField(), "personLastName");
@@ -61,6 +64,7 @@ public class TravelCalculatePremiumRequestValidatorTest {
         when(reqMock.getPersonFirstName()).thenReturn("Vasya");
         when(reqMock.getPersonLastName()).thenReturn(null);
         when(reqMock.getAgreementDateFrom()).thenReturn(new Date());
+        when(reqMock.getAgreementDateTo()).thenReturn(new Date());
         List<ValidationError> errorsList = reqVal.validate(reqMock);
         assertFalse(errorsList.isEmpty());
         assertEquals(errorsList.get(0).getField(), "personLastName");
@@ -75,9 +79,25 @@ public class TravelCalculatePremiumRequestValidatorTest {
         when(reqMock.getPersonFirstName()).thenReturn("Vasya");
         when(reqMock.getPersonLastName()).thenReturn("Pupkin");
         when(reqMock.getAgreementDateFrom()).thenReturn(null);
+        when(reqMock.getAgreementDateTo()).thenReturn(new Date());
         List<ValidationError> errorsList = reqVal.validate(reqMock);
         assertFalse(errorsList.isEmpty());
         assertEquals(errorsList.get(0).getField(), "agreementDateFrom");
+        assertEquals(errorsList.get(0).getMessage(), "Must not be empty!");
+        assertEquals(errorsList.size(), 1);
+    }
+
+    @Test
+    public void agreementDateToShouldNotBeNull() {
+        TravelCalculatePremiumRequestValidator reqVal = new TravelCalculatePremiumRequestValidator();
+        TravelCalculatePremiumRequest reqMock = mock(TravelCalculatePremiumRequest.class);
+        when(reqMock.getPersonFirstName()).thenReturn("Vasya");
+        when(reqMock.getPersonLastName()).thenReturn("Pupkin");
+        when(reqMock.getAgreementDateFrom()).thenReturn(new Date());
+        when(reqMock.getAgreementDateTo()).thenReturn(null);
+        List<ValidationError> errorsList = reqVal.validate(reqMock);
+        assertFalse(errorsList.isEmpty());
+        assertEquals(errorsList.get(0).getField(), "agreementDateTo");
         assertEquals(errorsList.get(0).getMessage(), "Must not be empty!");
         assertEquals(errorsList.size(), 1);
     }
@@ -89,6 +109,7 @@ public class TravelCalculatePremiumRequestValidatorTest {
         when(reqMock.getPersonFirstName()).thenReturn("Vasya");
         when(reqMock.getPersonLastName()).thenReturn("Pupkin");
         when(reqMock.getAgreementDateFrom()).thenReturn(new Date());
+        when(reqMock.getAgreementDateTo()).thenReturn(new Date());
         List<ValidationError> errorsList = reqVal.validate(reqMock);
         assertTrue(errorsList.isEmpty());
     }
