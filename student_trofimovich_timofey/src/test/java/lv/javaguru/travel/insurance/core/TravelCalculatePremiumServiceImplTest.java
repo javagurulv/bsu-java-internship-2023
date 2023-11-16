@@ -23,19 +23,18 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 public class TravelCalculatePremiumServiceImplTest {
     @Mock
-    DateTimeService dateTimeService;
-    @Mock
     TravelCalculatePremiumRequestValidator validator;
     @Mock
     TravelCalculatePremiumRequest request;
+    @Mock TravelPremiumUnderwriting underwriting;
     @InjectMocks
-    TravelCalculatePremiumServiceImpl travelCalculatePremiumService;
+    TravelCalculatePremiumServiceImpl service;
 
     @Test
     public void shouldReturnResponseWithCorrectPersonFirstName() {
         when(request.getPersonFirstName()).thenReturn("firstName");
         when(validator.validate(request)).thenReturn(List.of());
-        TravelCalculatePremiumResponse response = travelCalculatePremiumService.calculatePremium(request);
+        TravelCalculatePremiumResponse response = service.calculatePremium(request);
         assertThat(response.getPersonFirstName()).isEqualTo("firstName");
     }
 
@@ -43,7 +42,7 @@ public class TravelCalculatePremiumServiceImplTest {
     public void shouldReturnResponseWithCorrectPersonLastName() {
         when(request.getPersonLastName()).thenReturn("lastName");
         when(validator.validate(request)).thenReturn(List.of());
-        TravelCalculatePremiumResponse response = travelCalculatePremiumService.calculatePremium(request);
+        TravelCalculatePremiumResponse response = service.calculatePremium(request);
         assertThat(response.getPersonLastName()).isEqualTo("lastName");
     }
 
@@ -51,7 +50,7 @@ public class TravelCalculatePremiumServiceImplTest {
     public void shouldReturnResponseWithCorrectPersonDateFrom() {
         when(request.getAgreementDateFrom()).thenReturn(createDate("12.12.2020"));
         when(validator.validate(request)).thenReturn(List.of());
-        TravelCalculatePremiumResponse response = travelCalculatePremiumService.calculatePremium(request);
+        TravelCalculatePremiumResponse response = service.calculatePremium(request);
         assertThat(response.getAgreementDateFrom()).isEqualTo(createDate("12.12.2020"));
     }
 
@@ -59,7 +58,7 @@ public class TravelCalculatePremiumServiceImplTest {
     public void shouldReturnResponseWithCorrectPersonDateTo() {
         when(request.getAgreementDateTo()).thenReturn(createDate("12.12.2020"));
         when(validator.validate(request)).thenReturn(List.of());
-        TravelCalculatePremiumResponse response = travelCalculatePremiumService.calculatePremium(request);
+        TravelCalculatePremiumResponse response = service.calculatePremium(request);
         assertThat(response.getAgreementDateTo()).isEqualTo(createDate("12.12.2020"));
     }
 
@@ -68,22 +67,22 @@ public class TravelCalculatePremiumServiceImplTest {
         when(request.getAgreementDateFrom()).thenReturn(createDate("01.01.2023"));
         when(request.getAgreementDateTo()).thenReturn(createDate("10.01.2023"));
         when(validator.validate(request)).thenReturn(List.of());
-        when(dateTimeService.getDaysBetween(request.getAgreementDateFrom(), request.getAgreementDateTo())).thenReturn(9L);
-        TravelCalculatePremiumResponse response = travelCalculatePremiumService.calculatePremium(request);
+        when(underwriting.calculatePremium(request)).thenReturn(new BigDecimal(9L));
+        TravelCalculatePremiumResponse response = service.calculatePremium(request);
         assertEquals(response.getAgreementPrice(), new BigDecimal(9));
     }
 
     @Test
     public void shouldReturnResponseWithErrors() {
         when(validator.validate(request)).thenReturn(buildValidationErrorList());
-        TravelCalculatePremiumResponse response = travelCalculatePremiumService.calculatePremium(request);
+        TravelCalculatePremiumResponse response = service.calculatePremium(request);
         assertThat(response.hasErrors()).isTrue();
     }
 
     @Test
     public void shouldReturnResponseWithValidationErrors() {
         when(validator.validate(request)).thenReturn(buildValidationErrorList());
-        TravelCalculatePremiumResponse response = travelCalculatePremiumService.calculatePremium(request);
+        TravelCalculatePremiumResponse response = service.calculatePremium(request);
         assertAll(
                 () -> assertThat(response.getErrors().size()).isEqualTo(1),
                 () -> assertThat(response.getErrors().get(0).getField()).isEqualTo("field"),

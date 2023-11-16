@@ -35,7 +35,27 @@ class TravelCalculatePremiumRequestValidatorTest {
         var errors=validator.validate(request);
         assertFalse(errors.isEmpty());
         assertEquals(errors.size(), 1);
-        assertEquals(errors.get(0).getField(), "personFirstName");
-        assertEquals(errors.get(0).getMessage(), "Must not be empty!");
+        assertEquals("personFirstName", errors.get(0).getField());
+        assertEquals("Must not be empty!", errors.get(0).getMessage());
+    }
+    @Test
+    void validateLastNameIsNull() {
+        var request = new TravelCalculatePremiumRequest("John", null, null, null);
+        var validator=new TravelCalculatePremiumRequestValidator();
+        var errors=validator.validate(request);
+        assertFalse(errors.isEmpty());
+        assertEquals(1, errors.size());
+        assertEquals("personLastName", errors.get(0).getField());
+        assertEquals("Must not be empty!", errors.get(0).getMessage());
+    }
+    @Test
+    void validateLastNameIsEmpty() {
+        var request = new TravelCalculatePremiumRequest("John", "", null, null);
+        var validator=new TravelCalculatePremiumRequestValidator();
+        var errors=validator.validate(request);
+        assertFalse(errors.isEmpty());
+        assertEquals(errors.size(), 1);
+        assertEquals("personLastName", errors.get(0).getField());
+        assertEquals("Must not be empty!", errors.get(0).getMessage());
     }
 }
