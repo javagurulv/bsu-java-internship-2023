@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 @Component
+public
 class LastNameValidationRequest implements TravelRequestValidation
 {
     public Optional<ValidationError> execute(TravelCalculatePremiumRequest request) {

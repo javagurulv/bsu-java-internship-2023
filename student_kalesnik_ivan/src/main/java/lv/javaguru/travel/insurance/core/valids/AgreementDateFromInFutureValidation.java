@@ -10,10 +10,16 @@ import java.util.Date;
 import java.util.Optional;
 
 @Component
+public
 class AgreementDateFromInFutureValidation implements TravelRequestValidation {
 
     @Autowired
     private DateTimeService dateTimeService;
+
+    @Autowired
+    public AgreementDateFromInFutureValidation(DateTimeService dateTimeService) {
+        this.dateTimeService = dateTimeService;
+    }
 
     @Override
     public Optional<ValidationError> execute(TravelCalculatePremiumRequest request) {
