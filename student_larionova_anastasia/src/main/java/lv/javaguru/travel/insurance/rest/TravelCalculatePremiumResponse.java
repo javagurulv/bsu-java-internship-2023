@@ -2,6 +2,7 @@ package lv.javaguru.travel.insurance.rest;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.time.temporal.ChronoUnit;
 
 public class TravelCalculatePremiumResponse {
 
@@ -64,4 +65,10 @@ public class TravelCalculatePremiumResponse {
     public void setAgreementPrice(BigDecimal agreementPrice) {
         this.agreementPrice = agreementPrice;
     }
+
+    public void calculateAgreementPrice() {
+        long daysDifference = ChronoUnit.DAYS.between(agreementDateFrom.toInstant(), agreementDateTo.toInstant());
+        this.agreementPrice = BigDecimal.valueOf(daysDifference);
+    }
+
 }
