@@ -5,6 +5,7 @@ import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -16,6 +17,22 @@ public class TravelCalculatePremiumRequestValidatorTest {
 
     TravelCalculatePremiumRequestValidatorTest() {
         validator = new TravelCalculatePremiumRequestValidator();
+    }
+
+    @Test
+    public void returnNothingIfNamesOk() {
+        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest(
+                "Ilona",
+                "Frolova",
+                new Date(),
+                new Date()
+        );
+
+        List<ValidationError> errors = validator.validate(request);
+
+        ArrayList<ValidationError> expected = new ArrayList<ValidationError>();
+
+        assertEquals(errors, expected);
     }
 
     @Test
@@ -36,9 +53,26 @@ public class TravelCalculatePremiumRequestValidatorTest {
     }
 
     @Test
-    public void returnNothingIfFirstNameIsOk() {
+    public void returnErrorIfFirstNameConsistsOfSpaces() {
         TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest(
-                "Ilona",
+                "   ",
+                "Frolova",
+                new Date(),
+                new Date()
+        );
+
+        List<ValidationError> errors = validator.validate(request);
+
+        ArrayList<ValidationError> expected = new ArrayList<ValidationError>(List.of(
+                new ValidationError("personFirstName", "Must not be empty!")));
+
+        assertEquals(errors, expected);
+    }
+
+    @Test
+    public void returnNothingIfFirstNameContainsSpacesAndSmthElse() {
+        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest(
+                " Ilona ",
                 "Frolova",
                 new Date(),
                 new Date()
@@ -52,10 +86,10 @@ public class TravelCalculatePremiumRequestValidatorTest {
     }
 
     @Test
-    public void returnErrorIfFirstNameConsistsOfSpaces() {
+    public void returnErrorIfLastNameConsistsOfSpaces() {
         TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest(
+                "Ilona",
                 "   ",
-                "Frolova",
                 new Date(),
                 new Date()
         );
@@ -63,7 +97,59 @@ public class TravelCalculatePremiumRequestValidatorTest {
         List<ValidationError> errors = validator.validate(request);
 
         ArrayList<ValidationError> expected = new ArrayList<ValidationError>(List.of(
-                new ValidationError("personFirstName", "Must not be empty!")));
+                new ValidationError("personLastName", "Must not be empty!")));
+
+        assertEquals(errors, expected);
+    }
+
+    @Test
+    public void returnNothingIfLastNameContainsSpacesAndSmthElse() {
+        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest(
+                "Ilona",
+                "      Frolova   ",
+                new Date(),
+                new Date()
+        );
+
+        List<ValidationError> errors = validator.validate(request);
+
+        ArrayList<ValidationError> expected = new ArrayList<ValidationError>();
+
+        assertEquals(errors, expected);
+    }
+
+    @Test
+    public void returnErrorIfLastNameIsEmpty() {
+        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest(
+                "Ilona",
+                "",
+                new Date(),
+                new Date()
+        );
+
+        List<ValidationError> errors = validator.validate(request);
+
+        ArrayList<ValidationError> expected = new ArrayList<ValidationError>(List.of(
+                new ValidationError("personLastName", "Must not be empty!")));
+
+        assertEquals(errors, expected);
+    }
+
+    @Test
+    public void returnErrorsIfNamesNotOk() {
+        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest(
+                "",
+                "   ",
+                new Date(),
+                new Date()
+        );
+
+        List<ValidationError> errors = validator.validate(request);
+
+        ArrayList<ValidationError> expected = new ArrayList<ValidationError>(Arrays.asList(
+                new ValidationError("personFirstName", "Must not be empty!"),
+                new ValidationError("personLastName", "Must not be empty!")
+        ));
 
         assertEquals(errors, expected);
     }
