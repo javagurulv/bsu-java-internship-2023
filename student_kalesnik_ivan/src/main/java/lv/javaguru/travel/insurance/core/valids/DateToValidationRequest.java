@@ -9,7 +9,7 @@ import java.util.Optional;
 @Component
 public class DateToValidationRequest implements TravelRequestValidation{
     public Optional<ValidationError> execute(TravelCalculatePremiumRequest request) {
-        return (request.getAgreementDateFrom() == null)
+        return (request.getAgreementDateTo() == null)
                 ? Optional.of(new ValidationError("agreementDateTo", "Must not be empty!"))
                 : Optional.empty();
     }
