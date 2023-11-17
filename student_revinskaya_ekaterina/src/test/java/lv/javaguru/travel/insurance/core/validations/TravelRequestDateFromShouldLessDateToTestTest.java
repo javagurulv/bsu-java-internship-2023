@@ -22,7 +22,7 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 public class TravelRequestDateFromShouldLessDateToTestTest {
 @InjectMocks
-    TravelRequestDateFromLessDateToValidation dateFromLessDateToValidation = new TravelRequestDateFromLessDateToValidation();
+   private TravelRequestDateFromLessDateToValidation dateFromLessDateToValidation = new TravelRequestDateFromLessDateToValidation();
 
     @Mock
     TravelCalculatePremiumRequest request;

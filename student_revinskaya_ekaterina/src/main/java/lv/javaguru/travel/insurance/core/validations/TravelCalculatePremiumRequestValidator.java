@@ -13,7 +13,6 @@ import java.util.ArrayList;
 class TravelCalculatePremiumRequestValidator implements PublicTravelCalculatePremiumRequestValidator{
 
     @Autowired
-    public
     List<TravelRequestValidation> travelRequestValidations;
 
 @Override

@@ -21,9 +21,9 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 public class TravelRequestDateToOfFutureTimeValidationTest {
     @InjectMocks
-    TravelRequestAgreementDateToOfFutureValidation dateToValidation;
+    private TravelRequestAgreementDateToOfFutureValidation dateToValidation;
 
-    @Mock DateTimeService dateTimeService;
+    @Mock private DateTimeService dateTimeService;
 
     @Test
     public void responseShouldContainDateToOfFutureTimeTest() {

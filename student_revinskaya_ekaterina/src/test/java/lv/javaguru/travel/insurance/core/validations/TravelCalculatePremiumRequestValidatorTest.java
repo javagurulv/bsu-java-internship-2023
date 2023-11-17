@@ -21,7 +21,8 @@ import static org.mockito.Mockito.*;
 public class TravelCalculatePremiumRequestValidatorTest {
 @InjectMocks
 TravelCalculatePremiumRequestValidator requestValidator;
-    @Mock TravelCalculatePremiumRequest request;
+    @Mock
+    private TravelCalculatePremiumRequest request;
 
     @Test
     public void responseShouldContainErrorTest() {

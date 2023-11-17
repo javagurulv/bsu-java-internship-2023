@@ -22,7 +22,7 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 public class TravelCalculatePremiumServiceImplTest {
     @Mock
-    PublicTravelCalculatePremiumRequestValidator requestValidator;
+    private PublicTravelCalculatePremiumRequestValidator requestValidator;
     @InjectMocks
     private TravelCalculatePremiumServiceImpl service;
     private TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest

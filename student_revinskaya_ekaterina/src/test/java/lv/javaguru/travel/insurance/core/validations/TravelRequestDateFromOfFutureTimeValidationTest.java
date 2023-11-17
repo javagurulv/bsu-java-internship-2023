@@ -22,14 +22,13 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 public class TravelRequestDateFromOfFutureTimeValidationTest {
     @InjectMocks
-    TravelRequestAgreementDateFromOfFutureValidation dateFromValidation = new TravelRequestAgreementDateFromOfFutureValidation();
+    private TravelRequestAgreementDateFromOfFutureValidation dateFromValidation = new TravelRequestAgreementDateFromOfFutureValidation();
     @Mock
-    DateTimeService dateTimeService1;
+    private DateTimeService dateTimeService1;
     @Test
     public void responseShouldContainDateFromOfFutureTimeTest() {
 
         when(dateTimeService1.getCurrentDateTime()).thenReturn(createDate("16.11.2023"));
-        dateFromValidation.dateTimeService = dateTimeService1;
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getAgreementDateFrom()).thenReturn(createDate("8.07.2023"));
         Optional<ValidationError> error= dateFromValidation.validate(request);
