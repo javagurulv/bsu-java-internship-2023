@@ -1,8 +1,11 @@
 package lv.javaguru.travel.insurance.rest;
 
 import java.math.BigDecimal;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.Temporal;
 import java.util.Date;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 public class TravelCalculatePremiumResponse {
 
@@ -24,6 +27,8 @@ public class TravelCalculatePremiumResponse {
         this.personLastName = personLastName;
         this.agreementDateFrom = agreementDateFrom;
         this.agreementDateTo = agreementDateTo;
+        long diff = agreementDateTo.getTime() - agreementDateFrom.getTime();
+        this.agreementPrice = BigDecimal.valueOf(TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS));
     }
 
     @Override
@@ -37,7 +42,7 @@ public class TravelCalculatePremiumResponse {
 
         TravelCalculatePremiumResponse response = (TravelCalculatePremiumResponse) o;
 
-        return this.getAgreementDateFrom().equals(response.getAgreementDateFrom()) && this.getAgreementDateTo().equals(response.getAgreementDateTo()) && this.getPersonFirstName().equals(response.getPersonFirstName()) && this.getPersonLastName().equals(response.getPersonLastName());
+        return this.getAgreementDateFrom().equals(response.getAgreementDateFrom()) && this.getAgreementDateTo().equals(response.getAgreementDateTo()) && this.getPersonFirstName().equals(response.getPersonFirstName()) && this.getPersonLastName().equals(response.getPersonLastName()) && this.getAgreementPrice().equals(response.getAgreementPrice());
 
     }
 
@@ -78,6 +83,6 @@ public class TravelCalculatePremiumResponse {
     }
 
     public void setAgreementPrice(BigDecimal agreementPrice) {
-        this.agreementPrice = agreementPrice;
+        this.agreementPrice = new BigDecimal(agreementPrice.toString()) ;
     }
 }

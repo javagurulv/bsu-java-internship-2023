@@ -5,6 +5,8 @@ import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumResponse;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -12,16 +14,22 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 class TravelCalculatePremiumServiceImplTest {
-    private static TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest();;
+    private Date createDate(String s) {
+        try {
+            return new SimpleDateFormat("dd.MM.yyyy").parse(s);
+        } catch (ParseException e) {
+            throw new RuntimeException();
+        }
+    }
     @Test
     public void calculatePremiumTest() {
         TravelCalculatePremiumServiceImpl calculator = new TravelCalculatePremiumServiceImpl();
 
-        request = mock(TravelCalculatePremiumRequest.class);
+        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getPersonFirstName()).thenReturn("Eugene");
         when(request.getPersonLastName()).thenReturn("Kroshinsky");
-        when(request.getAgreementDateFrom()).thenReturn(new Date(2023, 11, 16));
-        when(request.getAgreementDateTo()).thenReturn(new Date(2023, 11, 24));
+        when(request.getAgreementDateFrom()).thenReturn(createDate("16.11.2023"));
+        when(request.getAgreementDateTo()).thenReturn(createDate("24.11.2023"));
 
         TravelCalculatePremiumResponse response = calculator.calculatePremium(request);
 
@@ -31,6 +39,4 @@ class TravelCalculatePremiumServiceImplTest {
         assertEquals(request.getAgreementDateTo(), response.getAgreementDateTo());
         assertEquals(new BigDecimal(8), response.getAgreementPrice());
     }
-
-
 }

@@ -16,15 +16,27 @@ import static org.mockito.Mockito.when;
 
 class TravelCalculatePremiumServiceImplTest {
 
+    private TravelCalculatePremiumServiceImpl test = new TravelCalculatePremiumServiceImpl();
+    private TravelCalculatePremiumResponse response = new TravelCalculatePremiumResponse();
+    private TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest("FirstName", "LastName", new Date(1500), new Date(2000));
     @Test
-    public void TravelCalculatePremiumServiceImplTest() {
-        TravelCalculatePremiumServiceImpl test = new TravelCalculatePremiumServiceImpl();
-        Date date = new Date();
-        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest("FirstName", "LastName", date, date);
-        TravelCalculatePremiumResponse response = test.calculatePremium(request);
-        assertEquals(request.getPersonFirstName(), response.getPersonFirstName());
-        assertEquals(request.getPersonLastName(), response.getPersonLastName());
-        assertEquals(request.getAgreementDateFrom(), response.getAgreementDateFrom());
-        assertEquals(request.getAgreementDateTo(), response.getAgreementDateTo());
+    public void TravelCalculatePremiumServiceImplChangeResponsePersonFirstNameTest() {
+        test.changeResponsePersonFirstName(request, response);
+        assertEquals(response.getPersonFirstName(), "FirstName");
+    }
+    @Test
+    public void TravelCalculatePremiumServiceImplChangeResponsePersonLastNameTest() {
+        test.changeResponsePersonLastName(request, response);
+        assertEquals(response.getPersonLastName(), "LastName");
+    }
+    @Test
+    public void TravelCalculatePremiumServiceImplChangeResponseAgreementDateFromTest() {
+        test.changeResponseAgreementDateFrom(request, response);
+        assertEquals(response.getAgreementDateFrom(), new Date(1500));
+    }
+    @Test
+    public void TravelCalculatePremiumServiceImplChangeResponseAgreementDateToTest() {
+        test.changeResponseAgreementDateTo(request, response);
+        assertEquals(response.getAgreementDateTo(), new Date(2000));
     }
 }
