@@ -12,6 +12,14 @@ public class TravelCalculatePremiumResponse {
 
     private BigDecimal agreementPrice;
 
+    public void setAgreementPrice(BigDecimal agreementPrice) {
+        this.agreementPrice = agreementPrice;
+    }
+
+    public BigDecimal getAgreementPrice() {
+        return agreementPrice;
+    }
+
     public TravelCalculatePremiumResponse() {}
 
     public String getPersonFirstName() {
