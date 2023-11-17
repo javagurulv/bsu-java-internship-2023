@@ -3,6 +3,7 @@ package lv.javaguru.travel.insurance.core.validation;
 import lv.javaguru.travel.insurance.core.services.DateServiceImpl;
 import lv.javaguru.travel.insurance.core.validator.TravelCalculatePremiumRequestValidator;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -109,5 +110,19 @@ public class TravelCalculatePremiumRequestValidatorTest {
         var errors = validator.validate(request);
 
         Assertions.assertEquals(0, errors.size());
+    }
+
+    @Test
+    void testDateTermsOk() throws ParseException {
+
+        var error = validator.validateDatesField(dateService.createDate("2000-10-10"), dateService.createDate("2000-10-11"));
+        Assertions.assertTrue(error.isEmpty());
+    }
+
+    @Test
+    void testDateTermsNotOk() throws ParseException {
+
+        var error = validator.validateDatesField(dateService.createDate("2000-10-10"), dateService.createDate("2000-10-09"));
+        Assertions.assertFalse(error.isEmpty());
     }
 }

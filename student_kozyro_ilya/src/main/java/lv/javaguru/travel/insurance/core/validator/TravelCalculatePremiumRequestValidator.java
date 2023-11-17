@@ -24,7 +24,16 @@ public class TravelCalculatePremiumRequestValidator extends AbstractValidator<Tr
         validateMandatoryField("agreementDateFrom", travelCalculatePremiumRequest.getAgreementDateFrom()).ifPresent(errors::add);
         validateMandatoryField("agreementDateTo", travelCalculatePremiumRequest.getAgreementDateTo()).ifPresent(errors::add);
 
+        validateDatesField(travelCalculatePremiumRequest.getAgreementDateFrom(), travelCalculatePremiumRequest.getAgreementDateTo()).ifPresent(errors::add);
+
         return errors;
+    }
+
+    public Optional<ValidationError> validateDatesField(Date from, Date to) {
+        return ((from != null && to != null) && (from.after(to) || from.equals(to))) ?
+                Optional.of(new ValidationError("agreementDayFrom", "Must be before agreementDayTo")) :
+                Optional.empty();
+
     }
 
 
