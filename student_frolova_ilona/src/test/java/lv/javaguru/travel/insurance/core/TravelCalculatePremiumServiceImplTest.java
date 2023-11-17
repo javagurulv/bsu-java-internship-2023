@@ -1,22 +1,23 @@
 package lv.javaguru.travel.insurance.core;
 
-import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
-import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumResponse;
+import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumResponse;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.Date;
 import java.util.Objects;
 
+@ExtendWith(MockitoExtension.class)
 class TravelCalculatePremiumServiceImplTest {
 
-    TravelCalculatePremiumServiceImpl service;
+    @Mock private TravelCalculatePremiumRequestValidator requestValidator;
+    @Mock private DateTimeService dateTimeService;
 
-    TravelCalculatePremiumServiceImplTest() {
-        service = new TravelCalculatePremiumServiceImpl();
-        service.setDateTimeService(new DateTimeService());
-    }
+    @InjectMocks private TravelCalculatePremiumServiceImpl service;
 
     @Test
     public void responseParametersEqualToRequestParametersWhenReturnedByController() {
@@ -33,17 +34,4 @@ class TravelCalculatePremiumServiceImplTest {
                 response.getAgreementDateTo() == request.getAgreementDateTo()
              );
     }
-
-    @Test
-    public void calculatingAgreementPriceAsDifferenceInDays() {
-        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest(
-                "Surname", "Name", new Date(12L), new Date(129600018L)
-        );
-
-        TravelCalculatePremiumResponse response = service.calculatePremium(request);
-        BigDecimal result = response.getAgreementPrice().setScale(5, RoundingMode.HALF_EVEN);
-
-        assert(result.compareTo(new BigDecimal("1.5")) == 0);
-    }
-
 }

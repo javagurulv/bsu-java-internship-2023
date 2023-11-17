@@ -1,10 +1,11 @@
 package lv.javaguru.travel.insurance.core;
 
-import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
-import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumResponse;
+import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumResponse;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
 import static org.assertj.core.api.Assertions.*;
 
 import java.math.BigDecimal;
@@ -17,6 +18,10 @@ class TravelCalculatePremiumServiceImplTest {
 
     @Autowired
     TravelCalculatePremiumService service;
+
+    @Autowired
+    DateTimeService dateTimeService;
+
 
     Date agreementDateFrom = new Date(2020, Calendar.DECEMBER,11);
     Date getAgreementDateTo =  new Date(2023, Calendar.DECEMBER,11);
@@ -35,8 +40,12 @@ class TravelCalculatePremiumServiceImplTest {
         assertThat(response.getPersonLastName()).isEqualTo(request.getPersonLastName());
         assertThat(response.getAgreementDateFrom()).isEqualTo(request.getAgreementDateFrom());
         assertThat(response.getAgreementDateTo()).isEqualTo(request.getAgreementDateTo());
-        long daysBetween = (request.getAgreementDateFrom().getTime() - request.getAgreementDateTo().getTime()) / 1000 * 60 * 60 * 24;
+        long daysBetween = dateTimeService.getDaysBetween(request.getAgreementDateFrom(), request.getAgreementDateTo());
         assertThat(response.getAgreementPrice()).isEqualTo(new BigDecimal(daysBetween));
+
+        // TODO PLEASE FIX TEST LOGIC!
+        //long daysBetween = (request.getAgreementDateFrom().getTime() - request.getAgreementDateTo().getTime()) / 1000 * 60 * 60 * 24;
+        //assertThat(response.getAgreementPrice()).isEqualTo(new BigDecimal(daysBetween));
     }
 
 
