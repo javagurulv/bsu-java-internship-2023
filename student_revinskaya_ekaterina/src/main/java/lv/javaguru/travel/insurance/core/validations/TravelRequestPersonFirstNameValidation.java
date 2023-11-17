@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 @Component
-public class TravelRequestPersonFirstNameValidation implements TravelRequestValidation {
+class TravelRequestPersonFirstNameValidation implements TravelRequestValidation {
     @Override
     public Optional<ValidationError> validate(TravelCalculatePremiumRequest request) {
         return (request.getPersonFirstName() == null || request.getPersonFirstName().isEmpty())

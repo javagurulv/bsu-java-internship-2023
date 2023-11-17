@@ -1,6 +1,7 @@
-package lv.javaguru.travel.insurance.core;
+package lv.javaguru.travel.insurance.core.validations;
 
-import lv.javaguru.travel.insurance.core.validations.TravelRequestPersonFirstNameValidation;
+import lv.javaguru.travel.insurance.core.validations.PublicTravelCalculatePremiumRequestValidator;
+import lv.javaguru.travel.insurance.core.validations.TravelCalculatePremiumRequestValidator;
 import lv.javaguru.travel.insurance.core.validations.TravelRequestValidation;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
@@ -10,8 +11,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 
@@ -19,9 +18,9 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-class TravelCalculatePremiumRequestValidatorTest {
+public class TravelCalculatePremiumRequestValidatorTest {
 @InjectMocks
-    TravelCalculatePremiumRequestValidator requestValidator = new TravelCalculatePremiumRequestValidator();
+TravelCalculatePremiumRequestValidator requestValidator;
     @Mock TravelCalculatePremiumRequest request;
 
     @Test

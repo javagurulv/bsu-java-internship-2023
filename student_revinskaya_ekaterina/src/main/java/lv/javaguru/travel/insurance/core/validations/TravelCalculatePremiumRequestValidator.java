@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.core;
+package lv.javaguru.travel.insurance.core.validations;
 
 import lv.javaguru.travel.insurance.core.validations.TravelRequestValidation;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
@@ -10,12 +10,13 @@ import java.util.List;
 import java.util.ArrayList;
 
 @Component
-class TravelCalculatePremiumRequestValidator {
+class TravelCalculatePremiumRequestValidator implements PublicTravelCalculatePremiumRequestValidator{
 
     @Autowired
+    public
     List<TravelRequestValidation> travelRequestValidations;
 
-
+@Override
     public List<ValidationError> validate(TravelCalculatePremiumRequest request) {
         List<ValidationError> errors = new ArrayList<>();
         for(TravelRequestValidation validation: travelRequestValidations){

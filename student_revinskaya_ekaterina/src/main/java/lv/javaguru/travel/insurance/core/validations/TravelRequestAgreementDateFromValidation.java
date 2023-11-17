@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 @Component
-public class TravelRequestAgreementDateFromValidation implements TravelRequestValidation {
+class TravelRequestAgreementDateFromValidation implements TravelRequestValidation {
     @Override
     public Optional<ValidationError> validate(TravelCalculatePremiumRequest request) {
         return (request.getAgreementDateFrom() == null)
