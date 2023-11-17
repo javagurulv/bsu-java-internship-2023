@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 public class DateTimeService {
-    Date getCurrentDateTime() {
+    public Date getCurrentDateTime() {
         ZoneId zone = ZoneId.of("Europe/Riga");
         return Date.from(ZonedDateTime.now(zone).toInstant());
     }
