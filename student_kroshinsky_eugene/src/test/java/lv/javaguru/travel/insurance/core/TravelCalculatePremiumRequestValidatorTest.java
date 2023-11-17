@@ -3,19 +3,25 @@ package lv.javaguru.travel.insurance.core;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+
+@ExtendWith(MockitoExtension.class)
 public class TravelCalculatePremiumRequestValidatorTest {
-    private  TravelCalculatePremiumRequest request;
+    @Mock private  TravelCalculatePremiumRequest request;
     private TravelCalculatePremiumRequestValidator validator = new TravelCalculatePremiumRequestValidator();
+
     private Date createDate(String s) {
         try {
             return new SimpleDateFormat("dd.MM.yyyy").parse(s);
@@ -26,7 +32,6 @@ public class TravelCalculatePremiumRequestValidatorTest {
 
     @Test
     public void validateTestNotEmpty() {
-        request = mock(TravelCalculatePremiumRequest.class);
         when(request.getPersonFirstName()).thenReturn("Eugene");
         when(request.getPersonLastName()).thenReturn("Kroshinsky");
         when(request.getAgreementDateFrom()).thenReturn(createDate("14.01.2023"));
@@ -38,7 +43,6 @@ public class TravelCalculatePremiumRequestValidatorTest {
     }
     @Test
     public void validateTestNullFirstName(){
-        request = mock(TravelCalculatePremiumRequest.class);
         when(request.getPersonFirstName()).thenReturn(null);
         when(request.getPersonLastName()).thenReturn("Kroshinsky");
         when(request.getAgreementDateFrom()).thenReturn(createDate("14.01.2023"));
@@ -52,7 +56,6 @@ public class TravelCalculatePremiumRequestValidatorTest {
     }
     @Test
     public void validateTestEmptyFirstName(){
-        request = mock(TravelCalculatePremiumRequest.class);
         when(request.getPersonFirstName()).thenReturn("");
         when(request.getPersonLastName()).thenReturn("Kroshinsky");
         when(request.getAgreementDateFrom()).thenReturn(createDate("14.01.2023"));
@@ -66,7 +69,6 @@ public class TravelCalculatePremiumRequestValidatorTest {
     }
     @Test
     public void validateTestNullLastName(){
-        request = mock(TravelCalculatePremiumRequest.class);
         when(request.getPersonFirstName()).thenReturn("Eugene");
         when(request.getPersonLastName()).thenReturn(null);
         when(request.getAgreementDateFrom()).thenReturn(createDate("14.01.2023"));
@@ -80,7 +82,6 @@ public class TravelCalculatePremiumRequestValidatorTest {
     }
     @Test
     public void validateTestEmptyLastName(){
-        request = mock(TravelCalculatePremiumRequest.class);
         when(request.getPersonFirstName()).thenReturn("Eugene");
         when(request.getPersonLastName()).thenReturn("");
         when(request.getAgreementDateFrom()).thenReturn(createDate("14.01.2023"));
@@ -94,7 +95,6 @@ public class TravelCalculatePremiumRequestValidatorTest {
     }
     @Test
     public void validateTestEmptyLastNameAndFirstName(){
-        request = mock(TravelCalculatePremiumRequest.class);
         when(request.getPersonFirstName()).thenReturn("");
         when(request.getPersonLastName()).thenReturn("");
         when(request.getAgreementDateFrom()).thenReturn(createDate("14.01.2023"));
@@ -110,7 +110,6 @@ public class TravelCalculatePremiumRequestValidatorTest {
     }
     @Test
     public void validateTestNullLastNameAndFirstName(){
-        request = mock(TravelCalculatePremiumRequest.class);
         when(request.getPersonFirstName()).thenReturn(null);
         when(request.getPersonLastName()).thenReturn(null);
         when(request.getAgreementDateFrom()).thenReturn(createDate("14.01.2023"));
@@ -126,7 +125,6 @@ public class TravelCalculatePremiumRequestValidatorTest {
     }
     @Test
     public void validateTestNullDateFromError(){
-        request = mock(TravelCalculatePremiumRequest.class);
         when(request.getPersonFirstName()).thenReturn("Eugene");
         when(request.getPersonLastName()).thenReturn("Kroshinsky");
         when(request.getAgreementDateFrom()).thenReturn(null);
@@ -140,7 +138,6 @@ public class TravelCalculatePremiumRequestValidatorTest {
     }
     @Test
     public void validateTestNullDateToError(){
-        request = mock(TravelCalculatePremiumRequest.class);
         when(request.getPersonFirstName()).thenReturn("Eugene");
         when(request.getPersonLastName()).thenReturn("Kroshinsky");
         when(request.getAgreementDateFrom()).thenReturn(createDate("16.01.2023"));
@@ -155,7 +152,6 @@ public class TravelCalculatePremiumRequestValidatorTest {
 
     @Test
     public void validateTestWrongDateDifference(){
-        request = mock(TravelCalculatePremiumRequest.class);
         when(request.getPersonFirstName()).thenReturn("Eugene");
         when(request.getPersonLastName()).thenReturn("Kroshinsky");
         when(request.getAgreementDateFrom()).thenReturn(createDate("14.01.2023"));

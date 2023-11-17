@@ -5,26 +5,34 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 class DateDifferenceServiceTest {
     DateDifferenceService dateDifferenceService = new DateDifferenceService();
-
+    private Date createDate(String s) {
+        try {
+            return new SimpleDateFormat("dd.MM.yyyy").parse(s);
+        } catch (ParseException e) {
+            throw new RuntimeException();
+        }
+    }
     @Test
-    public void calculateDateDifferenceTest1(){
-        Date dateTo = new Date(2023, 11, 12);
-        Date dateFrom = new Date(2023, 11, 01);
+    void calculateDateDifferenceTestPositive(){
+        Date dateTo = createDate("12.11.2023");
+        Date dateFrom = createDate("01.11.2023");
         assertEquals(new BigDecimal(11), dateDifferenceService.calculateDateDifference(dateFrom, dateTo));
     }
     @Test
-    public void calculateDateDifferenceTest2(){
-        Date dateTo = new Date(2023, 11, 01);
-        Date dateFrom = new Date(2023, 11, 12);
+    void calculateDateDifferenceTestNegative(){
+        Date dateTo = createDate("01.11.2023");
+        Date dateFrom = createDate("12.11.2023");
         assertEquals(new BigDecimal(-11), dateDifferenceService.calculateDateDifference(dateFrom, dateTo));
     }
     @Test
-    public void calculateDateDifferenceTest3(){
-        Date dateTo = new Date(2023, 11, 12);
-        Date dateFrom = new Date(2023, 11, 12);
+    void calculateDateDifferenceTestEqual(){
+        Date dateTo = createDate("12.11.2023");
+        Date dateFrom = createDate("12.11.2023");
         assertEquals(new BigDecimal(0), dateDifferenceService.calculateDateDifference(dateFrom, dateTo));
     }
 }
