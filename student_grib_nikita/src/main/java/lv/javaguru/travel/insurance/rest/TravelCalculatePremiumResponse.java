@@ -10,7 +10,6 @@ public class TravelCalculatePremiumResponse {
     private Date agreementDateFrom;
     private Date agreementDateTo;
     private BigDecimal agreementPrice;
-
     public BigDecimal getAgreementPrice() {
         return agreementPrice;
     }
