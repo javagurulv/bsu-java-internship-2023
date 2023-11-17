@@ -5,17 +5,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CoreResponse {
+public class ValidationError {
 
-    private List<ValidationError> errors;
+    private String field;
+    private String message;
 
-    public boolean hasErrors() {
-        return (errors != null && !errors.isEmpty());
-    }
 }

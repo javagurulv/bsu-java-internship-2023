@@ -16,6 +16,7 @@ public class CoreResponse {
     private List<ValidationError> errors;
 
     public boolean hasErrors() {
-        return (errors != null && !errors.isEmpty());
+        return errors != null && !errors.isEmpty();
     }
+
 }
