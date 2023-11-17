@@ -16,8 +16,6 @@ public class TravelCalculatePremiumRequestValidator {
 
     public List<ValidationError> validate(TravelCalculatePremiumRequest request) {
 
-        System.out.println("started to validate");
-
         List<ValidationError> errors = new ArrayList<ValidationError>();
 
         validatePersonFirstName(request).ifPresent(errors::add);
@@ -25,8 +23,6 @@ public class TravelCalculatePremiumRequestValidator {
         validateAgreementDateFrom(request).ifPresent(errors::add);
         validateAgreementDateTo(request).ifPresent(errors::add);
         validateDateSequence(request).ifPresent(errors::add);
-
-        System.out.println("inner validator errors: " + errors);
 
         return errors;
     }
