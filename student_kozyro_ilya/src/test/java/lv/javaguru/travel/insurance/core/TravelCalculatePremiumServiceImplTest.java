@@ -1,20 +1,13 @@
 package lv.javaguru.travel.insurance.core;
 
-import lv.javaguru.travel.insurance.core.services.DateService;
 import lv.javaguru.travel.insurance.core.services.DateServiceImpl;
-import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
-import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumResponse;
+import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class TravelCalculatePremiumServiceImplTest {
@@ -41,8 +34,6 @@ class TravelCalculatePremiumServiceImplTest {
         Assertions.assertEquals(request.getPersonLastName(), response.getPersonLastName());
 
     }
-
-
 
 
 }
