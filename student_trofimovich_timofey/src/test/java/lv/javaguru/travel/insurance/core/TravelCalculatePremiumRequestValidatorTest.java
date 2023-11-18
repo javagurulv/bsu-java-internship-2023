@@ -27,8 +27,8 @@ public class TravelCalculatePremiumRequestValidatorTest {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getPersonFirstName()).thenReturn("firstName");
         when(request.getPersonLastName()).thenReturn("lastName");
-        when(request.getAgreementDateFrom()).thenReturn(createDate("12.12.2020"));
-        when(request.getAgreementDateTo()).thenReturn(createDate("14.12.2020"));
+        when(request.getAgreementDateFrom()).thenReturn(createDate("12.12.2025"));
+        when(request.getAgreementDateTo()).thenReturn(createDate("14.12.2025"));
         List<ValidationError> errors = requestValidator.validate(request);
         assertThat(errors.size()).isEqualTo(0);
     }
@@ -124,8 +124,8 @@ public class TravelCalculatePremiumRequestValidatorTest {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getPersonFirstName()).thenReturn("firstName");
         when(request.getPersonLastName()).thenReturn("lastName");
-        when(request.getAgreementDateFrom()).thenReturn(createDate("20.12.2020"));
-        when(request.getAgreementDateTo()).thenReturn(createDate("19.12.2020"));
+        when(request.getAgreementDateFrom()).thenReturn(createDate("20.12.2025"));
+        when(request.getAgreementDateTo()).thenReturn(createDate("19.12.2025"));
         List<ValidationError> errors = requestValidator.validate(request);
         assertAll(
                 () -> assertThat(errors.size()).isGreaterThan(0),
@@ -133,6 +133,35 @@ public class TravelCalculatePremiumRequestValidatorTest {
                 () -> assertThat(errors.get(0).getMessage()).isEqualTo("Must not be before agreementDateFrom!")
         );
 
+    }
+    @Test
+    public void shouldReturnErrorWhenDateFromIsInThePast() {
+        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        when(request.getPersonFirstName()).thenReturn("firstName");
+        when(request.getPersonLastName()).thenReturn("lastName");
+        when(request.getAgreementDateFrom()).thenReturn(createDate("20.12.2020"));
+        when(request.getAgreementDateTo()).thenReturn(createDate("19.12.2025"));
+        List<ValidationError> errors = requestValidator.validate(request);
+        assertAll(
+                () -> assertThat(errors.size()).isGreaterThan(0),
+                () -> assertThat(errors.get(0).getField()).isEqualTo("agreementDateFrom"),
+                () -> assertThat(errors.get(0).getMessage()).isEqualTo("Must be the future!")
+        );
+    }
+
+    @Test
+    public void shouldReturnErrorWhenDateToIsInThePast() {
+        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        when(request.getPersonFirstName()).thenReturn("firstName");
+        when(request.getPersonLastName()).thenReturn("lastName");
+        when(request.getAgreementDateFrom()).thenReturn(createDate("20.12.2025"));
+        when(request.getAgreementDateTo()).thenReturn(createDate("19.12.2020"));
+        List<ValidationError> errors = requestValidator.validate(request);
+        assertAll(
+                () -> assertThat(errors.size()).isGreaterThan(0),
+                () -> assertThat(errors.get(1).getField()).isEqualTo("agreementDateTo"),
+                () -> assertThat(errors.get(1).getMessage()).isEqualTo("Must be the future!")
+        );
     }
 
     private Date createDate(String str) {

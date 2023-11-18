@@ -2,11 +2,11 @@ dependencies {
 
     implementation('org.springframework.boot:spring-boot-starter-web:2.7.5')
     implementation('com.fasterxml.jackson.core:jackson-core:2.14.2')
-
+    implementation('ch.qos.logback:logback:logback-classic:1.2.3')
     testImplementation('org.springframework.boot:spring-boot-starter-test:2.7.5')
     compileOnly('org.projectlombok:lombok:1.18.24')
     annotationProcessor('org.projectlombok:lombok:1.18.24')
-
+    testImplementation('uk.org.webcompere:model-assert:1.0.0')
     testCompileOnly('org.projectlombok:lombok:1.18.24')
     testAnnotationProcessor('org.projectlombok:lombok:1.18.24')
 
