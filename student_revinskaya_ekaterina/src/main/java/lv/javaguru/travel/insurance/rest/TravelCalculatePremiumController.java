@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 			produces = "application/json")
 	public TravelCalculatePremiumResponse calculatePremium(@RequestBody TravelCalculatePremiumRequest request) {
 		TravelCalculatePremiumRequestLogger logger = new TravelCalculatePremiumRequestLogger();
-		logger.logParseToJsonString(request);
+		logger.log(request);
 		return calculatePremiumService.calculatePremium(request);
 	}
 

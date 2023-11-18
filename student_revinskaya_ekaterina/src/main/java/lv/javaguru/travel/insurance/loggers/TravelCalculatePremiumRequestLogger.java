@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 public class TravelCalculatePremiumRequestLogger {
 
     private static final Logger logger = LoggerFactory.getLogger(TravelCalculatePremiumRequestLogger.class);
-    public void logParseToJsonString(TravelCalculatePremiumRequest request){
+    public void log(TravelCalculatePremiumRequest request){
             ObjectMapper mapper = new ObjectMapper();
             try {
                 String jsonString = mapper.writeValueAsString(request);

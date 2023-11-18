@@ -1,12 +1,45 @@
 package lv.javaguru.travel.insurance.core;
 
+import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumController;
+import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumResponse;
 import org.junit.jupiter.api.Test;
+
+import java.util.Calendar;
+import java.util.Date;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TravelCalculatePremiumServiceImplTest {
 
     @Test
-    public void deleteMe() {
+    public void test_step2() {
 
+        Calendar calendar = Calendar.getInstance();
+
+        calendar.set(2005, Calendar.JANUARY, 1);
+        Date dateFrom = calendar.getTime();
+
+        calendar.set(2023, Calendar.JANUARY, 1);
+        Date dateTo = calendar.getTime();
+
+        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest("Valeryia",
+                "Kedank", dateFrom, dateTo);
+
+        TravelCalculatePremiumResponse response = new TravelCalculatePremiumResponse();
+        response.setPersonFirstName("Valeryia");
+        response.setPersonLastName("Kedank");
+        response.setAgreementDateFrom(dateFrom);
+        response.setAgreementDateTo(dateTo);
+
+        TravelCalculatePremiumServiceImpl service = new TravelCalculatePremiumServiceImpl();
+        TravelCalculatePremiumResponse resp_done = service.calculatePremium(request);
+
+        assertEquals(response.getPersonFirstName(), resp_done.getPersonFirstName());
+        assertEquals(response.getPersonLastName(), resp_done.getPersonLastName());
+        assertEquals(response.getAgreementDateFrom(), resp_done.getAgreementDateFrom());
+        assertEquals(response.getAgreementDateTo(), resp_done.getAgreementDateTo());
+        
     }
 
 }
