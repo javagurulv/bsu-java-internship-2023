@@ -1,27 +1,25 @@
 package lv.javaguru.travel.insurance.core;
 
+import lv.javaguru.travel.insurance.core.validations.*;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumResponse;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.math.BigDecimal;
-import java.util.Date;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 @Component
 class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService {
     @Autowired
-    private TravelCalculatePremiumRequestValidator requestValidator = new TravelCalculatePremiumRequestValidator();
+    private PublicTravelCalculatePremiumRequestValidator requestValidator;
 
-    private BigDecimal calculateDiffBetweenDays(Date date1, Date date2){
-        return BigDecimal.valueOf(TimeUnit.MILLISECONDS.toDays(date1.getTime() - date2.getTime()));
-    }
+    private TravelCalculateUnderwriting calculateUnderwriting = new TravelCalculateUnderwriting();
+
 
     @Override
     public TravelCalculatePremiumResponse calculatePremium(TravelCalculatePremiumRequest request) {
+
         List<ValidationError> errors = requestValidator.validate(request);
         if (!errors.isEmpty()) {
             return new TravelCalculatePremiumResponse(errors);
@@ -32,7 +30,7 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
         response.setAgreementDateFrom(request.getAgreementDateFrom());
         response.setAgreementDateTo(request.getAgreementDateTo());
 
-        response.setAgreementPrice(calculateDiffBetweenDays(response.getAgreementDateFrom(), response.getAgreementDateTo()));
+        response.setAgreementPrice(calculateUnderwriting.calculateAgreementPrice(request));
         return response;
     }
 

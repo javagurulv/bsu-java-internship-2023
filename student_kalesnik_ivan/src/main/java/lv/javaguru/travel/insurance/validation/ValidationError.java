@@ -14,8 +14,5 @@ public class ValidationError {
     private String field;
     private String message;
 
-    public String getErrorMessage() {
-        return "Must not be empty!";
-    }
 }
 
