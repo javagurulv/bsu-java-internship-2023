@@ -5,6 +5,7 @@ import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumResponse;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -13,11 +14,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class TravelCalculatePremiumServiceImplTest {
 
     @Test
-    public void test_step2() {
+    public void test_step3() {
 
         Calendar calendar = Calendar.getInstance();
 
-        calendar.set(2005, Calendar.JANUARY, 1);
+        calendar.set(2022, Calendar.JANUARY, 1);
         Date dateFrom = calendar.getTime();
 
         calendar.set(2023, Calendar.JANUARY, 1);
@@ -26,11 +27,8 @@ class TravelCalculatePremiumServiceImplTest {
         TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest("Valeryia",
                 "Kedank", dateFrom, dateTo);
 
-        TravelCalculatePremiumResponse response = new TravelCalculatePremiumResponse();
-        response.setPersonFirstName("Valeryia");
-        response.setPersonLastName("Kedank");
-        response.setAgreementDateFrom(dateFrom);
-        response.setAgreementDateTo(dateTo);
+        TravelCalculatePremiumResponse response = new TravelCalculatePremiumResponse("Valeryia",
+                "Kedank", dateFrom, dateTo);
 
         TravelCalculatePremiumServiceImpl service = new TravelCalculatePremiumServiceImpl();
         TravelCalculatePremiumResponse resp_done = service.calculatePremium(request);
@@ -39,6 +37,8 @@ class TravelCalculatePremiumServiceImplTest {
         assertEquals(response.getPersonLastName(), resp_done.getPersonLastName());
         assertEquals(response.getAgreementDateFrom(), resp_done.getAgreementDateFrom());
         assertEquals(response.getAgreementDateTo(), resp_done.getAgreementDateTo());
+
+        assertEquals(BigDecimal.valueOf(365), response.getAgreementPrice());
 
     }
 
