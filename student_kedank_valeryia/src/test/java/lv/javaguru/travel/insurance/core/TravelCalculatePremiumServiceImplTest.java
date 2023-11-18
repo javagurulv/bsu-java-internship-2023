@@ -39,7 +39,7 @@ class TravelCalculatePremiumServiceImplTest {
         assertEquals(response.getPersonLastName(), resp_done.getPersonLastName());
         assertEquals(response.getAgreementDateFrom(), resp_done.getAgreementDateFrom());
         assertEquals(response.getAgreementDateTo(), resp_done.getAgreementDateTo());
-        
+
     }
 
 }
