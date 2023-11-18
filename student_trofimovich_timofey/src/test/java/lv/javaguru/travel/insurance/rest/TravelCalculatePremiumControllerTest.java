@@ -67,6 +67,20 @@ public class TravelCalculatePremiumControllerTest {
         );
     }
     @Test
+    public void dateFromIsInThePastError() throws Exception {
+        getResponseAndCompare(
+                "rest/DateFromIsInThePastRequest.json",
+                "rest/DateFromIsInThePastErrorResponse.json"
+        );
+    }
+    @Test
+    public void dateToIsInThePastError() throws Exception {
+        getResponseAndCompare(
+                "rest/DateToIsInThePastRequest.json",
+                "rest/DateToIsInThePastErrorResponse.json"
+        );
+    }
+    @Test
     public void nothingProvided() throws Exception {
         getResponseAndCompare(
                 "rest/NothingProvidedRequest.json",
