@@ -6,7 +6,7 @@ dependencies {
     testImplementation('org.springframework.boot:spring-boot-starter-test:2.7.5')
     compileOnly('org.projectlombok:lombok:1.18.24')
     annotationProcessor('org.projectlombok:lombok:1.18.24')
-
+    testImplementation('uk.org.webcompere:model-assert:1.0.0')
     testCompileOnly('org.projectlombok:lombok:1.18.24')
     testAnnotationProcessor('org.projectlombok:lombok:1.18.24')
 
