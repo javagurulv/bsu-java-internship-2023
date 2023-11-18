@@ -2,11 +2,7 @@
   "errors": [
     {
       "field": "agreementDateTo",
-      "message": "agreementDateTo must be future date"
-    },
-    {
-      "field": "agreementDateFrom",
-      "message": "agreementDateFrom must be less than agreementDateTo!"
+      "message": "Must not be empty!"
     }
   ],
   "personFirstName": null,
