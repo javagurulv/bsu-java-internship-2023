@@ -21,6 +21,4 @@ public class TravelCalculatePremiumRequest {
     private Date agreementDateFrom;
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date agreementDateTo;
-
-
 }

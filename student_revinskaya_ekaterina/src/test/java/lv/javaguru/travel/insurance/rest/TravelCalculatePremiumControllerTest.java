@@ -15,10 +15,8 @@ import org.springframework.util.ResourceUtils;
 import java.io.File;
 import java.nio.file.Files;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -35,38 +33,47 @@ public class TravelCalculatePremiumControllerTest {
     public void testRequestWithoutErrors() throws Exception {
         equalsJsonFiles("ControllerRequestWithoutErrors.json", "ControllerResponseWithoutErrors.json");
     }
+
     @Test
     public void testRequestWithoutFirstName() throws Exception {
         equalsJsonFiles("ControllerRequestWithoutFirstName.json", "ControllerResponseWithoutFirstName.json");
     }
+
     @Test
     public void testRequestWithoutLastName() throws Exception {
         equalsJsonFiles("ControllerRequestWithoutLastName.json", "ControllerResponseWithoutLastName.json");
     }
+
     @Test
     public void testRequestWithoutDateFrom() throws Exception {
         equalsJsonFiles("ControllerRequestWithoutDateFrom.json", "ControllerResponseWithoutDateFrom.json");
     }
+
     @Test
     public void testRequestWithoutDateTo() throws Exception {
         equalsJsonFiles("ControllerRequestWithoutDateTo.json", "ControllerResponseWithoutDateTo.json");
     }
+
     @Test
     public void testRequestWithNoFields() throws Exception {
         equalsJsonFiles("ControllerRequestWithNoFields.json", "ControllerResponseWithNoFields.json");
     }
+
     @Test
     public void testRequestWithDateFromMoreThanDateTo() throws Exception {
         equalsJsonFiles("ControllerRequestWithDateFromMoreThanTo.json", "ControllerResponseWithDateFromMoreThanTo.json");
     }
+
     @Test
     public void testRequestWithDateFromInPast() throws Exception {
         equalsJsonFiles("ControllerRequestWithDateFromInPast.json", "ControllerResponseWithDateFromInPast.json");
     }
+
     @Test
     public void testRequestWithDateToInPast() throws Exception {
         equalsJsonFiles("ControllerRequestWithDateToInPast.json", "ControllerResponseWithDateToInPast.json");
     }
+
     public void equalsJsonFiles(String requestFile, String responseFile) throws Exception {
         ObjectMapper mapper = new ObjectMapper();
         String response = mockMvc.perform(post("/insurance/travel/")
@@ -75,8 +82,7 @@ public class TravelCalculatePremiumControllerTest {
                 .andExpect(status().isOk())
                 .andReturn().getResponse().getContentAsString();
 
-        assertEquals(mapper.readTree(response),
-                mapper.readTree(parseJSONIntoString(responseFile)));
+        assertEquals(mapper.readTree(response), mapper.readTree(parseJSONIntoString(responseFile)));
     }
 
     private String parseJSONIntoString(String filePath) {
