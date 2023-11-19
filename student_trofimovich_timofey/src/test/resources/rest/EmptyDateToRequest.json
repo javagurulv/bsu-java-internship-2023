@@ -1,6 +1,6 @@
 {
-  "personFirstName" : "Harry",
-  "personLastName" : "Kane",
-  "agreementDateFrom" : "2025-04-05",
-  "agreementDateTo" : null
+  "personFirstName": "Harry",
+  "personLastName": "Kane",
+  "agreementDateFrom": "2025-04-05",
+  "agreementDateTo": null
 }

@@ -10,5 +10,4 @@ public class TravelCalculatePremiumRequest {
     private String personLastName;
     private Date agreementDateFrom;
     private Date agreementDateTo;
-
 }
