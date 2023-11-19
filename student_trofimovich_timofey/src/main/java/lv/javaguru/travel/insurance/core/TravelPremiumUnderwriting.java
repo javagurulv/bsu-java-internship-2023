@@ -8,7 +8,9 @@ import java.math.BigDecimal;
 
 @Component
 public class TravelPremiumUnderwriting {
-    @Autowired private DateTimeService dateTimeService;
+    @Autowired
+    private DateTimeService dateTimeService;
+
     BigDecimal calculatePremium(TravelCalculatePremiumRequest request) {
         long daysBetween = dateTimeService.getDaysBetween(request.getAgreementDateFrom(), request.getAgreementDateTo());
         return new BigDecimal(daysBetween);
