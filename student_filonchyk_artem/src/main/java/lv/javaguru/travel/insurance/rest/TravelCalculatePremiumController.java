@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class TravelCalculatePremiumController {
 
 	@Autowired private TravelCalculatePremiumService calculatePremiumService;
-//jkhkj
+
 	@PostMapping(path = "/",
 			consumes = "application/json",
 			produces = "application/json")
