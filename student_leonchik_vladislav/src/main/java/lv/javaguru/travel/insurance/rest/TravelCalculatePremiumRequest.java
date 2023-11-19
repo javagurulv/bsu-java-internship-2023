@@ -1,6 +1,7 @@
 package lv.javaguru.travel.insurance.rest;
 
 import java.util.Date;
+import java.util.Objects;
 
 public class TravelCalculatePremiumRequest {
 
@@ -21,6 +22,27 @@ public class TravelCalculatePremiumRequest {
         this.agreementDateTo = agreementDateTo;
     }
 
+    //////////////// Выдуманные перегрузки и функции
+
+/*
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+
+        if (obj == null || getClass() != obj.getClass())
+            return false;
+
+        TravelCalculatePremiumRequest other = (TravelCalculatePremiumRequest) obj;
+
+        return Objects.equals(personFirstName, other.personFirstName) &&
+                Objects.equals(personLastName, other.personLastName) &&
+                Objects.equals(agreementDateFrom, other.agreementDateFrom) &&
+                Objects.equals(agreementDateTo, other.agreementDateTo);
+    }
+    */
+
+    ////////////////
     public String getPersonFirstName() {
         return personFirstName;
     }

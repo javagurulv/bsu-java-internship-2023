@@ -23,7 +23,5 @@ class TravelCalculatePremiumServiceImplTest {
         TravelCalculatePremiumResponse response = new TravelCalculatePremiumResponse("Oleg", "Badeth", agreementDateFrom, agreementDateTo);
         TravelCalculatePremiumServiceImpl service = new TravelCalculatePremiumServiceImpl();
         assertEquals(response, service.calculatePremium(request));
-
     }
-
 }
