@@ -4,24 +4,28 @@ import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.rest.ValidationError;
 import org.junit.jupiter.api.Test;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 class TravelCalculatePremiumRequestValidatorTest {
 
     @Test
     void validateAllGood() {
-        var request = new TravelCalculatePremiumRequest("John", "Snow", null, null);
+        var request = new TravelCalculatePremiumRequest("John", "Snow", createDate("11.10.2004"), createDate("07.04.2020"));
         var validator=new TravelCalculatePremiumRequestValidator();
         assertTrue(validator.validate(request).isEmpty());
     }
     @Test
     void validateFirstNameIsNull() {
-        var request = new TravelCalculatePremiumRequest(null, "Snow", null, null);
+        var request = new TravelCalculatePremiumRequest(null, "Snow", createDate("11.10.2004"), createDate("07.04.2020"));
         var validator=new TravelCalculatePremiumRequestValidator();
         var errors=validator.validate(request);
         assertFalse(errors.isEmpty());
@@ -31,7 +35,7 @@ class TravelCalculatePremiumRequestValidatorTest {
     }
     @Test
     void validateFirstNameIsEmpty() {
-        var request = new TravelCalculatePremiumRequest("", "Snow", null, null);
+        var request = new TravelCalculatePremiumRequest("", "Snow", createDate("11.10.2004"), createDate("07.04.2020"));
         var validator=new TravelCalculatePremiumRequestValidator();
         var errors=validator.validate(request);
         assertFalse(errors.isEmpty());
@@ -41,7 +45,7 @@ class TravelCalculatePremiumRequestValidatorTest {
     }
     @Test
     void validateLastNameIsNull() {
-        var request = new TravelCalculatePremiumRequest("John", null, null, null);
+        var request = new TravelCalculatePremiumRequest("John", null, createDate("11.10.2004"), createDate("07.04.2020"));
         var validator=new TravelCalculatePremiumRequestValidator();
         var errors=validator.validate(request);
         assertFalse(errors.isEmpty());
@@ -51,7 +55,7 @@ class TravelCalculatePremiumRequestValidatorTest {
     }
     @Test
     void validateLastNameIsEmpty() {
-        var request = new TravelCalculatePremiumRequest("John", "", null, null);
+        var request = new TravelCalculatePremiumRequest("John", "", createDate("11.10.2004"), createDate("07.04.2020"));
         var validator=new TravelCalculatePremiumRequestValidator();
         var errors=validator.validate(request);
         assertFalse(errors.isEmpty());
@@ -61,42 +65,39 @@ class TravelCalculatePremiumRequestValidatorTest {
     }
     @Test
     void validateAgrementDataFromIsNull() {
-        var request = new TravelCalculatePremiumRequest("John", "Wick", null, new Date());
+        var request = new TravelCalculatePremiumRequest("John", "Wick", null ,createDate("07.04.2020"));
         var validator=new TravelCalculatePremiumRequestValidator();
         var errors=validator.validate(request);
         assertFalse(errors.isEmpty());
         assertEquals(1, errors.size());
-        assertEquals("agrementDataFrom", errors.get(0).getField());
+        assertEquals("agreementDateFrom", errors.get(0).getField());
         assertEquals("Must not be empty!", errors.get(0).getMessage());
     }
+
     @Test
-    void validateAgrementDataFromIsEmpty() {
-        var request = new TravelCalculatePremiumRequest("John", "Wick", new Date(), new Date());
-        var validator=new TravelCalculatePremiumRequestValidator();
-        var errors=validator.validate(request);
-        assertFalse(errors.isEmpty());
-        assertEquals(errors.size(), 1);
-        assertEquals("agrementDataFrom", errors.get(0).getField());
-        assertEquals("Must not be empty!", errors.get(0).getMessage());
-    }
-    @Test
-    void validateAgrementDataToIsNull() {
-        var request = new TravelCalculatePremiumRequest("John", "Wick",  new Date(),null);
+    void validateAgreementDataToIsNull() {
+        var request = new TravelCalculatePremiumRequest("John", "Wick",  createDate("11.10.2004"),null);
         var validator=new TravelCalculatePremiumRequestValidator();
         var errors=validator.validate(request);
         assertFalse(errors.isEmpty());
         assertEquals(1, errors.size());
-        assertEquals("agrementDataTo", errors.get(0).getField());
+        assertEquals("agreementDateTo", errors.get(0).getField());
         assertEquals("Must not be empty!", errors.get(0).getMessage());
     }
     @Test
-    void validateAgrementDataToIsEmpty() {
-        var request = new TravelCalculatePremiumRequest("John", "Wick", new Date(), new Date());
+    void agreementDateFromIsLessAgreementDateTo() {
+        var request = new TravelCalculatePremiumRequest("John", "Wick", createDate("11.10.2004"),createDate("07.04.2020"));
         var validator=new TravelCalculatePremiumRequestValidator();
         var errors=validator.validate(request);
-        assertFalse(errors.isEmpty());
-        assertEquals(errors.size(), 1);
-        assertEquals("agrementDataTo", errors.get(0).getField());
-        assertEquals("Must not be empty!", errors.get(0).getMessage());
+        assertTrue(errors.isEmpty());
     }
+    private Date createDate(String dateStr) {
+        try {
+            return new SimpleDateFormat("dd.MM.yyyy").parse(dateStr);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
 }

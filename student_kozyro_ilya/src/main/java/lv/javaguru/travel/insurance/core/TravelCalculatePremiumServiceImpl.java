@@ -1,22 +1,34 @@
 package lv.javaguru.travel.insurance.core;
 
-import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
-import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumResponse;
-import org.springframework.stereotype.Component;
+import lombok.AllArgsConstructor;
+import lv.javaguru.travel.insurance.core.services.DateServiceImpl;
+import lv.javaguru.travel.insurance.core.validator.TravelCalculatePremiumRequestValidator;
+import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumResponse;
+import lv.javaguru.travel.insurance.dto.ValidationError;
+import org.springframework.stereotype.Service;
 
-@Component
+import java.util.ArrayList;
+
+@Service
+@AllArgsConstructor
 class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService {
 
+    DateServiceImpl dateService;
+    TravelCalculatePremiumRequestValidator validator;
     @Override
     public TravelCalculatePremiumResponse calculatePremium(TravelCalculatePremiumRequest request) {
-        var premResp = new TravelCalculatePremiumResponse();
+        ArrayList<ValidationError> errors =  validator.validate(request);
 
-        premResp.setPersonFirstName(request.getPersonFirstName());
-        premResp.setPersonLastName(request.getPersonLastName());
-        premResp.setAgreementDateFrom(request.getAgreementDateFrom());
-        premResp.setAgreementDateTo(request.getAgreementDateTo());
-
-        return premResp;
+        return errors.isEmpty() ?
+                TravelCalculatePremiumResponse.builder()
+                        .personFirstName(request.getPersonFirstName())
+                        .personLastName(request.getPersonLastName())
+                        .agreementDateTo(request.getAgreementDateTo())
+                        .agreementDateFrom(request.getAgreementDateFrom())
+                        .agreementPrice(dateService.getDaysBetween(request.getAgreementDateFrom(), request.getAgreementDateTo()))
+                        .build() :
+                new TravelCalculatePremiumResponse(errors);
     }
 
 }
