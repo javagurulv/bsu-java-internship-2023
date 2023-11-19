@@ -13,29 +13,34 @@ import java.util.List;
 @Component
 class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService {
 
-    @Autowired private TravelCalculatePremiumRequestValidator requestValidator;
+    private final TravelCalculatePremiumRequestValidator requestValidator;
 
-    @Autowired
-    @Setter
-    private DateTimeService dateTimeService;
+    private final TravelCalculateUnderwriting underwritingCalculator;
+
+    TravelCalculatePremiumServiceImpl() {
+        requestValidator = new TravelCalculatePremiumRequestValidator();
+        underwritingCalculator = new TravelCalculateUnderwriting();
+    }
 
     @Override
     public TravelCalculatePremiumResponse calculatePremium(TravelCalculatePremiumRequest request) {
         List<ValidationError> errors = requestValidator.validate(request);
-        if (!errors.isEmpty()) {
-            return new TravelCalculatePremiumResponse(errors);
-        }
+        return errors.isEmpty() ? buildResponse(request, underwritingCalculator.calculatePremium(request)) : buildResponse(errors);
+    }
 
-        TravelCalculatePremiumResponse response = new TravelCalculatePremiumResponse();
-        response.setPersonFirstName(request.getPersonFirstName());
-        response.setPersonLastName(request.getPersonLastName());
-        response.setAgreementDateFrom(request.getAgreementDateFrom());
-        response.setAgreementDateTo(request.getAgreementDateTo());
+    TravelCalculatePremiumResponse buildResponse(List<ValidationError> errors) {
+        return new TravelCalculatePremiumResponse(errors);
+    }
 
-        BigDecimal daysBetween = dateTimeService.getDifferenceInDays(request.getAgreementDateFrom(), request.getAgreementDateTo());
-        response.setAgreementPrice(daysBetween);
+    TravelCalculatePremiumResponse buildResponse(TravelCalculatePremiumRequest request, BigDecimal cost) {
 
-        return response;
+        return new TravelCalculatePremiumResponse(
+                request.getPersonFirstName(),
+                request.getPersonLastName(),
+                request.getAgreementDateFrom(),
+                request.getAgreementDateTo(),
+                cost
+        );
     }
 
 }

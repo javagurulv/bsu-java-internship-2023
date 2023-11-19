@@ -1,5 +1,7 @@
 package lv.javaguru.travel.insurance.core;
 
+import lv.javaguru.travel.insurance.core.valids.TravelCalculatePremiumRequestValidatorImpl;
+import lv.javaguru.travel.insurance.core.valids.TravelCalculatePremiumRequestValidator;
 import lv.javaguru.travel.insurance.validation.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.validation.TravelCalculatePremiumResponse;
 import lv.javaguru.travel.insurance.validation.ValidationError;
@@ -24,7 +26,7 @@ import static org.mockito.Mockito.when;
 public class TravelCalculatePremiumServiceImplTest {
 
     @Mock private TravelCalculatePremiumRequestValidator requestValidator;
-    @Mock private DateTimeService dateTimeService;
+    @Mock private TravelPremiumUnderwriting premiumUnderwriting;
 
     @InjectMocks
     private TravelCalculatePremiumServiceImpl service;
@@ -104,7 +106,7 @@ public class TravelCalculatePremiumServiceImplTest {
         when(request.getAgreementDateFrom()).thenReturn(createDate("01.01.2023"));
         when(request.getAgreementDateTo()).thenReturn(createDate("10.01.2023"));
         when(requestValidator.validate(request)).thenReturn(List.of());
-        when(dateTimeService.getDaysBetween(request.getAgreementDateFrom(), request.getAgreementDateTo())).thenReturn(9L);
+        when(premiumUnderwriting.calculatePremium(request)).thenReturn(new BigDecimal(9));
         TravelCalculatePremiumResponse response = service.calculatePremium(request);
         assertEquals(response.getAgreementPrice(), new BigDecimal(9));
     }
@@ -122,5 +124,4 @@ public class TravelCalculatePremiumServiceImplTest {
             throw new RuntimeException(e);
         }
     }
-
 }

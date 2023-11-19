@@ -1,5 +1,6 @@
 package lv.javaguru.travel.insurance.core;
 
+import lv.javaguru.travel.insurance.core.valids.TravelCalculatePremiumRequestValidator;
 import lv.javaguru.travel.insurance.validation.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.validation.TravelCalculatePremiumResponse;
 import lv.javaguru.travel.insurance.validation.ValidationError;
@@ -38,3 +39,4 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
     }
 
 }
+
