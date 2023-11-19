@@ -1,7 +1,6 @@
 package lv.javaguru.travel.insurance.rest;
 
 import java.util.Date;
-
 public class TravelCalculatePremiumRequest {
 
     private String personFirstName;

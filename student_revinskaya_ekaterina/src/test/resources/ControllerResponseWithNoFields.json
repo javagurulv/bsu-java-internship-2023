@@ -1,11 +1,7 @@
 {
   "errors": [
     {
-      "field": "personFirstName",
-      "message": "Must not be empty!"
-    },
-    {
-      "field": "personLastName",
+      "field": "agreementDateTo",
       "message": "Must not be empty!"
     },
     {
@@ -13,7 +9,11 @@
       "message": "Must not be empty!"
     },
     {
-      "field": "agreementDateTo",
+      "field": "personLastName",
+      "message": "Must not be empty!"
+    },
+    {
+      "field": "personFirstName",
       "message": "Must not be empty!"
     }
   ],

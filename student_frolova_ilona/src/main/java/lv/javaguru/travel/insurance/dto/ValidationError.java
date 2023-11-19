@@ -1,14 +1,12 @@
 package lv.javaguru.travel.insurance.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @EqualsAndHashCode
+@ToString
 public class ValidationError {
     private String field;
     private String message;
