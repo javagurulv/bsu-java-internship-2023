@@ -12,7 +12,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class DateToValidatonTest {
-    DateToValidation validation = new DateToValidation();
+    private DateToValidation validation = new DateToValidation();
 
     @Test
     void shouldReturnErrorWhenAgreementDateFromIsEmpty() {
