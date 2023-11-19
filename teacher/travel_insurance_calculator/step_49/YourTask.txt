@@ -1,0 +1,13 @@
+Ментор обратил ваше внимание на код класса ClassifierValueRepositoryTest.
+Ментор утверждает, что в коде этого класса много дублирования.
+Ментор признаёт свою ошибку (так как именно он и писал этот код)
+и просит вас придумать способ улучшения кода в этом классе так,
+чтобы избавиться от повторений.
+
+Ваша задача: улучшить код в классе ClassifierValueRepositoryTest,
+избавиться от дупликации кода.
+
+https://refactoring.guru/extract-method
+https://www.jetbrains.com/help/idea/extract-method.html
+https://refactoring.com/catalog/extractFunction.html
+https://martinfowler.com/articles/class-too-large.html
