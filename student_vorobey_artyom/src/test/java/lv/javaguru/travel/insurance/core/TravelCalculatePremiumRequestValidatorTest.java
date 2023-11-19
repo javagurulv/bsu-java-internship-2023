@@ -7,11 +7,10 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import static lv.javaguru.travel.insurance.core.DateFunctions.createDateFromString;
 
-import java.util.Date;
 import java.util.List;
 
 public class TravelCalculatePremiumRequestValidatorTest {
-    private TravelCalculatePremiumRequestValidator validator = new TravelCalculatePremiumRequestValidator();
+    private TravelCalculatePremiumRequestValidator requestValidator = new TravelCalculatePremiumRequestValidator();
 
     @Test
     public void personFirstNameShouldNotBeEmpty() {
@@ -20,7 +19,7 @@ public class TravelCalculatePremiumRequestValidatorTest {
         Mockito.when(request.getPersonLastName()).thenReturn("Pupkin");
         Mockito.when(request.getAgreementDateFrom()).thenReturn(createDateFromString("10.10.2023"));
         Mockito.when(request.getAgreementDateTo()).thenReturn(createDateFromString("19.10.2023"));
-        List<ValidationError> error = validator.validate(request);
+        List<ValidationError> error = requestValidator.validate(request);
         Assertions.assertFalse(error.isEmpty());
         Assertions.assertEquals(error.size(), 1);
         Assertions.assertEquals(error.get(0).getField(), "personFirstName");
@@ -34,7 +33,7 @@ public class TravelCalculatePremiumRequestValidatorTest {
         Mockito.when(request.getPersonLastName()).thenReturn("Pupkin");
         Mockito.when(request.getAgreementDateFrom()).thenReturn(createDateFromString("10.10.2023"));
         Mockito.when(request.getAgreementDateTo()).thenReturn(createDateFromString("19.10.2023"));
-        List<ValidationError> error = validator.validate(request);
+        List<ValidationError> error = requestValidator.validate(request);
         Assertions.assertFalse(error.isEmpty());
         Assertions.assertEquals(error.size(), 1);
         Assertions.assertEquals(error.get(0).getField(), "personFirstName");
@@ -48,7 +47,7 @@ public class TravelCalculatePremiumRequestValidatorTest {
         Mockito.when(request.getPersonLastName()).thenReturn("Pupkin");
         Mockito.when(request.getAgreementDateFrom()).thenReturn(createDateFromString("10.10.2023"));
         Mockito.when(request.getAgreementDateTo()).thenReturn(createDateFromString("19.10.2023"));
-        List<ValidationError> error = validator.validate(request);
+        List<ValidationError> error = requestValidator.validate(request);
         Assertions.assertTrue(error.isEmpty());
     }
 
@@ -59,7 +58,7 @@ public class TravelCalculatePremiumRequestValidatorTest {
         Mockito.when(request.getPersonLastName()).thenReturn("");
         Mockito.when(request.getAgreementDateFrom()).thenReturn(createDateFromString("10.10.2023"));
         Mockito.when(request.getAgreementDateTo()).thenReturn(createDateFromString("19.10.2023"));
-        List<ValidationError> error = validator.validate(request);
+        List<ValidationError> error = requestValidator.validate(request);
         Assertions.assertFalse(error.isEmpty());
         Assertions.assertEquals(error.size(), 1);
         Assertions.assertEquals(error.get(0).getField(), "personLastName");
@@ -73,7 +72,7 @@ public class TravelCalculatePremiumRequestValidatorTest {
         Mockito.when(request.getPersonLastName()).thenReturn(null);
         Mockito.when(request.getAgreementDateFrom()).thenReturn(createDateFromString("10.10.2023"));
         Mockito.when(request.getAgreementDateTo()).thenReturn(createDateFromString("19.10.2023"));
-        List<ValidationError> error = validator.validate(request);
+        List<ValidationError> error = requestValidator.validate(request);
         Assertions.assertFalse(error.isEmpty());
         Assertions.assertEquals(error.size(), 1);
         Assertions.assertEquals(error.get(0).getField(), "personLastName");
@@ -87,7 +86,7 @@ public class TravelCalculatePremiumRequestValidatorTest {
         Mockito.when(request.getPersonLastName()).thenReturn(null);
         Mockito.when(request.getAgreementDateFrom()).thenReturn(createDateFromString("10.10.2023"));
         Mockito.when(request.getAgreementDateTo()).thenReturn(createDateFromString("19.10.2023"));
-        List<ValidationError> error = validator.validate(request);
+        List<ValidationError> error = requestValidator.validate(request);
         Assertions.assertFalse(error.isEmpty());
         Assertions.assertEquals(error.size(), 2);
         Assertions.assertEquals(error.get(0).getField(), "personFirstName");
@@ -103,7 +102,7 @@ public class TravelCalculatePremiumRequestValidatorTest {
         Mockito.when(request.getPersonLastName()).thenReturn("");
         Mockito.when(request.getAgreementDateFrom()).thenReturn(createDateFromString("10.10.2023"));
         Mockito.when(request.getAgreementDateTo()).thenReturn(createDateFromString("19.10.2023"));
-        List<ValidationError> error = validator.validate(request);
+        List<ValidationError> error = requestValidator.validate(request);
         Assertions.assertFalse(error.isEmpty());
         Assertions.assertEquals(error.size(), 2);
         Assertions.assertEquals(error.get(0).getField(), "personFirstName");
@@ -119,7 +118,7 @@ public class TravelCalculatePremiumRequestValidatorTest {
         Mockito.when(request.getPersonLastName()).thenReturn("");
         Mockito.when(request.getAgreementDateFrom()).thenReturn(createDateFromString("10.10.2023"));
         Mockito.when(request.getAgreementDateTo()).thenReturn(createDateFromString("19.10.2023"));
-        List<ValidationError> error = validator.validate(request);
+        List<ValidationError> error = requestValidator.validate(request);
         Assertions.assertFalse(error.isEmpty());
         Assertions.assertEquals(error.size(), 2);
         Assertions.assertEquals(error.get(0).getField(), "personFirstName");
@@ -135,7 +134,7 @@ public class TravelCalculatePremiumRequestValidatorTest {
         Mockito.when(request.getPersonLastName()).thenReturn(null);
         Mockito.when(request.getAgreementDateFrom()).thenReturn(createDateFromString("10.10.2023"));
         Mockito.when(request.getAgreementDateTo()).thenReturn(createDateFromString("19.10.2023"));
-        List<ValidationError> error = validator.validate(request);
+        List<ValidationError> error = requestValidator.validate(request);
         Assertions.assertFalse(error.isEmpty());
         Assertions.assertEquals(error.size(), 2);
         Assertions.assertEquals(error.get(0).getField(), "personFirstName");
@@ -151,7 +150,7 @@ public class TravelCalculatePremiumRequestValidatorTest {
         Mockito.when(request.getPersonLastName()).thenReturn("Vorobey");
         Mockito.when(request.getAgreementDateFrom()).thenReturn(null);
         Mockito.when(request.getAgreementDateTo()).thenReturn(createDateFromString("19.10.2023"));
-        List<ValidationError> error = validator.validate(request);
+        List<ValidationError> error = requestValidator.validate(request);
         Assertions.assertFalse(error.isEmpty());
         Assertions.assertEquals(error.size(), 1);
         Assertions.assertEquals(error.get(0).getField(), "agreementDateFrom");
@@ -165,7 +164,7 @@ public class TravelCalculatePremiumRequestValidatorTest {
         Mockito.when(request.getPersonLastName()).thenReturn("Vorobey");
         Mockito.when(request.getAgreementDateFrom()).thenReturn(createDateFromString("19.10.2023"));
         Mockito.when(request.getAgreementDateTo()).thenReturn(null);
-        List<ValidationError> error = validator.validate(request);
+        List<ValidationError> error = requestValidator.validate(request);
         Assertions.assertFalse(error.isEmpty());
         Assertions.assertEquals(error.size(), 1);
         Assertions.assertEquals(error.get(0).getField(), "agreementDateTo");
@@ -179,7 +178,7 @@ public class TravelCalculatePremiumRequestValidatorTest {
         Mockito.when(request.getPersonLastName()).thenReturn("Vorobey");
         Mockito.when(request.getAgreementDateFrom()).thenReturn(createDateFromString("19.10.2023"));
         Mockito.when(request.getAgreementDateTo()).thenReturn(createDateFromString("10.10.2023"));
-        List<ValidationError> error = validator.validate(request);
+        List<ValidationError> error = requestValidator.validate(request);
         Assertions.assertFalse(error.isEmpty());
         Assertions.assertEquals(error.size(), 1);
         Assertions.assertEquals(error.get(0).getField(), "agreementDateFrom");
@@ -193,7 +192,7 @@ public class TravelCalculatePremiumRequestValidatorTest {
         Mockito.when(request.getPersonLastName()).thenReturn("Vorobey");
         Mockito.when(request.getAgreementDateFrom()).thenReturn(createDateFromString("10.10.2023"));
         Mockito.when(request.getAgreementDateTo()).thenReturn(createDateFromString("10.10.2023"));
-        List<ValidationError> error = validator.validate(request);
+        List<ValidationError> error = requestValidator.validate(request);
         Assertions.assertFalse(error.isEmpty());
         Assertions.assertEquals(error.size(), 1);
         Assertions.assertEquals(error.get(0).getField(), "agreementDateFrom");

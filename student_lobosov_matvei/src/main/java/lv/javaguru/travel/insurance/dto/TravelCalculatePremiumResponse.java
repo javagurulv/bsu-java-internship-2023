@@ -1,13 +1,13 @@
 package lv.javaguru.travel.insurance.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
-
-import lombok.Getter;
-import lombok.Setter;
-import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
 
 @Getter
 @Setter
@@ -22,6 +22,8 @@ public class TravelCalculatePremiumResponse extends CoreResponse {
 
     private BigDecimal agreementPrice;
 
-    public TravelCalculatePremiumResponse (List<ValidationError> errors) {super(errors);}
+    public TravelCalculatePremiumResponse(List<ValidationError> errors) {
+        super(errors);
+    }
 
 }
