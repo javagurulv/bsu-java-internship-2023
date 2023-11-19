@@ -23,7 +23,9 @@ public class TravelCalculatePremiumResponse extends CoreResponse {
     public TravelCalculatePremiumResponse(List<ValidationError> errors) {
         super(errors);
     }
+    /*
     public void initAgreementPrice() {
         agreementPrice = BigDecimal.valueOf(agreementDateTo.getDay() - agreementDateFrom.getDay());
     }
+     */
 }

@@ -11,13 +11,7 @@ import java.util.Date;
 
 class DateDifferenceServiceTest {
     DateDifferenceService dateDifferenceService = new DateDifferenceService();
-    private Date createDate(String s) {
-        try {
-            return new SimpleDateFormat("dd.MM.yyyy").parse(s);
-        } catch (ParseException e) {
-            throw new RuntimeException();
-        }
-    }
+
     @Test
     public void calculateDateDifferenceTestPositive(){
         Date dateTo = createDate("12.11.2023");
@@ -35,5 +29,12 @@ class DateDifferenceServiceTest {
         Date dateTo = createDate("12.11.2023");
         Date dateFrom = createDate("12.11.2023");
         assertEquals(new BigDecimal(0), dateDifferenceService.calculateDateDifference(dateFrom, dateTo));
+    }
+    private Date createDate(String s) {
+        try {
+            return new SimpleDateFormat("dd.MM.yyyy").parse(s);
+        } catch (ParseException e) {
+            throw new RuntimeException();
+        }
     }
 }
