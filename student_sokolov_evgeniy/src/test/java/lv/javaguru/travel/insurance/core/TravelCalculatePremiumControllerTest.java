@@ -1,5 +1,7 @@
 package lv.javaguru.travel.insurance.core;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lv.javaguru.travel.insurance.core.JsonFileReader;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,10 +11,10 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 
-import static org.hamcrest.Matchers.is;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
@@ -22,23 +24,32 @@ public class TravelCalculatePremiumControllerTest {
 
     @Autowired private MockMvc mockMvc;
 
+    @Autowired private JsonFileReader jsonFileReader;
+    private ObjectMapper mapper = new ObjectMapper();
+
     @Test
     public void simpleRestControllerTest() throws Exception {
-        mockMvc.perform(post("/insurance/travel/")
-                        .content("{" +
-                                "\"personFirstName\" : \"Vasja\",\n" +
-                                "\"personLastName\" : \"Pupkin\",\n" +
-                                "\"agreementDateFrom\" : \"2021-05-25\",\n" +
-                                "\"agreementDateTo\" : \"2021-05-29\"\n" +
-                                "}")
+        executeAndCompare(
+                "TravelCalculatePremiumRequest.json",
+                "TravelCalculatePremiumResponse.json"
+        );
+    }
+
+    private void executeAndCompare(String jsonRequestFilePath,
+                                   String jsonResponseFilePath) throws Exception {
+        String jsonRequest = jsonFileReader.readJsonFromFile(jsonRequestFilePath);
+
+        MvcResult result = mockMvc.perform(post("/insurance/travel/")
+                        .content(jsonRequest)
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("personFirstName", is("Vasja")))
-                .andExpect(jsonPath("personLastName", is("Pupkin")))
-                .andExpect(jsonPath("agreementDateFrom", is("2021-05-25")))
-                .andExpect(jsonPath("agreementDateTo", is("2021-05-29")))
-                .andExpect(jsonPath("agreementPrice", is(4)))
                 .andReturn();
+
+        String responseBodyContent = result.getResponse().getContentAsString();
+
+        String jsonResponse = jsonFileReader.readJsonFromFile(jsonResponseFilePath);
+
+        assertEquals(mapper.readTree(responseBodyContent), mapper.readTree(jsonResponse));
     }
 
 }
