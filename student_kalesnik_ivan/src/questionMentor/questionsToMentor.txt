@@ -1,0 +1,9 @@
+How is the cost of insurance determined for each risk? Do we have specific prices for each type of risk or do they depend on other factors such as the length of the trip, the age of the client or the destination?
+
+Can a client select the same risk more than once? For example, if they are planning multiple outdoor activities during one trip, can they purchase activity-related risk insurance multiple times?
+
+How should we handle situations where a customer wants to change their policy after purchase? For example, what if they decide to add or remove certain risks?
+
+Are there any restrictions on what risks can be combined in one policy? For example, are there any risks that cannot be insured together?
+
+What client data do we need to collect to calculate the cost of the policy? Do we need to know details of their travel, such as destination and duration of travel, or health information?

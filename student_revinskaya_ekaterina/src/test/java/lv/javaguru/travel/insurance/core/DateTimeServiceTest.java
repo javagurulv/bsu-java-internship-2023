@@ -10,7 +10,7 @@ import java.util.Date;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DateTimeServiceTest {
-    DateTimeService calculatorDate = new DateTimeService();
+    private DateTimeService calculatorDate = new DateTimeService();
 @Test
     public void calculateWithRightDatesTest(){
        BigDecimal num = calculatorDate.calculateDiffBetweenDays(createDate("02.10.2023"),createDate( "12.10.2023"));
