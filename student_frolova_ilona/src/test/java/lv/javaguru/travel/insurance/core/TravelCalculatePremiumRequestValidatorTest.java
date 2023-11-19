@@ -40,10 +40,7 @@ public class TravelCalculatePremiumRequestValidatorTest {
     @Test
     public void returnErrorIfFirstNameIsEmpty() {
         TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest(
-                "",
-                "Frolova",
-                new Date(),
-                new Date()
+                "", "Name", new Date(12L), new Date(1212L)
         );
 
         List<ValidationError> errors = validator.validate(request);

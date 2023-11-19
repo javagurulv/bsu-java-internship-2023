@@ -1,0 +1,19 @@
+Ментор обратил ваше внимание на то, что после перевода системы
+на коды ошибок в коде осталось много повторений. Это касается
+кода создания экземпляров класса ValidationError:
+
+    private ValidationError buildError(String errorCode) {
+        String errorDescription = errorCodeUtil.getErrorDescription(errorCode);
+        return new ValidationError(errorCode, errorDescription);
+    }
+
+Ментор предлагает вынести этот кусочек кода в класс
+ValidationErrorFactory и пользоваться этим классом
+во всех местах программы где нужно создавать экземпляр
+класса ошибки.
+
+
+Ваша задача: реализовать предложение ментора.
+
+PS: так же найдите информацию про дизайн паттерн Factory
+в интернете и ознакомьтесь с ней.

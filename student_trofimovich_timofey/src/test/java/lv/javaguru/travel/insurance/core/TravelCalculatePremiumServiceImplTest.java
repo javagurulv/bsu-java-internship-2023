@@ -18,6 +18,7 @@ import java.util.List;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -25,13 +26,13 @@ public class TravelCalculatePremiumServiceImplTest {
     @Mock
     TravelCalculatePremiumRequestValidator validator;
     @Mock
-    TravelCalculatePremiumRequest request;
-    @Mock TravelPremiumUnderwriting underwriting;
+    TravelPremiumUnderwriting underwriting;
     @InjectMocks
     TravelCalculatePremiumServiceImpl service;
 
     @Test
     public void shouldReturnResponseWithCorrectPersonFirstName() {
+        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getPersonFirstName()).thenReturn("firstName");
         when(validator.validate(request)).thenReturn(List.of());
         TravelCalculatePremiumResponse response = service.calculatePremium(request);
@@ -40,6 +41,7 @@ public class TravelCalculatePremiumServiceImplTest {
 
     @Test
     public void shouldReturnResponseWithCorrectPersonLastName() {
+        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getPersonLastName()).thenReturn("lastName");
         when(validator.validate(request)).thenReturn(List.of());
         TravelCalculatePremiumResponse response = service.calculatePremium(request);
@@ -48,6 +50,7 @@ public class TravelCalculatePremiumServiceImplTest {
 
     @Test
     public void shouldReturnResponseWithCorrectPersonDateFrom() {
+        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getAgreementDateFrom()).thenReturn(createDate("12.12.2020"));
         when(validator.validate(request)).thenReturn(List.of());
         TravelCalculatePremiumResponse response = service.calculatePremium(request);
@@ -56,6 +59,7 @@ public class TravelCalculatePremiumServiceImplTest {
 
     @Test
     public void shouldReturnResponseWithCorrectPersonDateTo() {
+        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getAgreementDateTo()).thenReturn(createDate("12.12.2020"));
         when(validator.validate(request)).thenReturn(List.of());
         TravelCalculatePremiumResponse response = service.calculatePremium(request);
@@ -64,6 +68,7 @@ public class TravelCalculatePremiumServiceImplTest {
 
     @Test
     public void shouldReturnResponseWithCorrectAgreementPrice() {
+        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getAgreementDateFrom()).thenReturn(createDate("01.01.2023"));
         when(request.getAgreementDateTo()).thenReturn(createDate("10.01.2023"));
         when(validator.validate(request)).thenReturn(List.of());
@@ -74,6 +79,7 @@ public class TravelCalculatePremiumServiceImplTest {
 
     @Test
     public void shouldReturnResponseWithErrors() {
+        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(validator.validate(request)).thenReturn(buildValidationErrorList());
         TravelCalculatePremiumResponse response = service.calculatePremium(request);
         assertThat(response.hasErrors()).isTrue();
@@ -81,13 +87,14 @@ public class TravelCalculatePremiumServiceImplTest {
 
     @Test
     public void shouldReturnResponseWithValidationErrors() {
+        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(validator.validate(request)).thenReturn(buildValidationErrorList());
         TravelCalculatePremiumResponse response = service.calculatePremium(request);
         assertAll(
                 () -> assertThat(response.getErrors().size()).isEqualTo(1),
                 () -> assertThat(response.getErrors().get(0).getField()).isEqualTo("field"),
                 () -> assertThat(response.getErrors().get(0).getMessage()).isEqualTo("errorMessage")
-                );
+        );
     }
 
     private Date createDate(String str) {
