@@ -10,43 +10,37 @@ import org.springframework.stereotype.Component;
 import java.math.BigDecimal;
 import java.util.List;
 
+@Component
 class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService {
 
     private final TravelCalculatePremiumRequestValidator requestValidator;
 
-    private final DateTimeService dateTimeService;
+    private final TravelCalculateUnderwriting underwritingCalculator;
 
     TravelCalculatePremiumServiceImpl() {
         requestValidator = new TravelCalculatePremiumRequestValidator();
-        dateTimeService = new DateTimeService();
+        underwritingCalculator = new TravelCalculateUnderwriting();
     }
 
     @Override
     public TravelCalculatePremiumResponse calculatePremium(TravelCalculatePremiumRequest request) {
         List<ValidationError> errors = requestValidator.validate(request);
-        return errors.isEmpty() ? buildResponse(request) : buildResponse(errors);
+        return errors.isEmpty() ? buildResponse(request, underwritingCalculator.calculatePremium(request)) : buildResponse(errors);
     }
 
     TravelCalculatePremiumResponse buildResponse(List<ValidationError> errors) {
         return new TravelCalculatePremiumResponse(errors);
     }
 
-    TravelCalculatePremiumResponse buildResponse(TravelCalculatePremiumRequest request) {
+    TravelCalculatePremiumResponse buildResponse(TravelCalculatePremiumRequest request, BigDecimal cost) {
 
-        BigDecimal daysBetween = dateTimeService.getDifferenceInDays(
-                request.getAgreementDateFrom(), request.getAgreementDateTo()
+        return new TravelCalculatePremiumResponse(
+                request.getPersonFirstName(),
+                request.getPersonLastName(),
+                request.getAgreementDateFrom(),
+                request.getAgreementDateTo(),
+                cost
         );
-
-        TravelCalculatePremiumResponse response =
-                TravelCalculatePremiumResponse.builder().
-                        personFirstName(request.getPersonFirstName()).
-                        personLastName(request.getPersonLastName()).
-                        agreementDateFrom(request.getAgreementDateFrom()).
-                        agreementDateTo(request.getAgreementDateTo()).
-                        agreementPrice(daysBetween).
-                        build();
-
-        return response;
     }
 
 }

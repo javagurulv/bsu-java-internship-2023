@@ -1,0 +1,53 @@
+Ментор обратил ваше внимание на проблему возникшую при
+написании тестов на контроллер. Суть проблемы в следующем.
+Для сравнения JSON строк на данный момент используется
+следующий код из класса TravelCalculatePremiumControllerTest:
+
+ObjectMapper mapper = new ObjectMapper();
+assertEquals(mapper.readTree(responseBodyContent), mapper.readTree(jsonResponse));
+
+Проблема в том, что если сравниваемые JSON строки отличаются
+друг от друга только перестановкой элементов, содержат одни
+и те же элементы только в разном порядке то код выше считает
+такие JSON строки разными.
+
+Например, следующие два JSON строки будут разные:
+
+{"errors":[
+  {
+    "field":"agreementDateFrom",
+    "message":"Must not be empty!"
+  },
+  {
+    "field":"agreementDateTo",
+    "message":"Must not be empty!"
+  }
+]}
+
+{"errors":[
+  {
+    "field":"agreementDateTo",
+    "message":"Must not be empty!"
+  },
+  {
+      "field":"agreementDateFrom",
+      "message":"Must not be empty!"
+    }
+]}
+
+
+Ваша задача: проверить проблему на которую обратил внимание ментор
+и найти решение этой проблемы. Цель - найти решение для сравнения
+контента JSON строк без учёта порядка расположения элементов.
+Проверить найденное решение и заменить старое решение на новое
+в проекте.
+
+Подсказка от ментора:
+https://www.baeldung.com/json-modelassert
+testImplementation('uk.org.webcompere:model-assert:1.0.0')
+
+        assertJson(responseBodyContent)
+                .where()
+                    .keysInAnyOrder()
+                    .arrayInAnyOrder()
+                .isEqualTo(jsonResponse);
