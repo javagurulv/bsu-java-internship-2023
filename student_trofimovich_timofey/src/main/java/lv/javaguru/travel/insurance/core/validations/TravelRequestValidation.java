@@ -7,6 +7,6 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-public interface TravelRequestValidation {
+interface TravelRequestValidation {
     Optional<ValidationError> validate(TravelCalculatePremiumRequest request);
 }

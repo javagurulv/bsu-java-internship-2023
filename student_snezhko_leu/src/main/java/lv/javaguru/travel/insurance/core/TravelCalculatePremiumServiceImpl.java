@@ -25,24 +25,13 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
         response.setPersonLastName(request.getPersonLastName());
         response.setAgreementDateFrom(request.getAgreementDateFrom());
         response.setAgreementDateTo(request.getAgreementDateTo());
-        response.initAgreementPrice();
+        //response.initAgreementPrice();
+        TravelUnderwriting underwriting = new TravelUnderwriting();
+        response.setAgreementPrice(underwriting.calculatePremium(response));
         return response;
     }
     public TravelCalculatePremiumResponse buildResponse(List<ValidationError> errors) {
         return new TravelCalculatePremiumResponse(errors);
     }
-    /*
-    public void changeResponsePersonFirstName(TravelCalculatePremiumRequest request, TravelCalculatePremiumResponse response) {
-        response.setPersonFirstName(request.getPersonFirstName());
-    }
-    public void changeResponsePersonLastName(TravelCalculatePremiumRequest request, TravelCalculatePremiumResponse response) {
-        response.setPersonLastName(request.getPersonLastName());
-    }
-    public void changeResponseAgreementDateFrom(TravelCalculatePremiumRequest request, TravelCalculatePremiumResponse response) {
-        response.setAgreementDateFrom(request.getAgreementDateFrom());
-    }
-    public void changeResponseAgreementDateTo(TravelCalculatePremiumRequest request, TravelCalculatePremiumResponse response) {
-        response.setAgreementDateTo(request.getAgreementDateTo());
-    }
-     */
+
 }

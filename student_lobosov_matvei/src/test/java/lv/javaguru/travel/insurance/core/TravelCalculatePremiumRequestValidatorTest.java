@@ -14,9 +14,10 @@ public class TravelCalculatePremiumRequestValidatorTest {
     private TravelCalculatePremiumRequestValidator validator = new TravelCalculatePremiumRequestValidator();
 
     @Test
-    public void shouldReturnErrorwhenPersonFirstNameIsNull(){
+    public void shouldReturnErrorWhenPersonFirstNameIsNull(){
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getPersonFirstName()).thenReturn(null);
+        when(request.getPersonLastName()).thenReturn("lastName");
         List<ValidationError> errors = validator.validate(request);
         assertEquals(errors.size(), 1); // Это утверждение проверяет, что список errors не является пустым. Если список errors пустой, тест не пройдет, так как предполагается, что должна быть хотя бы одна ошибка.
         assertEquals(errors.get(0).getField(), "personFirstName"); // Это утверждение проверяет, что размер списка errors равен 1. То есть, ожидается, что только одна ошибка присутствует в списке.
@@ -27,6 +28,7 @@ public class TravelCalculatePremiumRequestValidatorTest {
     public void shouldReturnErrorWhenPersonFirstNameIsEmpty() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getPersonFirstName()).thenReturn("");
+        when(request.getPersonLastName()).thenReturn("lastName");
         List<ValidationError> errors = validator.validate(request);
         assertFalse(errors.isEmpty());
         assertEquals(errors.size(), 1);
@@ -36,6 +38,39 @@ public class TravelCalculatePremiumRequestValidatorTest {
     @Test
     public void shouldNotReturnErrorWhenPersonFirstNameIsPresent() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        when(request.getPersonFirstName()).thenReturn("firstName");
+        when(request.getPersonLastName()).thenReturn("lastName");
+        List<ValidationError> errors = validator.validate(request);
+        assertTrue(errors.isEmpty()); // Это утверждение проверяет, что список errors является пустым. Если список errors пустой, тест пройдет, так как предполагается, что ошибок быть не должно.
+    }
+
+    @Test
+    public void shouldReturnErrorWhenPersonLastNameIsNull() {
+        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        when(request.getPersonFirstName()).thenReturn("firstName");
+        when(request.getPersonLastName()).thenReturn(null);
+        List<ValidationError> errors = validator.validate(request);
+        assertFalse(errors.isEmpty());
+        assertEquals(errors.size(), 1);
+        assertEquals(errors.get(0).getField(), "personLastName");
+        assertEquals(errors.get(0).getMessage(), "Must not be empty!");
+    }
+
+    @Test
+    public void shouldReturnErrorWhenPersonLastNameIsEmpty() {
+        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        when(request.getPersonFirstName()).thenReturn("firstName");
+        when(request.getPersonLastName()).thenReturn("");
+        List<ValidationError> errors = validator.validate(request);
+        assertFalse(errors.isEmpty());
+        assertEquals(errors.size(), 1);
+        assertEquals(errors.get(0).getField(), "personLastName");
+        assertEquals(errors.get(0).getMessage(), "Must not be empty!");
+    }
+    @Test
+    public void shouldNotReturnErrorWhenPersonLastNameIsPresent() {
+        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        when(request.getPersonLastName()).thenReturn("lastName");
         when(request.getPersonFirstName()).thenReturn("firstName");
         List<ValidationError> errors = validator.validate(request);
         assertTrue(errors.isEmpty()); // Это утверждение проверяет, что список errors является пустым. Если список errors пустой, тест пройдет, так как предполагается, что ошибок быть не должно.
