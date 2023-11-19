@@ -11,7 +11,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class FirstNameValidationTest {
-    FirstNameValidation validation = new FirstNameValidation();
+    private FirstNameValidation validation = new FirstNameValidation();
 
     @Test
     void shouldReturnErrorWhenFirstNameIsNull() {

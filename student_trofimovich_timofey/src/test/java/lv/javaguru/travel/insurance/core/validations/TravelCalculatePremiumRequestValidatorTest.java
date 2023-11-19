@@ -1,5 +1,7 @@
-package lv.javaguru.travel.insurance.core;
+package lv.javaguru.travel.insurance.core.validations;
 
+import lv.javaguru.travel.insurance.core.validations.TravelCalculatePremiumRequestValidator;
+import lv.javaguru.travel.insurance.core.validations.TravelCalculatePremiumRequestValidatorImplementation;
 import lv.javaguru.travel.insurance.core.validations.TravelRequestValidation;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
@@ -19,7 +21,8 @@ import static org.mockito.Mockito.when;
 
 public class TravelCalculatePremiumRequestValidatorTest {
 
-    private TravelCalculatePremiumRequestValidator requestValidator;
+    private TravelCalculatePremiumRequestValidatorImplementation requestValidator;
+
 
 
     @Test
@@ -30,7 +33,7 @@ public class TravelCalculatePremiumRequestValidatorTest {
         TravelRequestValidation validation2 = mock(TravelRequestValidation.class);
         when(validation2.validate(request)).thenReturn(Optional.empty());
         List<TravelRequestValidation> validations = List.of(validation1, validation2);
-        requestValidator = new TravelCalculatePremiumRequestValidator(validations);
+        requestValidator = new TravelCalculatePremiumRequestValidatorImplementation(validations);
         List<ValidationError> errors = requestValidator.validate(request);
         assertThat(errors.size()).isEqualTo(0);
     }
@@ -43,7 +46,7 @@ public class TravelCalculatePremiumRequestValidatorTest {
         TravelRequestValidation validation2 = mock(TravelRequestValidation.class);
         when(validation2.validate(request)).thenReturn(Optional.of(new ValidationError()));
         List<TravelRequestValidation> validations = List.of(validation1, validation2);
-        requestValidator = new TravelCalculatePremiumRequestValidator(validations);
+        requestValidator = new TravelCalculatePremiumRequestValidatorImplementation(validations);
         List<ValidationError> errors = requestValidator.validate(request);
         assertThat(errors.size()).isGreaterThan(0);
     }

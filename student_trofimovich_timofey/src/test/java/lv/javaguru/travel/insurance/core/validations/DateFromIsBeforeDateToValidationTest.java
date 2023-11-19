@@ -14,7 +14,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class DateFromIsBeforeDateToValidationTest {
-    DateFromIsBeforeDateToValidation validation = new DateFromIsBeforeDateToValidation();
+    private DateFromIsBeforeDateToValidation validation = new DateFromIsBeforeDateToValidation();
 
     @Test
     void shouldReturnErrorWhenAgreementDateToIsBeforeAgreementDateFrom() {
