@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.core;
+package lv.javaguru.travel.insurance.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
@@ -28,56 +28,56 @@ public class TravelCalculatePremiumControllerTest {
     @Test
     public void successRequest() throws Exception {
         executeAndCompare(
-                "TravelCalculatePremiumRequest_success.json",
-                "TravelCalculatePremiumResponse_success.json"
+                "rest/TravelCalculatePremiumRequest_success.json",
+                "rest/TravelCalculatePremiumResponse_success.json"
         );
     }
 
     @Test
     public void firstNameNotProvided() throws Exception {
         executeAndCompare(
-                "TravelCalculatePremiumRequest_firstName_not_provided.json",
-                "TravelCalculatePremiumResponse_firstName_not_provided.json"
+                "rest/TravelCalculatePremiumRequest_firstName_not_provided.json",
+                "rest/TravelCalculatePremiumResponse_firstName_not_provided.json"
         );
     }
 
     @Test
     public void lastNameNotProvided() throws Exception {
         executeAndCompare(
-                "TravelCalculatePremiumRequest_lastName_not_provided.json",
-                "TravelCalculatePremiumResponse_lastName_not_provided.json"
+                "rest/TravelCalculatePremiumRequest_lastName_not_provided.json",
+                "rest/TravelCalculatePremiumResponse_lastName_not_provided.json"
         );
     }
 
     @Test
     public void agreementDateFromNotProvided() throws Exception {
         executeAndCompare(
-                "TravelCalculatePremiumRequest_agreementDateFrom_not_provided.json",
-                "TravelCalculatePremiumResponse_agreementDateFrom_not_provided.json"
+                "rest/TravelCalculatePremiumRequest_agreementDateFrom_not_provided.json",
+                "rest/TravelCalculatePremiumResponse_agreementDateFrom_not_provided.json"
         );
     }
 
     @Test
     public void agreementDateToNotProvided() throws Exception {
         executeAndCompare(
-                "TravelCalculatePremiumRequest_agreementDateTo_not_provided.json",
-                "TravelCalculatePremiumResponse_agreementDateTo_not_provided.json"
+                "rest/TravelCalculatePremiumRequest_agreementDateTo_not_provided.json",
+                "rest/TravelCalculatePremiumResponse_agreementDateTo_not_provided.json"
         );
     }
 
     @Test
     public void agreementDateToLessThenAgreementDateFrom() throws Exception {
         executeAndCompare(
-                "TravelCalculatePremiumRequest_dateTo_lessThen_dateFrom.json",
-                "TravelCalculatePremiumResponse_dateTo_lessThen_dateFrom.json"
+                "rest/TravelCalculatePremiumRequest_dateTo_lessThen_dateFrom.json",
+                "rest/TravelCalculatePremiumResponse_dateTo_lessThen_dateFrom.json"
         );
     }
 
     @Test
     public void allFieldsNotProvided() throws Exception {
         executeAndCompare(
-                "TravelCalculatePremiumRequest_allFields_not_provided.json",
-                "TravelCalculatePremiumResponse_allFields_not_provided.json"
+                "rest/TravelCalculatePremiumRequest_allFields_not_provided.json",
+                "rest/TravelCalculatePremiumResponse_allFields_not_provided.json"
         );
     }
 
