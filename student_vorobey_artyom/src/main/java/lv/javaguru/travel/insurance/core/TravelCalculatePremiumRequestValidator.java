@@ -1,6 +1,7 @@
 package lv.javaguru.travel.insurance.core;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,6 +17,8 @@ class TravelCalculatePremiumRequestValidator {
         validatePersonFirstName(request).ifPresent(errors::add);
         validatePersonLastName(request).ifPresent(errors::add);
         validateAgreementDateFrom(request).ifPresent(errors::add);
+        validateAgreementDateTo(request).ifPresent(errors::add);
+        validateAgreementDateFromLessThanAgreementDateTo(request).ifPresent(errors::add);
         return errors;
     }
 
@@ -40,6 +43,15 @@ class TravelCalculatePremiumRequestValidator {
     private Optional<ValidationError> validateAgreementDateTo(TravelCalculatePremiumRequest request) {
         return (request.getAgreementDateTo() == null)
                 ? Optional.of(new ValidationError("agreementDateTo", "Must not be empty!"))
+                : Optional.empty();
+    }
+
+    private Optional<ValidationError> validateAgreementDateFromLessThanAgreementDateTo(TravelCalculatePremiumRequest request) {
+        Date dateFrom = request.getAgreementDateFrom();
+        Date dateTo = request.getAgreementDateTo();
+        return (dateTo != null && dateFrom != null
+                && (dateFrom.equals(dateTo) || dateFrom.after(dateTo)))
+                ? Optional.of(new ValidationError("agreementDateFrom", "Must be less than agreementDateTo"))
                 : Optional.empty();
     }
 }
