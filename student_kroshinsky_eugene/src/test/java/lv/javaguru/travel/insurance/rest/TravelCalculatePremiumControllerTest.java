@@ -47,14 +47,14 @@ public class TravelCalculatePremiumControllerTest {
         );
     }
     @Test
-    public void controllerTestEmptyEmptyFirstName() throws Exception {
+    public void controllerTestEmptyFirstName() throws Exception {
         simpleRestControllerTest(
                 "rest/TravelCalculatePremiumRequestEmptyFirstName.json",
                 "rest/TravelCalculatePremiumResponseEmptyFirstName.json"
         );
     }
     @Test
-    public void controllerTestEmptyEmptyLastName() throws Exception {
+    public void controllerTestEmptyLastName() throws Exception {
         simpleRestControllerTest(
                 "rest/TravelCalculatePremiumRequestEmptyLastName.json",
                 "rest/TravelCalculatePremiumResponseEmptyLastName.json"
