@@ -11,7 +11,10 @@ import java.util.Date;
 @Component
 public class DateFunctions {
     public static long daysBetween (Date firstDate, Date secondDate) {
-        return ChronoUnit.DAYS.between(firstDate.toInstant(), secondDate.toInstant());
+        if (firstDate != null && secondDate != null)
+            return ChronoUnit.DAYS.between(secondDate.toInstant(), firstDate.toInstant());
+        else
+            return 0L;
     }
 
     public static Date createDateFromString (String stringDate) {
