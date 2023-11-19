@@ -20,9 +20,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 public class TravelCalculatePremiumControllerTest {
 
-    @Autowired private MockMvc mockMvc;
+    @Autowired
+    private MockMvc mockMvc;
 
-    @Autowired private JsonFileReader jsonFileReader;
+    @Autowired
+    private JsonFileReader jsonFileReader;
 
     @Test
     public void successfulResponse() throws Exception {
@@ -31,6 +33,7 @@ public class TravelCalculatePremiumControllerTest {
                 "rest/CorrectResponse.json"
         );
     }
+
     @Test
     public void emptyFirstNameError() throws Exception {
         getResponseAndCompare(
@@ -38,6 +41,7 @@ public class TravelCalculatePremiumControllerTest {
                 "rest/EmptyFirstNameErrorResponse.json"
         );
     }
+
     @Test
     public void emptyLastNameError() throws Exception {
         getResponseAndCompare(
@@ -45,6 +49,7 @@ public class TravelCalculatePremiumControllerTest {
                 "rest/EmptyLastNameErrorResponse.json"
         );
     }
+
     @Test
     public void emptyDateFromError() throws Exception {
         getResponseAndCompare(
@@ -52,6 +57,7 @@ public class TravelCalculatePremiumControllerTest {
                 "rest/EmptyDateFromErrorResponse.json"
         );
     }
+
     @Test
     public void emptyDateToError() throws Exception {
         getResponseAndCompare(
@@ -59,6 +65,7 @@ public class TravelCalculatePremiumControllerTest {
                 "rest/EmptyDateToErrorResponse.json"
         );
     }
+
     @Test
     public void dateToLessThanDateFromError() throws Exception {
         getResponseAndCompare(
@@ -66,6 +73,7 @@ public class TravelCalculatePremiumControllerTest {
                 "rest/DateToIsLessThanDateFromErrorResponse.json"
         );
     }
+
     @Test
     public void dateFromIsInThePastError() throws Exception {
         getResponseAndCompare(
@@ -73,6 +81,7 @@ public class TravelCalculatePremiumControllerTest {
                 "rest/DateFromIsInThePastErrorResponse.json"
         );
     }
+
     @Test
     public void dateToIsInThePastError() throws Exception {
         getResponseAndCompare(
@@ -80,6 +89,7 @@ public class TravelCalculatePremiumControllerTest {
                 "rest/DateToIsInThePastErrorResponse.json"
         );
     }
+
     @Test
     public void nothingProvided() throws Exception {
         getResponseAndCompare(
@@ -89,9 +99,8 @@ public class TravelCalculatePremiumControllerTest {
     }
 
 
-
     private void getResponseAndCompare(String jsonRequestFilePath,
-                                   String jsonResponseFilePath) throws Exception {
+                                       String jsonResponseFilePath) throws Exception {
         String jsonRequest = jsonFileReader.readJsonFromFile(jsonRequestFilePath);
 
         MvcResult result = mockMvc.perform(post("/insurance/travel/")
