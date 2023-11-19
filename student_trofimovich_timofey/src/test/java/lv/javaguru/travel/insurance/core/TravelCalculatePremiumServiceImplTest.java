@@ -25,7 +25,8 @@ import static org.mockito.Mockito.when;
 public class TravelCalculatePremiumServiceImplTest {
     @Mock
     TravelCalculatePremiumRequestValidator validator;
-    @Mock TravelPremiumUnderwriting underwriting;
+    @Mock
+    TravelPremiumUnderwriting underwriting;
     @InjectMocks
     TravelCalculatePremiumServiceImpl service;
 
@@ -93,7 +94,7 @@ public class TravelCalculatePremiumServiceImplTest {
                 () -> assertThat(response.getErrors().size()).isEqualTo(1),
                 () -> assertThat(response.getErrors().get(0).getField()).isEqualTo("field"),
                 () -> assertThat(response.getErrors().get(0).getMessage()).isEqualTo("errorMessage")
-                );
+        );
     }
 
     private Date createDate(String str) {

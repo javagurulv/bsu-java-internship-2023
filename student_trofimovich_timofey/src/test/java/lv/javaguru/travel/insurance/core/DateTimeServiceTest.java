@@ -1,8 +1,6 @@
 package lv.javaguru.travel.insurance.core;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -12,7 +10,8 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class DateTimeServiceTest {
 
-    private DateTimeService dateTimeService = new DateTimeService();
+    private final DateTimeService dateTimeService = new DateTimeService();
+
     @Test
     void daysBetweenEqualDatesShouldBeZero() {
         Date dateFrom = createDate("12.05.2020");
