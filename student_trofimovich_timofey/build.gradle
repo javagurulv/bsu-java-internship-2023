@@ -7,8 +7,6 @@ dependencies {
     implementation 'org.projectlombok:lombok:1.18.28'
     implementation('com.fasterxml.jackson.core:jackson-core:2.14.2')
 
-    // https://mvnrepository.com/artifact/ch.qos.logback/logback-classic
-    testImplementation("ch.qos.logback:logback-classic:1.4.11")
 
 
 
