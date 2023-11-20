@@ -9,10 +9,6 @@ import org.springframework.web.bind.annotation.*;
 public class TravelCalculatePremiumController {
 
 	@Autowired private TravelCalculatePremiumService calculatePremiumService;
-	@GetMapping("/hello")
-	public String hello() {
-		return "Hello from your Java application!";
-	}
 	@PostMapping(path = "/",
 			consumes = "application/json",
 			produces = "application/json")
