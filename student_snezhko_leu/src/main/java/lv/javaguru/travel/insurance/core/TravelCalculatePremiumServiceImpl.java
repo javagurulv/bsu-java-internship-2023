@@ -26,10 +26,8 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
         response.setAgreementDateFrom(request.getAgreementDateFrom());
         response.setAgreementDateTo(request.getAgreementDateTo());
         //response.initAgreementPrice();
-        response.setAgreementPrice(
-                TravelUnderwriting.getAgreementPrice(response.getAgreementDateTo(),
-                        response.getAgreementDateFrom())
-        );
+        TravelUnderwriting underwriting = new TravelUnderwriting();
+        response.setAgreementPrice(underwriting.calculatePremium(response));
         return response;
     }
     public TravelCalculatePremiumResponse buildResponse(List<ValidationError> errors) {

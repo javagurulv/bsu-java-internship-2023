@@ -18,6 +18,7 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
         if (!errors.isEmpty()) {
             return new TravelCalculatePremiumResponse(errors);
         }
+
         TravelCalculatePremiumResponse premiumResponse = new TravelCalculatePremiumResponse();
         premiumResponse.setAgreementDateTo(request.getAgreementDateTo());
         premiumResponse.setAgreementDateFrom(request.getAgreementDateFrom());
