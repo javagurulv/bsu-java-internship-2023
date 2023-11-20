@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.validation;
+package lv.javaguru.travel.insurance.validators;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,9 +10,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ValidationError {
-
-    private String errorCode;
-    private String description;
-
+    private String field;
+    private String message;
 }
-

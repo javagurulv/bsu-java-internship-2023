@@ -3,5 +3,5 @@
   "personLastName" : null,
   "agreementDateFrom" : null,
   "agreementDateTo" : null,
-  "selected_risks":["TRAVEL_MEDICAL"]
+  "selected_risks" : null
 }
