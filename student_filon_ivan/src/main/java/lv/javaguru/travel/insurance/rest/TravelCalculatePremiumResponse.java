@@ -15,39 +15,39 @@ public class TravelCalculatePremiumResponse {
         return personFirstName;
     }
 
-    public void setPersonFirstName(String personFirstName) {
-        this.personFirstName = personFirstName;
-    }
-
     public String getPersonLastName() {
         return personLastName;
-    }
-
-    public void setPersonLastName(String personLastName) {
-        this.personLastName = personLastName;
     }
 
     public Date getAgreementDateFrom() {
         return agreementDateFrom;
     }
 
-    public void setAgreementDateFrom(Date agreementDateFrom) {
-        this.agreementDateFrom = agreementDateFrom;
-    }
-
     public Date getAgreementDateTo() {
         return agreementDateTo;
-    }
-
-    public void setAgreementDateTo(Date agreementDateTo) {
-        this.agreementDateTo = agreementDateTo;
     }
 
     public BigDecimal getAgreementPrice() {
         return agreementPrice;
     }
 
+    public void setPersonLastName(String personLastName) {
+        this.personLastName = personLastName;
+    }
+
+    public void setAgreementDateFrom(Date agreementDateFrom) {
+        this.agreementDateFrom = agreementDateFrom;
+    }
+
+    public void setAgreementDateTo(Date agreementDateTo) {
+        this.agreementDateTo = agreementDateTo;
+    }
+
     public void setAgreementPrice(BigDecimal agreementPrice) {
         this.agreementPrice = agreementPrice;
+    }
+
+    public void setPersonFirstName(String personFirstName) {
+        this.personFirstName = personFirstName;
     }
 }

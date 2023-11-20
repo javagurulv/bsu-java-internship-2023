@@ -12,8 +12,6 @@ import java.util.concurrent.TimeUnit;
 @Component
 class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService {
 
-    @Autowired private DateTimeService dateTimeService;
-
     @Override
     public TravelCalculatePremiumResponse calculatePremium(TravelCalculatePremiumRequest request) {
         TravelCalculatePremiumResponse response = new TravelCalculatePremiumResponse();
@@ -21,7 +19,7 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
         response.setPersonFirstName(request.getPersonFirstName());
         response.setAgreementDateFrom(request.getAgreementDateFrom());
         response.setPersonLastName(request.getPersonLastName());
-        long daysBetween = dateTimeService.getDaysBetween(request.getAgreementDateTo(), request.getAgreementDateFrom());
+        long daysBetween = DateTimeService.getDaysBetween(request.getAgreementDateTo(), request.getAgreementDateFrom());
         response.setAgreementPrice(BigDecimal.valueOf(daysBetween));
         return response;
     }
