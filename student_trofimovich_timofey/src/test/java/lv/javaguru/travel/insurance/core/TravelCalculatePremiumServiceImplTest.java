@@ -1,8 +1,10 @@
 package lv.javaguru.travel.insurance.core;
 
+import lv.javaguru.travel.insurance.core.validations.TravelCalculatePremiumRequestValidator;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumResponse;
 import lv.javaguru.travel.insurance.dto.ValidationError;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -18,17 +20,22 @@ import java.util.List;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class TravelCalculatePremiumServiceImplTest {
     @Mock
-    TravelCalculatePremiumRequestValidator validator;
+    private TravelCalculatePremiumRequestValidator validator;
     @Mock
-    TravelCalculatePremiumRequest request;
-    @Mock TravelPremiumUnderwriting underwriting;
+    private TravelPremiumUnderwriting underwriting;
     @InjectMocks
-    TravelCalculatePremiumServiceImpl service;
+    private TravelCalculatePremiumServiceImpl service;
+    private TravelCalculatePremiumRequest request;
+    @BeforeEach
+    void createRequest() {
+        request = mock(TravelCalculatePremiumRequest.class);
+    }
 
     @Test
     public void shouldReturnResponseWithCorrectPersonFirstName() {
@@ -87,7 +94,7 @@ public class TravelCalculatePremiumServiceImplTest {
                 () -> assertThat(response.getErrors().size()).isEqualTo(1),
                 () -> assertThat(response.getErrors().get(0).getField()).isEqualTo("field"),
                 () -> assertThat(response.getErrors().get(0).getMessage()).isEqualTo("errorMessage")
-                );
+        );
     }
 
     private Date createDate(String str) {

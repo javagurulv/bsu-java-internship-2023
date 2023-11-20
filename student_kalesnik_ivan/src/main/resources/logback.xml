@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 
     <property name="LOGS" value="./logs" />
@@ -7,6 +8,8 @@
             <pattern>%d{ISO8601} [%thread] %-5level %logger{36} - %msg%n</pattern>
         </encoder>
     </appender>
+
+
 
     <appender name="FILE_APPENDER"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
@@ -46,6 +49,8 @@
         <appender-ref ref="CONSOLE" />
         <appender-ref ref="FILE_APPENDER" />
     </root>
+
+
 
     <logger name="lv.javaguru.travel.insurance.logger.TravelCalculatePremiumRequestLogger" level="INFO">
         <appender-ref ref="REQUEST_RESPONSE_FILE_APPENDER" />
