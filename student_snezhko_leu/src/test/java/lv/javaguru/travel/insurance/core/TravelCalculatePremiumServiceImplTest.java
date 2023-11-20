@@ -89,30 +89,4 @@ class TravelCalculatePremiumServiceImplTest {
         TravelCalculatePremiumResponse response = test.buildResponse(request);
         assertEquals(response.getAgreementDateTo(), new Date(2000));
     }
-    /*
-    @Test
-    public void TravelCalculatePremiumServiceImplChangeResponsePersonFirstNameTest() {
-        TravelCalculatePremiumResponse response = mock(TravelCalculatePremiumResponse.class);
-        when(response.getPersonFirstName()).thenReturn("FirstName");
-        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);//new TravelCalculatePremiumRequest("FirstName", "LastName", new Date(1500), new Date(2000));
-
-        test.changeResponsePersonFirstName(request, response);
-        assertEquals(response.getPersonFirstName(), "FirstName");
-    }
-    @Test
-    public void TravelCalculatePremiumServiceImplChangeResponsePersonLastNameTest() {
-        test.changeResponsePersonLastName(request, response);
-        assertEquals(response.getPersonLastName(), "LastName");
-    }
-    @Test
-    public void TravelCalculatePremiumServiceImplChangeResponseAgreementDateFromTest() {
-        test.changeResponseAgreementDateFrom(request, response);
-        assertEquals(response.getAgreementDateFrom(), new Date(1500));
-    }
-    @Test
-    public void TravelCalculatePremiumServiceImplChangeResponseAgreementDateToTest() {
-        test.changeResponseAgreementDateTo(request, response);
-        assertEquals(response.getAgreementDateTo(), new Date(2000));
-    }
-     */
 }

@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -21,5 +22,7 @@ public class TravelCalculatePremiumRequest {
 
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date agreementDateTo;
+
+    private List<String> selected_risks;
 
 }
