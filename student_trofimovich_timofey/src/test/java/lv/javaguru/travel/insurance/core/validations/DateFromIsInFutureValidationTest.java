@@ -14,7 +14,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class DateFromIsInFutureValidationTest {
-    DateFromIsInFutureValidation validation = new DateFromIsInFutureValidation();
+    private DateFromIsInFutureValidation validation = new DateFromIsInFutureValidation();
 
     @Test
     public void shouldReturnErrorWhenDateFromIsInThePast() {

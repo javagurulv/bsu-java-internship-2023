@@ -19,9 +19,9 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 public class TravelPremiumUnderwritingTest {
     @Mock
-    DateTimeService dateTimeService;
+    private DateTimeService dateTimeService;
     @InjectMocks
-    TravelPremiumUnderwriting premiumUnderwriting;
+    private TravelPremiumUnderwriting premiumUnderwriting;
 
     @Test
     public void shouldReturnResponseWithCorrectAgreementPrice() {

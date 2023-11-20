@@ -7,16 +7,13 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import static lv.javaguru.travel.insurance.core.DateFunctions.createDateFromString;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -28,6 +25,8 @@ class TravelCalculatePremiumServiceImplTest {
     private TravelCalculatePremiumServiceImpl service;
     @Mock
     private TravelCalculatePremiumRequestValidator requestValidator;
+    @Mock
+    private TravelPremiumUnderwriting premiumUnderwriting;
 
     @Test
     public void shouldReturnResponseWithErrors() {
@@ -91,6 +90,7 @@ class TravelCalculatePremiumServiceImplTest {
         when(requestValidator.validate(request)).thenReturn(List.of());
         when(request.getAgreementDateFrom()).thenReturn(createDateFromString("01.01.2023"));
         when(request.getAgreementDateTo()).thenReturn(createDateFromString("10.01.2023"));
+        when(premiumUnderwriting.calculatePremium(request)).thenReturn(new BigDecimal(9L));
         TravelCalculatePremiumResponse response = service.calculatePremium(request);
         assertEquals(response.getAgreementPrice(), new BigDecimal(9L));
     }
@@ -98,8 +98,4 @@ class TravelCalculatePremiumServiceImplTest {
     private List<ValidationError> buildListOfErrorsWithError() {
         return List.of(new ValidationError("field", "errorMessage"));
     }
-
-
-
-
 }
