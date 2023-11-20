@@ -1,4 +1,4 @@
-package rest;
+package lv.javaguru.travel.insurance.core;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
