@@ -28,6 +28,8 @@ class TravelCalculatePremiumServiceImplTest {
     private TravelCalculatePremiumServiceImpl service;
     @Mock
     private TravelCalculatePremiumRequestValidator requestValidator;
+    @Mock
+    private TravelPremiumUnderwriting premiumUnderwriting;
 
     @Test
     public void shouldReturnResponseWithErrors() {
@@ -91,6 +93,7 @@ class TravelCalculatePremiumServiceImplTest {
         when(requestValidator.validate(request)).thenReturn(List.of());
         when(request.getAgreementDateFrom()).thenReturn(createDateFromString("01.01.2023"));
         when(request.getAgreementDateTo()).thenReturn(createDateFromString("10.01.2023"));
+        when(premiumUnderwriting.calculatePremium(request)).thenReturn(new BigDecimal(9L));
         TravelCalculatePremiumResponse response = service.calculatePremium(request);
         assertEquals(response.getAgreementPrice(), new BigDecimal(9L));
     }
@@ -98,8 +101,4 @@ class TravelCalculatePremiumServiceImplTest {
     private List<ValidationError> buildListOfErrorsWithError() {
         return List.of(new ValidationError("field", "errorMessage"));
     }
-
-
-
-
 }
