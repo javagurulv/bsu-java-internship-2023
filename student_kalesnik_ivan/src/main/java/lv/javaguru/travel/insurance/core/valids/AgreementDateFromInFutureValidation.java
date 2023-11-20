@@ -1,12 +1,10 @@
 package lv.javaguru.travel.insurance.core.valids;
 
-import lv.javaguru.travel.insurance.core.DateTimeService;
-import lv.javaguru.travel.insurance.core.ErrorCodeValueUtil;
+import lv.javaguru.travel.insurance.core.util.DateTimeUtil;
 import lv.javaguru.travel.insurance.validation.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.validation.ValidationError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import lv.javaguru.travel.insurance.core.valids.ValidationErrorFactory;
 
 import java.util.Date;
 import java.util.Optional;
@@ -16,7 +14,7 @@ public
 class AgreementDateFromInFutureValidation implements TravelRequestValidation {
 
     @Autowired
-    private DateTimeService dateTimeService;
+    private DateTimeUtil dateTimeService;
 
     @Autowired private ValidationErrorFactory errorFactory;
 

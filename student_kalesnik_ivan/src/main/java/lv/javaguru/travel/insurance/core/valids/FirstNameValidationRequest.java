@@ -1,6 +1,5 @@
 package lv.javaguru.travel.insurance.core.valids;
 
-import lv.javaguru.travel.insurance.core.ErrorCodeValueUtil;
 import lv.javaguru.travel.insurance.validation.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.validation.ValidationError;
 import org.springframework.beans.factory.annotation.Autowired;

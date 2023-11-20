@@ -1,11 +1,9 @@
 package lv.javaguru.travel.insurance.core.validsTest;
 
-import lv.javaguru.travel.insurance.core.ErrorCodeValueUtil;
 import lv.javaguru.travel.insurance.core.valids.FirstNameValidationRequest;
 import lv.javaguru.travel.insurance.core.valids.ValidationErrorFactory;
 import lv.javaguru.travel.insurance.validation.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.validation.ValidationError;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

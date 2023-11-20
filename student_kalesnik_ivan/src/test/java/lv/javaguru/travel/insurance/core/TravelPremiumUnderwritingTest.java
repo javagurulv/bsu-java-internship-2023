@@ -1,5 +1,6 @@
 package lv.javaguru.travel.insurance.core;
 
+import lv.javaguru.travel.insurance.core.util.DateTimeUtil;
 import lv.javaguru.travel.insurance.validation.TravelCalculatePremiumRequest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -19,7 +20,7 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 public class TravelPremiumUnderwritingTest {
 
-    @Mock private DateTimeService dateTimeService;
+    @Mock private DateTimeUtil dateTimeService;
 
     @InjectMocks
     private TravelPremiumUnderwriting premiumUnderwriting;
