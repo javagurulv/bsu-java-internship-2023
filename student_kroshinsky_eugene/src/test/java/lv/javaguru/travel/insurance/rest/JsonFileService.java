@@ -14,7 +14,7 @@ import java.nio.file.Files;
 public class JsonFileService {
     @Autowired private ResourceLoader loader;
     public  String readJsonFile(String filePath) throws IOException {
-        Resource resource = loader.getResource(filePath);
+        Resource resource = loader.getResource("classpath:" + filePath);
         return new String(Files.readAllBytes(resource.getFile().toPath()));
     }
 }

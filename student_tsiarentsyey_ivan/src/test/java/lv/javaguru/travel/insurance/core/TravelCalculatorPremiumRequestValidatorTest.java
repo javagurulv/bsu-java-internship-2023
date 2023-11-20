@@ -2,7 +2,11 @@ package lv.javaguru.travel.insurance.core;
 
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -15,8 +19,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @SpringBootTest
 public class TravelCalculatorPremiumRequestValidatorTest {
 
-    @Autowired
+    @Mock
     TravelCalculatorPremiumRequestValidator validator;
+
     @Test
     void validatePersonFirstName() {
         TravelCalculatePremiumRequest request = Mockito.mock(TravelCalculatePremiumRequest.class);

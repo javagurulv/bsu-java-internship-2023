@@ -23,9 +23,12 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
         List<ValidationError> errors = validator.validate(request);
 
         if(!errors.isEmpty()) {
-            return new TravelCalculatePremiumResponse(errors);
+            return buildResponse(errors);
         }
+        return buildResponse(request);
+    }
 
+    private TravelCalculatePremiumResponse buildResponse(TravelCalculatePremiumRequest request) {
         TravelCalculatePremiumResponse response = new TravelCalculatePremiumResponse();
         response.setPersonFirstName(request.getPersonFirstName());
         response.setPersonLastName(request.getPersonLastName());
@@ -36,6 +39,10 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
         response.setAgreementPrice(new BigDecimal(daysBetween));
 
         return response;
+    }
+
+    private TravelCalculatePremiumResponse buildResponse(List<ValidationError> errors) {
+        return new TravelCalculatePremiumResponse(errors);
     }
 
 }
