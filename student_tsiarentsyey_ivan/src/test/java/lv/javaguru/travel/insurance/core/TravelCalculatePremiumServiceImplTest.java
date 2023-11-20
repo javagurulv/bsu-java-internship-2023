@@ -26,7 +26,7 @@ class TravelCalculatePremiumServiceImplTest {
     @Mock
     TravelCalculatorPremiumRequestValidator validator;
     @Mock
-    DateTimeService dateTimeService;
+    PremiumUnderwritingService underwritingService;
 
     @InjectMocks
     TravelCalculatePremiumServiceImpl service;
@@ -94,7 +94,7 @@ class TravelCalculatePremiumServiceImplTest {
         Date dateTo = createDate("13.11.2020");
         Mockito.when(request.getAgreementDateFrom()).thenReturn(dateFrom);
         Mockito.when(request.getAgreementDateTo()).thenReturn(dateTo);
-        Mockito.when(dateTimeService.getDaysBetween(dateFrom, dateTo)).thenReturn(10L);
+        Mockito.when(underwritingService.calculatePremium(request)).thenReturn(BigDecimal.valueOf(10L));
         Mockito.when(validator.validate(request)).thenReturn(List.of());
         TravelCalculatePremiumResponse response = service.calculatePremium(request);
         assertThat(response.getAgreementPrice()).isEqualTo(BigDecimal.valueOf(10L));
