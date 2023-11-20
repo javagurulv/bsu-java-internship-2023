@@ -26,8 +26,4 @@ public class TravelCalculatePremiumResponse extends CoreResponse{
         super(errors);
     }
 
-    public long calculateDaysBetween(Date date1, Date date2) {
-        long elapsedms = date1.getTime() - date2.getTime();
-        return TimeUnit.DAYS.convert(elapsedms, TimeUnit.MILLISECONDS);
-    }
 }
