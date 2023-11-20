@@ -14,24 +14,16 @@ import java.util.Optional;
 public
 class AgreementDateToInFutureValidation implements TravelRequestValidation {
 
-    @Autowired
-    private DateTimeService dateTimeService;
-
-    @Autowired private ErrorCodeValueUtil errorCodeUtil;
-
+    @Autowired private DateTimeService dateTimeService;
+    @Autowired private ValidationErrorFactory errorFactory;
 
     @Override
     public Optional<ValidationError> execute(TravelCalculatePremiumRequest request) {
         Date dateTo = request.getAgreementDateTo();
         Date currentDateTime = dateTimeService.getCurrentDateTime();
         return (dateTo != null && dateTo.before(currentDateTime))
-                ? Optional.of(buildError("ERROR_CODE_3"))
+                ? Optional.of(errorFactory.buildError("ERROR_CODE_3"))
                 : Optional.empty();
-    }
-
-    private ValidationError buildError(String errorCode) {
-        String errorDescription = errorCodeUtil.getErrorDescription(errorCode);
-        return new ValidationError(errorCode, errorDescription);
     }
 
 }

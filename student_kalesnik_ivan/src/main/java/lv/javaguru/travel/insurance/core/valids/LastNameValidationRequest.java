@@ -11,18 +11,12 @@ import java.util.Optional;
 public
 class LastNameValidationRequest implements TravelRequestValidation
 {
-    @Autowired
-    private ErrorCodeValueUtil errorCodeUtil;
+    @Autowired private ValidationErrorFactory errorFactory;
 
     @Override
     public Optional<ValidationError> execute(TravelCalculatePremiumRequest request) {
         return (request.getPersonLastName() == null || request.getPersonLastName().isEmpty())
-                ? Optional.of(buildError("ERROR_CODE_8"))
+                ? Optional.of(errorFactory.buildError("ERROR_CODE_8"))
                 : Optional.empty();
-    }
-
-    private ValidationError buildError(String errorCode) {
-        String errorDescription = errorCodeUtil.getErrorDescription(errorCode);
-        return new ValidationError(errorCode, errorDescription);
     }
 }

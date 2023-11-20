@@ -13,8 +13,7 @@ import java.util.Optional;
 public
 class DateAfterLessThenDateBefore implements TravelRequestValidation {
 
-    @Autowired
-    private ErrorCodeValueUtil errorCodeUtil;
+    @Autowired private ValidationErrorFactory errorFactory;
 
     @Override
     public Optional<ValidationError> execute(TravelCalculatePremiumRequest request) {
@@ -22,13 +21,8 @@ class DateAfterLessThenDateBefore implements TravelRequestValidation {
         Date dateTo = request.getAgreementDateTo();
         return (dateFrom != null && dateTo != null
                 && (dateFrom.equals(dateTo) || dateFrom.after(dateTo)))
-                ? Optional.of(buildError("ERROR_CODE_5"))
+                ? Optional.of(errorFactory.buildError("ERROR_CODE_5"))
                 : Optional.empty();
-    }
-
-    private ValidationError buildError(String errorCode) {
-        String errorDescription = errorCodeUtil.getErrorDescription(errorCode);
-        return new ValidationError(errorCode, errorDescription);
     }
 
 }

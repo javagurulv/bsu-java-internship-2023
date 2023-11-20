@@ -3,6 +3,7 @@ package lv.javaguru.travel.insurance.core.validsTest;
 import lv.javaguru.travel.insurance.core.DateTimeService;
 import lv.javaguru.travel.insurance.core.ErrorCodeValueUtil;
 import lv.javaguru.travel.insurance.core.valids.AgreementDateToInFutureValidation;
+import lv.javaguru.travel.insurance.core.valids.ValidationErrorFactory;
 import lv.javaguru.travel.insurance.validation.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.validation.ValidationError;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,32 +20,28 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class AgreementDateToInFutureValidationTest {
 
-    @Mock
-    private DateTimeService dateTimeService;
-    @Mock
-    private ErrorCodeValueUtil errorCodeUtil;
+    @Mock private DateTimeService dateTimeService;
+    @Mock private ValidationErrorFactory errorFactory;
 
     @InjectMocks
     private AgreementDateToInFutureValidation validation;
 
     @Test
     public void shouldReturnErrorWhenAgreementDateToInThePast() {
-
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getAgreementDateTo()).thenReturn(createDate("01.01.2020"));
         when(dateTimeService.getCurrentDateTime()).thenReturn(createDate("01.01.2023"));
-        when(errorCodeUtil.getErrorDescription("ERROR_CODE_3")).thenReturn("error description");
+        ValidationError validationError = mock(ValidationError.class);
+        when(errorFactory.buildError("ERROR_CODE_3")).thenReturn(validationError);
         Optional<ValidationError> errorOpt = validation.execute(request);
         assertTrue(errorOpt.isPresent());
-        assertEquals(errorOpt.get().getErrorCode(), "ERROR_CODE_3");
-        assertEquals(errorOpt.get().getDescription(), "error description");
+        assertSame(errorOpt.get(), validationError);
     }
 
     @Test
@@ -54,7 +51,7 @@ class AgreementDateToInFutureValidationTest {
         when(dateTimeService.getCurrentDateTime()).thenReturn(createDate("01.01.2023"));
         Optional<ValidationError> errorOpt = validation.execute(request);
         assertTrue(errorOpt.isEmpty());
-        verifyNoInteractions(errorCodeUtil);
+        verifyNoInteractions(errorFactory);
     }
 
     private Date createDate(String dateStr) {
