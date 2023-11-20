@@ -12,7 +12,7 @@ import java.util.Date;
 public class DateFunctions {
     public static long daysBetween (Date firstDate, Date secondDate) {
         if (firstDate != null && secondDate != null)
-            return ChronoUnit.DAYS.between(secondDate.toInstant(), firstDate.toInstant());
+            return ChronoUnit.DAYS.between(firstDate.toInstant(), secondDate.toInstant());
         else
             return 0L;
     }
