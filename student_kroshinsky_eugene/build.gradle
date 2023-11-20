@@ -4,6 +4,7 @@ dependencies {
 
 	testImplementation('org.springframework.boot:spring-boot-starter-test:2.7.5')
 
+	implementation('com.fasterxml.jackson.core:jackson-core:2.14.2')
 	test {
 		useJUnitPlatform()
 	}

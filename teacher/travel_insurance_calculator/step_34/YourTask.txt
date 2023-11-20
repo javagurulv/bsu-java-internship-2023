@@ -1,0 +1,29 @@
+Ваша задача: ознакомиться с записями вводных лекций по
+SQL и реляционным базам данных. В этих лекциях и в
+интернете найти ответы на вопросы:
+1. Что такое реляционная база данных?
+2. Что такое СУБД?
+3. Что такое SQL?
+4. Как создавать таблицы в базе данных?
+5. Что такое CRUD операции?
+6. Примеры команды SQL insert.
+7. Примеры команды SQL select
+8. Примеры команды SQL update.
+9. Примеры команды SQL delete.
+10. Что такое связи между таблицами и какие они бывают?
+11. Что такое первичный ключ (primary key)?
+12. Что такое вторичный ключ (foreign key)?
+13. Примеры команды SQL join.
+
+Пройти как можно дальше туториал по SQL:
+https://sqlbolt.com/lesson/select_queries_introduction
+
+SQL basics:
+Viktor: https://www.youtube.com/watch?v=qIippH729UI
+Ruslan: https://www.youtube.com/watch?v=sBwJOiwizCU
+
+SQL advanced:
+Viktor: https://www.youtube.com/watch?v=H02bJB846GU
+Ruslan: https://www.youtube.com/watch?v=egzYiYNq9hI
+
+Для экспериментов с SQL создайте базу данных на любую тему.

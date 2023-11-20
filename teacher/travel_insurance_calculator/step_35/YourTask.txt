@@ -1,0 +1,71 @@
+Ваша задача:
+
+1. Разобраться в SQL скрипте по созданию базы данных
+и таблиц для хранения значений классификаторов.
+
+Скрип находится в папке database/mySqlDbCreationScript.sql
+
+2. Создать локальную базу данных и таблицы для хранения значений
+классификаторов с помощью скрипта и MySQL Workbench.
+
+
+Классификаторы - это наборы не изменяемых значений. Эти значения
+будут использоваться как в коде так и в данных, которые
+обрабатывает приложение. Например, классификатор RISK_TYPE будет
+содержать типы доступных в приложении рисков страхования.
+
+Классификатор: RISK_TYPE
+Доступные значения классификатора RISK_TYPE:
+TRAVEL_MEDICAL
+TRAVEL_CANCELLATION
+TRAVEL_LOSS_BAGGAGE
+TRAVEL_THIRD_PARTY_LIABILITY
+и так далее.
+
+Почему ментор предлагает хранить классификаторы и доступные их
+значения в базе данных, а не в коде приложения (например в виде Java enum)?
+
+Потому, что, во-первых, это часть конфигурации полиса страхования,
+и она может меняться бизнесом, во вторых если значения классификаторов
+будут храниться в базе данных у них появляется уникальное id и на
+них можно ссылаться из других таблиц базы данных, а так же использовать
+поле ic как константу, которую использовать в коде.
+
+
+Для хранения значений классификаторов ментор предложил использовать
+следующие две таблицы в базе данных:
+
+CREATE TABLE IF NOT EXISTS `classifiers` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
+  `title` VARCHAR(200) NOT NULL,
+  `description` VARCHAR(100) NOT NULL,
+  PRIMARY KEY (`id`)
+)
+ENGINE = InnoDB
+AUTO_INCREMENT = 1002;
+
+
+CREATE TABLE IF NOT EXISTS `classifier_values` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
+  `classifier_id` BIGINT NOT NULL,
+  `ic` VARCHAR(200) NOT NULL,
+  `description` VARCHAR(500) NOT NULL,
+  PRIMARY KEY (id)
+)
+ENGINE = InnoDB
+AUTO_INCREMENT = 1002;
+
+
+Пример данных из таблиц classifiers и classifiers_values:
+
+classifiers
+1, RISK_TYPE, travel policy risk type classifier
+2, COUNTRY, country classifier
+
+classifier_values
+1, 1 (foreign key to classifiers table), TRAVEL_MEDICAL, travel policy medical risk
+2, 1 (foreign key to classifiers table), TRAVEL_CANCELLATION, travel policy trip cancellation risk
+3, 1 (foreign key to classifiers table), TRAVEL_LOSS_BAGGAGE, travel policy baggage lose risk
+4, 2 (foreign key to classifiers table), LATVIA, country Latvia
+4, 2 (foreign key to classifiers table), SPAIN, country Spain
+и так далее.
