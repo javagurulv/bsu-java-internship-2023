@@ -11,7 +11,7 @@ import java.util.Optional;
 public class TravelCalculatePremiumRequestValidator {
 
     private Optional<ValidationError> validatePersonFirstName(TravelCalculatePremiumRequest request) {
-        return (request.getPersonFirstName() == null || request.getPersonLastName().trim().isEmpty())
+        return (request.getPersonFirstName() == null || request.getPersonFirstName().trim().isEmpty())
                 ? Optional.of(new ValidationError("personFirstName", "Must not be empty!"))
                 : Optional.empty();
     }
