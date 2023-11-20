@@ -9,18 +9,7 @@ public class TravelCalculatePremiumResponse {
     private String personLastName;
     private Date agreementDateFrom;
     private Date agreementDateTo;
-
     private BigDecimal agreementPrice;
-
-    public BigDecimal getAgreementPrice() {
-        return agreementPrice;
-    }
-
-    public void setAgreementPrice(BigDecimal agreementPrice) {
-        this.agreementPrice = agreementPrice;
-    }
-
-    public TravelCalculatePremiumResponse() {}
 
     public String getPersonFirstName() {
         return personFirstName;
@@ -54,4 +43,11 @@ public class TravelCalculatePremiumResponse {
         this.agreementDateTo = agreementDateTo;
     }
 
+    public BigDecimal getAgreementPrice() {
+        return agreementPrice;
+    }
+
+    public void setAgreementPrice(BigDecimal agreementPrice) {
+        this.agreementPrice = agreementPrice;
+    }
 }
