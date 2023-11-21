@@ -10,7 +10,7 @@ import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.springframework.stereotype.Component;
 
 @Component
-class TravelCalculatePremiumRequestValidator {
+public class TravelCalculatePremiumRequestValidator {
 
     public List<ValidationError> validate (TravelCalculatePremiumRequest request) {
         List<ValidationError> errors = new ArrayList<>();
