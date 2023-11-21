@@ -1,6 +1,5 @@
 package lv.javaguru.travel.insurance.core.validations;
 
-import lv.javaguru.travel.insurance.core.ValidationErrorFactory;
 import org.junit.jupiter.api.Test;
 
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
