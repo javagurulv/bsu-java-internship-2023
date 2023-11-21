@@ -1,6 +1,6 @@
 package lv.javaguru.travel.insurance.core.validations;
 
-import lv.javaguru.travel.insurance.core.ErrorCodesPropertiesReader;
+import lv.javaguru.travel.insurance.core.ValidationErrorFactory;
 import org.junit.jupiter.api.Test;
 
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
@@ -9,9 +9,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -26,25 +24,25 @@ public class TravelRequestPersonFirstNameValidationTest {
     @InjectMocks
     TravelRequestPersonFirstNameValidation personFirstNameValidation;
 
-    @Mock private ErrorCodesPropertiesReader reader;
+    @Mock private ValidationErrorFactory validationErrorFactory;
     @Test
     public void responseShouldContainErrorEmptyFirstNameTest() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getPersonFirstName()).thenReturn("");
-        when(reader.getDescription("ERROR_CODE_1")).thenReturn("error description");
+        ValidationError validationError = mock(ValidationError.class);
+        when(validationErrorFactory.constructError("ERROR_CODE_1")).thenReturn(validationError);
         Optional<ValidationError> error= personFirstNameValidation.validate(request);
         assertTrue(error.isPresent());
-        assertEquals(error.get().getErrorCode(), "ERROR_CODE_1");
-        assertEquals(error.get().getDescription(), "error description");
+        assertEquals(error.get(), validationError);
     }
     @Test
     public void responseShouldContainErrorNullFirstNameTest() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getPersonFirstName()).thenReturn(null);
-        when(reader.getDescription("ERROR_CODE_1")).thenReturn("error description");
+        ValidationError validationError = mock(ValidationError.class);
+        when(validationErrorFactory.constructError("ERROR_CODE_1")).thenReturn(validationError);
         Optional<ValidationError> error= personFirstNameValidation.validate(request);
         assertTrue(error.isPresent());
-        assertEquals(error.get().getErrorCode(), "ERROR_CODE_1");
-        assertEquals(error.get().getDescription(), "error description");
+        assertEquals(error.get(), validationError);
     }
 }

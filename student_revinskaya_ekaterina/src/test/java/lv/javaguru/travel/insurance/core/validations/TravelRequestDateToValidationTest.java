@@ -1,6 +1,6 @@
 package lv.javaguru.travel.insurance.core.validations;
 
-import lv.javaguru.travel.insurance.core.ErrorCodesPropertiesReader;
+import lv.javaguru.travel.insurance.core.ValidationErrorFactory;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.Test;
@@ -18,17 +18,17 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 
 public class TravelRequestDateToValidationTest {
-    @Mock private ErrorCodesPropertiesReader reader;
+    @Mock private ValidationErrorFactory validationErrorFactory;
     @InjectMocks
     TravelRequestAgreementDateToValidation dateToValidation;
     @Test
     public void responseShouldContainErrorNullDateToTest() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getAgreementDateTo()).thenReturn(null);
-        when(reader.getDescription("ERROR_CODE_4")).thenReturn("error description");
+        ValidationError validationError = mock(ValidationError.class);
+        when(validationErrorFactory.constructError("ERROR_CODE_4")).thenReturn(validationError);
         Optional<ValidationError> error= dateToValidation.validate(request);
         assertTrue(error.isPresent());
-        assertEquals(error.get().getErrorCode(), "ERROR_CODE_4");
-        assertEquals(error.get().getDescription(), "error description");
+        assertEquals(error.get(), validationError);
     }
 }
