@@ -1,6 +1,7 @@
 package lv.javaguru.travel.insurance.core;
 
-import lv.javaguru.travel.insurance.core.valids.TravelCalculatePremiumRequestValidatorImpl;
+import lv.javaguru.travel.insurance.core.services.TravelCalculatePremiumServiceImpl;
+import lv.javaguru.travel.insurance.core.underwriting.TravelPremiumUnderwriting;
 import lv.javaguru.travel.insurance.core.valids.TravelCalculatePremiumRequestValidator;
 import lv.javaguru.travel.insurance.validation.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.validation.TravelCalculatePremiumResponse;
@@ -47,8 +48,8 @@ public class TravelCalculatePremiumServiceImplTest {
         when(requestValidator.validate(request)).thenReturn(errors);
         TravelCalculatePremiumResponse response = service.calculatePremium(request);
         assertEquals(response.getErrors().size(), 1);
-        assertEquals(response.getErrors().get(0).getErrorCode(), "errorCode");
-        assertEquals(response.getErrors().get(0).getDescription()   , "errorMessage");
+        assertEquals(response.getErrors().get(0).getErrorCode(), "field");
+        assertEquals(response.getErrors().get(0).getDescription(), "errorMessage");
     }
 
     @Test
@@ -58,7 +59,7 @@ public class TravelCalculatePremiumServiceImplTest {
         when(requestValidator.validate(request)).thenReturn(errors);
         TravelCalculatePremiumResponse response = service.calculatePremium(request);
         assertEquals(response.getErrors().size(), 1);
-        assertEquals(response.getErrors().get(0).getErrorCode(), "errorCode");
+        assertEquals(response.getErrors().get(0).getErrorCode(), "field");
         assertEquals(response.getErrors().get(0).getDescription(), "errorMessage");
     }
 
@@ -113,7 +114,7 @@ public class TravelCalculatePremiumServiceImplTest {
 
     private List<ValidationError> buildValidationErrorList() {
         return List.of(
-                new ValidationError("errorCode", "errorMessage")
+                new ValidationError("field", "errorMessage")
         );
     }
 
