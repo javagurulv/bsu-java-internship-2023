@@ -25,7 +25,7 @@ public class TravelPremiumUnderwritingTest {
     private TravelPremiumUnderwriting premiumUnderwriting;
 
     @Test
-    public void shouldReturnResponseWithCorrectAgreementPrice() {
+    void shouldReturnResponseWithCorrectAgreementPrice() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getAgreementDateFrom()).thenReturn(createDate("01.01.2023"));
         when(request.getAgreementDateTo()).thenReturn(createDate("10.01.2023"));

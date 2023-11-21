@@ -11,8 +11,8 @@ import lombok.Setter;
 @AllArgsConstructor
 public class ValidationError {
 
-    private String field;
-    private String message;
+    private String errorCode;
+    private String description;
 
 }
 

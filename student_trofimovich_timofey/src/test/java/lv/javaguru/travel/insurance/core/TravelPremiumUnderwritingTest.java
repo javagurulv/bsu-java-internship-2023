@@ -18,8 +18,10 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class TravelPremiumUnderwritingTest {
-    @Mock DateTimeService dateTimeService;
-    @InjectMocks TravelPremiumUnderwriting premiumUnderwriting;
+    @Mock
+    private DateTimeService dateTimeService;
+    @InjectMocks
+    private TravelPremiumUnderwriting premiumUnderwriting;
 
     @Test
     public void shouldReturnResponseWithCorrectAgreementPrice() {

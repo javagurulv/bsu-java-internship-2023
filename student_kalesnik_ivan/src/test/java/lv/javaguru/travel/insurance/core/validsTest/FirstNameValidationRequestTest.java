@@ -1,54 +1,58 @@
 package lv.javaguru.travel.insurance.core.validsTest;
 
 import lv.javaguru.travel.insurance.core.valids.FirstNameValidationRequest;
+import lv.javaguru.travel.insurance.core.valids.ValidationErrorFactory;
 import lv.javaguru.travel.insurance.validation.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.validation.ValidationError;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.mockito.Mockito.*;
 
+@ExtendWith(MockitoExtension.class)
 public class FirstNameValidationRequestTest {
 
+    @Mock private ValidationErrorFactory errorFactory;
+
+    @InjectMocks
     private FirstNameValidationRequest validation;
 
-    @BeforeEach
-    public void setUp() {
-        validation = new FirstNameValidationRequest();
+    @Test
+    public void shouldReturnErrorWhenPersonFirstNameIsNull() {
+        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        when(request.getPersonFirstName()).thenReturn(null);
+        ValidationError validationError = mock(ValidationError.class);
+        when(errorFactory.buildError("ERROR_CODE_7")).thenReturn(validationError);
+        Optional<ValidationError> errorOpt = validation.execute(request);
+        assertTrue(errorOpt.isPresent());
+        assertSame(errorOpt.get(), validationError);
     }
 
     @Test
-    public void shouldReturnErrorWhenFirstNameIsNull() {
-        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest();
-        request.setPersonFirstName(null);
-
-        Optional<ValidationError> result = validation.execute(request);
-
-        assertEquals("Must not be empty!", result.get().getMessage());
-        assertEquals("personFirstName", result.get().getField());
+    public void shouldReturnErrorWhenPersonFirstNameIsEmpty() {
+        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        when(request.getPersonFirstName()).thenReturn("");
+        ValidationError validationError = mock(ValidationError.class);
+        when(errorFactory.buildError("ERROR_CODE_7")).thenReturn(validationError);
+        Optional<ValidationError> errorOpt = validation.execute(request);
+        assertTrue(errorOpt.isPresent());
+        assertSame(errorOpt.get(), validationError);
     }
 
     @Test
-    public void shouldReturnErrorWhenFirstNameIsEmpty() {
-        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest();
-        request.setPersonFirstName("");
-
-        Optional<ValidationError> result = validation.execute(request);
-
-        assertEquals("Must not be empty!", result.get().getMessage());
-        assertEquals("personFirstName", result.get().getField());
-    }
-
-    @Test
-    public void shouldReturnEmptyWhenFirstNameIsNotEmpty() {
-        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest();
-        request.setPersonFirstName("Java");
-
-        Optional<ValidationError> result = validation.execute(request);
-
-        assertEquals(Optional.empty(), result);
+    public void shouldNotReturnErrorWhenPersonFirstNameIsPresent() {
+        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        when(request.getPersonFirstName()).thenReturn("Vasja");
+        Optional<ValidationError> errorOpt = validation.execute(request);
+        assertTrue(errorOpt.isEmpty());
+        verifyNoInteractions(errorFactory);
     }
 }
 

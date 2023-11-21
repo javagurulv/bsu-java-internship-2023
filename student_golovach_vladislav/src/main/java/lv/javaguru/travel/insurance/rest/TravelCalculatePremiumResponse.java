@@ -1,5 +1,6 @@
 package lv.javaguru.travel.insurance.rest;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,14 +21,12 @@ public class TravelCalculatePremiumResponse extends CoreResponse{
     BigDecimal agreementPrice;
     private String personFirstName;
     private String personLastName;
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date agreementDateFrom;
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date agreementDateTo;
     public TravelCalculatePremiumResponse(List<ValidationError> errors) {
         super(errors);
     }
 
-    public long calculateDaysBetween(Date date1, Date date2) {
-        long elapsedms = date1.getTime() - date2.getTime();
-        return TimeUnit.DAYS.convert(elapsedms, TimeUnit.MILLISECONDS);
-    }
 }
