@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.core;
+package lv.javaguru.travel.insurance.core.util;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Configuration
 @PropertySource("classpath:errorCodes.properties")
-public class  ErrorCodesPropertiesReader{
+public class ErrorCodeUtil {
 
     @Autowired
     private Environment environment;

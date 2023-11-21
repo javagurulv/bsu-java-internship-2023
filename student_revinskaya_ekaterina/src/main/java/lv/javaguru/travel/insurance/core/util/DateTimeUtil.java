@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.core;
+package lv.javaguru.travel.insurance.core.util;
 
 import org.springframework.stereotype.Component;
 
@@ -8,7 +8,7 @@ import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 @Component
-public class DateTimeService {
+public class DateTimeUtil {
     public Date getCurrentDateTime() {
         ZoneId zone = ZoneId.of("Europe/Riga");
         return Date.from(ZonedDateTime.now(zone).toInstant());

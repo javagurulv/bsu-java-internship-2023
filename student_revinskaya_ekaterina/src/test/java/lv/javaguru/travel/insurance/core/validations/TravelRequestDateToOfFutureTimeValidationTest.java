@@ -1,7 +1,6 @@
 package lv.javaguru.travel.insurance.core.validations;
 
-import lv.javaguru.travel.insurance.core.DateTimeService;
-import lv.javaguru.travel.insurance.core.ErrorCodesPropertiesReader;
+import lv.javaguru.travel.insurance.core.util.DateTimeUtil;
 import lv.javaguru.travel.insurance.core.ValidationErrorFactory;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
@@ -25,12 +24,12 @@ public class TravelRequestDateToOfFutureTimeValidationTest {
     @InjectMocks
     private TravelRequestAgreementDateToOfFutureValidation dateToValidation;
 
-    @Mock private DateTimeService dateTimeService;
+    @Mock private DateTimeUtil dateTimeUtil;
     @Mock private ValidationErrorFactory validationErrorFactory;
 
     @Test
     public void responseShouldContainDateToOfFutureTimeTest() {
-        when(dateTimeService.getCurrentDateTime()).thenReturn(createDate("16.11.2023"));
+        when(dateTimeUtil.getCurrentDateTime()).thenReturn(createDate("16.11.2023"));
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getAgreementDateTo()).thenReturn(createDate("8.07.2023"));
         ValidationError validationError = mock(ValidationError.class);

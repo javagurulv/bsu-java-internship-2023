@@ -1,5 +1,6 @@
 package lv.javaguru.travel.insurance.core;
 
+import lv.javaguru.travel.insurance.core.util.DateTimeUtil;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -10,7 +11,7 @@ import java.util.Date;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DateTimeServiceTest {
-    private DateTimeService calculatorDate = new DateTimeService();
+    private DateTimeUtil calculatorDate = new DateTimeUtil();
 @Test
     public void calculateWithRightDatesTest(){
        BigDecimal num = calculatorDate.calculateDiffBetweenDays(createDate("02.10.2023"),createDate( "12.10.2023"));
