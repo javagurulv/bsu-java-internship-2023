@@ -19,6 +19,7 @@ class TravelCalculatePremiumRequestValidator {
         validatePersonLastName(request).ifPresent(errors::add);
         validateAgreementDateFrom(request).ifPresent(errors::add);
         validateAgreementDateTo(request).ifPresent(errors::add);
+        validateDateFromLessThanDateTo(request).ifPresent(errors::add);
 
         return errors;
     }
@@ -52,7 +53,7 @@ class TravelCalculatePremiumRequestValidator {
         Date agreementDateTo = request.getAgreementDateTo();
         return (agreementDateTo != null
                 && agreementDateFrom != null
-                && (agreementDateFrom.before(agreementDateTo)))
+                && (agreementDateFrom.after(agreementDateTo) || agreementDateFrom.equals(agreementDateTo)))  // тк в условии не говорится про равенство дат!
                 ? Optional.of(new ValidationError("agreementDateFrom", "AgreementDateFrom should be less than agreementDateTo!"))
                 : Optional.empty();
     }
