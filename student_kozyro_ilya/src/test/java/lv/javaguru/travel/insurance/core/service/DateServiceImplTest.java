@@ -37,4 +37,5 @@ public class DateServiceImplTest {
         BigDecimal days = dateService.getDaysBetween(dateService.createDate("2000-10-10", testFormat), dateService.createDate("2000-10-11", testFormat));
         assertEquals(BigDecimal.ONE, days);
     }
+
 }
