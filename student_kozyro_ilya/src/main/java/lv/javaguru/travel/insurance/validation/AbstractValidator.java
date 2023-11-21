@@ -25,4 +25,5 @@ public abstract class AbstractValidator<AReq extends CoreRequest> {
                 Optional.of(new ValidationError(fieldName, "Shouldn't be empty!")) :
                 Optional.empty();
     }
+
 }

@@ -26,14 +26,15 @@ public class TravelCalculatePremiumServiceImplTest {
     @InjectMocks
     private TravelCalculatePremiumServiceImpl service;
     private TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest
-            ("Name", "Surname", createDate("09.07.2023"), createDate("19.07.2023"));
+            ("Name", "Surname", createDate("09.07.2023"), createDate("19.07.2023"),
+                    List.of("TRAVEL_MEDICAL", "TRAVEL_CANCELLATION"));
     @Test
     public void serviceImplWithError() {
         when(requestValidator.validate(request)).thenReturn(generateError());
         TravelCalculatePremiumResponse response = service.calculatePremium(request);
         assertTrue(response.hasErrors());
-        assertEquals(response.getErrors().get(0).getField(), "field");
-        assertEquals(response.getErrors().get(0).getMessage(), "message");
+        assertEquals(response.getErrors().get(0).getErrorCode(), "field");
+        assertEquals(response.getErrors().get(0).getDescription(), "message");
     }
 
     @Test

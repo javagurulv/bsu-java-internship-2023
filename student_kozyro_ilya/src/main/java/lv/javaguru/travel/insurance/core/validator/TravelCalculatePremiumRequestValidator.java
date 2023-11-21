@@ -19,23 +19,37 @@ public class TravelCalculatePremiumRequestValidator extends AbstractValidator<Tr
     public ArrayList<ValidationError> validate(TravelCalculatePremiumRequest travelCalculatePremiumRequest) {
         ArrayList<ValidationError> errors = new ArrayList<>();
 
-        validateMandatoryField("personFirstName", travelCalculatePremiumRequest.getPersonFirstName()).ifPresent(errors::add);
-        validateMandatoryField("personLastName", travelCalculatePremiumRequest.getPersonLastName()).ifPresent(errors::add);
-        validateMandatoryField("agreementDateFrom", travelCalculatePremiumRequest.getAgreementDateFrom()).ifPresent(errors::add);
-        validateMandatoryField("agreementDateTo", travelCalculatePremiumRequest.getAgreementDateTo()).ifPresent(errors::add);
+        validatePersonFirstName(travelCalculatePremiumRequest).ifPresent(errors::add);
+        validatePersonLastName(travelCalculatePremiumRequest).ifPresent(errors::add);
+        validateAgreementDateFrom(travelCalculatePremiumRequest).ifPresent(errors::add);
+        validateAgreementDateTo(travelCalculatePremiumRequest).ifPresent(errors::add);
 
-        validateDatesField(travelCalculatePremiumRequest.getAgreementDateFrom(), travelCalculatePremiumRequest.getAgreementDateTo()).ifPresent(errors::add);
+        validateDatesField(travelCalculatePremiumRequest).ifPresent(errors::add);
 
         return errors;
     }
 
-    public Optional<ValidationError> validateDatesField(Date from, Date to) {
+    public Optional<ValidationError> validatePersonFirstName(TravelCalculatePremiumRequest travelCalculatePremiumRequest) {
+        return validateMandatoryField("personFirstName", travelCalculatePremiumRequest.getPersonFirstName());
+    }
+    public Optional<ValidationError> validatePersonLastName(TravelCalculatePremiumRequest travelCalculatePremiumRequest) {
+        return validateMandatoryField("personLastName", travelCalculatePremiumRequest.getPersonLastName());
+    }
+    public Optional<ValidationError> validateAgreementDateFrom(TravelCalculatePremiumRequest travelCalculatePremiumRequest) {
+        return validateMandatoryField("agreementDateFrom", travelCalculatePremiumRequest.getAgreementDateFrom());
+    }
+    public Optional<ValidationError> validateAgreementDateTo(TravelCalculatePremiumRequest travelCalculatePremiumRequest) {
+        return validateMandatoryField("agreementDateTo", travelCalculatePremiumRequest.getAgreementDateTo());
+    }
+
+    public Optional<ValidationError> validateDatesField(TravelCalculatePremiumRequest travelCalculatePremiumRequest) {
+        var from = travelCalculatePremiumRequest.getAgreementDateFrom();
+        var to = travelCalculatePremiumRequest.getAgreementDateTo();
+
         return ((from != null && to != null) && (from.after(to) || from.equals(to))) ?
                 Optional.of(new ValidationError("agreementDayFrom", "Must be before agreementDayTo")) :
                 Optional.empty();
 
     }
-
-
 
 }
