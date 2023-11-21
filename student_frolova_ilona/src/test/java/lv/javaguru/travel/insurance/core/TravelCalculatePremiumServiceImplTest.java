@@ -9,6 +9,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -27,6 +28,8 @@ class TravelCalculatePremiumServiceImplTest {
 
     @Mock private TravelCalculatePremiumRequestValidator requestValidator;
     @Mock private DateTimeService dateTimeService;
+
+    @Mock private TravelCalculateUnderwriting underwritingCalculator;
 
     @InjectMocks private TravelCalculatePremiumServiceImpl service;
 
@@ -53,7 +56,11 @@ class TravelCalculatePremiumServiceImplTest {
                 "", "Name", new Date(1213L), new Date(1212L)
         );
 
+        System.out.println("request is " + request);
+
         TravelCalculatePremiumResponse response = service.calculatePremium(request);
+
+        System.out.println("response is " + response);
 
         assert(response.hasErrors());
     }

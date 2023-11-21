@@ -10,7 +10,13 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import static org.hamcrest.Matchers.is;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -59,5 +65,51 @@ public class TravelCalculatePremiumControllerTest {
                 .andExpect(jsonPath("agreementDateTo", is("2021-05-29")))
                 .andExpect(jsonPath("agreementPrice", is(9)))
                 .andReturn();
+    }
+
+    @Test
+    public void JsonReaderTest() throws IOException {
+
+        String fileName = "temp.json";
+        File file = new File(fileName);
+
+        if (!file.exists()) {
+            file.createNewFile();
+        }
+
+        String initial = "smth\nsmth2";
+
+        BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
+        writer.write(initial);
+        writer.close();
+
+        String result = JsonReader.read("temp.json");
+
+        file.delete();
+
+        assertEquals(initial, result);
+    }
+
+    @Test
+    public void correctResponseToRequestInJsonFiles() throws IOException {
+
+        File requestFile = new File("request.json");
+        File responseFile = new File("res.json");
+
+        /*if (!file.exists()) {
+            file.createNewFile();
+        }
+
+        String initial = "smth\nsmth2";
+
+        BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
+        writer.write(initial);
+        writer.close();
+
+        String result = JsonReader.read("temp.json");
+
+        file.delete();
+
+        assertEquals(initial, result);*/
     }
 }

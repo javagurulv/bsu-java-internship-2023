@@ -2,11 +2,15 @@ package lv.javaguru.travel.insurance.core;
 
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumResponse;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -16,6 +20,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+@SpringBootTest
 public class TravelCalculateUnderwritingTest {
 
     @Mock
@@ -24,10 +29,12 @@ public class TravelCalculateUnderwritingTest {
     @Mock
     private DateTimeService dateTimeService;
 
-    @InjectMocks private TravelCalculateUnderwriting underwritingCalculator;
+    @InjectMocks
+    private TravelCalculateUnderwriting underwritingCalculator;
 
-    TravelCalculateUnderwritingTest() {
-        underwritingCalculator = new TravelCalculateUnderwriting();
+    @BeforeEach
+    public void defineMocksBehavior() {
+        when(dateTimeService.getDifferenceInDays(any(), any())).thenReturn(BigDecimal.ZERO);
     }
 
     @Test
@@ -49,17 +56,15 @@ public class TravelCalculateUnderwritingTest {
     @ExtendWith(MockitoExtension.class)
     public void costIsThree() {
 
-        when(dateTimeService.createDate(any())).thenReturn(new Date(86400000L));
-        Date date1 = dateTimeService.createDate("");
-
-        when(dateTimeService.createDate(any())).thenReturn(new Date(345600000L));
-        Date date2 = dateTimeService.createDate("");
+        Date date1 = new Date(86400000L);
+        Date date2 = new Date(345600000L);
 
         when(request.getAgreementDateFrom()).thenReturn(date1);
         when(request.getAgreementDateTo()).thenReturn(date2);
+        when(dateTimeService.getDifferenceInDays(date1, date2)).thenReturn(BigDecimal.valueOf(3));
 
         BigDecimal cost = underwritingCalculator.calculatePremium(request);
 
-        assertEquals(cost.compareTo(BigDecimal.valueOf(3)), 0);
+        assertEquals(0, cost.compareTo(BigDecimal.valueOf(3)));
     }
 }
