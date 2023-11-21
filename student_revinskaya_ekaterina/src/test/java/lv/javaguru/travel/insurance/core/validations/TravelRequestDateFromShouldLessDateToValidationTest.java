@@ -1,5 +1,6 @@
 package lv.javaguru.travel.insurance.core.validations;
 
+import lv.javaguru.travel.insurance.core.ErrorCodesPropertiesReader;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.Test;
@@ -23,15 +24,18 @@ public class TravelRequestDateFromShouldLessDateToValidationTest {
    private TravelRequestDateFromLessDateToValidation dateFromLessDateToValidation = new TravelRequestDateFromLessDateToValidation();
 
     @Mock
-    TravelCalculatePremiumRequest request;
+    private TravelCalculatePremiumRequest request;
+    @Mock
+    private ErrorCodesPropertiesReader reader;
     @Test
     public void responseShouldContainErrorDateFromMoreToTest() {
         when(request.getAgreementDateFrom()).thenReturn(createDate("8.07.2024"));
         when(request.getAgreementDateTo()).thenReturn(createDate("8.08.2023"));
+        when(reader.getDescription("ERROR_CODE_7")).thenReturn("error description");
         Optional<ValidationError> error= dateFromLessDateToValidation.validate(request);
         assertTrue(error.isPresent());
-        assertEquals(error.get().getField(),"agreementDateFrom" );
-        assertEquals(error.get().getMessage(),"agreementDateFrom must be less than agreementDateTo!" );
+        assertEquals(error.get().getErrorCode(),"ERROR_CODE_7" );
+        assertEquals(error.get().getDescription(),"error description");
 
     }
     private Date createDate(String dateStr) {
