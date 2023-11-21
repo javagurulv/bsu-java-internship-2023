@@ -3,6 +3,7 @@ package lv.javaguru.travel.insurance.core;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class TravelCalculatePremiumRequestValidatorTest {
 
     private final TravelCalculatePremiumRequestValidator validator;
+    @Mock
     private final DateTimeService dateTimeService;
 
     TravelCalculatePremiumRequestValidatorTest() {
