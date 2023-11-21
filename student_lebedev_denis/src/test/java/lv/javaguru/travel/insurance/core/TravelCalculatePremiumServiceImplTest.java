@@ -1,19 +1,15 @@
 package lv.javaguru.travel.insurance.core;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
-import java.util.Calendar;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@Component
 class TravelCalculatePremiumServiceImplTest {
 
-    @Autowired DateTimeService dateTimeService = new DateTimeService();
+    private final DateTimeService dateTimeService = new DateTimeService();
 
     @Test
     public void checkResponse() {
@@ -28,5 +24,4 @@ class TravelCalculatePremiumServiceImplTest {
 
         assertEquals(response, service.calculatePremium(request));
     }
-
 }
