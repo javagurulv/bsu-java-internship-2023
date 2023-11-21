@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.core;
+package lv.javaguru.travel.insurance.core.underwriting;
 
 import lv.javaguru.travel.insurance.core.util.DateTimeUtil;
 import lv.javaguru.travel.insurance.validation.TravelCalculatePremiumRequest;
@@ -8,11 +8,12 @@ import org.springframework.stereotype.Component;
 import java.math.BigDecimal;
 
 @Component
-class TravelPremiumUnderwriting {
+public
+class TravelPremiumUnderwritingImpl implements TravelPremiumUnderwriting {
 
     @Autowired private DateTimeUtil dateTimeService;
 
-    BigDecimal calculatePremium(TravelCalculatePremiumRequest request) {
+    public BigDecimal calculatePremium(TravelCalculatePremiumRequest request) {
         return new BigDecimal(dateTimeService.getDaysBetween(request.getAgreementDateFrom(), request.getAgreementDateTo()));
     }
 
