@@ -74,6 +74,22 @@ public class TravelCalculatePremiumControllerTest {
     }
 
     @Test
+    public void selectedRisksIsNull() throws Exception {
+        executeAndCompare(
+                "rest/TravelCalculatePremiumRequest_selectedRisks_null.json",
+                "rest/TravelCalculatePremiumResponse_selectedRisks_null.json"
+        );
+    }
+
+    @Test
+    public void selectedRisksIsEmpty() throws Exception {
+        executeAndCompare(
+                "rest/TravelCalculatePremiumRequest_selectedRisks_empty.json",
+                "rest/TravelCalculatePremiumResponse_selectedRisks_empty.json"
+        );
+    }
+
+    @Test
     public void allFieldsNotProvided() throws Exception {
         executeAndCompare(
                 "rest/TravelCalculatePremiumRequest_allFields_not_provided.json",
