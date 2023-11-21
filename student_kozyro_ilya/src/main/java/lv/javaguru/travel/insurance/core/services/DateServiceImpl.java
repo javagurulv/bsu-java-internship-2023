@@ -13,17 +13,9 @@ import java.util.concurrent.TimeUnit;
 @Service
 public class DateServiceImpl implements DateService{
 
-    DateFormat dateFormat;
-
-    public DateServiceImpl(
-            @Value("${dateService.format}")
-            String dateStringFormat
-    ) {
-        dateFormat = new SimpleDateFormat(dateStringFormat);
-    }
     @Override
-    public Date createDate(String date) throws ParseException {
-        return dateFormat.parse(date);
+    public Date createDate(String date, String format) throws ParseException {
+        return (new SimpleDateFormat(format)).parse(date);
     }
 
     @Override
