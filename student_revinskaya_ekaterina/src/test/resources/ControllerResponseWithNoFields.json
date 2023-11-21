@@ -15,6 +15,10 @@
     {
       "field": "personFirstName",
       "message": "Must not be empty!"
+    },
+    {
+      "field": "selected_risks",
+      "message": "Must not be empty!"
     }
   ],
   "personFirstName": null,
