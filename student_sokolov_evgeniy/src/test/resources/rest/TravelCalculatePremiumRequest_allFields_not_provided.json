@@ -2,5 +2,6 @@
   "personFirstName" : null,
   "personLastName" : null,
   "agreementDateFrom" : null,
-  "agreementDateTo" : null
+  "agreementDateTo" : null,
+  "selected_risks" : null
 }
