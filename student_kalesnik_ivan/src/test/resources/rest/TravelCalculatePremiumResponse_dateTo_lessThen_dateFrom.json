@@ -1,13 +1,13 @@
 {
   "errors": [
     {
-      "field": "agreementDateFrom",
-      "message": "Must be less then agreementDateTo!"
+      "errorCode": "ERROR_CODE_5",
+      "description": "Field agreementDateFrom must be less than agreementDateTo!"
     }
   ],
   "personFirstName": null,
   "personLastName": null,
+  "agreementPrice": null,
   "agreementDateFrom": null,
-  "agreementDateTo": null,
-  "agreementPrice": null
+  "agreementDateTo": null
 }

@@ -5,6 +5,7 @@ import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,6 +18,8 @@ class TravelCalculatePremiumRequestValidator {
         validateAgreementDateTo(request).ifPresent(errors::add);
         validateAgreementDateFrom(request).ifPresent(errors::add);
         validateAgreementDateDifference(request).ifPresent(errors::add);
+        validateDateFromInPast(request).ifPresent(errors::add);
+        validateDateToInPast(request).ifPresent(errors::add);
         return errors;
     }
 
@@ -43,8 +46,21 @@ class TravelCalculatePremiumRequestValidator {
 
     private Optional<ValidationError> validateAgreementDateDifference(TravelCalculatePremiumRequest request) {
         return (request.getAgreementDateFrom() != null && request.getAgreementDateTo() != null
-                && request.getAgreementDateTo().compareTo(request.getAgreementDateFrom()) < 0)
+                && request.getAgreementDateTo().before(request.getAgreementDateFrom())
+                )
                 ? Optional.of(new ValidationError("agreementDateDifference", "DateTo must be greater than DateFrom"))
+                : Optional.empty();
+    }
+    private Optional<ValidationError> validateDateFromInPast(TravelCalculatePremiumRequest request) {
+        Date currentTime = new Date();
+        return (request.getAgreementDateFrom() != null && request.getAgreementDateFrom().before(currentTime))
+                ? Optional.of(new ValidationError("agreementDateDifference", "Date from past"))
+                : Optional.empty();
+    }
+    private Optional<ValidationError> validateDateToInPast(TravelCalculatePremiumRequest request) {
+        Date currentTime = new Date();
+        return (request.getAgreementDateTo() != null && request.getAgreementDateTo().before(currentTime))
+                ? Optional.of(new ValidationError("agreementDateDifference", "Date from past"))
                 : Optional.empty();
     }
 }
