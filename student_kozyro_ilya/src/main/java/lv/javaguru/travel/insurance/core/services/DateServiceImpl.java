@@ -13,11 +13,14 @@ import java.util.concurrent.TimeUnit;
 @Service
 public class DateServiceImpl implements DateService{
 
-    DateFormat dateFormat;
-
     @Override
     public Date createDate(String date, String format) throws ParseException {
         return (new SimpleDateFormat(format)).parse(date);
+    }
+
+    @Override
+    public Date getTodayDate() {
+        return new Date();
     }
 
     @Override
