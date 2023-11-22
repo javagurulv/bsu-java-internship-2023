@@ -9,13 +9,12 @@ import java.util.Date;
 import java.util.Optional;
 
 @Component
-public
-class DateAfterLessThenDateBefore implements TravelRequestValidation {
+class DateAfterLessThenDateBefore extends TravelRequestValidationImpl {
 
     @Autowired private ValidationErrorFactory errorFactory;
 
     @Override
-    public Optional<ValidationError> execute(TravelCalculatePremiumRequest request) {
+    public Optional<ValidationError> validate(TravelCalculatePremiumRequest request) {
         Date dateFrom = request.getAgreementDateFrom();
         Date dateTo = request.getAgreementDateTo();
         return (dateFrom != null && dateTo != null

@@ -3,14 +3,22 @@ package lv.javaguru.travel.insurance.rest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.json.GsonJsonParser;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 import static org.hamcrest.Matchers.is;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -60,4 +68,48 @@ public class TravelCalculatePremiumControllerTest {
                 .andExpect(jsonPath("agreementPrice", is(9)))
                 .andReturn();
     }
+
+    @Test
+    public void JsonReaderTest() throws IOException {
+        String fileName = "temp.json";
+        File file = new File(fileName);
+
+        if (!file.exists()) {
+            file.createNewFile();
+        }
+
+        String initial = "smth\nsmth2";
+
+        BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
+        writer.write(initial);
+        writer.close();
+
+        String result = JsonReader.read("temp.json");
+
+        file.delete();
+
+        assertEquals(initial, result);
+    }
+
+    /*@Test
+    public void correctResponseToRequestInJsonFiles(
+            String fileNameRequest, String fileNameResponse
+    ) throws Exception {
+        String jsonRequest = JsonReader.read(fileNameRequest);
+
+        MvcResult result = mockMvc.perform(post("/insurance/travel/")
+                        .content(jsonRequest)
+                        .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        String responseBodyContent = result.getResponse().getContentAsString();
+
+        String jsonResponse = JsonReader.read(fileNameResponse);
+
+
+        //JsonParser parser = new JsonParser(
+
+
+    }*/
 }
