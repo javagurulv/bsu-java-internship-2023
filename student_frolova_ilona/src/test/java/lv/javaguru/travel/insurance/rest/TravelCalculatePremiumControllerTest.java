@@ -13,11 +13,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-
 import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -32,7 +27,7 @@ public class TravelCalculatePremiumControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    private final JSONParser parser = new JSONParser();
+    private final ObjectMapper mapper = new ObjectMapper();
 
     @Test
     public void simpleRestControllerTestExample() throws Exception {
@@ -75,8 +70,44 @@ public class TravelCalculatePremiumControllerTest {
     @Test
     public void jsonFilesTest() throws Exception {
         compareResponseToRequestInJsonFiles(
-                "rest/TravelCalculatePremiumRequest.json",
-                "rest/TravelCalculatePremiumResponse.json"
+                "rest/TravelCalculatePremiumRequest_correct.json",
+                "rest/TravelCalculatePremiumResponse_correct.json"
+        );
+    }
+
+    @Test
+    public void wrongRequestJsonFilesTest() throws Exception {
+        compareResponseToRequestInJsonFiles(
+                "rest/TravelCalculatePremiumRequest_firstNameEmpty.json",
+                "rest/TravelCalculatePremiumResponse_firstNameEmpty.json"
+        );
+
+        compareResponseToRequestInJsonFiles(
+                "rest/TravelCalculatePremiumRequest_lastNameEmpty.json",
+                "rest/TravelCalculatePremiumResponse_lastNameEmpty.json"
+        );
+
+        compareResponseToRequestInJsonFiles(
+                "rest/TravelCalculatePremiumRequest_dateToEmpty.json",
+                "rest/TravelCalculatePremiumResponse_dateToEmpty.json"
+        );
+
+        compareResponseToRequestInJsonFiles(
+                "rest/TravelCalculatePremiumRequest_dateFromEmpty.json",
+                "rest/TravelCalculatePremiumResponse_dateFromEmpty.json"
+        );
+
+        compareResponseToRequestInJsonFiles(
+                "rest/TravelCalculatePremiumRequest_allWrong.json",
+                "rest/TravelCalculatePremiumResponse_allWrong.json"
+        );
+    }
+
+    @Test
+    public void wrongDateSequenceRequestJsonFilesTest() throws Exception {
+        compareResponseToRequestInJsonFiles(
+                "rest/TravelCalculatePremiumRequest_dateSeq.json",
+                "rest/TravelCalculatePremiumResponse_dateSeq.json"
         );
     }
 
@@ -95,6 +126,6 @@ public class TravelCalculatePremiumControllerTest {
 
         String jsonResponse = JsonReader.read(fileNameResponse);
 
-        assertEquals(parser.parse(responseBodyContent), parser.parse(jsonResponse));
+        assertEquals(mapper.readTree(responseBodyContent), mapper.readTree(jsonResponse));
     }
 }
