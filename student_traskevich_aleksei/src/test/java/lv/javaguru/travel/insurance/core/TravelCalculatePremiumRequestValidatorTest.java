@@ -14,54 +14,59 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TravelCalculatePremiumRequestValidatorTest {
     TravelCalculatePremiumRequestValidator validator = new TravelCalculatePremiumRequestValidator();
+    Date date = createDate("01.01.2023");
 
-    TravelCalculatePremiumRequest requestNormal = new TravelCalculatePremiumRequest(
-            "firstN", "firstN", null, null
-    );
 
     @Test
     void shouldNotErrors() {
-        List<ValidationError> errors = validator.validate(requestNormal);
+        List<ValidationError> errors = validator.validate(new TravelCalculatePremiumRequest(
+                "firstN", "firstN", date, date
+        ));
         assertTrue(errors.isEmpty());
     }
 
-    TravelCalculatePremiumRequest requestFirstNameNull = new TravelCalculatePremiumRequest(
-            null, "firstN", null, null
-    );
 
     @Test
     void firstNameNull() {
-        List<ValidationError> errors = validator.validate(requestFirstNameNull);
+        List<ValidationError> errors = validator.validate(new TravelCalculatePremiumRequest(
+                null, "firstN", date, date
+        ));
         assertTrue(!errors.isEmpty());
     }
 
-    TravelCalculatePremiumRequest requestFirstNameEmpty = new TravelCalculatePremiumRequest(
-            "", "firstN", null, null
-    );
 
     @Test
     void firstNameEmpty() {
-        List<ValidationError> errors = validator.validate(requestFirstNameEmpty);
+        List<ValidationError> errors = validator.validate(new TravelCalculatePremiumRequest(
+                "", "firstN", date, date
+        ));
         assertTrue(!errors.isEmpty());
     }
 
-    TravelCalculatePremiumRequest requestLastNameNull = new TravelCalculatePremiumRequest(
-            "firstN", null, null, null
-    );
 
     @Test
     void lastNameNull() {
-        List<ValidationError> errors = validator.validate(requestLastNameNull);
+        List<ValidationError> errors = validator.validate(new TravelCalculatePremiumRequest(
+                "firstN", null, date, date
+        ));
         assertTrue(!errors.isEmpty());
     }
 
-    TravelCalculatePremiumRequest requestLastNameEmpty = new TravelCalculatePremiumRequest(
-            "firstN", "", null, null
-    );
 
     @Test
     void lastNameEmpty() {
-        List<ValidationError> errors = validator.validate(requestLastNameEmpty);
+        List<ValidationError> errors = validator.validate(new TravelCalculatePremiumRequest(
+                "firstN", "", date, date
+        ));
+        assertTrue(!errors.isEmpty());
+    }
+
+    @Test
+    void dateFromEmpty() {
+        List<ValidationError> errors = validator.validate(
+                new TravelCalculatePremiumRequest(
+                        "firstN", "", date, null)
+        );
         assertTrue(!errors.isEmpty());
     }
 
