@@ -1,5 +1,6 @@
 package lv.javaguru.travel.insurance.core;
 
+import lv.javaguru.travel.insurance.core.validations.TravelCalculatePremiumRequestValidator;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumResponse;
 import lv.javaguru.travel.insurance.dto.ValidationError;
@@ -11,8 +12,10 @@ import java.util.List;
 
 @Component
 class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService {
-    @Autowired private TravelCalculatePremiumRequestValidator requestValidator;
-    @Autowired private TravelPremiumUnderwriting premiumUnderwriting;
+    @Autowired
+    private TravelCalculatePremiumRequestValidator requestValidator;
+    @Autowired
+    private TravelPremiumUnderwriting premiumUnderwriting;
 
     @Override
     public TravelCalculatePremiumResponse calculatePremium(TravelCalculatePremiumRequest request) {

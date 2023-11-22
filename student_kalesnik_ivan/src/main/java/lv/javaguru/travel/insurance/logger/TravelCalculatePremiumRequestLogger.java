@@ -5,7 +5,6 @@ import lv.javaguru.travel.insurance.validation.TravelCalculatePremiumRequest;
 import org.springframework.stereotype.Component;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import lv.javaguru.travel.insurance.core.*;
 @Slf4j
 @Component
 public
