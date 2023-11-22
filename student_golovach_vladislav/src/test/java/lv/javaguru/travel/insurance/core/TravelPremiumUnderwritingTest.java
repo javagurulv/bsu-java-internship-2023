@@ -27,8 +27,8 @@ public class TravelPremiumUnderwritingTest {
     @Test
     public void shouldReturnResponseWithCorrectAgreementPrice() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
-        when(request.getAgreementDateFrom()).thenReturn(createDate("01.01.2023"));
-        when(request.getAgreementDateTo()).thenReturn(createDate("10.01.2023"));
+        when(request.getAgreementDateFrom()).thenReturn(createDate("01.01.2024"));
+        when(request.getAgreementDateTo()).thenReturn(createDate("10.01.2024"));
         when(dateTimeService.getDaysBetween(request.getAgreementDateFrom(), request.getAgreementDateTo())).thenReturn(9L);
         BigDecimal premium = premiumUnderwriting.calculatePremium(request);
         assertEquals(premium, new BigDecimal(9));
