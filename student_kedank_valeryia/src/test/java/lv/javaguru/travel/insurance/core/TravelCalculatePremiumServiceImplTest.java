@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class TravelCalculatePremiumServiceImplTest {
 
     @Test
-    public void test_step3() {
+    public void test_step5() {
 
         Calendar calendar = Calendar.getInstance();
 
@@ -28,7 +28,7 @@ class TravelCalculatePremiumServiceImplTest {
                 "Kedank", dateFrom, dateTo);
 
         TravelCalculatePremiumResponse response = new TravelCalculatePremiumResponse("Valeryia",
-                "Kedank", dateFrom, dateTo);
+                "Kedank", dateFrom, dateTo, BigDecimal.valueOf(365));
 
         TravelCalculatePremiumServiceImpl service = new TravelCalculatePremiumServiceImpl();
         TravelCalculatePremiumResponse resp_done = service.calculatePremium(request);
@@ -38,7 +38,7 @@ class TravelCalculatePremiumServiceImplTest {
         assertEquals(response.getAgreementDateFrom(), resp_done.getAgreementDateFrom());
         assertEquals(response.getAgreementDateTo(), resp_done.getAgreementDateTo());
 
-        assertEquals(BigDecimal.valueOf(365), response.getAgreementPrice());
+        assertEquals(response.getAgreementPrice(), resp_done.getAgreementPrice());
 
     }
 

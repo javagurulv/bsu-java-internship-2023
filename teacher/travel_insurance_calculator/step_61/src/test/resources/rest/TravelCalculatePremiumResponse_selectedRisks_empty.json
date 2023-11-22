@@ -1,0 +1,14 @@
+{
+  "errors": [
+    {
+      "errorCode": "ERROR_CODE_6",
+      "description": "Field selectedRisks must not be empty!"
+    }
+  ],
+  "personFirstName": null,
+  "personLastName": null,
+  "agreementDateFrom": null,
+  "agreementDateTo": null,
+  "agreementPremium": null,
+  "risks": null
+}

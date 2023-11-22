@@ -8,25 +8,33 @@ import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.List;
-
 @Component
 class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService {
-    @Autowired
-    private TravelCalculatePremiumRequestValidator requestValidator;
+
+    @Autowired private TravelCalculatePremiumRequestValidator requestValidator;
+    @Autowired private TravelPremiumUnderwriting premiumUnderwriting;
+
     @Override
     public TravelCalculatePremiumResponse calculatePremium(TravelCalculatePremiumRequest request) {
         List<ValidationError> errors = requestValidator.validate(request);
-        if (!errors.isEmpty()) {
-            return new TravelCalculatePremiumResponse(errors);
-        }
+        return errors.isEmpty()
+                ? buildResponse(request, premiumUnderwriting.calculatePremium(request))
+                : buildResponse(errors);
+    }
+
+    private TravelCalculatePremiumResponse buildResponse(List<ValidationError> errors) {
+        return new TravelCalculatePremiumResponse(errors);
+    }
+
+    private TravelCalculatePremiumResponse buildResponse(TravelCalculatePremiumRequest request, BigDecimal premium) {
         TravelCalculatePremiumResponse response = new TravelCalculatePremiumResponse();
         response.setPersonFirstName(request.getPersonFirstName());
         response.setPersonLastName(request.getPersonLastName());
         response.setAgreementDateFrom(request.getAgreementDateFrom());
         response.setAgreementDateTo(request.getAgreementDateTo());
-        var daysBetween=response.calculateDaysBetween(request.getAgreementDateFrom(),request.getAgreementDateTo());
-        response.setAgreementPrice(BigDecimal.valueOf(daysBetween));
+        response.setAgreementPrice(premium);
         return response;
     }
 
 }
+

@@ -1,0 +1,13 @@
+{
+  "errorList": [
+    {
+      "field": "personLastName",
+      "error": "Shouldn't be empty!"
+    }
+  ],
+  "personFirstName": null,
+  "personLastName": null,
+  "agreementDateFrom": null,
+  "agreementDateTo": null,
+  "agreementPrice": null
+}
