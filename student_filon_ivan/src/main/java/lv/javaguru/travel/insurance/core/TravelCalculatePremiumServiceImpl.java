@@ -1,19 +1,15 @@
 package lv.javaguru.travel.insurance.core;
 
-import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
-import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumResponse;
+import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
-import java.util.Date;
-import java.util.concurrent.TimeUnit;
 
 @Component
 class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService {
-
-    @Autowired private DateTimeService dateTimeService;
-
+    @Autowired private DateTimeService dateTimeService = new DateTimeService();
     @Override
     public TravelCalculatePremiumResponse calculatePremium(TravelCalculatePremiumRequest request) {
         TravelCalculatePremiumResponse response = new TravelCalculatePremiumResponse();

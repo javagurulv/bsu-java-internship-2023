@@ -7,7 +7,7 @@ import java.util.concurrent.TimeUnit;
 
 @Component
 public class DateTimeService {
-    long getDaysBetween(Date date1, Date date2){
+    public long getDaysBetween(Date date1, Date date2){
         long difference = date1.getTime() - date2.getTime();
         return TimeUnit.MILLISECONDS.toDays(difference);
     }

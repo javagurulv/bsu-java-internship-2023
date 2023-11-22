@@ -2,5 +2,6 @@
   "personFirstName" : "Vasja",
   "personLastName" : "Pupkin",
   "agreementDateFrom" : "2025-05-12",
-  "agreementDateTo" : null
+  "agreementDateTo" : null,
+  "selected_risks":["TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"]
 }

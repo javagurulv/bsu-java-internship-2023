@@ -1,0 +1,13 @@
+{
+  "errors": [
+    {
+      "errorCode": "ERROR_CODE_1",
+      "description": "Field agreementDateFrom must be in the future!"
+    }
+  ],
+  "personFirstName": null,
+  "personLastName": null,
+  "agreementDateFrom": null,
+  "agreementDateTo": null,
+  "agreementPremium": null
+}

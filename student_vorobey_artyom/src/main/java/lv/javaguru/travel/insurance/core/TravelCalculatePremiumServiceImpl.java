@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @Component
-class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService {
+public class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService {
 
     @Autowired private TravelCalculatePremiumRequestValidator requestValidator;
     @Autowired private TravelPremiumUnderwriting underwriting;
