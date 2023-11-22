@@ -109,7 +109,7 @@ public class TravelCalculatePremiumServiceImplTest {
         when(requestValidator.validate(request)).thenReturn(List.of());
         when(premiumUnderwriting.calculatePremium(request)).thenReturn(new BigDecimal(9));
         TravelCalculatePremiumResponse response = service.calculatePremium(request);
-        assertEquals(response.getAgreementPrice(), new BigDecimal(9));
+        assertEquals(response.getAgreementPremium(), new BigDecimal(9));
     }
 
     private List<ValidationError> buildValidationErrorList() {
@@ -125,4 +125,5 @@ public class TravelCalculatePremiumServiceImplTest {
             throw new RuntimeException(e);
         }
     }
+
 }

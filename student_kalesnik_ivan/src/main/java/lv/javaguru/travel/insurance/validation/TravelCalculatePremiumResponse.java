@@ -19,7 +19,7 @@ public class TravelCalculatePremiumResponse extends CoreResponse {
     private String personFirstName;
     private String personLastName;
 
-    private BigDecimal agreementPrice;
+    private BigDecimal agreementPremium;
     public TravelCalculatePremiumResponse(List<ValidationError> errors) {
         super(errors);
     }
