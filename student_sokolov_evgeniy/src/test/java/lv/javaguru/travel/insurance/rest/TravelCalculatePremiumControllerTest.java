@@ -33,18 +33,34 @@ public class TravelCalculatePremiumControllerTest {
     }
 
     @Test
-    public void firstNameNotProvided() throws Exception {
+    public void personFirstNameIsNull() throws Exception {
         executeAndCompare(
-                "rest/TravelCalculatePremiumRequest_firstName_not_provided.json",
-                "rest/TravelCalculatePremiumResponse_firstName_not_provided.json"
+                "rest/TravelCalculatePremiumRequest_personFirstName_is_null.json",
+                "rest/TravelCalculatePremiumResponse_personFirstName_is_null.json"
         );
     }
 
     @Test
-    public void lastNameNotProvided() throws Exception {
+    public void personFirstNameIsEmpty() throws Exception {
         executeAndCompare(
-                "rest/TravelCalculatePremiumRequest_lastName_not_provided.json",
-                "rest/TravelCalculatePremiumResponse_lastName_not_provided.json"
+                "rest/TravelCalculatePremiumRequest_personFirstName_is_empty.json",
+                "rest/TravelCalculatePremiumResponse_personFirstName_is_empty.json"
+        );
+    }
+
+    @Test
+    public void personLastNameIsNull() throws Exception {
+        executeAndCompare(
+                "rest/TravelCalculatePremiumRequest_personLastName_is_null.json",
+                "rest/TravelCalculatePremiumResponse_personLastName_is_null.json"
+        );
+    }
+
+    @Test
+    public void personLastNameIsEmpty() throws Exception {
+        executeAndCompare(
+                "rest/TravelCalculatePremiumRequest_personLastName_is_empty.json",
+                "rest/TravelCalculatePremiumResponse_personLastName_is_empty.json"
         );
     }
 
@@ -61,6 +77,22 @@ public class TravelCalculatePremiumControllerTest {
         executeAndCompare(
                 "rest/TravelCalculatePremiumRequest_agreementDateTo_not_provided.json",
                 "rest/TravelCalculatePremiumResponse_agreementDateTo_not_provided.json"
+        );
+    }
+
+    @Test
+    public void agreementDateFromIsInThePast() throws Exception {
+        executeAndCompare(
+                "rest/TravelCalculatePremiumRequest_agreementDateFrom_in_the_past.json",
+                "rest/TravelCalculatePremiumResponse_agreementDateFrom_in_the_past.json"
+        );
+    }
+
+    @Test
+    public void agreementDateToIsInThePast() throws Exception {
+        executeAndCompare(
+                "rest/TravelCalculatePremiumRequest_agreementDateTo_in_the_past.json",
+                "rest/TravelCalculatePremiumResponse_agreementDateTo_in_the_past.json"
         );
     }
 
