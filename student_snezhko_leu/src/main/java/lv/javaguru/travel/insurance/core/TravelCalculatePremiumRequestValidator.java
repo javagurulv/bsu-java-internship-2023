@@ -5,9 +5,8 @@ package lv.javaguru.travel.insurance.core;
 import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.math.BigDecimal;
+import java.util.*;
 
 @Component
 class TravelCalculatePremiumRequestValidator {
@@ -32,15 +31,21 @@ class TravelCalculatePremiumRequestValidator {
                 : Optional.empty();
     }
     private Optional<ValidationError> validateAgreementDateFrom(TravelCalculatePremiumRequest request) {
-        return request.getAgreementDateFrom() == null
-                ? Optional.of(new ValidationError("agreementDateFrom", "Must not be null!"))
-                :Optional.empty();
+        if (request.getAgreementDateFrom() == null) {
+            return Optional.of(new ValidationError("agreementDateFrom", "Must not be null!"));
+        }
+        else if (request.getAgreementDateFrom().compareTo(new Date()) <= 0) {
+            return Optional.of(new ValidationError("agreementDateFrom", "Must not be in the past!"));
+        }
+        return Optional.empty();
     }
     private Optional<ValidationError> validateAgreementDateTo(TravelCalculatePremiumRequest request) {
-        return (request.getAgreementDateTo() == null)
-                ? Optional.of(new ValidationError("agreementDateTo", "Must not be null!"))
-                : ((request.getAgreementDateTo().before(request.getAgreementDateFrom()))
-                ? Optional.of(new ValidationError("agreementDateTo", "Must not be before agreementDateFrom!!!"))
-                :Optional.empty());
+        if (request.getAgreementDateTo() == null) {
+            return Optional.of(new ValidationError("agreementDateTo", "Must not be null!"));
+        }
+        else if (request.getAgreementDateTo().before(request.getAgreementDateFrom())) {
+            return Optional.of(new ValidationError("agreementDateTo", "Must not be before agreementDateFrom!!!"));
+        }
+        return Optional.empty();
     }
 }
