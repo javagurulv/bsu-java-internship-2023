@@ -1,9 +1,10 @@
 package lv.javaguru.travel.insurance.rest;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import net.minidev.json.parser.JSONParser;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.json.GsonJsonParser;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpHeaders;
@@ -30,6 +31,8 @@ public class TravelCalculatePremiumControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
+
+    private final JSONParser parser = new JSONParser();
 
     @Test
     public void simpleRestControllerTestExample() throws Exception {
@@ -70,29 +73,14 @@ public class TravelCalculatePremiumControllerTest {
     }
 
     @Test
-    public void JsonReaderTest() throws IOException {
-        String fileName = "temp.json";
-        File file = new File(fileName);
-
-        if (!file.exists()) {
-            file.createNewFile();
-        }
-
-        String initial = "smth\nsmth2";
-
-        BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
-        writer.write(initial);
-        writer.close();
-
-        String result = JsonReader.read("temp.json");
-
-        file.delete();
-
-        assertEquals(initial, result);
+    public void jsonFilesTest() throws Exception {
+        compareResponseToRequestInJsonFiles(
+                "rest/TravelCalculatePremiumRequest.json",
+                "rest/TravelCalculatePremiumResponse.json"
+        );
     }
 
-    /*@Test
-    public void correctResponseToRequestInJsonFiles(
+    public void compareResponseToRequestInJsonFiles(
             String fileNameRequest, String fileNameResponse
     ) throws Exception {
         String jsonRequest = JsonReader.read(fileNameRequest);
@@ -107,9 +95,6 @@ public class TravelCalculatePremiumControllerTest {
 
         String jsonResponse = JsonReader.read(fileNameResponse);
 
-
-        //JsonParser parser = new JsonParser(
-
-
-    }*/
+        assertEquals(parser.parse(responseBodyContent), parser.parse(jsonResponse));
+    }
 }
