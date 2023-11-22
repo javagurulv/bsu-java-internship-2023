@@ -1,6 +1,5 @@
-package lv.javaguru.travel.insurance.core.validsTest;
+package lv.javaguru.travel.insurance.core.valids;
 
-import lv.javaguru.travel.insurance.core.valids.SelectedRisksValidation;
 import lv.javaguru.travel.insurance.validation.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.validation.ValidationError;
 import org.junit.jupiter.api.BeforeEach;
@@ -26,7 +25,7 @@ public class SelectedRisksValidationTest {
         TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest();
         request.setSelected_risks(Arrays.asList("TRAVEL_MEDICAL"));
 
-        Optional<ValidationError> result = validation.execute(request);
+        Optional<ValidationError> result = validation.validate(request);
 
         assertTrue(result.isEmpty());
     }

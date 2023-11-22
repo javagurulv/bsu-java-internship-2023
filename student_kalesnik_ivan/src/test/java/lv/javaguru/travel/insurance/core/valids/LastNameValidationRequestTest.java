@@ -1,7 +1,5 @@
-package lv.javaguru.travel.insurance.core.validsTest;
+package lv.javaguru.travel.insurance.core.valids;
 
-import lv.javaguru.travel.insurance.core.valids.LastNameValidationRequest;
-import lv.javaguru.travel.insurance.core.valids.ValidationErrorFactory;
 import lv.javaguru.travel.insurance.validation.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.validation.ValidationError;
 import org.junit.jupiter.api.Test;
@@ -29,7 +27,7 @@ public class LastNameValidationRequestTest {
         when(request.getPersonLastName()).thenReturn(null);
         ValidationError validationError = mock(ValidationError.class);
         when(errorFactory.buildError("ERROR_CODE_8")).thenReturn(validationError);
-        Optional<ValidationError> errorOpt = validation.execute(request);
+        Optional<ValidationError> errorOpt = validation.validate(request);
         assertTrue(errorOpt.isPresent());
         assertSame(errorOpt.get(), validationError);
     }
@@ -40,7 +38,7 @@ public class LastNameValidationRequestTest {
         when(request.getPersonLastName()).thenReturn("");
         ValidationError validationError = mock(ValidationError.class);
         when(errorFactory.buildError("ERROR_CODE_8")).thenReturn(validationError);
-        Optional<ValidationError> errorOpt = validation.execute(request);
+        Optional<ValidationError> errorOpt = validation.validate(request);
         assertTrue(errorOpt.isPresent());
         assertSame(errorOpt.get(), validationError);
     }
@@ -49,7 +47,7 @@ public class LastNameValidationRequestTest {
     public void shouldNotReturnErrorWhenPersonLastNameIsPresent() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getPersonLastName()).thenReturn("Petrov");
-        Optional<ValidationError> errorOpt = validation.execute(request);
+        Optional<ValidationError> errorOpt = validation.validate(request);
         assertTrue(errorOpt.isEmpty());
         verifyNoInteractions(errorFactory);
     }

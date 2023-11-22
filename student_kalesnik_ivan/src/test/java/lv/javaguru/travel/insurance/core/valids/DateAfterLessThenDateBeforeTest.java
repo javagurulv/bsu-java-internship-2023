@@ -1,7 +1,5 @@
-package lv.javaguru.travel.insurance.core.validsTest;
+package lv.javaguru.travel.insurance.core.valids;
 
-import lv.javaguru.travel.insurance.core.valids.DateAfterLessThenDateBefore;
-import lv.javaguru.travel.insurance.core.valids.ValidationErrorFactory;
 import lv.javaguru.travel.insurance.validation.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.validation.ValidationError;
 import org.junit.jupiter.api.Test;
@@ -21,54 +19,6 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class DateAfterLessThenDateBeforeTest {
-
-    /*private DateAfterLessThenDateBefore validation;
-
-    @BeforeEach
-    public void setUp() {
-        validation = new DateAfterLessThenDateBefore();
-    }
-
-    @Test
-    public void shouldReturnErrorWhenDateFromIsEqualToDateTo() {
-        Date date = new Date();
-        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest();
-        request.setAgreementDateFrom(date);
-        request.setAgreementDateTo(date);
-
-        Optional<ValidationError> result = validation.execute(request);
-
-        assertEquals("Must be less then agreementDateTo!", result.get().getDescription());
-        assertEquals("agreementDateFrom", result.get().getErrorCode());
-    }
-
-    @Test
-    public void shouldReturnErrorWhenDateFromIsAfterDateTo() {
-        Date dateFrom = new Date(System.currentTimeMillis() + 10000);
-        Date dateTo = new Date();
-        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest();
-        request.setAgreementDateFrom(dateFrom);
-        request.setAgreementDateTo(dateTo);
-
-        Optional<ValidationError> result = validation.execute(request);
-
-        assertEquals("Must be less then agreementDateTo!", result.get().getDescription());
-        assertEquals("agreementDateFrom", result.get().getErrorCode());
-    }
-
-    @Test
-    public void shouldReturnEmptyWhenDateFromIsBeforeDateTo() {
-        Date dateFrom = new Date();
-        Date dateTo = new Date(System.currentTimeMillis() + 10000);
-        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest();
-        request.setAgreementDateFrom(dateFrom);
-        request.setAgreementDateTo(dateTo);
-
-        Optional<ValidationError> result = validation.execute(request);
-
-        assertEquals(Optional.empty(), result);
-    }*/
-
     @Mock private ValidationErrorFactory errorFactory;
 
     @InjectMocks
@@ -81,7 +31,7 @@ public class DateAfterLessThenDateBeforeTest {
         when(request.getAgreementDateTo()).thenReturn(createDate("01.01.2025"));
         ValidationError validationError = mock(ValidationError.class);
         when(errorFactory.buildError("ERROR_CODE_5")).thenReturn(validationError);
-        Optional<ValidationError> errorOpt = validation.execute(request);
+        Optional<ValidationError> errorOpt = validation.validate(request);
         assertTrue(errorOpt.isPresent());
         assertSame(errorOpt.get(), validationError);
     }
@@ -93,7 +43,7 @@ public class DateAfterLessThenDateBeforeTest {
         when(request.getAgreementDateTo()).thenReturn(createDate("01.01.2025"));
         ValidationError validationError = mock(ValidationError.class);
         when(errorFactory.buildError("ERROR_CODE_5")).thenReturn(validationError);
-        Optional<ValidationError> errorOpt = validation.execute(request);
+        Optional<ValidationError> errorOpt = validation.validate(request);
         assertTrue(errorOpt.isPresent());
         assertSame(errorOpt.get(), validationError);
     }
@@ -103,7 +53,7 @@ public class DateAfterLessThenDateBeforeTest {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getAgreementDateFrom()).thenReturn(createDate("01.01.2025"));
         when(request.getAgreementDateTo()).thenReturn(createDate("10.01.2025"));
-        Optional<ValidationError> errorOpt = validation.execute(request);
+        Optional<ValidationError> errorOpt = validation.validate(request);
         assertTrue(errorOpt.isEmpty());
         verifyNoInteractions(errorFactory);
     }
