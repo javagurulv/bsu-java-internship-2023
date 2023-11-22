@@ -28,19 +28,50 @@ public class TravelCalculatePremiumControllerTest {
     @Autowired
     private MockMvc mockMvc;
     @Test
-    public void readedJsonControllerTest() throws Exception {//throws FileNotFoundException, IOException {
+    public void ControllerAllParametersIsCorrectTest() throws Exception {//throws FileNotFoundException, IOException {
         ObjectMapper mapper = new ObjectMapper();
-        //assertEquals(mapper.readTree(JsonFileReader.readJsonFile("../../resources/rest/TravelCalculatePremiumRequest.json")),)
+        String pathRequest = "rest/TravelCalculatePremiumRequest.json";
+        String pathResponse = "rest/TravelCalculatePremiumResponse.json";
+
+        String responseFromRequest = getResponseFromRequest(pathRequest);
+        String responseFromFile = JsonFileReader.readJsonFile("rest/TravelCalculatePremiumResponse.json");
+        assertEquals(mapper.readTree(responseFromFile), mapper.readTree(responseFromRequest));
+    }
+    @Test
+    public void ControllerWithoutFirstNameTest() throws Exception{
+        ObjectMapper mapper = new ObjectMapper();
+        String pathRequest = "rest/PremiumRequestWithoutFirstName.json";
+        String pathResponse = "rest/PremiumResponseWithoutFirstName.json";
+        String responseFromRequest = getResponseFromRequest(pathRequest);
+        String responseFromFile = JsonFileReader.readJsonFile(pathResponse);
+        assertEquals(mapper.readTree(responseFromRequest), mapper.readTree(responseFromFile));
+    }
+    @Test
+    public void ControllerWithoutLastNameTest() throws Exception{
+        ObjectMapper mapper = new ObjectMapper();
+        String pathRequest = "rest/PremiumRequestWithoutLastName.json";
+        String pathResponse = "rest/PremiumResponseWithoutLastName.json";
+        String responseFromRequest = getResponseFromRequest(pathRequest);
+        String responseFromFile = JsonFileReader.readJsonFile(pathResponse);
+        assertEquals(mapper.readTree(responseFromRequest), mapper.readTree(responseFromFile));
+    }
+    @Test
+    public void ControllerWithoutDateFromAndDateToTest() throws Exception{
+        ObjectMapper mapper = new ObjectMapper();
+        String pathRequest = "rest/PremiumRequestWithoutDateFromAndDateTo.json";
+        String pathResponse = "rest/PremiumResponseWithoutDateFromAndDateTo.json";
+        String responseFromRequest = getResponseFromRequest(pathRequest);
+        String responseFromFile = JsonFileReader.readJsonFile(pathResponse);
+        assertEquals(mapper.readTree(responseFromRequest), mapper.readTree(responseFromFile));
+    }
+    private String getResponseFromRequest(String pathRequest) throws Exception{
         MvcResult result = mockMvc.perform(
                         post("/insurance/travel/")
-                                .content(JsonFileReader.readJsonFile("rest/TravelCalculatePremiumResponse.json"))
+                                .content(JsonFileReader.readJsonFile(pathRequest))
                                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 )
                 .andExpect(status().isOk())
                 .andReturn();
-        String responseFromRequest = result.getResponse().getContentAsString();
-        String responseFromFile = JsonFileReader.readJsonFile("rest/TravelCalculatePremiumResponse.json");
-        assertEquals(mapper.readTree(responseFromFile), mapper.readTree(responseFromRequest));
+        return result.getResponse().getContentAsString();
     }
-
 }
