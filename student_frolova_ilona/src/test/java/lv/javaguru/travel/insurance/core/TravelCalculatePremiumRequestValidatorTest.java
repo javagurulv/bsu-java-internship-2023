@@ -19,8 +19,6 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class TravelCalculatePremiumRequestValidatorTest {
-    @Mock
-    private DateTimeService dateTimeService;
 
     @Mock TravelCalculatePremiumRequest request;
 
