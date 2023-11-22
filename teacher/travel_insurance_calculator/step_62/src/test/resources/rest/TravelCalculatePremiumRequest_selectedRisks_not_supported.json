@@ -1,0 +1,8 @@
+{
+  "personFirstName" : "Vasja",
+  "personLastName" : "Pupkin",
+  "agreementDateFrom" : "2025-05-20",
+  "agreementDateTo" : "2025-05-29",
+  "country" : "SPAIN",
+  "selected_risks": ["NOT_VALID_RISK_IC_1", "NOT_VALID_RISK_IC_2"]
+}
