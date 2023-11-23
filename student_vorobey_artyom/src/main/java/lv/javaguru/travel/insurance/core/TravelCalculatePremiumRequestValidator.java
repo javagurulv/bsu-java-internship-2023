@@ -17,6 +17,7 @@ public class TravelCalculatePremiumRequestValidator {
         validatePersonFirstName(request).ifPresent(errors::add);
         validatePersonLastName(request).ifPresent(errors::add);
         validateAgreementDateFrom(request).ifPresent(errors::add);
+        validateAgreementDateFromIsNotInPast(request).ifPresent(errors::add);
         validateAgreementDateTo(request).ifPresent(errors::add);
         validateAgreementDateFromLessThanAgreementDateTo(request).ifPresent(errors::add);
         return errors;
@@ -52,6 +53,14 @@ public class TravelCalculatePremiumRequestValidator {
         return (dateTo != null && dateFrom != null
                 && (dateFrom.equals(dateTo) || dateFrom.after(dateTo)))
                 ? Optional.of(new ValidationError("agreementDateFrom", "Must be less than agreementDateTo"))
+                : Optional.empty();
+    }
+
+    private Optional<ValidationError> validateAgreementDateFromIsNotInPast(TravelCalculatePremiumRequest request) {
+        Date dateFrom = request.getAgreementDateFrom();
+        Date currentDate = new Date();
+        return (dateFrom != null && dateFrom.getTime() < currentDate.getTime())
+                ? Optional.of(new ValidationError("agreementDateFrom", "Must not be in past!"))
                 : Optional.empty();
     }
 }

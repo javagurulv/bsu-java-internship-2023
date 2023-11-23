@@ -76,6 +76,12 @@ public class TravelCalculatePremiumControllerTest {
                 "rest/agreementDateFromEqualsAgreementDateToRestControllerTestResponse.json");
     }
 
+    @Test
+    public void shouldReturnErrorIfAgreementDateFromIsInPastRestControllerTest() throws Exception {
+        executeAndCompare("rest/agreementDateFromIsInPastRestControllerTestRequest.json",
+                "rest/agreementDateFromIsInPastRestControllerTestResponse.json");
+    }
+
     private void executeAndCompare(String JsonFileRequestPath, String JsonFileResponsePath) throws Exception {
         String jsonStringRequest = jsonFileReader.readJsonFromFile(JsonFileRequestPath);
         String jsonExpectedStringResponse = jsonFileReader.readJsonFromFile(JsonFileResponsePath);
