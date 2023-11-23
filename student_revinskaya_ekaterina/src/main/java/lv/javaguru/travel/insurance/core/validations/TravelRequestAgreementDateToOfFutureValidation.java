@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import java.util.Date;
 import java.util.Optional;
 @Component
-class TravelRequestAgreementDateToOfFutureValidation implements TravelRequestValidation{
+class TravelRequestAgreementDateToOfFutureValidation extends TravelRequestValidationImpl {
     @Autowired
     private DateTimeUtil dateTimeUtil;
     @Autowired
