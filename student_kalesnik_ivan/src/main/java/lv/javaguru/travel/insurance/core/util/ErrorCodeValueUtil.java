@@ -11,6 +11,7 @@ import org.springframework.core.io.support.PropertiesLoaderUtils;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
@@ -18,6 +19,7 @@ import java.util.Properties;
 @PropertySource("classpath:errorCodes.properties")
 public class ErrorCodeValueUtil {
     private Properties props;
+
     ErrorCodeValueUtil() throws IOException {
         Resource resource = new ClassPathResource("errorCodes.properties");
         props = PropertiesLoaderUtils.loadProperties(resource);
@@ -25,5 +27,14 @@ public class ErrorCodeValueUtil {
 
     public String getErrorDescription(String errorCode) {
         return props.getProperty(errorCode);
+    }
+
+    public String getErrorDescription(String errorCode, List<Placeholder> placeholders) {
+        String errorDescription = props.getProperty(errorCode);
+        for(Placeholder placeholder : placeholders) {
+            String placeholderToReplace = "{" + placeholder.getPlaceholderName() + "}";
+            errorDescription = errorDescription.replace(placeholderToReplace, placeholder.getPlaceholderValue());
+        }
+        return errorDescription;
     }
 }

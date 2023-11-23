@@ -1,0 +1,30 @@
+Для реализации расчёта премии на основе рисков ментор предлагает
+сделать следующие архитектурные изменения в пакете core.underwriting:
+
+Создать интерфейс TravelRiskPremiumCalculator с методами
+
+BigDecimal calculatePremium(TravelCalculatePremiumRequest request);
+String getRiskIc();
+
+Для каждого из следующих рисков:
+               TRAVEL_MEDICAL
+               TRAVEL_CANCELLATION
+               TRAVEL_LOSS_BAGGAGE
+               TRAVEL_THIRD_PARTY_LIABILITY
+               TRAVEL_EVACUATION
+               TRAVEL_SPORT_ACTIVITIES
+создать свою реализацию интерфейса TravelRiskPremiumCalculator.
+Метод getRiskIc() каждой реализации будет возвращать ic код риска
+для которого он содержит алгоритм расчёта премии.
+
+По дефолту метод calculatePremium(...) должен возвращать 0 (BigDecimal.ZERO).
+
+Для TRAVEL_MEDICAL риска на данный момент оставить текущую
+формулу расчёта из класса TravelPremiumUnderwritingImpl.
+
+Далее в TravelPremiumUnderwritingImpl в зависимости получить
+список всех TravelRiskPremiumCalculator и с помощью него
+посчитать премии для каждого выбранного в запросе риска (selected_risks)
+и сложить их.
+
+Ваша задача: реализовать предложение ментора.

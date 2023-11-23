@@ -1,5 +1,7 @@
 package lv.javaguru.travel.insurance.rest;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import net.minidev.json.parser.JSONParser;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +11,15 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 import static org.hamcrest.Matchers.is;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -22,6 +31,8 @@ public class TravelCalculatePremiumControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
+
+    private final JSONParser parser = new JSONParser();
 
     @Test
     public void simpleRestControllerTestExample() throws Exception {
@@ -59,5 +70,31 @@ public class TravelCalculatePremiumControllerTest {
                 .andExpect(jsonPath("agreementDateTo", is("2021-05-29")))
                 .andExpect(jsonPath("agreementPrice", is(9)))
                 .andReturn();
+    }
+
+    @Test
+    public void jsonFilesTest() throws Exception {
+        compareResponseToRequestInJsonFiles(
+                "rest/TravelCalculatePremiumRequest.json",
+                "rest/TravelCalculatePremiumResponse.json"
+        );
+    }
+
+    public void compareResponseToRequestInJsonFiles(
+            String fileNameRequest, String fileNameResponse
+    ) throws Exception {
+        String jsonRequest = JsonReader.read(fileNameRequest);
+
+        MvcResult result = mockMvc.perform(post("/insurance/travel/")
+                        .content(jsonRequest)
+                        .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        String responseBodyContent = result.getResponse().getContentAsString();
+
+        String jsonResponse = JsonReader.read(fileNameResponse);
+
+        assertEquals(parser.parse(responseBodyContent), parser.parse(jsonResponse));
     }
 }

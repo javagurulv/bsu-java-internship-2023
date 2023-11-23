@@ -89,7 +89,21 @@ public class TravelCalculatePremiumControllerTest {
                 "rest/DateToIsInThePastErrorResponse.json"
         );
     }
+    @Test
+    public void selectedRisksListIsEmptyError() throws Exception {
+        getResponseAndCompare(
+                "rest/SelectedRisksListIsEmptyRequest.json/",
+                "rest/SelectedRisksListIsEmptyErrorResponse.json"
+        );
+    }
 
+    @Test
+    public void selectedRisksListIsNullError() throws Exception {
+        getResponseAndCompare(
+                "rest/SelectedRisksListIsNullRequest.json/",
+                "rest/SelectedRisksListIsNullResponse.json"
+        );
+    }
     @Test
     public void nothingProvided() throws Exception {
         getResponseAndCompare(
