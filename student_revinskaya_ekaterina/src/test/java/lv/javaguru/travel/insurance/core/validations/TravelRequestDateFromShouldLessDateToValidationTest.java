@@ -32,7 +32,7 @@ public class TravelRequestDateFromShouldLessDateToValidationTest {
         when(request.getAgreementDateFrom()).thenReturn(createDate("8.07.2024"));
         when(request.getAgreementDateTo()).thenReturn(createDate("8.08.2023"));
         ValidationError validationError = mock(ValidationError.class);
-        when(validationErrorFactory.constructError("ERROR_CODE_7")).thenReturn(validationError);
+        when(validationErrorFactory.buildError("ERROR_CODE_7")).thenReturn(validationError);
         Optional<ValidationError> error= dateFromLessDateToValidation.validate(request);
         assertTrue(error.isPresent());
         assertEquals(error.get(), validationError);

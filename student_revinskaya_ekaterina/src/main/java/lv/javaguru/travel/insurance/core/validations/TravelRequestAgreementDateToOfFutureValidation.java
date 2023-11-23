@@ -18,7 +18,7 @@ class TravelRequestAgreementDateToOfFutureValidation extends TravelRequestValida
     public Optional<ValidationError> validate(TravelCalculatePremiumRequest request) {
         Date dateTo = request.getAgreementDateTo();
         return (dateTo != null && (dateTimeUtil.getCurrentDateTime().after(dateTo)))
-                ? Optional.of(validationErrorFactory.constructError("ERROR_CODE_6"))
+                ? Optional.of(validationErrorFactory.buildError("ERROR_CODE_6"))
                 : Optional.empty();
     }
 }

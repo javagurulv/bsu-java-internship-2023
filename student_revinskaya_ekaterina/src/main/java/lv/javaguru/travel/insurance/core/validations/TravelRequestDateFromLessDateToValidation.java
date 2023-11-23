@@ -17,7 +17,7 @@ class TravelRequestDateFromLessDateToValidation extends TravelRequestValidationI
         Date dateTo = request.getAgreementDateTo();
         return (dateFrom != null && dateTo != null
                 && (dateFrom.equals(dateTo) || dateFrom.after(dateTo)))
-                ? Optional.of(validationErrorFactory.constructError("ERROR_CODE_7"))
+                ? Optional.of(validationErrorFactory.buildError("ERROR_CODE_7"))
                 : Optional.empty();
     }
 }
