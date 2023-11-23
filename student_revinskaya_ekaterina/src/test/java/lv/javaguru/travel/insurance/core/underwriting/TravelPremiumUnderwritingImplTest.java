@@ -12,8 +12,10 @@ import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -23,13 +25,16 @@ public class TravelPremiumUnderwritingImplTest {
     private DateTimeUtil calculatorDate;
     @InjectMocks
     private TravelPremiumUnderwritingImpl calculateUnderwriting;
+    @InjectMocks
+    TravelMedicalRiskPremiumCalculator medicalRiskPremiumCalculator;
 
     @Test
     public void rightCalculateUnderwriting(){
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
-        when(request.getAgreementDateFrom()).thenReturn(createDate("03.07.2023"));
-        when(request.getAgreementDateTo()).thenReturn(createDate("07.07.2023"));
-        when(calculatorDate.calculateDiffBetweenDays(request.getAgreementDateFrom(), request.getAgreementDateTo())).thenReturn(BigDecimal.valueOf(4));
+        when(request.getSelected_risks()).thenReturn(List.of("TRAVEL_MEDICAL"));
+        calculateUnderwriting.riskPremiumCalculators=List.of(medicalRiskPremiumCalculator);
+        when(calculatorDate.calculateDiffBetweenDays(any(), any()))
+                .thenReturn(BigDecimal.valueOf(4));
         assertEquals(calculateUnderwriting.calculateAgreementPrice(request), BigDecimal.valueOf(4));
     }
     private Date createDate(String dateStr) {
