@@ -1,5 +1,6 @@
 package lv.javaguru.travel.insurance.core.services;
 
+import lv.javaguru.travel.insurance.core.underwriting.TravelPremiumCalculationResult;
 import lv.javaguru.travel.insurance.core.underwriting.TravelPremiumUnderwriting;
 import lv.javaguru.travel.insurance.core.valids.TravelCalculatePremiumRequestValidator;
 import lv.javaguru.travel.insurance.validation.RiskPremium;
@@ -17,7 +18,6 @@ import java.util.stream.Collectors;
 public class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService {
 
     @Autowired private TravelCalculatePremiumRequestValidator requestValidator;
-
     @Autowired private TravelPremiumUnderwriting premiumUnderwriting;
 
     @Override
@@ -32,21 +32,16 @@ public class TravelCalculatePremiumServiceImpl implements TravelCalculatePremium
         return new TravelCalculatePremiumResponse(errors);
     }
 
-    private TravelCalculatePremiumResponse buildResponse(TravelCalculatePremiumRequest request, BigDecimal premium) {
+    private TravelCalculatePremiumResponse buildResponse(TravelCalculatePremiumRequest request,
+                                                         TravelPremiumCalculationResult premiumCalculationResult) {
         TravelCalculatePremiumResponse response = new TravelCalculatePremiumResponse();
         response.setPersonFirstName(request.getPersonFirstName());
         response.setPersonLastName(request.getPersonLastName());
         response.setAgreementDateFrom(request.getAgreementDateFrom());
         response.setAgreementDateTo(request.getAgreementDateTo());
-        response.setAgreementPremium(premium);
-        response.setRisks(buildRisks(request));
+        response.setAgreementPremium(premiumCalculationResult.getTotalPremium());
+        response.setRisks(premiumCalculationResult.getRiskPremiums());
         return response;
-    }
-
-    private List<RiskPremium> buildRisks(TravelCalculatePremiumRequest request) {
-        return request.getSelected_risks().stream()
-                .map(riskIc -> new RiskPremium(riskIc, BigDecimal.ZERO))
-                .collect(Collectors.toList());
     }
 
 }
