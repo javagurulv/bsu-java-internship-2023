@@ -4,6 +4,7 @@ import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumResponse;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -18,8 +19,9 @@ class TravelCalculatePremiumServiceImplTest {
         String lastName = "Bezmen";
         Date dateFrom = new Date(2002, Calendar.AUGUST, 11);
         Date dateTo = new Date(2002, Calendar.SEPTEMBER, 11);
+        BigDecimal agreementPrice = new BigDecimal("194901749817509");
         TravelCalculatePremiumRequest request =
-                new TravelCalculatePremiumRequest(firstName, lastName, dateFrom, dateTo);
+                new TravelCalculatePremiumRequest(firstName, lastName, dateFrom, dateTo, agreementPrice);
 
         TravelCalculatePremiumResponse resultOfWork = travelCalculatePremiumService.calculatePremium(request);
 
@@ -27,6 +29,7 @@ class TravelCalculatePremiumServiceImplTest {
         assertThat(resultOfWork.getAgreementDateTo()).isEqualTo(request.getAgreementDateTo());
         assertThat(resultOfWork.getPersonFirstName()).isEqualTo(request.getPersonFirstName());
         assertThat(resultOfWork.getPersonLastName()).isEqualTo(request.getPersonLastName());
+        assertThat(resultOfWork.getAgreementPrice()).isEqualTo(request.getAgreementPrice());
     }
 
 }
