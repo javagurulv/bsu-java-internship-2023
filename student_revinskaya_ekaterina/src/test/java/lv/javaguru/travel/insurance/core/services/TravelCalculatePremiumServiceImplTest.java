@@ -77,7 +77,7 @@ public class TravelCalculatePremiumServiceImplTest {
         when(calculateUnderwriting.calculateAgreementPrice(request)).thenReturn(BigDecimal.valueOf(10));
 
         TravelCalculatePremiumResponse response = service.calculatePremium(request);
-        assertEquals(response.getAgreementPrice(), BigDecimal.valueOf(10));
+        assertEquals(response.getAgreementPremium(), BigDecimal.valueOf(10));
     }
     private List<ValidationError> generateError() {
         List<ValidationError> errors = new ArrayList<>();
