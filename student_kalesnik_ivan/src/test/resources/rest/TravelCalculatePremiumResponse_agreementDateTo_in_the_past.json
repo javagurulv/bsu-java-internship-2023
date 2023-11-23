@@ -13,5 +13,6 @@
   "personLastName": null,
   "agreementDateFrom": null,
   "agreementDateTo": null,
-  "agreementPremium": null
+  "agreementPremium": null,
+  "risks": null
 }

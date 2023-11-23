@@ -2,6 +2,7 @@ package lv.javaguru.travel.insurance.core.services;
 
 import lv.javaguru.travel.insurance.core.underwriting.TravelPremiumUnderwriting;
 import lv.javaguru.travel.insurance.core.valids.TravelCalculatePremiumRequestValidator;
+import lv.javaguru.travel.insurance.validation.RiskPremium;
 import lv.javaguru.travel.insurance.validation.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.validation.TravelCalculatePremiumResponse;
 import lv.javaguru.travel.insurance.validation.ValidationError;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService {
@@ -37,7 +39,14 @@ public class TravelCalculatePremiumServiceImpl implements TravelCalculatePremium
         response.setAgreementDateFrom(request.getAgreementDateFrom());
         response.setAgreementDateTo(request.getAgreementDateTo());
         response.setAgreementPremium(premium);
+        response.setRisks(buildRisks(request));
         return response;
+    }
+
+    private List<RiskPremium> buildRisks(TravelCalculatePremiumRequest request) {
+        return request.getSelected_risks().stream()
+                .map(riskIc -> new RiskPremium(riskIc, BigDecimal.ZERO))
+                .collect(Collectors.toList());
     }
 
 }
