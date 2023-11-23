@@ -1,0 +1,21 @@
+Ваша задача: добавить в запрос (TravelCalculatePremiumRequest)
+секцию selected_risks и внести соответствующие изменения в Java код,
+чтобы секция selected_risks парсилась в Java класс запроса:
+
+{
+  "personFirstName" : "Vasja",
+  "personLastName" : "Pupkin",
+  "agreementDateFrom" : "2025-05-25",
+  "agreementDateTo" : "2025-05-29",
+  "selected_risks":["TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"]
+}
+
+selected_risks - это массив строк, каждая строка содержит IC код
+из классификатора RISK_TYPE.
+
+PS: никаких валидаций и проверок на данном этапе делать не надо.
+После внесения изменений запустите приложение, через Postman
+отправьте запрос с секцией selected_risks и убедитесь в дебаге,
+что в Java коде данные будут доступны для дальнейшей обработки.
+Так же можете проверить залогируется секция selected_risks и ее
+значения в лог файл или нет.

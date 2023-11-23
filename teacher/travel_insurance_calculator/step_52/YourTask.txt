@@ -1,0 +1,63 @@
+Продолжаем работу над заданием:
+Ментор предлагает воспользоваться классом ClassifierValueRepository
+и его методом findByClassifierTitleAndIc(...) для создания
+новой валидации. Новая валидация должна проверять значения selected_risks
+в запросе. Все значения указанные в selected_risks должны
+быть значениями ic (ClassifierValue.ic) классификатора RISK_TYPE
+из базы данных. Для каждого не верного значения в selected_risks
+валидация должна возвращать ошибку:
+Риск с ic = NOT_EXISTING_RISK не поддерживается системой.
+
+
+Ментор обратил ваше внимание на то, что при генерации ошибок
+может возникнуть проблема. Например, в selected_risks будут
+два значения и оба не валидные. В таком случае нужно сгенерировать
+две ошибки с описаниями:
+Риск с ic = NOT_EXISTING_RISK_1 не поддерживается системой.
+Риск с ic = NOT_EXISTING_RISK_2 не поддерживается системой.
+
+Как вы видите тексты обоих этих ошибок практически одинаковые,
+за исключением самого названия не существующего риска. Проблема
+заключается ещё и в том, что мы незнаем значения не существующих
+рисков заранее, и поэтому мы не можем внести их в файл
+errorCodes.properties.
+
+Ментор предлагает добавить функциональность placeholder в описание
+ошибок.
+
+Идея заключается в следующем (в файле errorCodes.properties
+в описании ошибок разрешить использовать символы {}, внутри
+них указывается название (placeholder), который будет заменён
+на значение указанное в программном коде):
+Риск с ic = {NOT_EXISTING_RISK} не поддерживается системой.
+
+Ментор предлагает создать класс:
+
+@Getter
+@AllArgsConstructor
+public class Placeholder {
+
+    private String placeholderName;
+
+    private String placeholderValue;
+
+}
+
+И добавить в класс ErrorCodeUtil новый метод:
+public String getErrorDescription(String errorCode, List<Placeholder> placeholders).
+
+Идея этого метода заключается в следующем:
+- в файле errorCodes.properties регистрируем error code с placeholder
+  в описании (placeholder может быть и много, но у каждого должно быть
+  своё уникальное название внутри одного описания ошибки);
+- при генерации ошибки в приложении Java код создаёт экземпляры класса
+  Placeholder и вызывает новый метод в классе ErrorCodeUtil;
+- ErrorCodeUtil по errorCode достаёт описание ошибки из файла
+  errorCodes.properties и заменяет все placeholder на предоставленные
+  значения в описании ошибки.
+
+Добавить в класс ValidationErrorFactory метод:
+
+ValidationError buildError(String errorCode, List<Placeholder> placeholders).
+
+Ваша задача: реализовать предложение ментора.

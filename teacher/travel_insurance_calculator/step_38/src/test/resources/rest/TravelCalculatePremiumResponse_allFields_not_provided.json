@@ -1,0 +1,28 @@
+{"errors":[
+  {
+    "field":"agreementDateFrom",
+    "message":"Must not be empty!"
+  },
+  {
+    "field":"agreementDateTo",
+    "message":"Must not be empty!"
+  },
+  {
+    "field":"selectedRisks",
+    "message":"Must not be empty!"
+  },
+  {
+    "field":"personFirstName",
+    "message":"Must not be empty!"
+  },
+  {
+    "field":"personLastName",
+    "message":"Must not be empty!"
+  }
+],
+  "personFirstName": null,
+  "personLastName": null,
+  "agreementDateFrom": null,
+  "agreementDateTo": null,
+  "agreementPrice": null
+}

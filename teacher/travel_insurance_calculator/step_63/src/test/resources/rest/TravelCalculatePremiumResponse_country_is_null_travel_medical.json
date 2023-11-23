@@ -1,0 +1,15 @@
+{
+  "errors": [
+    {
+      "errorCode": "ERROR_CODE_10",
+      "description": "Field country must not be empty!"
+    }
+  ],
+  "personFirstName": null,
+  "personLastName": null,
+  "agreementDateFrom": null,
+  "agreementDateTo": null,
+  "country": null,
+  "agreementPremium": null,
+  "risks": null
+}
