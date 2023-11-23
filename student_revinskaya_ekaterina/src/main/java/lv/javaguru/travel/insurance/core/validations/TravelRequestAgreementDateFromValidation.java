@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 @Component
-class TravelRequestAgreementDateFromValidation implements TravelRequestValidation {
+class TravelRequestAgreementDateFromValidation extends TravelRequestValidationImpl {
     @Autowired
     private ValidationErrorFactory validationErrorFactory;
     @Override

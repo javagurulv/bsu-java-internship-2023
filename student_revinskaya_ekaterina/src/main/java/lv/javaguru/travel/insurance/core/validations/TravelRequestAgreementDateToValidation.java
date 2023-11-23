@@ -9,7 +9,7 @@ import java.util.Optional;
 
 
 @Component
-class TravelRequestAgreementDateToValidation implements TravelRequestValidation {
+class TravelRequestAgreementDateToValidation extends TravelRequestValidationImpl {
     @Autowired
     private ValidationErrorFactory validationErrorFactory;
     @Override
