@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @NoArgsConstructor
+@Component
 public class TravelCalculatePremiumRequestValidator {
 
     public List<ValidationError> validate(TravelCalculatePremiumRequest request) {

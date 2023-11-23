@@ -1,6 +1,6 @@
 package lv.javaguru.travel.insurance.core.valids;
 
-import lv.javaguru.travel.insurance.core.DateTimeService;
+import lv.javaguru.travel.insurance.core.util.DateTimeUtil;
 import lv.javaguru.travel.insurance.validation.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.validation.ValidationError;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,23 +10,17 @@ import java.util.Date;
 import java.util.Optional;
 
 @Component
-public
-class AgreementDateFromInFutureValidation implements TravelRequestValidation {
+class AgreementDateFromInFutureValidation extends TravelRequestValidationImpl {
 
-    @Autowired
-    private DateTimeService dateTimeService;
-
-    @Autowired
-    public AgreementDateFromInFutureValidation(DateTimeService dateTimeService) {
-        this.dateTimeService = dateTimeService;
-    }
+    @Autowired private DateTimeUtil dateTimeUtil;
+    @Autowired private ValidationErrorFactory errorFactory;
 
     @Override
-    public Optional<ValidationError> execute(TravelCalculatePremiumRequest request) {
+    public Optional<ValidationError> validate(TravelCalculatePremiumRequest request) {
         Date dateFrom = request.getAgreementDateFrom();
-        Date currentDateTime = dateTimeService.getCurrentDateTime();
+        Date currentDateTime = dateTimeUtil.getCurrentDateTime();
         return (dateFrom != null && dateFrom.before(currentDateTime))
-                ? Optional.of(new ValidationError("agreementDateFrom", "Must be in the future!"))
+                ? Optional.of(errorFactory.buildError("ERROR_CODE_1"))
                 : Optional.empty();
     }
 

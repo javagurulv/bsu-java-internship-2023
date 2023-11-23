@@ -73,6 +73,10 @@ public class TravelCalculatePremiumControllerTest {
     public void testRequestWithDateToInPast() throws Exception {
         equalsJsonFiles("ControllerRequestWithDateToInPast.json", "ControllerResponseWithDateToInPast.json");
     }
+    @Test
+    public void testRequestWithSelectedRisks() throws Exception {
+        equalsJsonFiles("ControllerRequestWithoutSelectedRisks.json", "ControllerResponseWithoutSelectedRisks.json");
+    }
 
     public void equalsJsonFiles(String requestFile, String responseFile) throws Exception {
         ObjectMapper mapper = new ObjectMapper();
