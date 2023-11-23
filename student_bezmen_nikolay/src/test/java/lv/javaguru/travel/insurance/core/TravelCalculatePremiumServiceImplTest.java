@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -19,9 +20,14 @@ class TravelCalculatePremiumServiceImplTest {
         String lastName = "Bezmen";
         Date dateFrom = new Date(2002, Calendar.AUGUST, 11);
         Date dateTo = new Date(2002, Calendar.SEPTEMBER, 11);
-        BigDecimal agreementPrice = new BigDecimal("194901749817509");
+        BigDecimal correctAgreementPrice = new BigDecimal(
+                TimeUnit.DAYS.convert(
+                        dateTo.getTime() -
+                                dateFrom.getTime(), TimeUnit.MILLISECONDS)
+        );
+
         TravelCalculatePremiumRequest request =
-                new TravelCalculatePremiumRequest(firstName, lastName, dateFrom, dateTo, agreementPrice);
+                new TravelCalculatePremiumRequest(firstName, lastName, dateFrom, dateTo);
 
         TravelCalculatePremiumResponse resultOfWork = travelCalculatePremiumService.calculatePremium(request);
 
@@ -29,7 +35,7 @@ class TravelCalculatePremiumServiceImplTest {
         assertThat(resultOfWork.getAgreementDateTo()).isEqualTo(request.getAgreementDateTo());
         assertThat(resultOfWork.getPersonFirstName()).isEqualTo(request.getPersonFirstName());
         assertThat(resultOfWork.getPersonLastName()).isEqualTo(request.getPersonLastName());
-        assertThat(resultOfWork.getAgreementPrice()).isEqualTo(request.getAgreementPrice());
+        assertThat(resultOfWork.getAgreementPrice()).isEqualTo(correctAgreementPrice);
     }
 
 }
