@@ -18,7 +18,7 @@ class TravelRequestAgreementDateFromOfFutureValidation extends TravelRequestVali
     public Optional<ValidationError> validate(TravelCalculatePremiumRequest request) {
         Date dateFrom = request.getAgreementDateFrom();
         return (dateFrom != null && (dateTimeUtil.getCurrentDateTime().after(dateFrom)))
-                ? Optional.of( validationErrorFactory.constructError("ERROR_CODE_5"))
+                ? Optional.of( validationErrorFactory.buildError("ERROR_CODE_5"))
                 : Optional.empty();
     }
 }

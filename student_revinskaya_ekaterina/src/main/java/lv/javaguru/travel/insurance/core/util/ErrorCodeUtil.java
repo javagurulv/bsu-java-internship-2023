@@ -6,6 +6,8 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @Configuration
 @PropertySource("classpath:errorCodes.properties")
@@ -18,5 +20,13 @@ public class ErrorCodeUtil {
 
         return environment.getProperty(errorCode);
     }
+    public String getErrorDescription(String errorCode, List<Placeholder> placeholders){
+        String errorDescription = environment.getProperty(errorCode);
+        for (Placeholder placeholder: placeholders){
+            errorDescription = errorDescription.replace("{"+placeholder.getPlaceholderName()+"}", placeholder.getPlaceholderValue());
+        }
+        return errorDescription;
+    }
+
 
 }
