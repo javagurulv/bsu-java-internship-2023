@@ -1,9 +1,14 @@
 package lv.javaguru.travel.insurance.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lv.javaguru.travel.insurance.core.TravelCalculatePremiumRequestValidator;
 import net.minidev.json.parser.JSONParser;
+import org.apache.coyote.Request;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.Spy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,9 +22,11 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -34,6 +41,14 @@ public class TravelCalculatePremiumControllerTest {
     private MockMvc mockMvc;
 
     private final ObjectMapper mapper = new ObjectMapper();
+
+    @Spy
+    private TravelCalculatePremiumRequestValidator validator;
+
+    /*@BeforeEach
+    public void initMocks() {
+        when(validator)
+    }*/
 
     @Test
     public void simpleRestControllerTestExample() throws Exception {
