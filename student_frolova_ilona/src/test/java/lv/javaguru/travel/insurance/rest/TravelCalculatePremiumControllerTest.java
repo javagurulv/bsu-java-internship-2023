@@ -1,5 +1,7 @@
 package lv.javaguru.travel.insurance.rest;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import net.minidev.json.parser.JSONParser;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -28,6 +31,8 @@ public class TravelCalculatePremiumControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
+
+    private final ObjectMapper mapper = new ObjectMapper();
 
     @Test
     public void simpleRestControllerTestExample() throws Exception {
@@ -68,48 +73,28 @@ public class TravelCalculatePremiumControllerTest {
     }
 
     @Test
-    public void JsonReaderTest() throws IOException {
-
-        String fileName = "temp.json";
-        File file = new File(fileName);
-
-        if (!file.exists()) {
-            file.createNewFile();
-        }
-
-        String initial = "smth\nsmth2";
-
-        BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
-        writer.write(initial);
-        writer.close();
-
-        String result = JsonReader.read("temp.json");
-
-        file.delete();
-
-        assertEquals(initial, result);
+    public void jsonFilesTest() throws Exception {
+        compareResponseToRequestInJsonFiles(
+                "rest/TravelCalculatePremiumRequest_correct.json",
+                "rest/TravelCalculatePremiumResponse_correct.json"
+        );
     }
 
-    @Test
-    public void correctResponseToRequestInJsonFiles() throws IOException {
+    public void compareResponseToRequestInJsonFiles(
+            String fileNameRequest, String fileNameResponse
+    ) throws Exception {
+        String jsonRequest = JsonReader.read(fileNameRequest);
 
-        File requestFile = new File("request.json");
-        File responseFile = new File("res.json");
+        MvcResult result = mockMvc.perform(post("/insurance/travel/")
+                        .content(jsonRequest)
+                        .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isOk())
+                .andReturn();
 
-        /*if (!file.exists()) {
-            file.createNewFile();
-        }
+        String responseBodyContent = result.getResponse().getContentAsString();
 
-        String initial = "smth\nsmth2";
+        String jsonResponse = JsonReader.read(fileNameResponse);
 
-        BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
-        writer.write(initial);
-        writer.close();
-
-        String result = JsonReader.read("temp.json");
-
-        file.delete();
-
-        assertEquals(initial, result);*/
+        assertEquals(mapper.readTree(responseBodyContent), mapper.readTree(jsonResponse));
     }
 }

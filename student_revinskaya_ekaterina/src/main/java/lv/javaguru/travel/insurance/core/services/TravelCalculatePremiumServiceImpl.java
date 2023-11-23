@@ -13,7 +13,7 @@ import java.util.List;
 @Component
 class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService {
     @Autowired
-    private PublicTravelCalculatePremiumRequestValidator requestValidator;
+    private TravelCalculatePremiumRequestValidator requestValidator;
 @Autowired
     private TravelPremiumUnderwriting calculateUnderwriting;
     @Override
