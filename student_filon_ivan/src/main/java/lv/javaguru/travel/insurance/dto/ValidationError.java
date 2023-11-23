@@ -16,6 +16,7 @@ public class ValidationError {
 
     @Override
     public boolean equals(Object o) {
-        return this.getField().equals(((ValidationError)o).getField()) && this.getMessage().equals(((ValidationError)o).getMessage());
+        return this.getField().equals(((ValidationError)o).getField())
+                && this.getMessage().equals(((ValidationError)o).getMessage());
     }
 }
