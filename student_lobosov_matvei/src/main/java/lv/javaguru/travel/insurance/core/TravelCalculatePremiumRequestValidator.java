@@ -18,6 +18,7 @@ class TravelCalculatePremiumRequestValidator {
         validatePersonLastName(request).ifPresent(errors::add);
         validateAgreementDateFrom(request).ifPresent(errors::add);
         validateAgreementDateTo(request).ifPresent(errors::add);
+        validateAgreementDateToBiggerThanAgreementDateFrom(request).ifPresent(errors::add);
         return errors;
     }
 
