@@ -65,7 +65,7 @@ public class TravelCalculatePremiumRequestValidatorTest {
     void dateFromEmpty() {
         List<ValidationError> errors = validator.validate(
                 new TravelCalculatePremiumRequest(
-                        "firstN", "", date, null)
+                        "firstN", "lastN", null, date)
         );
         assertTrue(!errors.isEmpty());
     }
