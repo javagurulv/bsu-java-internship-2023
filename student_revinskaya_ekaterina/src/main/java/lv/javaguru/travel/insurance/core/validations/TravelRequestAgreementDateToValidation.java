@@ -9,13 +9,13 @@ import java.util.Optional;
 
 
 @Component
-class TravelRequestAgreementDateToValidation implements TravelRequestValidation {
+class TravelRequestAgreementDateToValidation extends TravelRequestValidationImpl {
     @Autowired
     private ValidationErrorFactory validationErrorFactory;
     @Override
     public Optional<ValidationError> validate(TravelCalculatePremiumRequest request) {
         return (request.getAgreementDateTo() == null)
-                ? Optional.of(validationErrorFactory.constructError("ERROR_CODE_4"))
+                ? Optional.of(validationErrorFactory.buildError("ERROR_CODE_4"))
                 : Optional.empty();
     }
 

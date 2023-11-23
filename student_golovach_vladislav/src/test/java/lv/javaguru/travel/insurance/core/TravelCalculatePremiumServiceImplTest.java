@@ -100,8 +100,8 @@ public class TravelCalculatePremiumServiceImplTest {
     @Test
     public void shouldReturnResponseWithCorrectAgreementPrice() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
-        when(request.getAgreementDateFrom()).thenReturn(createDate("01.01.2023"));
-        when(request.getAgreementDateTo()).thenReturn(createDate("10.01.2023"));
+        when(request.getAgreementDateFrom()).thenReturn(createDate("01.01.2024"));
+        when(request.getAgreementDateTo()).thenReturn(createDate("10.01.2024"));
         when(requestValidator.validate(request)).thenReturn(List.of());
         when(premiumUnderwriting.calculatePremium(request)).thenReturn(new BigDecimal(9));
         TravelCalculatePremiumResponse response = service.calculatePremium(request);

@@ -19,7 +19,6 @@ import static uk.org.webcompere.modelassert.json.JsonAssertions.assertJson;
 @SpringBootTest
 @AutoConfigureMockMvc
 public class TravelCalculatePremiumControllerTest {
-
     @Autowired private MockMvc mockMvc;
 
     @Autowired private JsonFileReader jsonFileReader;
@@ -121,6 +120,14 @@ public class TravelCalculatePremiumControllerTest {
     }
 
     @Test
+    public void selectedRisksNotSupported() throws Exception {
+        executeAndCompare(
+                "rest/TravelCalculatePremiumRequest_selectedRisks_not_supported.json",
+                "rest/TravelCalculatePremiumResponse_selectedRisks_not_supported.json"
+        );
+    }
+
+    @Test
     public void allFieldsNotProvided() throws Exception {
         executeAndCompare(
                 "rest/TravelCalculatePremiumRequest_allFields_not_provided.json",
@@ -148,5 +155,4 @@ public class TravelCalculatePremiumControllerTest {
                 .arrayInAnyOrder()
                 .isEqualTo(jsonResponse);
     }
-
 }
