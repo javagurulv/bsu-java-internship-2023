@@ -1,9 +1,11 @@
 package lv.javaguru.travel.insurance.core;
 
+import lv.javaguru.travel.insurance.core.underwriting.SelectedRiskPremiumCalculator;
 import lv.javaguru.travel.insurance.core.underwriting.TravelPremiumCalculationResult;
 import lv.javaguru.travel.insurance.core.underwriting.TravelPremiumUnderwritingImpl;
 import lv.javaguru.travel.insurance.core.underwriting.TravelRiskPremiumCalculator;
 import lv.javaguru.travel.insurance.core.util.DateTimeUtil;
+import lv.javaguru.travel.insurance.validation.RiskPremium;
 import lv.javaguru.travel.insurance.validation.TravelCalculatePremiumRequest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -26,42 +28,25 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class TravelPremiumUnderwritingTest {
+    @Mock private SelectedRiskPremiumCalculator selectedRiskPremiumCalculator;
+
     @InjectMocks
     private TravelPremiumUnderwritingImpl premiumUnderwriting;
 
-    private TravelRiskPremiumCalculator riskPremiumCalculator1;
-    private TravelRiskPremiumCalculator riskPremiumCalculator2;
-
-    @BeforeEach
-    public void init() {
-        riskPremiumCalculator1 = mock(TravelRiskPremiumCalculator.class);
-        riskPremiumCalculator2 = mock(TravelRiskPremiumCalculator.class);
-        var riskPremiumCalculators = List.of(riskPremiumCalculator1, riskPremiumCalculator2);
-        ReflectionTestUtils.setField(premiumUnderwriting, "riskPremiumCalculators", riskPremiumCalculators);
-    }
+    /**/
 
     @Test
-    void shouldCalculatePremiumForOneRisk() {
-        when(riskPremiumCalculator1.getRiskIc()).thenReturn("TRAVEL_MEDICAL");
-        when(riskPremiumCalculator1.calculatePremium(any())).thenReturn(BigDecimal.ONE);
+
+    void shouldCalculateTotalPremiumAsSumOfRiskPremiums() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
-        when(request.getSelected_risks()).thenReturn(List.of("TRAVEL_MEDICAL"));
-        TravelPremiumCalculationResult premiumCalculationResult = premiumUnderwriting.calculatePremium(request);
-        assertEquals(premiumCalculationResult.getTotalPremium(), BigDecimal.ONE);
-    }
-
-    @Test
-    void shouldCalculatePremiumForTwoRisks() {
-        when(riskPremiumCalculator1.getRiskIc()).thenReturn("TRAVEL_MEDICAL");
-        when(riskPremiumCalculator2.getRiskIc()).thenReturn("TRAVEL_EVACUATION");
-
-        when(riskPremiumCalculator1.calculatePremium(any())).thenReturn(BigDecimal.ONE);
-        when(riskPremiumCalculator2.calculatePremium(any())).thenReturn(BigDecimal.ONE);
-
-        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
-        when(request.getSelected_risks()).thenReturn(List.of("TRAVEL_MEDICAL", "TRAVEL_EVACUATION"));
+        List<RiskPremium> riskPremiums = List.of(
+                new RiskPremium("TRAVEL_MEDICAL", BigDecimal.ONE),
+                new RiskPremium("TRAVEL_EVACUATION", BigDecimal.ONE)
+        );
+        when(selectedRiskPremiumCalculator.calculatePremiumForAllRisks(request)).thenReturn(riskPremiums);
         TravelPremiumCalculationResult premiumCalculationResult = premiumUnderwriting.calculatePremium(request);
         assertEquals(premiumCalculationResult.getTotalPremium(), new BigDecimal(2));
     }
+
 
 }
