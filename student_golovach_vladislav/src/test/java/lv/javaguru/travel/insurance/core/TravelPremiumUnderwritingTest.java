@@ -1,6 +1,6 @@
 package lv.javaguru.travel.insurance.core;
 
-import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -25,7 +25,7 @@ public class TravelPremiumUnderwritingTest {
     private TravelPremiumUnderwriting premiumUnderwriting;
 
     @Test
-    public void shouldReturnResponseWithCorrectAgreementPrice() {
+    void shouldReturnResponseWithCorrectAgreementPrice() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getAgreementDateFrom()).thenReturn(createDate("01.01.2024"));
         when(request.getAgreementDateTo()).thenReturn(createDate("10.01.2024"));
