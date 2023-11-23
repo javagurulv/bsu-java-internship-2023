@@ -23,6 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static uk.org.webcompere.modelassert.json.JsonAssertions.assertJson;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -78,6 +79,36 @@ public class TravelCalculatePremiumControllerTest {
                 "rest/TravelCalculatePremiumRequest_correct.json",
                 "rest/TravelCalculatePremiumResponse_correct.json"
         );
+
+        compareResponseToRequestInJsonFiles(
+                "rest/TravelCalculatePremiumRequest_allWrong.json",
+                "rest/TravelCalculatePremiumResponse_allWrong.json"
+        );
+
+        compareResponseToRequestInJsonFiles(
+                "rest/TravelCalculatePremiumRequest_dateFromEmpty.json",
+                "rest/TravelCalculatePremiumResponse_dateFromEmpty.json"
+        );
+
+        compareResponseToRequestInJsonFiles(
+                "rest/TravelCalculatePremiumRequest_dateToEmpty.json",
+                "rest/TravelCalculatePremiumResponse_dateToEmpty.json"
+        );
+
+        compareResponseToRequestInJsonFiles(
+                "rest/TravelCalculatePremiumRequest_firstNameEmpty.json",
+                "rest/TravelCalculatePremiumResponse_firstNameEmpty.json"
+        );
+
+        compareResponseToRequestInJsonFiles(
+                "rest/TravelCalculatePremiumRequest_lastNameEmpty.json",
+                "rest/TravelCalculatePremiumResponse_lastNameEmpty.json"
+        );
+
+        compareResponseToRequestInJsonFiles(
+                "rest/TravelCalculatePremiumRequest_dateSeq.json",
+                "rest/TravelCalculatePremiumResponse_dateSeq.json"
+        );
     }
 
     public void compareResponseToRequestInJsonFiles(
@@ -95,6 +126,10 @@ public class TravelCalculatePremiumControllerTest {
 
         String jsonResponse = JsonReader.read(fileNameResponse);
 
-        assertEquals(mapper.readTree(responseBodyContent), mapper.readTree(jsonResponse));
+        assertJson(responseBodyContent)
+                .where()
+                .keysInAnyOrder()
+                .arrayInAnyOrder()
+                .isEqualTo(jsonResponse);
     }
 }
