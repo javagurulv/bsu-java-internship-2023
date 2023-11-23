@@ -16,7 +16,7 @@ public class ErrorCodeUtil {
     @Autowired
     private Environment environment;
 
-    public String getDescription(String errorCode) {
+    public String getErrorDescription(String errorCode) {
 
         return environment.getProperty(errorCode);
     }

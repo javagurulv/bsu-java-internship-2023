@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.core.services;
+package lv.javaguru.travel.insurance.core.util;
 
 import lv.javaguru.travel.insurance.core.util.DateTimeUtil;
 import org.junit.jupiter.api.Test;
@@ -12,7 +12,7 @@ import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class DateTimeServiceTest {
+public class DateTimeUtilTest {
     private DateTimeUtil calculatorDate = new DateTimeUtil();
 @Test
     public void calculateWithRightDatesTest(){
