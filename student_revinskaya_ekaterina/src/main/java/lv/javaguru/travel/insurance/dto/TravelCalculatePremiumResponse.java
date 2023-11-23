@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lv.javaguru.travel.insurance.core.underwriting.TravelRiskPremiumCalculator;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -24,6 +25,7 @@ public class TravelCalculatePremiumResponse  extends CoreResponse{
     private Date agreementDateTo;
 
     private BigDecimal agreementPremium;
+    private List<TravelRisk> risks;
 
 
     public TravelCalculatePremiumResponse(List<ValidationError> errors) {
