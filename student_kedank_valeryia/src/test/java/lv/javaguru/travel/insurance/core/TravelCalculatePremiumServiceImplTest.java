@@ -25,6 +25,7 @@ class TravelCalculatePremiumServiceImplTest {
 
         TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest();
         request.setPersonLastName("");
+        request.setPersonFirstName("Valeryia");
 
         TravelCalculatePremiumRequestValidator requestValidator = new TravelCalculatePremiumRequestValidator();
         List<ValidationError> error = requestValidator.validate(request);
@@ -37,6 +38,7 @@ class TravelCalculatePremiumServiceImplTest {
     public void ValidatorIsNull() {
 
         TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest();
+        request.setPersonFirstName("Valeryia");
 
         TravelCalculatePremiumRequestValidator requestValidator = new TravelCalculatePremiumRequestValidator();
         List<ValidationError> error = requestValidator.validate(request);
