@@ -5,6 +5,6 @@ import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
-public interface TravelRequestValidation {
+interface TravelRequestValidation {
     Optional<ValidationError> validate(TravelCalculatePremiumRequest request);
 }
