@@ -28,11 +28,18 @@ public class TravelCalculatePremiumRequestValidator {
                 : Optional.empty();
     }
 
+    private Optional<ValidationError> validateAgreementDateTo(TravelCalculatePremiumRequest request) {
+        return request.getAgreementDateTo() == null
+                ? Optional.of(new ValidationError("agreementDateTo", "Must not be empty!"))
+                : Optional.empty();
+    }
+
     public List<ValidationError> validate(TravelCalculatePremiumRequest request) {
         List<ValidationError> errors = new ArrayList<>();
         validatePersonFirstName(request).ifPresent(errors::add);
         validatePersonLastName(request).ifPresent(errors::add);
         validateAgreementDateFrom(request).ifPresent(errors::add);
+        validateAgreementDateTo(request).ifPresent(errors::add);
         return errors;
     }
 }
