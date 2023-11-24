@@ -13,19 +13,19 @@ class DateDifferenceServiceTest {
     DateDifferenceService dateDifferenceService = new DateDifferenceService();
 
     @Test
-    public void calculateDateDifferenceTestPositive(){
+    void calculateDateDifferenceTestPositive(){
         Date dateTo = createDate("12.11.2023");
         Date dateFrom = createDate("01.11.2023");
         assertEquals(new BigDecimal(11), dateDifferenceService.calculateDateDifference(dateFrom, dateTo));
     }
     @Test
-    public void calculateDateDifferenceTestNegative(){
+    void calculateDateDifferenceTestNegative(){
         Date dateTo = createDate("01.11.2023");
         Date dateFrom = createDate("12.11.2023");
         assertEquals(new BigDecimal(-11), dateDifferenceService.calculateDateDifference(dateFrom, dateTo));
     }
     @Test
-    public void calculateDateDifferenceTestEqual(){
+    void calculateDateDifferenceTestEqual(){
         Date dateTo = createDate("12.11.2023");
         Date dateFrom = createDate("12.11.2023");
         assertEquals(new BigDecimal(0), dateDifferenceService.calculateDateDifference(dateFrom, dateTo));

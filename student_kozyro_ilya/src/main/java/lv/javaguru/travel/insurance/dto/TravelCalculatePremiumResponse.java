@@ -7,6 +7,7 @@ import lv.javaguru.travel.insurance.format.AppDatePattern;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -27,7 +28,7 @@ public class TravelCalculatePremiumResponse extends CoreResponse {
 
     private BigDecimal agreementPrice;
 
-    public TravelCalculatePremiumResponse(ArrayList<ValidationError> errors) {
+    public TravelCalculatePremiumResponse(List<ValidationError> errors) {
         super(errors);
     }
 }
