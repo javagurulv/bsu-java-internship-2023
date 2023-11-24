@@ -13,7 +13,7 @@ public class DateTimeServiceTest {
     private DateTimeService dateTimeService = new DateTimeService();
 
     @Test
-    void shouldDaysBetweenBeZero() {
+    public void daysBetweenShouldBeZero() {
         Date date1 = createDate("01.01.2023");
         Date date2 = createDate("01.01.2023");
         var daysBetween = dateTimeService.getDaysBetween(date1, date2);
@@ -21,7 +21,7 @@ public class DateTimeServiceTest {
     }
 
     @Test
-    void shouldDaysBetweenBePositive() {
+    public void daysBetweenShouldBePositive() {
         Date date1 = createDate("01.01.2023");
         Date date2 = createDate("10.01.2023");
         var daysBetween = dateTimeService.getDaysBetween(date1, date2);
@@ -29,7 +29,7 @@ public class DateTimeServiceTest {
     }
 
     @Test
-    void shouldDaysBetweenBeNegative() {
+    public void daysBetweenShouldBeNegative() {
         Date date1 = createDate("10.01.2023");
         Date date2 = createDate("01.01.2023");
         var daysBetween = dateTimeService.getDaysBetween(date1, date2);
