@@ -1,4 +1,5 @@
-package lv.javaguru.travel.insurance.core;
+package lv.javaguru.travel.insurance.core.underwriting;
+
 
 import lv.javaguru.travel.insurance.core.util.DateTimeUtil;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
@@ -18,11 +19,11 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class TravelPremiumUnderwritingTest {
+public class TravelPremiumUnderwritingImplTest {
     @Mock
     private DateTimeUtil dateTimeService;
     @InjectMocks
-    private TravelPremiumUnderwriting premiumUnderwriting;
+    private TravelPremiumUnderwritingImpl premiumUnderwriting;
 
     @Test
     public void shouldReturnResponseWithCorrectAgreementPrice() {
