@@ -1,5 +1,8 @@
-package lv.javaguru.travel.insurance.core;
+package lv.javaguru.travel.insurance.rest;
 
+import lv.javaguru.travel.insurance.core.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.core.TravelCalculatePremiumResponse;
+import lv.javaguru.travel.insurance.core.TravelCalculatePremiumService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
