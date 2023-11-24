@@ -20,7 +20,7 @@ import static org.mockito.Mockito.when;
 
 public class TravelRequestSelectedRisksValidationTest {
     @InjectMocks
-    TravelRequestSelectedRisksValidation selectedRisksValidation;
+    private TravelRequestSelectedRisksValidation selectedRisksValidation;
     @Mock
     private ValidationErrorFactory validationErrorFactory;
     @Test
