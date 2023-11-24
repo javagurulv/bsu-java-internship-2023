@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 @Component
 class TravelPremiumUnderwritingImpl implements TravelPremiumUnderwriting {
     @Autowired
-    List<TravelRiskPremiumCalculator> riskPremiumCalculators;
+    private List<TravelRiskPremiumCalculator> riskPremiumCalculators;
     @Override
     public TravelPremiumCalculatorResult calculatePremium(TravelCalculatePremiumRequest request){
         List<TravelRisk> travelRisks= riskPremiumCalculators.stream()

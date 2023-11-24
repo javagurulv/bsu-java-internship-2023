@@ -33,10 +33,9 @@ public class TravelPremiumUnderwritingImplTest {
         when(request.getSelected_risks()).thenReturn(List.of("TRAVEL_MEDICAL"));
         when(medicalRiskPremiumCalculator.calculatePremium(request)).thenReturn(BigDecimal.valueOf(4));
         when(medicalRiskPremiumCalculator.getRiskIc()).thenReturn("TRAVEL_MEDICAL");
-       // var riskPremiumCalculators = List.of(medicalRiskPremiumCalculator);
-       // ReflectionTestUtils.setField(travelPremiumUnderwriting, "riskPremiumCalculators", riskPremiumCalculators);
-        travelPremiumUnderwriting.riskPremiumCalculators=List.of(medicalRiskPremiumCalculator);
-        //assertEquals(calculateUnderwriting.calculatePremium(request).getTotalPremium(), BigDecimal.valueOf(4));
+        List<TravelRiskPremiumCalculator> calculators = List.of(medicalRiskPremiumCalculator);
+        ReflectionTestUtils.setField(travelPremiumUnderwriting, "riskPremiumCalculators", calculators);
+        assertEquals(travelPremiumUnderwriting.calculatePremium(request).getTotalPremium(), BigDecimal.valueOf(4));
         assertEquals(travelPremiumUnderwriting.calculatePremium(request).getTravelRisks().size(), 1);
 
     }
