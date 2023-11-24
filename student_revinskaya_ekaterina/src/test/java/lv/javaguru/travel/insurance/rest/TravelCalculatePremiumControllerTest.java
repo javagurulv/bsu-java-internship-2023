@@ -77,6 +77,14 @@ public class TravelCalculatePremiumControllerTest {
     public void testRequestWithSelectedRisks() throws Exception {
         equalsJsonFiles("ControllerRequestWithoutSelectedRisks.json", "ControllerResponseWithoutSelectedRisks.json");
     }
+    @Test
+    public void testRequestWithoutCountry() throws Exception {
+        equalsJsonFiles("ControllerRequestWithoutCountry.json", "ControllerResponseWithoutCountry.json");
+    }
+    @Test
+    public void testRequestWithNotExistCountry() throws Exception {
+        equalsJsonFiles("ControllerRequestWithNotExistCountry.json", "ControllerResponseWithNotExistCountry.json");
+    }
 
     public void equalsJsonFiles(String requestFile, String responseFile) throws Exception {
         ObjectMapper mapper = new ObjectMapper();
