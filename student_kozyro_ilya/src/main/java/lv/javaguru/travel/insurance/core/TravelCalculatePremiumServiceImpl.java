@@ -1,25 +1,45 @@
 package lv.javaguru.travel.insurance.core;
 
-import lombok.AllArgsConstructor;
-import lv.javaguru.travel.insurance.core.request.processor.TravelCalculatePremiumRequestProcessor;
 import lv.javaguru.travel.insurance.core.services.DateServiceImpl;
-import lv.javaguru.travel.insurance.core.validator.TravelCalculatePremiumRequestValidator;
+import lv.javaguru.travel.insurance.core.underwriting.TravelPremiumUnderwriting;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumResponse;
 import lv.javaguru.travel.insurance.dto.ValidationError;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import java.math.BigDecimal;
+import java.util.List;
 
 @Service
-@AllArgsConstructor
-class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService {
+public class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService {
 
-    DateServiceImpl dateService;
+    @Autowired
     TravelCalculatePremiumRequestValidator validator;
+
+    @Autowired
+    TravelPremiumUnderwriting travelPremiumUnderwriting;
     @Override
     public TravelCalculatePremiumResponse calculatePremium(TravelCalculatePremiumRequest request) {
-        return new TravelCalculatePremiumRequestProcessor(dateService, validator).buildResponse(request);
+        var errors = validator.validate(request);
+
+        return errors.isEmpty() ?
+                buildResponse(request, travelPremiumUnderwriting.calculatePremium(request)) :
+                buildResponse(errors);
+    }
+
+    private TravelCalculatePremiumResponse buildResponse(List<ValidationError> errors) {
+        return new TravelCalculatePremiumResponse(errors);
+    }
+
+    private TravelCalculatePremiumResponse buildResponse(TravelCalculatePremiumRequest request, BigDecimal agreementPrice) {
+        return TravelCalculatePremiumResponse.builder()
+                .personFirstName(request.getPersonFirstName())
+                .personLastName(request.getPersonLastName())
+                .agreementDateTo(request.getAgreementDateTo())
+                .agreementDateFrom(request.getAgreementDateFrom())
+                .agreementPrice(agreementPrice)
+                .build();
     }
 
 }

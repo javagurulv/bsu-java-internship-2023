@@ -1,17 +1,13 @@
-package lv.javaguru.travel.insurance.core.file.manager;
+package lv.javaguru.travel.insurance.core;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.stereotype.Component;
 import org.springframework.util.ResourceUtils;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 
+@Component
 public class TestFileManager {
 
     public String openFile(String filePath) throws IOException {
