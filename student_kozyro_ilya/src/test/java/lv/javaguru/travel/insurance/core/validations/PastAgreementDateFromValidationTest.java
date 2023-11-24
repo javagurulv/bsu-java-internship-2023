@@ -1,7 +1,7 @@
-package lv.javaguru.travel.insurance.core.validator.validation;
+package lv.javaguru.travel.insurance.core.validations;
 
+import lv.javaguru.travel.insurance.core.services.DateService;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
-import lv.javaguru.travel.insurance.validation.travel.DateCorrectOrderValidation;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -13,53 +13,61 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class DateCorrectOrderTest {
+public class PastAgreementDateFromValidationTest {
 
+    @Mock
+    DateService dateService;
 
     @InjectMocks
-    DateCorrectOrderValidation validation;
+    PastAgreementDateFromValidation validation;
+
 
     @Test
-    void testBadOrder() {
+    void inPastDate() throws ParseException {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
 
-        var date1Str = "21.10.2000";
-        var date1 = createDate(date1Str);
+        var todayDateStr = "15.10.2000";
+        var todayDate = createDate(todayDateStr);
 
-        var date2Str = "10.10.2000";
-        var date2 = createDate(date2Str);
+        var dateStr = "10.10.2000";
+        var date = createDate(dateStr);
 
-        when(request.getAgreementDateFrom()).thenReturn(date1);
-        when(request.getAgreementDateTo()).thenReturn(date2);
+        when(dateService.getTodayDate()).thenReturn(createDate(todayDateStr));
+
+        when(request.getAgreementDateFrom()).thenReturn(date);
 
         var error = validation.execute(request);
 
         assertFalse(error.isEmpty());
-        assertEquals("agreementDayFrom", error.get().getField());
-        assertEquals("Must be before agreementDayTo", error.get().getError());
+        assertEquals("agreementDateFrom", error.get().getField());
+        assertEquals("Should be in a future, not in a past!", error.get().getError());
     }
 
     @Test
-    void testGoodOrder() {
+    void okDate() throws ParseException {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
 
-        var date1Str = "10.10.2000";
-        var date1 = createDate(date1Str);
+        var todayDateStr = "15.10.2000";
+        var todayDate = createDate(todayDateStr);
 
-        var date2Str = "21.10.2000";
-        var date2 = createDate(date2Str);
+        var dateStr = "21.10.2000";
+        var date = createDate(dateStr);
 
-        when(request.getAgreementDateFrom()).thenReturn(date1);
-        when(request.getAgreementDateTo()).thenReturn(date2);
+        when(dateService.getTodayDate()).thenReturn(createDate(todayDateStr));
+
+        when(request.getAgreementDateFrom()).thenReturn(date);
 
         var error = validation.execute(request);
 
         assertTrue(error.isEmpty());
     }
+
+
 
     private Date createDate(String dateStr) {
         try {

@@ -1,8 +1,7 @@
-package lv.javaguru.travel.insurance.core.validator.validation;
+package lv.javaguru.travel.insurance.core.validations;
 
 import lv.javaguru.travel.insurance.core.services.DateService;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
-import lv.javaguru.travel.insurance.validation.travel.PastAgreementDateFromValidation;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -14,18 +13,17 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class PastAgreementDateFromValidationTest {
+public class PastAgreementDateToValidationTest {
 
     @Mock
     DateService dateService;
 
     @InjectMocks
-    PastAgreementDateFromValidation validation;
+    PastAgreementDateToValidation validation;
 
 
     @Test
@@ -40,12 +38,12 @@ public class PastAgreementDateFromValidationTest {
 
         when(dateService.getTodayDate()).thenReturn(createDate(todayDateStr));
 
-        when(request.getAgreementDateFrom()).thenReturn(date);
+        when(request.getAgreementDateTo()).thenReturn(date);
 
         var error = validation.execute(request);
 
         assertFalse(error.isEmpty());
-        assertEquals("agreementDateFrom", error.get().getField());
+        assertEquals("agreementDateTo", error.get().getField());
         assertEquals("Should be in a future, not in a past!", error.get().getError());
     }
 
@@ -61,7 +59,7 @@ public class PastAgreementDateFromValidationTest {
 
         when(dateService.getTodayDate()).thenReturn(createDate(todayDateStr));
 
-        when(request.getAgreementDateFrom()).thenReturn(date);
+        when(request.getAgreementDateTo()).thenReturn(date);
 
         var error = validation.execute(request);
 

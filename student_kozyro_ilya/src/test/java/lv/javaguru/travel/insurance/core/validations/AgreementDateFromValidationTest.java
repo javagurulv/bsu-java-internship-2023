@@ -1,15 +1,15 @@
-package lv.javaguru.travel.insurance.core.validator.validation;
+package lv.javaguru.travel.insurance.core.validations;
 
 import lv.javaguru.travel.insurance.core.services.DateService;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
-import lv.javaguru.travel.insurance.validation.travel.PersonLastNameValidation;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Date;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -17,43 +17,32 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class PersonLastNameValidationTest {
-
+public class AgreementDateFromValidationTest {
     @Mock
-    DateService dateService;
+    private DateService dateService;
 
     @InjectMocks
-    PersonLastNameValidation validation;
+    private AgreementDateFromValidation validation;
 
 
     @Test
-    void dontHaveMandatoryFirstName() {
+    void dontHaveMandatoryDateFrom() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
-        when(request.getPersonLastName()).thenReturn(null);
+
+        when(request.getAgreementDateFrom()).thenReturn(null);
 
         Optional<ValidationError> error = validation.execute(request);
 
         assertFalse(error.isEmpty());
-        assertEquals("personLastName", error.get().getField());
+        assertEquals("agreementDateFrom", error.get().getField());
         assertEquals("Shouldn't be empty!", error.get().getError());
     }
 
     @Test
-    void haveEmptyLastName() {
+    void haveMandatoryField() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
-        when(request.getPersonLastName()).thenReturn("");
 
-        Optional<ValidationError> error = validation.execute(request);
-
-        assertFalse(error.isEmpty());
-        assertEquals("personLastName", error.get().getField());
-        assertEquals("Shouldn't be empty!", error.get().getError());
-    }
-
-    @Test
-    void allOkLastName() {
-        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
-        when(request.getPersonLastName()).thenReturn("SomeName");
+        when(request.getAgreementDateFrom()).thenReturn(new Date());
 
         Optional<ValidationError> error = validation.execute(request);
 

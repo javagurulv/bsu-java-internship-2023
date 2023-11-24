@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.validation.travel;
+package lv.javaguru.travel.insurance.core.validations;
 
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
@@ -7,11 +7,11 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-public class AgreementDateToValidation implements TravelRequestValidation{
+public class AgreementDateFromValidation implements TravelRequestValidation{
     @Override
     public Optional<ValidationError> execute(TravelCalculatePremiumRequest request) {
-        return (request.getAgreementDateTo() == null) ?
-                Optional.of(new ValidationError("agreementDateTo", "Shouldn't be empty!")) :
+        return (request.getAgreementDateFrom() == null) ?
+                Optional.of(new ValidationError("agreementDateFrom", "Shouldn't be empty!")) :
                 Optional.empty();
     }
 }
