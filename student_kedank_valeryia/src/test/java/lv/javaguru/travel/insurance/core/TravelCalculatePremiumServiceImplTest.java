@@ -1,6 +1,5 @@
 package lv.javaguru.travel.insurance.core;
 
-import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumController;
 import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumResponse;
 import org.junit.jupiter.api.Test;
@@ -14,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class TravelCalculatePremiumServiceImplTest {
 
     @Test
-    public void test_step5() {
+    public void test_step6() {
 
         Calendar calendar = Calendar.getInstance();
 

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import java.util.Date;
 import java.util.Optional;
 @Component
-class TravelRequestAgreementDateFromOfFutureValidation implements TravelRequestValidation {
+class TravelRequestAgreementDateFromOfFutureValidation extends TravelRequestValidationImpl {
     @Autowired
     private DateTimeUtil dateTimeUtil;
 @Autowired
@@ -18,7 +18,7 @@ class TravelRequestAgreementDateFromOfFutureValidation implements TravelRequestV
     public Optional<ValidationError> validate(TravelCalculatePremiumRequest request) {
         Date dateFrom = request.getAgreementDateFrom();
         return (dateFrom != null && (dateTimeUtil.getCurrentDateTime().after(dateFrom)))
-                ? Optional.of( validationErrorFactory.constructError("ERROR_CODE_5"))
+                ? Optional.of( validationErrorFactory.buildError("ERROR_CODE_5"))
                 : Optional.empty();
     }
 }

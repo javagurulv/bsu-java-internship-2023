@@ -7,13 +7,13 @@ import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 @Component
-class TravelRequestPersonFirstNameValidation implements TravelRequestValidation {
+class TravelRequestPersonFirstNameValidation extends TravelRequestValidationImpl {
     @Autowired
     private ValidationErrorFactory validationErrorFactory;
     @Override
     public Optional<ValidationError> validate(TravelCalculatePremiumRequest request) {
         return (request.getPersonFirstName() == null || request.getPersonFirstName().isEmpty())
-                ? Optional.of(validationErrorFactory.constructError("ERROR_CODE_1"))
+                ? Optional.of(validationErrorFactory.buildError("ERROR_CODE_1"))
                 : Optional.empty();
     }
 }

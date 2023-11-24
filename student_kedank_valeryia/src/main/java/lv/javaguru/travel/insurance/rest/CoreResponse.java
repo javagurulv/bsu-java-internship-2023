@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lv.javaguru.travel.insurance.rest.ValidationError;
 
 import java.util.List;
 
@@ -13,11 +12,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CoreResponse {
-
-    private List<ValidationError> errors;
-
-    public boolean hasErrors() {
+    List<ValidationError> errors;
+    boolean hasErrors(TravelCalculatePremiumRequest request){
         return errors != null && !errors.isEmpty();
     }
-
 }
