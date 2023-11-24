@@ -9,19 +9,18 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-public class PastAgreementDateToDateValidation implements TravelRequestValidation {
+public class PastAgreementDateFromValidation implements TravelRequestValidation{
 
     @Autowired
     DateService dateService;
+    @Override
+    public Optional<ValidationError> execute(TravelCalculatePremiumRequest request) {
+        var from = request.getAgreementDateFrom();
 
-    public Optional<ValidationError> execute(TravelCalculatePremiumRequest travelCalculatePremiumRequest) {
-        var to = travelCalculatePremiumRequest.getAgreementDateTo();
-
-        return (to != null) ?
-                to.after(dateService.getTodayDate()) ?
+        return (from != null) ?
+                from.after(dateService.getTodayDate()) ?
                         Optional.empty() :
-                        Optional.of(new ValidationError("agreementDateTo", "Should be in a future, not in a past!")) :
+                        Optional.of(new ValidationError("agreementDateFrom", "Should be in a future, not in a past!")) :
                 Optional.empty();
-
     }
 }
