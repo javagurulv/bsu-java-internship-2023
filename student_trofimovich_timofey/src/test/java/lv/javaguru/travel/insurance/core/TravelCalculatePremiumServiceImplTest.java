@@ -92,8 +92,8 @@ public class TravelCalculatePremiumServiceImplTest {
         TravelCalculatePremiumResponse response = service.calculatePremium(request);
         assertAll(
                 () -> assertThat(response.getErrors().size()).isEqualTo(1),
-                () -> assertThat(response.getErrors().get(0).getField()).isEqualTo("field"),
-                () -> assertThat(response.getErrors().get(0).getMessage()).isEqualTo("errorMessage")
+                () -> assertThat(response.getErrors().get(0).getErrorCode()).isEqualTo("error code"),
+                () -> assertThat(response.getErrors().get(0).getDescription()).isEqualTo("description")
         );
     }
 
@@ -107,7 +107,7 @@ public class TravelCalculatePremiumServiceImplTest {
 
     private List<ValidationError> buildValidationErrorList() {
         return List.of(
-                new ValidationError("field", "errorMessage")
+                new ValidationError("error code", "description")
         );
     }
 }

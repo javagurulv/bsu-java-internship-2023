@@ -18,6 +18,7 @@ dependencies {
 
     testImplementation('org.springframework.boot:spring-boot-starter-test:2.7.5')
     testImplementation("org.assertj:assertj-core:3.24.2")
+    testImplementation('uk.org.webcompere:model-assert:1.0.0')
 
     test {
         useJUnitPlatform()

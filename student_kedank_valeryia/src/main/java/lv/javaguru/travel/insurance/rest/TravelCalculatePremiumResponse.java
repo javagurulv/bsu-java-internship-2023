@@ -7,13 +7,14 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class TravelCalculatePremiumResponse {
+public class TravelCalculatePremiumResponse extends CoreResponse {
 
     private String personFirstName;
     private String personLastName;
@@ -22,7 +23,7 @@ public class TravelCalculatePremiumResponse {
     private BigDecimal agreementPrice;
 
     public TravelCalculatePremiumResponse(String personFirstName, String personLastName,
-                                          Date agreementDateFrom, Date agreementDateTo){
+                                          Date agreementDateFrom, Date agreementDateTo) {
         this.personFirstName = personFirstName;
         this.personLastName = personLastName;
         this.agreementDateFrom = agreementDateFrom;
@@ -31,6 +32,10 @@ public class TravelCalculatePremiumResponse {
         long temp = agreementDateTo.getTime() - agreementDateFrom.getTime();
         long days = TimeUnit.DAYS.convert(temp, TimeUnit.MILLISECONDS);
         this.agreementPrice = BigDecimal.valueOf(days);
+    }
+
+    public TravelCalculatePremiumResponse(List<ValidationError> errors) {
+        super(errors);
     }
 
 }
