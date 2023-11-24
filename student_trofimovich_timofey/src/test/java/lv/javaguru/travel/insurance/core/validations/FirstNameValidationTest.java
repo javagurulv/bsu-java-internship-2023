@@ -25,6 +25,7 @@ public class FirstNameValidationTest {
     void shouldReturnErrorWhenFirstNameIsNull() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getPersonFirstName()).thenReturn(null);
+        ValidationError validatonError = mock(ValidationError.class);
         when(factory.buildError("ERROR_CODE_1")).thenReturn(new ValidationError("ERROR_CODE_1", "First name must not be empty!"));
         Optional<ValidationError> validationError = validation.validate(request);
         assertThat(validationError).isPresent();

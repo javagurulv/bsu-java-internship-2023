@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.Optional;
 
 @Component
-public class DateFromIsInFutureValidation implements TravelRequestValidation {
+class DateFromIsInFutureValidation implements TravelRequestValidation {
     @Autowired
     ValidationErrorFactory factory;
     @Override

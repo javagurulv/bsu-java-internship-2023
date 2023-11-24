@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-public class FirstNameValidation implements TravelRequestValidation {
+class FirstNameValidation implements TravelRequestValidation {
     @Autowired
     ValidationErrorFactory factory;
     @Override
