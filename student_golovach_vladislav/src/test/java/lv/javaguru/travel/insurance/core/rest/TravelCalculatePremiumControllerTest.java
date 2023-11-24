@@ -21,8 +21,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class TravelCalculatePremiumControllerTest {
 
     @Autowired private MockMvc mockMvc;
-    @Autowired JsonFileReader jsonFileReader;
-    private ObjectMapper mapper = new ObjectMapper();
+
+    @Autowired private JsonFileReader jsonFileReader;
 
     @Test
     public void successRequest() throws Exception {
@@ -94,8 +94,8 @@ public class TravelCalculatePremiumControllerTest {
 
         String jsonResponse = jsonFileReader.readJsonFromFile(jsonResponseFilePath);
 
+        ObjectMapper mapper = new ObjectMapper();
         assertEquals(mapper.readTree(responseBodyContent), mapper.readTree(jsonResponse));
     }
 
 }
-

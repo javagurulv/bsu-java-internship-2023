@@ -19,7 +19,7 @@ public class TravelCalculatePremiumResponse extends CoreResponse {
     private String personFirstName;
     private String personLastName;
 
-    private BigDecimal agreementPrice;
+    private BigDecimal agreementPremium;
     public TravelCalculatePremiumResponse(List<ValidationError> errors) {
         super(errors);
     }
@@ -27,6 +27,8 @@ public class TravelCalculatePremiumResponse extends CoreResponse {
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date agreementDateFrom;
 
+    private String country;
+    private List<RiskPremium> risks;
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date agreementDateTo;
 }

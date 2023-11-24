@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import java.util.concurrent.TimeUnit;
 
 @Component
-public class TravelCalculatePremiumRequestExecutionTimeLogger {
+class TravelCalculatePremiumRequestExecutionTimeLogger {
     public static final Logger logger = LoggerFactory.getLogger(TravelCalculatePremiumRequestExecutionTimeLogger.class);
     public void log(Stopwatch stopwatch) {
         stopwatch.stop();

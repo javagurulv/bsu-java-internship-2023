@@ -1,0 +1,52 @@
+Ментор предлагает начать подготовку программного кода для внедрения
+новой версии (поддерживающей нескольких персон) с разделения валидаций
+на два уровня: полис (agreement) и персона.
+
+Ментор обосновывает свое предложение так: из новой структуры запроса
+
+New Request format:
+
+{
+  "agreementDateFrom" : "2025-05-25",
+  "agreementDateTo" : "2025-05-29",
+  "country" : "SPAIN",
+  "medicalRiskLimitLevel" : "LEVEL_10000",
+  "selected_risks":["TRAVEL_MEDICAL"],
+  "persons" : [
+        {
+          "personFirstName" : "Vasja",
+          "personLastName" : "Pupkin",
+          "personBirthDate" : "2000-05-29"
+        },
+        {
+          "personFirstName" : "Petja",
+          "personLastName" : "Pupkin",
+          "personBirthDate" : "2000-02-29"
+        }
+  ]
+}
+
+видно, что есть поля относящиеся к самому полису
+  "agreementDateFrom" : "2025-05-25",
+  "agreementDateTo" : "2025-05-29",
+  "country" : "SPAIN",
+  "medicalRiskLimitLevel" : "LEVEL_10000",
+  "selected_risks":["TRAVEL_MEDICAL"]
+
+а есть поля, которые относятся к персоне:
+        {
+          "personFirstName" : "Vasja",
+          "personLastName" : "Pupkin",
+          "personBirthDate" : "2000-05-29"
+        }
+
+Валидации для полей полиса нужно в новой версии выполнить только
+один раз, а поля персоны нужно проверить для каждой персоны отдельно.
+
+Поэтому нужен способ, который позволит разделить валидации на
+два уровня: полис и персона.
+
+
+Ваша задача:
+придумать как можно реализовать предложение ментора, обсудить
+вашу идею с ментором и реализовать ее.

@@ -34,6 +34,54 @@ public class TravelCalculatePremiumControllerTest {
                 "rest/ControllerTestResponse.json");
     }
 
+    @Test
+    public void shouldReturnErrorIfFirstNameIsInvalidRestControllerTest() throws Exception {
+        executeAndCompare("rest/firstNameIsInvalidControllerRequest.json",
+                "rest/firstNameIsInvalidControllerResponse.json");
+    }
+
+    @Test
+    public void shouldReturnErrorIfLastNameIsInvalidRestControllerTest() throws Exception {
+        executeAndCompare("rest/lastNameIsInvalidControllerRequest.json",
+                "rest/lastNameIsInvalidControllerResponse.json");
+    }
+
+    @Test
+    public void shouldReturnErrorIfAgreementDateFromIsInvalidRestControllerTest() throws Exception {
+        executeAndCompare("rest/agreementDateFromIsInvalidControllerRequest.json",
+                "rest/agreementDateFromIsInvalidControllerResponse.json");
+    }
+
+    @Test
+    public void shouldReturnErrorIfAgreementDateToIsInvalidRestControllerTest() throws Exception {
+        executeAndCompare("rest/agreementDateToIsInvalidControllerRequest.json",
+                "rest/agreementDateToIsInvalidControllerResponse.json");
+    }
+
+    @Test
+    public void shouldReturnValidAgreementPriceControllerTest() throws Exception {
+        executeAndCompare("rest/agreementPriceIsValidRestControllerTestRequest.json",
+                "rest/agreementPriceIsValidRestControllerTestResponse.json");
+    }
+
+    @Test
+    public void shouldReturnErrorIfAgreementDateFromAfterAgreementDateToRestControllerTest() throws Exception {
+        executeAndCompare("rest/agreementDateFromAfterAgreementDateRestControllerTestRequest.json",
+                "rest/agreementDateFromAfterAgreementDateRestControllerTestResponse.json");
+    }
+
+    @Test
+    public void shouldReturnErrorIfAgreementDateFromEqualsAgreementDateToRestControllerTest() throws Exception {
+        executeAndCompare("rest/agreementDateFromEqualsAgreementDateToRestControllerTestRequest.json",
+                "rest/agreementDateFromEqualsAgreementDateToRestControllerTestResponse.json");
+    }
+
+    @Test
+    public void shouldReturnErrorIfAgreementDateFromIsInPastRestControllerTest() throws Exception {
+        executeAndCompare("rest/agreementDateFromIsInPastRestControllerTestRequest.json",
+                "rest/agreementDateFromIsInPastRestControllerTestResponse.json");
+    }
+
     private void executeAndCompare(String JsonFileRequestPath, String JsonFileResponsePath) throws Exception {
         String jsonStringRequest = jsonFileReader.readJsonFromFile(JsonFileRequestPath);
         String jsonExpectedStringResponse = jsonFileReader.readJsonFromFile(JsonFileResponsePath);

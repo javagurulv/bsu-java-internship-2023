@@ -1,11 +1,9 @@
 package lv.javaguru.travel.insurance.core.underwriting;
 
+
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
-import org.springframework.stereotype.Component;
-
-import java.math.BigDecimal;
-
-
+import lv.javaguru.travel.insurance.dto.TravelPremiumCalculatorResult;
 public interface TravelPremiumUnderwriting {
-    BigDecimal calculateAgreementPrice(TravelCalculatePremiumRequest request);
+    TravelPremiumCalculatorResult calculatePremium(TravelCalculatePremiumRequest request);
+
 }

@@ -17,7 +17,7 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 public class TravelRequestDateFromValidationTest {
     @InjectMocks
-    TravelRequestAgreementDateFromValidation dateFromValidation;
+    private TravelRequestAgreementDateFromValidation dateFromValidation;
 
     @Mock
     private ValidationErrorFactory validationErrorFactory;
@@ -26,7 +26,7 @@ public class TravelRequestDateFromValidationTest {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getAgreementDateFrom()).thenReturn(null);
         ValidationError validationError = mock(ValidationError.class);
-        when(validationErrorFactory.constructError("ERROR_CODE_3")).thenReturn(validationError);
+        when(validationErrorFactory.buildError("ERROR_CODE_3")).thenReturn(validationError);
         Optional<ValidationError> error= dateFromValidation.validate(request);
         assertTrue(error.isPresent());
         assertEquals(error.get(), validationError);

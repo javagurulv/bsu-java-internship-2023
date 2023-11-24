@@ -1,0 +1,10 @@
+{
+  "personFirstName" : "Vasja",
+  "personLastName" : "Pupkin",
+  "personBirthDate" : null,
+  "agreementDateFrom" : "2025-05-25",
+  "agreementDateTo" : "2025-05-29",
+  "country" : "SPAIN",
+  "medicalRiskLimitLevel" : "LEVEL_10000",
+  "selected_risks":["TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"]
+}

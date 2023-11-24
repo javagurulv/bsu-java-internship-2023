@@ -20,7 +20,7 @@ import static org.mockito.Mockito.when;
 
 public class TravelRequestSelectedRisksValidationTest {
     @InjectMocks
-    TravelRequestSelectedRisksValidation selectedRisksValidation;
+    private TravelRequestSelectedRisksValidation selectedRisksValidation;
     @Mock
     private ValidationErrorFactory validationErrorFactory;
     @Test
@@ -28,7 +28,7 @@ public class TravelRequestSelectedRisksValidationTest {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getSelected_risks()).thenReturn(List.of());
         ValidationError validationError = mock(ValidationError.class);
-        when(validationErrorFactory.constructError("ERROR_CODE_8")).thenReturn(validationError);
+        when(validationErrorFactory.buildError("ERROR_CODE_8")).thenReturn(validationError);
         Optional<ValidationError> error= selectedRisksValidation.validate(request);
         assertTrue(error.isPresent());
         assertEquals(error.get(), validationError);
@@ -38,7 +38,7 @@ public class TravelRequestSelectedRisksValidationTest {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getSelected_risks()).thenReturn(null);
         ValidationError validationError = mock(ValidationError.class);
-        when(validationErrorFactory.constructError("ERROR_CODE_8")).thenReturn(validationError);
+        when(validationErrorFactory.buildError("ERROR_CODE_8")).thenReturn(validationError);
         Optional<ValidationError> error= selectedRisksValidation.validate(request);
         assertTrue(error.isPresent());
         assertEquals(error.get(), validationError);
