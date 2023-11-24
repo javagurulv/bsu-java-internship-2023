@@ -1,5 +1,6 @@
 package lv.javaguru.travel.insurance.core;
 
+import lv.javaguru.travel.insurance.core.validations.TravelCalculatePremiumRequestValidator;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumResponse;
 import lv.javaguru.travel.insurance.dto.ValidationError;
@@ -24,7 +25,7 @@ class TravelCalculatePremiumServiceImplTest {
     @Mock private TravelCalculatePremiumRequestValidator requestValidator;
     @InjectMocks TravelCalculatePremiumServiceImpl calculator;
     @Test
-    public void calculatePremiumTestFirstName() {
+    void calculatePremiumTestFirstName() {
         when(request.getPersonFirstName()).thenReturn("personFirstName");
         when(requestValidator.validate(request)).thenReturn(List.of());
         TravelCalculatePremiumResponse response = calculator.calculatePremium(request);
@@ -32,7 +33,7 @@ class TravelCalculatePremiumServiceImplTest {
         assertFalse(response.hasErrors());
     }
     @Test
-    public void calculatePremiumTestLastName() {
+    void calculatePremiumTestLastName() {
         when(request.getPersonLastName()).thenReturn("personLastName");
         when(requestValidator.validate(request)).thenReturn(List.of());
         TravelCalculatePremiumResponse response = calculator.calculatePremium(request);
@@ -40,7 +41,7 @@ class TravelCalculatePremiumServiceImplTest {
         assertFalse(response.hasErrors());
     }
     @Test
-    public void calculatePremiumTestDateFrom() {
+    void calculatePremiumTestDateFrom() {
         when(request.getAgreementDateFrom()).thenReturn(createDate("16.11.2023"));
         when(requestValidator.validate(request)).thenReturn(List.of());
         TravelCalculatePremiumResponse response = calculator.calculatePremium(request);
@@ -48,7 +49,7 @@ class TravelCalculatePremiumServiceImplTest {
         assertFalse(response.hasErrors());
     }
     @Test
-    public void calculatePremiumTestDateTo() {
+    void calculatePremiumTestDateTo() {
         when(request.getAgreementDateTo()).thenReturn(createDate("24.11.2023"));
         when(requestValidator.validate(request)).thenReturn(List.of());
         TravelCalculatePremiumResponse response = calculator.calculatePremium(request);
@@ -56,7 +57,7 @@ class TravelCalculatePremiumServiceImplTest {
         assertFalse(response.hasErrors());
     }
     @Test
-    public void calculatePremiumTestAgreementPrice() {
+    void calculatePremiumTestAgreementPrice() {
         when(request.getAgreementDateFrom()).thenReturn(createDate("16.11.2023"));
         when(request.getAgreementDateTo()).thenReturn(createDate("24.11.2023"));
         when(requestValidator.validate(request)).thenReturn(List.of());
@@ -67,13 +68,13 @@ class TravelCalculatePremiumServiceImplTest {
         assertFalse(response.hasErrors());
     }
     @Test
-    public void calculatePremiumTestHasErrors() {
+    void calculatePremiumTestHasErrors() {
         when(requestValidator.validate(request)).thenReturn(createError());
         TravelCalculatePremiumResponse response = calculator.calculatePremium(request);
         assertTrue(response.hasErrors());
-        assertEquals(response.getErrors().size(), 1);
-        assertEquals(response.getErrors().get(0).getField(), "field");
-        assertEquals(response.getErrors().get(0).getMessage(), "message");
+        assertEquals(1, response.getErrors().size());
+        assertEquals("field", response.getErrors().get(0).getField());
+        assertEquals("message", response.getErrors().get(0).getMessage());
     }
 
     private List<ValidationError> createError() {

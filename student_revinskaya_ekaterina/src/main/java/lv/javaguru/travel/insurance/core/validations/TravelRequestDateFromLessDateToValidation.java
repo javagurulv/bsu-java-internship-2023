@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import java.util.Date;
 import java.util.Optional;
 @Component
-class TravelRequestDateFromLessDateToValidation implements TravelRequestValidation {
+class TravelRequestDateFromLessDateToValidation extends TravelRequestValidationImpl {
     @Autowired
     private ValidationErrorFactory validationErrorFactory;
     @Override
@@ -17,7 +17,7 @@ class TravelRequestDateFromLessDateToValidation implements TravelRequestValidati
         Date dateTo = request.getAgreementDateTo();
         return (dateFrom != null && dateTo != null
                 && (dateFrom.equals(dateTo) || dateFrom.after(dateTo)))
-                ? Optional.of(validationErrorFactory.constructError("ERROR_CODE_7"))
+                ? Optional.of(validationErrorFactory.buildError("ERROR_CODE_7"))
                 : Optional.empty();
     }
 }

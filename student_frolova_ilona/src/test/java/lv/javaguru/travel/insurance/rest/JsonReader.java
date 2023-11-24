@@ -1,25 +1,20 @@
 package lv.javaguru.travel.insurance.rest;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import org.springframework.stereotype.Component;
+import org.springframework.util.ResourceUtils;
 
+import java.io.*;
+import java.nio.file.Files;
+
+@Component
 public class JsonReader {
 
-    public static String read(String fileName) throws IOException {
-
-        StringBuilder result = new StringBuilder();
-
-        BufferedReader reader = new BufferedReader(new FileReader(fileName));
-        String line = reader.readLine();
-
-        while (line != null) {
-            result.append(line).append('\n');
-            line = reader.readLine();
+    public static String read(String filePath) throws IOException {
+        try {
+            File file = ResourceUtils.getFile("classpath:" + filePath);
+            return new String(Files.readAllBytes(file.toPath()));
+        } catch (Exception ex) {
+            throw new RuntimeException(ex);
         }
-        reader.close();
-
-        return result.substring(0, result.length() - 1);
     }
 }
