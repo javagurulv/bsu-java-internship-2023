@@ -42,13 +42,8 @@ public class TravelCalculatePremiumControllerTest {
 
     private final ObjectMapper mapper = new ObjectMapper();
 
-    @Spy
+    @Mock
     private TravelCalculatePremiumRequestValidator validator;
-
-    /*@BeforeEach
-    public void initMocks() {
-        when(validator)
-    }*/
 
     @Test
     public void simpleRestControllerTestExample() throws Exception {
@@ -56,15 +51,15 @@ public class TravelCalculatePremiumControllerTest {
                         .content("{" +
                                 "\"personFirstName\" : \"Vasja\",\n" +
                                 "\"personLastName\" : \"Pupkin\",\n" +
-                                "\"agreementDateFrom\" : \"2021-05-25\",\n" +
-                                "\"agreementDateTo\" : \"2021-05-29\"\n" +
+                                "\"agreementDateFrom\" : \"2029-05-25\",\n" +
+                                "\"agreementDateTo\" : \"2029-05-29\"\n" +
                                 "}")
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("personFirstName", is("Vasja")))
                 .andExpect(jsonPath("personLastName", is("Pupkin")))
-                .andExpect(jsonPath("agreementDateFrom", is("2021-05-25")))
-                .andExpect(jsonPath("agreementDateTo", is("2021-05-29")))
+                .andExpect(jsonPath("agreementDateFrom", is("2029-05-25")))
+                .andExpect(jsonPath("agreementDateTo", is("2029-05-29")))
                 .andExpect(jsonPath("agreementPrice", is(4)))
                 .andReturn();
     }
@@ -75,15 +70,15 @@ public class TravelCalculatePremiumControllerTest {
                         .content("{" +
                                 "\"personFirstName\" : \"Name\",\n" +
                                 "\"personLastName\" : \"Surname\",\n" +
-                                "\"agreementDateFrom\" : \"2021-05-20\",\n" +
-                                "\"agreementDateTo\" : \"2021-05-29\"\n" +
+                                "\"agreementDateFrom\" : \"2029-05-20\",\n" +
+                                "\"agreementDateTo\" : \"2029-05-29\"\n" +
                                 "}")
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("personFirstName", is("Name")))
                 .andExpect(jsonPath("personLastName", is("Surname")))
-                .andExpect(jsonPath("agreementDateFrom", is("2021-05-20")))
-                .andExpect(jsonPath("agreementDateTo", is("2021-05-29")))
+                .andExpect(jsonPath("agreementDateFrom", is("2029-05-20")))
+                .andExpect(jsonPath("agreementDateTo", is("2029-05-29")))
                 .andExpect(jsonPath("agreementPrice", is(9)))
                 .andReturn();
     }
