@@ -1,6 +1,5 @@
 package lv.javaguru.travel.insurance.core.validations;
 
-import lv.javaguru.travel.insurance.core.ErrorCodeUtil;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.Test;
@@ -21,7 +20,7 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 public class DateToIsInFutureValidationTest {
     @Mock
-    ErrorCodeUtil errorCodeUtil;
+    ValidationErrorFactory factory;
     @InjectMocks
     private DateToIsInFutureValidation validation;
 
@@ -29,7 +28,7 @@ public class DateToIsInFutureValidationTest {
     public void shouldReturnErrorWhenDateFromIsInThePast() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getAgreementDateTo()).thenReturn(createDate("20.12.2020"));
-        when(errorCodeUtil.getErrorDescription("ERROR_CODE_6")).thenReturn("Date to must be in the future!");
+        when(factory.buildError("ERROR_CODE_6")).thenReturn(new ValidationError("ERROR_CODE_6", "Date to must be in the future!"));
         Optional<ValidationError> validationError = validation.validate(request);
         assertThat(validationError).isPresent();
         assertThat(validationError.get().getErrorCode()).isEqualTo("ERROR_CODE_6");

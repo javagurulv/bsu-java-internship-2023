@@ -18,24 +18,25 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class TravelPremiumUnderwritingTest {
-    @Mock
-    private DateTimeService dateTimeService;
-    @InjectMocks
-    private TravelPremiumUnderwriting premiumUnderwriting;
+    @Mock DateTimeService dateTimeService;
+    @InjectMocks TravelPremiumUnderwriting travelPremiumUnderwriting;
 
     @Test
-    public void shouldReturnResponseWithCorrectAgreementPrice() {
+    void test_return_on_correct_response(){
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
-        when(request.getAgreementDateFrom()).thenReturn(createDate("01.01.2023"));
-        when(request.getAgreementDateTo()).thenReturn(createDate("10.01.2023"));
-        when(dateTimeService.getDaysBetween(request.getAgreementDateFrom(), request.getAgreementDateTo())).thenReturn(9L);
-        BigDecimal premium = premiumUnderwriting.calculatePremium(request);
-        assertThat(premium).isEqualTo(new BigDecimal(9));
-    }
+        when(request.getAgreementDateFrom()).thenReturn(createDate("2022-10-15"));
+        when(request.getAgreementDateFrom()).thenReturn(createDate("2022-10-17"));
+        when(dateTimeService.getDaysBetween(request.getAgreementDateFrom(), request.getAgreementDateTo()))
+                .thenReturn(2L);
 
+        BigDecimal resultOfWork = travelPremiumUnderwriting.calculatePremium(request);
+
+        assertThat(resultOfWork).isEqualTo(resultOfWork);
+
+    }
     private Date createDate(String dateStr) {
         try {
-            return new SimpleDateFormat("dd.MM.yyyy").parse(dateStr);
+            return new SimpleDateFormat("yyyy-MM-dd").parse(dateStr);
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }

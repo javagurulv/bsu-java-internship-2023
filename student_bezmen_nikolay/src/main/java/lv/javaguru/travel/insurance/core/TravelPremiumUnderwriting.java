@@ -11,8 +11,8 @@ public class TravelPremiumUnderwriting {
     @Autowired
     private DateTimeService dateTimeService;
 
-    BigDecimal calculatePremium(TravelCalculatePremiumRequest request) {
-        long daysBetween = dateTimeService.getDaysBetween(request.getAgreementDateFrom(), request.getAgreementDateTo());
-        return new BigDecimal(daysBetween);
+    BigDecimal calculatePremium(TravelCalculatePremiumRequest request){
+        var duration = dateTimeService.getDaysBetween(request.getAgreementDateFrom(), request.getAgreementDateTo());
+        return new BigDecimal(duration);
     }
 }
