@@ -31,7 +31,6 @@ public class TravelCalculatePremiumServiceImplTest {
     }
     @Test
     public void test_correct_set_field() {
-        //TravelCalculatePremiumServiceImpl travelCalculatePremiumService = new TravelCalculatePremiumServiceImpl();
         String firstName = "Nikolay";
         String lastName = "Bezmen";
         Date dateFrom = new Date(2002, Calendar.AUGUST, 11);
