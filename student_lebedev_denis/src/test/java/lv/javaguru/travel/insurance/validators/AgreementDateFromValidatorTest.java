@@ -10,39 +10,22 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class PersonLastNameValidatorTest {
+public class AgreementDateFromValidatorTest {
     private final DateTimeService dateTimeService = new DateTimeService();
     private final TravelCalculatePremiumRequestValidator requestValidator = new TravelCalculatePremiumRequestValidator();
 
     @Test
-    public void shouldReturnErrorIfPersonLastNameIsEmpty() {
-        Date agreementDateFrom = dateTimeService.createDate("30.01.2015");
+    public void shouldReturnErrorIfAgreementDateFromIsEmpty() {
         Date agreementDateTo = dateTimeService.createDate("14.12.2022");
 
         TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest(
-                "personFirstName", "    ",
-                agreementDateFrom, agreementDateTo);
+                "personFirstName", "personLastName",
+                null, agreementDateTo);
 
         List<ValidationError> validationErrors = requestValidator.validate(request);
 
         assertEquals(1, validationErrors.size());
-        assertEquals("personLastName", validationErrors.get(0).getField());
-        assertEquals("Must not be empty!", validationErrors.get(0).getMessage());
-    }
-
-    @Test
-    public void shouldReturnErrorIfPersonLastNameIsNull() {
-        Date agreementDateFrom = dateTimeService.createDate("30.01.2015");
-        Date agreementDateTo = dateTimeService.createDate("14.12.2022");
-
-        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest(
-                "personFirstName", null,
-                agreementDateFrom, agreementDateTo);
-
-        List<ValidationError> validationErrors = requestValidator.validate(request);
-
-        assertEquals(1, validationErrors.size());
-        assertEquals("personLastName", validationErrors.get(0).getField());
+        assertEquals("agreementDateFrom", validationErrors.get(0).getField());
         assertEquals("Must not be empty!", validationErrors.get(0).getMessage());
     }
 
