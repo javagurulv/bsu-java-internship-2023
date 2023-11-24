@@ -16,7 +16,7 @@ import java.util.stream.Stream;
 class TravelCalculatePremiumRequestValidatorImpl implements TravelCalculatePremiumRequestValidator {
 
     @Autowired
-    List<TravelRequestValidation> travelRequestValidations;
+    private List<TravelRequestValidation> travelRequestValidations;
 
 
     @Override
