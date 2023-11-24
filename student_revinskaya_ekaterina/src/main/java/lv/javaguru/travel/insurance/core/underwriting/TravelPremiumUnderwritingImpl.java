@@ -13,13 +13,10 @@ import java.util.List;
 @Component
 class TravelPremiumUnderwritingImpl implements TravelPremiumUnderwriting {
     @Autowired
-    private List<TravelRiskPremiumCalculator> riskPremiumCalculators;
+    private SelectedRisksPremiumCalculator selectedRisksPremiumCalculator;
     @Override
     public TravelPremiumCalculatorResult calculatePremium(TravelCalculatePremiumRequest request){
-        List<TravelRisk> travelRisks= riskPremiumCalculators.stream()
-                .filter(calculator->request.getSelected_risks().contains(calculator.getRiskIc()))
-                .map(calculator->new TravelRisk(calculator.getRiskIc(),calculator.calculatePremium(request)))
-                .toList();
+        List<TravelRisk> travelRisks= selectedRisksPremiumCalculator.calculateSelectedRisksPremium(request);
         BigDecimal totalPremium = travelRisks.stream()
                 .map(TravelRisk::getPremium)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
