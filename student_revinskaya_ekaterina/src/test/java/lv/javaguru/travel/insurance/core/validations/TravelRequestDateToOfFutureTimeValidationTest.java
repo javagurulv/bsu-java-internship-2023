@@ -32,7 +32,7 @@ public class TravelRequestDateToOfFutureTimeValidationTest {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getAgreementDateTo()).thenReturn(createDate("8.07.2023"));
         ValidationError validationError = mock(ValidationError.class);
-        when(validationErrorFactory.constructError("ERROR_CODE_6")).thenReturn(validationError);
+        when(validationErrorFactory.buildError("ERROR_CODE_6")).thenReturn(validationError);
         Optional<ValidationError> error= dateToValidation.validate(request);
         assertTrue(error.isPresent());
         assertEquals(error.get(), validationError);

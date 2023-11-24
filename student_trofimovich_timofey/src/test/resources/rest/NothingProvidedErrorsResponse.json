@@ -1,24 +1,24 @@
 {
   "errors": [
     {
-      "field": "personFirstName",
-      "message": "Must not be empty!"
+      "errorCode": "ERROR_CODE_3",
+      "description": "Field agreementDateFrom is empty!"
     },
     {
-      "field": "personLastName",
-      "message": "Must not be empty!"
+      "errorCode": "ERROR_CODE_4",
+      "description": "Field agreementDateTo is empty!"
     },
     {
-      "field": "agreementDateFrom",
-      "message": "Must not be empty!"
+      "errorCode": "ERROR_CODE_1",
+      "description": "Field personFirstName is empty!"
     },
     {
-      "field": "agreementDateTo",
-      "message": "Must not be empty!"
+      "errorCode": "ERROR_CODE_2",
+      "description": "Field personLastName is empty!"
     },
     {
-      "field": "selectedRisks",
-      "message": "Must not be empty!"
+      "errorCode": "ERROR_CODE_8",
+      "description": "Field selectedRisks is empty!"
     }
   ],
   "personFirstName": null,

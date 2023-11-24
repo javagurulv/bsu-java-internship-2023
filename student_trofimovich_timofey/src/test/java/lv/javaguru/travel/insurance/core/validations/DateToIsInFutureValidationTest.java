@@ -1,8 +1,13 @@
 package lv.javaguru.travel.insurance.core.validations;
 
+import lv.javaguru.travel.insurance.core.ErrorCodeUtil;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -13,17 +18,22 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+@ExtendWith(MockitoExtension.class)
 public class DateToIsInFutureValidationTest {
-    private DateToIsInFutureValidation validation = new DateToIsInFutureValidation();
+    @Mock
+    ErrorCodeUtil errorCodeUtil;
+    @InjectMocks
+    private DateToIsInFutureValidation validation;
 
     @Test
     public void shouldReturnErrorWhenDateFromIsInThePast() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getAgreementDateTo()).thenReturn(createDate("20.12.2020"));
+        when(errorCodeUtil.getErrorDescription("ERROR_CODE_6")).thenReturn("Date to must be in the future!");
         Optional<ValidationError> validationError = validation.validate(request);
         assertThat(validationError).isPresent();
-        assertThat(validationError.get().getField()).isEqualTo("agreementDateTo");
-        assertThat(validationError.get().getMessage()).isEqualTo("Must be the future!");
+        assertThat(validationError.get().getErrorCode()).isEqualTo("ERROR_CODE_6");
+        assertThat(validationError.get().getDescription()).isEqualTo("Date to must be in the future!");
     }
 
     @Test

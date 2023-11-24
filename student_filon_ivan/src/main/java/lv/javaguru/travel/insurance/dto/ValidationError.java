@@ -14,4 +14,9 @@ public class ValidationError {
     private String field;
     private String message;
 
+    @Override
+    public boolean equals(Object o) {
+        return this.getField().equals(((ValidationError)o).getField())
+                && this.getMessage().equals(((ValidationError)o).getMessage());
+    }
 }
