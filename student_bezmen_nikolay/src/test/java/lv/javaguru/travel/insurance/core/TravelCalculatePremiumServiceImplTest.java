@@ -21,7 +21,7 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class TravelCalculatePremiumServiceImplTest {
-    @Mock DateTimeService dateTimeService;
+    @Mock TravelPremiumUnderwriting travelPremiumUnderwriting;
     @Mock TravelCalculatePremiumRequestValidator validator;
     @InjectMocks TravelCalculatePremiumServiceImpl service;
     private TravelCalculatePremiumRequest request;
@@ -46,7 +46,7 @@ public class TravelCalculatePremiumServiceImplTest {
         when(request.getPersonLastName()).thenReturn(lastName);
         when(request.getAgreementDateFrom()).thenReturn(dateFrom);
         when(request.getAgreementDateTo()).thenReturn(dateTo);
-        when(dateTimeService.getDaysBetween(dateFrom,dateTo)).thenReturn(31L);
+        when(travelPremiumUnderwriting.calculatePremium(request)).thenReturn(new BigDecimal(31L));
         TravelCalculatePremiumResponse resultOfWork = service.calculatePremium(request);
 
         assertThat(resultOfWork.getAgreementDateFrom()).isEqualTo(request.getAgreementDateFrom());

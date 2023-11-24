@@ -13,28 +13,30 @@ import java.util.List;
 class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService {
     @Autowired
     private TravelCalculatePremiumRequestValidator requestValidator;
-    @Autowired
-    private DateTimeService dateTimeService;
+    @Autowired private TravelPremiumUnderwriting premiumUnderwriting;
+
 
     @Override
     public TravelCalculatePremiumResponse calculatePremium(TravelCalculatePremiumRequest request) {
         List<ValidationError> errorList = requestValidator.validate(request);
 
-        if (!errorList.isEmpty()) {
-            return new TravelCalculatePremiumResponse(errorList);
-        }
+        return errorList.isEmpty() ?
+                buildResponse(request,premiumUnderwriting.calculatePremium(request) ) : buildResponse();
+    }
 
-        TravelCalculatePremiumResponse travelCalculatePremiumResponse = new TravelCalculatePremiumResponse();
+    private TravelCalculatePremiumResponse buildResponse(){
+        return new TravelCalculatePremiumResponse();
+    }
 
-        travelCalculatePremiumResponse.setAgreementDateFrom(request.getAgreementDateFrom());
-        travelCalculatePremiumResponse.setAgreementDateTo(request.getAgreementDateTo());
-        travelCalculatePremiumResponse.setPersonFirstName(request.getPersonFirstName());
-        travelCalculatePremiumResponse.setPersonLastName(request.getPersonLastName());
+    private TravelCalculatePremiumResponse buildResponse(TravelCalculatePremiumRequest request, BigDecimal duration){
+        TravelCalculatePremiumResponse response = new TravelCalculatePremiumResponse();
 
-        var daysBetween = dateTimeService.getDaysBetween(request.getAgreementDateFrom(), request.getAgreementDateTo());
-        travelCalculatePremiumResponse.setAgreementPrice(new BigDecimal(daysBetween));
-
-        return travelCalculatePremiumResponse;
+        response.setPersonFirstName(request.getPersonFirstName());
+        response.setPersonLastName(request.getPersonLastName());
+        response.setAgreementDateFrom(request.getAgreementDateFrom());
+        response.setAgreementDateTo(request.getAgreementDateTo());
+        response.setAgreementPrice(duration);
+        return response;
     }
 
 }
