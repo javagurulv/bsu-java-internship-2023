@@ -30,6 +30,22 @@ public class AgreementDateFromValidatorTest {
     }
 
     @Test
+    public void shouldReturnErrorIfAgreementDateFromLessThenAgreementDateTo() {
+        Date agreementDateFrom = dateTimeService.createDate("30.01.2015");
+        Date agreementDateTo = dateTimeService.createDate("14.12.2000");
+
+        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest(
+                "personFirstName", "personLastName",
+                agreementDateFrom, agreementDateTo);
+
+        List<ValidationError> validationErrors = requestValidator.validate(request);
+
+        assertEquals(1, validationErrors.size());
+        assertEquals("agreementDateFrom", validationErrors.get(0).getField());
+        assertEquals("Must be less than agreementDateTo!", validationErrors.get(0).getMessage());
+    }
+
+    @Test
     public void shouldNotHaveError() {
         Date agreementDateFrom = dateTimeService.createDate("30.01.2015");
         Date agreementDateTo = dateTimeService.createDate("14.12.2022");
