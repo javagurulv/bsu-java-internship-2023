@@ -1,12 +1,17 @@
 package lv.javaguru.travel.insurance.core;
 
-import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
-import lv.javaguru.travel.insurance.rest.ValidationError;
+import lv.javaguru.travel.insurance.core.validations.TravelRequestValidation;
+import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.test.util.ReflectionTestUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -15,89 +20,40 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-class TravelCalculatePremiumRequestValidatorTest {
+@ExtendWith(MockitoExtension.class)
+public class TravelCalculatePremiumRequestValidatorTest {
+
+    @InjectMocks
+    private TravelCalculatePremiumRequestValidator requestValidator;
 
     @Test
-    void validateAllGood() {
-        var request = new TravelCalculatePremiumRequest("John", "Snow", createDate("11.10.2004"), createDate("07.04.2020"));
-        var validator=new TravelCalculatePremiumRequestValidator();
-        assertTrue(validator.validate(request).isEmpty());
-    }
-    @Test
-    void validateFirstNameIsNull() {
-        var request = new TravelCalculatePremiumRequest(null, "Snow", createDate("11.10.2004"), createDate("07.04.2020"));
-        var validator=new TravelCalculatePremiumRequestValidator();
-        var errors=validator.validate(request);
-        assertFalse(errors.isEmpty());
-        assertEquals(1, errors.size());
-        assertEquals("personFirstName", errors.get(0).getField());
-        assertEquals("Must not be empty!", errors.get(0).getMessage());
-    }
-    @Test
-    void validateFirstNameIsEmpty() {
-        var request = new TravelCalculatePremiumRequest("", "Snow", createDate("11.10.2004"), createDate("07.04.2020"));
-        var validator=new TravelCalculatePremiumRequestValidator();
-        var errors=validator.validate(request);
-        assertFalse(errors.isEmpty());
-        assertEquals(errors.size(), 1);
-        assertEquals("personFirstName", errors.get(0).getField());
-        assertEquals("Must not be empty!", errors.get(0).getMessage());
-    }
-    @Test
-    void validateLastNameIsNull() {
-        var request = new TravelCalculatePremiumRequest("John", null, createDate("11.10.2004"), createDate("07.04.2020"));
-        var validator=new TravelCalculatePremiumRequestValidator();
-        var errors=validator.validate(request);
-        assertFalse(errors.isEmpty());
-        assertEquals(1, errors.size());
-        assertEquals("personLastName", errors.get(0).getField());
-        assertEquals("Must not be empty!", errors.get(0).getMessage());
-    }
-    @Test
-    void validateLastNameIsEmpty() {
-        var request = new TravelCalculatePremiumRequest("John", "", createDate("11.10.2004"), createDate("07.04.2020"));
-        var validator=new TravelCalculatePremiumRequestValidator();
-        var errors=validator.validate(request);
-        assertFalse(errors.isEmpty());
-        assertEquals(errors.size(), 1);
-        assertEquals("personLastName", errors.get(0).getField());
-        assertEquals("Must not be empty!", errors.get(0).getMessage());
-    }
-    @Test
-    void validateAgrementDataFromIsNull() {
-        var request = new TravelCalculatePremiumRequest("John", "Wick", null ,createDate("07.04.2020"));
-        var validator=new TravelCalculatePremiumRequestValidator();
-        var errors=validator.validate(request);
-        assertFalse(errors.isEmpty());
-        assertEquals(1, errors.size());
-        assertEquals("agreementDateFrom", errors.get(0).getField());
-        assertEquals("Must not be empty!", errors.get(0).getMessage());
-    }
-
-    @Test
-    void validateAgreementDataToIsNull() {
-        var request = new TravelCalculatePremiumRequest("John", "Wick",  createDate("11.10.2004"),null);
-        var validator=new TravelCalculatePremiumRequestValidator();
-        var errors=validator.validate(request);
-        assertFalse(errors.isEmpty());
-        assertEquals(1, errors.size());
-        assertEquals("agreementDateTo", errors.get(0).getField());
-        assertEquals("Must not be empty!", errors.get(0).getMessage());
-    }
-    @Test
-    void agreementDateFromIsLessAgreementDateTo() {
-        var request = new TravelCalculatePremiumRequest("John", "Wick", createDate("11.10.2004"),createDate("07.04.2020"));
-        var validator=new TravelCalculatePremiumRequestValidator();
-        var errors=validator.validate(request);
+    public void shouldNotReturnErrors() {
+        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        TravelRequestValidation validation1 = mock(TravelRequestValidation.class);
+        when(validation1.execute(request)).thenReturn(Optional.empty());
+        TravelRequestValidation validation2 = mock(TravelRequestValidation.class);
+        when(validation2.execute(request)).thenReturn(Optional.empty());
+        List<TravelRequestValidation> travelValidations = List.of(
+                validation1, validation2
+        );
+        ReflectionTestUtils.setField(requestValidator, "travelValidations", travelValidations);
+        List<ValidationError> errors = requestValidator.validate(request);
         assertTrue(errors.isEmpty());
     }
-    private Date createDate(String dateStr) {
-        try {
-            return new SimpleDateFormat("dd.MM.yyyy").parse(dateStr);
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
+    @Test
+    public void shouldReturnErrors() {
+        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        TravelRequestValidation validation1 = mock(TravelRequestValidation.class);
+        when(validation1.execute(request)).thenReturn(Optional.of(new ValidationError()));
+        TravelRequestValidation validation2 = mock(TravelRequestValidation.class);
+        when(validation2.execute(request)).thenReturn(Optional.of(new ValidationError()));
+        List<TravelRequestValidation> travelValidations = List.of(
+                validation1, validation2
+        );
+        ReflectionTestUtils.setField(requestValidator, "travelValidations", travelValidations);
+        List<ValidationError> errors = requestValidator.validate(request);
+        assertEquals(errors.size(), 2);
+    }
 
 }

@@ -28,12 +28,4 @@ public class TravelCalculatePremiumRequestExecutionTimeLoggerTest {
         logger.logExecutionTime(stopwatch);
         assertTrue(stopwatch.isRunning());
     }
-
-    @Test
-    public void testLogExecutionTimeWithZeroElapsed() {
-        TravelCalculatePremiumRequestExecutionTimeLogger logger = new TravelCalculatePremiumRequestExecutionTimeLogger();
-        Stopwatch stopwatch = Stopwatch.createStarted();
-        logger.logExecutionTime(stopwatch);
-        assertTrue(stopwatch.elapsed(TimeUnit.MILLISECONDS) == 0);
-    }
 }

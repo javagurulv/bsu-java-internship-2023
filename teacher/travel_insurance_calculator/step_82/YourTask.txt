@@ -1,0 +1,29 @@
+Ментор обратил ваше внимание на srt/test/resources/rest
+папку. По его мнению там накопилось слишком много файлов
+и поэтому с ними довольно тяжело стало работать.
+
+Идея ментора заключается в следующем:
+1. Для каждого test case создать свою папку
+   (например: /rest/test_case_1, /rest/test_case_2, etc);
+2. Переместить в новые папки json файлы с запросами и ответами
+   для каждого test case;
+3. Создать текстовый файл /rest/TestCaseDescription.txt
+   и внести в него описание (краткое на словах) каждого тест кейса:
+   Test_case_1 - тестирует то-то и то-то,
+   Test_case_2 - тестирует то-то и то-то,
+   Test_case_3 - тестирует то-то и то-то.
+   ...
+4. Разделить TravelCalculatePremiumControllerTest класс на
+   классы для каждого test_case:
+   /rest/TravelCalculatePremiumControllerTestCase1.java
+   /rest/TravelCalculatePremiumControllerTestCase2.java
+   /rest/TravelCalculatePremiumControllerTestCase3.java
+   Общий код можно вынести в супер-класс TravelCalculatePremiumControllerTestCase.java.
+
+Ментор считает, что данные изменения улучшат и упростят работу с
+тест кейсами, будет создан общий документ с описанием всех тестовых
+сценариев, а так же файлы запросов и ответов будут упорядочены и с ними
+будет проще работать.
+
+Ваша задача:
+если вы согласны с предложением ментора, реализуйте его!

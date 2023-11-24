@@ -18,7 +18,7 @@ public class TravelUnterwritingTest {
         when(response.getAgreementDateTo()).thenReturn(Date.valueOf("2022-09-12"));
         when(response.getAgreementDateFrom()).thenReturn(Date.valueOf("2022-09-11"));
         TravelUnderwriting underwriting = new TravelUnderwriting();
-        assertEquals(underwriting.calculatePremium(response), BigDecimal.valueOf(86400000));
+        assertEquals(underwriting.calculatePremium(response), BigDecimal.valueOf(1));
     }
 /*
     @Test

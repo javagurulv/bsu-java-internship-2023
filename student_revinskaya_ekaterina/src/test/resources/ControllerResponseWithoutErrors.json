@@ -2,7 +2,21 @@
   "errors": null,
   "personFirstName": "Vasja",
   "personLastName": "Pupkin",
-  "agreementDateFrom": "2025-05-12",
-  "agreementDateTo": "2025-05-19",
-  "agreementPrice": 7
+  "agreementDateFrom": "2025-05-25",
+  "agreementDateTo": "2025-05-29",
+  "agreementPremium": 4,
+  "risks": [
+    {
+      "riskIc": "TRAVEL_MEDICAL",
+      "premium": 4
+    },
+    {
+      "riskIc": "TRAVEL_CANCELLATION",
+      "premium": 0
+    },
+    {
+      "riskIc": "TRAVEL_LOSS_BAGGAGE",
+      "premium": 0
+    }
+  ]
 }
