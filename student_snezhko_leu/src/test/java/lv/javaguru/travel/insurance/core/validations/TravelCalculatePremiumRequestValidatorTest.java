@@ -1,18 +1,25 @@
-package lv.javaguru.travel.insurance.core;
+package lv.javaguru.travel.insurance.core.validations;
 
+import lv.javaguru.travel.insurance.core.ValidationError;
+import lv.javaguru.travel.insurance.core.validations.RequestValidator;
+//import lv.javaguru.travel.insurance.core.validations.TravelCalculatePremiumRequestValidator;
+import lv.javaguru.travel.insurance.core.validations.TravelCalculatePremiumRequestValidator;
 import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import java.time.LocalDate;
-import java.util.*;
-
 import java.util.Date;
 import java.util.List;
-import java.sql.*;
 
+@ExtendWith(MockitoExtension.class)
 public class TravelCalculatePremiumRequestValidatorTest {
     private TravelCalculatePremiumRequestValidator validator = new TravelCalculatePremiumRequestValidator();
     private TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);

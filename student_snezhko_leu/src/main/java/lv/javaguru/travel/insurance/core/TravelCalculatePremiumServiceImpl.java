@@ -1,5 +1,7 @@
 package lv.javaguru.travel.insurance.core;
 
+//import lv.javaguru.travel.insurance.core.validations.TravelCalculatePremiumRequestValidator;
+import lv.javaguru.travel.insurance.core.validations.RequestValidator;
 import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +12,7 @@ import java.util.List;
 @Component
 class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService {
 
-    @Autowired
-    private TravelCalculatePremiumRequestValidator validator = new TravelCalculatePremiumRequestValidator();
+    @Autowired private RequestValidator validator;
     @Override
     public TravelCalculatePremiumResponse calculatePremium(TravelCalculatePremiumRequest request) {
         List<ValidationError> errors = validator.validate(request);
