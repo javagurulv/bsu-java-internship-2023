@@ -1,5 +1,6 @@
 package lv.javaguru.travel.insurance.core;
 
+import lv.javaguru.travel.insurance.core.validations.TravelCalculatePremiumRequestValidatorImpl;
 import lv.javaguru.travel.insurance.core.validations.TravelRequestValidation;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
@@ -10,20 +11,16 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.util.ReflectionTestUtils;
 
-import javax.swing.text.html.Option;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
-class TravelCalculatePremiumRequestValidatorTest {
+class TravelCalculatePremiumRequestValidatorImplTest {
     @Mock private TravelRequestValidation validationObject;
     @Mock private  TravelCalculatePremiumRequest request;
-    @InjectMocks private TravelCalculatePremiumRequestValidator validator;
+    @InjectMocks private TravelCalculatePremiumRequestValidatorImpl validator;
     @Test
     void validateTestNotEmptyList() {
         when(validationObject.validate(request)).thenReturn(Optional.empty());
@@ -38,7 +35,7 @@ class TravelCalculatePremiumRequestValidatorTest {
         List<TravelRequestValidation> expextedList = List.of(validationObject);
         ReflectionTestUtils.setField(validator, "validations", expextedList);
         List<ValidationError> errors = validator.validate(request);
-        assertEquals(errors.size(), 1);
+        assertEquals(1, errors.size());
         assertEquals("field", errors.get(0).getField());
         assertEquals("message", errors.get(0).getMessage());
     }
