@@ -1,43 +1,47 @@
 package lv.javaguru.travel.insurance.core;
-
 import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
-import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumResponse;
+import lv.javaguru.travel.insurance.rest.ValidationError;
 import org.junit.jupiter.api.Test;
-
-import java.math.BigDecimal;
-import java.util.Calendar;
-import java.util.Date;
-
+import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TravelCalculatePremiumServiceImplTest {
 
     @Test
-    public void test_step6() {
+    public void ValidatorIsGood() {
 
-        Calendar calendar = Calendar.getInstance();
+        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest();
+        request.setPersonFirstName("Valeryia");
+        request.setPersonLastName("Kedank");
 
-        calendar.set(2022, Calendar.JANUARY, 1);
-        Date dateFrom = calendar.getTime();
+        TravelCalculatePremiumRequestValidator requestValidator = new TravelCalculatePremiumRequestValidator();
+        List<ValidationError> error = requestValidator.validate(request);
+        assertEquals(error.size(), 0);
 
-        calendar.set(2023, Calendar.JANUARY, 1);
-        Date dateTo = calendar.getTime();
+    }
 
-        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest("Valeryia",
-                "Kedank", dateFrom, dateTo);
+    @Test
+    public void ValidatorIsEmpty() {
 
-        TravelCalculatePremiumResponse response = new TravelCalculatePremiumResponse("Valeryia",
-                "Kedank", dateFrom, dateTo, BigDecimal.valueOf(365));
+        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest();
+        request.setPersonLastName("");
 
-        TravelCalculatePremiumServiceImpl service = new TravelCalculatePremiumServiceImpl();
-        TravelCalculatePremiumResponse resp_done = service.calculatePremium(request);
+        TravelCalculatePremiumRequestValidator requestValidator = new TravelCalculatePremiumRequestValidator();
+        List<ValidationError> error = requestValidator.validate(request);
+        assertEquals(error.get(0).getField(),  "personLastName");
+        assertEquals(error.get(0).getMessage(),  "Most not be empty!");
 
-        assertEquals(response.getPersonFirstName(), resp_done.getPersonFirstName());
-        assertEquals(response.getPersonLastName(), resp_done.getPersonLastName());
-        assertEquals(response.getAgreementDateFrom(), resp_done.getAgreementDateFrom());
-        assertEquals(response.getAgreementDateTo(), resp_done.getAgreementDateTo());
+    }
 
-        assertEquals(response.getAgreementPrice(), resp_done.getAgreementPrice());
+    @Test
+    public void ValidatorIsNull() {
+
+        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest();
+
+        TravelCalculatePremiumRequestValidator requestValidator = new TravelCalculatePremiumRequestValidator();
+        List<ValidationError> error = requestValidator.validate(request);
+        assertEquals(error.get(0).getField(),  "personLastName");
+        assertEquals(error.get(0).getMessage(),  "Most not be empty!");
 
     }
 

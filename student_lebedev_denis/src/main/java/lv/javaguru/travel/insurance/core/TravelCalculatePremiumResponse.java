@@ -47,8 +47,8 @@ public class TravelCalculatePremiumResponse extends CoreResponse {
         TravelCalculatePremiumResponse anotherRequest = (TravelCalculatePremiumResponse) obj;
         return this.personFirstName.equals(anotherRequest.personFirstName) &&
                 this.personLastName.equals(anotherRequest.personLastName) &&
-                this.agreementDateFrom.equals(anotherRequest.agreementDateFrom) &&
-                this.agreementDateTo.equals(anotherRequest.agreementDateTo) &&
+                //this.agreementDateFrom.equals(anotherRequest.agreementDateFrom) &&
+                //this.agreementDateTo.equals(anotherRequest.agreementDateTo) &&
                 this.agreementPrice.equals(anotherRequest.agreementPrice);
     }
 

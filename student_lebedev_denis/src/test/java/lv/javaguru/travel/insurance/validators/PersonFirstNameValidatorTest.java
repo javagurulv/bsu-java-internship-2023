@@ -1,7 +1,7 @@
-package lv.javaguru.travel.insurance.core;
+package lv.javaguru.travel.insurance.validators;
 
-import lv.javaguru.travel.insurance.validators.TravelCalculatePremiumRequestValidator;
-import lv.javaguru.travel.insurance.validators.ValidationError;
+import lv.javaguru.travel.insurance.core.DateTimeService;
+import lv.javaguru.travel.insurance.core.TravelCalculatePremiumRequest;
 import org.junit.jupiter.api.Test;
 
 import java.util.Date;
@@ -10,17 +10,18 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class TravelCalculatePremiumRequestValidatorTest {
+public class PersonFirstNameValidatorTest {
     private final DateTimeService dateTimeService = new DateTimeService();
+    private final TravelCalculatePremiumRequestValidator requestValidator = new TravelCalculatePremiumRequestValidator();
 
     @Test
-    public void shouldReturnErrorIfPersonFirstNameIsNull() {
+    public void shouldReturnErrorIfPersonFirstNameIsEmpty() {
         Date agreementDateFrom = dateTimeService.createDate("30.01.2015");
         Date agreementDateTo = dateTimeService.createDate("14.12.2022");
 
-        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest("    ", "Lebedev",
+        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest(
+                "    ", "personLastName",
                 agreementDateFrom, agreementDateTo);
-        TravelCalculatePremiumRequestValidator requestValidator = new TravelCalculatePremiumRequestValidator();
 
         List<ValidationError> validationErrors = requestValidator.validate(request);
 
@@ -30,13 +31,13 @@ public class TravelCalculatePremiumRequestValidatorTest {
     }
 
     @Test
-    public void shouldReturnErrorIfPersonFirstNameIsEmpty() {
+    public void shouldReturnErrorIfPersonFirstNameIsNull() {
         Date agreementDateFrom = dateTimeService.createDate("30.01.2015");
         Date agreementDateTo = dateTimeService.createDate("14.12.2022");
 
-        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest(null, "Lebedev",
+        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest(
+                null, "personLastName",
                 agreementDateFrom, agreementDateTo);
-        TravelCalculatePremiumRequestValidator requestValidator = new TravelCalculatePremiumRequestValidator();
 
         List<ValidationError> validationErrors = requestValidator.validate(request);
 
@@ -50,9 +51,9 @@ public class TravelCalculatePremiumRequestValidatorTest {
         Date agreementDateFrom = dateTimeService.createDate("30.01.2015");
         Date agreementDateTo = dateTimeService.createDate("14.12.2022");
 
-        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest("Denis", "Lebedev",
+        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest(
+                "personFirstName", "personLastName",
                 agreementDateFrom, agreementDateTo);
-        TravelCalculatePremiumRequestValidator requestValidator = new TravelCalculatePremiumRequestValidator();
 
         List<ValidationError> validationErrors = requestValidator.validate(request);
 
