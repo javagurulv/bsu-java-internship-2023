@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-public class DateToValidation implements TravelRequestValidation {
+class DateToValidation implements TravelRequestValidation {
     @Autowired
     ValidationErrorFactory factory;
     @Override
