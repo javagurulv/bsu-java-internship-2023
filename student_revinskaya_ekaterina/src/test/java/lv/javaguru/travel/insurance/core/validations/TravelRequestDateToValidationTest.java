@@ -19,13 +19,13 @@ import static org.mockito.Mockito.when;
 public class TravelRequestDateToValidationTest {
     @Mock private ValidationErrorFactory validationErrorFactory;
     @InjectMocks
-    TravelRequestAgreementDateToValidation dateToValidation;
+    private TravelRequestAgreementDateToValidation dateToValidation;
     @Test
     public void responseShouldContainErrorNullDateToTest() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getAgreementDateTo()).thenReturn(null);
         ValidationError validationError = mock(ValidationError.class);
-        when(validationErrorFactory.constructError("ERROR_CODE_4")).thenReturn(validationError);
+        when(validationErrorFactory.buildError("ERROR_CODE_4")).thenReturn(validationError);
         Optional<ValidationError> error= dateToValidation.validate(request);
         assertTrue(error.isPresent());
         assertEquals(error.get(), validationError);

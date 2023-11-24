@@ -92,7 +92,7 @@ public class TravelCalculatePremiumControllerTest {
                 .andReturn();
 
         String responseBody = result.getResponse().getContentAsString();
-        assertEquals(mapper.readTree(responseBody), mapper.readTree(responseJson));
+        assertEquals(mapper.readTree(responseJson), mapper.readTree(responseBody));
     }
 
 }

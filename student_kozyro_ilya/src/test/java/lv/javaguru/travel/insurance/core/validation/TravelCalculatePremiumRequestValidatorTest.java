@@ -32,20 +32,18 @@ public class TravelCalculatePremiumRequestValidatorTest {
     @Mock
     DateServiceImpl dateService;
 
+    @InjectMocks
     TravelCalculatePremiumRequestValidator validator = new TravelCalculatePremiumRequestValidator();
 
-    void initFromDateService() throws ParseException{
-        when(dateService.createDate(eq("from"), any())).thenReturn(new Date(1L));
+
+    void initFutureDateService() throws ParseException{
+        when(dateService.createDate(eq("future"), any())).thenReturn(new Date(300L));
     }
 
-    void initToDateService() throws ParseException{
-        when(dateService.createDate(eq("to"), any())).thenReturn(new Date(2L));
+    void initPastDateService() throws ParseException{
+        when(dateService.createDate(eq("past"), any())).thenReturn(new Date(150L));
     }
 
-    void initAllDateServiceMock() throws ParseException{
-        initFromDateService();
-        initToDateService();
-    }
     @Test
     void testEmptyErrorsAmountOnEmpty() {
         TravelCalculatePremiumRequest request = TravelCalculatePremiumRequest
@@ -70,7 +68,7 @@ public class TravelCalculatePremiumRequestValidatorTest {
 
     @Test
     void testEmptyErrorsContainsOneFirst() throws ParseException {
-        initFromDateService();
+        when(dateService.createDate(eq("from"), any())).thenReturn(new Date(100L));
         TravelCalculatePremiumRequest request = TravelCalculatePremiumRequest
                 .builder()
                 .personFirstName("Gregory")
@@ -85,7 +83,8 @@ public class TravelCalculatePremiumRequestValidatorTest {
 
     @Test
     void testEmptyErrorsContainsOneSecond() throws ParseException {
-        initToDateService();
+        when(dateService.createDate(eq("to"), any())).thenReturn(new Date(200L));
+        when(dateService.getTodayDate()).thenReturn(new Date(150L));
         TravelCalculatePremiumRequest request = TravelCalculatePremiumRequest
                 .builder()
                 .personFirstName("Gregory")
@@ -99,7 +98,9 @@ public class TravelCalculatePremiumRequestValidatorTest {
     }
     @Test
     void testEmptyErrorsContainsOneThird() throws ParseException {
-        initAllDateServiceMock();
+        when(dateService.createDate(eq("from"), any())).thenReturn(new Date(100L));
+        when(dateService.createDate(eq("to"), any())).thenReturn(new Date(200L));
+        when(dateService.getTodayDate()).thenReturn(new Date(150L));
         TravelCalculatePremiumRequest request = TravelCalculatePremiumRequest
                 .builder()
                 .personFirstName("Gregory")
@@ -114,7 +115,9 @@ public class TravelCalculatePremiumRequestValidatorTest {
 
     @Test
     void testEmptyErrorsContainsOneFourth() throws ParseException {
-        initAllDateServiceMock();
+        when(dateService.createDate(eq("from"), any())).thenReturn(new Date(100L));
+        when(dateService.createDate(eq("to"), any())).thenReturn(new Date(200L));
+        when(dateService.getTodayDate()).thenReturn(new Date(150L));
         TravelCalculatePremiumRequest request = TravelCalculatePremiumRequest
                 .builder()
                 .personLastName("Meow")
@@ -129,7 +132,9 @@ public class TravelCalculatePremiumRequestValidatorTest {
 
     @Test
     void testAllOk() throws ParseException {
-        initAllDateServiceMock();
+        when(dateService.createDate(eq("from"), any())).thenReturn(new Date(100L));
+        when(dateService.createDate(eq("to"), any())).thenReturn(new Date(200L));
+        when(dateService.getTodayDate()).thenReturn(new Date(150L));
         TravelCalculatePremiumRequest request = TravelCalculatePremiumRequest
                 .builder()
                 .personFirstName("Gregory")
@@ -145,7 +150,8 @@ public class TravelCalculatePremiumRequestValidatorTest {
 
     @Test
     void testDateTermsOk() throws ParseException {
-        initAllDateServiceMock();
+        when(dateService.createDate(eq("from"), any())).thenReturn(new Date(100L));
+        when(dateService.createDate(eq("to"), any())).thenReturn(new Date(200L));
         TravelCalculatePremiumRequest request = TravelCalculatePremiumRequest
                 .builder()
                 .agreementDateFrom(dateService.createDate("from", "f"))
@@ -157,7 +163,8 @@ public class TravelCalculatePremiumRequestValidatorTest {
 
     @Test
     void testDateTermsNotOk() throws ParseException {
-        initAllDateServiceMock();
+        when(dateService.createDate(eq("from"), any())).thenReturn(new Date(100L));
+        when(dateService.createDate(eq("to"), any())).thenReturn(new Date(200L));
         TravelCalculatePremiumRequest request = TravelCalculatePremiumRequest
                 .builder()
                 .agreementDateFrom(dateService.createDate("to", "f"))
@@ -167,5 +174,31 @@ public class TravelCalculatePremiumRequestValidatorTest {
         var error = validator.validateDatesField(request);
 
         Assertions.assertFalse(error.isEmpty());
+    }
+
+    @Test
+    void testAgreementDateToFail() throws ParseException {
+        when(dateService.createDate(eq("toPast"), any())).thenReturn(new Date(300L));
+        when(dateService.getTodayDate()).thenReturn(new Date(500L));
+
+        TravelCalculatePremiumRequest request = TravelCalculatePremiumRequest
+                .builder()
+                .agreementDateTo(dateService.createDate("toPast", "f"))
+                .build();
+        var error = validator.validateAgreementDateFuture(request);
+        Assertions.assertFalse(error.isEmpty());
+    }
+
+    @Test
+    void testAgreementDateToOk() throws ParseException {
+        when(dateService.createDate(eq("toFuture"), any())).thenReturn(new Date(700L));
+        when(dateService.getTodayDate()).thenReturn(new Date(500L));
+
+        TravelCalculatePremiumRequest request = TravelCalculatePremiumRequest
+                .builder()
+                .agreementDateTo(dateService.createDate("toFuture", "f"))
+                .build();
+        var error = validator.validateAgreementDateFuture(request);
+        Assertions.assertTrue(error.isEmpty());
     }
 }

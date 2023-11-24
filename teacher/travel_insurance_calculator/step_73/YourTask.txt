@@ -1,0 +1,51 @@
+Ментор предлагает следующий план реализации InsuranceLimitCoefficient:
+
+1. Создать в базе данных классификатор MEDICAL_RISK_LIMIT_LEVEL
+со следующими доступными значениями:
+- LEVEL_10000
+- LEVEL_15000
+- LEVEL_20000
+- LEVEL_50000.
+
+2. Добавить в запрос поле medicalRiskLimitLevel.
+
+3. Добавить в ответ поле medicalRiskLimitLevel.
+
+4. Создать свойство medical.risk.limit.level.enabled и
+добавить его в application.properties. Это свойство
+может принимать два значения:
+true - функциональность включена;
+false - функциональность выключена.
+
+5. Создать валидацию, если medical.risk.limit.level.enabled=true
+то поле в запросе medicalRiskLimitLevel является обязательным.
+
+6. Создать валидацию, если medical.risk.limit.level.enabled=true
+   то поле в запросе medicalRiskLimitLevel должно содержать
+   одно из значений классификатора MEDICAL_RISK_LIMIT_LEVEL.
+
+7. Создать в базе данных таблицу MEDICAL_RISK_LIMIT_LEVEL
+с полями: MEDICAL_RISK_LIMIT_LEVEL_IC, COEFFICIENT и заполнить ее
+значениями:
+- LEVEL_10000 -> коэффициент 1.0
+- LEVEL_15000 -> коэффициент 1.2
+- LEVEL_20000 -> коэффициент 1.5
+- LEVEL_50000 -> коэффициент 2.0
+
+8. Создать доменный объект и репозиторий для таблицы
+MEDICAL_RISK_LIMIT_LEVEL.
+
+9. Поменять формулу расчёта медицинского риска на:
+premium = CountryDefaultDayRate * DayCount * AgeCoefficient * InsuranceLimitCoefficient.
+
+
+
+Ваша задача: обсудите предложенный ментором план реализации
+InsuranceLimitCoefficient. Реализовать первый пункт этого плана:
+
+1. Создать в базе данных классификатор MEDICAL_RISK_LIMIT_LEVEL
+со следующими доступными значениями:
+- LEVEL_10000
+- LEVEL_15000
+- LEVEL_20000
+- LEVEL_50000.

@@ -18,7 +18,7 @@ import static org.mockito.Mockito.when;
 
 public class TravelRequestPersonLastNameValidationTest {
     @InjectMocks
-    TravelRequestPersonLastNameValidation personLastNameValidation;
+    private TravelRequestPersonLastNameValidation personLastNameValidation;
     @Mock
     private ValidationErrorFactory validationErrorFactory;
     @Test
@@ -26,7 +26,7 @@ public class TravelRequestPersonLastNameValidationTest {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getPersonLastName()).thenReturn("");
         ValidationError validationError = mock(ValidationError.class);
-        when(validationErrorFactory.constructError("ERROR_CODE_2")).thenReturn(validationError);
+        when(validationErrorFactory.buildError("ERROR_CODE_2")).thenReturn(validationError);
         Optional<ValidationError> error= personLastNameValidation.validate(request);
         assertTrue(error.isPresent());
         assertEquals(error.get(), validationError);
@@ -36,7 +36,7 @@ public class TravelRequestPersonLastNameValidationTest {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getPersonLastName()).thenReturn(null);
         ValidationError validationError = mock(ValidationError.class);
-        when(validationErrorFactory.constructError("ERROR_CODE_2")).thenReturn(validationError);
+        when(validationErrorFactory.buildError("ERROR_CODE_2")).thenReturn(validationError);
         Optional<ValidationError> error= personLastNameValidation.validate(request);
         assertTrue(error.isPresent());
         assertEquals(error.get(), validationError);

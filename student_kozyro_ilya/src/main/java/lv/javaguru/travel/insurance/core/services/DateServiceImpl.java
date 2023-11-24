@@ -19,6 +19,11 @@ public class DateServiceImpl implements DateService{
     }
 
     @Override
+    public Date getTodayDate() {
+        return new Date();
+    }
+
+    @Override
     public BigDecimal getDaysBetween(Date from, Date to) {
         return BigDecimal.valueOf(TimeUnit.DAYS.convert(
                 to.getTime() - from.getTime(),
