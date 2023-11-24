@@ -19,7 +19,7 @@ import static org.mockito.Mockito.when;
 public class TravelRequestDateToValidationTest {
     @Mock private ValidationErrorFactory validationErrorFactory;
     @InjectMocks
-    TravelRequestAgreementDateToValidation dateToValidation;
+    private TravelRequestAgreementDateToValidation dateToValidation;
     @Test
     public void responseShouldContainErrorNullDateToTest() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
