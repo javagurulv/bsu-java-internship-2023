@@ -1,6 +1,5 @@
 package lv.javaguru.travel.insurance.core.validations;
 
-import lv.javaguru.travel.insurance.core.ErrorCodeUtil;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.Test;
@@ -21,7 +20,7 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 public class DateFromIsBeforeDateToValidationTest {
     @Mock
-    ErrorCodeUtil errorCodeUtil;
+    ValidationErrorFactory factory;
     @InjectMocks
     private DateFromIsBeforeDateToValidation validation;
 
@@ -30,7 +29,7 @@ public class DateFromIsBeforeDateToValidationTest {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getAgreementDateFrom()).thenReturn(createDate("20.12.2025"));
         when(request.getAgreementDateTo()).thenReturn(createDate("19.12.2025"));
-        when(errorCodeUtil.getErrorDescription("ERROR_CODE_7")).thenReturn("Date from must be before date to!");
+        when(factory.buildError("ERROR_CODE_7")).thenReturn(new ValidationError("ERROR_CODE_7", "Date from must be before date to!"));
         Optional<ValidationError> validationError = validation.validate(request);
         assertThat(validationError).isPresent();
         assertThat(validationError.get().getErrorCode()).isEqualTo("ERROR_CODE_7");

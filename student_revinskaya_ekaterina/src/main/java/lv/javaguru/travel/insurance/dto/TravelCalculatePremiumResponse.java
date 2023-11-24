@@ -1,11 +1,9 @@
 package lv.javaguru.travel.insurance.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lv.javaguru.travel.insurance.core.underwriting.TravelRiskPremiumCalculator;
 
 import java.math.BigDecimal;
 import java.util.Date;

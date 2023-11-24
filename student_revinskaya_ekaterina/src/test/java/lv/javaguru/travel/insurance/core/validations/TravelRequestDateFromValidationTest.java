@@ -17,7 +17,7 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 public class TravelRequestDateFromValidationTest {
     @InjectMocks
-    TravelRequestAgreementDateFromValidation dateFromValidation;
+    private TravelRequestAgreementDateFromValidation dateFromValidation;
 
     @Mock
     private ValidationErrorFactory validationErrorFactory;

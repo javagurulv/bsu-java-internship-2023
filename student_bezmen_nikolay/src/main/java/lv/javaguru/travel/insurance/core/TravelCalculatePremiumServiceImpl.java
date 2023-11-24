@@ -1,34 +1,42 @@
 package lv.javaguru.travel.insurance.core;
 
-import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
-import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumResponse;
+import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumResponse;
+import lv.javaguru.travel.insurance.dto.ValidationError;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
-import java.util.Date;
-import java.util.concurrent.TimeUnit;
+import java.util.List;
 
 @Component
 class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService {
+    @Autowired
+    private TravelCalculatePremiumRequestValidator requestValidator;
+    @Autowired private TravelPremiumUnderwriting premiumUnderwriting;
+
 
     @Override
     public TravelCalculatePremiumResponse calculatePremium(TravelCalculatePremiumRequest request) {
-        TravelCalculatePremiumResponse travelCalculatePremiumResponse = new TravelCalculatePremiumResponse();
+        List<ValidationError> errorList = requestValidator.validate(request);
 
-        Date from = request.getAgreementDateFrom();
-        Date to = request.getAgreementDateTo();
+        return errorList.isEmpty() ?
+                buildResponse(request,premiumUnderwriting.calculatePremium(request) ) : buildResponse();
+    }
 
-        travelCalculatePremiumResponse.setAgreementDateFrom(from);
-        travelCalculatePremiumResponse.setAgreementDateTo(to);
-        travelCalculatePremiumResponse.setPersonFirstName(request.getPersonFirstName());
-        travelCalculatePremiumResponse.setPersonLastName(request.getPersonLastName());
-        travelCalculatePremiumResponse.setAgreementPrice(
-                new BigDecimal(
-                        TimeUnit.DAYS.convert(to.getTime() - from.getTime(), TimeUnit.MILLISECONDS)
-                )
-        );
+    private TravelCalculatePremiumResponse buildResponse(){
+        return new TravelCalculatePremiumResponse();
+    }
 
-        return travelCalculatePremiumResponse;
+    private TravelCalculatePremiumResponse buildResponse(TravelCalculatePremiumRequest request, BigDecimal duration){
+        TravelCalculatePremiumResponse response = new TravelCalculatePremiumResponse();
+
+        response.setPersonFirstName(request.getPersonFirstName());
+        response.setPersonLastName(request.getPersonLastName());
+        response.setAgreementDateFrom(request.getAgreementDateFrom());
+        response.setAgreementDateTo(request.getAgreementDateTo());
+        response.setAgreementPrice(duration);
+        return response;
     }
 
 }
