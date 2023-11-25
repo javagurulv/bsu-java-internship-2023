@@ -58,6 +58,19 @@ CREATE TABLE IF NOT EXISTS `age_coefficient` (
     AUTO_INCREMENT = 1002;
 
 
+CREATE TABLE IF NOT EXISTS `medical_risk_limit_level` (
+                                                          `id` BIGINT NOT NULL AUTO_INCREMENT,
+                                                          `medical_risk_limit_level_ic` VARCHAR(200) NOT NULL,
+                                                          `coefficient` DECIMAL(10,2) NOT NULL,
+                                                          PRIMARY KEY (`id`)
+)
+    ENGINE = InnoDB
+    AUTO_INCREMENT = 1002;
+
+CREATE UNIQUE INDEX `ix_medical_risk_limit_level_limit_level_ic`
+    ON `medical_risk_limit_level` (`medical_risk_limit_level_ic`);
+
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

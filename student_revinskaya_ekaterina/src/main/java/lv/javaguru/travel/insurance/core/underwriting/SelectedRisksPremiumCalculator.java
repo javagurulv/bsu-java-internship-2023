@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Optional;
 
 @Component
 class SelectedRisksPremiumCalculator {
@@ -14,7 +13,7 @@ class SelectedRisksPremiumCalculator {
     private List<TravelRiskPremiumCalculator> riskPremiumCalculators;
 
     List<TravelRisk> calculateSelectedRisksPremium(TravelCalculatePremiumRequest request) {
-        return request.getSelected_risks().stream()
+        return request.getSelectedRisks().stream()
                 .map(this::getCalculatorByIc)
                 .map(calculator -> new TravelRisk(calculator.getRiskIc(), calculator.calculatePremium(request)))
                 .toList();

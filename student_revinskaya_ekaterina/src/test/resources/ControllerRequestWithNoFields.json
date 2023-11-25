@@ -4,6 +4,6 @@
   "agreementDateFrom" : null,
   "agreementDateTo" : null,
   "birthday" : null,
-  "selected_risks": null,
+  "selectedRisks": null,
   "country": null
 }
