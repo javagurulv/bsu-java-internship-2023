@@ -31,7 +31,7 @@ class AgreementDateToValidationTest {
         when(request.getAgreementDateTo()).thenReturn(null);
         ValidationError validationError = mock(ValidationError.class);
         when(errorFactory.buildError("ERROR_CODE_4")).thenReturn(validationError);
-        Optional<ValidationError> errorOpt = validation.validate(request);
+        Optional<ValidationError> errorOpt = validation.execute(request);
         assertTrue(errorOpt.isPresent());
         assertSame(errorOpt.get(), validationError);
     }
@@ -40,7 +40,7 @@ class AgreementDateToValidationTest {
     public void shouldNotReturnErrorWhenAgreementDateToIsPresent() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getAgreementDateTo()).thenReturn(createDate("01.01.2025"));
-        Optional<ValidationError> errorOpt = validation.validate(request);
+        Optional<ValidationError> errorOpt = validation.execute(request);
         assertTrue(errorOpt.isEmpty());
         verifyNoInteractions(errorFactory);
     }

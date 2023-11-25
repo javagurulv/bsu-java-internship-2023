@@ -18,7 +18,7 @@ import static org.mockito.Mockito.when;
 
 public class TravelRequestPersonLastNameValidationTest {
     @InjectMocks
-    TravelRequestPersonLastNameValidation personLastNameValidation;
+    private TravelRequestPersonLastNameValidation personLastNameValidation;
     @Mock
     private ValidationErrorFactory validationErrorFactory;
     @Test

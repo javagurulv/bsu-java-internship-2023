@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
 @Getter
 @Setter
@@ -13,5 +14,5 @@ import java.math.BigInteger;
 @NoArgsConstructor
 public class TravelRisk {
     private String riskIc;
-    private BigInteger premium;
+    private BigDecimal premium;
 }

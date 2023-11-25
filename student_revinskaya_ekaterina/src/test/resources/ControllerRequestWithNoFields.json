@@ -3,5 +3,7 @@
   "personLastName" : null,
   "agreementDateFrom" : null,
   "agreementDateTo" : null,
-  "selected_risks": null
+  "birthday" : null,
+  "selected_risks": null,
+  "country": null
 }

@@ -1,0 +1,21 @@
+Клиент в срочном порядке попросил создать в приложении
+веб страницу с расчётом премии. Клиент хочет дать возможность
+своим сотрудникам и партнёрам использовать веб страницу для
+более удобной работы сотрудников с приложением.
+
+Ментор внёс изменения в приложение и создал требуемую веб страницу.
+
+Изменения коснулись:
+teacher/step_85/build.gradle - добавлена зависимость Thymeleaf
+teacher/step_85/src/main/resources/application.properties - добавлена конфигурация Thymeleaf
+teacher/step_85/src/main/resources/templates - добавлен шаблон страницы на Thymeleaf
+teacher/step_85/src/main/java/lv/javaguru/java2/insurance/web - добавлен контроллер веб страницы
+teacher/step_85/src/main/java/lv/javaguru/java2/insurance/rest/TravelCalculatePremiumController.java - изменён URL
+teacher/step_85/src/test/java/lv/javaguru/java2/insurance/rest/TravelCalculatePremiumControllerTestCase.java - изменён URL
+
+Ваша задача:
+
+Разобраться с изменениями сделанными менторов в приложении.
+Узнать про HTTP GET, POST, Thymeleaf, URL, HTML.
+Прояснить при помощи интернета или задать все возникшие вопросы ментору.
+Запустить приложение и по тестировать созданную ментором веб страницу.

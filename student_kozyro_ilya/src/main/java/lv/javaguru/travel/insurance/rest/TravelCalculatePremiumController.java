@@ -1,6 +1,7 @@
 package lv.javaguru.travel.insurance.rest;
 
 import lv.javaguru.travel.insurance.core.TravelCalculatePremiumService;
+import lv.javaguru.travel.insurance.core.logger.MLogger;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,12 +16,16 @@ import static lv.javaguru.travel.insurance.rest.RestConfig.insuranceTravel;
 @RequestMapping(RestConfig.insuranceTravel)
 public class TravelCalculatePremiumController {
 
-	@Autowired private TravelCalculatePremiumService calculatePremiumService;
+	@Autowired
+	private TravelCalculatePremiumService calculatePremiumService;
 
+	@Autowired
+	MLogger mLogger;
 	@PostMapping(path = "/",
 			consumes = "application/json",
 			produces = "application/json")
 	public TravelCalculatePremiumResponse calculatePremium(@RequestBody TravelCalculatePremiumRequest request) {
+		mLogger.logTravelPremiumRequest(request);
 		return calculatePremiumService.calculatePremium(request);
 	}
 

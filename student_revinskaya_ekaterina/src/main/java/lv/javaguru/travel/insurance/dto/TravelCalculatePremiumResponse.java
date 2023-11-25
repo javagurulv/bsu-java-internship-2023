@@ -1,11 +1,12 @@
 package lv.javaguru.travel.insurance.dto;
 
+import lv.javaguru.travel.insurance.core.util.BigDecimalSerializer;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.AllArgsConstructor;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lv.javaguru.travel.insurance.core.underwriting.TravelRiskPremiumCalculator;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -23,10 +24,12 @@ public class TravelCalculatePremiumResponse  extends CoreResponse{
     private Date agreementDateFrom;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date agreementDateTo;
-
+    private String country;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private Date birthday;
+    @JsonSerialize(using = BigDecimalSerializer.class)
     private BigDecimal agreementPremium;
     private List<TravelRisk> risks;
-
 
     public TravelCalculatePremiumResponse(List<ValidationError> errors) {
         super(errors);

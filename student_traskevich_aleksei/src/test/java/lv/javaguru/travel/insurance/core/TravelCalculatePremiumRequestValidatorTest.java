@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
@@ -32,7 +33,7 @@ public class TravelCalculatePremiumRequestValidatorTest {
         List<ValidationError> errors = validator.validate(new TravelCalculatePremiumRequest(
                 null, "firstN", dateLess, dateMore
         ));
-        assertTrue(!errors.isEmpty());
+        assertFalse(errors.isEmpty());
     }
 
 
@@ -41,7 +42,7 @@ public class TravelCalculatePremiumRequestValidatorTest {
         List<ValidationError> errors = validator.validate(new TravelCalculatePremiumRequest(
                 "", "firstN", dateLess, dateMore
         ));
-        assertTrue(!errors.isEmpty());
+        assertFalse(errors.isEmpty());
     }
 
 
@@ -50,7 +51,7 @@ public class TravelCalculatePremiumRequestValidatorTest {
         List<ValidationError> errors = validator.validate(new TravelCalculatePremiumRequest(
                 "firstN", null, dateLess, dateMore
         ));
-        assertTrue(!errors.isEmpty());
+        assertFalse(errors.isEmpty());
     }
 
 
@@ -59,7 +60,7 @@ public class TravelCalculatePremiumRequestValidatorTest {
         List<ValidationError> errors = validator.validate(new TravelCalculatePremiumRequest(
                 "firstN", "", dateLess, dateMore
         ));
-        assertTrue(!errors.isEmpty());
+        assertFalse(errors.isEmpty());
     }
 
     @Test
@@ -68,7 +69,7 @@ public class TravelCalculatePremiumRequestValidatorTest {
                 new TravelCalculatePremiumRequest(
                         "firstN", "lastN", null, dateMore)
         );
-        assertTrue(!errors.isEmpty());
+        assertFalse(errors.isEmpty());
     }
 
     @Test
@@ -83,13 +84,13 @@ public class TravelCalculatePremiumRequestValidatorTest {
                 new TravelCalculatePremiumRequest(
                         "firstN", "lastN", dateMore, dateLess)
         );
-        assertTrue(!errors2.isEmpty());
+        assertFalse(errors2.isEmpty());
 
         List<ValidationError> errors3 = validator.validate(
                 new TravelCalculatePremiumRequest(
                         "firstN", "lastN", dateLess, dateLess)
         );
-        assertTrue(!errors3.isEmpty());
+        assertFalse(errors3.isEmpty());
     }
 
 

@@ -1,6 +1,5 @@
 package lv.javaguru.travel.insurance.core.validations;
 
-import lv.javaguru.travel.insurance.core.ErrorCodeUtil;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.Test;
@@ -19,7 +18,7 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 public class DateToValidatonTest {
     @Mock
-    ErrorCodeUtil errorCodeUtil;
+    ValidationErrorFactory factory;
     @InjectMocks
     private DateToValidation validation;
 
@@ -28,7 +27,7 @@ public class DateToValidatonTest {
     void shouldReturnErrorWhenAgreementDateFromIsEmpty() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getAgreementDateTo()).thenReturn(null);
-        when(errorCodeUtil.getErrorDescription("ERROR_CODE_4")).thenReturn("Date to field must not be empty!");
+        when(factory.buildError("ERROR_CODE_4")).thenReturn(new ValidationError("ERROR_CODE_4","Date to field must not be empty!"));
         Optional<ValidationError> validationError = validation.validate(request);
         assertThat(validationError).isPresent();
         assertThat(validationError.get().getErrorCode()).isEqualTo("ERROR_CODE_4");

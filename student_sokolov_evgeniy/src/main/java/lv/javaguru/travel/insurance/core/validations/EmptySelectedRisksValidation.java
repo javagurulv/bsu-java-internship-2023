@@ -8,12 +8,12 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-class EmptySelectedRisksValidation extends TravelRequestValidationImpl {
+class EmptySelectedRisksValidation implements TravelRequestValidation {
 
     @Autowired private ValidationErrorFactory errorFactory;
 
     @Override
-    public Optional<ValidationError> validate(TravelCalculatePremiumRequest request) {
+    public Optional<ValidationError> execute(TravelCalculatePremiumRequest request) {
         return (request.getSelectedRisks() == null || request.getSelectedRisks().isEmpty())
                 ? Optional.of(errorFactory.buildError("ERROR_CODE_6"))
                 : Optional.empty();
