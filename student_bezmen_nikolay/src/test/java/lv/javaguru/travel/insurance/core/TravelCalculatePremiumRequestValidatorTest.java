@@ -28,8 +28,8 @@ public class TravelCalculatePremiumRequestValidatorTest {
     static TravelCalculatePremiumRequest request;
     private static final String FIRST_NAME = "firstName";
     private static final String LAST_NAME = "lastName";
-    private static final Date DATE_FROM = createDate("2000-11-11");
-    private static final Date DATE_TO = createDate("2000-12-11");
+    private static final Date DATE_FROM = createDate("2100-11-11");
+    private static final Date DATE_TO = createDate("2100-12-11");
 
     @BeforeAll
     static void setup() {
@@ -61,8 +61,8 @@ public class TravelCalculatePremiumRequestValidatorTest {
                 Arguments.of(FIRST_NAME, LAST_NAME, null, DATE_TO, List.of(
                         new ValidationError("agreementDateFrom", "Must not be empty!"))),
                 Arguments.of(FIRST_NAME, LAST_NAME,
-                        createDate("2000-11-11"),
-                        createDate("2000-11-10"), List.of(
+                        createDate("2100-11-11"),
+                        createDate("2100-11-10"), List.of(
                                 new ValidationError("agreementDateFrom, agreementDateTo",
                                         "dateFrom must be before dateTo"))),
                 Arguments.of(FIRST_NAME, "", DATE_FROM, DATE_TO, List.of(

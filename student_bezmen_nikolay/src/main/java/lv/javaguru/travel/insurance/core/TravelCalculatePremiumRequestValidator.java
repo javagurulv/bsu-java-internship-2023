@@ -18,6 +18,7 @@ public class TravelCalculatePremiumRequestValidator {
         validateAgreementDateFrom(request).ifPresent(errors::add);
         validateAgreementDateTo(request).ifPresent(errors::add);
         validateThatDateFromBeforeDateTo(request).ifPresent(errors::add);
+        validateThatDateFromAndDateToInFuture(request).ifPresent(errors::add);
 
         return errors;
     }
@@ -56,6 +57,15 @@ public class TravelCalculatePremiumRequestValidator {
         return (!(from.before(to) || from.equals(to)))
                 ? Optional.of(new ValidationError("agreementDateFrom, agreementDateTo",
                 "dateFrom must be before dateTo"))
+                : Optional.empty();
+    }
+
+    private Optional<ValidationError> validateThatDateFromAndDateToInFuture(TravelCalculatePremiumRequest request) {
+        Date to = request.getAgreementDateTo();
+
+        return (to != null && to.before(new Date()))
+                ? Optional.of(new ValidationError("agreementDateTo",
+                "dateTo should not be from the past"))
                 : Optional.empty();
     }
 }

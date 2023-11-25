@@ -89,6 +89,14 @@ public class TravelCalculatePremiumControllerTest {
                 "rest/TravelCalculatePremiumResponse_lastNameIsNull.json"
         );
     }
+
+    @Test
+    public void testCorrectResponseIfDateToInPast() throws Exception {
+        compareResponseFromRequest(
+                "rest/TravelCalculatePremiumRequest_dateToInPast.json",
+                "rest/TravelCalculatePremiumResponse_dateToInPast.json"
+        );
+    }
     private void compareResponseFromRequest(String pathToRequestJsonFile,
                                                    String pathToCorrectResponseJsonFile) throws Exception {
         String jsonRequestToString = readJson.parseData(pathToRequestJsonFile);
