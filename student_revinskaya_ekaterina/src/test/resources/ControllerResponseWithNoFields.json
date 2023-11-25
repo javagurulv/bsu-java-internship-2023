@@ -26,6 +26,7 @@
   "agreementDateFrom": null,
   "agreementDateTo": null,
   "country": null,
+  "birthday": null,
   "agreementPremium": null,
   "risks": null
 }

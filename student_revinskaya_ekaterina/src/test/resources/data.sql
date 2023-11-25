@@ -87,3 +87,6 @@ insert into classifier_values (classifier_id, ic, description)
 select classifiers.id, 'JAPAN', 'country of visit is Japan'
 from classifiers where classifiers.title = 'COUNTRY';
 
+ insert into country_default_day_rate (  country_ic, default_day_rate)
+ values('LATVIA', 1.00), ('SPAIN', 2.50), ('JAPAN', 3.50);
+
