@@ -82,7 +82,7 @@ public class TravelCalculatePremiumControllerTest {
 
     @Test
     public void allFieldsAreNull() throws Exception {
-        executeAndCompare("rest/TravelCalculatePremiumRequest_allFieldsAreNull.json",
+        executeAndCompare("rest/TravelCalculatePremiumRequest_AllFieldsAreNull.json",
                 "rest/TravelCalculatePremiumResponse_AllFieldsAreNull.json");
     }
 
