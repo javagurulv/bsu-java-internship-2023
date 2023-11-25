@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class TravelCalculatePremiumResponseLogger {
-    private static final Logger logger = LoggerFactory.getLogger(TravelCalculatePremiumRequestLogger.class);
+    private static final Logger logger = LoggerFactory.getLogger(TravelCalculatePremiumResponseLogger.class);
 
     public void logResponse(TravelCalculatePremiumResponse response) {
         ObjectMapper objectMapper = new ObjectMapper();
