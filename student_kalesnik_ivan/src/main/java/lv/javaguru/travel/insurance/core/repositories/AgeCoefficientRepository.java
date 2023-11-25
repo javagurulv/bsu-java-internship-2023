@@ -15,5 +15,4 @@ public interface AgeCoefficientRepository
             "and ac.ageTo >= :age")
     Optional<AgeCoefficient> findCoefficient(@Param("age") Integer age);
 
-
 }

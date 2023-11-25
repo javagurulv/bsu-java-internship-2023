@@ -29,7 +29,7 @@ public class TravelRequestNotNullCountryValidationTest {
     public void responseShouldContainErrorEmptyCountryTest() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getCountry()).thenReturn("");
-        when(request.getSelected_risks()).thenReturn(List.of("TRAVEL_MEDICAL"));
+        when(request.getSelectedRisks()).thenReturn(List.of("TRAVEL_MEDICAL"));
         ValidationError validationError = mock(ValidationError.class);
         when(validationErrorFactory.buildError(eq("ERROR_CODE_10"), anyList())).thenReturn(validationError);
         Optional<ValidationError> error= notNullCountryValidation.validate(request);
@@ -40,7 +40,7 @@ public class TravelRequestNotNullCountryValidationTest {
     public void responseShouldContainErrorNullCountryTest() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getCountry()).thenReturn(null);
-        when(request.getSelected_risks()).thenReturn(List.of("TRAVEL_MEDICAL"));
+        when(request.getSelectedRisks()).thenReturn(List.of("TRAVEL_MEDICAL"));
         ValidationError validationError = mock(ValidationError.class);
         when(validationErrorFactory.buildError(eq("ERROR_CODE_10"), anyList())).thenReturn(validationError);
         Optional<ValidationError> error= notNullCountryValidation.validate(request);
@@ -51,7 +51,7 @@ public class TravelRequestNotNullCountryValidationTest {
     public void responseShouldNotContainErrorNullCountryTest() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getCountry()).thenReturn(null);
-        when(request.getSelected_risks()).thenReturn(List.of("NOT_MEDICAL_RISK"));
+        when(request.getSelectedRisks()).thenReturn(List.of("NOT_MEDICAL_RISK"));
         Optional<ValidationError> error= notNullCountryValidation.validate(request);
         assertTrue(error.isEmpty());
     }
