@@ -1,46 +1,31 @@
 package lv.javaguru.travel.insurance.rest;
 
+import lombok.*;
+import java.math.BigDecimal;
 import java.util.Date;
-
+import java.util.concurrent.TimeUnit;
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode
 public class TravelCalculatePremiumResponse {
 
     private String personFirstName;
     private String personLastName;
     private Date agreementDateFrom;
     private Date agreementDateTo;
+    private BigDecimal agreementPrice;
 
-    public TravelCalculatePremiumResponse() {}
-
-    public String getPersonFirstName() {
-        return personFirstName;
-    }
-
-    public void setPersonFirstName(String personFirstName) {
+    public TravelCalculatePremiumResponse(String personFirstName,
+                                          String personLastName,
+                                          Date agreementDateFrom,
+                                          Date agreementDateTo) {
         this.personFirstName = personFirstName;
-    }
-
-    public String getPersonLastName() {
-        return personLastName;
-    }
-
-    public void setPersonLastName(String personLastName) {
         this.personLastName = personLastName;
-    }
-
-    public Date getAgreementDateFrom() {
-        return agreementDateFrom;
-    }
-
-    public void setAgreementDateFrom(Date agreementDateFrom) {
         this.agreementDateFrom = agreementDateFrom;
-    }
-
-    public Date getAgreementDateTo() {
-        return agreementDateTo;
-    }
-
-    public void setAgreementDateTo(Date agreementDateTo) {
         this.agreementDateTo = agreementDateTo;
+        long diff = agreementDateTo.getTime() - agreementDateFrom.getTime();
+        this.agreementPrice = BigDecimal.valueOf(TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS));
     }
-
 }

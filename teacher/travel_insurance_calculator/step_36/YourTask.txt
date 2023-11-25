@@ -1,0 +1,14 @@
+Ваша задача: написать SQL скрипт по заполнению таблиц
+classifiers и classifier_values значениями для классификатора
+RISK_TYPE.
+
+RISK_TYPE возможные значения:
+TRAVEL_MEDICAL
+TRAVEL_CANCELLATION
+TRAVEL_LOSS_BAGGAGE
+TRAVEL_THIRD_PARTY_LIABILITY
+TRAVEL_EVACUATION
+TRAVEL_SPORT_ACTIVITIES
+
+Созданный SQL скрипт протестируйте на созданной базе данных
+и сохраните в файле database/mySqlDataScript.sql.

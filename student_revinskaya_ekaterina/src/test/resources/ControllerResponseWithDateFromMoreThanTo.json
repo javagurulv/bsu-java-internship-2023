@@ -1,0 +1,16 @@
+{
+  "errors": [
+    {
+      "errorCode": "ERROR_CODE_7",
+      "description": "Field agreementDateFrom must be less than field agreementDateTo!"
+    }
+  ],
+  "personFirstName": null,
+  "personLastName": null,
+  "agreementDateFrom": null,
+  "agreementDateTo": null,
+  "country": null,
+  "birthday": null,
+  "agreementPremium": null,
+  "risks": null
+}
