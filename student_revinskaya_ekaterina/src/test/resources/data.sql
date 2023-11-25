@@ -98,3 +98,23 @@ from classifiers where classifiers.title = 'COUNTRY';
     (41, 65, 1.2),
     (66, 150, 1.5);
 
+    insert into classifiers (title, description)
+    values('MEDICAL_RISK_LIMIT_LEVEL',
+    'limit levels for medical risk payments');
+
+    insert into classifier_values (classifier_id, ic, description)
+    select classifiers.id, 'LEVEL_10000', 'the maximum payout is 10,000 euros'
+    from classifiers where classifiers.title = 'MEDICAL_RISK_LIMIT_LEVEL';
+
+    insert into classifier_values (classifier_id, ic, description)
+    select classifiers.id, 'LEVEL_15000', 'the maximum payout is 15,000 euros'
+    from classifiers where classifiers.title = 'MEDICAL_RISK_LIMIT_LEVEL';
+
+    insert into classifier_values (classifier_id, ic, description)
+    select classifiers.id, 'LEVEL_20000', 'the maximum payout is 20,000 euros'
+    from classifiers where classifiers.title = 'MEDICAL_RISK_LIMIT_LEVEL';
+
+    insert into classifier_values (classifier_id, ic, description)
+    select classifiers.id, 'LEVEL_50000', 'the maximum payout is 50,000 euros'
+    from classifiers where classifiers.title = 'MEDICAL_RISK_LIMIT_LEVEL';
+
