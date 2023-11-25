@@ -10,12 +10,13 @@ import java.math.BigDecimal;
 class TravelTripCancellationRiskPremiumCalculator implements TravelRiskPremiumCalculator {
 
     @Override
+    public BigDecimal calculatePremium(TravelCalculatePremiumRequest request) {
+        return BigDecimal.ZERO;
+    }
+
+    @Override
     public String getRiskIc() {
         return "TRAVEL_CANCELLATION";
     }
 
-    @Override
-    public BigDecimal calculatePremium(TravelCalculatePremiumRequest request) {
-        return BigDecimal.ZERO;
-    }
 }

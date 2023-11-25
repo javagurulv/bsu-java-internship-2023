@@ -5,19 +5,21 @@
   "agreementDateFrom": "2025-05-25",
   "agreementDateTo": "2025-05-29",
   "country": "SPAIN",
-  "agreementPremium": 4,
+  "birthday": "2005-08-03",
+  "medicalRiskLimitLevel": "LEVEL_10000",
+  "agreementPremium": 11.00,
   "risks": [
     {
       "riskIc": "TRAVEL_MEDICAL",
-      "premium": 4
+      "premium": 11.00
     },
     {
       "riskIc": "TRAVEL_CANCELLATION",
-      "premium": 0
+      "premium": 0.00
     },
     {
       "riskIc": "TRAVEL_LOSS_BAGGAGE",
-      "premium": 0
+      "premium": 0.00
     }
   ]
 }

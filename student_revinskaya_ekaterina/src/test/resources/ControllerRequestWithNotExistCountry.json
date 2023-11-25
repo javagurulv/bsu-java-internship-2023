@@ -3,6 +3,8 @@
   "personLastName" : "Pupkin",
   "agreementDateFrom" : "2025-05-25",
   "agreementDateTo" : "2025-05-29",
-  "selected_risks":["TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"],
-  "country": "ENGLAND"
+  "birthday" : "2005-08-03",
+  "selectedRisks":["TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"],
+  "country": "ENGLAND",
+  "medicalRiskLimitLevel": "LEVEL_10000"
 }

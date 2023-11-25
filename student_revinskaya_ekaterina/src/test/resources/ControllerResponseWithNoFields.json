@@ -9,6 +9,10 @@
       "description": "Field agreementDateTo is empty!"
     },
     {
+      "errorCode": "ERROR_CODE_12",
+      "description": "Field birthday is empty!"
+    },
+    {
       "errorCode": "ERROR_CODE_1",
       "description": "Field personFirstName is empty!"
     },
@@ -18,7 +22,7 @@
     },
     {
       "errorCode": "ERROR_CODE_8",
-      "description": "Field selected_risks  must not be empty!"
+      "description": "Field selected_risks must not be empty!"
     }
   ],
   "personFirstName": null,
@@ -26,6 +30,8 @@
   "agreementDateFrom": null,
   "agreementDateTo": null,
   "country": null,
+  "birthday": null,
+  "medicalRiskLimitLevel": null,
   "agreementPremium": null,
   "risks": null
 }

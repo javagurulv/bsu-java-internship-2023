@@ -25,7 +25,7 @@ public class SelectedRisksPremiumCalculatorTest {
     TravelCalculatePremiumRequest request;
 @Test
 public void calculateWithNotExistSelectedRisksPremium(){
-    when(request.getSelected_risks()).thenReturn(List.of("RISK_1", "RISK_2"));
+    when(request.getSelectedRisks()).thenReturn(List.of("RISK_1", "RISK_2"));
 
     TravelRiskPremiumCalculator calculator1 = mock(TravelRiskPremiumCalculator.class);
     when(calculator1.getRiskIc()).thenReturn("RISK_1");
@@ -39,7 +39,7 @@ public void calculateWithNotExistSelectedRisksPremium(){
 }
     @Test
     public void calculateSelectedRisksPremium(){
-        when(request.getSelected_risks()).thenReturn(List.of("RISK_1", "RISK_2"));
+        when(request.getSelectedRisks()).thenReturn(List.of("RISK_1", "RISK_2"));
 
         TravelRiskPremiumCalculator calculator1 = mock(TravelRiskPremiumCalculator.class);
         when(calculator1.getRiskIc()).thenReturn("RISK_1");
