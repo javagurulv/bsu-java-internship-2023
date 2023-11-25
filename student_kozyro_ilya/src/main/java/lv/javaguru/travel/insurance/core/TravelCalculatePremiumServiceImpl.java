@@ -21,6 +21,7 @@ public class TravelCalculatePremiumServiceImpl implements TravelCalculatePremium
     TravelPremiumUnderwriting travelPremiumUnderwriting;
     @Override
     public TravelCalculatePremiumResponse calculatePremium(TravelCalculatePremiumRequest request) {
+
         var errors = validator.validate(request);
 
         return errors.isEmpty() ?
