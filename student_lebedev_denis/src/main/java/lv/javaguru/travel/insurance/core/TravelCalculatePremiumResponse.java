@@ -1,5 +1,6 @@
 package lv.javaguru.travel.insurance.core;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,38 +19,18 @@ import java.util.concurrent.TimeUnit;
 public class TravelCalculatePremiumResponse extends CoreResponse {
 
     private String personFirstName;
+
     private String personLastName;
+
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date agreementDateFrom;
+
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date agreementDateTo;
+
     private BigDecimal agreementPrice;
 
     public TravelCalculatePremiumResponse(List<ValidationError> errors) {
         super(errors);
     }
-
-    public TravelCalculatePremiumResponse(String personFirstName, String personLastName,
-                                          Date agreementDateFrom, Date agreementDateTo) {
-        this.personFirstName = personFirstName;
-        this.personLastName = personLastName;
-        this.agreementDateFrom = agreementDateFrom;
-        this.agreementDateTo = agreementDateTo;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null || this.getClass() != obj.getClass()) {
-            return false;
-        }
-
-        TravelCalculatePremiumResponse anotherRequest = (TravelCalculatePremiumResponse) obj;
-        return this.personFirstName.equals(anotherRequest.personFirstName) &&
-                this.personLastName.equals(anotherRequest.personLastName) &&
-                //this.agreementDateFrom.equals(anotherRequest.agreementDateFrom) &&
-                //this.agreementDateTo.equals(anotherRequest.agreementDateTo) &&
-                this.agreementPrice.equals(anotherRequest.agreementPrice);
-    }
-
 }

@@ -7,7 +7,7 @@ import java.time.Duration;
 import java.util.Date;
 
 @Component
-class DateDifferenceService {
+public class DateDifferenceService {
     BigDecimal calculateDateDifference(Date dateFrom, Date dateTo){
         return new BigDecimal(Duration.between(dateFrom.toInstant(), dateTo.toInstant()).toDays());
     }

@@ -30,8 +30,8 @@ public class TravelCalculatePremiumServiceImplTest {
     @InjectMocks
     private TravelCalculatePremiumServiceImpl service;
     private TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest
-            ("Name", "Surname", createDate("09.07.2023"), createDate("19.07.2023"),
-                    List.of("TRAVEL_MEDICAL", "TRAVEL_CANCELLATION"));
+            ("Name", "Surname", createDate("09.07.2023"), createDate("19.07.2023"),createDate("03.08.2005"),
+                    List.of("TRAVEL_MEDICAL", "TRAVEL_CANCELLATION"),"SPAIN");
     @Test
     public void serviceImplWithError() {
         when(requestValidator.validate(request)).thenReturn(generateError());
