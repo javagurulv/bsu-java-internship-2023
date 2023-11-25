@@ -27,9 +27,69 @@ public class TravelCalculatePremiumControllerTest {
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Test
-    public void simpleRestControllerTest() throws Exception {
-        executeAndCompare("rest/TravelCalculatePremiumRequest.json",
-                "rest/TravelCalculatePremiumResponse.json");
+    public void personFirstNameIsNull() throws Exception {
+        executeAndCompare("rest/TravelCalculatePremiumRequest_PersonFirstNameIsNull.json",
+                "rest/TravelCalculatePremiumResponse_PersonFirstNameIsNull.json");
+    }
+
+    @Test
+    public void personFirstNameIsEmpty() throws Exception {
+        executeAndCompare("rest/TravelCalculatePremiumRequest_PersonFirstNameIsEmpty.json",
+                "rest/TravelCalculatePremiumResponse_PersonFirstNameIsEmpty.json");
+    }
+
+    @Test
+    public void personLastNameIsNull() throws Exception {
+        executeAndCompare("rest/TravelCalculatePremiumRequest_PersonLastNameIsNull.json",
+                "rest/TravelCalculatePremiumResponse_PersonLastNameIsNull.json");
+    }
+
+    @Test
+    public void personLastNameIsEmpty() throws Exception {
+        executeAndCompare("rest/TravelCalculatePremiumRequest_PersonLastNameIsEmpty.json",
+                "rest/TravelCalculatePremiumResponse_PersonLastNameIsEmpty.json");
+    }
+
+    @Test
+    public void agreementDateFromIsNull() throws Exception {
+        executeAndCompare("rest/TravelCalculatePremiumRequest_AgreementDateFromIsNull.json",
+                "rest/TravelCalculatePremiumResponse_AgreementDateFromIsNull.json");
+    }
+
+    @Test
+    public void agreementDateFromIsEmpty() throws Exception {
+        executeAndCompare("rest/TravelCalculatePremiumRequest_AgreementDateFromIsEmpty.json",
+                "rest/TravelCalculatePremiumResponse_AgreementDateFromIsEmpty.json");
+    }
+
+    @Test
+    public void agreementDateToIsNull() throws Exception {
+        executeAndCompare("rest/TravelCalculatePremiumRequest_AgreementDateToIsNull.json",
+                "rest/TravelCalculatePremiumResponse_AgreementDateToIsNull.json");
+    }
+
+    @Test
+    public void agreementDateToIsEmpty() throws Exception {
+        executeAndCompare("rest/TravelCalculatePremiumRequest_AgreementDateToIsEmpty.json",
+                "rest/TravelCalculatePremiumResponse_AgreementDateToIsEmpty.json");
+    }
+
+    @Test
+    public void agreementDateFromIsNotLessThanAgreementDateTo() throws Exception {
+        executeAndCompare("rest/TravelCalculatePremiumRequest_AgreementDateFromIsNotLessThanAgreementDateTo.json",
+                "rest/TravelCalculatePremiumResponse_AgreementDateFromIsNotLessThanAgreementDateTo.json");
+    }
+
+    @Test
+    public void allFieldsAreNull() throws Exception {
+        executeAndCompare("rest/TravelCalculatePremiumRequest_allFieldsAreNull.json",
+                "rest/TravelCalculatePremiumResponse_AllFieldsAreNull.json");
+    }
+
+    @Test
+    public void noErrors() throws Exception {
+        executeAndCompare("rest/TravelCalculatePremiumRequest_NoErrors.json",
+                "rest/TravelCalculatePremiumResponse_NoErrors.json");
     }
 
     private void executeAndCompare(String requestFilePath, String responseFilePath) throws Exception {
