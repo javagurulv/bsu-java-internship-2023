@@ -1,6 +1,7 @@
-package lv.javaguru.travel.insurance.core.core;
+package lv.javaguru.travel.insurance.core.core.validations;
 
-import lv.javaguru.travel.insurance.core.TravelCalculatePremiumRequestValidator;
+import lv.javaguru.travel.insurance.core.validations.TravelCalculatePremiumRequestValidator;
+import lv.javaguru.travel.insurance.core.validations.TravelCalculatePremiumRequestValidatorImpl;
 import lv.javaguru.travel.insurance.core.validations.TravelRequestValidation;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
@@ -12,7 +13,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import static org.mockito.Mockito.*;
-import static lv.javaguru.travel.insurance.core.DateFunctions.createDateFromString;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,7 +20,7 @@ import java.util.Optional;
 @ExtendWith(MockitoExtension.class)
 public class TravelCalculatePremiumRequestValidatorTest {
     @InjectMocks
-    private TravelCalculatePremiumRequestValidator requestValidator;
+    private TravelCalculatePremiumRequestValidatorImpl requestValidator;
 
     @Test
     public void shouldReturnErrors() {
