@@ -4,7 +4,7 @@ import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 
 import java.math.BigDecimal;
 
-interface TravelRiskPremiumCalculator {
+public interface TravelRiskPremiumCalculator {
 
     BigDecimal calculatePremium(TravelCalculatePremiumRequest request);
 
