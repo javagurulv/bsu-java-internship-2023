@@ -13,6 +13,9 @@ import java.util.List;
 public class CoreResponse {
     protected List<ValidationError> errorList;
 
+    public boolean hasErrors() {
+        return errorList != null && !errorList.isEmpty();
+    }
     CoreResponse(List<ValidationError> errorList) {
         this.errorList = errorList;
     }
