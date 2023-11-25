@@ -16,8 +16,8 @@ public class TravelCalculatePremiumRequestValidatorTest {
 
     @Test
     public void shouldReturnErrorIfPersonFirstNameIsEmpty() {
-        Date agreementDateFrom = dateTimeService.createDate("30.01.2015");
-        Date agreementDateTo = dateTimeService.createDate("14.12.2022");
+        Date agreementDateFrom = dateTimeService.createDate("30.01.2025");
+        Date agreementDateTo = dateTimeService.createDate("14.12.2032");
 
         TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest(
                 "    ", "personLastName",
@@ -32,8 +32,8 @@ public class TravelCalculatePremiumRequestValidatorTest {
 
     @Test
     public void shouldReturnErrorIfPersonFirstNameIsNull() {
-        Date agreementDateFrom = dateTimeService.createDate("30.01.2015");
-        Date agreementDateTo = dateTimeService.createDate("14.12.2022");
+        Date agreementDateFrom = dateTimeService.createDate("30.01.2025");
+        Date agreementDateTo = dateTimeService.createDate("14.12.2032");
 
         TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest(
                 null, "personLastName",
@@ -48,8 +48,8 @@ public class TravelCalculatePremiumRequestValidatorTest {
 
     @Test
     public void shouldReturnErrorIfPersonLastNameIsEmpty() {
-        Date agreementDateFrom = dateTimeService.createDate("30.01.2015");
-        Date agreementDateTo = dateTimeService.createDate("14.12.2022");
+        Date agreementDateFrom = dateTimeService.createDate("30.01.2025");
+        Date agreementDateTo = dateTimeService.createDate("14.12.2032");
 
         TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest(
                 "personFirstName", "    ",
@@ -64,8 +64,8 @@ public class TravelCalculatePremiumRequestValidatorTest {
 
     @Test
     public void shouldReturnErrorIfPersonLastNameIsNull() {
-        Date agreementDateFrom = dateTimeService.createDate("30.01.2015");
-        Date agreementDateTo = dateTimeService.createDate("14.12.2022");
+        Date agreementDateFrom = dateTimeService.createDate("30.01.2025");
+        Date agreementDateTo = dateTimeService.createDate("14.12.2032");
 
         TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest(
                 "personFirstName", null,
@@ -79,8 +79,8 @@ public class TravelCalculatePremiumRequestValidatorTest {
     }
 
     @Test
-    public void shouldReturnErrorIfAgreementDateFromIsEmpty() {
-        Date agreementDateTo = dateTimeService.createDate("14.12.2022");
+    public void shouldReturnErrorIfAgreementDateFromIsNull() {
+        Date agreementDateTo = dateTimeService.createDate("14.12.2032");
 
         TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest(
                 "personFirstName", "personLastName",
@@ -94,9 +94,9 @@ public class TravelCalculatePremiumRequestValidatorTest {
     }
 
     @Test
-    public void shouldReturnErrorIfAgreementDateFromNotLessThenAgreementDateTo() {
+    public void shouldReturnErrorIfAgreementDateFromInPast() {
         Date agreementDateFrom = dateTimeService.createDate("30.01.2015");
-        Date agreementDateTo = dateTimeService.createDate("14.12.2000");
+        Date agreementDateTo = dateTimeService.createDate("14.12.2032");
 
         TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest(
                 "personFirstName", "personLastName",
@@ -106,12 +106,12 @@ public class TravelCalculatePremiumRequestValidatorTest {
 
         assertEquals(1, validationErrors.size());
         assertEquals("agreementDateFrom", validationErrors.get(0).getField());
-        assertEquals("Must be less than agreementDateTo!", validationErrors.get(0).getMessage());
+        assertEquals("Must be in the future!", validationErrors.get(0).getMessage());
     }
 
     @Test
-    public void shouldReturnErrorIfAgreementDateToIsEmpty() {
-        Date agreementDateFrom = dateTimeService.createDate("30.01.2015");
+    public void shouldReturnErrorIfAgreementDateToIsNull() {
+        Date agreementDateFrom = dateTimeService.createDate("30.01.2025");
 
         TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest(
                 "personFirstName", "personLastName",
@@ -125,9 +125,43 @@ public class TravelCalculatePremiumRequestValidatorTest {
     }
 
     @Test
+    public void shouldReturnErrorIfAgreementDateToInPast() {
+        Date agreementDateFrom = dateTimeService.createDate("30.01.2025");
+        Date agreementDateTo = dateTimeService.createDate("14.12.2012");
+
+        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest(
+                "personFirstName", "personLastName",
+                agreementDateFrom, agreementDateTo);
+
+        List<ValidationError> validationErrors = requestValidator.validate(request);
+
+        assertEquals(2, validationErrors.size());
+        assertEquals("agreementDateFrom", validationErrors.get(0).getField());
+        assertEquals("Must be less than agreementDateTo!", validationErrors.get(0).getMessage());
+        assertEquals("agreementDateTo", validationErrors.get(1).getField());
+        assertEquals("Must be in the future!", validationErrors.get(1).getMessage());
+    }
+
+    @Test
+    public void shouldReturnErrorIfAgreementDateFromNotLessThenAgreementDateTo() {
+        Date agreementDateFrom = dateTimeService.createDate("30.01.2025");
+        Date agreementDateTo = dateTimeService.createDate("14.12.2024");
+
+        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest(
+                "personFirstName", "personLastName",
+                agreementDateFrom, agreementDateTo);
+
+        List<ValidationError> validationErrors = requestValidator.validate(request);
+
+        assertEquals(1, validationErrors.size());
+        assertEquals("agreementDateFrom", validationErrors.get(0).getField());
+        assertEquals("Must be less than agreementDateTo!", validationErrors.get(0).getMessage());
+    }
+
+    @Test
     public void shouldNotHaveError() {
-        Date agreementDateFrom = dateTimeService.createDate("30.01.2015");
-        Date agreementDateTo = dateTimeService.createDate("14.12.2022");
+        Date agreementDateFrom = dateTimeService.createDate("30.01.2025");
+        Date agreementDateTo = dateTimeService.createDate("14.12.2032");
 
         TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest(
                 "personFirstName", "personLastName",
