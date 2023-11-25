@@ -11,19 +11,20 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
 @ExtendWith(MockitoExtension.class)
 class TravelCalculatePremiumServiceImplTest {
 
-    @InjectMocks
-    private TravelCalculatePremiumServiceImpl service;
-    @Mock
-    private TravelCalculatePremiumRequestValidator requestValidator;
-    @Mock
-    private TravelCalculatePremiumRequest request;
+    @Mock private TravelCalculatePremiumRequestValidator requestValidator;
+    @Mock private TravelCalculatePremiumRequest request;
+    @Mock private TravelPremiumUnderwriting premiumUnderwriting;
+
+    @InjectMocks private TravelCalculatePremiumServiceImpl service;
 
     @Test
     public void shouldReturnResponseWithOneError() {
@@ -88,7 +89,20 @@ class TravelCalculatePremiumServiceImplTest {
         assertEquals(response.getErrors(), errors);
     }
 
+    //--------------------------------------------------------
+    // step 13, TravelPremiumUnderwriting
 
+    @Test
+    public void responseWithCorrectAgreementPrice(){
+        //premiumUnderwriting = new TravelPremiumUnderwriting();
+        //Mockito.when(request.getAgreementDateFrom()).thenReturn(new Date(2023, 12, 3));
+        //Mockito.when(request.getAgreementDateTo()).thenReturn(new Date(2023, 12, 9));
+        when(requestValidator.validate(request)).thenReturn(List.of());
+        Mockito.when(premiumUnderwriting.calculatePremium(request)).thenReturn(new BigDecimal(6));
+
+        TravelCalculatePremiumResponse response = service.calculatePremium(request);
+        assertEquals(response.getAgreementPrice(), new BigDecimal(6));
+    }
 }
 
 
