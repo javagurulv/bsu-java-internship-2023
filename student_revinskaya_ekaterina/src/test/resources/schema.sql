@@ -30,3 +30,16 @@ primary key(id)
 );
 create unique index ix_country_default_day_rate_country_ic
 on country_default_day_rate(country_ic);
+
+create table if not exists age_coefficient
+(
+id bigint not null auto_increment,
+age_from int not null,
+age_to int not null,
+coefficient numeric(2,1) not null,
+primary key(id)
+);
+CREATE UNIQUE INDEX ix_age_coefficient_age_from
+ON age_coefficient (age_from);
+CREATE UNIQUE INDEX ix_age_coefficient_age_to
+ON age_coefficient (age_to);
