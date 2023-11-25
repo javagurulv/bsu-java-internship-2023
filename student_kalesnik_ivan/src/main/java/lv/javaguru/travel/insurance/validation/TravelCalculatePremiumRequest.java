@@ -30,6 +30,8 @@ public class TravelCalculatePremiumRequest {
 
     private String country;
 
+    private String medicalRiskLimitLevel;
+
     @JsonAlias("selected_risks")
     private List<String> selected_risks;
 
