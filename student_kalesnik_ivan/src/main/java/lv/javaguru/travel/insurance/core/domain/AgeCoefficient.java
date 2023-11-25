@@ -31,4 +31,5 @@ public class AgeCoefficient {
 
     @Column(name = "coefficient", precision = 10, scale = 2, nullable = false)
     private BigDecimal coefficient;
+
 }
