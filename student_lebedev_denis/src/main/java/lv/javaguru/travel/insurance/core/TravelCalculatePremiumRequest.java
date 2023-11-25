@@ -1,5 +1,6 @@
 package lv.javaguru.travel.insurance.core;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,7 +16,10 @@ import java.util.Objects;
 public class TravelCalculatePremiumRequest {
 
     private String personFirstName;
+
     private String personLastName;
+
     private Date agreementDateFrom;
+
     private Date agreementDateTo;
 }
