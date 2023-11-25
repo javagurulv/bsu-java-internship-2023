@@ -1,7 +1,6 @@
-package lv.javaguru.travel.insurance.validation;
+package lv.javaguru.travel.insurance.core.validations;
 
 import lv.javaguru.travel.insurance.dto.ValidationError;
-import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.Optional;

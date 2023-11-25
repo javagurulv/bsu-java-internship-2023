@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.validation.travel;
+package lv.javaguru.travel.insurance.core.validations;
 
 import lv.javaguru.travel.insurance.core.services.DateService;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
