@@ -12,7 +12,7 @@ class TravelRequestSelectedRisksValidation extends TravelRequestValidationImpl {
     private ValidationErrorFactory validationErrorFactory;
     @Override
     public Optional<ValidationError> validate(TravelCalculatePremiumRequest request) {
-        return (request.getSelected_risks() == null || request.getSelected_risks().isEmpty())
+        return (request.getSelectedRisks() == null || request.getSelectedRisks().isEmpty())
                 ? Optional.of(validationErrorFactory.buildError("ERROR_CODE_8"))
                 : Optional.empty();
     }

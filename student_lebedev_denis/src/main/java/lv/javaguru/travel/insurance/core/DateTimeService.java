@@ -24,4 +24,8 @@ public class DateTimeService {
         long diff = to.getTime() - from.getTime();
         return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
     }
+
+    public Date getCurrentDate() {
+        return new Date();
+    }
 }

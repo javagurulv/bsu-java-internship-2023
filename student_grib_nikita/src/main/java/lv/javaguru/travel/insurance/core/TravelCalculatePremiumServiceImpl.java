@@ -1,5 +1,7 @@
 package lv.javaguru.travel.insurance.core;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumResponse;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
@@ -9,12 +11,24 @@ import org.springframework.stereotype.Component;
 import java.math.BigDecimal;
 import java.util.List;
 
+//@NoArgsConstructor
+//@AllArgsConstructor
+
 @Component
 class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService {
-    @Autowired private TravelCalculatePremiumRequestValidator requestValidator;
+     private TravelCalculatePremiumRequestValidator requestValidator;
+
     @Override
     public TravelCalculatePremiumResponse calculatePremium(TravelCalculatePremiumRequest request) {
         List<ValidationError> errors = requestValidator.validate(request);
+        return createPremiumResponse(errors, request);
+    }
+    @Autowired
+    public TravelCalculatePremiumServiceImpl(TravelCalculatePremiumRequestValidator requestValidator) {
+        this.requestValidator = requestValidator;
+    }
+
+    private TravelCalculatePremiumResponse createPremiumResponse(List<ValidationError> errors, TravelCalculatePremiumRequest request){
         if (!errors.isEmpty()) {
             return new TravelCalculatePremiumResponse(errors);
         }
@@ -26,8 +40,8 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
         premiumResponse.setPersonLastName(request.getPersonLastName());
 
         BigDecimal daysDiff = new BigDecimal
-                                            (DataTimeService.getDaysBetween(request.getAgreementDateFrom(),
-                                                                            request.getAgreementDateTo()));
+                (DataTimeService.getDaysBetween(request.getAgreementDateFrom(),
+                        request.getAgreementDateTo()));
         premiumResponse.setAgreementPrice(daysDiff);
         return premiumResponse;
     }
