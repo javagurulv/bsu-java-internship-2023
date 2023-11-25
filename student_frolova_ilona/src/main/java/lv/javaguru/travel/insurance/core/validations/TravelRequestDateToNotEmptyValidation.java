@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-public class TravelRequestDateToNotEmptyValidation implements TravelRequestValidation {
+class TravelRequestDateToNotEmptyValidation implements TravelRequestValidation {
     @Override
     public Optional<ValidationError> check(TravelCalculatePremiumRequest request) {
         return (request.getAgreementDateTo() == null)

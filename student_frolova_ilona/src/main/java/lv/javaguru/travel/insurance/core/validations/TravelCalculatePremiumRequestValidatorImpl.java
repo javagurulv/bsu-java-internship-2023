@@ -1,8 +1,7 @@
-package lv.javaguru.travel.insurance.core;
+package lv.javaguru.travel.insurance.core.validations;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lv.javaguru.travel.insurance.core.validations.TravelRequestValidation;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +14,12 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 @Component
 @Getter
-public class TravelCalculatePremiumRequestValidator {
+public class TravelCalculatePremiumRequestValidatorImpl implements TravelCalculatePremiumRequestValidator{
 
     @Autowired
     List<TravelRequestValidation> validations;
 
+    @Override
     public List<ValidationError> validate(TravelCalculatePremiumRequest request) {
         return validations.stream()
                 .map(x -> x.check(request))
