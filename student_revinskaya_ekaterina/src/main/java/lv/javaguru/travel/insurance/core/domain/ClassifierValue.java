@@ -19,7 +19,7 @@ public class ClassifierValue {
     @JoinColumn(name = "classifier_id", nullable = false)
     private Classifier classifier;
     @Column(name = "ic", nullable = false)
-    String ic;
+    private String ic;
     @Column(name = "description", nullable = false)
-    String description;
+    private String description;
 }
