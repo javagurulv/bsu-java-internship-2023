@@ -110,7 +110,6 @@ FROM classifiers as cl
 WHERE cl.title = 'COUNTRY';
 
 
-
 INSERT INTO country_default_day_rate(country_ic, default_day_rate)
 VALUES('LATVIA', 1.00);
 
@@ -119,6 +118,7 @@ VALUES('SPAIN', 2.50);
 
 INSERT INTO country_default_day_rate(country_ic, default_day_rate)
 VALUES('JAPAN', 3.50);
+
 
 
 INSERT INTO age_coefficient(age_from, age_to, coefficient)
@@ -187,7 +187,6 @@ SELECT
     'Medical Risk 50000 euro limit level'
 FROM classifiers as cl
 WHERE cl.title = 'MEDICAL_RISK_LIMIT_LEVEL';
-
 
 
 INSERT INTO medical_risk_limit_level(medical_risk_limit_level_ic, coefficient)
