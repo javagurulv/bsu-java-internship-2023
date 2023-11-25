@@ -26,7 +26,7 @@ public class TravelRequestSelectedRisksValidationTest {
     @Test
     public void responseShouldContainErrorEmptySelected_risksTest() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
-        when(request.getSelected_risks()).thenReturn(List.of());
+        when(request.getSelectedRisks()).thenReturn(List.of());
         ValidationError validationError = mock(ValidationError.class);
         when(validationErrorFactory.buildError("ERROR_CODE_8")).thenReturn(validationError);
         Optional<ValidationError> error= selectedRisksValidation.validate(request);
@@ -36,7 +36,7 @@ public class TravelRequestSelectedRisksValidationTest {
     @Test
     public void responseShouldContainErrorNullSelected_risksTest() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
-        when(request.getSelected_risks()).thenReturn(null);
+        when(request.getSelectedRisks()).thenReturn(null);
         ValidationError validationError = mock(ValidationError.class);
         when(validationErrorFactory.buildError("ERROR_CODE_8")).thenReturn(validationError);
         Optional<ValidationError> error= selectedRisksValidation.validate(request);

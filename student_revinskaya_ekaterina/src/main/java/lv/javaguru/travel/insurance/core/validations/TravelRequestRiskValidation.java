@@ -20,7 +20,7 @@ public class TravelRequestRiskValidation extends TravelRequestValidationImpl {
     @Override
     public List<ValidationError> validateList(TravelCalculatePremiumRequest request) {
         List<ValidationError> errors = new ArrayList<>();
-        List<String> risks = request.getSelected_risks();
+        List<String> risks = request.getSelectedRisks();
         for (String ic : risks) {
             Optional<ClassifierValue> classifierValue = classifierValueRepository.findByClassifierTitleAndIc("RISK_TYPE", ic);
             if (classifierValue.isEmpty()) {
