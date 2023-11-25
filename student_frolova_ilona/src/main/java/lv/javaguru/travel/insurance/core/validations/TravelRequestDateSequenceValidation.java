@@ -9,7 +9,7 @@ import java.util.Optional;
 
 @Component
 @Getter
-public class TravelRequestDateSequenceValidation implements TravelRequestValidation {
+class TravelRequestDateSequenceValidation implements TravelRequestValidation {
     @Override
     public Optional<ValidationError> check(TravelCalculatePremiumRequest request) {
         if (request.getAgreementDateFrom() == null || request.getAgreementDateTo() == null)
