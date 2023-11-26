@@ -23,7 +23,7 @@ public abstract class TravelCalculatePremiumControllerTestCase {
 
     @Autowired private JsonFileReader jsonFileReader;
 
-    private static final String BASE_URL = "/insurance/travel/";
+    private static final String BASE_URL = "/insurance/travel/api/";
 
 
     protected abstract String getTestCaseFolderName();

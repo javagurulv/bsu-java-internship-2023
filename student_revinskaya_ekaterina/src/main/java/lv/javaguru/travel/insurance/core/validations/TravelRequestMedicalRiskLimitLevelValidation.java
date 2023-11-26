@@ -1,10 +1,9 @@
 package lv.javaguru.travel.insurance.core.validations;
 
-import lv.javaguru.travel.insurance.core.util.MedicalRiskLimitLevelEnabledUtil;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.Environment;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
@@ -13,12 +12,12 @@ import java.util.Optional;
 public class TravelRequestMedicalRiskLimitLevelValidation extends TravelRequestValidationImpl {
     @Autowired
     private ValidationErrorFactory validationErrorFactory;
-    @Autowired
-    private MedicalRiskLimitLevelEnabledUtil medicalRiskLimitLevelEnabledUtil;
+    @Value( "${medical.risk.limit.level.enabled:false}" )
+    private Boolean medicalRiskLimitLevelEnabled;
 @Override
     public Optional<ValidationError> validate(TravelCalculatePremiumRequest request) {
         return medicalRiskSelect(request) && medicalRiskEmptyOrNull(request)
-                && medicalRiskLimitLevelEnabledUtil.isMedicalRiskLimitLevelEnabled() ?
+                && medicalRiskLimitLevelEnabled ?
                 Optional.of(validationErrorFactory.buildError("ERROR_CODE_14"))
                 : Optional.empty();
     }
