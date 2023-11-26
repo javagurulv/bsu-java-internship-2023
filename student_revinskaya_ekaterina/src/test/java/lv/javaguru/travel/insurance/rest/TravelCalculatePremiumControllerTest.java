@@ -61,7 +61,8 @@ public class TravelCalculatePremiumControllerTest {
 
     @Test
     public void testRequestWithDateFromMoreThanDateTo() throws Exception {
-        equalsJsonFiles("ControllerRequestWithDateFromMoreThanTo.json", "ControllerResponseWithDateFromMoreThanTo.json");
+        equalsJsonFiles("ControllerRequestWithDateFromMoreThanTo.json",
+                "ControllerResponseWithDateFromMoreThanTo.json");
     }
 
     @Test
@@ -74,8 +75,9 @@ public class TravelCalculatePremiumControllerTest {
         equalsJsonFiles("ControllerRequestWithDateToInPast.json", "ControllerResponseWithDateToInPast.json");
     }
     @Test
-    public void testRequestWithSelectedRisks() throws Exception {
-        equalsJsonFiles("ControllerRequestWithoutSelectedRisks.json", "ControllerResponseWithoutSelectedRisks.json");
+    public void testRequestWithoutSelectedRisks() throws Exception {
+        equalsJsonFiles("ControllerRequestWithoutSelectedRisks.json",
+                "ControllerResponseWithoutSelectedRisks.json");
     }
     @Test
     public void testRequestWithoutCountry() throws Exception {
@@ -83,7 +85,18 @@ public class TravelCalculatePremiumControllerTest {
     }
     @Test
     public void testRequestWithNotExistCountry() throws Exception {
-        equalsJsonFiles("ControllerRequestWithNotExistCountry.json", "ControllerResponseWithNotExistCountry.json");
+        equalsJsonFiles("ControllerRequestWithNotExistCountry.json",
+                "ControllerResponseWithNotExistCountry.json");
+    }
+    @Test
+    public void testRequestWithoutMedicalRiskLimitLevel() throws Exception {
+        equalsJsonFiles("ControllerRequestWithoutMedicalRiskLimitLevel.json",
+                "ControllerResponseWithoutMedicalRiskLimitLevel.json");
+    }
+    @Test
+    public void testRequestWithNotExistMedicalRiskLimitLevel() throws Exception {
+        equalsJsonFiles("ControllerRequestWithNotExistMedicalRiskLimitLevel.json",
+                "ControllerResponseWithNotExistMedicalRiskLimitLevel.json");
     }
 
     public void equalsJsonFiles(String requestFile, String responseFile) throws Exception {
