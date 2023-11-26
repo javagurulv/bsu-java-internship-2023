@@ -2,7 +2,7 @@
   "errors": [
     {
       "errorCode": "ERROR_CODE_8",
-      "description": "Field selected_risks  must not be empty!"
+      "description": "Field selected_risks must not be empty!"
     }
   ],
   "personFirstName": null,
@@ -10,6 +10,8 @@
   "agreementDateFrom": null,
   "agreementDateTo": null,
   "country": null,
+  "birthday": null,
+  "medicalRiskLimitLevel": null,
   "agreementPremium": null,
   "risks": null
 }

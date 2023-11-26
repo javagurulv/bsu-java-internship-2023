@@ -121,6 +121,30 @@ public class TravelCalculatePremiumControllerTest {
     }
 
     @Test
+    public void selectedRisksNotSupported() throws Exception {
+        executeAndCompare(
+                "rest/TravelCalculatePremiumRequest_selectedRisks_not_supported.json",
+                "rest/TravelCalculatePremiumResponse_selectedRisks_not_supported.json"
+        );
+    }
+
+    @Test
+    public void countryIsNullWhenTravelMedicalRiskSelected() throws Exception {
+        executeAndCompare(
+                "rest/TravelCalculatePremiumRequest_country_is_null_travel_medical.json",
+                "rest/TravelCalculatePremiumResponse_country_is_null_travel_medical.json"
+        );
+    }
+
+    @Test
+    public void countryIsEmptyWhenTravelMedicalRiskSelected() throws Exception {
+        executeAndCompare(
+                "rest/TravelCalculatePremiumRequest_country_is_empty_travel_medical.json",
+                "rest/TravelCalculatePremiumResponse_country_is_empty_travel_medical.json"
+        );
+    }
+
+    @Test
     public void allFieldsNotProvided() throws Exception {
         executeAndCompare(
                 "rest/TravelCalculatePremiumRequest_allFields_not_provided.json",
