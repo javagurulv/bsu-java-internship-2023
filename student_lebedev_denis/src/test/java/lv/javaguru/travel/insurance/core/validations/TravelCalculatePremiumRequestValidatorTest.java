@@ -1,6 +1,5 @@
-package lv.javaguru.travel.insurance.core;
+package lv.javaguru.travel.insurance.core.validations;
 
-import lv.javaguru.travel.insurance.core.validations.TravelRequestValidation;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.Test;
@@ -28,7 +27,7 @@ public class TravelCalculatePremiumRequestValidatorTest {
     TravelRequestValidation secondValidation;
 
     @InjectMocks
-    private final TravelCalculatePremiumRequestValidator requestValidator = new TravelCalculatePremiumRequestValidator();
+    private final TravelCalculatePremiumRequestValidatorImpl requestValidator = new TravelCalculatePremiumRequestValidatorImpl();
 
     @Test
     public void shouldReturnErrors() {
