@@ -1,0 +1,27 @@
+<configuration>
+
+    <!-- Уровень логирования -->
+    <springProfile name="dev">
+        <root level="DEBUG"/>
+    </springProfile>
+
+    <springProfile name="prod">
+        <root level="INFO"/>
+    </springProfile>
+
+    <!-- Формат вывода -->
+    <property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"/>
+
+    <!-- Настройки вывода в консоль -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Применение вывода -->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+
+</configuration>

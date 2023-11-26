@@ -16,7 +16,11 @@ class TravelCalculatePremiumRequestValidatorImplementation implements TravelCalc
 
     public List<ValidationError> validate(TravelCalculatePremiumRequest request) {
         List<ValidationError> errors = new ArrayList<>();
-        validations.forEach(v -> v.validate(request).ifPresent(errors::add));
+        validations.forEach(v -> {
+            v.validate(request).ifPresent(errors::add);
+            List<ValidationError> selectedRisksErrorsList = v.validateList(request);
+            errors.addAll(selectedRisksErrorsList);
+        });
         return errors;
     }
 
