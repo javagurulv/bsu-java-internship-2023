@@ -1,9 +1,9 @@
 package lv.javaguru.travel.insurance.core.underwriting.calculators.medical;
 
 import lv.javaguru.travel.insurance.core.repositories.MedicalRiskLimitLevelRepository;
-import lv.javaguru.travel.insurance.core.util.MedicalRiskLimitLevelEnabledUtil;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -12,10 +12,10 @@ import java.math.BigDecimal;
 public class InsuranceLimitCoefficientCalculator {
     @Autowired
     private MedicalRiskLimitLevelRepository medicalRiskLimitLevelRepository;
-@Autowired
-private MedicalRiskLimitLevelEnabledUtil medicalRiskLimitLevelEnabledUtil;
+    @Value( "${medical.risk.limit.level.enabled:false}" )
+    private Boolean medicalRiskLimitLevelEnabled;
     BigDecimal calculate(TravelCalculatePremiumRequest request){
-        return medicalRiskLimitLevelEnabledUtil.isMedicalRiskLimitLevelEnabled()
+        return medicalRiskLimitLevelEnabled
                 ? calculateValue(request)
                 : defaulterValue();
 
