@@ -26,7 +26,7 @@ public class AgeCoefficientCalculator {
                 localDateFromDate(dateTimeUtil.getCurrentDateTime()));
         return ageCoefficientRepository.findByAge(period.getYears())
                 .orElseThrow(()->new RuntimeException("coefficient for person with birthday "
-                        +convertDateToString(request.getBirthday())+" not exist in system")).getCoefficient();
+                        +convertDateToString(request.getBirthday())+" not found")).getCoefficient();
 
     }
     private String convertDateToString(Date date) {
