@@ -1,8 +1,12 @@
+plugins {
+	id 'org.springframework.boot' version "2.7.5"
+}
+
 dependencies {
 
 	implementation('mysql:mysql-connector-java:8.0.22')
 	implementation('org.hibernate:hibernate-core:5.4.25.Final')
-	testImplementation('org.hibernate:hibernate-core:5.4.25.Final')
+
 	implementation('org.springframework.boot:spring-boot-starter-data-jpa:2.7.5')
 
 	implementation('org.springframework.boot:spring-boot-starter-web:2.7.5')
@@ -28,4 +32,14 @@ dependencies {
 		useJUnitPlatform()
 	}
 
+}
+
+jar {
+	enabled = true
+}
+
+bootJar {
+	enabled = true
+	archiveBaseName = 'insurance-calculator'
+	archiveVersion = '1.0.2'
 }
