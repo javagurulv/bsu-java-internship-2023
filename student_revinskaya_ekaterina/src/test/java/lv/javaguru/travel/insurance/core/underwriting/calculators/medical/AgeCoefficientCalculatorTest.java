@@ -43,7 +43,9 @@ public class AgeCoefficientCalculatorTest {
         Date date =createDate("03.04.2033");
         when(request.getBirthday()).thenReturn(date);
         when(dateTimeUtil.getCurrentDateTime()).thenReturn(createDate("03.04.2023"));
-        assertThrows(RuntimeException.class, ()->ageCoefficientCalculator.calculate(request));
+        Throwable thrown = assertThrows(RuntimeException.class, ()->ageCoefficientCalculator.calculate(request));
+        assertEquals(thrown.getMessage(),
+                "coefficient for person with birthday 03.04.2033 not exist in system");
     }
     private Date createDate(String dateStr) {
         try {
