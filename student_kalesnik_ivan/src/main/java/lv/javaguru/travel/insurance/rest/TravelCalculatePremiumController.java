@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/insurance/travel")
+@RequestMapping("/insurance/travel/api")
 class TravelCalculatePremiumController {
 
 	@Autowired private TravelCalculatePremiumService calculatePremiumService;
