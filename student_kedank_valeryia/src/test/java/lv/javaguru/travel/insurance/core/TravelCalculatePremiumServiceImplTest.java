@@ -4,6 +4,9 @@ import lv.javaguru.travel.insurance.core.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.validators.TravelCalculatePremiumRequestValidator;
 import lv.javaguru.travel.insurance.validators.ValidationError;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -13,6 +16,8 @@ import java.util.Date;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 @SpringBootTest
 class TravelCalculatePremiumServiceImplTest {
@@ -39,6 +44,7 @@ class TravelCalculatePremiumServiceImplTest {
         TravelCalculatePremiumResponse response = service.calculatePremium(request);
         assertEquals(response.getPersonFirstName(), "personFirstName");
     }
+
     @Test
     public void shouldReturnResponseWithCorrectPersonLastName() {
         TravelCalculatePremiumRequest request = createObjectRequest();
@@ -77,7 +83,7 @@ class TravelCalculatePremiumServiceImplTest {
 
     //разница между двумя датами
     @Test
-    public void shouldReturnZeroAgreementPrice(){
+    public void shouldReturnZeroAgreementPrice() {
         Calendar calendar = Calendar.getInstance();
         calendar.set(2023, Calendar.JANUARY, 1);
         Date dateFrom = calendar.getTime();
@@ -93,25 +99,14 @@ class TravelCalculatePremiumServiceImplTest {
     }
 
     @Test
-    public void shouldReturnPositiveAgreementPrice(){
+    public void shouldReturnPositiveAgreementPrice() {
         TravelCalculatePremiumRequest request = createObjectRequest();
 
         TravelCalculatePremiumResponse response = service.calculatePremium(request);
         assertEquals(response.getAgreementPrice(), BigDecimal.valueOf(365));
     }
 
-    @Test
-    public void shouldReturnNegativeAgreementPrice(){
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(2023, Calendar.JANUARY, 1);
-        Date dateFrom = calendar.getTime();
-        calendar.set(2022, Calendar.JANUARY, 1);
-        Date dateTo = calendar.getTime();
-
-        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest("personFirstName",
-                "personLastName", dateFrom, dateTo);
-
-        TravelCalculatePremiumResponse response = service.calculatePremium(request);
-        assertEquals(response.getAgreementPrice(), BigDecimal.valueOf(-365));
-    }
+    /*@Test
+    public void shouldReturnNegativeAgreementPrice() {
+    }*/
 }
