@@ -1,10 +1,7 @@
 package lv.javaguru.travel.insurance.core.underwriting.calculators.medical;
 
-import lv.javaguru.travel.insurance.core.domain.AgeCoefficient;
 import lv.javaguru.travel.insurance.core.domain.CountryDefaultDayRate;
-import lv.javaguru.travel.insurance.core.repositories.AgeCoefficientRepository;
 import lv.javaguru.travel.insurance.core.repositories.CountryDefaultDayRateRepository;
-import lv.javaguru.travel.insurance.core.util.DateTimeUtil;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

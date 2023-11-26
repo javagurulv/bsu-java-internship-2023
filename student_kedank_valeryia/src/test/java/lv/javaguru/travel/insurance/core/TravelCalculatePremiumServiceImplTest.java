@@ -1,68 +1,112 @@
 package lv.javaguru.travel.insurance.core;
 
-import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
-import lv.javaguru.travel.insurance.rest.ValidationError;
+import lv.javaguru.travel.insurance.core.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.validators.TravelCalculatePremiumRequestValidator;
+import lv.javaguru.travel.insurance.validators.ValidationError;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
+import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
+@SpringBootTest
 class TravelCalculatePremiumServiceImplTest {
+    @Autowired
+    private TravelCalculatePremiumServiceImpl service;
 
-    @Test
-    public void ValidatorIsGoodFromTo() {
-
+    public TravelCalculatePremiumRequest createObjectRequest() {
         Calendar calendar = Calendar.getInstance();
         calendar.set(2022, Calendar.JANUARY, 1);
         Date dateFrom = calendar.getTime();
         calendar.set(2023, Calendar.JANUARY, 1);
         Date dateTo = calendar.getTime();
 
-        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest("Valeryia", "Kedank", dateFrom, dateTo);
+        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest("personFirstName",
+                "personLastName",
+                dateFrom, dateTo);
 
-        TravelCalculatePremiumRequestValidator requestValidator = new TravelCalculatePremiumRequestValidator();
-        List<ValidationError> error = requestValidator.validate(request);
-        assertEquals(error.size(), 0);
-
+        return request;
     }
 
     @Test
-    public void ValidatorIsEmptyNull() {
+    public void shouldReturnResponseWithCorrectPersonFirstName() {
+        TravelCalculatePremiumRequest request = createObjectRequest();
+        TravelCalculatePremiumResponse response = service.calculatePremium(request);
+        assertEquals(response.getPersonFirstName(), "personFirstName");
+    }
 
+    @Test
+    public void shouldReturnResponseWithCorrectPersonLastName() {
+        TravelCalculatePremiumRequest request = createObjectRequest();
+        TravelCalculatePremiumResponse response = service.calculatePremium(request);
+        assertEquals(response.getPersonLastName(), "personLastName");
+    }
+
+    @Test
+    public void shouldReturnResponseWithCorrectAgreementDateFrom() {
         Calendar calendar = Calendar.getInstance();
         calendar.set(2022, Calendar.JANUARY, 1);
         Date dateFrom = calendar.getTime();
-        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest();
-        request.setPersonLastName("Kedank");
-        request.setPersonFirstName("Valeryia");
-        request.setAgreementDateFrom(dateFrom);
 
-        TravelCalculatePremiumRequestValidator requestValidator = new TravelCalculatePremiumRequestValidator();
-        List<ValidationError> error = requestValidator.validate(request);
-        assertEquals(error.get(0).getField(), "dateTo");
-        assertEquals(error.get(0).getMessage(), "Most not be empty!");
-
+        TravelCalculatePremiumRequest request = createObjectRequest();
+        TravelCalculatePremiumResponse response = service.calculatePremium(request);
+        assertEquals(response.getAgreementDateFrom(), dateFrom);
     }
 
     @Test
-    public void ValidatorIsEmptyNullTo() {
-
+    public void shouldReturnResponseWithCorrectAgreementDateTo() {
         Calendar calendar = Calendar.getInstance();
-        calendar.set(2022, Calendar.JANUARY, 1);
+        calendar.set(2023, Calendar.JANUARY, 1);
         Date dateTo = calendar.getTime();
-        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest();
-        request.setPersonLastName("Kedank");
-        request.setPersonFirstName("Valeryia");
-        request.setAgreementDateTo(dateTo);
 
-        TravelCalculatePremiumRequestValidator requestValidator = new TravelCalculatePremiumRequestValidator();
-        List<ValidationError> error = requestValidator.validate(request);
-        assertEquals(error.get(0).getField(), "dateFrom");
-        assertEquals(error.get(0).getMessage(), "Most not be empty!");
-
+        TravelCalculatePremiumRequest request = createObjectRequest();
+        TravelCalculatePremiumResponse response = service.calculatePremium(request);
+        assertEquals(response.getAgreementDateTo(), dateTo);
     }
 
+    @Test
+    public void shouldReturnResponseWithCorrectAgreementPrice() {
+        TravelCalculatePremiumRequest request = createObjectRequest();
+        TravelCalculatePremiumResponse response = service.calculatePremium(request);
+        assertEquals(response.getAgreementPrice(), BigDecimal.valueOf(365));
+    }
+
+    //разница между двумя датами
+    @Test
+    public void shouldReturnZeroAgreementPrice() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(2023, Calendar.JANUARY, 1);
+        Date dateFrom = calendar.getTime();
+        calendar.set(2023, Calendar.JANUARY, 1);
+        Date dateTo = calendar.getTime();
+
+        TravelCalculatePremiumRequest request = createObjectRequest();
+        request.setAgreementDateFrom(dateFrom);
+        request.setAgreementDateTo(dateFrom);
+
+        TravelCalculatePremiumResponse response = service.calculatePremium(request);
+        assertEquals(response.getAgreementPrice(), BigDecimal.valueOf(0));
+    }
+
+    @Test
+    public void shouldReturnPositiveAgreementPrice() {
+        TravelCalculatePremiumRequest request = createObjectRequest();
+
+        TravelCalculatePremiumResponse response = service.calculatePremium(request);
+        assertEquals(response.getAgreementPrice(), BigDecimal.valueOf(365));
+    }
+
+    /*@Test
+    public void shouldReturnNegativeAgreementPrice() {
+    }*/
 }

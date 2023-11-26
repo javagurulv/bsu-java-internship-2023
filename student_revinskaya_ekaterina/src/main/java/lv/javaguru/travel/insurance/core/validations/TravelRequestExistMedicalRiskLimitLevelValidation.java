@@ -1,12 +1,11 @@
 package lv.javaguru.travel.insurance.core.validations;
 
-import lv.javaguru.travel.insurance.core.repositories.ClassifierRepository;
 import lv.javaguru.travel.insurance.core.repositories.ClassifierValueRepository;
-import lv.javaguru.travel.insurance.core.util.MedicalRiskLimitLevelEnabledUtil;
 import lv.javaguru.travel.insurance.core.util.Placeholder;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -16,13 +15,13 @@ import java.util.Optional;
 public class TravelRequestExistMedicalRiskLimitLevelValidation extends TravelRequestValidationImpl{
     @Autowired
     ValidationErrorFactory errorFactory;
-    @Autowired
-    MedicalRiskLimitLevelEnabledUtil medicalRiskLimitLevelEnabledUtil;
+    @Value( "${medical.risk.limit.level.enabled:false}" )
+    private Boolean medicalRiskLimitLevelEnabled;
     @Autowired
     ClassifierValueRepository classifierValueRepository;
     @Override
     public Optional<ValidationError> validate(TravelCalculatePremiumRequest request){
-        return medicalRiskLimitLevelEnabledUtil.isMedicalRiskLimitLevelEnabled()
+        return medicalRiskLimitLevelEnabled
                 && medicalRiskNotEmptyOrNull(request)
                 && notExistLimitLevel(request) ?
                 Optional.of( buildError(request)) : Optional.empty();
