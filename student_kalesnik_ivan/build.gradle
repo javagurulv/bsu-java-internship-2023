@@ -45,4 +45,3 @@ bootJar {
 	archiveBaseName = 'insurance-calculator'
 	archiveVersion = '1.0.2'
 }
-3
