@@ -1,9 +1,10 @@
-package lv.javaguru.travel.insurance.rest;
+package lv.javaguru.travel.insurance.core;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lv.javaguru.travel.insurance.validators.ValidationError;
 
 import java.util.List;
 
