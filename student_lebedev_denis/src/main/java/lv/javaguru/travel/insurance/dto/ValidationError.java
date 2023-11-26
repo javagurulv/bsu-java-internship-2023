@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.validators;
+package lv.javaguru.travel.insurance.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

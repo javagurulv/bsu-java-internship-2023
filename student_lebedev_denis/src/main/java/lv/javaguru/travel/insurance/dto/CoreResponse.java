@@ -1,10 +1,9 @@
-package lv.javaguru.travel.insurance.core;
+package lv.javaguru.travel.insurance.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lv.javaguru.travel.insurance.validators.ValidationError;
 
 import java.util.List;
 
@@ -15,7 +14,7 @@ import java.util.List;
 public class CoreResponse {
     private List<ValidationError> errors;
 
-    boolean hasErrors() {
+    public boolean hasErrors() {
         return errors != null && !errors.isEmpty();
     }
 }
