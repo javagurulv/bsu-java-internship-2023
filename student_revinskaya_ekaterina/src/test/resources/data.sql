@@ -118,3 +118,8 @@ from classifiers where classifiers.title = 'COUNTRY';
     select classifiers.id, 'LEVEL_50000', 'the maximum payout is 50,000 euros'
     from classifiers where classifiers.title = 'MEDICAL_RISK_LIMIT_LEVEL';
 
+    insert into medical_risk_limit_level ( medical_risk_limit_level_ic, coefficient)
+    values('LEVEL_10000', 1.0),
+    ('LEVEL_15000', 1.2),
+    ('LEVEL_20000', 1.5),
+    ('LEVEL_50000', 2.0);
