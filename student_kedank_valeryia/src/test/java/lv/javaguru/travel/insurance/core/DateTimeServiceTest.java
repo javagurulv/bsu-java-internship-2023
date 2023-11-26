@@ -1,8 +1,14 @@
 package lv.javaguru.travel.insurance.core;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -10,44 +16,38 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DateTimeServiceTest {
 
-    @Autowired
-    private TravelCalculatePremiumServiceImpl service;
-    private DateTimeService dateTimeService= new DateTimeService();
-
+    private DateTimeService dateTimeService = new DateTimeService();
 
     @Test
     public void shouldReturnZeroAgreementPrice() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(2022, Calendar.JANUARY, 1);
-        Date dateFrom = calendar.getTime();
-        calendar.set(2022, Calendar.JANUARY, 1);
-        Date dateTo = calendar.getTime();
-
+        Date dateFrom = createDate("01.01.2022");
+        Date dateTo = createDate("01.01.2022");
         var daysBetween = dateTimeService.getDaysBetween(dateFrom, dateTo);
         assertEquals(daysBetween, 0);
     }
 
     @Test
     public void shouldReturnPositiveAgreementPrice() {
+        Date dateFrom = createDate("01.01.2022");
+        Date dateTo = createDate("01.01.2023");
         Calendar calendar = Calendar.getInstance();
-        calendar.set(2022, Calendar.JANUARY, 1);
-        Date dateFrom = calendar.getTime();
-        calendar.set(2023, Calendar.JANUARY, 1);
-        Date dateTo = calendar.getTime();
-
         var daysBetween = dateTimeService.getDaysBetween(dateFrom, dateTo);
         assertEquals(daysBetween, 365);
     }
 
     @Test
     public void shouldReturnNegativeAgreementPrice() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(2023, Calendar.JANUARY, 1);
-        Date dateFrom = calendar.getTime();
-        calendar.set(2022, Calendar.JANUARY, 1);
-        Date dateTo = calendar.getTime();
-
+        Date dateFrom = createDate("01.01.2023");
+        Date dateTo = createDate("01.01.2022");
         var daysBetween = dateTimeService.getDaysBetween(dateFrom, dateTo);
-        assertEquals( daysBetween, -365);
+        assertEquals(daysBetween, -365);
+    }
+
+    public Date createDate(String strDate) {
+        try {
+            return new SimpleDateFormat("dd.MM.yyyy").parse(strDate);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

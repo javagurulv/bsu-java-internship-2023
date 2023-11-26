@@ -14,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 public class CoreResponse {
     List<ValidationError> errors;
-    boolean hasErrors(TravelCalculatePremiumRequest request){
+    public boolean hasErrors(TravelCalculatePremiumRequest request){
         return errors != null && !errors.isEmpty();
     }
 }

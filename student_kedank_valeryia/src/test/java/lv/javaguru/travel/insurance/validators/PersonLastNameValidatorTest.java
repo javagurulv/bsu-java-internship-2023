@@ -5,70 +5,68 @@ import lv.javaguru.travel.insurance.core.TravelCalculatePremiumResponse;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class PersonLastNameValidatorTest {
-        @Test
-        public void shouldNotHaveError() {
 
-            Calendar calendar = Calendar.getInstance();
-            calendar.set(2022, Calendar.JANUARY, 1);
-            Date dateFrom = calendar.getTime();
-            calendar.set(2023, Calendar.JANUARY, 1);
-            Date dateTo = calendar.getTime();
+    TravelCalculatePremiumRequestValidator requestValidator = new TravelCalculatePremiumRequestValidator();
 
-            TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest("Valeryia",
-                    "Kedank", dateFrom, dateTo);
-            TravelCalculatePremiumResponse response = new TravelCalculatePremiumResponse("Valeryia",
-                    "Kedank", dateFrom, dateTo, BigDecimal.valueOf(365));
+    @Test
+    public void shouldNotHaveError() {
+        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        when(request.getPersonFirstName()).thenReturn("firstName");
+        when(request.getPersonLastName()).thenReturn("lastName");
+        when(request.getAgreementDateFrom()).thenReturn(createDate("01.01.2022"));
+        when(request.getAgreementDateTo()).thenReturn(createDate("01.01.2023"));
+        List<ValidationError> errors = requestValidator.validate(request);
 
-            TravelCalculatePremiumRequestValidator requestValidator = new TravelCalculatePremiumRequestValidator();
+        assertTrue(errors.isEmpty());
+        assertEquals(errors.size(), 0);
+    }
 
-            assertEquals(requestValidator.validate(request).size(), 0);
+    @Test
+    public void shouldReturnErrorIfPersonLastNameIsEmpty() {
+        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        when(request.getPersonFirstName()).thenReturn("firstName");
+        when(request.getPersonLastName()).thenReturn("");
+        when(request.getAgreementDateFrom()).thenReturn(createDate("01.01.2022"));
+        when(request.getAgreementDateTo()).thenReturn(createDate("01.01.2023"));
+        List<ValidationError> errors = requestValidator.validate(request);
+
+        assertFalse(errors.isEmpty());
+        assertEquals(errors.size(), 1);
+        assertEquals(errors.get(0).getField(), "personLastName");
+        assertEquals(errors.get(0).getMessage(), "Most not be empty!");
+    }
+
+    @Test
+    public void shouldReturnErrorIfPersonLastNameIsNull() {
+        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        when(request.getPersonFirstName()).thenReturn("firstName");
+        when(request.getPersonLastName()).thenReturn(null);
+        when(request.getAgreementDateFrom()).thenReturn(createDate("01.01.2022"));
+        when(request.getAgreementDateTo()).thenReturn(createDate("01.01.2023"));
+        List<ValidationError> errors = requestValidator.validate(request);
+
+        assertFalse(errors.isEmpty());
+        assertEquals(errors.size(), 1);
+        assertEquals(errors.get(0).getField(), "personLastName");
+        assertEquals(errors.get(0).getMessage(), "Most not be empty!");
+    }
+
+    public Date createDate(String strDate) {
+        try {
+            return new SimpleDateFormat("dd.MM.yyyy").parse(strDate);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
         }
-
-        @Test
-        public void shouldReturnErrorIfPersonLastNameIsEmpty() {
-
-            Calendar calendar = Calendar.getInstance();
-            calendar.set(2022, Calendar.JANUARY, 1);
-            Date dateFrom = calendar.getTime();
-            calendar.set(2023, Calendar.JANUARY, 1);
-            Date dateTo = calendar.getTime();
-
-            TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest("Valeryia",
-                    "", dateFrom, dateTo);
-
-            TravelCalculatePremiumRequestValidator requestValidator = new TravelCalculatePremiumRequestValidator();
-            List<ValidationError> error = requestValidator.validate(request);
-
-
-            assertEquals(error.get(0).getField(), "personLastName");
-            assertEquals(error.get(0).getMessage(), "Most not be empty!");
-
-        }
-
-        @Test
-        public void shouldReturnErrorIfPersonLastNameIsNull() {
-            Calendar calendar = Calendar.getInstance();
-            calendar.set(2022, Calendar.JANUARY, 1);
-            Date dateFrom = calendar.getTime();
-            calendar.set(2023, Calendar.JANUARY, 1);
-            Date dateTo = calendar.getTime();
-
-            TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest();
-            request.setPersonFirstName("Valeryia");
-            request.setAgreementDateFrom(dateFrom);
-            request.setAgreementDateTo(dateTo);
-
-            TravelCalculatePremiumRequestValidator requestValidator = new TravelCalculatePremiumRequestValidator();
-            List<ValidationError> error = requestValidator.validate(request);
-
-            assertEquals(error.get(0).getField(), "personLastName");
-            assertEquals(error.get(0).getMessage(), "Most not be empty!");
-        }
+    }
 }

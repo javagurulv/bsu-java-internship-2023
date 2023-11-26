@@ -1,41 +1,76 @@
 package lv.javaguru.travel.insurance.core;
 
-import lv.javaguru.travel.insurance.core.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.validators.TravelCalculatePremiumRequestValidator;
 import lv.javaguru.travel.insurance.validators.ValidationError;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.*;
 
-@SpringBootTest
+
+@ExtendWith(MockitoExtension.class)
 class TravelCalculatePremiumServiceImplTest {
-    @Autowired
+    @InjectMocks
     private TravelCalculatePremiumServiceImpl service;
+    @Mock
+    private TravelCalculatePremiumRequestValidator requestValidator;
 
     public TravelCalculatePremiumRequest createObjectRequest() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(2022, Calendar.JANUARY, 1);
-        Date dateFrom = calendar.getTime();
-        calendar.set(2023, Calendar.JANUARY, 1);
-        Date dateTo = calendar.getTime();
 
-        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest("personFirstName",
+        Date dateFrom = createDate("01.01.2000");
+        Date dateTo = createDate("01.01.2023");
+
+        return new TravelCalculatePremiumRequest(
+                "personFirstName",
                 "personLastName",
                 dateFrom, dateTo);
+    }
 
-        return request;
+    public Date createDate(String strData) {
+        try {
+            return new SimpleDateFormat("dd.MM.yyyy").parse(strData);
+        } catch (ParseException e) {
+            throw new RuntimeException();
+        }
+    }
+
+    public List<ValidationError> buildValidationErrorList() {
+        return List.of(new ValidationError("field", "message"));
+    }
+
+    @Test
+    public void shouldReturnResponseWithErrors() {
+        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        List<ValidationError> errors = buildValidationErrorList();
+        when(requestValidator.validate(request)).thenReturn(errors);
+        TravelCalculatePremiumResponse response = service.calculatePremium(request);
+        assertTrue(response.hasErrors(request));
+    }
+
+    @Test
+    public void shouldReturnResponseWithValidationErrors() {
+        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        List<ValidationError> errors = buildValidationErrorList();
+        when(requestValidator.validate(request)).thenReturn(errors);
+        TravelCalculatePremiumResponse response = service.calculatePremium(request);
+        assertEquals(response.getErrors().size(), 1);
+        assertEquals(response.getErrors().get(0).getField(), "field");
+        assertEquals(response.getErrors().get(0).getMessage(), "message");
     }
 
     @Test
@@ -54,10 +89,7 @@ class TravelCalculatePremiumServiceImplTest {
 
     @Test
     public void shouldReturnResponseWithCorrectAgreementDateFrom() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(2022, Calendar.JANUARY, 1);
-        Date dateFrom = calendar.getTime();
-
+        Date dateFrom = createDate("01.01.2000");
         TravelCalculatePremiumRequest request = createObjectRequest();
         TravelCalculatePremiumResponse response = service.calculatePremium(request);
         assertEquals(response.getAgreementDateFrom(), dateFrom);
@@ -65,10 +97,7 @@ class TravelCalculatePremiumServiceImplTest {
 
     @Test
     public void shouldReturnResponseWithCorrectAgreementDateTo() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(2023, Calendar.JANUARY, 1);
-        Date dateTo = calendar.getTime();
-
+        Date dateTo = createDate("01.01.2023");
         TravelCalculatePremiumRequest request = createObjectRequest();
         TravelCalculatePremiumResponse response = service.calculatePremium(request);
         assertEquals(response.getAgreementDateTo(), dateTo);
@@ -78,6 +107,6 @@ class TravelCalculatePremiumServiceImplTest {
     public void shouldReturnResponseWithCorrectAgreementPrice() {
         TravelCalculatePremiumRequest request = createObjectRequest();
         TravelCalculatePremiumResponse response = service.calculatePremium(request);
-        assertEquals(response.getAgreementPrice(), BigDecimal.valueOf(365));
+        assertEquals(response.getAgreementPrice(), BigDecimal.valueOf(8400));
     }
 }
