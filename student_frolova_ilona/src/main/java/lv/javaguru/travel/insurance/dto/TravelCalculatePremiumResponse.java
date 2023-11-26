@@ -3,7 +3,7 @@ package lv.javaguru.travel.insurance.dto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.*;
-import lv.javaguru.travel.insurance.dto.CoreResponse;
+import lv.javaguru.travel.insurance.core.serializers.MoneySerializer;
 
 import java.math.BigDecimal;
 import java.util.Date;
