@@ -15,7 +15,6 @@ public class MedicalRiskLimitLevelEnabledUtil {
     @Autowired
     private Environment environment;
     public boolean isMedicalRiskLimitLevelEnabled() {
-        System.out.println(environment.getProperty("medical.risk.limit.level.enabled"));
         return Objects.equals(environment.getProperty("medical.risk.limit.level.enabled"), "true");
     }
 }
