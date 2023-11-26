@@ -38,33 +38,36 @@
 </form>
 
 
-<td th:if="${response.errors != null}">
+<!-- Display errors -->
+<div th:if="${response != null and response.errors != null}">
     <h3>Travel Insurance Premium Calculation ERRORS</h3>
-    <tr th:each="error : ${response.errors}">
-        <td th:text="${error.errorCode}" />
-        <td th:text="${error.description}" />
-        <br>
-        <br>
-    </tr>
-</td>
+    <table>
+        <tr th:each="error : ${response.errors}">
+            <td th:text="${error.errorCode}" />
+            <td th:text="${error.description}" />
+        </tr>
+    </table>
+</div>
 
 <br>
 
 <h3>
-    <label th:if="${response.agreementPremium != null}"
+    <label th:if="${response != null and response.agreementPremium != null}"
            th:text="'AGREEMENT PREMIUM: ' + ${response.agreementPremium}"></label>
 </h3>
 
 <br>
 
-<td th:if="${response.risks != null}">
+<!-- Display risks -->
+<div th:if="${response != null and response.risks != null}">
     <h3>Travel Insurance Premium Calculation RISKS</h3>
-    <tr th:each="risk : ${response.risks}">
-        <td th:text="${risk.riskIc}" />
-        <td th:text="${risk.premium}" />
-        <br>
-    </tr>
-</td>
+    <table>
+        <tr th:each="risk : ${response.risks}">
+            <td th:text="${risk.riskIc}" />
+            <td th:text="${risk.premium}" />
+        </tr>
+    </table>
+</div>
 
 </body>
 </html>
