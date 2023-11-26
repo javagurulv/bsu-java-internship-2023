@@ -1,6 +1,6 @@
 package lv.javaguru.travel.insurance.core.core;
 
-import lv.javaguru.travel.insurance.core.TravelCalculatePremiumRequestValidator;
+import lv.javaguru.travel.insurance.core.validations.TravelCalculatePremiumRequestValidator;
 import lv.javaguru.travel.insurance.core.TravelCalculatePremiumServiceImpl;
 import lv.javaguru.travel.insurance.core.TravelPremiumUnderwriting;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;

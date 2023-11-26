@@ -1,7 +1,8 @@
 package lv.javaguru.travel.insurance.core;
 
-import lv.javaguru.travel.insurance.validators.TravelCalculatePremiumRequestValidator;
-import lv.javaguru.travel.insurance.validators.ValidationError;
+import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumResponse;
+import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -69,9 +70,9 @@ class TravelCalculatePremiumServiceImplTest {
         when(request.getAgreementDateFrom()).thenReturn(dateTimeService.createDate("23.03.2023"));
         when(request.getAgreementDateTo()).thenReturn(dateTimeService.createDate("18.05.2023"));
         when(requestValidator.validate(request)).thenReturn(List.of());
-        when(underwriting.calculatePremium(request)).thenReturn(new BigDecimal(57));
+        when(underwriting.calculatePremium(request)).thenReturn(new BigDecimal(56));
         TravelCalculatePremiumResponse response = service.calculatePremium(request);
-        assertEquals(response.getAgreementPrice(), new BigDecimal(57));
+        assertEquals(response.getAgreementPrice(), new BigDecimal(56));
     }
 
     @Test

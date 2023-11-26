@@ -33,6 +33,8 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
         response.setAgreementPremium(calculatorResult.getTotalPremium());
         response.setRisks(calculatorResult.getTravelRisks());
         response.setCountry(request.getCountry());
+        response.setBirthday(request.getBirthday());
+        response.setMedicalRiskLimitLevel(request.getMedicalRiskLimitLevel());
         return response;
     }
 }
