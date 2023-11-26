@@ -11,6 +11,7 @@
   "agreementDateFrom": null,
   "agreementDateTo": null,
   "country": null,
+  "medicalRiskLimitLevel" : null,
   "agreementPremium": null,
   "risks": null
 }

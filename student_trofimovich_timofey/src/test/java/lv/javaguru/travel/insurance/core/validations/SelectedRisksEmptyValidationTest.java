@@ -17,11 +17,11 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class SelectedRisksValidationTest {
+public class SelectedRisksEmptyValidationTest {
     @Mock
     ValidationErrorFactory factory;
     @InjectMocks
-    private SelectedRisksValidation validation;
+    private SelectedRisksEmptyValidation validation;
     @Test
     void shouldReturnErrorWhenSelectedRisksListIsEmpty() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
