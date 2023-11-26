@@ -25,10 +25,10 @@ public class TravelCalculatePremiumControllerTest {
     @Autowired private JsonFileReader jsonFileReader;
 
     @Test
-    public void successRequest() throws Exception {
+    public void successRequestTravelMedical() throws Exception {
         executeAndCompare(
-                "rest/TravelCalculatePremiumRequest_success.json",
-                "rest/TravelCalculatePremiumResponse_success.json"
+                "rest/TravelCalculatePremiumRequest_travel_medical_success.json",
+                "rest/TravelCalculatePremiumResponse_travel_medical_success.json"
         );
     }
 
@@ -61,6 +61,22 @@ public class TravelCalculatePremiumControllerTest {
         executeAndCompare(
                 "rest/TravelCalculatePremiumRequest_personLastName_is_empty.json",
                 "rest/TravelCalculatePremiumResponse_personLastName_is_empty.json"
+        );
+    }
+
+    @Test
+    public void personBirthDateIsNull() throws Exception {
+        executeAndCompare(
+                "rest/TravelCalculatePremiumRequest_personBirthDate_is_null.json",
+                "rest/TravelCalculatePremiumResponse_personBirthDate_is_null.json"
+        );
+    }
+
+    @Test
+    public void personBirthDateIsInTheFuture() throws Exception {
+        executeAndCompare(
+                "rest/TravelCalculatePremiumRequest_personBirthDate_in_the_future.json",
+                "rest/TravelCalculatePremiumResponse_personBirthDate_in_the_future.json"
         );
     }
 
@@ -125,6 +141,22 @@ public class TravelCalculatePremiumControllerTest {
         executeAndCompare(
                 "rest/TravelCalculatePremiumRequest_selectedRisks_not_supported.json",
                 "rest/TravelCalculatePremiumResponse_selectedRisks_not_supported.json"
+        );
+    }
+
+    @Test
+    public void countryIsNullWhenTravelMedicalRiskSelected() throws Exception {
+        executeAndCompare(
+                "rest/TravelCalculatePremiumRequest_country_is_null_travel_medical.json",
+                "rest/TravelCalculatePremiumResponse_country_is_null_travel_medical.json"
+        );
+    }
+
+    @Test
+    public void countryIsEmptyWhenTravelMedicalRiskSelected() throws Exception {
+        executeAndCompare(
+                "rest/TravelCalculatePremiumRequest_country_is_empty_travel_medical.json",
+                "rest/TravelCalculatePremiumResponse_country_is_empty_travel_medical.json"
         );
     }
 

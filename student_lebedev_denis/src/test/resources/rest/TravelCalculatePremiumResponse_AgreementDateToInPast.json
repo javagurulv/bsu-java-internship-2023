@@ -6,7 +6,7 @@
     },
     {
       "field": "agreementDateTo",
-      "message": "Must be in the future!"
+      "message": "Must be in future!"
     }
   ],
   "personFirstName": null,

@@ -2,12 +2,10 @@ package lv.javaguru.travel.insurance.core;
 
 import org.springframework.stereotype.Component;
 
-import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.SimpleFormatter;
 
 @Component
 public class DateTimeService {
