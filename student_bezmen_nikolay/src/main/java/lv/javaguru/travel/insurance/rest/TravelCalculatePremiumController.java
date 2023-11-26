@@ -1,5 +1,6 @@
 package lv.javaguru.travel.insurance.rest;
 
+import com.google.common.base.Stopwatch;
 import lv.javaguru.travel.insurance.core.TravelCalculatePremiumService;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumResponse;
@@ -16,11 +17,20 @@ public class TravelCalculatePremiumController {
 	@Autowired private TravelCalculatePremiumService calculatePremiumService;
 	@Autowired private TravelCalculatePremiumRequestLogger requestLogger;
 	@Autowired private TravelCalculatePremiumResponseLogger responseLogger;
+	@Autowired private TravelCalculatePremiumRequestExecutionTimeLogger timeProcessLogger;
 
 	@PostMapping(path = "/",
 			consumes = "application/json",
 			produces = "application/json")
 	public TravelCalculatePremiumResponse calculatePremium(@RequestBody TravelCalculatePremiumRequest request) {
+		Stopwatch stopwatch = Stopwatch.createStarted();
+		TravelCalculatePremiumResponse response = processRequest(request);
+		timeProcessLogger.log(stopwatch);
+
+		return response;
+	}
+
+	private TravelCalculatePremiumResponse processRequest(TravelCalculatePremiumRequest request){
 		requestLogger.log(request);
 		TravelCalculatePremiumResponse response = calculatePremiumService.calculatePremium(request);
 		responseLogger.log(response);
