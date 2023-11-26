@@ -1,9 +1,11 @@
-package lv.javaguru.travel.insurance.rest;
+package lv.javaguru.travel.insurance.core;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lv.javaguru.travel.insurance.core.CoreResponse;
+import lv.javaguru.travel.insurance.validators.ValidationError;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -20,6 +22,8 @@ public class TravelCalculatePremiumResponse extends CoreResponse {
     private String personLastName;
     private Date agreementDateFrom;
     private Date agreementDateTo;
+
+    //разница между двумя датами
     private BigDecimal agreementPrice;
 
     public TravelCalculatePremiumResponse(String personFirstName, String personLastName,
@@ -29,6 +33,7 @@ public class TravelCalculatePremiumResponse extends CoreResponse {
         this.agreementDateFrom = agreementDateFrom;
         this.agreementDateTo = agreementDateTo;
 
+        //разница между двумя датами
         long temp = agreementDateTo.getTime() - agreementDateFrom.getTime();
         long days = TimeUnit.DAYS.convert(temp, TimeUnit.MILLISECONDS);
         this.agreementPrice = BigDecimal.valueOf(days);

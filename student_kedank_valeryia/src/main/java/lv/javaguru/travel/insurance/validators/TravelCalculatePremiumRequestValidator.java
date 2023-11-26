@@ -1,7 +1,6 @@
-package lv.javaguru.travel.insurance.core;
+package lv.javaguru.travel.insurance.validators;
 
-import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
-import lv.javaguru.travel.insurance.rest.ValidationError;
+import lv.javaguru.travel.insurance.core.TravelCalculatePremiumRequest;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -34,13 +33,14 @@ public class TravelCalculatePremiumRequestValidator {
 
     private Optional<ValidationError> validateDateFrom(TravelCalculatePremiumRequest request){
         return (request.getAgreementDateFrom() == null)
-                ? Optional.of(new ValidationError("dateFrom", "Most not be empty!"))
+                ? Optional.of(new ValidationError("agreementDateFrom", "Most not be empty!"))
                 : Optional.empty();
     }
 
     private Optional<ValidationError> validateDateTo(TravelCalculatePremiumRequest request){
         return (request.getAgreementDateTo() == null)
-                ? Optional.of(new ValidationError("dateTo", "Most not be empty!"))
+                ? Optional.of(new ValidationError("agreementDateTo", "Most not be empty!"))
                 : Optional.empty();
     }
+
 }
