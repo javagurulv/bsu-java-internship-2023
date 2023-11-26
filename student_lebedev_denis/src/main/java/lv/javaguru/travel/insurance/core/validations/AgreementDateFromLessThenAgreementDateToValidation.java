@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-public class AgreementDateFromLessThenAgreementDateToValidation implements TravelRequestValidation {
+class AgreementDateFromLessThenAgreementDateToValidation implements TravelRequestValidation {
     @Override
     public Optional<ValidationError> execute(TravelCalculatePremiumRequest request) {
         return (request.getAgreementDateFrom() != null && request.getAgreementDateTo() != null &&

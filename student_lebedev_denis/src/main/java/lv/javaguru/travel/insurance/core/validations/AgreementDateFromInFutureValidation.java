@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.Optional;
 
 @Component
-public class AgreementDateFromInFutureValidation implements TravelRequestValidation {
+class AgreementDateFromInFutureValidation implements TravelRequestValidation {
     @Autowired
     private DateTimeService dateTimeService;
 
