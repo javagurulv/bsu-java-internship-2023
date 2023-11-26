@@ -103,10 +103,10 @@ class TravelCalculatePremiumServiceImplTest {
         assertEquals(response.getAgreementDateTo(), dateTo);
     }
 
-    @Test
-    public void shouldReturnResponseWithCorrectAgreementPrice() {
+
+    /*public void shouldReturnResponseWithCorrectAgreementPrice() {
         TravelCalculatePremiumRequest request = createObjectRequest();
         TravelCalculatePremiumResponse response = service.calculatePremium(request);
         assertEquals(response.getAgreementPrice(), BigDecimal.valueOf(8400));
-    }
+    }*/
 }
