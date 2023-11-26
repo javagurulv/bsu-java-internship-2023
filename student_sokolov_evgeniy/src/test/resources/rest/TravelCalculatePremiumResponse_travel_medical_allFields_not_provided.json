@@ -8,10 +8,6 @@
     "description":"Field agreementDateTo must not be empty!"
   },
   {
-    "errorCode":"ERROR_CODE_6",
-    "description":"Field selectedRisks must not be empty!"
-  },
-  {
     "errorCode":"ERROR_CODE_8",
     "description":"Field personLastName must not be empty!"
   },
@@ -22,6 +18,14 @@
   {
     "errorCode":"ERROR_CODE_11",
     "description":"Field personBirthDate must not be empty!"
+  },
+  {
+    "errorCode":"ERROR_CODE_10",
+    "description":"Field country must not be empty!"
+  },
+  {
+    "errorCode":"ERROR_CODE_13",
+    "description":"Field medicalRiskLimitLevel must not be empty!"
   }
 ],
   "personFirstName": null,

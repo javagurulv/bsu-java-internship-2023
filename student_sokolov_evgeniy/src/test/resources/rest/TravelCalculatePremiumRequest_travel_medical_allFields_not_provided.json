@@ -6,5 +6,5 @@
   "agreementDateTo" : null,
   "country" : null,
   "medicalRiskLimitLevel" : null,
-  "selected_risks" : null
+  "selected_risks" : ["TRAVEL_MEDICAL"]
 }
