@@ -21,11 +21,11 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
         List<ValidationError> errorList = requestValidator.validate(request);
 
         return errorList.isEmpty() ?
-                buildResponse(request,premiumUnderwriting.calculatePremium(request) ) : buildResponse();
+                buildResponse(request,premiumUnderwriting.calculatePremium(request) ) : buildResponse(errorList);
     }
 
-    private TravelCalculatePremiumResponse buildResponse(){
-        return new TravelCalculatePremiumResponse();
+    private TravelCalculatePremiumResponse buildResponse(List<ValidationError> errorList){
+        return new TravelCalculatePremiumResponse(errorList);
     }
 
     private TravelCalculatePremiumResponse buildResponse(TravelCalculatePremiumRequest request, BigDecimal duration){

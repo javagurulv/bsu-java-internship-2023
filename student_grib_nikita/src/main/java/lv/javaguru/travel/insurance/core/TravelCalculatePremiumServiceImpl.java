@@ -16,33 +16,33 @@ import java.util.List;
 
 @Component
 class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService {
-     private TravelCalculatePremiumRequestValidator requestValidator;
+    @Autowired private TravelCalculatePremiumRequestValidator requestValidator;
+    @Autowired private TravelPremiumUnderwriting premiumUnderwriting;
+
+    @Autowired
+    public TravelCalculatePremiumServiceImpl(TravelCalculatePremiumRequestValidator requestValidator, TravelPremiumUnderwriting premiumUnderwriting) {
+        this.requestValidator = requestValidator;
+        this.premiumUnderwriting = premiumUnderwriting;
+    }
 
     @Override
     public TravelCalculatePremiumResponse calculatePremium(TravelCalculatePremiumRequest request) {
         List<ValidationError> errors = requestValidator.validate(request);
-        return createPremiumResponse(errors, request);
-    }
-    @Autowired
-    public TravelCalculatePremiumServiceImpl(TravelCalculatePremiumRequestValidator requestValidator) {
-        this.requestValidator = requestValidator;
+        return errors.isEmpty() ? buildResponse(request, premiumUnderwriting.calculatePremium(request)) : buildResponse(errors);
     }
 
-    private TravelCalculatePremiumResponse createPremiumResponse(List<ValidationError> errors, TravelCalculatePremiumRequest request){
-        if (!errors.isEmpty()) {
-            return new TravelCalculatePremiumResponse(errors);
-        }
+    TravelCalculatePremiumResponse buildResponse(List<ValidationError> errors) {
+        return new TravelCalculatePremiumResponse(errors);
+    }
+
+    private TravelCalculatePremiumResponse buildResponse(TravelCalculatePremiumRequest request, BigDecimal agreementPrice){
 
         TravelCalculatePremiumResponse premiumResponse = new TravelCalculatePremiumResponse();
         premiumResponse.setAgreementDateTo(request.getAgreementDateTo());
         premiumResponse.setAgreementDateFrom(request.getAgreementDateFrom());
         premiumResponse.setPersonFirstName(request.getPersonFirstName());
         premiumResponse.setPersonLastName(request.getPersonLastName());
-
-        BigDecimal daysDiff = new BigDecimal
-                (DataTimeService.getDaysBetween(request.getAgreementDateFrom(),
-                        request.getAgreementDateTo()));
-        premiumResponse.setAgreementPrice(daysDiff);
+        premiumResponse.setAgreementPrice(agreementPrice);
         return premiumResponse;
     }
 
