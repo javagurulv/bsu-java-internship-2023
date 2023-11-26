@@ -161,6 +161,14 @@ public class TravelCalculatePremiumControllerTest {
     }
 
     @Test
+    public void travelMedicalAllFieldsNotProvided() throws Exception {
+        executeAndCompare(
+                "rest/TravelCalculatePremiumRequest_travel_medical_allFields_not_provided.json",
+                "rest/TravelCalculatePremiumResponse_travel_medical_allFields_not_provided.json"
+        );
+    }
+
+    @Test
     public void allFieldsNotProvided() throws Exception {
         executeAndCompare(
                 "rest/TravelCalculatePremiumRequest_allFields_not_provided.json",
