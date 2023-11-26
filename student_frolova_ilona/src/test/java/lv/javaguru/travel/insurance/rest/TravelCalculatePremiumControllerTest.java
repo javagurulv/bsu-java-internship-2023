@@ -1,7 +1,7 @@
 package lv.javaguru.travel.insurance.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lv.javaguru.travel.insurance.core.validations.TravelCalculatePremiumRequestValidatorImpl;
+import lv.javaguru.travel.insurance.core.validations.TravelCalculatePremiumRequestValidator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -32,7 +32,7 @@ public class TravelCalculatePremiumControllerTest {
     private final ObjectMapper mapper = new ObjectMapper();
 
     @Mock
-    private TravelCalculatePremiumRequestValidatorImpl validator;
+    private TravelCalculatePremiumRequestValidator validator;
 
     @Test
     public void simpleRestControllerTestExample() throws Exception {

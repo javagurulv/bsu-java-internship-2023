@@ -14,10 +14,10 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 @Component
 @Getter
-public class TravelCalculatePremiumRequestValidatorImpl implements TravelCalculatePremiumRequestValidator{
+class TravelCalculatePremiumRequestValidatorImpl implements TravelCalculatePremiumRequestValidator{
 
     @Autowired
-    List<TravelRequestValidation> validations;
+    private List<TravelRequestValidation> validations;
 
     @Override
     public List<ValidationError> validate(TravelCalculatePremiumRequest request) {
