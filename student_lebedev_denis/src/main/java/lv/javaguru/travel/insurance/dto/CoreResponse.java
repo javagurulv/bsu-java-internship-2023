@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.rest;
+package lv.javaguru.travel.insurance.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,8 +12,9 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CoreResponse {
-    List<ValidationError> errors;
-    boolean hasErrors(TravelCalculatePremiumRequest request){
+    private List<ValidationError> errors;
+
+    public boolean hasErrors() {
         return errors != null && !errors.isEmpty();
     }
 }
