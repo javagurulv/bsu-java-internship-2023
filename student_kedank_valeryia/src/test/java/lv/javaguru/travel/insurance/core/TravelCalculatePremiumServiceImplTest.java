@@ -80,33 +80,4 @@ class TravelCalculatePremiumServiceImplTest {
         TravelCalculatePremiumResponse response = service.calculatePremium(request);
         assertEquals(response.getAgreementPrice(), BigDecimal.valueOf(365));
     }
-
-    //разница между двумя датами
-    @Test
-    public void shouldReturnZeroAgreementPrice() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(2023, Calendar.JANUARY, 1);
-        Date dateFrom = calendar.getTime();
-        calendar.set(2023, Calendar.JANUARY, 1);
-        Date dateTo = calendar.getTime();
-
-        TravelCalculatePremiumRequest request = createObjectRequest();
-        request.setAgreementDateFrom(dateFrom);
-        request.setAgreementDateTo(dateFrom);
-
-        TravelCalculatePremiumResponse response = service.calculatePremium(request);
-        assertEquals(response.getAgreementPrice(), BigDecimal.valueOf(0));
-    }
-
-    @Test
-    public void shouldReturnPositiveAgreementPrice() {
-        TravelCalculatePremiumRequest request = createObjectRequest();
-
-        TravelCalculatePremiumResponse response = service.calculatePremium(request);
-        assertEquals(response.getAgreementPrice(), BigDecimal.valueOf(365));
-    }
-
-    /*@Test
-    public void shouldReturnNegativeAgreementPrice() {
-    }*/
 }

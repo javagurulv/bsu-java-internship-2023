@@ -23,7 +23,6 @@ public class TravelCalculatePremiumResponse extends CoreResponse {
     private Date agreementDateFrom;
     private Date agreementDateTo;
 
-    //разница между двумя датами
     private BigDecimal agreementPrice;
 
     public TravelCalculatePremiumResponse(String personFirstName, String personLastName,
@@ -32,11 +31,8 @@ public class TravelCalculatePremiumResponse extends CoreResponse {
         this.personLastName = personLastName;
         this.agreementDateFrom = agreementDateFrom;
         this.agreementDateTo = agreementDateTo;
-
-        //разница между двумя датами
-        long temp = agreementDateTo.getTime() - agreementDateFrom.getTime();
-        long days = TimeUnit.DAYS.convert(temp, TimeUnit.MILLISECONDS);
-        this.agreementPrice = BigDecimal.valueOf(days);
+        DateTimeService dateTimeService = new DateTimeService();
+        this.agreementPrice = BigDecimal.valueOf(dateTimeService.getDaysBetween(agreementDateFrom, agreementDateTo));
     }
 
     public TravelCalculatePremiumResponse(List<ValidationError> errors) {
