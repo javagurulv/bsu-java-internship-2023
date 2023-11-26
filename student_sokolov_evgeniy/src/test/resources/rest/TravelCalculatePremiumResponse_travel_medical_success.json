@@ -13,11 +13,11 @@
       },
       {
         "riskIc": "TRAVEL_CANCELLATION",
-        "premium": 0
+        "premium": 0.00
       },
       {
         "riskIc": "TRAVEL_LOSS_BAGGAGE",
-        "premium": 0
+        "premium": 0.00
       }
   ]
 }
