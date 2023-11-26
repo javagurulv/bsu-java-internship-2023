@@ -35,11 +35,11 @@ dependencies {
 }
 
 jar {
-	enabled = false
+	enabled = true
 }
 
 bootJar {
 	enabled = true
 	archiveBaseName = 'insurance-calculator'
-	archiveVersion = '1.0.0'
+	archiveVersion = '1.0.2'
 }
