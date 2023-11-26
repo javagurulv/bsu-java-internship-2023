@@ -26,4 +26,5 @@ public class TravelCalculatePremiumRequest {
     private Date birthday;
     private List<String> selectedRisks;
     private String country;
+    private String medicalRiskLimitLevel;
 }

@@ -34,8 +34,10 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
         TravelCalculatePremiumResponse response = new TravelCalculatePremiumResponse();
         response.setPersonFirstName(request.getPersonFirstName());
         response.setPersonLastName(request.getPersonLastName());
+        response.setPersonBirthDate(request.getPersonBirthDate());
         response.setAgreementDateFrom(request.getAgreementDateFrom());
         response.setAgreementDateTo(request.getAgreementDateTo());
+        response.setCountry(request.getCountry());
         response.setAgreementPremium(premiumCalculationResult.getTotalPremium());
         response.setRisks(premiumCalculationResult.getRiskPremiums());
         return response;

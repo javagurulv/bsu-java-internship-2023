@@ -43,3 +43,13 @@ CREATE UNIQUE INDEX ix_age_coefficient_age_from
 ON age_coefficient (age_from);
 CREATE UNIQUE INDEX ix_age_coefficient_age_to
 ON age_coefficient (age_to);
+
+create table if not exists medical_risk_limit_level
+(
+id bigint not null auto_increment,
+medical_risk_limit_level_ic varchar(200) not null,
+coefficient numeric(10,1) not null,
+primary key(id)
+);
+CREATE UNIQUE INDEX ix_medical_risk_limit_level_ic
+ON medical_risk_limit_level (medical_risk_limit_level_ic);
