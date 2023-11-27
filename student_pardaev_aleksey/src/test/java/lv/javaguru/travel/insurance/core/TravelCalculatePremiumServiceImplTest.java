@@ -26,7 +26,7 @@ public class TravelCalculatePremiumServiceImplTest {
     @Mock
     private TravelCalculatePremiumRequestValidator requestValidator;
     @Mock
-    private DateTimeService dateTimeService;
+    private TravelPremiumUnderwriting underwriting;
 
     @InjectMocks
     private TravelCalculatePremiumServiceImpl service;
@@ -84,7 +84,7 @@ public class TravelCalculatePremiumServiceImplTest {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getAgreementDateTo()).thenReturn(createDate("25.02.2006"));
         when(request.getAgreementDateFrom()).thenReturn(createDate("24.02.2006"));
-        when(dateTimeService.getDaysBetween(request.getAgreementDateFrom(), request.getAgreementDateTo())).thenReturn(1L);
+        when(underwriting.calculatePremium(request)).thenReturn(new BigDecimal(1));
         when(requestValidator.validate(request)).thenReturn(List.of());
         TravelCalculatePremiumResponse response = service.calculatePremium(request);
         assertEquals(response.getAgreementPrice(), new BigDecimal(1));
