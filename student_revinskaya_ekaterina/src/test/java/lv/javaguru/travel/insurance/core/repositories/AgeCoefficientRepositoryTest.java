@@ -46,8 +46,6 @@ public class AgeCoefficientRepositoryTest {
         testValueByAge(140);
     }
 
-
-
     @Test
     public void shouldNotFindAgeMoreThanExist() {
         Optional<AgeCoefficient> valueOpt = ageCoefficientRepository.findByAge(200);

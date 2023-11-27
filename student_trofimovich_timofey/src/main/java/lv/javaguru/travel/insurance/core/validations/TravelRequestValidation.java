@@ -4,9 +4,11 @@ import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 
 @Component
 interface TravelRequestValidation {
     Optional<ValidationError> validate(TravelCalculatePremiumRequest request);
+    List<ValidationError> validateList(TravelCalculatePremiumRequest request);
 }
