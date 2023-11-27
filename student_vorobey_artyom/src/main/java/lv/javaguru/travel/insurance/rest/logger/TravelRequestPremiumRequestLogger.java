@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.rest;
+package lv.javaguru.travel.insurance.rest.logger;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
