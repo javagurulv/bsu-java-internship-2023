@@ -1,6 +1,7 @@
 package lv.javaguru.travel.insurance.rest;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
 
@@ -16,12 +17,14 @@ public class TravelCalculatePremiumResponse {
     public TravelCalculatePremiumResponse(String personFirstName,
                                           String personLastName,
                                           Date agreementDateFrom,
-                                          Date agreementDateTo)
+                                          Date agreementDateTo,
+                                          BigDecimal agreementPrice)
     {
         this.personFirstName = personFirstName;
         this.personLastName = personLastName;
         this.agreementDateFrom = agreementDateFrom;
         this.agreementDateTo = agreementDateTo;
+        this.agreementPrice = agreementPrice;
     }
 
     /////////////
