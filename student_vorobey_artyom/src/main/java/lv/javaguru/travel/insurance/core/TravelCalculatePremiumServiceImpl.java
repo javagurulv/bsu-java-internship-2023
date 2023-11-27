@@ -4,6 +4,7 @@ import lv.javaguru.travel.insurance.core.validations.TravelCalculatePremiumReque
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumResponse;
 import lv.javaguru.travel.insurance.dto.ValidationError;
+import lv.javaguru.travel.insurance.rest.logger.TravelRequestPremiumRequestLogger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

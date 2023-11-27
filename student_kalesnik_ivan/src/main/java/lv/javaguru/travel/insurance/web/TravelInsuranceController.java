@@ -1,8 +1,8 @@
 package lv.javaguru.travel.insurance.web;
 
 import lv.javaguru.travel.insurance.core.services.TravelCalculatePremiumService;
-import lv.javaguru.travel.insurance.validation.TravelCalculatePremiumRequest;
-import lv.javaguru.travel.insurance.validation.TravelCalculatePremiumResponse;
+import lv.javaguru.travel.insurance.validation.v1.TravelCalculatePremiumRequestV1;
+import lv.javaguru.travel.insurance.validation.v1.TravelCalculatePremiumResponseV1;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -25,12 +25,12 @@ public class TravelInsuranceController {
 
     @GetMapping("/insurance/travel/web")
     public String showForm(ModelMap modelMap) {
-        modelMap.addAttribute("request", new TravelCalculatePremiumRequest());
+        modelMap.addAttribute("request", new TravelCalculatePremiumRequestV1());
         return "travel-calculate-premium";
     }
 
     @PostMapping("/insurance/travel/web")
-    public String processForm(@ModelAttribute(value = "request") @Validated TravelCalculatePremiumRequest request,
+    public String processForm(@ModelAttribute(value = "request") @Validated TravelCalculatePremiumRequestV1 request,
                               BindingResult bindingResult,
                               ModelMap modelMap) {
 
@@ -38,7 +38,7 @@ public class TravelInsuranceController {
             // Handle validation errors
             return "travel-calculate-premium";
         }
-        TravelCalculatePremiumResponse response = service.calculatePremium(request);
+        TravelCalculatePremiumResponseV1 response = service.calculatePremium(request);
         modelMap.addAttribute("response", response);
 
         return "travel-calculate-premium";

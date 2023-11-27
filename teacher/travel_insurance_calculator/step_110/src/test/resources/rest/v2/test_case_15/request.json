@@ -1,0 +1,20 @@
+{
+  "agreementDateFrom" : "2025-05-29",
+  "agreementDateTo" : null,
+  "country" : "SPAIN",
+  "selected_risks":["TRAVEL_MEDICAL"],
+  "persons" : [
+    {
+      "personFirstName" : "Vasja",
+      "personLastName" : "Pupkin",
+      "personBirthDate" : "2010-05-29",
+      "medicalRiskLimitLevel" : "LEVEL_10000"
+    },
+    {
+      "personFirstName" : "Petja",
+      "personLastName" : "Pupkin",
+      "personBirthDate" : "2010-02-29",
+      "medicalRiskLimitLevel" : "LEVEL_10000"
+    }
+  ]
+}

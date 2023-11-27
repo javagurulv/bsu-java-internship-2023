@@ -21,12 +21,11 @@ public class TravelRequestExistMedicalRiskLimitLevelValidation extends TravelReq
     ClassifierValueRepository classifierValueRepository;
     @Override
     public Optional<ValidationError> validate(TravelCalculatePremiumRequest request){
-        return medicalRiskLimitLevelEnabled
-                && medicalRiskNotEmptyOrNull(request)
+        return medicalRiskLevelNotEmptyOrNull(request)
                 && notExistLimitLevel(request) ?
                 Optional.of( buildError(request)) : Optional.empty();
     }
-    private boolean medicalRiskNotEmptyOrNull(TravelCalculatePremiumRequest request) {
+    private boolean medicalRiskLevelNotEmptyOrNull(TravelCalculatePremiumRequest request) {
         return !(request.getMedicalRiskLimitLevel()==null || request.getMedicalRiskLimitLevel().isEmpty());
     }
     private ValidationError buildError(TravelCalculatePremiumRequest request){

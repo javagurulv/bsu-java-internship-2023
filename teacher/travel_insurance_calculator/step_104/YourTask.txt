@@ -1,0 +1,19 @@
+Ваша задача:
+1. Скопировать в /version_2 пакет /web.
+2. В /version_2 пакете /web создать пакет /v1
+   и перенести туда классы первой версии web (TravelInsuranceController).
+3. TravelInsuranceController -> TravelInsuranceControllerV1.
+4. Перевести на использование /core/api класс из пакета /web/v1.
+5. Поменять URL первой версии web c /insurance/travel/web
+   на "/insurance/travel/web/v1".
+5. Протестировать первую версию web и убедиться, что она работает
+   после сделанных изменений.
+
+В процессе реализации поставленной задачи вы увидите, что в /web/v1
+придётся использовать тот же код преобразования
+TravelCalculatePremiumRequestV1 -> TravelCalculatePremiumCoreCommand
+TravelCalculatePremiumCoreResult -> TravelCalculatePremiumResponseV1
+что и в /rest/v1. Поэтому для улучшения качества кода вынесите
+этот код в отдельные классы, например:
+DtoV1Converter и воспользуйтесь этим классом как в /rest/v1,
+так и в /web/v1. Класс DtoV1Converter положите в пакет /dto/v1.
