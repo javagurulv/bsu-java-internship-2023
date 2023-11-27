@@ -24,7 +24,7 @@ public class TravelPremiumUnderwritingImplTest {
     private TravelPremiumUnderwritingImpl premiumUnderwriting;
 
     @Test
-    public void shouldReturnResponseWithCorrectAgreementPrice() {
+    public void shouldReturnResponseWithCorrectTravelCalculatePremiumResult() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getSelectedRisks()).thenReturn(List.of("RISK_1", "RISK_2"));
         TravelMedicalPremiumCalculation mock1 = mock(TravelMedicalPremiumCalculation.class);
@@ -35,15 +35,11 @@ public class TravelPremiumUnderwritingImplTest {
         when(mock2.calculatePremium(request)).thenReturn(new BigDecimal(10));
         List<TravelMedicalPremiumCalculation> premiumCalculationList = List.of(mock1, mock2);
         ReflectionTestUtils.setField(premiumUnderwriting, "premiumCalculationList", premiumCalculationList);
-        BigDecimal premium = premiumUnderwriting.calculatePremium(request);
-        assertThat(premium).isEqualTo(new BigDecimal(20));
-    }
-
-    private Date createDate(String dateStr) {
-        try {
-            return new SimpleDateFormat("dd.MM.yyyy").parse(dateStr);
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
+        TravelPremiumCalculationResult travelPremiumCalculationResult = premiumUnderwriting.calculatePremium(request);
+        assertThat(travelPremiumCalculationResult.getTotalPremium()).isEqualTo(new BigDecimal(20));
+        assertThat(travelPremiumCalculationResult.getRiskPremiums().size()).isEqualTo(2);
+        assertThat(travelPremiumCalculationResult.getRiskPremiums().get(0).getIc()).isEqualTo("RISK_1");
+        assertThat(travelPremiumCalculationResult.getRiskPremiums().get(0).getPremium()).isEqualTo(new BigDecimal(10));
+        assertThat(travelPremiumCalculationResult.getRiskPremiums().get(1).getIc()).isEqualTo("RISK_2");
     }
 }
