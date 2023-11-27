@@ -12,14 +12,6 @@
       {
         "riskIc": "TRAVEL_MEDICAL",
         "premium": 11.00
-      },
-      {
-        "riskIc": "TRAVEL_CANCELLATION",
-        "premium": 0.00
-      },
-      {
-        "riskIc": "TRAVEL_LOSS_BAGGAGE",
-        "premium": 0.00
       }
   ]
 }
