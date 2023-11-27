@@ -1,0 +1,19 @@
+
+
+Ваша задача:
+1. Создайте в /version_2 пакет /core/underwriting.
+2. Скопируйте в /version_2 интерфейс TravelRiskPremiumCalculator.
+3. Измените сигнатуру метода TravelRiskPremiumCalculator
+с
+BigDecimal calculatePremium(TravelCalculatePremiumRequestV1 request);
+на
+BigDecimal calculatePremium(AgreementDTO agreement, PersonDTO person);
+
+так как в версии 2 приложения риск премия будет считаться для
+конкретной персоны.
+
+4. Скопируйте в /version_2 пакет /underwriting/calculators.
+5. Переведите пакет /underwriting/calculators на использование
+   классов из /core/api и с учётом изменения сигнатуры метода
+   из пункта 3.
+6. Для расчёта AgeCoefficientCalculator передавать так же PersonDTO.

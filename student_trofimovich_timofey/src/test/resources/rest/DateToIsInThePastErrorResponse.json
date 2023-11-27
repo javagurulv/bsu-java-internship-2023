@@ -1,0 +1,19 @@
+{
+  "errors": [
+    {
+      "errorCode": "ERROR_CODE_7",
+      "description": "Field agreementDateFrom is not before field agreementDateTo!"
+    },
+    {
+      "errorCode": "ERROR_CODE_6",
+      "description": "Field agreementDateTo is not in the future!"
+    }
+  ],
+  "riskPremiums": null,
+  "personFirstName": null,
+  "personLastName": null,
+  "agreementDateFrom": null,
+  "agreementDateTo": null,
+  "agreementPremium": null,
+  "risks": null
+}

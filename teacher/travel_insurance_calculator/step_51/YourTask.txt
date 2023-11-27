@@ -1,0 +1,53 @@
+Продолжаем работу над заданием:
+Ментор предлагает воспользоваться классом ClassifierValueRepository
+и его методом findByClassifierTitleAndIc(...) для создания
+новой валидации. Новая валидация должна проверять значения selected_risks
+в запросе. Все значения указанные в selected_risks должны
+быть значениями ic (ClassifierValue.ic) классификатора RISK_TYPE
+из базы данных. Для каждого не верного значения в selected_risks
+валидация должна возвращать ошибку:
+Риск с ic = NOT_EXISTING_RISK не поддерживается системой.
+
+
+Для реализации поставленного выше задания ментор предлагает
+внести в код следующие архитектурные изменения:
+
+В интерфейсе TravelRequestValidation переименовать метод
+execute(...) -> validate(...).
+
+Добавить в интерфейс TravelRequestValidation новый метод:
+List<ValidationError> validateList(TravelCalculatePremiumRequest request);
+Этот новый метод позволит возвращать список ошибок при валидации.
+
+Для минимизации эффекта изменений в интерфейсе TravelRequestValidation
+на уже существующий код (чтобы не реализовывать новый метод в каждом
+классе валидации) предлагается создать абстрактный класс с дефолтными
+реализациями методов:
+
+abstract class TravelRequestValidationImpl
+    implements TravelRequestValidation {
+
+    @Override
+    Optional<ValidationError> validate(TravelCalculatePremiumRequest request) {
+        return Optional.empty();
+    }
+
+    @Override
+    List<ValidationError> validateList(TravelCalculatePremiumRequest request) {
+        return List.of();
+    }
+
+}
+
+После этого все классы валидаций должны наследоваться от
+TravelRequestValidationImpl и переопределять только тот метод
+валидации, который им нужен.
+
+
+Далее внести в класс TravelCalculatePremiumRequestValidatorImpl
+изменения, так чтобы он вызывал у валидации оба метода
+(как validate(...) так и validateList(...)) и собирал полученные
+ошибки в один список.
+
+
+Ваша задача: реализовать предложение ментора.

@@ -1,8 +1,17 @@
 dependencies {
 
 	implementation('org.springframework.boot:spring-boot-starter-web:2.7.5')
+	implementation 'org.projectlombok:lombok:1.18.28'
 
 	testImplementation('org.springframework.boot:spring-boot-starter-test:2.7.5')
+
+	compileOnly('org.projectlombok:lombok:1.18.24')
+	annotationProcessor('org.projectlombok:lombok:1.18.24')
+
+	testCompileOnly('org.projectlombok:lombok:1.18.24')
+	testAnnotationProcessor('org.projectlombok:lombok:1.18.24')
+
+	implementation('com.fasterxml.jackson.core:jackson-core:2.14.2') // for normal date format
 
 	test {
 		useJUnitPlatform()

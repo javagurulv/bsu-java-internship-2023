@@ -1,0 +1,17 @@
+{
+  "errors": [
+    {
+      "errorCode": "ERROR_CODE_12",
+      "description": "Field personBirthDate must be in the past!"
+    },
+    {
+      "errorCode": "ERROR_CODE_12",
+      "description": "Field personBirthDate must be in the past!"
+    }
+  ],
+  "agreementDateFrom": null,
+  "agreementDateTo": null,
+  "country": null,
+  "agreementPremium": null,
+  "persons": null
+}
