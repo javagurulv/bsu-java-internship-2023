@@ -5,8 +5,8 @@ import lv.javaguru.travel.insurance.core.services.TravelCalculatePremiumService;
 import lv.javaguru.travel.insurance.logger.TravelCalculatePremiumRequestExecutionTimeLogger;
 import lv.javaguru.travel.insurance.logger.TravelCalculatePremiumRequestLogger;
 import lv.javaguru.travel.insurance.logger.TravelCalculatePremiumResponseLogger;
-import lv.javaguru.travel.insurance.validation.TravelCalculatePremiumRequest;
-import lv.javaguru.travel.insurance.validation.TravelCalculatePremiumResponse;
+import lv.javaguru.travel.insurance.validation.v1.TravelCalculatePremiumRequestV1;
+import lv.javaguru.travel.insurance.validation.v1.TravelCalculatePremiumResponseV1;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,16 +25,16 @@ public class TravelCalculatePremiumController {
 	@PostMapping(path = "/",
 			consumes = "application/json",
 			produces = "application/json")
-	public TravelCalculatePremiumResponse calculatePremium(@RequestBody TravelCalculatePremiumRequest request) {
+	public TravelCalculatePremiumResponseV1 calculatePremium(@RequestBody TravelCalculatePremiumRequestV1 request) {
 		Stopwatch stopwatch = Stopwatch.createStarted();
-		TravelCalculatePremiumResponse response = processRequest(request);
+		TravelCalculatePremiumResponseV1 response = processRequest(request);
 		executionTimeLogger.logExecutionTime(stopwatch);
 		return response;
 	}
 
-	private TravelCalculatePremiumResponse processRequest(TravelCalculatePremiumRequest request) {
+	private TravelCalculatePremiumResponseV1 processRequest(TravelCalculatePremiumRequestV1 request) {
 		requestLogger.log(request);
-		TravelCalculatePremiumResponse response = calculatePremiumService.calculatePremium(request);
+		TravelCalculatePremiumResponseV1 response = calculatePremiumService.calculatePremium(request);
 		responseLogger.log(response);
 		return response;
 	}

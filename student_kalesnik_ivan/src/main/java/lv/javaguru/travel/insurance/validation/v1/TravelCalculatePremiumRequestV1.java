@@ -1,12 +1,12 @@
-package lv.javaguru.travel.insurance.validation;
+package lv.javaguru.travel.insurance.validation.v1;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -14,7 +14,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class TravelCalculatePremiumResponse extends CoreResponse {
+public class TravelCalculatePremiumRequestV1 {
 
     private String personFirstName;
     private String personLastName;
@@ -31,12 +31,8 @@ public class TravelCalculatePremiumResponse extends CoreResponse {
     private String country;
 
     private String medicalRiskLimitLevel;
-    private BigDecimal agreementPremium;
-    public TravelCalculatePremiumResponse(List<ValidationError> errors) {
-        super(errors);
-    }
 
-
-    private List<RiskPremium> risks;
+    @JsonAlias("selected_risks")
+    private List<String> selected_risks;
 
 }
