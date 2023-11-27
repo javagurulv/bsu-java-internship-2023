@@ -3,6 +3,8 @@ package lv.javaguru.travel.insurance.rest;
 import lv.javaguru.travel.insurance.core.TravelCalculatePremiumService;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumResponse;
+import lv.javaguru.travel.insurance.rest.logger.TravelCalculatePremiumResponseLogger;
+import lv.javaguru.travel.insurance.rest.logger.TravelRequestPremiumRequestLogger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
