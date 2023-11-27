@@ -1,0 +1,8 @@
+Ментор скопировал в /version_2 и внёс изменения в
+интерфейс TravelCalculatePremiumService
+класс TravelCalculatePremiumServiceImpl.
+
+Ваша задача:
+разобраться в коде, который написал ментор в классе
+TravelCalculatePremiumServiceImpl.
+Написать JUnit тесты для этого класса.

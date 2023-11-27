@@ -1,6 +1,6 @@
 package lv.javaguru.travel.insurance.core.valids;
 
-import lv.javaguru.travel.insurance.validation.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.validation.v1.TravelCalculatePremiumRequestV1;
 import lv.javaguru.travel.insurance.validation.ValidationError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -20,13 +20,13 @@ class TravelCalculatePremiumRequestValidatorImpl implements TravelCalculatePremi
     private List<TravelRequestValidation> travelValidations;
 
     @Override
-    public List<ValidationError> validate(TravelCalculatePremiumRequest request) {
+    public List<ValidationError> validate(TravelCalculatePremiumRequestV1 request) {
         List<ValidationError> singleErrors = collectSingleErrors(request);
         List<ValidationError> listErrors = collectListErrors(request);
         return concatenateLists(singleErrors, listErrors);
     }
 
-    private List<ValidationError> collectSingleErrors(TravelCalculatePremiumRequest request) {
+    private List<ValidationError> collectSingleErrors(TravelCalculatePremiumRequestV1 request) {
         return travelValidations.stream()
                 .map(validation -> validation.validate(request))
                 .filter(Optional::isPresent)
@@ -34,7 +34,7 @@ class TravelCalculatePremiumRequestValidatorImpl implements TravelCalculatePremi
                 .collect(Collectors.toList());
     }
 
-    private List<ValidationError> collectListErrors(TravelCalculatePremiumRequest request) {
+    private List<ValidationError> collectListErrors(TravelCalculatePremiumRequestV1 request) {
         return travelValidations.stream()
                 .map(validation -> validation.validateList(request))
                 .filter(Objects::nonNull)

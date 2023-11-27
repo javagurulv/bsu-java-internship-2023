@@ -4,15 +4,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 
-import java.util.Calendar;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.GregorianCalendar;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DateTimeServiceTest {
 
-    GregorianCalendar calendar = new GregorianCalendar();
     @Mock
     private DateTimeService dateTimeService;
 
@@ -22,10 +21,8 @@ public class DateTimeServiceTest {
     @Test
     void returnsCorrectResultWithPositiveDifference()
     {
-        calendar.set(2005,Calendar.APRIL,14);
-        Date date1 = calendar.getTime();
-        calendar.set(2006,Calendar.APRIL,14);
-        Date date2 = calendar.getTime();
+        Date date1 = createDate("14-04-2005");
+        Date date2 = createDate("14-04-2006");
         long days = dateTimeService.getDaysBetween(date2,date1);
         assertEquals(365, days);
     }
@@ -33,10 +30,8 @@ public class DateTimeServiceTest {
     @Test
     void returnsCorrectResultWithNegativeDifference()
     {
-        calendar.set(2005,Calendar.APRIL,14);
-        Date date1 = calendar.getTime();
-        calendar.set(2006,Calendar.APRIL,14);
-        Date date2 = calendar.getTime();
+        Date date1 = createDate("14-04-2005");
+        Date date2 = createDate("14-04-2006");
         long days = dateTimeService.getDaysBetween(date1,date2);
         assertEquals(-365, days);
     }
@@ -44,12 +39,21 @@ public class DateTimeServiceTest {
     @Test
     void returnsCorrectResultWithZeroDifference()
     {
-        calendar.set(2005,Calendar.APRIL,14);
-        Date date1 = calendar.getTime();
-        Date date2 = calendar.getTime();
+        Date date1 = createDate("14-04-2005");
+        Date date2 = createDate("14-04-2005");
         long days = dateTimeService.getDaysBetween(date2,date1);
         assertEquals(0, days);
     }
 
-
+    Date createDate(String stringDate)
+    {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        try{
+            return  formatter.parse(stringDate);
+        }
+        catch(ParseException e)
+        {
+            throw new RuntimeException();
+        }
+    }
 }

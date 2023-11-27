@@ -65,6 +65,22 @@ public class TravelCalculatePremiumControllerTest {
     }
 
     @Test
+    public void personBirthDateIsNull() throws Exception {
+        executeAndCompare(
+                "rest/TravelCalculatePremiumRequest_personBirthDate_is_null.json",
+                "rest/TravelCalculatePremiumResponse_personBirthDate_is_null.json"
+        );
+    }
+
+    @Test
+    public void personBirthDateIsInTheFuture() throws Exception {
+        executeAndCompare(
+                "rest/TravelCalculatePremiumRequest_personBirthDate_in_the_future.json",
+                "rest/TravelCalculatePremiumResponse_personBirthDate_in_the_future.json"
+        );
+    }
+
+    @Test
     public void agreementDateFromNotProvided() throws Exception {
         executeAndCompare(
                 "rest/TravelCalculatePremiumRequest_agreementDateFrom_not_provided.json",
@@ -141,6 +157,14 @@ public class TravelCalculatePremiumControllerTest {
         executeAndCompare(
                 "rest/TravelCalculatePremiumRequest_country_is_empty_travel_medical.json",
                 "rest/TravelCalculatePremiumResponse_country_is_empty_travel_medical.json"
+        );
+    }
+
+    @Test
+    public void travelMedicalAllFieldsNotProvided() throws Exception {
+        executeAndCompare(
+                "rest/TravelCalculatePremiumRequest_travel_medical_allFields_not_provided.json",
+                "rest/TravelCalculatePremiumResponse_travel_medical_allFields_not_provided.json"
         );
     }
 
