@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
 @Component
 @Slf4j
 public class TravelRequestPremiumRequestLogger {
-    ObjectMapper objectMapper = new ObjectMapper();
     public void logRequest(TravelCalculatePremiumRequest request) {
+        ObjectMapper objectMapper = new ObjectMapper();
         try {
             String jsonRequest = objectMapper.writeValueAsString(request);
             log.info("REQUEST: " + jsonRequest);

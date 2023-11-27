@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class TravelCalculatePremiumController {
 
 	@Autowired private TravelRequestPremiumRequestLogger requestLogger;
+	@Autowired private TravelCalculatePremiumResponseLogger responseLogger;
 	@Autowired private TravelCalculatePremiumService calculatePremiumService;
 
 	@PostMapping(path = "/",
@@ -21,6 +22,8 @@ public class TravelCalculatePremiumController {
 			produces = "application/json")
 	public TravelCalculatePremiumResponse calculatePremium(@RequestBody TravelCalculatePremiumRequest request) {
 		requestLogger.logRequest(request);
+		TravelCalculatePremiumResponse response = calculatePremiumService.calculatePremium(request);
+		responseLogger.logResponse(response);
 		return calculatePremiumService.calculatePremium(request);
 	}
 
