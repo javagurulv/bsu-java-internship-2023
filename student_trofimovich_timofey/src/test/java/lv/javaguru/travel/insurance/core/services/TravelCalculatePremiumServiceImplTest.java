@@ -77,7 +77,19 @@ public class TravelCalculatePremiumServiceImplTest {
         when(validator.validate(request)).thenReturn(List.of());
         when(underwriting.calculatePremium(request)).thenReturn(new BigDecimal(9L));
         TravelCalculatePremiumResponse response = service.calculatePremium(request);
-        assertEquals(response.getAgreementPrice(), new BigDecimal(9));
+        assertEquals(response.getAgreementPremium(), new BigDecimal(9));
+    }
+
+    @Test
+    public void shouldReturnResponseWithCorrectRisks() {
+        when(request.getSelectedRisks()).thenReturn(List.of("RISK_1", "RISK_2"));
+        when(validator.validate(request)).thenReturn(List.of());
+        TravelCalculatePremiumResponse response = service.calculatePremium(request);
+        assertThat(response.getRisks().size()).isEqualTo(2);
+        assertThat(response.getRisks().get(0).getIc()).isEqualTo("RISK_1");
+        assertThat(response.getRisks().get(1).getIc()).isEqualTo("RISK_2");
+        assertThat(response.getRisks().get(0).getPremium()).isEqualTo(BigDecimal.ZERO);
+        assertThat(response.getRisks().get(1).getPremium()).isEqualTo(BigDecimal.ZERO);
     }
 
     @Test
