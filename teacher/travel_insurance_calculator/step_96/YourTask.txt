@@ -1,0 +1,9 @@
+Ваша задача:
+
+1. Скопировать в /version_2 интерфейс TravelPersonFieldValidation.
+2. Перевести интерфейс TravelPersonFieldValidation на использование
+   классов из пакета /core/api. Вместо TravelCalculatePremiumRequestV1
+   подавать на валидацию класс PersonDTO.
+3. Скопировать в /version_2 пакет /core/validations/person + тесты.
+6. Перевести скопированные /core/validations/person + тесты на
+   использование классов из пакета /core/api.
