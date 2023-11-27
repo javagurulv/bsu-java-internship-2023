@@ -41,6 +41,7 @@ public class TravelExistMedicalRiskLimitLevelValidationTest {
         assertTrue(error.isPresent());
         assertEquals(error.get(), validationError);
     }
+    @Test
     public void containErrorNotExistMedRiskLimitLevelWithNotEnableTest(){
         when(request.getMedicalRiskLimitLevel()).thenReturn("FAKE");
         ReflectionTestUtils.setField(medicalRiskLimitLevelValidation, "medicalRiskLimitLevelEnabled", false);
