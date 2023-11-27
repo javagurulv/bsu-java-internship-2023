@@ -17,16 +17,10 @@ class CountryValidation extends TravelRequestValidationImpl {
 
     @Override
     public Optional<ValidationError> validate(TravelCalculatePremiumRequest request) {
-        return (containsTravelMedical(request)
-                && isCountryNotBlank(request))
+        return (isCountryNotBlank(request))
                 && !existInDatabase(request.getCountry())
                 ? Optional.of(errorFactory.buildError("ERROR_CODE_15"))
                 : Optional.empty();
-    }
-
-    private boolean containsTravelMedical(TravelCalculatePremiumRequest request) {
-        return request.getSelectedRisks() != null
-                && request.getSelectedRisks().contains("TRAVEL_MEDICAL");
     }
 
     private boolean isCountryNotBlank(TravelCalculatePremiumRequest request) {

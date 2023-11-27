@@ -12,12 +12,16 @@
     "description":"Field selectedRisks must not be empty!"
   },
   {
+    "errorCode":"ERROR_CODE_7",
+    "description":"Field personFirstName must not be empty!"
+  },
+  {
     "errorCode":"ERROR_CODE_8",
     "description":"Field personLastName must not be empty!"
   },
   {
-    "errorCode":"ERROR_CODE_7",
-    "description":"Field personFirstName must not be empty!"
+    "errorCode":"ERROR_CODE_10",
+    "description":"Field country must not be empty!"
   },
   {
     "errorCode":"ERROR_CODE_11",

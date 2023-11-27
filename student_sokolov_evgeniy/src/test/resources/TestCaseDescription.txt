@@ -79,4 +79,10 @@ Test Case 20:
 Request: all fields not provided.
 Response: multiple error codes.
 
+Test Case 21:
+Request: country is null, RISK_TYPE - TRAVEL_EVACUATION.
+Response: error code = ERROR_CODE_10.
 
+Test Case 22:
+Request: country is empty, RISK_TYPE - TRAVEL_EVACUATION.
+Response: error code = ERROR_CODE_10.
