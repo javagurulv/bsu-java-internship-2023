@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.core.util;
+package lv.javaguru.travel.insurance.validation.util;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
