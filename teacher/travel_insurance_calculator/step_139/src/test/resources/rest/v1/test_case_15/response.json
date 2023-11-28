@@ -1,0 +1,8 @@
+{
+  "errors": [
+    {
+      "errorCode": "ERROR_CODE_9",
+      "description": "Risk Type ic = NOT_VALID_RISK_IC_1 not supported!"
+    }
+  ]
+}
