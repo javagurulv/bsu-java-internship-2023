@@ -1,17 +1,18 @@
 {
+  "uuid": "e4597e75-9455-4166-97bd-c869f280cf18",
   "agreementDateFrom": "2025-05-25",
   "agreementDateTo": "2025-05-29",
   "country": "SPAIN",
-  "agreementPremium": 132.0,
+  "agreementPremium": 116.00,
   "persons": [
     {
       "personFirstName": "Vasja",
       "personLastName": "Pupkin",
-      "personCode" : "123456-12345",
+      "personCode": "123456-12345",
       "personBirthDate": "2000-05-29",
-      "medicalRiskLimitLevel" : "LEVEL_10000",
-      "travelCost" : 100.00,
-      "personPremium": 49.00,
+      "medicalRiskLimitLevel": "LEVEL_10000",
+      "travelCost": 100.00,
+      "personPremium": 41.00,
       "personRisks": [
         {
           "riskIc": "TRAVEL_MEDICAL",
@@ -19,18 +20,18 @@
         },
         {
           "riskIc": "TRAVEL_CANCELLATION",
-          "premium": 38.00
+          "premium": 30.00
         }
       ]
     },
     {
       "personFirstName": "Petja",
       "personLastName": "Pupkin",
-      "personCode" : "123456-12345",
+      "personCode": "123456-12345",
       "personBirthDate": "1950-03-01",
-      "medicalRiskLimitLevel" : "LEVEL_10000",
-      "travelCost" : 100.00,
-      "personPremium": 83.00,
+      "medicalRiskLimitLevel": "LEVEL_10000",
+      "travelCost": 100.00,
+      "personPremium": 75.00,
       "personRisks": [
         {
           "riskIc": "TRAVEL_MEDICAL",
@@ -38,7 +39,7 @@
         },
         {
           "riskIc": "TRAVEL_CANCELLATION",
-          "premium": 68.00
+          "premium": 60.00
         }
       ]
     }
