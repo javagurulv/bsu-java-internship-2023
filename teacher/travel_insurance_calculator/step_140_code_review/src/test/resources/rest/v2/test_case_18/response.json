@@ -1,8 +1,0 @@
-{
-  "errors": [
-    {
-      "errorCode": "ERROR_CODE_5",
-      "description": "Field agreementDateFrom must be less than agreementDateTo!"
-    }
-  ]
-}
