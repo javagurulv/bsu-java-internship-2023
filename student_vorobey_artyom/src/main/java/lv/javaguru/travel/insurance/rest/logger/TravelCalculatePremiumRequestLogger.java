@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Slf4j
-public class TravelRequestPremiumRequestLogger {
+public class TravelCalculatePremiumRequestLogger {
     public void logRequest(TravelCalculatePremiumRequest request) {
         ObjectMapper objectMapper = new ObjectMapper();
         try {
