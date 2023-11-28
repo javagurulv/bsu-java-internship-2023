@@ -1,0 +1,17 @@
+{
+  "errors": [
+    {
+      "errorCode": "ERROR_CODE_9",
+      "description": "Risk Type ic = NOT_SUPPORTED_1 not supported!"
+    },
+    {
+      "errorCode": "ERROR_CODE_9",
+      "description": "Risk Type ic = NOT_SUPPORTED_2 not supported!"
+    }
+  ],
+  "agreementDateFrom": null,
+  "agreementDateTo": null,
+  "country": null,
+  "agreementPremium": null,
+  "persons": null
+}

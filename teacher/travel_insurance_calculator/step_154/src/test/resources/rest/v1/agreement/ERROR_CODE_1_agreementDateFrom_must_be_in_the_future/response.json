@@ -1,0 +1,8 @@
+{
+  "errors": [
+    {
+      "errorCode": "ERROR_CODE_1",
+      "description": "Field agreementDateFrom must be in the future!"
+    }
+  ]
+}

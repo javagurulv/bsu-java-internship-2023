@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
+
+    <changeSet author = "javaguru" id = "25">
+        <createTable tableName="agreement_persons">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="agreement_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="person_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="medical_risk_limit_level" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="javaguru" id="26">
+        <createIndex indexName="ix_agreement_person_agreement_id_person_id"
+                     tableName="agreement_persons"
+                     unique="true">
+            <column name="agreement_id"/>
+            <column name="person_id"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet author="javaguru" id="27">
+        <addForeignKeyConstraint baseTableName="agreement_persons"
+                                 baseColumnNames="agreement_id"
+                                 constraintName="fk_agreement_persons_agreement_id"
+                                 referencedTableName="agreements"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+    <changeSet author="javaguru" id="28">
+        <addForeignKeyConstraint baseTableName="agreement_persons"
+                                 baseColumnNames="person_id"
+                                 constraintName="fk_agreement_persons_person_id"
+                                 referencedTableName="persons"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+</databaseChangeLog>
