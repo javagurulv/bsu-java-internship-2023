@@ -63,6 +63,12 @@ public class TravelCalculatePremiumControllerTest {
     }
 
     @Test
+    public void agreementDateFromInPast() throws Exception {
+        executeAndCompare("rest/TravelCalculatePremiumRequest_AgreementDateFromInPast.json",
+                "rest/TravelCalculatePremiumResponse_AgreementDateFromInPast.json");
+    }
+
+    @Test
     public void agreementDateToIsNull() throws Exception {
         executeAndCompare("rest/TravelCalculatePremiumRequest_AgreementDateToIsNull.json",
                 "rest/TravelCalculatePremiumResponse_AgreementDateToIsNull.json");
@@ -72,6 +78,12 @@ public class TravelCalculatePremiumControllerTest {
     public void agreementDateToIsEmpty() throws Exception {
         executeAndCompare("rest/TravelCalculatePremiumRequest_AgreementDateToIsEmpty.json",
                 "rest/TravelCalculatePremiumResponse_AgreementDateToIsEmpty.json");
+    }
+
+    @Test
+    public void agreementDateToInPast() throws Exception {
+        executeAndCompare("rest/TravelCalculatePremiumRequest_AgreementDateToInPast.json",
+                "rest/TravelCalculatePremiumResponse_AgreementDateToInPast.json");
     }
 
     @Test

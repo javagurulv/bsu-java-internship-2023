@@ -2,7 +2,7 @@ package lv.javaguru.travel.insurance.core.valids;
 
 import lv.javaguru.travel.insurance.core.domain.ClassifierValue;
 import lv.javaguru.travel.insurance.core.repositories.ClassifierValueRepository;
-import lv.javaguru.travel.insurance.validation.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.validation.v1.TravelCalculatePremiumRequestV1;
 import lv.javaguru.travel.insurance.validation.ValidationError;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -30,7 +30,7 @@ class RisksValidationTest {
 
     @Test
     public void shouldNotValidateWhenSelectedRisksIsNull() {
-        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        TravelCalculatePremiumRequestV1 request = mock(TravelCalculatePremiumRequestV1.class);
         when(request.getSelected_risks()).thenReturn(null);
         List<ValidationError> errors = validation.validateList(request);
         assertTrue(errors.isEmpty());
@@ -40,7 +40,7 @@ class RisksValidationTest {
 
     @Test
     public void shouldValidateWithoutErrors() {
-        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        TravelCalculatePremiumRequestV1 request = mock(TravelCalculatePremiumRequestV1.class);
         when(request.getSelected_risks()).thenReturn(List.of("RISK_IC_1", "RISK_IC_2"));
         when(classifierValueRepository.findByClassifierTitleAndIc("RISK_TYPE", "RISK_IC_1"))
                 .thenReturn(Optional.of(mock(ClassifierValue.class)));
@@ -51,7 +51,7 @@ class RisksValidationTest {
 
     @Test
     public void shouldValidateWithErrors() {
-        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        TravelCalculatePremiumRequestV1 request = mock(TravelCalculatePremiumRequestV1.class);
         when(request.getSelected_risks()).thenReturn(List.of("RISK_IC_1", "RISK_IC_2"));
         when(classifierValueRepository.findByClassifierTitleAndIc("RISK_TYPE", "RISK_IC_1"))
                 .thenReturn(Optional.empty());

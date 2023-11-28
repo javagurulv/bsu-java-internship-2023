@@ -5,9 +5,11 @@
       "description": "Field agreementDateFrom is empty!"
     }
   ],
+  "riskPremiums": null,
   "personFirstName": null,
   "personLastName": null,
   "agreementDateFrom": null,
   "agreementDateTo": null,
-  "agreementPrice": null
+  "agreementPremium": null,
+  "risks": null
 }

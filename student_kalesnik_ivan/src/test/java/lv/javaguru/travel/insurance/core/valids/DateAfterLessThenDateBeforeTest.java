@@ -1,6 +1,6 @@
 package lv.javaguru.travel.insurance.core.valids;
 
-import lv.javaguru.travel.insurance.validation.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.validation.v1.TravelCalculatePremiumRequestV1;
 import lv.javaguru.travel.insurance.validation.ValidationError;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,7 +26,7 @@ public class DateAfterLessThenDateBeforeTest {
 
     @Test
     public void shouldReturnErrorWhenDateFromIsAfterDateTo() {
-        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        TravelCalculatePremiumRequestV1 request = mock(TravelCalculatePremiumRequestV1.class);
         when(request.getAgreementDateFrom()).thenReturn(createDate("10.01.2025"));
         when(request.getAgreementDateTo()).thenReturn(createDate("01.01.2025"));
         ValidationError validationError = mock(ValidationError.class);
@@ -38,7 +38,7 @@ public class DateAfterLessThenDateBeforeTest {
 
     @Test
     public void shouldReturnErrorWhenDateFromIsEqualsDateTo() {
-        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        TravelCalculatePremiumRequestV1 request = mock(TravelCalculatePremiumRequestV1.class);
         when(request.getAgreementDateFrom()).thenReturn(createDate("01.01.2025"));
         when(request.getAgreementDateTo()).thenReturn(createDate("01.01.2025"));
         ValidationError validationError = mock(ValidationError.class);
@@ -50,7 +50,7 @@ public class DateAfterLessThenDateBeforeTest {
 
     @Test
     public void shouldNotReturnErrorWhenDateFromIsLessDateTo() {
-        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        TravelCalculatePremiumRequestV1 request = mock(TravelCalculatePremiumRequestV1.class);
         when(request.getAgreementDateFrom()).thenReturn(createDate("01.01.2025"));
         when(request.getAgreementDateTo()).thenReturn(createDate("10.01.2025"));
         Optional<ValidationError> errorOpt = validation.validate(request);

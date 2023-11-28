@@ -1,5 +1,6 @@
 package lv.javaguru.travel.insurance.core;
 
+import lv.javaguru.travel.insurance.core.validations.TravelCalculatePremiumRequestValidator;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumResponse;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,7 +23,8 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 public class TravelCalculatePremiumServiceImplTest {
     @Mock TravelPremiumUnderwriting travelPremiumUnderwriting;
-    @Mock TravelCalculatePremiumRequestValidator validator;
+    @Mock
+    TravelCalculatePremiumRequestValidator validator;
     @InjectMocks TravelCalculatePremiumServiceImpl service;
     private TravelCalculatePremiumRequest request;
     @BeforeEach

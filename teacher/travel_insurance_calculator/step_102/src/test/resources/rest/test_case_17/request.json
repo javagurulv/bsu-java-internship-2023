@@ -1,0 +1,10 @@
+{
+  "personFirstName" : "Vasja",
+  "personLastName" : "Pupkin",
+  "personBirthDate" : "2000-05-29",
+  "agreementDateFrom" : "2025-05-25",
+  "agreementDateTo" : "2025-05-29",
+  "country" : "",
+  "medicalRiskLimitLevel" : "LEVEL_10000",
+  "selected_risks":["TRAVEL_MEDICAL"]
+}

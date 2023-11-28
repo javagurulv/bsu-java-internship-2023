@@ -1,8 +1,5 @@
 package lv.javaguru.travel.insurance.core.validations;
 
-import lv.javaguru.travel.insurance.core.validations.TravelCalculatePremiumRequestValidator;
-import lv.javaguru.travel.insurance.core.validations.TravelCalculatePremiumRequestValidatorImplementation;
-import lv.javaguru.travel.insurance.core.validations.TravelRequestValidation;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.Test;
@@ -39,7 +36,22 @@ public class TravelCalculatePremiumRequestValidatorTest {
     }
 
     @Test
-    void shouldReturnErrors() {
+    void shouldReturnSingleErrors() {
+        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        TravelRequestValidation validation1 = mock(TravelRequestValidation.class);
+        when(validation1.validate(request)).thenReturn(Optional.empty());
+        when(validation1.validateList(request)).thenReturn(List.of(mock(ValidationError.class), mock(ValidationError.class)));
+        TravelRequestValidation validation2 = mock(TravelRequestValidation.class);
+        when(validation2.validate(request)).thenReturn(Optional.empty());
+        when(validation2.validateList(request)).thenReturn(List.of(mock(ValidationError.class), mock(ValidationError.class)));
+        List<TravelRequestValidation> validations = List.of(validation1, validation2);
+        requestValidator = new TravelCalculatePremiumRequestValidatorImplementation(validations);
+        List<ValidationError> errors = requestValidator.validate(request);
+        assertThat(errors.size()).isEqualTo(4);
+    }
+
+    @Test
+    void shouldReturnListErrors() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         TravelRequestValidation validation1 = mock(TravelRequestValidation.class);
         when(validation1.validate(request)).thenReturn(Optional.of(new ValidationError()));

@@ -1,0 +1,17 @@
+{
+  "errors": [
+    {
+      "errorCode": "ERROR_CODE_14",
+      "description": "MedicalRiskLimitLevel value not supported!"
+    },
+    {
+      "errorCode": "ERROR_CODE_14",
+      "description": "MedicalRiskLimitLevel value not supported!"
+    }
+  ],
+  "agreementDateFrom": null,
+  "agreementDateTo": null,
+  "country": null,
+  "agreementPremium": null,
+  "persons": null
+}

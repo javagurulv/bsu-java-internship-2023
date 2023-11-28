@@ -1,5 +1,7 @@
 package lv.javaguru.travel.insurance.core.validations;
 
+import lv.javaguru.travel.insurance.core.domain.ClassifierValue;
+import lv.javaguru.travel.insurance.core.repositories.ClassifierValueRepository;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.Test;
@@ -20,6 +22,8 @@ import static org.mockito.Mockito.when;
 public class SelectedRisksValidationTest {
     @Mock
     ValidationErrorFactory factory;
+    @Mock
+    ClassifierValueRepository classifierValueRepository;
     @InjectMocks
     private SelectedRisksValidation validation;
     @Test
@@ -47,8 +51,29 @@ public class SelectedRisksValidationTest {
     @Test
     void shouldNotReturnError() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
-        when(request.getSelectedRisks()).thenReturn(List.of("dummy"));
+        when(request.getSelectedRisks()).thenReturn(List.of("RISK_IC_1", "RISK_IC_2"));
+        when(classifierValueRepository
+                .findByClassifierTitleAndIc("RISK_TYPE", "RISK_IC_1"))
+                .thenReturn(Optional.of(mock(ClassifierValue.class)));
         Optional<ValidationError> validationError = validation.validate(request);
+        List<ValidationError> errors = validation.validateList(request);
         assertThat(validationError).isEmpty();
+        assertThat(errors.isEmpty());
+    }
+
+    @Test
+    void shouldReturnRiskNotFoundException() {
+        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        when(request.getSelectedRisks()).thenReturn(List.of("RISK_IC_1", "RISK_IC_2"));
+        when(classifierValueRepository
+                .findByClassifierTitleAndIc("RISK_TYPE", "RISK_IC_1"))
+                .thenReturn(Optional.empty());
+        when(classifierValueRepository
+                .findByClassifierTitleAndIc("RISK_TYPE", "RISK_IC_2"))
+                .thenReturn(Optional.empty());
+        Optional<ValidationError> validationError = validation.validate(request);
+        List<ValidationError> errors = validation.validateList(request);
+        assertThat(validationError).isEmpty();
+        assertThat(errors.size()).isEqualTo(2);
     }
 }

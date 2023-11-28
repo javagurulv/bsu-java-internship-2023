@@ -2,7 +2,6 @@ package lv.javaguru.travel.insurance.loggers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
