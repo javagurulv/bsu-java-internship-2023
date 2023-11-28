@@ -1,0 +1,7 @@
+Ваша задача:
+разработайте код для задачи 4: реализация самой формулы расчёта.
+
+Формула расчёта премии для риска Отмена поездки для одного
+путешественника может выглядеть так:
+TRAVEL_CANCELLATION premium =
+TravelCostCoefficient + AgeCoefficient + CountrySafetyRatingCoefficient

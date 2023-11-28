@@ -27,9 +27,12 @@ public class TravelCalculatePremiumControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
+
+    private static final String BASE_URL = "/insurance/travel/api/";
+
     public void equalsJsonFiles(String requestFile, String responseFile) throws Exception {
         ObjectMapper mapper = new ObjectMapper();
-        String response = mockMvc.perform(post("/insurance/travel/")
+        String response = mockMvc.perform(post(BASE_URL)
                         .content(parseJSONIntoString(requestFile))
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
