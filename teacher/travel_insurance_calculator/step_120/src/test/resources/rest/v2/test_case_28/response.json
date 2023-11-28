@@ -1,0 +1,17 @@
+{
+  "errors": [
+    {
+      "errorCode": "ERROR_CODE_13",
+      "description": "Field medicalRiskLimitLevel must not be empty!"
+    },
+    {
+      "errorCode": "ERROR_CODE_13",
+      "description": "Field medicalRiskLimitLevel must not be empty!"
+    }
+  ],
+  "agreementDateFrom": null,
+  "agreementDateTo": null,
+  "country": null,
+  "agreementPremium": null,
+  "persons": null
+}

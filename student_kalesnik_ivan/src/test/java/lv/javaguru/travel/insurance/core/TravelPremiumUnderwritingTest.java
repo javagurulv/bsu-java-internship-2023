@@ -3,22 +3,15 @@ package lv.javaguru.travel.insurance.core;
 import lv.javaguru.travel.insurance.core.underwriting.SelectedRiskPremiumCalculator;
 import lv.javaguru.travel.insurance.core.underwriting.TravelPremiumCalculationResult;
 import lv.javaguru.travel.insurance.core.underwriting.TravelPremiumUnderwritingImpl;
-import lv.javaguru.travel.insurance.core.underwriting.TravelRiskPremiumCalculator;
-import lv.javaguru.travel.insurance.core.util.DateTimeUtil;
 import lv.javaguru.travel.insurance.validation.RiskPremium;
-import lv.javaguru.travel.insurance.validation.TravelCalculatePremiumRequest;
-import org.junit.jupiter.api.BeforeEach;
+import lv.javaguru.travel.insurance.validation.v1.TravelCalculatePremiumRequestV1;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.test.util.ReflectionTestUtils;
 
 import java.math.BigDecimal;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -38,7 +31,7 @@ public class TravelPremiumUnderwritingTest {
     @Test
 
     void shouldCalculateTotalPremiumAsSumOfRiskPremiums() {
-        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        TravelCalculatePremiumRequestV1 request = mock(TravelCalculatePremiumRequestV1.class);
         List<RiskPremium> riskPremiums = List.of(
                 new RiskPremium("TRAVEL_MEDICAL", BigDecimal.ONE),
                 new RiskPremium("TRAVEL_EVACUATION", BigDecimal.ONE)

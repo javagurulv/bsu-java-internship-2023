@@ -1,5 +1,5 @@
 package lv.javaguru.travel.insurance.core.valids;
-import lv.javaguru.travel.insurance.validation.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.validation.v1.TravelCalculatePremiumRequestV1;
 import lv.javaguru.travel.insurance.validation.ValidationError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -13,13 +13,13 @@ class EmptyCountryValidation extends TravelRequestValidationImpl {
 
 
     @Override
-    public Optional<ValidationError> validate(TravelCalculatePremiumRequest request) {
+    public Optional<ValidationError> validate(TravelCalculatePremiumRequestV1 request) {
         return (countryIsNullOrBlank(request))
                 ? Optional.of(errorFactory.buildError("ERROR_CODE_10"))
                 : Optional.empty();
     }
 
-    private boolean countryIsNullOrBlank(TravelCalculatePremiumRequest request) {
+    private boolean countryIsNullOrBlank(TravelCalculatePremiumRequestV1 request) {
         return request.getCountry() == null || request.getCountry().isBlank();
     }
 

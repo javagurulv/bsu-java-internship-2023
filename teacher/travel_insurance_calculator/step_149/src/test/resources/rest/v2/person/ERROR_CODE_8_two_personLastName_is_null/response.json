@@ -1,0 +1,12 @@
+{
+  "errors": [
+    {
+      "errorCode": "ERROR_CODE_8",
+      "description": "Field personLastName must not be empty!"
+    },
+    {
+      "errorCode": "ERROR_CODE_8",
+      "description": "Field personLastName must not be empty!"
+    }
+  ]
+}
