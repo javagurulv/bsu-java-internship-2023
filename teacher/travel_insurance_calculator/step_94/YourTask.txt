@@ -1,0 +1,33 @@
+Ваша задача:
+
+Изучить зависимости между пакетами:
+/core/domain
+/core/repositories
+/core/util
+/core/validations
+/core/underwriting
+/core/services
+
+Правильная зависимость между пакетами должна быть следующей:
+
+/core/util - не зависит от других /core пакетов
+/core/domain - не зависит от других /core пакетов
+/core/repositories - зависит от /core/domain
+/core/validations - зависит от:
+        /core/util
+        /core/domain
+        /core/repositories
+/core/underwriting - зависит от:
+        /core/util
+        /core/domain
+        /core/repositories
+/core/services - зависит от:
+        /core/validations
+        /core/underwriting
+
+
+1. Скопировать в /version_2 пакет /core/domain.
+2. Скопировать в /version_2 пакет /core/repositories + тесты.
+3. Скопировать в /version_2 пакет /core/util + тесты.
+4. Скопировать в /version_2 папку resources как в /main так и в /test.
+5. Скопировать в /version_2 класс InsuranceApplication.

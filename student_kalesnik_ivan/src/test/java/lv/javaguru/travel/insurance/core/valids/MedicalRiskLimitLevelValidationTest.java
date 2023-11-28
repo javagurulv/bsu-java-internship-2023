@@ -2,7 +2,7 @@ package lv.javaguru.travel.insurance.core.valids;
 
 import lv.javaguru.travel.insurance.core.domain.ClassifierValue;
 import lv.javaguru.travel.insurance.core.repositories.ClassifierValueRepository;
-import lv.javaguru.travel.insurance.validation.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.validation.v1.TravelCalculatePremiumRequestV1;
 import lv.javaguru.travel.insurance.validation.ValidationError;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -27,7 +27,7 @@ class MedicalRiskLimitLevelValidationTest {
 
     @Test
     public void shouldNotReturnErrorWhenMedicalRiskLimitLevelIsNull() {
-        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        TravelCalculatePremiumRequestV1 request = mock(TravelCalculatePremiumRequestV1.class);
         when(request.getMedicalRiskLimitLevel()).thenReturn(null);
         Optional<ValidationError> validationErrorOpt = validation.validate(request);
         assertTrue(validationErrorOpt.isEmpty());
@@ -36,7 +36,7 @@ class MedicalRiskLimitLevelValidationTest {
 
     @Test
     public void shouldNotReturnErrorWhenMedicalRiskLimitLevelIsBlank() {
-        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        TravelCalculatePremiumRequestV1 request = mock(TravelCalculatePremiumRequestV1.class);
         when(request.getMedicalRiskLimitLevel()).thenReturn("");
         Optional<ValidationError> validationErrorOpt = validation.validate(request);
         assertTrue(validationErrorOpt.isEmpty());
@@ -45,7 +45,7 @@ class MedicalRiskLimitLevelValidationTest {
 
     @Test
     public void shouldNotReturnErrorWhenMedicalRiskLimitLevelExistInDb() {
-        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        TravelCalculatePremiumRequestV1 request = mock(TravelCalculatePremiumRequestV1.class);
         when(request.getMedicalRiskLimitLevel()).thenReturn("LEVEL_10000");
         ClassifierValue classifierValue = mock(ClassifierValue.class);
         when(classifierValueRepository.findByClassifierTitleAndIc("MEDICAL_RISK_LIMIT_LEVEL", "LEVEL_10000"))
@@ -57,7 +57,7 @@ class MedicalRiskLimitLevelValidationTest {
 
     @Test
     public void shouldReturnError() {
-        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        TravelCalculatePremiumRequestV1 request = mock(TravelCalculatePremiumRequestV1.class);
         when(request.getMedicalRiskLimitLevel()).thenReturn("LEVEL_10000");
         when(classifierValueRepository.findByClassifierTitleAndIc("MEDICAL_RISK_LIMIT_LEVEL", "LEVEL_10000"))
                 .thenReturn(Optional.empty());

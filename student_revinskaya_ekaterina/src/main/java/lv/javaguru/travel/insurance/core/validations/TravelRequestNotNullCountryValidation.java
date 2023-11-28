@@ -21,7 +21,6 @@ public class TravelRequestNotNullCountryValidation extends TravelRequestValidati
                 : Optional.empty();
     }
     private boolean validateNotNull(TravelCalculatePremiumRequest request){
-        return (request.getCountry() == null || request.getCountry().isEmpty())
-                && request.getSelectedRisks() != null && request.getSelectedRisks().contains("TRAVEL_MEDICAL");
+        return (request.getCountry() == null || request.getCountry().isEmpty());
     }
 }

@@ -1,0 +1,155 @@
+Test Case 1:
+Request: All fields filled, RISK_TYPE - TRAVEL_MEDICAL.
+Response: success, without errors.
+
+
+Test Case 2:
+Request: first person personFirstName is null, RISK_TYPE - TRAVEL_MEDICAL.
+Response: error code = ERROR_CODE_7.
+
+
+Test Case 3:
+Request: first person personFirstName is empty, RISK_TYPE - TRAVEL_MEDICAL.
+Response: error code = ERROR_CODE_7.
+
+
+Test Case 4:
+Request: multiple persons personFirstName is null, RISK_TYPE - TRAVEL_MEDICAL.
+Response: multiple errors with code = ERROR_CODE_7.
+
+
+Test Case 5:
+Request: multiple persons personFirstName is empty, RISK_TYPE - TRAVEL_MEDICAL.
+Response: multiple errors with code = ERROR_CODE_7.
+
+
+Test Case 6:
+Request: first personLastName is null, RISK_TYPE - TRAVEL_MEDICAL.
+Response: error code = ERROR_CODE_8.
+
+
+Test Case 7:
+Request: first personLastName is empty, RISK_TYPE - TRAVEL_MEDICAL.
+Response: error code = ERROR_CODE_8.
+
+
+Test Case 8:
+Request: multiple persons personLastName is null, RISK_TYPE - TRAVEL_MEDICAL.
+Response: multiple errors with code = ERROR_CODE_8.
+
+
+Test Case 9:
+Request: multiple persons personLastName is empty, RISK_TYPE - TRAVEL_MEDICAL.
+Response: multiple errors with code = ERROR_CODE_8.
+
+
+Test Case 10:
+Request: first personBirthDate is null, RISK_TYPE - TRAVEL_MEDICAL.
+Response: error code = ERROR_CODE_11.
+
+
+Test Case 11:
+Request: multiple personBirthDate is null, RISK_TYPE - TRAVEL_MEDICAL.
+Response: multiple errors with code = ERROR_CODE_11.
+
+
+Test Case 12:
+Request: first personBirthDate is in the future, RISK_TYPE - TRAVEL_MEDICAL.
+Response: error code = ERROR_CODE_12.
+
+
+Test Case 13:
+Request: multiple personBirthDate is in the future, RISK_TYPE - TRAVEL_MEDICAL.
+Response: multiple errors with code = ERROR_CODE_12.
+
+
+Test Case 14:
+Request: agreementDateFrom is null, RISK_TYPE - TRAVEL_MEDICAL.
+Response: error code = ERROR_CODE_2.
+
+
+Test Case 15:
+Request: agreementDateTo is null, RISK_TYPE - TRAVEL_MEDICAL.
+Response: error code = ERROR_CODE_4.
+
+
+Test Case 16:
+Request: agreementDateFrom is in the past, RISK_TYPE - TRAVEL_MEDICAL.
+Response: error code = ERROR_CODE_1.
+
+
+Test Case 17:
+Request: agreementDateTo is in the past, RISK_TYPE - TRAVEL_MEDICAL.
+Response: error code = ERROR_CODE_3.
+
+
+Test Case 18:
+Request: agreementDateTo is less than agreementDateFrom, RISK_TYPE - TRAVEL_MEDICAL.
+Response: error code = ERROR_CODE_5.
+
+
+Test Case 19:
+Request: selectedRisks is null.
+Response: error code = ERROR_CODE_6.
+
+
+Test Case 20:
+Request: selectedRisks is empty.
+Response: error code = ERROR_CODE_6.
+
+
+Test Case 21:
+Request: selectedRisks is not supported (one risk).
+Response: error code = ERROR_CODE_9.
+
+
+Test Case 22:
+Request: selectedRisks is not supported (two risks).
+Response: multiple error codes = ERROR_CODE_9.
+
+
+Test Case 23:
+Request: country is null, RISK_TYPE - TRAVEL_MEDICAL.
+Response: error code = ERROR_CODE_10.
+
+
+Test Case 24:
+Request: country is empty, RISK_TYPE - TRAVEL_MEDICAL.
+Response: error code = ERROR_CODE_10.
+
+
+Test Case 25:
+Request: country is not supported, RISK_TYPE - TRAVEL_MEDICAL.
+Response: error code = ERROR_CODE_15.
+
+
+Test Case 26:
+Request: medicalRiskLimitLevel is null for one person, RISK_TYPE - TRAVEL_MEDICAL.
+Response: error code = ERROR_CODE_13.
+
+
+Test Case 27:
+Request: medicalRiskLimitLevel is empty for one person, RISK_TYPE - TRAVEL_MEDICAL.
+Response: error code = ERROR_CODE_13.
+
+
+Test Case 28:
+Request: medicalRiskLimitLevel is null for multiple persons, RISK_TYPE - TRAVEL_MEDICAL.
+Response: multiple error codes = ERROR_CODE_13.
+
+
+Test Case 29:
+Request: medicalRiskLimitLevel is empty for multiple persons, RISK_TYPE - TRAVEL_MEDICAL.
+Response: multiple error codes = ERROR_CODE_13.
+
+
+Test Case 30:
+Request: medicalRiskLimitLevel value not supported
+for one person, RISK_TYPE - TRAVEL_MEDICAL.
+Response: error code = ERROR_CODE_14.
+
+
+Test Case 31:
+Request: medicalRiskLimitLevel value not supported
+for multiple persons, RISK_TYPE - TRAVEL_MEDICAL.
+Response: multiple error codes = ERROR_CODE_14.

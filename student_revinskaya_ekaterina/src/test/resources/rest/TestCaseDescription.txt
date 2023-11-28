@@ -1,0 +1,21 @@
+Test_case_1 - tests a request without first name;
+Test_case_2 - tests a request without last name;
+Test_case_3 - tests a request without agreement date from;
+Test_case_4 - tests a request with agreement date from in the past;
+Test_case_5 - tests a request without agreement date to;
+Test_case_6 - tests a request with agreement date to in the past;
+Test_case_7 - tests a request where agreement date to less than agreement date from;
+Test_case_8 - tests a request without country;
+Test_case_9 - tests a request with country not supported by the system;
+Test_case_10 - tests a request without medical risk limit level;
+when it is enabled by business and medical risk is chosen;
+Test_case_11 - tests a request with not exist medical risk limit level;
+when it is enabled by business;
+Test_case_12 - tests a request without selected risks;
+Test_case_13 - tests a request where all fields empty;
+Test_case_14 - tests a request without errors.
+
+
+
+
+

@@ -1,0 +1,11 @@
+{
+  "personFirstName" : "Vasja",
+  "personLastName" : "Pupkin",
+  "personCode" : "123456-12345",
+  "personBirthDate" : "2030-05-29",
+  "agreementDateFrom" : "2027-05-29",
+  "agreementDateTo" : "2028-05-29",
+  "country" : "SPAIN",
+  "medicalRiskLimitLevel" : "LEVEL_10000",
+  "selected_risks":["TRAVEL_MEDICAL"]
+}

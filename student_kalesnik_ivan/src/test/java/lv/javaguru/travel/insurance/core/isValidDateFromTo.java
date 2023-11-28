@@ -2,7 +2,7 @@ package lv.javaguru.travel.insurance.core;
 
 import lv.javaguru.travel.insurance.core.valids.*;
 import lv.javaguru.travel.insurance.core.valids.TravelRequestValidation;
-import lv.javaguru.travel.insurance.validation.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.validation.v1.TravelCalculatePremiumRequestV1;
 import lv.javaguru.travel.insurance.validation.ValidationError;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -25,7 +25,7 @@ public class isValidDateFromTo {
 
     @Test
     public void shouldNotReturnErrors() {
-        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        TravelCalculatePremiumRequestV1 request = mock(TravelCalculatePremiumRequestV1.class);
         TravelRequestValidation validation1 = mock(TravelRequestValidation.class);
         when(validation1.validate(request)).thenReturn(Optional.empty());
         TravelRequestValidation validation2 = mock(TravelRequestValidation.class);
@@ -40,7 +40,7 @@ public class isValidDateFromTo {
 
     @Test
     public void shouldReturnErrors() {
-        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        TravelCalculatePremiumRequestV1 request = mock(TravelCalculatePremiumRequestV1.class);
         TravelRequestValidation validation1 = mock(TravelRequestValidation.class);
         when(validation1.validate(request)).thenReturn(Optional.of(new ValidationError()));
         TravelRequestValidation validation2 = mock(TravelRequestValidation.class);

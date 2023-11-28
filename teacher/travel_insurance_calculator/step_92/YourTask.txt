@@ -1,0 +1,88 @@
+Проанализировав код нашего приложения ментор пришёл к следующему
+выводу. Core пакет нашего приложения и его основные части такие
+как /services, /validations, /underwriting зависят от класса
+TravelCalculatePremiumRequestV1.
+
+Класс TravelCalculatePremiumRequestV1 является внешней моделью
+для web и rest интеграций первой версии приложения.
+
+То есть по сути получается, что /core полностью зависит от
+/rest/v1 и /web/v1. Эта зависимость и мешает нам реализовать
+вторую версию приложения.
+
+Если оставить все как есть (where /core depends from /rest/v1 and /web/v1),
+то для реализации второй версии нам по сути нужно создать /core/v2
+продублировав большинство кода (валидации, расчёт премии) внеся некоторые
+изменения связанные с новой моделью данных (поддержка нескольких персон).
+
+Согласитесь, дублировать /core это довольно плохая затея.
+Поддерживать две почти одинаковые копии кода это не по канонам
+clean code.
+
+Вся проблема в направлении зависимости: /core -> /rest/v1 and /web/v1.
+
+Для исправления ситуации надо поменять зависимость на противоположную:
+/core <- /rest/v1 and /web/v1. Сделать так, чтобы /rest/v1 и /web/v1
+зависели от /core. А в дальнейшем и весь REST и WEB должны зависеть
+от /core:
+    /core <- /rest/v1
+    /core <- /web/v1
+    /core <- /rest/v2
+    /core <- /web/v2.
+
+
+Ваша задача:
+найти в интернете и прочитать информацию и изучить Hexagonal Architecture.
+В следующих заданиях мы попробуем применить ее для нашего приложения.
+Обсудите не понятные вам вопросы и детали с ментором.
+
+
+Hexagonal Architecture, also known as Ports and Adapters Architecture,
+is an architectural pattern that aims to improve the maintainability,
+testability, and flexibility of an application. It was introduced by
+Alistair Cockburn in the early 2000s.
+
+The main idea behind Hexagonal Architecture is to clearly separate
+the core business logic of the application from its surrounding
+infrastructure, such as databases, messaging systems, or web services.
+This separation allows for easier testing and adaptability to changes
+in technology or requirements.
+
+In Hexagonal Architecture, the application is divided into three primary
+components:
+
+Core Domain: This is the central part of the application containing
+the business logic, rules, and domain models. It is independent of any
+specific technology or infrastructure concerns.
+
+Ports: These are the interfaces that define how the core domain
+interacts with external systems. Ports can be divided into two types:
+a. Inbound Ports (a.k.a. Driving Ports): These define the APIs that
+ core domain exposes to the outside world. They represent use cases or
+ application services that can be called by external actors.
+b. Outbound Ports (a.k.a. Driven Ports): These define the interfaces
+ that the core domain requires to interact with external systems, such
+ as databases, messaging systems, or web services.
+
+Adapters: Adapters are the implementations of the ports that handle
+communication between the core domain and external systems. There are
+two types of adapters:
+a. Inbound Adapters (a.k.a. Driving Adapters): These adapters handle
+incoming requests from external systems and translate them into calls
+to the appropriate inbound ports. Examples include REST controllers,
+user interfaces, or message consumers.
+b. Outbound Adapters (a.k.a. Driven Adapters): These adapters implement
+the outbound ports and handle communication with external systems.
+Examples include database repositories, message producers, or API clients.
+
+The key benefit of Hexagonal Architecture is the decoupling of the core
+domain from infrastructure concerns. This decoupling allows for easier
+testing (by using mock implementations of the ports) and makes the
+application more resilient to changes in technology or requirements
+(by allowing new adapters to be easily swapped in or out).
+
+In summary, Hexagonal Architecture promotes a clear separation of
+concerns, making the application more maintainable, testable, and
+flexible. It achieves this by organizing the application into a core
+domain surrounded by ports and adapters, which handle communication
+with external systems.
