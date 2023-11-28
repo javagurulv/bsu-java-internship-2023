@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.core.underwriting;
+package lv.javaguru.travel.insurance.core.underwriting.calculations;
 
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 
