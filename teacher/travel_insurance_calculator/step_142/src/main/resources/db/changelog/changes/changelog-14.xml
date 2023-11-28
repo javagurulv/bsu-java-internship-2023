@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
+
+    <changeSet  author="javaguru"  id="36">
+        <renameTable newTableName="travel_medical_age_coefficient"
+                     oldTableName="age_coefficient"/>
+    </changeSet>
+
+    <changeSet  author="javaguru"  id="37">
+        <renameTable newTableName="travel_cancellation_travel_cost_coefficient"
+                     oldTableName="travel_cost_coefficient"/>
+    </changeSet>
+
+    <changeSet  author="javaguru"  id="38">
+        <renameTable newTableName="travel_medical_country_default_day_rate"
+                     oldTableName="country_default_day_rate"/>
+    </changeSet>
+
+    <changeSet  author="javaguru"  id="39">
+        <renameTable newTableName="travel_medical_risk_limit_level"
+                     oldTableName="medical_risk_limit_level"/>
+    </changeSet>
+
+</databaseChangeLog>

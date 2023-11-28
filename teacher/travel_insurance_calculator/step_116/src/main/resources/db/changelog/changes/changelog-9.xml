@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
+
+    <changeSet author = "javaguru" id = "23">
+        <createTable tableName="selected_risks">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="agreement_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="risk_ic" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="javaguru" id="24">
+        <createIndex indexName="ix_selected_risks_agreement_id_risk_ic"
+                     tableName="selected_risks"
+                     unique="true">
+            <column name="agreement_id"/>
+            <column name="risk_ic"/>
+        </createIndex>
+    </changeSet>
+
+</databaseChangeLog>

@@ -18,6 +18,7 @@ public class TravelCalculatePremiumResponse extends CoreResponse {
     private String personFirstName;
     private String personLastName;
     private Date agreementDateFrom;
+
     private Date agreementDateTo;
 
     private BigDecimal agreementPrice;
