@@ -25,7 +25,7 @@ class TravelCalculatePremiumServiceImplTest {
     @Mock
     private TravelCalculatePremiumRequest request;
     @Mock
-    private DateTimeService dateTimeService;
+    private TravelPremiumUnderwriting underwriting;
     @Mock
     private TravelCalculatePremiumRequestValidator validator;
     @InjectMocks
@@ -99,10 +99,10 @@ class TravelCalculatePremiumServiceImplTest {
 
     @Test
     public void shouldReturnDaysBetween() throws ParseException {
-        Mockito.when(request.getAgreementDateTo()).thenReturn(new SimpleDateFormat("dd.MM.yyyy").parse("18.05.2000"));
-        Mockito.when(request.getAgreementDateFrom()).thenReturn(new SimpleDateFormat("dd.MM.yyyy").parse("24.05.2000"));
+        when(request.getAgreementDateTo()).thenReturn(new SimpleDateFormat("dd.MM.yyyy").parse("18.05.2000"));
+        when(request.getAgreementDateFrom()).thenReturn(new SimpleDateFormat("dd.MM.yyyy").parse("24.05.2000"));
         when(validator.validate(request)).thenReturn(List.of());
-        Mockito.when(dateTimeService.getDaysBetween(request.getAgreementDateTo(), request.getAgreementDateFrom())).thenReturn(6L);
+        when(underwriting.calculatePremium(request)).thenReturn(new BigDecimal(6));
         TravelCalculatePremiumResponse response = service.calculatePremium(request);
         assertEquals(response.getAgreementPrice(), new BigDecimal(6));
     }
