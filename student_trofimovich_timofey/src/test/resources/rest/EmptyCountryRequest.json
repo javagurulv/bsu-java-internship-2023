@@ -1,8 +1,8 @@
 {
   "personFirstName": "Harry",
   "personLastName": "Kane",
-  "agreementDateFrom": "2025-04-05",
-  "agreementDateTo": "2025-04-04",
+  "agreementDateFrom": "2025-03-07",
+  "agreementDateTo": "2025-04-08",
   "selected_risks":["TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"],
-  "country": "LATVIA"
+  "country": null
 }

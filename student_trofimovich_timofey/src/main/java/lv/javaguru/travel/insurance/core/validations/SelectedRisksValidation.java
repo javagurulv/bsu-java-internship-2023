@@ -32,11 +32,11 @@ class SelectedRisksValidation extends TravelRequestValidationImpl {
         if (selectedRisks == null) {
             return Collections.emptyList();
         }
-        selectedRisks.forEach(r -> {
+        selectedRisks.forEach(risk -> {
             Optional<ClassifierValue> optionalClassifierValue = classifierValueRepository
-                    .findByClassifierTitleAndIc("RISK_TYPE", r);
+                    .findByClassifierTitleAndIc("RISK_TYPE", risk);
             if (optionalClassifierValue.isEmpty()) {
-                errors.add(factory.buildError("ERROR_CODE_9", List.of(new Placeholder("name", r))));
+                errors.add(factory.buildError("ERROR_CODE_9", List.of(new Placeholder("name", risk))));
             }
         });
         return errors;
