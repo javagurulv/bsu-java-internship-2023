@@ -1,24 +1,21 @@
-package lv.javaguru.travel.insurance.dto;
-
-import lv.javaguru.travel.insurance.core.util.BigDecimalSerializer;
+package lv.javaguru.travel.insurance.dto.v1;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.annotation.NumberFormat;
 
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
 @Getter
 @Setter
+@AllArgsConstructor
 @NoArgsConstructor
 
-public class TravelCalculatePremiumResponse  extends CoreResponse{
+public class TravelCalculatePremiumRequestV1 {
 
     private String personFirstName;
     private String personLastName;
@@ -28,17 +25,10 @@ public class TravelCalculatePremiumResponse  extends CoreResponse{
     @JsonFormat(pattern = "yyyy-MM-dd")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date agreementDateTo;
-    private String country;
     @JsonFormat(pattern = "yyyy-MM-dd")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthday;
+    private List<String> selectedRisks;
+    private String country;
     private String medicalRiskLimitLevel;
-    @JsonSerialize(using = BigDecimalSerializer.class)
-    private BigDecimal agreementPremium;
-    private List<TravelRisk> risks;
-
-    public TravelCalculatePremiumResponse(List<ValidationError> errors) {
-        super(errors);
-    }
-
 }
