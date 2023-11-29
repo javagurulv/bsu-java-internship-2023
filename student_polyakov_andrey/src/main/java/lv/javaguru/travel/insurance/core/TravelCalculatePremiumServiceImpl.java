@@ -12,35 +12,35 @@ import java.util.List;
 @Component
 class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService {
 
-    private final TravelCalculatePremiumRequestValidator requestValidator;
-
-    private final DateTimeService dateTimeService;
+    @Autowired
+    private TravelCalculatePremiumRequestValidator requestValidator;
 
     @Autowired
-    public TravelCalculatePremiumServiceImpl (TravelCalculatePremiumRequestValidator requestValidator, DateTimeService dateTimeService) {
-        this.requestValidator = requestValidator;
-        this.dateTimeService = dateTimeService;
-    }
+    private TravelUnderwritingProcess underwritingProcess;
 
     @Override
     public TravelCalculatePremiumResponse calculatePremium(TravelCalculatePremiumRequest request) {
         List<ValidationError> errors = requestValidator.validate(request);
-        return createResponse(request, errors);
+        if (errors.isEmpty()) {
+            return createResponse(request, underwritingProcess.calculatePremium(request));
+        }
+        else {
+            return createResponse(errors);
+        }
     }
 
-    public TravelCalculatePremiumResponse createResponse(TravelCalculatePremiumRequest request, List<ValidationError> errors) {
-        if (!errors.isEmpty()) {
-            return new TravelCalculatePremiumResponse(errors);
-        }
-
+    public TravelCalculatePremiumResponse createResponse(TravelCalculatePremiumRequest request, BigDecimal agreementPrice) {
         TravelCalculatePremiumResponse response = new TravelCalculatePremiumResponse();
         response.setPersonFirstName(request.getPersonFirstName());
         response.setPersonLastName(request.getPersonLastName());
         response.setAgreementDateTo(request.getAgreementDateTo());
         response.setAgreementDateFrom(request.getAgreementDateFrom());
-        var daysBetween = dateTimeService.getDaysBetween(request.getAgreementDateFrom(), request.getAgreementDateTo());
-        response.setAgreementPrice(new BigDecimal(daysBetween));
+        response.setAgreementPrice(agreementPrice);
         return response;
+    }
+
+    public TravelCalculatePremiumResponse createResponse(List<ValidationError> errors) {
+        return new TravelCalculatePremiumResponse(errors);
     }
 
 }
