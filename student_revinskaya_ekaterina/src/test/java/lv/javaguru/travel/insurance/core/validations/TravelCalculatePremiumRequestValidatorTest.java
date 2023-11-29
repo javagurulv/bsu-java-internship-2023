@@ -1,6 +1,6 @@
 package lv.javaguru.travel.insurance.core.validations;
 
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,7 +20,7 @@ public class TravelCalculatePremiumRequestValidatorTest {
 @InjectMocks
 private TravelCalculatePremiumRequestValidatorImpl requestValidator;
     @Mock
-    private TravelCalculatePremiumRequest request;
+    private TravelCalculatePremiumRequestV1 request;
     @Test
     public void responseShouldContainSingleErrorsTest() {
         TravelRequestValidation requestSingleValidation = mock(TravelRequestValidation.class);
