@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import lv.javaguru.travel.insurance.rest.loggers.TravelCalculatePremiumRequestExecutionTimeLogger;
 import lv.javaguru.travel.insurance.rest.loggers.TravelCalculatePremiumRequestLogger;
 import lv.javaguru.travel.insurance.rest.loggers.TravelCalculatePremiumResponseLogger;
 import org.junit.jupiter.api.BeforeAll;
@@ -32,6 +33,8 @@ TravelCalculatePremiumServiceImplTest {
     TravelCalculatePremiumResponseLogger responseLogger;
     @Mock
     TravelCalculatePremiumRequestLogger requestLogger;
+    @Mock
+    TravelCalculatePremiumRequestExecutionTimeLogger timeLogger;
     @Mock
     TravelCalculatePremiumRequestValidator validator;
 

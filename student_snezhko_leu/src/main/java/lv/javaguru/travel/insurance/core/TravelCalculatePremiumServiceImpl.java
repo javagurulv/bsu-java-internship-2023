@@ -1,12 +1,14 @@
 package lv.javaguru.travel.insurance.core;
 
+import com.google.common.base.Stopwatch;
 import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumResponse;
+import lv.javaguru.travel.insurance.rest.loggers.TravelCalculatePremiumRequestExecutionTimeLogger;
 import lv.javaguru.travel.insurance.rest.loggers.TravelCalculatePremiumRequestLogger;
 import lv.javaguru.travel.insurance.rest.loggers.TravelCalculatePremiumResponseLogger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
+import com.google.common.base.Stopwatch;
 import java.util.List;
 
 @Component
@@ -16,13 +18,17 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
     private TravelCalculatePremiumRequestValidator validator = new TravelCalculatePremiumRequestValidator();
     @Autowired private TravelCalculatePremiumRequestLogger requestLogger;
     @Autowired private TravelCalculatePremiumResponseLogger responseLogger;
+    @Autowired private TravelCalculatePremiumRequestExecutionTimeLogger requestTimeLogger;
     @Override
     public TravelCalculatePremiumResponse calculatePremium(TravelCalculatePremiumRequest request) {
+        final Stopwatch stopWatch = Stopwatch.createStarted();
         List<ValidationError> errors = validator.validate(request);
         requestLogger.log(request);
         TravelCalculatePremiumResponse response = !errors.isEmpty()
                 ? buildResponse(errors)
                 : buildResponse(request);
+        stopWatch.stop();
+        requestTimeLogger.log(stopWatch);
         responseLogger.log(response);
         return response;
     }
