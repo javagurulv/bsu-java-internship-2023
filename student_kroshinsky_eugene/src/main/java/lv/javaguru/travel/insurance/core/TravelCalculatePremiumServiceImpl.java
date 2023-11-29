@@ -1,5 +1,7 @@
 package lv.javaguru.travel.insurance.core;
 
+import lv.javaguru.travel.insurance.rest.loggers.TravelCalculatePremiumRequestLogger;
+import lv.javaguru.travel.insurance.core.validations.TravelCalculatePremiumRequestValidator;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumResponse;
 import lv.javaguru.travel.insurance.dto.ValidationError;
@@ -10,15 +12,18 @@ import java.util.List;
 
 @Component
 class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService {
-    @Autowired private DateDifferenceService dateTimeService = new DateDifferenceService();
-    @Autowired private TravelCalculatePremiumRequestValidator requestValidator = new TravelCalculatePremiumRequestValidator();
+    @Autowired private DateDifferenceService dateTimeService;
+    @Autowired private TravelCalculatePremiumRequestValidator requestValidator;
+    @Autowired private TravelCalculatePremiumRequestLogger logger;
     @Override
     public TravelCalculatePremiumResponse calculatePremium(TravelCalculatePremiumRequest request) {
         List<ValidationError> errors = requestValidator.validate(request);
-        if (!errors.isEmpty()) {
-            return new TravelCalculatePremiumResponse(errors);
-        }
-
+        return errors.isEmpty() ? buildResponse(request) : buildResponse(errors);
+    }
+    private TravelCalculatePremiumResponse buildResponse(List<ValidationError> errors){
+        return new TravelCalculatePremiumResponse(errors);
+    }
+    private TravelCalculatePremiumResponse buildResponse(TravelCalculatePremiumRequest request){
         TravelCalculatePremiumResponse response = new TravelCalculatePremiumResponse();
         response.setPersonFirstName(request.getPersonFirstName());
         response.setPersonLastName(request.getPersonLastName());
@@ -27,5 +32,4 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
         response.setAgreementPrice(dateTimeService.calculateDateDifference(request.getAgreementDateFrom(),request.getAgreementDateTo()));
         return response;
     }
-
 }

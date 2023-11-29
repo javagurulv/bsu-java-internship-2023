@@ -1,0 +1,12 @@
+Ваша задача:
+
+1. Скопировать в /version_2 класс ValidationErrorFactory + тест.
+2. Перевести класс ValidationErrorFactory на использование классов
+   из пакета /core/api.
+3. Скопировать в /version_2 интерфейс TravelAgreementFieldValidation.
+4. Перевести интерфейс TravelAgreementFieldValidation на использование
+   классов из пакета /core/api. Вместо TravelCalculatePremiumRequestV1
+   подавать на валидацию класс AgreementDTO.
+5. Скопировать в /version_2 пакет /core/validations/agreement + тесты.
+6. Перевести скопированные /core/validations/agreement + тесты на
+   использование классов из пакета /core/api.

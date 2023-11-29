@@ -1,0 +1,5 @@
+Ваша задача на данный момент:
+1. Создать в Java доменный объект + репозиторий для написания
+запросов к таблице AGE_COEFFICIENT.
+2. Поменять формулу расчёта медицинского риска на:
+premium = CountryDefaultDayRate * DayCount * AgeCoefficient.

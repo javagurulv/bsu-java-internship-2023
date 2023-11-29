@@ -1,27 +1,33 @@
 package lv.javaguru.travel.insurance.core;
 
-import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
-import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
+import lv.javaguru.travel.insurance.dto.*;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Component
 class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService {
 
-    @Autowired private DateTimeService dateTimeService;
+    @Autowired private TravelCalculatePremiumRequestValidator requestValidator;
+    @Autowired private TravelPremiumUnderwriting underwriting;
 
     @Override
     public TravelCalculatePremiumResponse calculatePremium(TravelCalculatePremiumRequest request) {
+        List<ValidationError> errors = requestValidator.validate(request);
+        return errors.isEmpty()
+                ? buildResponse(request, underwriting.calculatePremium(request))
+                : new TravelCalculatePremiumResponse(errors);
+    }
+
+    public TravelCalculatePremiumResponse buildResponse (TravelCalculatePremiumRequest request, BigDecimal premium){
+
         TravelCalculatePremiumResponse response = new TravelCalculatePremiumResponse();
         response.setPersonFirstName(request.getPersonFirstName());
         response.setPersonLastName(request.getPersonLastName());
         response.setAgreementDateFrom(request.getAgreementDateFrom());
         response.setAgreementDateTo(request.getAgreementDateTo());
-
-        var daysBetween = dateTimeService.getDaysBetween(request.getAgreementDateFrom(), request.getAgreementDateTo());
-        response.setAgreementPrice(new BigDecimal(daysBetween));
+        response.setAgreementPrice(premium);
 
         return response;
     }

@@ -1,0 +1,8 @@
+{
+  "errors": [
+    {
+      "errorCode": "ERROR_CODE_11",
+      "description": "Field personBirthDate must not be empty!"
+    }
+  ]
+}

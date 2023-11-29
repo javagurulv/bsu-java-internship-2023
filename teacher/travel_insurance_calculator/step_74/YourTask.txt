@@ -1,0 +1,3 @@
+Ваша задача:
+1. Добавить в запрос поле medicalRiskLimitLevel.
+2. Добавить в ответ поле medicalRiskLimitLevel.

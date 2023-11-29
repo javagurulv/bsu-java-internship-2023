@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
+
+    <changeSet author = "javaguru" id = "34">
+        <createTable tableName="travel_cost_coefficient">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="travel_cost_from" type="DECIMAL(10,2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="travel_cost_to" type="DECIMAL(10,2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="coefficient" type="DECIMAL(10,2)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author = "javaguru" id = "35">
+        <sql>
+            INSERT INTO travel_cost_coefficient(travel_cost_from, travel_cost_to, coefficient)
+            VALUES(0, 4999.99, 10.0);
+
+            INSERT INTO travel_cost_coefficient(travel_cost_from, travel_cost_to, coefficient)
+            VALUES(5000, 9999.99, 30.0);
+
+            INSERT INTO travel_cost_coefficient(travel_cost_from, travel_cost_to, coefficient)
+            VALUES(10000, 19999.99, 100.0);
+
+            INSERT INTO travel_cost_coefficient(travel_cost_from, travel_cost_to, coefficient)
+            VALUES(20000, 1000000, 500.0);
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>

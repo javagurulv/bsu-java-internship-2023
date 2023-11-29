@@ -5,6 +5,8 @@ import java.text.ParseException;
 import java.util.Date;
 
 public interface DateService {
-    Date createDate(String date) throws ParseException;
+    Date createDate(String date, String format) throws ParseException;
+
+    Date getTodayDate();
     BigDecimal getDaysBetween(Date from, Date to);
 }
