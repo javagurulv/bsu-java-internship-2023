@@ -1,6 +1,6 @@
 package lv.javaguru.travel.insurance.dto.v1;
 
-import lv.javaguru.travel.insurance.core.util.BigDecimalSerializer;
+import lv.javaguru.travel.insurance.dto.util.BigDecimalSerializer;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
