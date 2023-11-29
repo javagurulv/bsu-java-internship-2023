@@ -8,22 +8,35 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import lv.javaguru.travel.insurance.rest.loggers.TravelCalculatePremiumRequestLogger;
+import lv.javaguru.travel.insurance.rest.loggers.TravelCalculatePremiumResponseLogger;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+@SpringBootTest
+@ExtendWith(MockitoExtension.class)
 class
 TravelCalculatePremiumServiceImplTest {
 
+    @InjectMocks TravelCalculatePremiumServiceImpl test;
+    @Mock
+    TravelCalculatePremiumResponseLogger responseLogger;
+    @Mock
+    TravelCalculatePremiumRequestLogger requestLogger;
+    @Mock
+    TravelCalculatePremiumRequestValidator validator;
+
     @Test
     public void hasErrorsTest() {
-        TravelCalculatePremiumRequestValidator validator = mock(TravelCalculatePremiumRequestValidator.class);
-        TravelCalculatePremiumServiceImpl test = new TravelCalculatePremiumServiceImpl();
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         List<ValidationError> errors = List.of(new ValidationError("field", "error"));
         when(validator.validate(request)).thenReturn(errors);
@@ -32,8 +45,6 @@ TravelCalculatePremiumServiceImplTest {
     }
     @Test
     public void validationErrorsTest() {
-        TravelCalculatePremiumRequestValidator validator = mock(TravelCalculatePremiumRequestValidator.class);
-        TravelCalculatePremiumServiceImpl test = mock(TravelCalculatePremiumServiceImpl.class);
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         List<ValidationError> errors = List.of(new ValidationError("field", "message"));
         when(validator.validate(request)).thenReturn(errors);
@@ -45,8 +56,6 @@ TravelCalculatePremiumServiceImplTest {
     }
     @Test
     public void correctReturnResponsesFirstNameTest() {
-        //TravelCalculatePremiumRequestValidator validator = mock(TravelCalculatePremiumRequestValidator.class);
-        TravelCalculatePremiumServiceImpl test = new TravelCalculatePremiumServiceImpl();
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getPersonFirstName()).thenReturn("FirstName");
         when(request.getPersonLastName()).thenReturn("LastName");
@@ -57,7 +66,6 @@ TravelCalculatePremiumServiceImplTest {
     }
     @Test
     public void correctReturnResponsesLastNameTest() {
-        TravelCalculatePremiumServiceImpl test = new TravelCalculatePremiumServiceImpl();
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getPersonFirstName()).thenReturn("FirstName");
         when(request.getPersonLastName()).thenReturn("LastName");
@@ -68,7 +76,6 @@ TravelCalculatePremiumServiceImplTest {
     }
     @Test
     public void correctReturnResponsesDateFromTest() {
-        TravelCalculatePremiumServiceImpl test = new TravelCalculatePremiumServiceImpl();
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getPersonFirstName()).thenReturn("FirstName");
         when(request.getPersonLastName()).thenReturn("LastName");
@@ -80,7 +87,6 @@ TravelCalculatePremiumServiceImplTest {
     }
     @Test
     public void correctReturnResponsesDateToTest() {
-        TravelCalculatePremiumServiceImpl test = new TravelCalculatePremiumServiceImpl();
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getPersonFirstName()).thenReturn("FirstName");
         when(request.getPersonLastName()).thenReturn("LastName");
