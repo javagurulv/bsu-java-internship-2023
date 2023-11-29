@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.rest;
+package lv.javaguru.travel.insurance.dto;
 
 import java.math.BigDecimal;
 import java.util.Date;
