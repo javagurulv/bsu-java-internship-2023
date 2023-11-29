@@ -55,6 +55,21 @@ public class TravelCalculatePremiumControllerTest {
                 "TravelCalculatePremiumResponse_agreementDateFrom_not_provided.json"
         );
     }
+    @Test
+    public void selected_risksNull() throws Exception {
+        executeAndCompare(
+                "TravelCalculatePremiumRequest_selected_risks_null.json",
+                "TravelCalculatePremiumResponse_selected_risks_null.json"
+        );
+    }
+    @Test
+    public void selected_risksEmpty() throws Exception {
+        executeAndCompare(
+                "TravelCalculatePremiumRequest_selected_risks_empty.json",
+                "TravelCalculatePremiumResponse_selected_risks_empty.json"
+        );
+    }
+
 
     @Test
     public void agreementDateToNotProvided() throws Exception {
