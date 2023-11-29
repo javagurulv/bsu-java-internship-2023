@@ -2,7 +2,7 @@ package lv.javaguru.travel.insurance.core.underwriting.calculators.medical;
 
 import lv.javaguru.travel.insurance.core.domain.CountryDefaultDayRate;
 import lv.javaguru.travel.insurance.core.repositories.CountryDefaultDayRateRepository;
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -23,7 +23,7 @@ public class CountryDefaultDayPremiumCalculatorTest {
     private CountryDefaultDayPremiumCalculator defaultDayPremiumCalculator;
     @Mock
     private CountryDefaultDayRateRepository countryDefaultDayRateRepository;
-    @Mock private TravelCalculatePremiumRequest request;
+    @Mock private TravelCalculatePremiumRequestV1 request;
     @Test
     public void calculateDayCountTest(){
         when(request.getCountry()).thenReturn("SPAIN");

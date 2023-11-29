@@ -19,8 +19,7 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class EmptyPersonBirthDateValidationTest {
 
-    @Mock
-    private ValidationErrorFactory errorFactory;
+    @Mock private ValidationErrorFactory errorFactory;
 
     @InjectMocks
     private EmptyPersonBirthDateValidation validation;

@@ -1,0 +1,21 @@
+Ментор сообщил радостную новость!
+Бизнес начал тестировать вторую версию приложения.
+
+Test Case:
+Request: selectedRisks is not supported (one risk).
+Response: error code = ERROR_CODE_6.
+
+Test Case:
+Request: selectedRisks is not supported (two risks).
+Response: multiple error codes = ERROR_CODE_6.
+
+Test Case:
+Request: country is null, RISK_TYPE - TRAVEL_MEDICAL.
+Response: error code = ERROR_CODE_10.
+
+Test Case:
+Request: country is empty, RISK_TYPE - TRAVEL_MEDICAL.
+Response: error code = ERROR_CODE_10.
+
+
+Ваша задача: выполнить пожелание ментора.

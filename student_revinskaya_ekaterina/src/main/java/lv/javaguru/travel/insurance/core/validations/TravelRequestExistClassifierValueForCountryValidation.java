@@ -2,7 +2,7 @@ package lv.javaguru.travel.insurance.core.validations;
 
 import lv.javaguru.travel.insurance.core.repositories.ClassifierValueRepository;
 import lv.javaguru.travel.insurance.core.util.Placeholder;
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -18,12 +18,12 @@ public class TravelRequestExistClassifierValueForCountryValidation
     private ClassifierValueRepository classifierValueRepository;
 
     @Override
-    public Optional<ValidationError> validate(TravelCalculatePremiumRequest request) {
+    public Optional<ValidationError> validate(TravelCalculatePremiumRequestV1 request) {
         return validateExistClassifierValue(request) ? Optional.of(validationErrorFactory.buildError("ERROR_CODE_11",
                         List.of(new Placeholder("NOT_EXISTING_COUNTRY", request.getCountry()))))
                 : Optional.empty();
     }
-    private boolean validateExistClassifierValue(TravelCalculatePremiumRequest request){
+    private boolean validateExistClassifierValue(TravelCalculatePremiumRequestV1 request){
         return request.getCountry() != null && !request.getCountry().isEmpty()
                 && classifierValueRepository.findByClassifierTitleAndIc("COUNTRY", request.getCountry()).isEmpty();
     }

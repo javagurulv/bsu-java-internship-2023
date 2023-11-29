@@ -1,0 +1,71 @@
+Ваша задача:
+по аналогии с /rest/v1 реализовать /rest/v2.
+Новая версия должна использовать классы из /dto/v2 поддерживающие
+много персон для полиса.
+
+При реализации класс TravelCalculatePremiumRequestExecutionTimeLogger
+вынесите в пакет /rest/common, сделайте его public и воспользуйтесь
+им в /rest/v1 и /rest/v2.
+
+Протестируйте созданную вами реализацию /rest/v2 через Postman
+воспользовавшись приведённым ниже запросом и ответом.
+
+
+Request for /rest/v2:
+
+{
+  "agreementDateFrom" : "2025-05-25",
+  "agreementDateTo" : "2025-05-29",
+  "country" : "SPAIN",
+  "medicalRiskLimitLevel" : "LEVEL_10000",
+  "selected_risks":["TRAVEL_MEDICAL"],
+  "persons" : [
+        {
+          "personFirstName" : "Vasja",
+          "personLastName" : "Pupkin",
+          "personBirthDate" : "2000-05-29"
+        },
+        {
+          "personFirstName" : "Petja",
+          "personLastName" : "Pupkin",
+          "personBirthDate" : "1950-02-29"
+        }
+  ]
+}
+
+
+Expected result:
+{
+    "errors": null,
+    "agreementDateFrom": "2025-05-25",
+    "agreementDateTo": "2025-05-29",
+    "country": "SPAIN",
+    "medicalRiskLimitLevel": "LEVEL_10000",
+    "agreementPremium": 26.00,
+    "persons": [
+        {
+            "personFirstName": "Vasja",
+            "personLastName": "Pupkin",
+            "personBirthDate": "2000-05-29",
+            "personPremium": 11.00,
+            "personRisks": [
+                {
+                    "riskIc": "TRAVEL_MEDICAL",
+                    "premium": 11.00
+                }
+            ]
+        },
+        {
+            "personFirstName": "Petja",
+            "personLastName": "Pupkin",
+            "personBirthDate": "1950-03-01",
+            "personPremium": 15.00,
+            "personRisks": [
+                {
+                    "riskIc": "TRAVEL_MEDICAL",
+                    "premium": 15.00
+                }
+            ]
+        }
+    ]
+}

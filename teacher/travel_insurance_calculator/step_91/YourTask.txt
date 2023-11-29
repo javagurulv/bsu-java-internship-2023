@@ -1,0 +1,10 @@
+Ментор обратил ваше внимание на то, что класс BigDecimalSerializer
+используется только в пакете insurance.dto, а сам находится
+в пакете insurance.core.util.
+
+Следуя принципу Single Responsibility Principle класс BigDecimalSerializer
+должен находиться в пакете insurance.dto.common, так как он используется
+при преобразовании Java классов в JSON документы в обе версиях.
+
+Ваша задача: выполнить просьбу ментора и перенести класс
+BigDecimalSerializer в пакет insurance.dto.util.

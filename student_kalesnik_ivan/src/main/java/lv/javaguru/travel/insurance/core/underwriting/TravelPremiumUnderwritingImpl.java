@@ -1,8 +1,7 @@
 package lv.javaguru.travel.insurance.core.underwriting;
 
-import lv.javaguru.travel.insurance.core.util.DateTimeUtil;
 import lv.javaguru.travel.insurance.validation.RiskPremium;
-import lv.javaguru.travel.insurance.validation.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.validation.v1.TravelCalculatePremiumRequestV1;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,13 +15,13 @@ class TravelPremiumUnderwritingImpl implements TravelPremiumUnderwriting {
     @Autowired private SelectedRiskPremiumCalculator selectedRisksPremiumCalculator;
 
     @Override
-    public TravelPremiumCalculationResult calculatePremium(TravelCalculatePremiumRequest request) {
+    public TravelPremiumCalculationResult calculatePremium(TravelCalculatePremiumRequestV1 request) {
         List<RiskPremium> riskPremiums = calculateSelectedRisksPremium(request);
         BigDecimal totalPremium = calculateTotalPremium(riskPremiums);
         return new TravelPremiumCalculationResult(totalPremium, riskPremiums);
     }
 
-    private List<RiskPremium> calculateSelectedRisksPremium(TravelCalculatePremiumRequest request) {
+    private List<RiskPremium> calculateSelectedRisksPremium(TravelCalculatePremiumRequestV1 request) {
         return selectedRisksPremiumCalculator.calculatePremiumForAllRisks(request);
     }
 

@@ -1,5 +1,6 @@
 package lv.javaguru.travel.insurance.core;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumResponse;
@@ -15,15 +16,10 @@ import java.util.List;
 //@AllArgsConstructor
 
 @Component
+@JsonFormat
 class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService {
     @Autowired private TravelCalculatePremiumRequestValidator requestValidator;
     @Autowired private TravelPremiumUnderwriting premiumUnderwriting;
-
-    @Autowired
-    public TravelCalculatePremiumServiceImpl(TravelCalculatePremiumRequestValidator requestValidator, TravelPremiumUnderwriting premiumUnderwriting) {
-        this.requestValidator = requestValidator;
-        this.premiumUnderwriting = premiumUnderwriting;
-    }
 
     @Override
     public TravelCalculatePremiumResponse calculatePremium(TravelCalculatePremiumRequest request) {
@@ -45,5 +41,4 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
         premiumResponse.setAgreementPrice(agreementPrice);
         return premiumResponse;
     }
-
 }
