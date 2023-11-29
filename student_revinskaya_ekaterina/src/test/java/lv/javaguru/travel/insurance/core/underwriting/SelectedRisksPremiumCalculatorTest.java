@@ -1,6 +1,6 @@
 package lv.javaguru.travel.insurance.core.underwriting;
 
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import lv.javaguru.travel.insurance.dto.TravelRisk;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -22,7 +22,7 @@ public class SelectedRisksPremiumCalculatorTest {
     @InjectMocks
     SelectedRisksPremiumCalculator selectedRisksPremiumCalculator;
     @Mock
-    TravelCalculatePremiumRequest request;
+    TravelCalculatePremiumRequestV1 request;
 @Test
 public void calculateWithNotExistSelectedRisksPremium(){
     when(request.getSelectedRisks()).thenReturn(List.of("RISK_1", "RISK_2"));

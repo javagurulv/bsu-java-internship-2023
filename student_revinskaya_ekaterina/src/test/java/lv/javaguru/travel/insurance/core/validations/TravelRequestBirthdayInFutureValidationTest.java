@@ -1,14 +1,13 @@
 package lv.javaguru.travel.insurance.core.validations;
 
 import lv.javaguru.travel.insurance.core.util.DateTimeUtil;
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.expression.spel.ast.OpAnd;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -27,7 +26,7 @@ public class TravelRequestBirthdayInFutureValidationTest {
     @Mock
     DateTimeUtil dateTimeUtil;
     @Mock
-    TravelCalculatePremiumRequest request;
+    TravelCalculatePremiumRequestV1 request;
     @Mock
     ValidationErrorFactory validationErrorFactory;
     @Test

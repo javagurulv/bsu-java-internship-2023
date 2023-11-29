@@ -1,6 +1,6 @@
 package lv.javaguru.travel.insurance.core.validations;
 
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -24,7 +24,7 @@ public class TravelRequestDateFromShouldLessDateToValidationTest {
    private TravelRequestDateFromLessDateToValidation dateFromLessDateToValidation = new TravelRequestDateFromLessDateToValidation();
 
     @Mock
-    private TravelCalculatePremiumRequest request;
+    private TravelCalculatePremiumRequestV1 request;
     @Mock
     private ValidationErrorFactory validationErrorFactory;
     @Test

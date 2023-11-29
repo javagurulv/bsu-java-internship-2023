@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.dto;
+package lv.javaguru.travel.insurance.dto.v1;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
@@ -15,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class TravelCalculatePremiumRequest {
+public class TravelCalculatePremiumRequestV1 {
 
     private String personFirstName;
     private String personLastName;
