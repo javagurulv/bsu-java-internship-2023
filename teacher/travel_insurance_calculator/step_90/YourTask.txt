@@ -1,0 +1,76 @@
+Ментор предлагает продолжить подготовку программного кода для внедрения
+новой версии (поддерживающей нескольких персон) с создания DTO для
+запроса и ответа новой версии.
+
+New Request format:
+
+{
+  "agreementDateFrom" : "2025-05-25",
+  "agreementDateTo" : "2025-05-29",
+  "country" : "SPAIN",
+  "medicalRiskLimitLevel" : "LEVEL_10000",
+  "selected_risks":["TRAVEL_MEDICAL"],
+  "persons" : [
+        {
+          "personFirstName" : "Vasja",
+          "personLastName" : "Pupkin",
+          "personBirthDate" : "2000-05-29"
+        },
+        {
+          "personFirstName" : "Petja",
+          "personLastName" : "Pupkin",
+          "personBirthDate" : "2000-02-29"
+        }
+  ]
+}
+
+New Response format:
+{
+    "errors": null,
+    "agreementDateFrom": "2025-05-25",
+    "agreementDateTo": "2025-05-29",
+    "country": "SPAIN",
+    "medicalRiskLimitLevel" : "LEVEL_10000",
+    "agreementPremium": 22.00,
+    "persons" : [
+        {
+            "personFirstName" : "Vasja",
+            "personLastName" : "Pupkin",
+            "personBirthDate" : "2000-05-29",
+            "personPremium" : 11.00,
+            "risks": [
+                    {
+                        "riskIc": "TRAVEL_MEDICAL",
+                        "premium": 11.00
+                    }
+            ]
+        },
+        {
+          "personFirstName" : "Petja",
+          "personLastName" : "Pupkin",
+          "personBirthDate" : "2000-02-29",
+          "personPremium" : 11.00,
+            "risks": [
+                    {
+                        "riskIc": "TRAVEL_MEDICAL",
+                        "premium": 11.00
+                    }
+            ]
+        }
+    ]
+}
+
+
+Ваша задача:
+1. В пакете insurance/dto создать пакет v1 и переместить в него
+классы запроса и ответа первой версии приложения (поддерживающие
+только одну персону).
+
+2. Переименовать классы запроса и ответа первой версии приложения
+TravelCalculatePremiumRequest -> TravelCalculatePremiumRequestV1
+TravelCalculatePremiumResponse -> TravelCalculatePremiumResponseV1
+
+3. В пакете insurance/dto создать пакет v2 и в этом пакете создать
+классы запроса и ответа для новой (второй) версии приложения
+поддерживающие много персон:
+TravelCalculatePremiumRequestV2, TravelCalculatePremiumResponseV2.

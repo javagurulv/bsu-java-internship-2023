@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
+
+    <changeSet author = "javaguru" id = "32">
+        <addColumn tableName="agreements">
+            <column name="uuid" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
+    <changeSet author="javaguru" id="33">
+        <createIndex indexName="ix_agreements_uuid"
+                     tableName="agreements"
+                     unique="true">
+            <column name="uuid"/>
+        </createIndex>
+    </changeSet>
+
+</databaseChangeLog>

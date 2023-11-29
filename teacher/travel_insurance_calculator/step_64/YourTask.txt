@@ -1,0 +1,8 @@
+Ваша задача:
+
+1. Создать доменный класс с маппингом для таблицы COUNTRY_DEFAULT_DAY_RATE в Java.
+2. Добавить класс репозитория для написания запросов к таблице
+   COUNTRY_DEFAULT_DAY_RATE.
+3. Написать запрос по получению default_day_rate по стране.
+4. Изменить формулу расчёта медицинского риска:
+   premium = CountryDefaultDayPremium * DayCount.

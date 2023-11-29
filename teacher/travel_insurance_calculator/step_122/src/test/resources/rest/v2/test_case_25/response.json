@@ -1,0 +1,8 @@
+{
+  "errors": [
+    {
+      "errorCode": "ERROR_CODE_15",
+      "description": "Country value = NOT_SUPPORTED not supported!"
+    }
+  ]
+}

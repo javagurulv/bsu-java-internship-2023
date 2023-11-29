@@ -1,7 +1,9 @@
 package lv.javaguru.travel.insurance.core;
 
+import lv.javaguru.travel.insurance.core.util.DateTimeUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -10,11 +12,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class dateTimeTest {
 
-    private DateTimeService dateTimeService;
+    @Mock
+    private DateTimeUtil dateTimeService;
 
     @BeforeEach
     void setUp() {
-        dateTimeService = new DateTimeService();
+        dateTimeService = new DateTimeUtil();
     }
 
     @Test
@@ -52,4 +55,6 @@ public class dateTimeTest {
 
         assertEquals(0, daysBetween);
     }
+
+
 }
