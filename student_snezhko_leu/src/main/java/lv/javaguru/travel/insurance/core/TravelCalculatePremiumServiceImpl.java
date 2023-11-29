@@ -2,6 +2,8 @@ package lv.javaguru.travel.insurance.core;
 
 import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumResponse;
+import lv.javaguru.travel.insurance.rest.loggers.TravelCalculatePremiumRequestLogger;
+import lv.javaguru.travel.insurance.rest.loggers.TravelCalculatePremiumResponseLogger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -12,12 +14,17 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
 
     @Autowired
     private TravelCalculatePremiumRequestValidator validator = new TravelCalculatePremiumRequestValidator();
+    @Autowired private TravelCalculatePremiumRequestLogger requestLogger;
+    @Autowired private TravelCalculatePremiumResponseLogger responseLogger;
     @Override
     public TravelCalculatePremiumResponse calculatePremium(TravelCalculatePremiumRequest request) {
         List<ValidationError> errors = validator.validate(request);
-        return !errors.isEmpty()
+        requestLogger.log(request);
+        TravelCalculatePremiumResponse response = !errors.isEmpty()
                 ? buildResponse(errors)
                 : buildResponse(request);
+        responseLogger.log(response);
+        return response;
     }
     public TravelCalculatePremiumResponse buildResponse(TravelCalculatePremiumRequest request) {
         TravelCalculatePremiumResponse response = new TravelCalculatePremiumResponse();
