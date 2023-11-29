@@ -11,6 +11,14 @@ public class TravelCalculatePremiumResponse {
 
     public TravelCalculatePremiumResponse() {}
 
+    public TravelCalculatePremiumResponse(TravelCalculatePremiumRequest request)
+    {
+        this.setPersonFirstName(request.getPersonFirstName());
+        this.setPersonLastName(request.getPersonLastName());
+        this.setAgreementDateFrom(request.getAgreementDateFrom());
+        this.setAgreementDateTo(request.getAgreementDateTo());
+    }
+
     public String getPersonFirstName() {
         return personFirstName;
     }
