@@ -35,3 +35,12 @@ ALTER TABLE country_default_day_rate
 
 CREATE UNIQUE INDEX ix_country_default_day_rate
     ON country_default_day_rate (country_ic);
+
+CREATE TABLE age_coefficient
+(
+     id         BIGINT         NOT NULL AUTO_INCREMENT,
+    age_from    INT            NOT NULL,
+    age_to      INT            NOT NULL,
+    coefficient DECIMAL(10, 2) NOT NULL,
+    PRIMARY KEY (id)
+    );
