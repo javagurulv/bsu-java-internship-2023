@@ -20,6 +20,8 @@ public class PersonDTO {
 
     private Date personBirthDate;
 
+    private String medicalRiskLimitLevel;
+
     private List<RiskDTO> risks;
 
 }
