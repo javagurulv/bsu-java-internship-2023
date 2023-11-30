@@ -1,0 +1,34 @@
+package lv.javaguru.travel.insurance.core;
+
+import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.ValidationError;
+import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+@Component
+public class TravelCalculatePremiumRequestValidator {
+
+    public List<ValidationError> validate(TravelCalculatePremiumRequest request)
+    {
+        List<ValidationError> errors = new ArrayList<>();
+        validatePersonFirstName(request).ifPresent(errors::add);
+        validatePersonLastName(request).ifPresent(errors::add);
+        return errors;
+    }
+
+    private Optional<ValidationError> validatePersonFirstName(TravelCalculatePremiumRequest request)
+    {
+        return (request.getPersonFirstName() == null || request.getPersonFirstName().isEmpty()
+                ? Optional.of(new ValidationError("personFirstName", "cannot be empty!"))
+                : Optional.empty());
+    }
+    private Optional<ValidationError> validatePersonLastName(TravelCalculatePremiumRequest request)
+    {
+        return (request.getPersonLastName() == null || request.getPersonLastName().isEmpty()
+                ? Optional.of(new ValidationError("personLastName", "cannot be empty!"))
+                : Optional.empty());
+    }
+}
