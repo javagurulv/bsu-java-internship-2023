@@ -4,7 +4,7 @@
   "personLastName": "Kane",
   "agreementDateFrom": "2025-04-05",
   "agreementDateTo": "2025-04-08",
-  "agreementPremium": 3,
+  "agreementPremium": 3.00,
   "risks": [
     {
       "ic": "TRAVEL_MEDICAL",
