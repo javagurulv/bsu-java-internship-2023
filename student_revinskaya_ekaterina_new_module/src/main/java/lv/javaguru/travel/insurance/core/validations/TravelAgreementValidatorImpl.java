@@ -14,74 +14,23 @@ import java.util.stream.Stream;
 
 @Component
 class TravelAgreementValidatorImpl implements TravelAgreementValidator {
-
     @Autowired
-    private List<TravelAgreementFieldValidation> agreementFieldValidations;
+    private AgreementFieldValidation agreementFieldValidation;
     @Autowired
-    private List<TravelPersonFieldValidation> personFieldValidations;
-
+    private ListPersonFieldValidations listPersonFieldValidations;
 
     @Override
     public List<ValidationErrorDTO> validate(AgreementDTO request) {
 
-        List<ValidationErrorDTO> agreementErrors = validateAgreementErrors(request);
-        List<ValidationErrorDTO> personErrors = validatePersonErrors(request);
+        List<ValidationErrorDTO> agreementErrors = agreementFieldValidation.validateErrors(request);
+        List<ValidationErrorDTO> personErrors = listPersonFieldValidations.validateErrors(request);
 
         return concatenateErrorLists(agreementErrors, personErrors);
     }
-
-private List<ValidationErrorDTO> validateAgreementErrors(AgreementDTO request){
-    List<ValidationErrorDTO> agreementSingleErrors = validateAgreementSingleErrors(request);
-    List<ValidationErrorDTO> agreementListErrors = validateAgreementListErrors(request);
-    return concatenateErrorLists(agreementSingleErrors, agreementListErrors);
-}
-    private List<ValidationErrorDTO> validatePersonErrors(AgreementDTO request){
-        return request.getPersons().stream()
-                .flatMap(person->validatePersonSingleAndList(person).stream())
-                .collect(Collectors.toList());
-    }
-    private List<ValidationErrorDTO> validatePersonSingleAndList(PersonDTO request){
-        List<ValidationErrorDTO> personSingleErrors = validatePersonSingleErrors(request);
-        List<ValidationErrorDTO> personListErrors = validatePersonListErrors(request);
-        return concatenateErrorLists(personSingleErrors, personListErrors);
-    }
-    private List<ValidationErrorDTO> validateAgreementSingleErrors(AgreementDTO request){
-        return agreementFieldValidations.stream()
-                .map(validation->validation.validate(request))
-                .filter(Optional::isPresent)
-                .map(Optional::get)
-                .collect(Collectors.toList());
-    }
-    private List<ValidationErrorDTO> validateAgreementListErrors(AgreementDTO request){
-        return agreementFieldValidations.stream()
-                .map(validation->validation.validateList(request))
-                .flatMap(Collection::stream)
-                .collect(Collectors.toList());
-    }
-    private List<ValidationErrorDTO> validatePersonSingleErrors(PersonDTO person){
-        return personFieldValidations.stream()
-                .map(validation->validation.validate(person))
-                .filter(Optional::isPresent)
-                .map(Optional::get)
-                .collect(Collectors.toList());
-    }
-    private List<ValidationErrorDTO> validatePersonListErrors(PersonDTO person){
-        return personFieldValidations.stream()
-                .map(validation->validation.validateList(person))
-                .flatMap(Collection::stream)
-                .collect(Collectors.toList());
-    }
-
     private List<ValidationErrorDTO> concatenateErrorLists(
             List<ValidationErrorDTO> singleErrors, List<ValidationErrorDTO> listErrors)
     {
         return Stream.concat(singleErrors.stream(), listErrors.stream())
                 .collect(Collectors.toList());
     }
-
-
-
-
-
-
 }
