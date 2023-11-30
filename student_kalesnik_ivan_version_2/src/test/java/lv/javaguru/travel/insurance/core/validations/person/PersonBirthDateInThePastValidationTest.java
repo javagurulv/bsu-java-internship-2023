@@ -1,5 +1,6 @@
 package lv.javaguru.travel.insurance.core.validations.person;
 
+import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import lv.javaguru.travel.insurance.core.util.DateTimeUtil;
@@ -30,22 +31,24 @@ class PersonBirthDateInThePastValidationTest {
 
     @Test
     public void shouldReturnErrorWhenPersonBirthDateInTheFuture() {
+        AgreementDTO agreement = mock(AgreementDTO.class);
         PersonDTO person = mock(PersonDTO.class);
         when(person.getPersonBirthDate()).thenReturn(createDate("01.01.2030"));
         when(dateTimeUtil.getCurrentDateTime()).thenReturn(createDate("01.01.2023"));
         ValidationErrorDTO validationError = mock(ValidationErrorDTO.class);
         when(errorFactory.buildError("ERROR_CODE_12")).thenReturn(validationError);
-        Optional<ValidationErrorDTO> errorOpt = validation.validate(person);
+        Optional<ValidationErrorDTO> errorOpt = validation.validate(agreement, person);
         assertTrue(errorOpt.isPresent());
         assertSame(errorOpt.get(), validationError);
     }
 
     @Test
     public void shouldNotReturnErrorWhenPersonBirthDateDateInThePast() {
+        AgreementDTO agreement = mock(AgreementDTO.class);
         PersonDTO person = mock(PersonDTO.class);
         when(person.getPersonBirthDate()).thenReturn(createDate("01.01.2020"));
         when(dateTimeUtil.getCurrentDateTime()).thenReturn(createDate("01.01.2023"));
-        Optional<ValidationErrorDTO> errorOpt = validation.validate(person);
+        Optional<ValidationErrorDTO> errorOpt = validation.validate(agreement, person);
         assertTrue(errorOpt.isEmpty());
         verifyNoInteractions(errorFactory);
     }

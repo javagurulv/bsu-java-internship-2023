@@ -46,7 +46,7 @@ public class DtoV1Converter {
         response.setAgreementDateFrom(agreement.getAgreementDateFrom());
         response.setAgreementDateTo(agreement.getAgreementDateTo());
         response.setCountry(agreement.getCountry());
-        response.setMedicalRiskLimitLevel(agreement.getMedicalRiskLimitLevel());
+        response.setMedicalRiskLimitLevel(agreement.getPersons().get(0).getMedicalRiskLimitLevel());
         response.setAgreementPremium(agreement.getAgreementPremium());
 
         PersonDTO person = agreement.getPersons().get(0);
@@ -63,6 +63,7 @@ public class DtoV1Converter {
         person.setPersonFirstName(request.getPersonFirstName());
         person.setPersonLastName(request.getPersonLastName());
         person.setPersonBirthDate(request.getPersonBirthDate());
+        person.setMedicalRiskLimitLevel(request.getMedicalRiskLimitLevel());
         return person;
     }
 
@@ -71,7 +72,6 @@ public class DtoV1Converter {
         agreement.setAgreementDateFrom(request.getAgreementDateFrom());
         agreement.setAgreementDateTo(request.getAgreementDateTo());
         agreement.setCountry(request.getCountry());
-        agreement.setMedicalRiskLimitLevel(request.getMedicalRiskLimitLevel());
         agreement.setSelectedRisks(request.getSelectedRisks());
 
         PersonDTO person = buildPerson(request);
