@@ -7,5 +7,4 @@ public interface TravelCalculatePremiumService {
 
     TravelCalculatePremiumCoreResult calculatePremium(TravelCalculatePremiumCoreCommand command);
 
-
 }
