@@ -22,3 +22,8 @@ insert into classifier_values(classifier_id, ic, description)
 VALUES ((SELECT id from classifiers where title = 'COUNTRY'), 'LATVIA', 'country: Latvia'),
        ((SELECT id from classifiers where title = 'COUNTRY'), 'SPAIN', 'country: Spain'),
        ((SELECT id from classifiers where title = 'COUNTRY'), 'JAPAN', 'country: Japan');
+
+INSERT INTO country_default_day_rate(country_ic, country_default_day_rate)
+VALUES ('LATVIA', 1.00),
+       ('SPAIN', 2.50),
+       ('JAPAN', 3.50);

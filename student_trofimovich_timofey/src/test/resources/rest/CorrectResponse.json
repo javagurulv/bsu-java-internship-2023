@@ -1,6 +1,5 @@
 {
   "errors": null,
-  "riskPremiums": null,
   "personFirstName": "Harry",
   "personLastName": "Kane",
   "agreementDateFrom": "2025-04-05",
@@ -8,16 +7,17 @@
   "agreementPremium": 3,
   "risks": [
     {
+      "ic": "TRAVEL_MEDICAL",
+      "premium": 3
+    },
+    {
       "ic": "TRAVEL_CANCELLATION",
       "premium": 0
     },
     {
       "ic": "TRAVEL_LOSS_BAGGAGE",
       "premium": 0
-    },
-    {
-      "ic": "TRAVEL_MEDICAL",
-      "premium": 3
     }
-  ]
+  ],
+  "country": "LATVIA"
 }
