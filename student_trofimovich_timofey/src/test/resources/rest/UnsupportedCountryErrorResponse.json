@@ -1,0 +1,16 @@
+{
+  "errors": [
+    {
+      "errorCode": "ERROR_CODE_11",
+      "description": "Country my_country is not supported by the system!"
+    }
+  ],
+  "personFirstName": null,
+  "personLastName": null,
+  "dateOfBirth": null,
+  "agreementDateFrom": null,
+  "agreementDateTo": null,
+  "agreementPremium": null,
+  "risks": null,
+  "country": null
+}

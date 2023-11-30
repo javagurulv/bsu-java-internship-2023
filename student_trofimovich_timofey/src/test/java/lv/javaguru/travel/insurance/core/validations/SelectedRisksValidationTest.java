@@ -51,7 +51,7 @@ public class SelectedRisksValidationTest {
     @Test
     void shouldNotReturnError() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
-        when(request.getSelectedRisks()).thenReturn(List.of("RISK_IC_1", "RISK_IC_2"));
+        when(request.getSelectedRisks()).thenReturn(List.of("RISK_IC_1"));
         when(classifierValueRepository
                 .findByClassifierTitleAndIc("RISK_TYPE", "RISK_IC_1"))
                 .thenReturn(Optional.of(mock(ClassifierValue.class)));
