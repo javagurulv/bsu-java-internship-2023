@@ -58,12 +58,22 @@ public class ValidatorTests {
         assertEquals(errors.get(2).getMessage(), "cannot be empty!");
     }
     @Test
+    public void AgreementDateToIsNull()
+    {
+        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest();
+        request.setAgreementDateTo(null);
+        List<ValidationError> errors = validator.validate(request);
+        assertEquals(errors.get(3).getField(), "agreementDateTo");
+        assertEquals(errors.get(3).getMessage(), "cannot be empty!");
+    }
+    @Test
     public void FullRequestIsValid()
     {
         TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest();
         request.setPersonFirstName("Anton");
         request.setPersonLastName("Bosko");
         request.setAgreementDateFrom(new Date(123123123L));
+        request.setAgreementDateTo(new Date(123123123L));
         List<ValidationError> errors = validator.validate(request);
         assertEquals(errors.size(), 0);
     }
