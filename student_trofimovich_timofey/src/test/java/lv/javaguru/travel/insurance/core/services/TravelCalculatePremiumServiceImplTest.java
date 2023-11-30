@@ -117,6 +117,14 @@ public class TravelCalculatePremiumServiceImplTest {
         TravelCalculatePremiumResponse response = service.calculatePremium(request);
         assertThat(response.getCountry()).isEqualTo("country");
     }
+    @Test
+    public void shouldReturnResponseWithCorrectDateOfBirth() {
+        when(request.getDateOfBirth()).thenReturn(createDate("12.12.2003"));
+        when(validator.validate(request)).thenReturn(List.of());
+        when(underwriting.calculatePremium(request)).thenReturn(mock(TravelPremiumCalculationResult.class));
+        TravelCalculatePremiumResponse response = service.calculatePremium(request);
+        assertThat(response.getDateOfBirth()).isEqualTo(createDate("12.12.2003"));
+    }
 
     @Test
     public void shouldReturnResponseWithErrors() {

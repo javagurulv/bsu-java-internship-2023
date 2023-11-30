@@ -2,6 +2,7 @@
   "errors": null,
   "personFirstName": "Harry",
   "personLastName": "Kane",
+  "dateOfBirth": "2004-03-02",
   "agreementDateFrom": "2025-04-05",
   "agreementDateTo": "2025-04-08",
   "agreementPremium": 7.50,
