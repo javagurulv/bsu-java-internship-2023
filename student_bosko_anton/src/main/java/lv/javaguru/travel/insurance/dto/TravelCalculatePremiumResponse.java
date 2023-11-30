@@ -15,7 +15,7 @@ import lv.javaguru.travel.insurance.core.DateTimeService;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class TravelCalculatePremiumResponse extends CoreResponse{
+public class TravelCalculatePremiumResponse extends CoreResponse {
 
     private String personFirstName;
     private String personLastName;
@@ -23,8 +23,7 @@ public class TravelCalculatePremiumResponse extends CoreResponse{
     private Date agreementDateTo;
     private BigDecimal agreementPrice;
 
-    public TravelCalculatePremiumResponse(TravelCalculatePremiumRequest request)
-    {
+    public TravelCalculatePremiumResponse(TravelCalculatePremiumRequest request) {
         this.setPersonFirstName(request.getPersonFirstName());
         this.setPersonLastName(request.getPersonLastName());
         this.setAgreementDateFrom(request.getAgreementDateFrom());
@@ -33,14 +32,16 @@ public class TravelCalculatePremiumResponse extends CoreResponse{
         long difference = daysBetween.getDaysBetween(request.getAgreementDateFrom(), request.getAgreementDateTo());
         this.setAgreementPrice(new BigDecimal(difference));
     }
-    public TravelCalculatePremiumResponse(List<ValidationError> errors) { super(errors); }
+
+    public TravelCalculatePremiumResponse(List<ValidationError> errors) {
+        super(errors);
+    }
 
     @Override
-    public boolean equals(Object obj)
-    {
-        if(obj == null || this.getClass() != obj.getClass())
+    public boolean equals(Object obj) {
+        if (obj == null || this.getClass() != obj.getClass())
             return false;
-        else if(obj == this)
+        else if (obj == this)
             return true;
         else {
             TravelCalculatePremiumResponse temp = (TravelCalculatePremiumResponse) obj;
