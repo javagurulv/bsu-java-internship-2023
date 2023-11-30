@@ -43,6 +43,7 @@ include 'student_leonchik_vladislav'
 include 'student_chernookiy_dmitry'
 include 'student_klyzhuk_polina'
 include 'student_kushmar_elina'
+include 'student_zakharevich_fiodar'
 
 
 include 'teacher:travel_insurance_calculator:step_1'

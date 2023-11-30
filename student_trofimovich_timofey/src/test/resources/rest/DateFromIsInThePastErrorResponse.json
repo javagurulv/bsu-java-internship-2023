@@ -5,11 +5,11 @@
       "description": "Field agreementDateFrom is not in the future!"
     }
   ],
-  "riskPremiums": null,
   "personFirstName": null,
   "personLastName": null,
   "agreementDateFrom": null,
   "agreementDateTo": null,
   "agreementPremium": null,
-  "risks": null
+  "risks": null,
+  "country": null
 }
