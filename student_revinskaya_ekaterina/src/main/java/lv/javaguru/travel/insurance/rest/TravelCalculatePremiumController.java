@@ -2,8 +2,8 @@ package lv.javaguru.travel.insurance.rest;
 
 import com.google.common.base.Stopwatch;
 import lv.javaguru.travel.insurance.core.services.TravelCalculatePremiumService;
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumResponse;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumResponseV1;
 import lv.javaguru.travel.insurance.loggers.TravelCalculatePremiumRequestLogger;
 import lv.javaguru.travel.insurance.loggers.TravelCalculatePremiumResponseLogger;
 import lv.javaguru.travel.insurance.loggers.TravelCalculateRequestExecutionTimeLogger;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/insurance/travel")
+@RequestMapping("/insurance/travel/api")
  class TravelCalculatePremiumController {
 	@Autowired private TravelCalculatePremiumService calculatePremiumService;
 @Autowired private TravelCalculatePremiumRequestLogger loggerForRequest;
@@ -23,14 +23,15 @@ import org.springframework.web.bind.annotation.RestController;
 	@PostMapping(path = "/",
 			consumes = "application/json",
 			produces = "application/json")
-	public TravelCalculatePremiumResponse calculatePremium(@RequestBody TravelCalculatePremiumRequest request) {
+	public TravelCalculatePremiumResponseV1 calculatePremium(@RequestBody TravelCalculatePremiumRequestV1 request) {
 		loggerForRequest.log(request);
 		Stopwatch stopwatch = Stopwatch.createStarted();
-		TravelCalculatePremiumResponse response = calculatePremiumService.calculatePremium(request);
+		TravelCalculatePremiumResponseV1 response = calculatePremiumService.calculatePremium(request);
 		stopwatch.stop();
 		loggerForResponse.log(response);
 		requestExecutionTimeLogger.log(stopwatch.elapsed().toMillis());
 		return response;
 	}
+
 
 }

@@ -2,9 +2,9 @@ package lv.javaguru.travel.insurance.core.services;
 
 import lv.javaguru.travel.insurance.core.underwriting.TravelPremiumUnderwriting;
 import lv.javaguru.travel.insurance.core.validations.*;
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumResponse;
-import lv.javaguru.travel.insurance.dto.ValidationError;
+import lv.javaguru.travel.insurance.dto.*;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumResponseV1;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,23 +14,27 @@ import java.util.List;
 class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService {
     @Autowired
     private TravelCalculatePremiumRequestValidator requestValidator;
-@Autowired
+    @Autowired
     private TravelPremiumUnderwriting calculateUnderwriting;
+
     @Override
-    public TravelCalculatePremiumResponse calculatePremium(TravelCalculatePremiumRequest request) {
+    public TravelCalculatePremiumResponseV1 calculatePremium(TravelCalculatePremiumRequestV1 request) {
 
         List<ValidationError> errors = requestValidator.validate(request);
         if (!errors.isEmpty()) {
-            return new TravelCalculatePremiumResponse(errors);
+            return new TravelCalculatePremiumResponseV1(errors);
         }
-        TravelCalculatePremiumResponse response = new TravelCalculatePremiumResponse();
+        TravelCalculatePremiumResponseV1 response = new TravelCalculatePremiumResponseV1();
         response.setPersonFirstName(request.getPersonFirstName());
         response.setPersonLastName(request.getPersonLastName());
         response.setAgreementDateFrom(request.getAgreementDateFrom());
         response.setAgreementDateTo(request.getAgreementDateTo());
-
-        response.setAgreementPrice(calculateUnderwriting.calculateAgreementPrice(request));
+        TravelPremiumCalculatorResult calculatorResult = calculateUnderwriting.calculatePremium(request);
+        response.setAgreementPremium(calculatorResult.getTotalPremium());
+        response.setRisks(calculatorResult.getTravelRisks());
+        response.setCountry(request.getCountry());
+        response.setBirthday(request.getBirthday());
+        response.setMedicalRiskLimitLevel(request.getMedicalRiskLimitLevel());
         return response;
     }
-
 }

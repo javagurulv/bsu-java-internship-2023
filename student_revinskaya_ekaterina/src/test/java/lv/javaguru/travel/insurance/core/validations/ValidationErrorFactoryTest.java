@@ -18,9 +18,9 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 public class ValidationErrorFactoryTest {
 @InjectMocks
-    ValidationErrorFactory validationErrorFactory;
+    private ValidationErrorFactory validationErrorFactory;
     @Mock
-    ErrorCodeUtil reader;
+    private ErrorCodeUtil reader;
     @Test
     public void buildErrorByCodeTest() {
         when(reader.getErrorDescription("ERROR_CODE")).thenReturn("description");

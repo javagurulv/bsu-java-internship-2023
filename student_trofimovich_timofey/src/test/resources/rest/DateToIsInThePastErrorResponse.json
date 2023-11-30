@@ -1,17 +1,20 @@
 {
   "errors": [
     {
-      "field": "agreementDateTo",
-      "message": "Must not be before agreementDateFrom!"
+      "errorCode": "ERROR_CODE_7",
+      "description": "Field agreementDateFrom is not before field agreementDateTo!"
     },
     {
-      "field": "agreementDateTo",
-      "message": "Must be the future!"
+      "errorCode": "ERROR_CODE_6",
+      "description": "Field agreementDateTo is not in the future!"
     }
   ],
   "personFirstName": null,
   "personLastName": null,
+  "dateOfBirth": null,
   "agreementDateFrom": null,
   "agreementDateTo": null,
-  "agreementPrice": null
+  "agreementPremium": null,
+  "risks": null,
+  "country": null
 }

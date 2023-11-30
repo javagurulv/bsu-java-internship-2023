@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
+
+    <changeSet author = "javaguru" id = "29">
+        <createTable tableName="agreement_person_risks">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="agreement_person_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="risk_ic" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="premium" type="DECIMAL(10,2)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="javaguru" id="30">
+        <createIndex indexName="ix_agreement_person_risks_person_risk_ic"
+                     tableName="agreement_person_risks"
+                     unique="true">
+            <column name="agreement_person_id"/>
+            <column name="risk_ic"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet author="javaguru" id="31">
+        <addForeignKeyConstraint baseTableName="agreement_person_risks"
+                                 baseColumnNames="agreement_person_id"
+                                 constraintName="fk_agreement_person_risks_agreement_person_id"
+                                 referencedTableName="agreement_persons"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+</databaseChangeLog>

@@ -1,0 +1,17 @@
+{
+  "errors": [
+    {
+      "errorCode": "ERROR_CODE_15",
+      "description": "medicalRiskLimitLevel LEVEL_100 not supported by the system"
+    }
+  ],
+  "personFirstName": null,
+  "personLastName": null,
+  "agreementDateFrom": null,
+  "agreementDateTo": null,
+  "country": null,
+  "birthday": null,
+  "medicalRiskLimitLevel": null,
+  "agreementPremium": null,
+  "risks": null
+}

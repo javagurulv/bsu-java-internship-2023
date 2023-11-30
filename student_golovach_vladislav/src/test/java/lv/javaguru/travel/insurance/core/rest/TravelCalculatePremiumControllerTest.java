@@ -21,8 +21,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class TravelCalculatePremiumControllerTest {
 
     @Autowired private MockMvc mockMvc;
-    @Autowired JsonFileReader jsonFileReader;
-    private ObjectMapper mapper = new ObjectMapper();
+
+    @Autowired private JsonFileReader jsonFileReader;
 
     @Test
     public void successRequest() throws Exception {
@@ -55,6 +55,21 @@ public class TravelCalculatePremiumControllerTest {
                 "TravelCalculatePremiumResponse_agreementDateFrom_not_provided.json"
         );
     }
+    @Test
+    public void selected_risksNull() throws Exception {
+        executeAndCompare(
+                "TravelCalculatePremiumRequest_selected_risks_null.json",
+                "TravelCalculatePremiumResponse_selected_risks_null.json"
+        );
+    }
+    @Test
+    public void selected_risksEmpty() throws Exception {
+        executeAndCompare(
+                "TravelCalculatePremiumRequest_selected_risks_empty.json",
+                "TravelCalculatePremiumResponse_selected_risks_empty.json"
+        );
+    }
+
 
     @Test
     public void agreementDateToNotProvided() throws Exception {
@@ -94,8 +109,8 @@ public class TravelCalculatePremiumControllerTest {
 
         String jsonResponse = jsonFileReader.readJsonFromFile(jsonResponseFilePath);
 
+        ObjectMapper mapper = new ObjectMapper();
         assertEquals(mapper.readTree(responseBodyContent), mapper.readTree(jsonResponse));
     }
 
 }
-

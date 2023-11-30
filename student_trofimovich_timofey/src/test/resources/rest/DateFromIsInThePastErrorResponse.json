@@ -1,13 +1,16 @@
 {
   "errors": [
     {
-      "field": "agreementDateFrom",
-      "message": "Must be the future!"
+      "errorCode": "ERROR_CODE_5",
+      "description": "Field agreementDateFrom is not in the future!"
     }
   ],
   "personFirstName": null,
   "personLastName": null,
+  "dateOfBirth": null,
   "agreementDateFrom": null,
   "agreementDateTo": null,
-  "agreementPrice": null
+  "agreementPremium": null,
+  "risks": null,
+  "country": null
 }

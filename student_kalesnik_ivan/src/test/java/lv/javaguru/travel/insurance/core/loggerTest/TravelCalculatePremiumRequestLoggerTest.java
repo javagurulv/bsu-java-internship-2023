@@ -1,19 +1,13 @@
 package lv.javaguru.travel.insurance.core.loggerTest;
 
 import lv.javaguru.travel.insurance.logger.TravelCalculatePremiumRequestLogger;
-import lv.javaguru.travel.insurance.validation.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.validation.v1.TravelCalculatePremiumRequestV1;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.slf4j.Logger;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
@@ -29,7 +23,7 @@ class TravelCalculatePremiumRequestLoggerTest {
 
     @Test
     void log_emptyRequest() {
-        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest();
+        TravelCalculatePremiumRequestV1 request = new TravelCalculatePremiumRequestV1();
         travelCalculatePremiumRequestLogger.log(request);
         verify(logger, never()).info(anyString());
     }
