@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.v1;
+package lv.javaguru.travel.insurance.rest.v1;
 
 import com.google.common.base.Stopwatch;
 import org.slf4j.Logger;
