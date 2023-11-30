@@ -8,9 +8,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 @Component
-class TravelCalculatePremiumRequestLogger {
+class TravelCalculatePremiumRequestLoggerV1 {
 
-    private static final Logger logger = LoggerFactory.getLogger(TravelCalculatePremiumRequestLogger.class);
+    private static final Logger logger = LoggerFactory.getLogger(TravelCalculatePremiumRequestLoggerV1.class);
 
     void log(TravelCalculatePremiumRequestV1 request) {
         ObjectMapper objectMapper = new ObjectMapper();

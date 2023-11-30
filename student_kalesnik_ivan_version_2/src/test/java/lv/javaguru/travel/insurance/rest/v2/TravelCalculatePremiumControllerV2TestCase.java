@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.rest.v1;
+package lv.javaguru.travel.insurance.rest.v2;
 
 import lv.javaguru.travel.insurance.rest.common.JsonFileReader;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,21 +18,21 @@ import static uk.org.webcompere.modelassert.json.JsonAssertions.assertJson;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public abstract class TravelCalculatePremiumControllerTestCase {
+public abstract class TravelCalculatePremiumControllerV2TestCase {
 
     @Autowired private MockMvc mockMvc;
 
     @Autowired private JsonFileReader jsonFileReader;
 
-    private static final String BASE_URL = "/insurance/travel/api/v1/";
+    private static final String BASE_URL = "/insurance/travel/api/v2/";
 
 
     protected abstract String getTestCaseFolderName();
 
     protected void executeAndCompare() throws Exception {
         executeAndCompare(
-                "rest/v1/" + getTestCaseFolderName() + "/request.json",
-                "rest/v1/" + getTestCaseFolderName() + "/response.json"
+                "rest/v2/" + getTestCaseFolderName() + "/request.json",
+                "rest/v2/" + getTestCaseFolderName() + "/response.json"
         );
     }
 
