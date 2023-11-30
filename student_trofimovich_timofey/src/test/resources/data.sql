@@ -74,7 +74,7 @@ WHERE cl.title = 'RISK_TYPE';
 
 
 insert into classifiers(title, description)
-values ('COUNTRY', 'country');
+values ('COUNTRY', 'country classifier');
 
 insert into classifier_values(classifier_id, ic, description)
 VALUES ((SELECT id from classifiers where title = 'COUNTRY'), 'LATVIA', 'country: Latvia'),
