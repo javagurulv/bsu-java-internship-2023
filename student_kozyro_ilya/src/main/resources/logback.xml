@@ -34,8 +34,4 @@
         <appender-ref ref="FILE_APPENDER" />
     </root>
 
-    <root level="warn">
-        <appender-ref ref="STDOUT" />
-        <appender-ref ref="FILE_APPENDER" />
-    </root>
 </configuration>
