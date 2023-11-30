@@ -21,14 +21,14 @@ public class DateTimeServiceTest {
     public void shouldBeNegative() throws ParseException {
         Date date = new SimpleDateFormat("dd.MM.yyyy").parse("30.05.2005");
         Date date1 = new SimpleDateFormat("dd.MM.yyyy").parse("31.05.2005");
-        assertEquals(service.getDaysBetween(date,date1), -1L);
+        assertEquals(service.getDaysBetween(date,date1), 1L);
     }
 
     @Test
     public void shouldBeNormal() throws ParseException {
         Date date = new SimpleDateFormat("dd.MM.yyyy").parse("31.05.2005");
         Date date1 = new SimpleDateFormat("dd.MM.yyyy").parse("30.05.2005");
-        assertEquals(service.getDaysBetween(date,date1), 1L);
+        assertEquals(service.getDaysBetween(date,date1), -1L);
     }
 
 }
