@@ -4,6 +4,7 @@ import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.Test;
 
+import java.util.Date;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -48,11 +49,21 @@ public class ValidatorTests {
         assertEquals(errors.get(1).getMessage(), "cannot be empty!");
     }
     @Test
-    public void FullNameIsValid()
+    public void AgreementDateFromIsNull()
+    {
+        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest();
+        request.setAgreementDateFrom(null);
+        List<ValidationError> errors = validator.validate(request);
+        assertEquals(errors.get(2).getField(), "agreementDateFrom");
+        assertEquals(errors.get(2).getMessage(), "cannot be empty!");
+    }
+    @Test
+    public void FullRequestIsValid()
     {
         TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest();
         request.setPersonFirstName("Anton");
         request.setPersonLastName("Bosko");
+        request.setAgreementDateFrom(new Date(123123123L));
         List<ValidationError> errors = validator.validate(request);
         assertEquals(errors.size(), 0);
     }
