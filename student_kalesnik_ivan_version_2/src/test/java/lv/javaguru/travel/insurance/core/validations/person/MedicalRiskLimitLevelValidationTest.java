@@ -68,7 +68,7 @@ class MedicalRiskLimitLevelValidationTest {
         when(classifierValueRepository.findByClassifierTitleAndIc("MEDICAL_RISK_LIMIT_LEVEL", "LEVEL_10000"))
                 .thenReturn(Optional.empty());
         ValidationErrorDTO validationError = mock(ValidationErrorDTO.class);
-        when(errorFactory.buildError("ERROR_CODE_14")).thenReturn(validationError);
+        when(errorFactory.buildError(eq("ERROR_CODE_14"), any())).thenReturn(validationError);
         Optional<ValidationErrorDTO> validationErrorOpt = validation.validate(agreement, person);
         assertTrue(validationErrorOpt.isPresent());
         assertSame(validationError, validationErrorOpt.get());
