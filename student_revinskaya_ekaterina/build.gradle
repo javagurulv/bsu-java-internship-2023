@@ -15,6 +15,9 @@ dependencies {
 
     implementation('com.google.guava:guava:31.0.1-jre')
 
+    implementation ('com.h2database:h2:2.1.212')
+
+
     compileOnly('org.projectlombok:lombok:1.18.24')
     annotationProcessor('org.projectlombok:lombok:1.18.24')
 
@@ -25,8 +28,6 @@ dependencies {
     testImplementation('org.springframework.boot:spring-boot-starter-test:2.7.5')
     testImplementation('org.hamcrest:hamcrest:2.2')
     testImplementation('uk.org.webcompere:model-assert:1.0.0')
-
-    testImplementation('com.h2database:h2:1.4.200')
 
 
     test {

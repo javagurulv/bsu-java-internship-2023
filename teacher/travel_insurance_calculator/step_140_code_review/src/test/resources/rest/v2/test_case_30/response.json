@@ -1,8 +1,0 @@
-{
-  "errors": [
-    {
-      "errorCode": "ERROR_CODE_14",
-      "description": "MedicalRiskLimitLevel value = NOT_SUPPORTED not supported!"
-    }
-  ]
-}

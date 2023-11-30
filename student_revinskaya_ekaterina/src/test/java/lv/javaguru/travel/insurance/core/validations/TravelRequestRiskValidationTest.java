@@ -2,7 +2,7 @@ package lv.javaguru.travel.insurance.core.validations;
 
 import lv.javaguru.travel.insurance.core.domain.ClassifierValue;
 import lv.javaguru.travel.insurance.core.repositories.ClassifierValueRepository;
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -28,7 +28,7 @@ public class TravelRequestRiskValidationTest {
     @Mock
     private ClassifierValueRepository valueRepository;
     @Mock
-    private TravelCalculatePremiumRequest request;
+    private TravelCalculatePremiumRequestV1 request;
     @Test
     public void requestWithExistSelectedRiskTest(){
         ClassifierValue classifierValue = mock(ClassifierValue.class);
