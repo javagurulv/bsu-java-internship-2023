@@ -12,7 +12,7 @@ public class ValidatorTests {
 
     TravelCalculatePremiumRequestValidator validator = new TravelCalculatePremiumRequestValidator();
     @Test
-    public void isNull()
+    public void FirstNameIsNull()
     {
         TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest();
         request.setPersonFirstName(null);
@@ -21,7 +21,7 @@ public class ValidatorTests {
         assertEquals(errors.get(0).getMessage(), "cannot be empty!");
     }
     @Test
-    public void isEmpty()
+    public void FirstNameIsEmpty()
     {
         TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest();
         request.setPersonFirstName("");
@@ -30,10 +30,29 @@ public class ValidatorTests {
         assertEquals(errors.get(0).getMessage(), "cannot be empty!");
     }
     @Test
-    public void isValid()
+    public void LastNameIsNull()
+    {
+        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest();
+        request.setPersonLastName(null);
+        List<ValidationError> errors = validator.validate(request);
+        assertEquals(errors.get(1).getField(), "personLastName");
+        assertEquals(errors.get(1).getMessage(), "cannot be empty!");
+    }
+    @Test
+    public void LastNameIsEmpty()
+    {
+        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest();
+        request.setPersonLastName("");
+        List<ValidationError> errors = validator.validate(request);
+        assertEquals(errors.get(1).getField(), "personLastName");
+        assertEquals(errors.get(1).getMessage(), "cannot be empty!");
+    }
+    @Test
+    public void FullNameIsValid()
     {
         TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest();
         request.setPersonFirstName("Anton");
+        request.setPersonLastName("Bosko");
         List<ValidationError> errors = validator.validate(request);
         assertEquals(errors.size(), 0);
     }
