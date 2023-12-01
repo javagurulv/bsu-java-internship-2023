@@ -15,9 +15,9 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 public class ErrorCodeUtilTest {
     @InjectMocks
-    ErrorCodeUtil errorCodeUtil;
+    private ErrorCodeUtil errorCodeUtil;
     @Mock
-    Environment environment;
+    private Environment environment;
     @Test
     public void descriptionByErrorCode(){
         when(environment.getProperty("ERROR_CODE")).thenReturn("description of code");
