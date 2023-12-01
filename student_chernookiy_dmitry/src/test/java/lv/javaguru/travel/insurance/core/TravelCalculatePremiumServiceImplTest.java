@@ -1,7 +1,7 @@
 package lv.javaguru.travel.insurance.core;
 
-import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
-import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumResponse;
+import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumResponse;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -24,7 +24,7 @@ class TravelCalculatePremiumServiceImplTest {
 
     @Test
     public void TravelCalculatePremiumServiceImplTest() {
-        Date dateTo = new Date(2002, Calendar.MARCH, 2);
+        Date dateTo = new Date(2002, Calendar.MARCH, 3);
         Date dateFrom = new Date(2002, Calendar.MARCH, 2);
         TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest(TEST_FIRST_NAME,
                 TEST_LAST_NAME, dateFrom, dateTo);
@@ -36,18 +36,18 @@ class TravelCalculatePremiumServiceImplTest {
         assertThat(response.getPersonFirstName()).isEqualTo(response.getPersonFirstName());
         assertThat(response.getAgreementDateTo()).isEqualTo(response.getAgreementDateTo());
         assertThat(response.getAgreementDateFrom()).isEqualTo(response.getAgreementDateFrom());
-        assertThat(response.getAgreementPrice()).isEqualTo(new BigDecimal(0));
+        assertThat(response.getAgreementPrice()).isEqualTo(new BigDecimal(1));
 
     }
 
     private static Stream<Map.Entry<Date[], BigDecimal>> dates() {
         return Stream.of(
                 new AbstractMap.SimpleEntry<>(new Date[]{new Date(2002, Calendar.MARCH, 2),
-                        new Date(2002, Calendar.MARCH, 2)}, new BigDecimal(0)),
+                        new Date(2002, Calendar.MARCH, 5)}, new BigDecimal(3)),
                 new AbstractMap.SimpleEntry<>(new Date[]{new Date(2002, Calendar.MARCH, 1),
                         new Date(2002, Calendar.MARCH, 3)}, new BigDecimal(2)),
                 new AbstractMap.SimpleEntry<>(new Date[]{new Date(2002, Calendar.MARCH, 3),
-                        new Date(2002, Calendar.MARCH, 1)}, new BigDecimal(-2))
+                        new Date(2002, Calendar.MARCH, 11)}, new BigDecimal(8))
         );
     }
 

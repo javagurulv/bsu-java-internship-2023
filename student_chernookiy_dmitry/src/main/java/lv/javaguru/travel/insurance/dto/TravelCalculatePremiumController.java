@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.rest;
+package lv.javaguru.travel.insurance.dto;
 
 import lv.javaguru.travel.insurance.core.TravelCalculatePremiumService;
 import org.springframework.beans.factory.annotation.Autowired;
