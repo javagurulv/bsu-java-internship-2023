@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Travel Insurance Premium Calculation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .error-container {
+            margin-top: 20px;
+            color: #d9534f;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #4caf50;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Travel Insurance Premium Calculation</h1>
+
+<form action="/insurance/travel/web" th:object="${request}" method="post">
+    <label for="personFirstName">First Name:</label>
+    <input type="text" id="personFirstName" th:field="${request.personFirstName}">
+
+    <label for="personLastName">Last Name:</label>
+    <input type="text" id="personLastName" th:field="${request.personLastName}">
+
+    <label for="personBirthDate">Birth Date:</label>
+    <input type="date" id="personBirthDate" th:field="${request.personBirthDate}">
+
+    <label for="agreementDateFrom">Agreement Date From:</label>
+    <input type="date" id="agreementDateFrom" th:field="${request.agreementDateFrom}">
+
+    <label for="agreementDateTo">Agreement Date To:</label>
+    <input type="date" id="agreementDateTo" th:field="${request.agreementDateTo}">
+
+    <label for="country">Country:</label>
+    <input type="text" id="country" th:field="${request.country}">
+
+    <label for="medicalRiskLimitLevel">Medical Risk Limit Level:</label>
+    <input type="text" id="medicalRiskLimitLevel" th:field="${request.medicalRiskLimitLevel}">
+
+    <label for="selectedRisks">Selected Risks:</label>
+    <input type="text" id="selectedRisks" th:field="${request.selected_risks}">
+
+    <button type="submit">Calculate Premium</button>
+</form>
+
+<!-- Display errors -->
+<div th:if="${response != null and response.errors != null}" class="error-container">
+    <h3>Travel Insurance Premium Calculation ERRORS</h3>
+    <table>
+        <tr th:each="error : ${response.errors}">
+            <td th:text="${error.errorCode}"></td>
+            <td th:text="${error.description}"></td>
+        </tr>
+    </table>
+</div>
+
+<br>
+
+<h3 th:if="${response != null and response.agreementPremium != null}">
+    AGREEMENT PREMIUM: <span th:text="${response.agreementPremium}"></span>
+</h3>
+
+<!-- Display risks -->
+<div th:if="${response != null and response.risks != null}">
+    <h3>Travel Insurance Premium Calculation RISKS</h3>
+    <table>
+        <tr th:each="risk : ${response.risks}">
+            <td th:text="${risk.riskIc}"></td>
+            <td th:text="${risk.premium}"></td>
+        </tr>
+    </table>
+</div>
+
+</body>
+</html>
