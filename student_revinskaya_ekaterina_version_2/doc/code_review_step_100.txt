@@ -1,0 +1,12 @@
+1. Добавлен модификатор доступа private на поля классов тестов
+2. class ErrorCodeUtil: placeholderToReplace создаётся отдельно, для улучшения читаемости кода,
+ добавлена проверка errorDescription != null, во избежание NullPointerException метода replace
+3. TravelCalculatePremiumServiceImpl: построение response вынесены в два отдельных метода
+buildErrorResponse и buildSuccessResponse. Таким образомм заметно улучшается читаемость кода,
+легче понять что делает метода класса
+4. TravelInsuranceController: “travel-calculate-premium” используется несколько раз, можно вынести в константу
+ для избежания возможных ошибок и упрощения изменений в будущем.
+5. Значительно улучшены тесты TravelCalculatePremiumControllerTest:
+ изменены названия файлов resources/rest/test_case_1 ... test_case_14 для вынесения самого теста в общий класс,
+  его наследники лишь передают основную часть имени файла тестируемого запроса.
+Это делает расширение тест кейсов проще, также избавило от копирования кода. И код стал очень приятным:)
