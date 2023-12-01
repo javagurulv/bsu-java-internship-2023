@@ -22,8 +22,16 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
 
         List<ValidationError> errors = requestValidator.validate(request);
         if (!errors.isEmpty()) {
-            return new TravelCalculatePremiumResponseV1(errors);
+            return buildErrorResponse(errors);
         }
+        return buildSuccessResponse(request);
+    }
+
+    private TravelCalculatePremiumResponseV1 buildErrorResponse(List<ValidationError> errors) {
+        return new TravelCalculatePremiumResponseV1(errors);
+    }
+
+    private TravelCalculatePremiumResponseV1 buildSuccessResponse(TravelCalculatePremiumRequestV1 request) {
         TravelCalculatePremiumResponseV1 response = new TravelCalculatePremiumResponseV1();
         response.setPersonFirstName(request.getPersonFirstName());
         response.setPersonLastName(request.getPersonLastName());

@@ -14,19 +14,24 @@ import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(SpringExtension.class)
 @DataJpaTest
 public class CountryDefaultDayRateRepositoryTest {
-    @Autowired private CountryDefaultDayRateRepository countryDefaultDayRateRepository;
+    @Autowired
+    private CountryDefaultDayRateRepository countryDefaultDayRateRepository;
+
     @Test
     public void injectedRepositoryAreNotNull() {
         assertNotNull(countryDefaultDayRateRepository);
     }
+
     @Test
     public void shouldFindCountrySPAIN() {
         testValueByClassifierTitleAndIc("SPAIN");
     }
+
     @Test
     public void shouldFindCountryJAPAN() {
         testValueByClassifierTitleAndIc("JAPAN");
     }
+
     @Test
     public void shouldFindCountryLATVIA() {
         testValueByClassifierTitleAndIc("LATVIA");
@@ -38,7 +43,8 @@ public class CountryDefaultDayRateRepositoryTest {
                 "FAKE");
         assertTrue(valueOpt.isEmpty());
     }
-    public void testValueByClassifierTitleAndIc(String countryIc){
+
+    public void testValueByClassifierTitleAndIc(String countryIc) {
         Optional<CountryDefaultDayRate> valueOpt = countryDefaultDayRateRepository.findByCountryIc(countryIc);
         assertTrue(valueOpt.isPresent());
         assertEquals(valueOpt.get().getCountryIc(), countryIc);

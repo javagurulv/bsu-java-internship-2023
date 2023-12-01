@@ -7,8 +7,7 @@ import lv.javaguru.travel.insurance.core.validations.TravelAgreementFieldValidat
 import java.util.List;
 import java.util.Optional;
 
-abstract class TravelAgreementFieldValidationImpl
-        implements TravelAgreementFieldValidation {
+abstract class TravelAgreementFieldValidationImpl implements TravelAgreementFieldValidation {
 
     @Override
     public Optional<ValidationErrorDTO> validate(AgreementDTO request) {

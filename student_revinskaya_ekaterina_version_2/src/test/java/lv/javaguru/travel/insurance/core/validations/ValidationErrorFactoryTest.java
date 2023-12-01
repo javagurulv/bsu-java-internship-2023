@@ -16,10 +16,11 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class ValidationErrorFactoryTest {
-@InjectMocks
+    @InjectMocks
     private ValidationErrorFactory validationErrorFactory;
     @Mock
     private ErrorCodeUtil reader;
+
     @Test
     public void buildErrorByCodeTest() {
         when(reader.getErrorDescription("ERROR_CODE")).thenReturn("description");
@@ -27,6 +28,7 @@ public class ValidationErrorFactoryTest {
         assertEquals(error.getErrorCode(), "ERROR_CODE");
         assertEquals(error.getDescription(), "description");
     }
+
     @Test
     public void buildErrorByCodeAndListPlaceholderTest() {
         Placeholder placeholder = new Placeholder("name", "value");

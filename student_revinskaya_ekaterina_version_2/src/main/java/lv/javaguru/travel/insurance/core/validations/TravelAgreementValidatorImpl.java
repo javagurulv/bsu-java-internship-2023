@@ -27,9 +27,9 @@ class TravelAgreementValidatorImpl implements TravelAgreementValidator {
 
         return concatenateErrorLists(agreementErrors, personErrors);
     }
+
     private List<ValidationErrorDTO> concatenateErrorLists(
-            List<ValidationErrorDTO> singleErrors, List<ValidationErrorDTO> listErrors)
-    {
+            List<ValidationErrorDTO> singleErrors, List<ValidationErrorDTO> listErrors) {
         return Stream.concat(singleErrors.stream(), listErrors.stream())
                 .collect(Collectors.toList());
     }

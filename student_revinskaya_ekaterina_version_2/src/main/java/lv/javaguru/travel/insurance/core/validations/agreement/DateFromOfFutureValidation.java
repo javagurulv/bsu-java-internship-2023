@@ -9,17 +9,19 @@ import org.springframework.stereotype.Component;
 
 import java.util.Date;
 import java.util.Optional;
+
 @Component
 class DateFromOfFutureValidation extends TravelAgreementFieldValidationImpl {
     @Autowired
     private DateTimeUtil dateTimeUtil;
-@Autowired
+    @Autowired
     private ValidationErrorFactory validationErrorFactory;
+
     @Override
     public Optional<ValidationErrorDTO> validate(AgreementDTO request) {
         Date dateFrom = request.getAgreementDateFrom();
         return (dateFrom != null && (dateTimeUtil.getCurrentDateTime().after(dateFrom)))
-                ? Optional.of( validationErrorFactory.buildError("ERROR_CODE_5"))
+                ? Optional.of(validationErrorFactory.buildError("ERROR_CODE_5"))
                 : Optional.empty();
     }
 }

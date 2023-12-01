@@ -20,25 +20,28 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 public class SelectedRisksPremiumCalculatorTest {
     @InjectMocks
-    SelectedRisksPremiumCalculator selectedRisksPremiumCalculator;
+    private SelectedRisksPremiumCalculator selectedRisksPremiumCalculator;
     @Mock
-    TravelCalculatePremiumRequestV1 request;
-@Test
-public void calculateWithNotExistSelectedRisksPremium(){
-    when(request.getSelectedRisks()).thenReturn(List.of("RISK_1", "RISK_2"));
+    private TravelCalculatePremiumRequestV1 request;
 
-    TravelRiskPremiumCalculator calculator1 = mock(TravelRiskPremiumCalculator.class);
-    when(calculator1.getRiskIc()).thenReturn("RISK_1");
-    when(calculator1.calculatePremium(request)).thenReturn(BigDecimal.valueOf(2));
-
-    List<TravelRiskPremiumCalculator> riskPremiumCalculators = List.of(calculator1);
-    ReflectionTestUtils.setField(selectedRisksPremiumCalculator, "riskPremiumCalculators", riskPremiumCalculators);
-    Throwable thrown = assertThrows(RuntimeException.class, ()->selectedRisksPremiumCalculator.calculateSelectedRisksPremium(request));
-
-    assertEquals(thrown.getMessage(), "risk with riskIc RISK_2 not supported by system");
-}
     @Test
-    public void calculateSelectedRisksPremium(){
+    public void calculateWithNotExistSelectedRisksPremium() {
+        when(request.getSelectedRisks()).thenReturn(List.of("RISK_1", "RISK_2"));
+
+        TravelRiskPremiumCalculator calculator1 = mock(TravelRiskPremiumCalculator.class);
+        when(calculator1.getRiskIc()).thenReturn("RISK_1");
+        when(calculator1.calculatePremium(request)).thenReturn(BigDecimal.valueOf(2));
+
+        List<TravelRiskPremiumCalculator> riskPremiumCalculators = List.of(calculator1);
+        ReflectionTestUtils.setField(selectedRisksPremiumCalculator, "riskPremiumCalculators", riskPremiumCalculators);
+        Throwable thrown = assertThrows(RuntimeException.class,
+                () -> selectedRisksPremiumCalculator.calculateSelectedRisksPremium(request));
+
+        assertEquals(thrown.getMessage(), "risk with riskIc RISK_2 not supported by system");
+    }
+
+    @Test
+    public void calculateSelectedRisksPremium() {
         when(request.getSelectedRisks()).thenReturn(List.of("RISK_1", "RISK_2"));
 
         TravelRiskPremiumCalculator calculator1 = mock(TravelRiskPremiumCalculator.class);

@@ -23,20 +23,23 @@ public class CountryDefaultDayPremiumCalculatorTest {
     private CountryDefaultDayPremiumCalculator defaultDayPremiumCalculator;
     @Mock
     private CountryDefaultDayRateRepository countryDefaultDayRateRepository;
-    @Mock private AgreementDTO agreementDTO;
+    @Mock
+    private AgreementDTO agreementDTO;
+
     @Test
-    public void calculateDayCountTest(){
+    public void calculateDayCountTest() {
         when(agreementDTO.getCountry()).thenReturn("SPAIN");
         CountryDefaultDayRate countryDefaultDayRate = mock(CountryDefaultDayRate.class);
         when(countryDefaultDayRate.getDefaultDayRate()).thenReturn(BigDecimal.valueOf(1.2));
         when(countryDefaultDayRateRepository.findByCountryIc("SPAIN")).thenReturn(Optional.of(countryDefaultDayRate));
         assertEquals(defaultDayPremiumCalculator.calculate(agreementDTO), BigDecimal.valueOf(1.2));
     }
+
     @Test
-    public void throwExceptionCountryDefaultDayRateTest(){
+    public void throwExceptionCountryDefaultDayRateTest() {
         when(agreementDTO.getCountry()).thenReturn("FAKE_COUNTRY");
         when(countryDefaultDayRateRepository.findByCountryIc("FAKE_COUNTRY")).thenReturn(Optional.empty());
-        Throwable thrown = assertThrows(RuntimeException.class, ()->defaultDayPremiumCalculator.calculate(agreementDTO));
+        Throwable thrown = assertThrows(RuntimeException.class, () -> defaultDayPremiumCalculator.calculate(agreementDTO));
         assertEquals(thrown.getMessage(), "default day rate for country FAKE_COUNTRY not found");
     }
 }

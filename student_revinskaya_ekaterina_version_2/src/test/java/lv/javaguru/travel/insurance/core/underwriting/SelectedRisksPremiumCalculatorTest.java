@@ -1,9 +1,8 @@
-package lv.javaguru.travel.insurance.core.underwriting.calculators;
+package lv.javaguru.travel.insurance.core.underwriting;
 
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.api.dto.RiskDTO;
-import lv.javaguru.travel.insurance.core.underwriting.TravelRiskPremiumCalculator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -22,11 +21,11 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 public class SelectedRisksPremiumCalculatorTest {
     @InjectMocks
-    SelectedRisksPremiumCalculator selectedRisksPremiumCalculator;
+    private SelectedRisksPremiumCalculator selectedRisksPremiumCalculator;
     @Mock
-    AgreementDTO agreementDTO;
+    private AgreementDTO agreementDTO;
     @Mock
-    PersonDTO personDTO;
+    private PersonDTO personDTO;
 @Test
 public void calculateWithNotExistSelectedRisksPremium(){
     when(agreementDTO.getSelectedRisks()).thenReturn(List.of("RISK_1", "RISK_2"));
