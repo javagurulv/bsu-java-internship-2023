@@ -15,6 +15,7 @@ import java.util.Date;
 public class TravelCalculatePremiumRequest {
     private String personFirstName;
     private String personLastName;
+    //has been already done in previous step
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date agreementDateFrom;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
