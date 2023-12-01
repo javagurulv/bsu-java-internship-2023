@@ -17,7 +17,6 @@ class TravelCalculatePremiumRequestValidatorImpl implements TravelCalculatePremi
     @Autowired
     private List<TravelRequestValidation> travelRequestValidations;
 
-
     @Override
     public List<ValidationError> validate(TravelCalculatePremiumRequestV1 request) {
 
@@ -26,27 +25,27 @@ class TravelCalculatePremiumRequestValidatorImpl implements TravelCalculatePremi
 
         return concatenateErrorLists(singleErrors, listErrors);
     }
-private List<ValidationError> validateSingleErrors(TravelCalculatePremiumRequestV1 request){
-return travelRequestValidations.stream()
-        .map(validation->validation.validate(request))
-        .filter(Optional::isPresent)
-        .map(Optional::get)
-        .collect(Collectors.toList());
-}
-private List<ValidationError> validateListErrors(TravelCalculatePremiumRequestV1 request){
-return travelRequestValidations.stream()
-        .map(validation->validation.validateList(request))
-        .flatMap(Collection::stream)
-        .collect(Collectors.toList());
-    }
-    private List<ValidationError> concatenateErrorLists(List<ValidationError> singleErrors, List<ValidationError> listErrors){
-        return Stream.concat(singleErrors.stream(), listErrors.stream())
+
+    private List<ValidationError> validateSingleErrors(TravelCalculatePremiumRequestV1 request) {
+        return travelRequestValidations.stream()
+                .map(validation -> validation.validate(request))
+                .filter(Optional::isPresent)
+                .map(Optional::get)
                 .collect(Collectors.toList());
     }
 
+    private List<ValidationError> validateListErrors(TravelCalculatePremiumRequestV1 request) {
+        return travelRequestValidations.stream()
+                .map(validation -> validation.validateList(request))
+                .flatMap(Collection::stream)
+                .collect(Collectors.toList());
+    }
 
-
-
+    private List<ValidationError> concatenateErrorLists(List<ValidationError> singleErrors,
+                                                        List<ValidationError> listErrors) {
+        return Stream.concat(singleErrors.stream(), listErrors.stream())
+                .collect(Collectors.toList());
+    }
 
 
 }

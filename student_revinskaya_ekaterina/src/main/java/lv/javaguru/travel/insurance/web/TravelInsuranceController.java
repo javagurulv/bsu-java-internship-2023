@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class TravelInsuranceController {
 
-    @Autowired private TravelCalculatePremiumService service;
+    @Autowired
+    private TravelCalculatePremiumService service;
 
     @GetMapping("/insurance/travel/web")
     public String showForm(ModelMap modelMap) {

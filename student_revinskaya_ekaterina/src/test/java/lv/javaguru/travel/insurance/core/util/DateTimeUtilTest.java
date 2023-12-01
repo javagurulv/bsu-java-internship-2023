@@ -14,16 +14,21 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DateTimeUtilTest {
     private DateTimeUtil calculatorDate = new DateTimeUtil();
-@Test
-    public void calculateWithRightDatesTest(){
-       BigDecimal num = calculatorDate.calculateDiffBetweenDays(createDate("02.10.2023"),createDate( "12.10.2023"));
-        assertEquals(num, BigDecimal.valueOf(10));
-}
+
     @Test
-    public void calculateWithWrongDatesTest(){
-        BigDecimal num = calculatorDate.calculateDiffBetweenDays(createDate("22.10.2023"),createDate( "12.10.2023"));
+    public void calculateWithRightDatesTest() {
+        BigDecimal num = calculatorDate
+                .calculateDiffBetweenDays(createDate("02.10.2023"), createDate("12.10.2023"));
+        assertEquals(num, BigDecimal.valueOf(10));
+    }
+
+    @Test
+    public void calculateWithWrongDatesTest() {
+        BigDecimal num = calculatorDate
+                .calculateDiffBetweenDays(createDate("22.10.2023"), createDate("12.10.2023"));
         assertEquals(num, BigDecimal.valueOf(-10));
     }
+
     private Date createDate(String dateStr) {
         try {
             return new SimpleDateFormat("dd.MM.yyyy").parse(dateStr);

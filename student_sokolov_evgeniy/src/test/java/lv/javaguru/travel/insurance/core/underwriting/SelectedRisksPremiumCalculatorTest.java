@@ -1,7 +1,7 @@
 package lv.javaguru.travel.insurance.core.underwriting;
 
 import lv.javaguru.travel.insurance.dto.RiskPremium;
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -39,7 +39,7 @@ class SelectedRisksPremiumCalculatorTest {
     void shouldCalculatePremiumForOneRisk() {
         when(riskPremiumCalculator1.getRiskIc()).thenReturn("TRAVEL_MEDICAL");
         when(riskPremiumCalculator1.calculatePremium(any())).thenReturn(BigDecimal.ONE);
-        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        TravelCalculatePremiumRequestV1 request = mock(TravelCalculatePremiumRequestV1.class);
         when(request.getSelectedRisks()).thenReturn(List.of("TRAVEL_MEDICAL"));
         List<RiskPremium> riskPremiums = calculator.calculatePremiumForAllRisks(request);
         assertEquals(riskPremiums.size(), 1);
@@ -55,7 +55,7 @@ class SelectedRisksPremiumCalculatorTest {
         when(riskPremiumCalculator1.calculatePremium(any())).thenReturn(BigDecimal.ONE);
         when(riskPremiumCalculator2.calculatePremium(any())).thenReturn(BigDecimal.ONE);
 
-        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        TravelCalculatePremiumRequestV1 request = mock(TravelCalculatePremiumRequestV1.class);
         when(request.getSelectedRisks()).thenReturn(List.of("TRAVEL_MEDICAL", "TRAVEL_EVACUATION"));
         List<RiskPremium> riskPremiums = calculator.calculatePremiumForAllRisks(request);
         assertEquals(riskPremiums.size(), 2);
@@ -70,7 +70,7 @@ class SelectedRisksPremiumCalculatorTest {
         when(riskPremiumCalculator1.getRiskIc()).thenReturn("TRAVEL_MEDICAL");
         when(riskPremiumCalculator2.getRiskIc()).thenReturn("TRAVEL_EVACUATION");
 
-        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        TravelCalculatePremiumRequestV1 request = mock(TravelCalculatePremiumRequestV1.class);
         when(request.getSelectedRisks()).thenReturn(List.of("NOT_SUPPORTED_RISK_TYPE"));
 
         RuntimeException exception = assertThrows(RuntimeException.class,

@@ -9,15 +9,15 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class TravelCalculatePremiumRequestLogger {
-
     private static final Logger logger = LoggerFactory.getLogger(TravelCalculatePremiumRequestLogger.class);
-    public void log(TravelCalculatePremiumRequestV1 request){
-            ObjectMapper mapper = new ObjectMapper();
-            try {
-                String jsonString = mapper.writeValueAsString(request);
-                logger.info("REQUEST:\n" + jsonString);
-            }catch(JsonProcessingException ex){
-logger.error(ex.getMessage());
+
+    public void log(TravelCalculatePremiumRequestV1 request) {
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            String jsonString = mapper.writeValueAsString(request);
+            logger.info("REQUEST:\n" + jsonString);
+        } catch (JsonProcessingException ex) {
+            logger.error(ex.getMessage());
         }
 
     }

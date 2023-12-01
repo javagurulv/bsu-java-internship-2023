@@ -14,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+
 @ExtendWith(MockitoExtension.class)
 public class TravelRequestDateFromValidationTest {
     @InjectMocks
@@ -21,13 +22,14 @@ public class TravelRequestDateFromValidationTest {
 
     @Mock
     private ValidationErrorFactory validationErrorFactory;
+
     @Test
     public void responseShouldContainErrorNullDateFromTest() {
         TravelCalculatePremiumRequestV1 request = mock(TravelCalculatePremiumRequestV1.class);
         when(request.getAgreementDateFrom()).thenReturn(null);
         ValidationError validationError = mock(ValidationError.class);
         when(validationErrorFactory.buildError("ERROR_CODE_3")).thenReturn(validationError);
-        Optional<ValidationError> error= dateFromValidation.validate(request);
+        Optional<ValidationError> error = dateFromValidation.validate(request);
         assertTrue(error.isPresent());
         assertEquals(error.get(), validationError);
     }

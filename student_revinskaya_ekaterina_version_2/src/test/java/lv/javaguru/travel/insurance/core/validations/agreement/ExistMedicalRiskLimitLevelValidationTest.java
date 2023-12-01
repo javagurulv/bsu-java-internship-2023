@@ -23,13 +23,13 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 public class ExistMedicalRiskLimitLevelValidationTest {
     @InjectMocks
-    ExistMedicalRiskLimitLevelValidation medicalRiskLimitLevelValidation;
+    private ExistMedicalRiskLimitLevelValidation medicalRiskLimitLevelValidation;
     @Mock
-    ValidationErrorFactory validationErrorFactory;
+    private ValidationErrorFactory validationErrorFactory;
     @Mock
-    ClassifierValueRepository classifierValueRepository;
+    private ClassifierValueRepository classifierValueRepository;
     @Mock
-    AgreementDTO request;
+    private AgreementDTO request;
     @Test
     public void containErrorNotExistMedRiskLimitLevelWithEnableTest(){
         when(request.getMedicalRiskLimitLevel()).thenReturn("FAKE");

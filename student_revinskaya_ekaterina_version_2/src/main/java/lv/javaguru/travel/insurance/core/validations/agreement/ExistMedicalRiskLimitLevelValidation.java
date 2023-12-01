@@ -15,27 +15,31 @@ import java.util.Optional;
 @Component
 public class ExistMedicalRiskLimitLevelValidation extends TravelAgreementFieldValidationImpl {
     @Autowired
-    ValidationErrorFactory errorFactory;
-    @Value( "${medical.risk.limit.level.enabled:false}" )
+    private ValidationErrorFactory errorFactory;
+    @Value("${medical.risk.limit.level.enabled:false}")
     private Boolean medicalRiskLimitLevelEnabled;
     @Autowired
-    ClassifierValueRepository classifierValueRepository;
+    private ClassifierValueRepository classifierValueRepository;
+
     @Override
-    public Optional<ValidationErrorDTO> validate(AgreementDTO request){
+    public Optional<ValidationErrorDTO> validate(AgreementDTO request) {
         return medicalRiskLevelNotEmptyOrNull(request)
                 && notExistLimitLevel(request) ?
-                Optional.of( buildError(request)) : Optional.empty();
+                Optional.of(buildError(request)) : Optional.empty();
     }
+
     private boolean medicalRiskLevelNotEmptyOrNull(AgreementDTO request) {
-        return !(request.getMedicalRiskLimitLevel()==null || request.getMedicalRiskLimitLevel().isEmpty());
+        return !(request.getMedicalRiskLimitLevel() == null || request.getMedicalRiskLimitLevel().isEmpty());
     }
-    private ValidationErrorDTO buildError(AgreementDTO request){
+
+    private ValidationErrorDTO buildError(AgreementDTO request) {
         return errorFactory.buildError("ERROR_CODE_15", List.of(
-                        new Placeholder("NOT_EXISTING_MEDICAL_RISK_LIMIT_LEVEL",
-                                request.getMedicalRiskLimitLevel())));
+                new Placeholder("NOT_EXISTING_MEDICAL_RISK_LIMIT_LEVEL",
+                        request.getMedicalRiskLimitLevel())));
 
     }
-    private boolean notExistLimitLevel(AgreementDTO request){
+
+    private boolean notExistLimitLevel(AgreementDTO request) {
         return classifierValueRepository.findByClassifierTitleAndIc(
                 "MEDICAL_RISK_LIMIT_LEVEL", request.getMedicalRiskLimitLevel()).isEmpty();
     }

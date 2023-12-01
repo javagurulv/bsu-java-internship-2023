@@ -1,93 +1,70 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
 <head>
     <meta charset="UTF-8">
     <title>Travel Insurance Premium Calculation</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
+<body>
 
-<body class="container mt-5">
-
-<h1 class="text-center mb-4">Travel Insurance Premium Calculation</h1>
+<h1>Travel Insurance Premium Calculation</h1>
 
 <form action="/insurance/travel/web" th:object="${request}" method="post">
+    <label for="personFirstName">First Name:</label>
+    <input type="text" id="personFirstName" th:field="${request.personFirstName}"><br><br>
 
-    <div class="form-group">
-        <label for="personFirstName">First Name:</label>
-        <input type="text" class="form-control" id="personFirstName" th:field="${request.personFirstName}">
-    </div>
+    <label for="personLastName">Last Name:</label>
+    <input type="text" id="personLastName" th:field="${request.personLastName}"><br><br>
 
-    <div class="form-group">
-        <label for="personLastName">Last Name:</label>
-        <input type="text" class="form-control" id="personLastName" th:field="${request.personLastName}">
-    </div>
+    <label for="personBirthDate">Birth Date:</label>
+    <input type="date" id="personBirthDate"
+           th:field="${request.personBirthDate}"><br><br>
 
-    <div class="form-group">
-        <label for="personBirthDate">Birth Date:</label>
-        <input type="date" class="form-control" id="personBirthDate" th:field="${request.personBirthDate}">
-    </div>
+    <label for="agreementDateFrom">Agreement Date From:</label>
+    <input type="date" id="agreementDateFrom" th:field="${request.agreementDateFrom}"><br><br>
 
-    <!-- Add Bootstrap classes to the rest of the form elements -->
+    <label for="agreementDateTo">Agreement Date To:</label>
+    <input type="date" id="agreementDateTo" th:field="${request.agreementDateTo}"><br><br>
 
-    <div class="form-group">
-        <label for="agreementDateFrom">Agreement Date From:</label>
-        <input type="date" class="form-control" id="agreementDateFrom" th:field="${request.agreementDateFrom}">
-    </div>
+    <label for="country">Country:</label>
+    <input type="text" id="country" th:field="${request.country}"><br><br>
 
-    <div class="form-group">
-        <label for="agreementDateTo">Agreement Date To:</label>
-        <input type="date" class="form-control" id="agreementDateTo" th:field="${request.agreementDateTo}">
-    </div>
+    <label for="medicalRiskLimitLevel">Medical Risk Limit Level:</label>
+    <input type="text" id="medicalRiskLimitLevel" th:field="${request.medicalRiskLimitLevel}"><br><br>
 
-    <div class="form-group">
-        <label for="country">Country:</label>
-        <input type="text" class="form-control" id="country" th:field="${request.country}">
-    </div>
+    <label for="selectedRisks">Selected Risks:</label>
+    <input type="text" id="selectedRisks" th:field="${request.selectedRisks}"><br><br>
 
-    <div class="form-group">
-        <label for="medicalRiskLimitLevel">Medical Risk Limit Level:</label>
-        <input type="text" class="form-control" id="medicalRiskLimitLevel" th:field="${request.medicalRiskLimitLevel}">
-    </div>
-
-    <div class="form-group">
-        <label for="selectedRisks">Selected Risks:</label>
-        <input type="text" class="form-control" id="selectedRisks" th:field="${request.selectedRisks}">
-    </div>
-
-    <button type="submit" class="btn btn-primary">Calculate Premium</button>
+    <button type="submit">Calculate Premium</button>
 </form>
 
-<!-- Add Bootstrap styling to the response section -->
 
-<div th:if="${response.errors != null}" class="mt-5">
-    <h3 class="text-danger">Travel Insurance Premium Calculation ERRORS</h3>
-    <table class="table">
-        <tr th:each="error : ${response.errors}">
-            <td th:text="${error.errorCode}" />
-            <td th:text="${error.description}" />
-        </tr>
-    </table>
-</div>
+<td th:if="${response.errors != null}">
+    <h3>Travel Insurance Premium Calculation ERRORS</h3>
+    <tr th:each="error : ${response.errors}">
+        <td th:text="${error.errorCode}" />
+        <td th:text="${error.description}" />
+        <br>
+        <br>
+    </tr>
+</td>
 
-<div th:if="${response.agreementPremium != null}" class="mt-4">
-    <h3 class="text-success">AGREEMENT PREMIUM: <span th:text="${response.agreementPremium}"></span></h3>
-</div>
+<br>
 
-<div th:if="${response.risks != null}" class="mt-5">
+<h3>
+    <label th:if="${response.agreementPremium != null}"
+           th:text="'AGREEMENT PREMIUM: ' + ${response.agreementPremium}"></label>
+</h3>
+
+<br>
+
+<td th:if="${response.risks != null}">
     <h3>Travel Insurance Premium Calculation RISKS</h3>
-    <table class="table">
-        <tr th:each="risk : ${response.risks}">
-            <td th:text="${risk.riskIc}" />
-            <td th:text="${risk.premium}" />
-        </tr>
-    </table>
-</div>
-
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
+    <tr th:each="risk : ${response.risks}">
+        <td th:text="${risk.riskIc}" />
+        <td th:text="${risk.premium}" />
+        <br>
+    </tr>
+</td>
 
 </body>
-
 </html>

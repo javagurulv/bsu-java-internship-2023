@@ -21,24 +21,26 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class DateFromShouldLessDateToValidationTest {
-@InjectMocks
-   private DateFromLessDateToValidation dateFromLessDateToValidation;
+    @InjectMocks
+    private DateFromLessDateToValidation dateFromLessDateToValidation;
 
     @Mock
     private AgreementDTO request;
     @Mock
     private ValidationErrorFactory validationErrorFactory;
+
     @Test
     public void responseShouldContainErrorDateFromMoreToTest() {
         when(request.getAgreementDateFrom()).thenReturn(createDate("8.07.2024"));
         when(request.getAgreementDateTo()).thenReturn(createDate("8.08.2023"));
         ValidationErrorDTO validationError = mock(ValidationErrorDTO.class);
         when(validationErrorFactory.buildError("ERROR_CODE_7")).thenReturn(validationError);
-        Optional<ValidationErrorDTO> error= dateFromLessDateToValidation.validate(request);
+        Optional<ValidationErrorDTO> error = dateFromLessDateToValidation.validate(request);
         assertTrue(error.isPresent());
         assertEquals(error.get(), validationError);
 
     }
+
     private Date createDate(String dateStr) {
         try {
             return new SimpleDateFormat("dd.MM.yyyy").parse(dateStr);

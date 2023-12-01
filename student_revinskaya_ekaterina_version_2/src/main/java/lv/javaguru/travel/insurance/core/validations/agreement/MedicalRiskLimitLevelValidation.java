@@ -13,20 +13,23 @@ import java.util.Optional;
 public class MedicalRiskLimitLevelValidation extends TravelAgreementFieldValidationImpl {
     @Autowired
     private ValidationErrorFactory validationErrorFactory;
-    @Value( "${medical.risk.limit.level.enabled:false}" )
+    @Value("${medical.risk.limit.level.enabled:false}")
     private Boolean medicalRiskLimitLevelEnabled;
-@Override
+
+    @Override
     public Optional<ValidationErrorDTO> validate(AgreementDTO request) {
         return medicalRiskSelect(request) && medicalRiskEmptyOrNull(request)
                 && medicalRiskLimitLevelEnabled ?
                 Optional.of(validationErrorFactory.buildError("ERROR_CODE_14"))
                 : Optional.empty();
     }
+
     private boolean medicalRiskEmptyOrNull(AgreementDTO request) {
-        return request.getMedicalRiskLimitLevel()==null || request.getMedicalRiskLimitLevel().isEmpty();
+        return request.getMedicalRiskLimitLevel() == null || request.getMedicalRiskLimitLevel().isEmpty();
     }
+
     private boolean medicalRiskSelect(AgreementDTO request) {
-        return !(request.getSelectedRisks() == null ||request.getSelectedRisks().isEmpty()) &&
+        return !(request.getSelectedRisks() == null || request.getSelectedRisks().isEmpty()) &&
                 request.getSelectedRisks().contains("TRAVEL_MEDICAL");
     }
 }

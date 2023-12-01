@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
+
 @Component
 public class TravelRequestExistClassifierValueForCountryValidation
         extends TravelRequestValidationImpl {
@@ -20,10 +21,11 @@ public class TravelRequestExistClassifierValueForCountryValidation
     @Override
     public Optional<ValidationError> validate(TravelCalculatePremiumRequestV1 request) {
         return validateExistClassifierValue(request) ? Optional.of(validationErrorFactory.buildError("ERROR_CODE_11",
-                        List.of(new Placeholder("NOT_EXISTING_COUNTRY", request.getCountry()))))
+                List.of(new Placeholder("NOT_EXISTING_COUNTRY", request.getCountry()))))
                 : Optional.empty();
     }
-    private boolean validateExistClassifierValue(TravelCalculatePremiumRequestV1 request){
+
+    private boolean validateExistClassifierValue(TravelCalculatePremiumRequestV1 request) {
         return request.getCountry() != null && !request.getCountry().isEmpty()
                 && classifierValueRepository.findByClassifierTitleAndIc("COUNTRY", request.getCountry()).isEmpty();
     }

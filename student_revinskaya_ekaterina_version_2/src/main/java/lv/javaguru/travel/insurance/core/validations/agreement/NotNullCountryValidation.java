@@ -10,18 +10,22 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
+
 @Component
 public class NotNullCountryValidation extends TravelAgreementFieldValidationImpl {
     @Autowired
     private ValidationErrorFactory validationErrorFactory;
-    @Autowired private ClassifierValueRepository classifierValueRepository;
+    @Autowired
+    private ClassifierValueRepository classifierValueRepository;
+
     @Override
     public Optional<ValidationErrorDTO> validate(AgreementDTO request) {//can be validateList later
         return validateNotNull(request) ? Optional.of(validationErrorFactory.buildError("ERROR_CODE_10",
                 List.of(new Placeholder("SELECTED_RISK", "TRAVEL_MEDICAL"))))
                 : Optional.empty();
     }
-    private boolean validateNotNull(AgreementDTO request){
+
+    private boolean validateNotNull(AgreementDTO request) {
         return (request.getCountry() == null || request.getCountry().isEmpty());
     }
 }
