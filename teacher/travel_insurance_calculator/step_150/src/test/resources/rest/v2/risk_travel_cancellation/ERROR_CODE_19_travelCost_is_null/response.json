@@ -1,0 +1,12 @@
+{
+  "errors": [
+    {
+      "errorCode": "ERROR_CODE_19",
+      "description": "Field travelCost must not be empty!"
+    },
+    {
+      "errorCode": "ERROR_CODE_19",
+      "description": "Field travelCost must not be empty!"
+    }
+  ]
+}

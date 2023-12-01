@@ -15,6 +15,7 @@ public class TravelCalculatePremiumRequest {
                                          String personLastName,
                                          Date agreementDateFrom,
                                          Date agreementDateTo) {
+
         this.personFirstName = personFirstName;
         this.personLastName = personLastName;
         this.agreementDateFrom = agreementDateFrom;

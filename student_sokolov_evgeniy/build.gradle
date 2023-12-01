@@ -6,6 +6,7 @@ dependencies {
 
 	implementation('mysql:mysql-connector-java:8.0.22')
 	implementation('org.hibernate:hibernate-core:5.4.25.Final')
+	implementation ('org.liquibase:liquibase-core:4.2.2')
 
 	implementation('org.springframework.boot:spring-boot-starter-data-jpa:2.7.5')
 
@@ -14,11 +15,11 @@ dependencies {
 	implementation('com.fasterxml.jackson.core:jackson-core:2.14.2')
 	implementation('com.google.guava:guava:31.0.1-jre')
 
-	compileOnly('org.projectlombok:lombok:1.18.30')
-	annotationProcessor('org.projectlombok:lombok:1.18.30')
+	compileOnly('org.projectlombok:lombok:1.18.24')
+	annotationProcessor('org.projectlombok:lombok:1.18.24')
 
-	testCompileOnly('org.projectlombok:lombok:1.18.30')
-	testAnnotationProcessor('org.projectlombok:lombok:1.18.30')
+	testCompileOnly('org.projectlombok:lombok:1.18.24')
+	testAnnotationProcessor('org.projectlombok:lombok:1.18.24')
 
 	testImplementation('org.springframework.boot:spring-boot-starter-test:2.7.5')
 
@@ -41,5 +42,5 @@ jar {
 bootJar {
 	enabled = true
 	archiveBaseName = 'insurance-calculator'
-	archiveVersion = '1.0.0'
+	archiveVersion = '1.0.2'
 }

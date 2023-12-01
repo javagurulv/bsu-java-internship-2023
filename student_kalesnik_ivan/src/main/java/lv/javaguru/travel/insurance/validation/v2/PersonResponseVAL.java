@@ -7,7 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lv.javaguru.travel.insurance.core.util.BigDecimalSerializer;
+import lv.javaguru.travel.insurance.validation.util.BigDecimalSerializer;
 import lv.javaguru.travel.insurance.validation.RiskPremium;
 import org.springframework.format.annotation.DateTimeFormat;
 import java.math.BigDecimal;

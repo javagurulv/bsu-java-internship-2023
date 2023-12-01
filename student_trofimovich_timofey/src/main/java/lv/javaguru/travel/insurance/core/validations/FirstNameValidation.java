@@ -13,7 +13,7 @@ class FirstNameValidation extends TravelRequestValidationImpl {
     ValidationErrorFactory factory;
     @Override
     public Optional<ValidationError> validate(TravelCalculatePremiumRequest request) {
-        return (request.getPersonFirstName() == null || request.getPersonFirstName().isEmpty())
+        return (request.getPersonFirstName() == null || request.getPersonFirstName().isBlank())
                 ? Optional.of(factory.buildError("ERROR_CODE_1"))
                 : Optional.empty();
     }

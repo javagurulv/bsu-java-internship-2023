@@ -1,7 +1,7 @@
 package lv.javaguru.travel.insurance.core.validations;
 
 import lv.javaguru.travel.insurance.core.repositories.ClassifierValueRepository;
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -28,11 +28,23 @@ public class TravelExistMedicalRiskLimitLevelValidationTest {
     @Mock
     ClassifierValueRepository classifierValueRepository;
     @Mock
-    TravelCalculatePremiumRequest request;
+    TravelCalculatePremiumRequestV1 request;
     @Test
-    public void shouldContainErrorNotExistMedicalRiskLimitLevelTest(){
+    public void containErrorNotExistMedRiskLimitLevelWithEnableTest(){
         when(request.getMedicalRiskLimitLevel()).thenReturn("FAKE");
         ReflectionTestUtils.setField(medicalRiskLimitLevelValidation, "medicalRiskLimitLevelEnabled", true);
+        when(classifierValueRepository.findByClassifierTitleAndIc("MEDICAL_RISK_LIMIT_LEVEL","FAKE"))
+                .thenReturn(Optional.empty());
+        ValidationError validationError = mock(ValidationError.class);
+        when(validationErrorFactory.buildError(eq("ERROR_CODE_15"),anyList())).thenReturn(validationError);
+        Optional<ValidationError> error = medicalRiskLimitLevelValidation.validate(request);
+        assertTrue(error.isPresent());
+        assertEquals(error.get(), validationError);
+    }
+    @Test
+    public void containErrorNotExistMedRiskLimitLevelWithNotEnableTest(){
+        when(request.getMedicalRiskLimitLevel()).thenReturn("FAKE");
+        ReflectionTestUtils.setField(medicalRiskLimitLevelValidation, "medicalRiskLimitLevelEnabled", false);
         when(classifierValueRepository.findByClassifierTitleAndIc("MEDICAL_RISK_LIMIT_LEVEL","FAKE"))
                 .thenReturn(Optional.empty());
         ValidationError validationError = mock(ValidationError.class);
