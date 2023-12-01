@@ -6,22 +6,10 @@ import lombok.extern.slf4j.Slf4j;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import org.springframework.stereotype.Component;
 
-@Slf4j
-@Component
-public class MLogger {
+public abstract class MLogger {
 
-    public void logTravelPremiumRequest(TravelCalculatePremiumRequest request) {
-        logObject(request);
-    }
-
-    private void logObject(Object object) {
+    protected String logObject(Object object) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
-
-        try {
-            String json = objectMapper.writeValueAsString(object);
-            log.info(json);
-        } catch (JsonProcessingException e) {
-            log.error("Error while converting object to JSON");
-        }
+        return objectMapper.writeValueAsString(object);
     }
 }

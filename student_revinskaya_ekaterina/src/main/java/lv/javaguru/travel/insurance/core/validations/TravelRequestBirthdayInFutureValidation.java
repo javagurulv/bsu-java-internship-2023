@@ -10,9 +10,9 @@ import java.util.Optional;
 @Component
 public class TravelRequestBirthdayInFutureValidation extends TravelRequestValidationImpl{
     @Autowired
-    DateTimeUtil dateTimeUtil;
+    private DateTimeUtil dateTimeUtil;
     @Autowired
-    ValidationErrorFactory validationErrorFactory;
+    private ValidationErrorFactory validationErrorFactory;
     @Override
     public Optional<ValidationError> validate(TravelCalculatePremiumRequestV1 request){
         return (request.getBirthday() != null && dateTimeUtil.getCurrentDateTime().before(request.getBirthday()))

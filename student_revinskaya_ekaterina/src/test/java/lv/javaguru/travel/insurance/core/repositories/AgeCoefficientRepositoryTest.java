@@ -16,31 +16,39 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @ExtendWith(SpringExtension.class)
 @DataJpaTest
 public class AgeCoefficientRepositoryTest {
-    @Autowired private AgeCoefficientRepository ageCoefficientRepository;
+    @Autowired
+    private AgeCoefficientRepository ageCoefficientRepository;
+
     @Test
     public void injectedRepositoryAreNotNull() {
         assertNotNull(ageCoefficientRepository);
     }
+
     @Test
     public void shouldFindAgeCoefficientFrom0To5() {
         testValueByAge(5);
     }
+
     @Test
     public void shouldFindAgeCoefficientFrom6To10() {
         testValueByAge(6);
     }
+
     @Test
     public void shouldFindAgeCoefficientFrom11To17() {
         testValueByAge(12);
     }
+
     @Test
     public void shouldFindAgeCoefficientFrom18To40() {
         testValueByAge(33);
     }
+
     @Test
     public void shouldFindAgeCoefficientFrom41To65() {
         testValueByAge(65);
     }
+
     @Test
     public void shouldFindAgeCoefficientFrom66To150() {
         testValueByAge(140);
@@ -51,12 +59,14 @@ public class AgeCoefficientRepositoryTest {
         Optional<AgeCoefficient> valueOpt = ageCoefficientRepository.findByAge(200);
         assertTrue(valueOpt.isEmpty());
     }
+
     @Test
     public void shouldNotFindAgeLessThanExist() {
         Optional<AgeCoefficient> valueOpt = ageCoefficientRepository.findByAge(-2);
         assertTrue(valueOpt.isEmpty());
     }
-    public void testValueByAge(int age){
+
+    public void testValueByAge(int age) {
         Optional<AgeCoefficient> valueOpt = ageCoefficientRepository.findByAge(age);
         assertTrue(valueOpt.isPresent());
         assertTrue(valueOpt.get().getAgeFrom() <= age);
