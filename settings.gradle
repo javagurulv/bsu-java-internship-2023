@@ -1,7 +1,7 @@
 include 'student_lastname_firstname'
 include 'student_polyakov_andrey'
 include 'student_revinskaya_ekaterina'
-include 'student_revinskaya_ekaterina_versiom_2'
+include 'student_revinskaya_ekaterina_version_2'
 include 'student_trofimovich_timofey'
 include 'student_snezhko_leu'
 include 'student_koktysh_anton'
