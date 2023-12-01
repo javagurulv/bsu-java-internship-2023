@@ -15,19 +15,21 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 public class ErrorCodeUtilTest {
     @InjectMocks
-    ErrorCodeUtil errorCodeUtil;
+    private ErrorCodeUtil errorCodeUtil;
     @Mock
-    Environment environment;
+    private Environment environment;
+
     @Test
-    public void descriptionByErrorCode(){
+    public void descriptionByErrorCode() {
         when(environment.getProperty("ERROR_CODE")).thenReturn("description of code");
         assertEquals(errorCodeUtil.getErrorDescription("ERROR_CODE"), "description of code");
     }
+
     @Test
-    public void descriptionByErrorCodeAndListOfPlaceholder(){
+    public void descriptionByErrorCodeAndListOfPlaceholder() {
         when(environment.getProperty("ERROR_CODE")).thenReturn("{MISTAKE_RISK} is bad risk");
         assertEquals(errorCodeUtil.getErrorDescription("ERROR_CODE",
-                List.of(new Placeholder("MISTAKE_RISK", "SOME_RISK"))),
+                        List.of(new Placeholder("MISTAKE_RISK", "SOME_RISK"))),
                 "SOME_RISK is bad risk");
     }
 }

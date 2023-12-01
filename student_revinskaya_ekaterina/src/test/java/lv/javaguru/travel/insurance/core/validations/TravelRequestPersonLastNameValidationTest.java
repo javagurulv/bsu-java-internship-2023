@@ -1,6 +1,6 @@
 package lv.javaguru.travel.insurance.core.validations;
 
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -14,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+
 @ExtendWith(MockitoExtension.class)
 
 public class TravelRequestPersonLastNameValidationTest {
@@ -21,23 +22,25 @@ public class TravelRequestPersonLastNameValidationTest {
     private TravelRequestPersonLastNameValidation personLastNameValidation;
     @Mock
     private ValidationErrorFactory validationErrorFactory;
+
     @Test
     public void responseShouldContainErrorEmptyLastNameTest() {
-        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        TravelCalculatePremiumRequestV1 request = mock(TravelCalculatePremiumRequestV1.class);
         when(request.getPersonLastName()).thenReturn("");
         ValidationError validationError = mock(ValidationError.class);
         when(validationErrorFactory.buildError("ERROR_CODE_2")).thenReturn(validationError);
-        Optional<ValidationError> error= personLastNameValidation.validate(request);
+        Optional<ValidationError> error = personLastNameValidation.validate(request);
         assertTrue(error.isPresent());
         assertEquals(error.get(), validationError);
     }
+
     @Test
     public void responseShouldContainErrorNullLastNameTest() {
-        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        TravelCalculatePremiumRequestV1 request = mock(TravelCalculatePremiumRequestV1.class);
         when(request.getPersonLastName()).thenReturn(null);
         ValidationError validationError = mock(ValidationError.class);
         when(validationErrorFactory.buildError("ERROR_CODE_2")).thenReturn(validationError);
-        Optional<ValidationError> error= personLastNameValidation.validate(request);
+        Optional<ValidationError> error = personLastNameValidation.validate(request);
         assertTrue(error.isPresent());
         assertEquals(error.get(), validationError);
     }

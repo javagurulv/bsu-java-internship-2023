@@ -33,7 +33,7 @@ class TravelCalculatePremiumServiceImplTest {
     public TravelCalculatePremiumRequest createObjectRequest() {
 
         Date dateFrom = createDate("01.01.2000");
-        Date dateTo = createDate("01.01.2023");
+        Date dateTo = createDate("02.01.2000");
 
         return new TravelCalculatePremiumRequest(
                 "personFirstName",
@@ -97,16 +97,17 @@ class TravelCalculatePremiumServiceImplTest {
 
     @Test
     public void shouldReturnResponseWithCorrectAgreementDateTo() {
-        Date dateTo = createDate("01.01.2023");
+        Date dateTo = createDate("02.01.2000");
         TravelCalculatePremiumRequest request = createObjectRequest();
         TravelCalculatePremiumResponse response = service.calculatePremium(request);
         assertEquals(response.getAgreementDateTo(), dateTo);
     }
 
 
-    /*public void shouldReturnResponseWithCorrectAgreementPrice() {
+    @Test
+    public void shouldReturnResponseWithCorrectAgreementPrice() {
         TravelCalculatePremiumRequest request = createObjectRequest();
         TravelCalculatePremiumResponse response = service.calculatePremium(request);
-        assertEquals(response.getAgreementPrice(), BigDecimal.valueOf(8400));
-    }*/
+        assertEquals(response.getAgreementPrice(), BigDecimal.valueOf(1));
+    }
 }

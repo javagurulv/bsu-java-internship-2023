@@ -1,6 +1,6 @@
 package lv.javaguru.travel.insurance.core.validations;
 
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,45 +20,48 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 public class TravelRequestMedicalRiskLimitLevelValidationTest {
     @InjectMocks
-    TravelRequestMedicalRiskLimitLevelValidation travelRequestMedicalRiskLimitLevelValidation;
+    private TravelRequestMedicalRiskLimitLevelValidation travelRequestMedicalRiskLimitLevelValidation;
     @Mock
-    ValidationErrorFactory validationErrorFactory;
+    private ValidationErrorFactory validationErrorFactory;
     @Mock
-    TravelCalculatePremiumRequest request;
+    private TravelCalculatePremiumRequestV1 request;
+
     @Test
     public void responseShouldContainErrorNullMedicalRiskLimitLevelTest() {
-        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        TravelCalculatePremiumRequestV1 request = mock(TravelCalculatePremiumRequestV1.class);
         when(request.getMedicalRiskLimitLevel()).thenReturn(null);
         when(request.getSelectedRisks()).thenReturn(List.of("TRAVEL_MEDICAL"));
         ReflectionTestUtils.setField(travelRequestMedicalRiskLimitLevelValidation,
-                "medicalRiskLimitLevelEnabled",true);
+                "medicalRiskLimitLevelEnabled", true);
         ValidationError validationError = mock(ValidationError.class);
         when(validationErrorFactory.buildError("ERROR_CODE_14")).thenReturn(validationError);
-        Optional<ValidationError> error= travelRequestMedicalRiskLimitLevelValidation.validate(request);
+        Optional<ValidationError> error = travelRequestMedicalRiskLimitLevelValidation.validate(request);
         assertTrue(error.isPresent());
         assertEquals(error.get(), validationError);
     }
+
     @Test
     public void responseShouldContainErrorEmptyMedicalRiskLimitLevelTest() {
-        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        TravelCalculatePremiumRequestV1 request = mock(TravelCalculatePremiumRequestV1.class);
         when(request.getMedicalRiskLimitLevel()).thenReturn("");
         when(request.getSelectedRisks()).thenReturn(List.of("TRAVEL_MEDICAL"));
         ReflectionTestUtils.setField(travelRequestMedicalRiskLimitLevelValidation,
-                "medicalRiskLimitLevelEnabled",true);
+                "medicalRiskLimitLevelEnabled", true);
         ValidationError validationError = mock(ValidationError.class);
         when(validationErrorFactory.buildError("ERROR_CODE_14")).thenReturn(validationError);
-        Optional<ValidationError> error= travelRequestMedicalRiskLimitLevelValidation.validate(request);
+        Optional<ValidationError> error = travelRequestMedicalRiskLimitLevelValidation.validate(request);
         assertTrue(error.isPresent());
         assertEquals(error.get(), validationError);
     }
+
     @Test
     public void responseShouldNotContainErrorTest() {
-        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        TravelCalculatePremiumRequestV1 request = mock(TravelCalculatePremiumRequestV1.class);
         when(request.getMedicalRiskLimitLevel()).thenReturn("");
         when(request.getSelectedRisks()).thenReturn(List.of("TRAVEL_MEDICAL"));
         ReflectionTestUtils.setField(travelRequestMedicalRiskLimitLevelValidation,
-                "medicalRiskLimitLevelEnabled",false);
-        Optional<ValidationError> error= travelRequestMedicalRiskLimitLevelValidation.validate(request);
+                "medicalRiskLimitLevelEnabled", false);
+        Optional<ValidationError> error = travelRequestMedicalRiskLimitLevelValidation.validate(request);
         assertTrue(error.isEmpty());
     }
 }

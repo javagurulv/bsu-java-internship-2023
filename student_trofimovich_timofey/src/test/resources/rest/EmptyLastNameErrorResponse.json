@@ -5,11 +5,12 @@
       "description": "Field personLastName is empty!"
     }
   ],
-  "riskPremiums": null,
   "personFirstName": null,
   "personLastName": null,
+  "dateOfBirth": null,
   "agreementDateFrom": null,
   "agreementDateTo": null,
   "agreementPremium": null,
-  "risks": null
+  "risks": null,
+  "country": null
 }

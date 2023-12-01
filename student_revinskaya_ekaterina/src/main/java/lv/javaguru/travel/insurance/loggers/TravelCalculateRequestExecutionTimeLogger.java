@@ -9,7 +9,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class TravelCalculateRequestExecutionTimeLogger {
     private static final Logger logger = LoggerFactory.getLogger(TravelCalculateRequestExecutionTimeLogger.class);
-    public void log(long millis){
-        logger.info("Request processing time (ms): "+millis);
+
+    public void log(long millis) {
+        logger.info("Request processing time (ms): " + millis);
     }
 }

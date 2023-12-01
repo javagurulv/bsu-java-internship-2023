@@ -113,3 +113,5 @@ CREATE TABLE agreement_person_risks (
 
 CREATE UNIQUE INDEX ix_agreement_person_risks_agreement_person_id_risk_ic
 ON agreement_person_risks(agreement_person_id, risk_ic);
+
+ALTER TABLE agreements ADD uuid VARCHAR(255) NOT NULL;
