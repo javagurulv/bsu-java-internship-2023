@@ -27,3 +27,12 @@ INSERT INTO country_default_day_rate(country_ic, country_default_day_rate)
 VALUES ('LATVIA', 1.00),
        ('SPAIN', 2.50),
        ('JAPAN', 3.50);
+
+
+INSERT INTO age_coefficient(age_from, age_to, coefficient)
+VALUES (0, 5, 1.1),
+       (6, 10, 0.7),
+       (11, 17, 1.0),
+       (18, 40, 1.1),
+       (41, 65, 1.2),
+       (65, 150, 1.5);
