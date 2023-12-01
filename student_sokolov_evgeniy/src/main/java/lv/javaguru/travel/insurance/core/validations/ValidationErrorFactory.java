@@ -9,16 +9,16 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-class ValidationErrorFactory {
+public class ValidationErrorFactory {
 
     @Autowired private ErrorCodeUtil errorCodeUtil;
 
-    ValidationError buildError(String errorCode) {
+    public ValidationError buildError(String errorCode) {
         String errorDescription = errorCodeUtil.getErrorDescription(errorCode);
         return new ValidationError(errorCode, errorDescription);
     }
 
-    ValidationError buildError(String errorCode, List<Placeholder> placeholders) {
+    public ValidationError buildError(String errorCode, List<Placeholder> placeholders) {
         String errorDescription = errorCodeUtil.getErrorDescription(errorCode, placeholders);
         return new ValidationError(errorCode, errorDescription);
     }

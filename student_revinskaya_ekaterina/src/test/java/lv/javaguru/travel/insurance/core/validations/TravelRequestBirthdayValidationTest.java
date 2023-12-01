@@ -18,17 +18,18 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 public class TravelRequestBirthdayValidationTest {
     @InjectMocks
-    TravelRequestBirthdayValidation birthdayValidation;
+    private TravelRequestBirthdayValidation birthdayValidation;
     @Mock
-    TravelCalculatePremiumRequestV1 request;
+    private TravelCalculatePremiumRequestV1 request;
     @Mock
-    ValidationErrorFactory validationErrorFactory;
+    private ValidationErrorFactory validationErrorFactory;
+
     @Test
-    public void responseShouldContainsErrorBirthdayInFutureTest(){
+    public void responseShouldContainsErrorBirthdayInFutureTest() {
         ValidationError validationError = mock(ValidationError.class);
         when(request.getBirthday()).thenReturn(null);
         when(validationErrorFactory.buildError("ERROR_CODE_12")).thenReturn(validationError);
-        Optional<ValidationError> error= birthdayValidation.validate(request);
+        Optional<ValidationError> error = birthdayValidation.validate(request);
         assertTrue(error.isPresent());
         assertEquals(error.get(), validationError);
     }

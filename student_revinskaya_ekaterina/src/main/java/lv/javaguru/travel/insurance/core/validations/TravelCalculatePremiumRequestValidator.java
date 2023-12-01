@@ -5,7 +5,8 @@ import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+
 public interface TravelCalculatePremiumRequestValidator {
-@Autowired
+    @Autowired
     List<ValidationError> validate(TravelCalculatePremiumRequestV1 request);
 }

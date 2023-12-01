@@ -18,13 +18,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+
 @ExtendWith(MockitoExtension.class)
 public class TravelRequestDateToOfFutureTimeValidationTest {
     @InjectMocks
     private TravelRequestAgreementDateToOfFutureValidation dateToValidation;
 
-    @Mock private DateTimeUtil dateTimeUtil;
-    @Mock private ValidationErrorFactory validationErrorFactory;
+    @Mock
+    private DateTimeUtil dateTimeUtil;
+    @Mock
+    private ValidationErrorFactory validationErrorFactory;
 
     @Test
     public void responseShouldContainDateToOfFutureTimeTest() {
@@ -33,10 +36,11 @@ public class TravelRequestDateToOfFutureTimeValidationTest {
         when(request.getAgreementDateTo()).thenReturn(createDate("8.07.2023"));
         ValidationError validationError = mock(ValidationError.class);
         when(validationErrorFactory.buildError("ERROR_CODE_6")).thenReturn(validationError);
-        Optional<ValidationError> error= dateToValidation.validate(request);
+        Optional<ValidationError> error = dateToValidation.validate(request);
         assertTrue(error.isPresent());
         assertEquals(error.get(), validationError);
     }
+
     private Date createDate(String dateStr) {
         try {
             return new SimpleDateFormat("dd.MM.yyyy").parse(dateStr);

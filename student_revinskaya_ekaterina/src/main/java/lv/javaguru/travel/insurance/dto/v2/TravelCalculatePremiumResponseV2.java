@@ -14,7 +14,6 @@ import java.util.List;
 
 public class TravelCalculatePremiumResponseV2 extends CoreResponse {
 
-
     @JsonFormat(pattern = "yyyy-MM-dd")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @JsonAlias("agreement_date_from")

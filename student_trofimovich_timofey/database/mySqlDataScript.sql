@@ -36,3 +36,10 @@ VALUES (0, 5, 1.1),
        (18, 40, 1.1),
        (41, 65, 1.2),
        (65, 150, 1.5);
+
+INSERT INTO classifiers(title, description) VALUES ('MEDICAL_RISK_LIMIT_LEVEL', 'medical risk limit level');
+INSERT INTO classifier_values(classifier_id, ic, description)
+VALUES ((SELECT id FROM classifiers WHERE title = 'MEDICAL_RISK_LIMIT_LEVEL'), 'LEVEL_10000', 'Medical Risk 10000 euro limit level'),
+     ((SELECT id FROM classifiers WHERE title = 'MEDICAL_RISK_LIMIT_LEVEL'), 'LEVEL_15000', 'Medical Risk 15000 euro limit level'),
+     ((SELECT id FROM classifiers WHERE title = 'MEDICAL_RISK_LIMIT_LEVEL'), 'LEVEL_20000', 'Medical Risk 20000 euro limit level'),
+     ((SELECT id FROM classifiers WHERE title = 'MEDICAL_RISK_LIMIT_LEVEL'), 'LEVEL_50000', 'Medical Risk 50000 euro limit level');
