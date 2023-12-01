@@ -21,26 +21,27 @@ import static org.mockito.Mockito.when;
 public class TravelRequestNotNullCountryValidationTest {
     @InjectMocks
     private TravelRequestNotNullCountryValidation notNullCountryValidation;
-
     @Mock
     private ValidationErrorFactory validationErrorFactory;
+
     @Test
     public void responseShouldContainErrorEmptyCountryTest() {
         TravelCalculatePremiumRequestV1 request = mock(TravelCalculatePremiumRequestV1.class);
         when(request.getCountry()).thenReturn("");
         ValidationError validationError = mock(ValidationError.class);
         when(validationErrorFactory.buildError(eq("ERROR_CODE_10"), anyList())).thenReturn(validationError);
-        Optional<ValidationError> error= notNullCountryValidation.validate(request);
+        Optional<ValidationError> error = notNullCountryValidation.validate(request);
         assertTrue(error.isPresent());
         assertEquals(error.get(), validationError);
     }
+
     @Test
     public void responseShouldContainErrorNullCountryTest() {
         TravelCalculatePremiumRequestV1 request = mock(TravelCalculatePremiumRequestV1.class);
         when(request.getCountry()).thenReturn(null);
         ValidationError validationError = mock(ValidationError.class);
         when(validationErrorFactory.buildError(eq("ERROR_CODE_10"), anyList())).thenReturn(validationError);
-        Optional<ValidationError> error= notNullCountryValidation.validate(request);
+        Optional<ValidationError> error = notNullCountryValidation.validate(request);
         assertTrue(error.isPresent());
         assertEquals(error.get(), validationError);
     }

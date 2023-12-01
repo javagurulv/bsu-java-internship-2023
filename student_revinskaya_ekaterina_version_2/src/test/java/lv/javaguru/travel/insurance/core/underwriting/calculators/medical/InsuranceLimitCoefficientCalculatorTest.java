@@ -26,8 +26,9 @@ public class InsuranceLimitCoefficientCalculatorTest {
     private MedicalRiskLimitLevelRepository medicalRiskLimitLevelRepository;
     @Mock
     private AgreementDTO agreementDTO;
+
     @Test
-    public void calculateInsuranceLimitCoefficientTest(){
+    public void calculateInsuranceLimitCoefficientTest() {
         when(agreementDTO.getMedicalRiskLimitLevel()).thenReturn("LEVEL_10000");
         MedicalRiskLimitLevel medicalRiskLimitLevel = mock(MedicalRiskLimitLevel.class);
         when(medicalRiskLimitLevel.getCoefficient()).thenReturn(BigDecimal.valueOf(1.0));
@@ -36,19 +37,21 @@ public class InsuranceLimitCoefficientCalculatorTest {
         ReflectionTestUtils.setField(insuranceLimitCoefficientCalculator, "medicalRiskLimitLevelEnabled", true);
         assertEquals(insuranceLimitCoefficientCalculator.calculate(agreementDTO), BigDecimal.valueOf(1.0));
     }
+
     @Test
-    public void shouldReturn1Test(){
+    public void shouldReturn1Test() {
         ReflectionTestUtils.setField(insuranceLimitCoefficientCalculator, "medicalRiskLimitLevelEnabled", false);
         assertEquals(insuranceLimitCoefficientCalculator.calculate(agreementDTO), BigDecimal.valueOf(1));
     }
+
     @Test
-    public void throwExceptionCountryDefaultDayRateTest(){
+    public void throwExceptionCountryDefaultDayRateTest() {
         when(agreementDTO.getMedicalRiskLimitLevel()).thenReturn("FAKE_LEVEL");
         when(medicalRiskLimitLevelRepository.findByMedicalRiskLimitLevelIc("FAKE_LEVEL"))
                 .thenReturn(Optional.empty());
         ReflectionTestUtils.setField(insuranceLimitCoefficientCalculator, "medicalRiskLimitLevelEnabled", true);
         Throwable thrown = assertThrows(RuntimeException.class,
-                ()->insuranceLimitCoefficientCalculator.calculate(agreementDTO));
+                () -> insuranceLimitCoefficientCalculator.calculate(agreementDTO));
         assertEquals(thrown.getMessage(), "medicalRiskLimitLevel with ic FAKE_LEVEL not found");
     }
 }

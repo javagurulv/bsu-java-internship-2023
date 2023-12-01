@@ -9,14 +9,14 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class TravelCalculatePremiumResponseLogger {
-
     private static final Logger logger = LoggerFactory.getLogger(TravelCalculatePremiumResponseLogger.class);
-    public void log(TravelCalculatePremiumResponseV1 response){
+
+    public void log(TravelCalculatePremiumResponseV1 response) {
         ObjectMapper mapper = new ObjectMapper();
         try {
             String jsonString = mapper.writeValueAsString(response);
             logger.info("RESPONSE:\n" + jsonString);
-        }catch(JsonProcessingException ex){
+        } catch (JsonProcessingException ex) {
             logger.error(ex.getMessage());
         }
 

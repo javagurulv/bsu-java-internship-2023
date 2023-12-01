@@ -16,7 +16,8 @@ import static org.junit.jupiter.api.Assertions.*;
 @DataJpaTest
 class ClassifierValueRepositoryTest {
 
-    @Autowired private ClassifierValueRepository classifierValueRepository;
+    @Autowired
+    private ClassifierValueRepository classifierValueRepository;
 
     @Test
     public void injectedRepositoryAreNotNull() {
@@ -59,7 +60,8 @@ class ClassifierValueRepositoryTest {
                 "RISK_TYPE", "FAKE");
         assertTrue(valueOpt.isEmpty());
     }
-    public void testValueByClassifierTitleAndIc(String classifierTitle, String ic){
+
+    public void testValueByClassifierTitleAndIc(String classifierTitle, String ic) {
         Optional<ClassifierValue> valueOpt = classifierValueRepository.findByClassifierTitleAndIc(
                 classifierTitle, ic);
         assertTrue(valueOpt.isPresent());

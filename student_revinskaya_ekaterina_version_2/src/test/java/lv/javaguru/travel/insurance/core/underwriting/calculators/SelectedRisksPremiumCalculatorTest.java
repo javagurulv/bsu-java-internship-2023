@@ -22,11 +22,11 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 public class SelectedRisksPremiumCalculatorTest {
     @InjectMocks
-    SelectedRisksPremiumCalculator selectedRisksPremiumCalculator;
+    private SelectedRisksPremiumCalculator selectedRisksPremiumCalculator;
     @Mock
-    AgreementDTO agreementDTO;
+    private AgreementDTO agreementDTO;
     @Mock
-    PersonDTO personDTO;
+    private PersonDTO personDTO;
 @Test
 public void calculateWithNotExistSelectedRisksPremium(){
     when(agreementDTO.getSelectedRisks()).thenReturn(List.of("RISK_1", "RISK_2"));

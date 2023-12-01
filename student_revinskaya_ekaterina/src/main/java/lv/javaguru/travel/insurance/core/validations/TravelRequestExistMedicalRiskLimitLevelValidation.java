@@ -12,29 +12,33 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-public class TravelRequestExistMedicalRiskLimitLevelValidation extends TravelRequestValidationImpl{
+public class TravelRequestExistMedicalRiskLimitLevelValidation extends TravelRequestValidationImpl {
     @Autowired
-    ValidationErrorFactory errorFactory;
-    @Value( "${medical.risk.limit.level.enabled:false}" )
+    private ValidationErrorFactory errorFactory;
+    @Value("${medical.risk.limit.level.enabled:false}")
     private Boolean medicalRiskLimitLevelEnabled;
     @Autowired
-    ClassifierValueRepository classifierValueRepository;
+    private ClassifierValueRepository classifierValueRepository;
+
     @Override
-    public Optional<ValidationError> validate(TravelCalculatePremiumRequestV1 request){
+    public Optional<ValidationError> validate(TravelCalculatePremiumRequestV1 request) {
         return medicalRiskLevelNotEmptyOrNull(request)
                 && notExistLimitLevel(request) ?
-                Optional.of( buildError(request)) : Optional.empty();
+                Optional.of(buildError(request)) : Optional.empty();
     }
+
     private boolean medicalRiskLevelNotEmptyOrNull(TravelCalculatePremiumRequestV1 request) {
-        return !(request.getMedicalRiskLimitLevel()==null || request.getMedicalRiskLimitLevel().isEmpty());
+        return !(request.getMedicalRiskLimitLevel() == null || request.getMedicalRiskLimitLevel().isEmpty());
     }
-    private ValidationError buildError(TravelCalculatePremiumRequestV1 request){
+
+    private ValidationError buildError(TravelCalculatePremiumRequestV1 request) {
         return errorFactory.buildError("ERROR_CODE_15", List.of(
-                        new Placeholder("NOT_EXISTING_MEDICAL_RISK_LIMIT_LEVEL",
-                                request.getMedicalRiskLimitLevel())));
+                new Placeholder("NOT_EXISTING_MEDICAL_RISK_LIMIT_LEVEL",
+                        request.getMedicalRiskLimitLevel())));
 
     }
-    private boolean notExistLimitLevel(TravelCalculatePremiumRequestV1 request){
+
+    private boolean notExistLimitLevel(TravelCalculatePremiumRequestV1 request) {
         return classifierValueRepository.findByClassifierTitleAndIc(
                 "MEDICAL_RISK_LIMIT_LEVEL", request.getMedicalRiskLimitLevel()).isEmpty();
     }

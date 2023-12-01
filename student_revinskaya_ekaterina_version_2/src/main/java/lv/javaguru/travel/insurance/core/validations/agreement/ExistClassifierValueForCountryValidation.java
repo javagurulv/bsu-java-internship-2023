@@ -10,9 +10,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
+
 @Component
-public class ExistClassifierValueForCountryValidation
-        extends TravelAgreementFieldValidationImpl {
+public class ExistClassifierValueForCountryValidation extends TravelAgreementFieldValidationImpl {
     @Autowired
     private ValidationErrorFactory validationErrorFactory;
     @Autowired
@@ -20,12 +20,15 @@ public class ExistClassifierValueForCountryValidation
 
     @Override
     public Optional<ValidationErrorDTO> validate(AgreementDTO request) {
-        return validateExistClassifierValue(request) ? Optional.of(validationErrorFactory.buildError("ERROR_CODE_11",
-                        List.of(new Placeholder("NOT_EXISTING_COUNTRY", request.getCountry()))))
+        return validateExistClassifierValue(request)
+                ? Optional.of(validationErrorFactory.buildError("ERROR_CODE_11",
+                List.of(new Placeholder("NOT_EXISTING_COUNTRY", request.getCountry()))))
                 : Optional.empty();
     }
-    private boolean validateExistClassifierValue(AgreementDTO request){
-        return request.getCountry() != null && !request.getCountry().isEmpty()
+
+    private boolean validateExistClassifierValue(AgreementDTO request) {
+        return request.getCountry() != null
+                && !request.getCountry().isEmpty()
                 && classifierValueRepository.findByClassifierTitleAndIc("COUNTRY", request.getCountry()).isEmpty();
     }
 }

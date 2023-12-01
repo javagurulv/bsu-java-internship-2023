@@ -9,6 +9,7 @@ import java.util.Optional;
 
 public interface TravelPersonFieldValidation {
     Optional<ValidationErrorDTO> validate(PersonDTO request);
+
     List<ValidationErrorDTO> validateList(PersonDTO request);
 
 }

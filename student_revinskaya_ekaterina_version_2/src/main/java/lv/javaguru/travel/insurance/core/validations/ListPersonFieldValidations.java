@@ -17,34 +17,35 @@ public class ListPersonFieldValidations {
     @Autowired
     private List<TravelPersonFieldValidation> personFieldValidations;
 
-    public List<ValidationErrorDTO> validateErrors(AgreementDTO request){
+    public List<ValidationErrorDTO> validateErrors(AgreementDTO request) {
         return request.getPersons().stream()
-                .flatMap(person->validatePersonSingleAndList(person).stream())
+                .flatMap(person -> validatePersonSingleAndList(person).stream())
                 .collect(Collectors.toList());
     }
-    private List<ValidationErrorDTO> validatePersonSingleAndList(PersonDTO request){
+
+    private List<ValidationErrorDTO> validatePersonSingleAndList(PersonDTO request) {
         List<ValidationErrorDTO> personSingleErrors = validatePersonSingleErrors(request);
         List<ValidationErrorDTO> personListErrors = validatePersonListErrors(request);
         return concatenateErrorLists(personSingleErrors, personListErrors);
     }
 
-    private List<ValidationErrorDTO> validatePersonSingleErrors(PersonDTO person){
+    private List<ValidationErrorDTO> validatePersonSingleErrors(PersonDTO person) {
         return personFieldValidations.stream()
-                .map(validation->validation.validate(person))
+                .map(validation -> validation.validate(person))
                 .filter(Optional::isPresent)
                 .map(Optional::get)
                 .collect(Collectors.toList());
     }
-    private List<ValidationErrorDTO> validatePersonListErrors(PersonDTO person){
+
+    private List<ValidationErrorDTO> validatePersonListErrors(PersonDTO person) {
         return personFieldValidations.stream()
-                .map(validation->validation.validateList(person))
+                .map(validation -> validation.validateList(person))
                 .flatMap(Collection::stream)
                 .collect(Collectors.toList());
     }
 
     private List<ValidationErrorDTO> concatenateErrorLists(
-            List<ValidationErrorDTO> singleErrors, List<ValidationErrorDTO> listErrors)
-    {
+            List<ValidationErrorDTO> singleErrors, List<ValidationErrorDTO> listErrors) {
         return Stream.concat(singleErrors.stream(), listErrors.stream())
                 .collect(Collectors.toList());
     }
