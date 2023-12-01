@@ -1,5 +1,6 @@
 package lv.javaguru.travel.insurance.rest;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class TravelCalculatePremiumRequest {
@@ -9,7 +10,9 @@ public class TravelCalculatePremiumRequest {
     private Date agreementDateFrom;
     private Date agreementDateTo;
 
-    public TravelCalculatePremiumRequest() { }
+
+    public TravelCalculatePremiumRequest() {
+    }
 
     public TravelCalculatePremiumRequest(String personFirstName,
                                          String personLastName,
@@ -47,10 +50,6 @@ public class TravelCalculatePremiumRequest {
 
     public Date getAgreementDateTo() {
         return agreementDateTo;
-    }
-
-    public void setAgreementDateTo(Date agreementDateTo) {
-        this.agreementDateTo = agreementDateTo;
     }
 
 }

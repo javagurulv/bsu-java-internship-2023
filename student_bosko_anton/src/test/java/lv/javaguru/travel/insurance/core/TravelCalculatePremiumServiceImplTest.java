@@ -4,16 +4,27 @@ import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumResponse;
 import org.junit.jupiter.api.Test;
 
-import java.util.Date;
+import java.math.BigDecimal;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TravelCalculatePremiumServiceImplTest {
+    DateTimeService date = new DateTimeService();
+
     @Test
-    public void test()
-    {
+    public void test_first() {
         TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest("Anton",
-                "Bosko", new Date(123123100123L), new Date(123123123123L));
-        TravelCalculatePremiumResponse response = new TravelCalculatePremiumResponse(request);
+                "Bosko", date.createDate("15.08.2004"), date.createDate("15.08.2005"));
         TravelCalculatePremiumServiceImpl impl = new TravelCalculatePremiumServiceImpl();
-        assert (response.equals(impl.calculatePremium(request)));
+        TravelCalculatePremiumResponse response = impl.buildResponse(request, impl.getUnderwriting().calculatePremium(request));
+        assertEquals(response.getAgreementPrice(), new BigDecimal(date.getDaysBetween(request.getAgreementDateFrom(), request.getAgreementDateTo())));
+    }
+    @Test
+    public void test_second() {
+        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest("Ludmila",
+                "Velitskaya", date.createDate("16.05.2003"), date.createDate("15.08.2005"));
+        TravelCalculatePremiumServiceImpl impl = new TravelCalculatePremiumServiceImpl();
+        TravelCalculatePremiumResponse response = impl.buildResponse(request, impl.getUnderwriting().calculatePremium(request));
+        assertEquals(response.getAgreementPrice(), new BigDecimal(date.getDaysBetween(request.getAgreementDateFrom(), request.getAgreementDateTo())));
     }
 }

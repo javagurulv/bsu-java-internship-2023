@@ -23,9 +23,9 @@ public class TravelPremiumUnderwritingTest {
 
     @Test
     public void correctAgreementPrice() throws ParseException {
-        Mockito.when(request.getAgreementDateFrom()).thenReturn(new SimpleDateFormat("dd.MM.yyyy").parse("21.05.2000"));
-        Mockito.when(request.getAgreementDateTo()).thenReturn(new SimpleDateFormat("dd.MM.yyyy").parse("12.05.2000"));
-        Mockito.when(service.getDaysBetween(request.getAgreementDateTo(), request.getAgreementDateFrom())).thenReturn(9L);
+        Mockito.when(request.getAgreementDateFrom()).thenReturn(new SimpleDateFormat("dd.MM.yyyy").parse("12.05.2000"));
+        Mockito.when(request.getAgreementDateTo()).thenReturn(new SimpleDateFormat("dd.MM.yyyy").parse("21.05.2000"));
+        Mockito.when(service.getDaysBetween(request.getAgreementDateFrom(), request.getAgreementDateTo())).thenReturn(9L);
         BigDecimal premium = underwriting.calculatePremium(request);
         assertEquals(premium, new BigDecimal(9));
     }

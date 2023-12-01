@@ -13,5 +13,8 @@ import java.util.List;
 @NoArgsConstructor
 public class CoreResponse {
     private List<ValidationError> errors;
-    public boolean hasErrors(List<ValidationError> errors) {return errors != null && !errors.isEmpty();}
+
+    public boolean hasErrors(List<ValidationError> errors) {
+        return errors != null && !errors.isEmpty();
+    }
 }

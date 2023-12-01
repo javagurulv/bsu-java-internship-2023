@@ -10,7 +10,7 @@ public class DateTimeService {
 
     long getDaysBetween(Date date1, Date date2)
     {
-        return TimeUnit.DAYS.convert(date1.getTime()-date2.getTime(),TimeUnit.MILLISECONDS);
+        return TimeUnit.DAYS.convert(date2.getTime()-date1.getTime(),TimeUnit.MILLISECONDS);
     }
 
 }
