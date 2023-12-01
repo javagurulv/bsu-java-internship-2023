@@ -17,42 +17,42 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-class PersonLastNameValidationTest {
+class EmptyPersonFirstNameValidationTest {
 
     @Mock private ValidationErrorFactory errorFactory;
 
     @InjectMocks
-    private PersonLastNameValidation validation;
+    private EmptyPersonFirstNameValidation validation;
 
     @Test
-    public void shouldReturnErrorWhenPersonLastNameIsNull() {
+    public void shouldReturnErrorWhenPersonFirstNameIsNull() {
         AgreementDTO agreement = mock(AgreementDTO.class);
         PersonDTO person = mock(PersonDTO.class);
-        when(person.getPersonLastName()).thenReturn(null);
+        when(person.getPersonFirstName()).thenReturn(null);
         ValidationErrorDTO validationError = mock(ValidationErrorDTO.class);
-        when(errorFactory.buildError("ERROR_CODE_8")).thenReturn(validationError);
+        when(errorFactory.buildError("ERROR_CODE_7")).thenReturn(validationError);
         Optional<ValidationErrorDTO> errorOpt = validation.validate(agreement, person);
         assertTrue(errorOpt.isPresent());
         assertSame(errorOpt.get(), validationError);
     }
 
     @Test
-    public void shouldReturnErrorWhenPersonLastNameIsEmpty() {
+    public void shouldReturnErrorWhenPersonFirstNameIsEmpty() {
         AgreementDTO agreement = mock(AgreementDTO.class);
         PersonDTO person = mock(PersonDTO.class);
-        when(person.getPersonLastName()).thenReturn("");
+        when(person.getPersonFirstName()).thenReturn("");
         ValidationErrorDTO validationError = mock(ValidationErrorDTO.class);
-        when(errorFactory.buildError("ERROR_CODE_8")).thenReturn(validationError);
+        when(errorFactory.buildError("ERROR_CODE_7")).thenReturn(validationError);
         Optional<ValidationErrorDTO> errorOpt = validation.validate(agreement, person);
         assertTrue(errorOpt.isPresent());
         assertSame(errorOpt.get(), validationError);
     }
 
     @Test
-    public void shouldNotReturnErrorWhenPersonLastNameIsPresent() {
+    public void shouldNotReturnErrorWhenPersonFirstNameIsPresent() {
         AgreementDTO agreement = mock(AgreementDTO.class);
         PersonDTO person = mock(PersonDTO.class);
-        when(person.getPersonLastName()).thenReturn("Petrov");
+        when(person.getPersonFirstName()).thenReturn("Vasja");
         Optional<ValidationErrorDTO> errorOpt = validation.validate(agreement, person);
         assertTrue(errorOpt.isEmpty());
         verifyNoInteractions(errorFactory);
