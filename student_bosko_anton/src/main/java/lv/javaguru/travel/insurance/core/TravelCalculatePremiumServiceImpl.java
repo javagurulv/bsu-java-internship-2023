@@ -28,7 +28,7 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
     @Override
     public TravelCalculatePremiumResponse calculatePremium(TravelCalculatePremiumRequest request) {
         List<ValidationError> errors = validator.validate(request);
-        return errors.isEmpty() ? buildResponse(errors) : buildResponse(request, underwriting.calculatePremium(request));
+        return !errors.isEmpty() ? buildResponse(errors) : buildResponse(request, underwriting.calculatePremium(request));
     }
 
     public TravelCalculatePremiumResponse buildResponse(List<ValidationError> errors) {
