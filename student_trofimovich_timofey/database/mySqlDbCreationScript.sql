@@ -36,6 +36,31 @@ CREATE UNIQUE INDEX `ix_classifier_values_ic`
     ON `classifier_values` (`ic`);
 
 
+CREATE TABLE IF NOT EXISTS `country_default_day_rate`
+(
+    `id`                       BIGINT         NOT NULL AUTO_INCREMENT,
+    `country_ic`               VARCHAR(200)   NOT NULL,
+    `country_default_day_rate` DECIMAL(10, 2) NOT NULL,
+    PRIMARY KEY ('id')
+);
+
+ALTER TABLE `country_default_day_rate`
+    ADD FOREIGN KEY (`country_ic`) REFERENCES `classifier_values` (`ic`);
+
+CREATE UNIQUE INDEX `ix_country_default_day_rate`
+    ON `country_default_day_rate` (`country_ic`);
+
+
+CREATE TABLE IF NOT EXISTS `age_coefficient`
+(
+    `id`          BIGINT         NOT NULL AUTO_INCREMENT,
+    `age_from`    INT            NOT NULL,
+    `age_to`      INT            NOT NULL,
+    'coefficient' DECIMAL(10, 2) NOT NULL,
+    PRIMARY KEY ('id')
+);
+
+
 SET SQL_MODE = @OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS = @OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS = @OLD_UNIQUE_CHECKS;

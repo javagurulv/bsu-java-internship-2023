@@ -1,8 +1,0 @@
-{
-  "errors": [
-    {
-      "errorCode": "ERROR_CODE_18",
-      "description": "Agreement with uuid = UNKNOWN_UUID not found!"
-    }
-  ]
-}

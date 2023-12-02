@@ -1,9 +1,9 @@
 package lv.javaguru.travel.insurance.core.services;
 
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumResponse;
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumResponseV1;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 
 public interface TravelCalculatePremiumService {
-    TravelCalculatePremiumResponse calculatePremium(TravelCalculatePremiumRequest request);
+    TravelCalculatePremiumResponseV1 calculatePremium(TravelCalculatePremiumRequestV1 request);
 
 }
