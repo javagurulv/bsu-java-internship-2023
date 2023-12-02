@@ -31,6 +31,7 @@ public class TravelCalculatePremiumResponse extends CoreResponse {
     private BigDecimal agreementPremium;
     private List<RiskPremium> risks;
     private String country;
+    private String medicalRiskLimitLevel;
 
     public TravelCalculatePremiumResponse(List<ValidationError> errors) {
         super(errors);

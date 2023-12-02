@@ -5,5 +5,6 @@
   "agreementDateFrom" : "2025-05-25",
   "agreementDateTo" : "2025-05-29",
   "selected_risks":[],
-  "country": "LATVIA"
+  "country": "LATVIA",
+  "medicalRiskLimitLevel": "LEVEL_10000"
 }

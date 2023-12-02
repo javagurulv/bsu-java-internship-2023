@@ -1,8 +1,8 @@
 {
   "errors": [
     {
-      "errorCode": "ERROR_CODE_3",
-      "description": "Field agreementDateFrom is empty!"
+      "errorCode": "ERROR_CODE_15",
+      "description": "Medical risk limit my_limit is not supported by the system!"
     }
   ],
   "personFirstName": null,
@@ -14,5 +14,4 @@
   "risks": null,
   "country": null,
   "medicalRiskLimitLevel": null
-
 }

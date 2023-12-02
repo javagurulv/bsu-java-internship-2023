@@ -20,5 +20,6 @@
       "premium": 0.00
     }
   ],
-  "country": "SPAIN"
+  "country": "SPAIN",
+  "medicalRiskLimitLevel": "LEVEL_10000"
 }
