@@ -5,7 +5,7 @@
 2. В классе SelectedRisksPremiumCalculator поменяйте сигнатуру
 List<RiskPremium> calculatePremiumForAllRisks(TravelCalculatePremiumRequestV1 request)
 на
-List<RiskPremium> calculatePremiumForAllRisks(AgreementDTO agreement, PersonDTO person)
+List<RiskDTO> calculatePremiumForAllRisks(AgreementDTO agreement, PersonDTO person)
 а так же сделайте нужные изменения в коде класса.
 Данный класс должен по полису и персоне рассчитывать все выбранные
 риски для переданной в качестве параметра персоне.

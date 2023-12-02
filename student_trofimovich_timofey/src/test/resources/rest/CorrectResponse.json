@@ -1,23 +1,25 @@
 {
   "errors": null,
-  "riskPremiums": null,
   "personFirstName": "Harry",
   "personLastName": "Kane",
+  "dateOfBirth": "2004-03-02",
   "agreementDateFrom": "2025-04-05",
   "agreementDateTo": "2025-04-08",
-  "agreementPremium": 3,
+  "agreementPremium": 8.25,
   "risks": [
     {
+      "ic": "TRAVEL_MEDICAL",
+      "premium": 8.25
+    },
+    {
       "ic": "TRAVEL_CANCELLATION",
-      "premium": 0
+      "premium": 0.00
     },
     {
       "ic": "TRAVEL_LOSS_BAGGAGE",
-      "premium": 0
-    },
-    {
-      "ic": "TRAVEL_MEDICAL",
-      "premium": 3
+      "premium": 0.00
     }
-  ]
+  ],
+  "country": "SPAIN",
+  "medicalRiskLimitLevel": "LEVEL_10000"
 }

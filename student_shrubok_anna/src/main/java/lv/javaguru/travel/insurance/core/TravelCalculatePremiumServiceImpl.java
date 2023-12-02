@@ -14,7 +14,7 @@ import java.util.List;
 class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService {
 
     @Autowired private TravelCalculatePremiumRequestValidator requestValidator;
-    @Autowired private DateTimeService dateTimeService;
+    @Autowired private TravelCalculatePremiumUnderwriting underwriting;
     @Override
     public TravelCalculatePremiumResponse calculatePremium(TravelCalculatePremiumRequest request) {
 
@@ -28,7 +28,7 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
         response.setPersonLastName(request.getPersonLastName());
         response.setAgreementDateFrom(request.getAgreementDateFrom());
         response.setAgreementDateTo(request.getAgreementDateTo());
-        response.setAgreementPrice(new BigDecimal(dateTimeService.getDaysBetween(request.getAgreementDateFrom(),request.getAgreementDateTo())));
+        response.setAgreementPrice(underwriting.calculateAgreementPrice(request));
         return response;
     }
 

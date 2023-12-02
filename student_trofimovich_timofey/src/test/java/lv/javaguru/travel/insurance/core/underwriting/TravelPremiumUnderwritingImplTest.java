@@ -1,6 +1,7 @@
 package lv.javaguru.travel.insurance.core.underwriting;
 
 
+
 import lv.javaguru.travel.insurance.dto.RiskPremium;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import org.junit.jupiter.api.Test;
@@ -12,6 +13,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
 import java.util.List;
+
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.Mockito.mock;
@@ -30,10 +32,10 @@ public class TravelPremiumUnderwritingImplTest {
         RiskPremium riskPremium1 = mock(RiskPremium.class);
         when(riskPremium1.getPremium()).thenReturn(new BigDecimal(10));
         RiskPremium riskPremium2 = mock(RiskPremium.class);
-        when(riskPremium2.getPremium()).thenReturn(new BigDecimal(15));
+        when(riskPremium2.getPremium()).thenReturn(new BigDecimal(25));
         List<RiskPremium> riskPremiums = List.of(riskPremium1, riskPremium2);
         when(selectedRisksPremiumCalculator.calculatePremiumForAllRisks(request))
                 .thenReturn(riskPremiums);
-        assertThat(premiumUnderwriting.calculatePremium(request).getTotalPremium()).isEqualTo(new BigDecimal(25));
+        assertThat(premiumUnderwriting.calculatePremium(request).getTotalPremium()).isEqualTo(new BigDecimal(35));
     }
 }

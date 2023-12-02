@@ -1,22 +1,20 @@
 package lv.javaguru.travel.insurance.core.validations;
 
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import lv.javaguru.travel.insurance.dto.ValidationError;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
 
-abstract class TravelRequestValidationImpl
-        implements TravelRequestValidation {
+abstract class TravelRequestValidationImpl implements TravelRequestValidation {
 
     @Override
-    public Optional<ValidationError> validate(TravelCalculatePremiumRequest request) {
+    public Optional<ValidationError> validate(TravelCalculatePremiumRequestV1 request) {
         return Optional.empty();
     }
 
     @Override
-    public List<ValidationError> validateList(TravelCalculatePremiumRequest request) {
+    public List<ValidationError> validateList(TravelCalculatePremiumRequestV1 request) {
         return List.of();
     }
 

@@ -1,6 +1,6 @@
 package lv.javaguru.travel.insurance.core.validations;
 
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -23,23 +23,25 @@ public class TravelRequestSelectedRisksValidationTest {
     private TravelRequestSelectedRisksValidation selectedRisksValidation;
     @Mock
     private ValidationErrorFactory validationErrorFactory;
+
     @Test
     public void responseShouldContainErrorEmptySelected_risksTest() {
-        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        TravelCalculatePremiumRequestV1 request = mock(TravelCalculatePremiumRequestV1.class);
         when(request.getSelectedRisks()).thenReturn(List.of());
         ValidationError validationError = mock(ValidationError.class);
         when(validationErrorFactory.buildError("ERROR_CODE_8")).thenReturn(validationError);
-        Optional<ValidationError> error= selectedRisksValidation.validate(request);
+        Optional<ValidationError> error = selectedRisksValidation.validate(request);
         assertTrue(error.isPresent());
         assertEquals(error.get(), validationError);
     }
+
     @Test
     public void responseShouldContainErrorNullSelected_risksTest() {
-        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        TravelCalculatePremiumRequestV1 request = mock(TravelCalculatePremiumRequestV1.class);
         when(request.getSelectedRisks()).thenReturn(null);
         ValidationError validationError = mock(ValidationError.class);
         when(validationErrorFactory.buildError("ERROR_CODE_8")).thenReturn(validationError);
-        Optional<ValidationError> error= selectedRisksValidation.validate(request);
+        Optional<ValidationError> error = selectedRisksValidation.validate(request);
         assertTrue(error.isPresent());
         assertEquals(error.get(), validationError);
     }

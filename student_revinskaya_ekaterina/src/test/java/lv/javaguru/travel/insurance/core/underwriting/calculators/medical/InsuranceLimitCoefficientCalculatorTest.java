@@ -2,7 +2,7 @@ package lv.javaguru.travel.insurance.core.underwriting.calculators.medical;
 
 import lv.javaguru.travel.insurance.core.domain.MedicalRiskLimitLevel;
 import lv.javaguru.travel.insurance.core.repositories.MedicalRiskLimitLevelRepository;
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -23,9 +23,11 @@ public class InsuranceLimitCoefficientCalculatorTest {
     private InsuranceLimitCoefficientCalculator insuranceLimitCoefficientCalculator;
     @Mock
     private MedicalRiskLimitLevelRepository medicalRiskLimitLevelRepository;
-    @Mock private TravelCalculatePremiumRequest request;
+    @Mock
+    private TravelCalculatePremiumRequestV1 request;
+
     @Test
-    public void calculateInsuranceLimitCoefficientTest(){
+    public void calculateInsuranceLimitCoefficientTest() {
         when(request.getMedicalRiskLimitLevel()).thenReturn("LEVEL_10000");
         MedicalRiskLimitLevel medicalRiskLimitLevel = mock(MedicalRiskLimitLevel.class);
         when(medicalRiskLimitLevel.getCoefficient()).thenReturn(BigDecimal.valueOf(1.0));
@@ -34,18 +36,20 @@ public class InsuranceLimitCoefficientCalculatorTest {
         ReflectionTestUtils.setField(insuranceLimitCoefficientCalculator, "medicalRiskLimitLevelEnabled", true);
         assertEquals(insuranceLimitCoefficientCalculator.calculate(request), BigDecimal.valueOf(1.0));
     }
+
     @Test
-    public void shouldReturn1Test(){
+    public void shouldReturn1Test() {
         ReflectionTestUtils.setField(insuranceLimitCoefficientCalculator, "medicalRiskLimitLevelEnabled", false);
         assertEquals(insuranceLimitCoefficientCalculator.calculate(request), BigDecimal.valueOf(1));
     }
+
     @Test
-    public void throwExceptionCountryDefaultDayRateTest(){
+    public void throwExceptionCountryDefaultDayRateTest() {
         when(request.getMedicalRiskLimitLevel()).thenReturn("FAKE_LEVEL");
         when(medicalRiskLimitLevelRepository.findByMedicalRiskLimitLevelIc("FAKE_LEVEL"))
                 .thenReturn(Optional.empty());
         ReflectionTestUtils.setField(insuranceLimitCoefficientCalculator, "medicalRiskLimitLevelEnabled", true);
-        Throwable thrown = assertThrows(RuntimeException.class, ()->insuranceLimitCoefficientCalculator.calculate(request));
+        Throwable thrown = assertThrows(RuntimeException.class, () -> insuranceLimitCoefficientCalculator.calculate(request));
         assertEquals(thrown.getMessage(), "medicalRiskLimitLevel with ic FAKE_LEVEL not found");
     }
 }

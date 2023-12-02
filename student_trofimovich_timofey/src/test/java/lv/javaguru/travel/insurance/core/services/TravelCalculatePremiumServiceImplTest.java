@@ -110,6 +110,31 @@ public class TravelCalculatePremiumServiceImplTest {
     }
 
     @Test
+    public void shouldReturnResponseWithCorrectCountry() {
+        when(request.getCountry()).thenReturn("country");
+        when(validator.validate(request)).thenReturn(List.of());
+        when(underwriting.calculatePremium(request)).thenReturn(mock(TravelPremiumCalculationResult.class));
+        TravelCalculatePremiumResponse response = service.calculatePremium(request);
+        assertThat(response.getCountry()).isEqualTo("country");
+    }
+    @Test
+    public void shouldReturnResponseWithCorrectMedicalLimitLevel() {
+        when(request.getMedicalRiskLimitLevel()).thenReturn("level");
+        when(validator.validate(request)).thenReturn(List.of());
+        when(underwriting.calculatePremium(request)).thenReturn(mock(TravelPremiumCalculationResult.class));
+        TravelCalculatePremiumResponse response = service.calculatePremium(request);
+        assertThat(response.getMedicalRiskLimitLevel()).isEqualTo("level");
+    }
+    @Test
+    public void shouldReturnResponseWithCorrectDateOfBirth() {
+        when(request.getDateOfBirth()).thenReturn(createDate("12.12.2003"));
+        when(validator.validate(request)).thenReturn(List.of());
+        when(underwriting.calculatePremium(request)).thenReturn(mock(TravelPremiumCalculationResult.class));
+        TravelCalculatePremiumResponse response = service.calculatePremium(request);
+        assertThat(response.getDateOfBirth()).isEqualTo(createDate("12.12.2003"));
+    }
+
+    @Test
     public void shouldReturnResponseWithErrors() {
         when(validator.validate(request)).thenReturn(buildValidationErrorList());
         TravelCalculatePremiumResponse response = service.calculatePremium(request);
