@@ -1,0 +1,64 @@
+package lv.javaguru.travel.insurance.core.services;
+
+import lv.javaguru.travel.insurance.core.api.command.TravelCalculatePremiumCoreCommand;
+import lv.javaguru.travel.insurance.core.api.command.TravelCalculatePremiumCoreResult;
+import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
+import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
+import lv.javaguru.travel.insurance.core.api.dto.RiskDTO;
+import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
+import lv.javaguru.travel.insurance.core.underwriting.TravelPremiumCalculationResult;
+import lv.javaguru.travel.insurance.core.underwriting.TravelPremiumUnderwriting;
+import lv.javaguru.travel.insurance.core.validations.TravelAgreementValidator;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import java.math.BigDecimal;
+import java.util.Collection;
+import java.util.List;
+
+@Component
+class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService {
+    @Autowired
+    private TravelAgreementValidator agreementValidator;
+    @Autowired
+    private TravelPremiumUnderwriting premiumUnderwriting;
+
+    @Override
+    public TravelCalculatePremiumCoreResult calculatePremium(TravelCalculatePremiumCoreCommand command) {
+
+        List<ValidationErrorDTO> errors = agreementValidator.validate(command.getAgreement());
+        if (!errors.isEmpty()) {
+            return buildErrorResponse(errors);
+        }
+        return buildSuccessResponse(command.getAgreement());
+    }
+
+    private TravelCalculatePremiumCoreResult buildErrorResponse(List<ValidationErrorDTO> errors) {
+        return new TravelCalculatePremiumCoreResult(errors);
+    }
+
+    private TravelCalculatePremiumCoreResult buildSuccessResponse(AgreementDTO agreement) {
+        calculateRiskPremiumsForAllPersons(agreement);
+
+        BigDecimal totalAgreementPremium = calculateTotalAgreementPremium(agreement);
+        agreement.setAgreementPremium(totalAgreementPremium);
+
+        TravelCalculatePremiumCoreResult coreResult = new TravelCalculatePremiumCoreResult();
+        coreResult.setAgreement(agreement);
+        return coreResult;
+    }
+
+    private BigDecimal calculateTotalAgreementPremium(AgreementDTO agreement) {
+        return agreement.getPersons().stream()
+                .map(PersonDTO::getRisks)
+                .flatMap(Collection::stream)
+                .map(RiskDTO::getPremium)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
+    private void calculateRiskPremiumsForAllPersons(AgreementDTO agreement) {
+        agreement.getPersons().forEach(person -> {
+            TravelPremiumCalculationResult calculationResult = premiumUnderwriting.calculatePremium(agreement, person);
+            person.setRisks(calculationResult.getRisks());
+        });
+    }
+}
