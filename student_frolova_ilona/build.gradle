@@ -5,8 +5,15 @@ dependencies {
 	implementation('com.fasterxml.jackson.core:jackson-core:2.14.2')
 	implementation('com.google.guava:guava:31.0.1-jre')
 
+	implementation ("org.springframework:spring-jdbc:3.1.0.RELEASE")
+	implementation("mysql:mysql-connector-java:8.0.28")
+	implementation ("org.springframework:spring-tx")
+
+
 	testImplementation('org.springframework.boot:spring-boot-starter-test:2.7.5')
 	testImplementation('uk.org.webcompere:model-assert:1.0.0')
+
+	testImplementation group: 'com.h2database', name: 'h2', version: '2.2.224'
 
 	test {
 		useJUnitPlatform()
