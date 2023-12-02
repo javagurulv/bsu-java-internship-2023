@@ -6,6 +6,8 @@ import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.api.dto.RiskDTO;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
+import lv.javaguru.travel.insurance.core.services.calculators.CalculatorForTotalAgreementPremium;
+import lv.javaguru.travel.insurance.core.services.calculators.CalculatorRiskPremiumsForAllPersons;
 import lv.javaguru.travel.insurance.core.underwriting.TravelPremiumCalculationResult;
 import lv.javaguru.travel.insurance.core.underwriting.TravelPremiumUnderwriting;
 import lv.javaguru.travel.insurance.core.validations.TravelAgreementValidator;
@@ -21,7 +23,9 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
     @Autowired
     private TravelAgreementValidator agreementValidator;
     @Autowired
-    private TravelPremiumUnderwriting premiumUnderwriting;
+    private CalculatorForTotalAgreementPremium calculatorForTotalAgreementPremium;
+    @Autowired
+    private CalculatorRiskPremiumsForAllPersons calculatorRiskPremiumsForAllPersons;
 
     @Override
     public TravelCalculatePremiumCoreResult calculatePremium(TravelCalculatePremiumCoreCommand command) {
@@ -38,9 +42,9 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
     }
 
     private TravelCalculatePremiumCoreResult buildSuccessResponse(AgreementDTO agreement) {
-        calculateRiskPremiumsForAllPersons(agreement);
+        calculatorRiskPremiumsForAllPersons.calculate(agreement);
 
-        BigDecimal totalAgreementPremium = calculateTotalAgreementPremium(agreement);
+        BigDecimal totalAgreementPremium = calculatorForTotalAgreementPremium.calculate(agreement);
         agreement.setAgreementPremium(totalAgreementPremium);
 
         TravelCalculatePremiumCoreResult coreResult = new TravelCalculatePremiumCoreResult();
@@ -48,17 +52,4 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
         return coreResult;
     }
 
-    private BigDecimal calculateTotalAgreementPremium(AgreementDTO agreement) {
-        return agreement.getPersons().stream()
-                .map(PersonDTO::getRisks)
-                .flatMap(Collection::stream)
-                .map(RiskDTO::getPremium)
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
-    }
-    private void calculateRiskPremiumsForAllPersons(AgreementDTO agreement) {
-        agreement.getPersons().forEach(person -> {
-            TravelPremiumCalculationResult calculationResult = premiumUnderwriting.calculatePremium(agreement, person);
-            person.setRisks(calculationResult.getRisks());
-        });
-    }
 }
