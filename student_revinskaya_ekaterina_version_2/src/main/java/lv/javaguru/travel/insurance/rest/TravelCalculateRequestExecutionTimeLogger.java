@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.rest.v1;
+package lv.javaguru.travel.insurance.rest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
