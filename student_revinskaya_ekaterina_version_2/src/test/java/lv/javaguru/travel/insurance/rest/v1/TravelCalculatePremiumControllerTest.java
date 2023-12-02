@@ -30,7 +30,7 @@ public abstract class TravelCalculatePremiumControllerTest {
     private static final String BASE_URL = "/insurance/travel/api/v1/";
     protected abstract String getTestCaseName();
     @Test
-    public void testRequestWithoutFirstName() throws Exception {
+    public void testRequest() throws Exception {
         equalsJsonFiles("rest/v1/" +getTestCaseName() + "Request.json", "rest/v1/" +getTestCaseName() + "Response.json");
     }
 
