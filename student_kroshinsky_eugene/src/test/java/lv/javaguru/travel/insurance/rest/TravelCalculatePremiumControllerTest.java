@@ -15,6 +15,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static uk.org.webcompere.modelassert.json.JsonAssertions.assertJson;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -99,7 +100,12 @@ public class TravelCalculatePremiumControllerTest {
                 .andReturn();
 
         String responseBody = result.getResponse().getContentAsString();
-        assertEquals(mapper.readTree(responseJson), mapper.readTree(responseBody));
+
+        assertJson(responseJson)
+                .where()
+                .keysInAnyOrder()
+                .arrayInAnyOrder()
+                .isEqualTo(responseBody);
     }
 
 }
