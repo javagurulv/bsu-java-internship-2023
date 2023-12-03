@@ -1,0 +1,25 @@
+{
+  "errors": null,
+  "personFirstName": "Vasja",
+  "personLastName": "Pupkin",
+  "agreementDateFrom": "2025-05-12",
+  "agreementDateTo": "2025-05-19",
+  "country": "SPAIN",
+  "birthday": "2005-08-03",
+  "medicalRiskLimitLevel": "LEVEL_10000",
+  "agreementPremium": 19.25,
+  "risks": [
+    {
+      "riskIc": "TRAVEL_MEDICAL",
+      "premium": 19.25
+    },
+    {
+      "riskIc": "TRAVEL_CANCELLATION",
+      "premium": 0.00
+    },
+    {
+      "riskIc": "TRAVEL_LOSS_BAGGAGE",
+      "premium": 0.00
+    }
+  ]
+}
