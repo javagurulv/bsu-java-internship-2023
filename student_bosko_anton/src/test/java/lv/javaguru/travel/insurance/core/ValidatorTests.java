@@ -19,8 +19,8 @@ public class ValidatorTests {
         TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest();
         request.setPersonFirstName("Anton");
         request.setPersonLastName("Bosko");
-        request.setAgreementDateFrom(date.createDate("15.08.2004"));
-        request.setAgreementDateTo(date.createDate("15.08.2005"));
+        request.setAgreementDateFrom(date.createDate("24.08.2054"));
+        request.setAgreementDateTo(date.createDate("25.08.2054"));
         List<ValidationError> errors = validator.validate(request);
         assertEquals(errors.size(), 0);
     }
@@ -33,7 +33,7 @@ public class ValidatorTests {
         request.setAgreementDateFrom(date.createDate("15.08.2004"));
         request.setAgreementDateTo(date.createDate("15.08.2004"));
         List<ValidationError> errors = validator.validate(request);
-        assertEquals(errors.get(0).getField(), "agreementDateTo");
-        assertEquals(errors.get(0).getMessage(), "needs to be bigger than agreementDateFrom");
+        assertEquals(errors.get(0).getField(), "agreementDateFrom");
+        assertEquals(errors.get(0).getMessage(), "cannot be the past date!");
     }
 }

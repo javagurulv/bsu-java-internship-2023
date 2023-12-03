@@ -16,8 +16,6 @@ import java.util.Optional;
 public class ExistMedicalRiskLimitLevelValidation extends TravelAgreementFieldValidationImpl {
     @Autowired
     private ValidationErrorFactory errorFactory;
-    @Value("${medical.risk.limit.level.enabled:false}")
-    private Boolean medicalRiskLimitLevelEnabled;
     @Autowired
     private ClassifierValueRepository classifierValueRepository;
 

@@ -23,7 +23,7 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 public class SelectedRiskValidationTest {
     @InjectMocks
-    private SelectedRiskValidation validation;
+    private NotExistSelectedRiskValidation validation;
     @Mock
     private ValidationErrorFactory errorFactory;
     @Mock

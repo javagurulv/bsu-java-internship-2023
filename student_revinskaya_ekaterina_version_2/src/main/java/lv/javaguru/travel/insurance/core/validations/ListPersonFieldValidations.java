@@ -18,9 +18,11 @@ public class ListPersonFieldValidations {
     private List<TravelPersonFieldValidation> personFieldValidations;
 
     public List<ValidationErrorDTO> validateErrors(AgreementDTO request) {
-        return request.getPersons().stream()
+        return request.getPersons() != null
+                ? request.getPersons().stream()
                 .flatMap(person -> validatePersonSingleAndList(person).stream())
-                .collect(Collectors.toList());
+                .collect(Collectors.toList())
+                : List.of();
     }
 
     private List<ValidationErrorDTO> validatePersonSingleAndList(PersonDTO request) {

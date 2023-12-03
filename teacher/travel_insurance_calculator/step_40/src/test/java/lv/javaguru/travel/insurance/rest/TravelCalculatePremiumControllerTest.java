@@ -141,11 +141,10 @@ public class TravelCalculatePremiumControllerTest {
         String responseBodyContent = result.getResponse().getContentAsString();
 
         String jsonResponse = jsonFileReader.readJsonFromFile(jsonResponseFilePath);
-
         assertJson(responseBodyContent)
                 .where()
-                    .keysInAnyOrder()
-                    .arrayInAnyOrder()
+                .keysInAnyOrder()
+                .arrayInAnyOrder()
                 .isEqualTo(jsonResponse);
     }
 
