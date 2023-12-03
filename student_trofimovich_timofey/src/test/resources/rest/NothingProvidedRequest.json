@@ -5,5 +5,6 @@
   "agreementDateFrom": null,
   "agreementDateTo": null,
   "selected_risks" : null,
-  "country" : null
+  "country" : null,
+  "medicalRiskLimitLevel": null
 }

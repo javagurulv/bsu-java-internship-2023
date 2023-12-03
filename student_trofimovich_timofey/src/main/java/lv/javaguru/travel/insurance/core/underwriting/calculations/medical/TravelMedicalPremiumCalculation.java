@@ -14,14 +14,17 @@ class TravelMedicalPremiumCalculation implements TravelRiskPremiumCalculator {
     @Autowired private AgeCoefficientCalculator ageCoefficientCalculator;
     @Autowired private CountryDefaultDayRateCalculator countryDefaultDayRateCalculator;
     @Autowired private DayCountCalculator dayCountCalculator;
+    @Autowired private InsuranceLimitCoefficientCalculator limitCoefficientCalculator;
     @Override
     public BigDecimal calculatePremium(TravelCalculatePremiumRequest request) {
         long numberOfDays = dayCountCalculator.getNumberOfDays(request);
         BigDecimal countryDefaultDayRate = countryDefaultDayRateCalculator.getCountryDefaultDayRate(request);
         BigDecimal ageCoefficient = ageCoefficientCalculator.getAgeCoefficient(request);
+        BigDecimal insuranceLimitCoefficient = limitCoefficientCalculator.getInsuranceLimitCoefficient(request);
         return new BigDecimal(numberOfDays)
                 .multiply(countryDefaultDayRate)
                 .multiply(ageCoefficient)
+                .multiply(insuranceLimitCoefficient)
                 .setScale(2, RoundingMode.HALF_UP);
     }
 

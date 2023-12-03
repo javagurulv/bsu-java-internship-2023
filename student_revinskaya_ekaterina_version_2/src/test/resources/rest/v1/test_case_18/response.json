@@ -1,0 +1,17 @@
+{
+  "errors": [
+    {
+      "errorCode": "ERROR_CODE_9",
+      "description": "Risk Type ic = FAKE_RISK not supported by the system"
+    }
+  ],
+  "personFirstName": null,
+  "personLastName": null,
+  "agreementDateFrom": null,
+  "agreementDateTo": null,
+  "country": null,
+  "birthday": null,
+  "medicalRiskLimitLevel": null,
+  "agreementPremium": null,
+  "risks": null
+}
