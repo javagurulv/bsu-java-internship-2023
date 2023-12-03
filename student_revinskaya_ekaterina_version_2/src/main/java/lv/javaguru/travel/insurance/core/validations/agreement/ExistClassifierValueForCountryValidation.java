@@ -27,8 +27,7 @@ public class ExistClassifierValueForCountryValidation extends TravelAgreementFie
     }
 
     private boolean validateExistClassifierValue(AgreementDTO request) {
-        return request.getCountry() != null
-                && !request.getCountry().isEmpty()
+        return !(request.getCountry() == null || request.getCountry().isEmpty())
                 && classifierValueRepository.findByClassifierTitleAndIc("COUNTRY", request.getCountry()).isEmpty();
     }
 }
