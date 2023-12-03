@@ -31,7 +31,7 @@ public class NotNullCountryValidationTest {
         AgreementDTO request = mock(AgreementDTO.class);
         when(request.getCountry()).thenReturn("");
         ValidationErrorDTO validationError = mock(ValidationErrorDTO.class);
-        when(validationErrorFactory.buildError(eq("ERROR_CODE_10"), anyList())).thenReturn(validationError);
+        when(validationErrorFactory.buildError("ERROR_CODE_10")).thenReturn(validationError);
         Optional<ValidationErrorDTO> error= notNullCountryValidation.validate(request);
         assertTrue(error.isPresent());
         assertEquals(error.get(), validationError);
@@ -41,7 +41,7 @@ public class NotNullCountryValidationTest {
         AgreementDTO request = mock(AgreementDTO.class);
         when(request.getCountry()).thenReturn(null);
         ValidationErrorDTO validationError = mock(ValidationErrorDTO.class);
-        when(validationErrorFactory.buildError(eq("ERROR_CODE_10"), anyList())).thenReturn(validationError);
+        when(validationErrorFactory.buildError("ERROR_CODE_10")).thenReturn(validationError);
         Optional<ValidationErrorDTO> error= notNullCountryValidation.validate(request);
         assertTrue(error.isPresent());
         assertEquals(error.get(), validationError);
