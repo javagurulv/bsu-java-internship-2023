@@ -25,16 +25,52 @@ public class TravelCalculatePremiumControllerTest {
     private ObjectMapper OMapper = new ObjectMapper();
 
     @Test
-    public void testFirst() throws Exception
+    public void EmptyFirstNameTest() throws Exception
     {
-        compare("rest/request.json",
-                "rest/response.json");
+        compare("rest/EmptyFirstNameRequest.json",
+                "rest/EmptyFirstNameResponse.json");
     }
     @Test
-    public void testSecond() throws Exception
+    public void EmptyLastNameTest() throws Exception
     {
-        compare("rest/request2.json",
-                "rest/response2.json");
+        compare("rest/EmptyLastNameRequest.json",
+                "rest/EmptyLastNameResponse.json");
+    }
+    @Test
+    public void NullFirstNameTest() throws Exception
+    {
+        compare("rest/NullFirstNameRequest.json",
+                "rest/NullFirstNameResponse.json");
+    }
+    @Test
+    public void NullLastNameTest() throws Exception
+    {
+        compare("rest/NullLastNameRequest.json",
+                "rest/NullLastNameResponse.json");
+    }
+    @Test
+    public void NullAgreementDateFromTest() throws Exception
+    {
+        compare("rest/NullAgreementDateFromRequest.json",
+                "rest/NullAgreementDateFromResponse.json");
+    }
+    @Test
+    public void NullAgreementDateToTest() throws Exception
+    {
+        compare("rest/NullAgreementDateToRequest.json",
+                "rest/NullAgreementDateToResponse.json");
+    }
+    @Test
+    public void DateFromBiggerThanDateToTest() throws Exception
+    {
+        compare("rest/DateFromBiggerThanDateToRequest.json",
+                "rest/DateFromBiggerThanDateToResponse.json");
+    }
+    @Test
+    public void ValidTest() throws Exception
+    {
+        compare("rest/ValidTestRequest.json",
+                "rest/ValidTestResponse.json");
     }
 
     private void compare(String RequestFilePath,

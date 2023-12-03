@@ -46,7 +46,9 @@ public class TravelCalculatePremiumRequestValidator {
     }
 
     private Optional<ValidationError> validateFromLessTo(TravelCalculatePremiumRequest request) {
-        return (request.getAgreementDateTo().getTime() <= request.getAgreementDateFrom().getTime()
+        return (request.getAgreementDateFrom() != null
+                && request.getAgreementDateTo() != null
+                && request.getAgreementDateTo().getTime() <= request.getAgreementDateFrom().getTime()
                 ? Optional.of(new ValidationError("agreementDateTo", "needs to be bigger than agreementDateFrom"))
                 : Optional.empty());
     }
