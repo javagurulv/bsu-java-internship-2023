@@ -5,6 +5,10 @@
       "description": "Field agreementDateFrom is empty!"
     },
     {
+      "errorCode": "ERROR_CODE_12",
+      "description": "Field dateOfBirth is empty!"
+    },
+    {
       "errorCode": "ERROR_CODE_4",
       "description": "Field agreementDateTo is empty!"
     },
@@ -23,9 +27,11 @@
   ],
   "personFirstName": null,
   "personLastName": null,
+  "dateOfBirth": null,
   "agreementDateFrom": null,
   "agreementDateTo": null,
   "agreementPremium": null,
   "risks": null,
-  "country": null
+  "country": null,
+  "medicalRiskLimitLevel": null
 }

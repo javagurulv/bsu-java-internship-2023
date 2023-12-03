@@ -15,23 +15,28 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/insurance/travel/api")
- class TravelCalculatePremiumController {
-	@Autowired private TravelCalculatePremiumService calculatePremiumService;
-@Autowired private TravelCalculatePremiumRequestLogger loggerForRequest;
-@Autowired private TravelCalculatePremiumResponseLogger loggerForResponse;
-@Autowired private TravelCalculateRequestExecutionTimeLogger requestExecutionTimeLogger;
-	@PostMapping(path = "/",
-			consumes = "application/json",
-			produces = "application/json")
-	public TravelCalculatePremiumResponseV1 calculatePremium(@RequestBody TravelCalculatePremiumRequestV1 request) {
-		loggerForRequest.log(request);
-		Stopwatch stopwatch = Stopwatch.createStarted();
-		TravelCalculatePremiumResponseV1 response = calculatePremiumService.calculatePremium(request);
-		stopwatch.stop();
-		loggerForResponse.log(response);
-		requestExecutionTimeLogger.log(stopwatch.elapsed().toMillis());
-		return response;
-	}
+class TravelCalculatePremiumController {
+    @Autowired
+    private TravelCalculatePremiumService calculatePremiumService;
+    @Autowired
+    private TravelCalculatePremiumRequestLogger loggerForRequest;
+    @Autowired
+    private TravelCalculatePremiumResponseLogger loggerForResponse;
+    @Autowired
+    private TravelCalculateRequestExecutionTimeLogger requestExecutionTimeLogger;
+
+    @PostMapping(path = "/",
+            consumes = "application/json",
+            produces = "application/json")
+    public TravelCalculatePremiumResponseV1 calculatePremium(@RequestBody TravelCalculatePremiumRequestV1 request) {
+        loggerForRequest.log(request);
+        Stopwatch stopwatch = Stopwatch.createStarted();
+        TravelCalculatePremiumResponseV1 response = calculatePremiumService.calculatePremium(request);
+        stopwatch.stop();
+        loggerForResponse.log(response);
+        requestExecutionTimeLogger.log(stopwatch.elapsed().toMillis());
+        return response;
+    }
 
 
 }

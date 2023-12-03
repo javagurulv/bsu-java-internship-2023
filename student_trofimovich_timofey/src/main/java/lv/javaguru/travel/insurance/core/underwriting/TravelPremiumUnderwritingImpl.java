@@ -14,6 +14,7 @@ class TravelPremiumUnderwritingImpl implements TravelPremiumUnderwriting{
     @Autowired
     SelectedRisksPremiumCalculator selectedRisksPremiumCalculator;
 
+
     public TravelPremiumCalculationResult calculatePremium(TravelCalculatePremiumRequest request) {
         List<RiskPremium> riskPremiums = selectedRisksPremiumCalculator.calculatePremiumForAllRisks(request);
         BigDecimal totalPremium = calculateTotalPremium(riskPremiums);
@@ -21,6 +22,10 @@ class TravelPremiumUnderwritingImpl implements TravelPremiumUnderwriting{
     }
 
     private BigDecimal calculateTotalPremium(List<RiskPremium> riskPremiums) {
+        BigDecimal sumOfRisksPremiums = calculateSumOfRisksPremiums(riskPremiums);
+        return sumOfRisksPremiums;
+    }
+    private BigDecimal calculateSumOfRisksPremiums(List<RiskPremium> riskPremiums) {
         return riskPremiums.stream().map(RiskPremium::getPremium).reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 }

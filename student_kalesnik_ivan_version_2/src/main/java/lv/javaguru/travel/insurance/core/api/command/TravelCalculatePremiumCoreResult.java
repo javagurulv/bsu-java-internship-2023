@@ -23,4 +23,8 @@ public class TravelCalculatePremiumCoreResult {
         return errors != null && !errors.isEmpty();
     }
 
+    public TravelCalculatePremiumCoreResult(List<ValidationErrorDTO> errors) {
+        this.errors = errors;
+    }
+
 }

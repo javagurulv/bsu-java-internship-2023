@@ -24,17 +24,18 @@ public class TravelPremiumUnderwritingImplTest {
     private TravelPremiumUnderwritingImpl travelPremiumUnderwriting;
 
     @Test
-    public void rightCalculateUnderwriting(){
+    public void rightCalculateUnderwriting() {
         TravelCalculatePremiumRequestV1 request = mock(TravelCalculatePremiumRequestV1.class);
         SelectedRisksPremiumCalculator selectedRisksPremiumCalculator = mock(SelectedRisksPremiumCalculator.class);
         when(selectedRisksPremiumCalculator.calculateSelectedRisksPremium(request))
-                .thenReturn(List.of(new TravelRisk("RISK_1",BigDecimal.valueOf(4)),
-                        new TravelRisk("RISK_2",BigDecimal.valueOf(2))));
+                .thenReturn(List.of(new TravelRisk("RISK_1", BigDecimal.valueOf(4)),
+                        new TravelRisk("RISK_2", BigDecimal.valueOf(2))));
         ReflectionTestUtils.setField(travelPremiumUnderwriting, "selectedRisksPremiumCalculator", selectedRisksPremiumCalculator);
         assertEquals(travelPremiumUnderwriting.calculatePremium(request).getTotalPremium(), BigDecimal.valueOf(6));
         assertEquals(travelPremiumUnderwriting.calculatePremium(request).getTravelRisks().size(), 2);
 
     }
+
     private Date createDate(String dateStr) {
         try {
             return new SimpleDateFormat("dd.MM.yyyy").parse(dateStr);

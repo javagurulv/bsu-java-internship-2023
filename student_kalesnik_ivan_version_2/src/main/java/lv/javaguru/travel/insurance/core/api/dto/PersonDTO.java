@@ -18,7 +18,11 @@ public class PersonDTO {
 
     private String personLastName;
 
+    private String personCode;
+
     private Date personBirthDate;
+
+    private String medicalRiskLimitLevel;
 
     private List<RiskDTO> risks;
 
