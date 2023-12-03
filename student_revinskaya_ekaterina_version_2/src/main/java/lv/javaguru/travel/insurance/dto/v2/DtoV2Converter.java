@@ -68,9 +68,12 @@ public class DtoV2Converter {
     }
 
     private List<PersonDTO> listPersonDTOFromPersonRequest(List<PersonRequest> personRequests) {
-        return personRequests.stream()
+        return personRequests != null
+                ? personRequests.stream()
                 .map(this::getPersonDTOFromPersonRequest)
-                .collect(Collectors.toList());
+                .collect(Collectors.toList())
+                : null;
+
     }
 
     private PersonDTO getPersonDTOFromPersonRequest(PersonRequest request) {
