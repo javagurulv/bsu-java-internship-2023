@@ -67,6 +67,18 @@ public class TravelCalculatePremiumControllerTest {
                 "rest/DateFromBiggerThanDateToResponse.json");
     }
     @Test
+    public void PastAgreementDateFromTest() throws Exception
+    {
+        compare("rest/PastAgreementDateFromRequest.json",
+                "rest/PastAgreementDateFromResponse.json");
+    }
+    @Test
+    public void PastAgreementDateToTest() throws Exception
+    {
+        compare("rest/PastAgreementDateToRequest.json",
+                "rest/PastAgreementDateToResponse.json");
+    }
+    @Test
     public void ValidTest() throws Exception
     {
         compare("rest/ValidTestRequest.json",
