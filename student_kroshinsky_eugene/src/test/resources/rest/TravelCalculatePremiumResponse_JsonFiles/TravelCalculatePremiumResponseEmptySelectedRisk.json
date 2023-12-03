@@ -1,12 +1,12 @@
 {
   "errors": [
     {
-      "field": "personLastName",
-      "message": "Must not be empty!"
+      "errorCode": "ERROR_CODE_6",
+      "description": "Field personLastName is empty!"
     },
     {
-      "field": "selectedRisk",
-      "message": "Must not be empty!"
+      "errorCode": "ERROR_CODE_7",
+      "description": "Field selectedRisk is empty!"
     }
   ],
   "personFirstName": null,
