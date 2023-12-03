@@ -16,8 +16,6 @@ import java.util.stream.Collectors;
 public class NotNullCountryValidation extends TravelAgreementFieldValidationImpl {
     @Autowired
     private ValidationErrorFactory validationErrorFactory;
-    @Autowired
-    private ClassifierValueRepository classifierValueRepository;
 
     @Override
     public Optional<ValidationErrorDTO> validate(AgreementDTO request) {

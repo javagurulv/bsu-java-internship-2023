@@ -33,7 +33,6 @@ public class ExistMedicalRiskLimitLevelValidationTest {
     @Test
     public void containErrorNotExistMedRiskLimitLevelWithEnableTest(){
         when(request.getMedicalRiskLimitLevel()).thenReturn("FAKE");
-        ReflectionTestUtils.setField(medicalRiskLimitLevelValidation, "medicalRiskLimitLevelEnabled", true);
         when(classifierValueRepository.findByClassifierTitleAndIc("MEDICAL_RISK_LIMIT_LEVEL","FAKE"))
                 .thenReturn(Optional.empty());
         ValidationErrorDTO validationError = mock(ValidationErrorDTO.class);
@@ -45,7 +44,6 @@ public class ExistMedicalRiskLimitLevelValidationTest {
     @Test
     public void containErrorNotExistMedRiskLimitLevelWithNotEnableTest(){
         when(request.getMedicalRiskLimitLevel()).thenReturn("FAKE");
-        ReflectionTestUtils.setField(medicalRiskLimitLevelValidation, "medicalRiskLimitLevelEnabled", false);
         when(classifierValueRepository.findByClassifierTitleAndIc("MEDICAL_RISK_LIMIT_LEVEL","FAKE"))
                 .thenReturn(Optional.empty());
         ValidationErrorDTO validationError = mock(ValidationErrorDTO.class);
