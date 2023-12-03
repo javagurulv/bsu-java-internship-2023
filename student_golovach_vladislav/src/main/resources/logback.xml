@@ -1,23 +1,13 @@
 <configuration>
 
-    <!-- Уровень логирования -->
-    <springProfile name="dev">
-        <root level="DEBUG"/>
-    </springProfile>
+    <property name="LOGS" value="./logs" />
 
-    <springProfile name="prod">
-        <root level="INFO"/>
-    </springProfile>
-
-    <!-- Формат вывода -->
-    <property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"/>
-
-    <!-- Настройки вывода в консоль -->
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>${LOG_PATTERN}</pattern>
+            <pattern>%d{ISO8601} [%thread] %-5level %logger{36} - %msg%n</pattern>
         </encoder>
     </appender>
+
     <appender name="FILE_APPENDER"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${LOGS}/application-logger.log</file>
@@ -34,6 +24,7 @@
             </timeBasedFileNamingAndTriggeringPolicy>
         </rollingPolicy>
     </appender>
+
     <appender name="REQUEST_RESPONSE_FILE_APPENDER"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${LOGS}/request-response-logger.log</file>
@@ -50,11 +41,10 @@
             </timeBasedFileNamingAndTriggeringPolicy>
         </rollingPolicy>
     </appender>
-    <!-- Применение вывода -->
-    <root level="INFO">
-        <appender-ref ref="CONSOLE"/>
-        <appender-ref ref="FILE_APPENDER" />
 
+    <root level="INFO">
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="FILE_APPENDER" />
     </root>
 
     <logger name="lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequestLogger" level="INFO">
@@ -63,6 +53,5 @@
     <logger name="lv.javaguru.travel.insurance.rest.TravelCalculatePremiumResponseLogger" level="INFO">
         <appender-ref ref="REQUEST_RESPONSE_FILE_APPENDER" />
     </logger>
-
 
 </configuration>

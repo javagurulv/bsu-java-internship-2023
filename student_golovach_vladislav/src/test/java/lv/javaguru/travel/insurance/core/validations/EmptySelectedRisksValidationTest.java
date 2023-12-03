@@ -9,9 +9,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -19,53 +17,42 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-class DateFromLessThenDateToValidationTest {
+class EmptySelectedRisksValidationTest {
 
     @Mock private ErrorCodeUtil errorCodeUtil;
 
     @InjectMocks
-    private DateFromLessThenDateToValidation validation;
+    private EmptySelectedRisksValidation validation;
 
     @Test
-    public void shouldReturnErrorWhenDateFromIsAfterDateTo() {
+    public void shouldReturnErrorWhenSelectedRisksIsNull() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
-        when(request.getAgreementDateFrom()).thenReturn(createDate("10.01.2025"));
-        when(request.getAgreementDateTo()).thenReturn(createDate("01.01.2025"));
-        when(errorCodeUtil.getErrorDescription("ERROR_CODE_5")).thenReturn("error description");
+        when(request.getSelectedRisks()).thenReturn(null);
+        when(errorCodeUtil.getErrorDescription("ERROR_CODE_6")).thenReturn("error description");
         Optional<ValidationError> errorOpt = validation.execute(request);
         assertTrue(errorOpt.isPresent());
-        assertEquals(errorOpt.get().getErrorCode(), "ERROR_CODE_5");
+        assertEquals(errorOpt.get().getErrorCode(), "ERROR_CODE_6");
         assertEquals(errorOpt.get().getDescription(), "error description");
     }
 
     @Test
-    public void shouldReturnErrorWhenDateFromIsEqualsDateTo() {
+    public void shouldReturnErrorWhenSelectedRisksIsEmpty() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
-        when(request.getAgreementDateFrom()).thenReturn(createDate("01.01.2025"));
-        when(request.getAgreementDateTo()).thenReturn(createDate("01.01.2025"));
-        when(errorCodeUtil.getErrorDescription("ERROR_CODE_5")).thenReturn("error description");
+        when(request.getSelectedRisks()).thenReturn(List.of());
+        when(errorCodeUtil.getErrorDescription("ERROR_CODE_6")).thenReturn("error description");
         Optional<ValidationError> errorOpt = validation.execute(request);
         assertTrue(errorOpt.isPresent());
-        assertEquals(errorOpt.get().getErrorCode(), "ERROR_CODE_5");
+        assertEquals(errorOpt.get().getErrorCode(), "ERROR_CODE_6");
         assertEquals(errorOpt.get().getDescription(), "error description");
     }
 
     @Test
-    public void shouldNotReturnErrorWhenDateFromIsLessDateTo() {
+    public void shouldNotReturnErrorWhenSelectedRisksIsNotEmpty() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
-        when(request.getAgreementDateFrom()).thenReturn(createDate("01.01.2025"));
-        when(request.getAgreementDateTo()).thenReturn(createDate("10.01.2025"));
+        when(request.getSelectedRisks()).thenReturn(List.of("TRAVEL_MEDICAL"));
         Optional<ValidationError> errorOpt = validation.execute(request);
         assertTrue(errorOpt.isEmpty());
         verifyNoInteractions(errorCodeUtil);
-    }
-
-    private Date createDate(String dateStr) {
-        try {
-            return new SimpleDateFormat("dd.MM.yyyy").parse(dateStr);
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
     }
 
 }

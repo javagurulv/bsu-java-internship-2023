@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.core.rest;
+package lv.javaguru.travel.insurance.rest;
 
 import org.springframework.stereotype.Component;
 import org.springframework.util.ResourceUtils;
@@ -19,4 +19,3 @@ public class JsonFileReader {
     }
 
 }
-
