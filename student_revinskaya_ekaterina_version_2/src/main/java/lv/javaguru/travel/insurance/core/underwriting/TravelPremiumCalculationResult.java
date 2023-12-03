@@ -15,6 +15,4 @@ public class TravelPremiumCalculationResult {
     private BigDecimal totalPremium;
     private List<RiskDTO> risks;
 
-    public TravelPremiumCalculationResult(List<RiskDTO> risks, BigDecimal totalPremium) {
-    }
 }

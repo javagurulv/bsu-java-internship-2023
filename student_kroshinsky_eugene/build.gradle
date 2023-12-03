@@ -1,4 +1,5 @@
 dependencies {
+	testImplementation('uk.org.webcompere:model-assert:1.0.0')
 
 	implementation('org.springframework.boot:spring-boot-starter-web:2.7.5')
 

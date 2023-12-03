@@ -35,9 +35,7 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
         response.setAgreementDateFrom(request.getAgreementDateFrom());
         response.setAgreementDateTo(request.getAgreementDateTo());
         response.setAgreementPrice(premium);
-
         return response;
     }
 
 }
-

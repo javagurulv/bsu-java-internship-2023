@@ -1,4 +1,5 @@
 package lv.javaguru.travel.insurance.core;
+
 import lv.javaguru.travel.insurance.core.validations.TravelCalculatePremiumRequestValidator;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumResponse;
@@ -45,8 +46,8 @@ public class TravelCalculatePremiumServiceImplTest {
         when(requestValidator.validate(request)).thenReturn(errors);
         TravelCalculatePremiumResponse response = service.calculatePremium(request);
         assertEquals(response.getErrors().size(), 1);
-        assertEquals(response.getErrors().get(0).getField(), "field");
-        assertEquals(response.getErrors().get(0).getMessage(), "errorMessage");
+        assertEquals(response.getErrors().get(0).getErrorCode(), "field");
+        assertEquals(response.getErrors().get(0).getDescription(), "errorMessage");
     }
 
     @Test
@@ -56,8 +57,8 @@ public class TravelCalculatePremiumServiceImplTest {
         when(requestValidator.validate(request)).thenReturn(errors);
         TravelCalculatePremiumResponse response = service.calculatePremium(request);
         assertEquals(response.getErrors().size(), 1);
-        assertEquals(response.getErrors().get(0).getField(), "field");
-        assertEquals(response.getErrors().get(0).getMessage(), "errorMessage");
+        assertEquals(response.getErrors().get(0).getErrorCode(), "field");
+        assertEquals(response.getErrors().get(0).getDescription(), "errorMessage");
     }
 
     @Test
@@ -101,8 +102,8 @@ public class TravelCalculatePremiumServiceImplTest {
     @Test
     public void shouldReturnResponseWithCorrectAgreementPrice() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
-        when(request.getAgreementDateFrom()).thenReturn(createDate("01.01.2024"));
-        when(request.getAgreementDateTo()).thenReturn(createDate("10.01.2024"));
+        when(request.getAgreementDateFrom()).thenReturn(createDate("01.01.2023"));
+        when(request.getAgreementDateTo()).thenReturn(createDate("10.01.2023"));
         when(requestValidator.validate(request)).thenReturn(List.of());
         when(premiumUnderwriting.calculatePremium(request)).thenReturn(new BigDecimal(9));
         TravelCalculatePremiumResponse response = service.calculatePremium(request);
