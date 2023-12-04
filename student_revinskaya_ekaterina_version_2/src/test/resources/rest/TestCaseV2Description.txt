@@ -8,7 +8,7 @@ Test_case_7 - tests a request with null country;
 Test_case_8 - tests a request with empty country;
 Test_case_9 - tests a request with country not supported by the system and MEDICAL_RISK selected;
 Test_case_10 - tests a request with country not supported by the system and TRAVEL_CANCELLATION selected;
-Test_case_11 - tests a request with not exist medical risk limit level;
+Test_case_11 - tests a request with not exist medical risk limit level of both persons;
 Test_case_12 - tests a request with empty selected risks;
 Test_case_13 - tests a request with null selected risks;
 Test_case_14 - tests a request with not exist selected risks;

@@ -33,7 +33,6 @@ public class DtoV1Converter {
         agreement.setSelectedRisks(requestV1.getSelectedRisks());
         agreement.setAgreementDateFrom(requestV1.getAgreementDateFrom());
         agreement.setAgreementDateTo(requestV1.getAgreementDateTo());
-        agreement.setMedicalRiskLimitLevel(requestV1.getMedicalRiskLimitLevel());
         agreement.setPersons(List.of(getPersonDTOFromRequestV1(requestV1)));
         return agreement;
     }
@@ -43,6 +42,7 @@ public class DtoV1Converter {
         personDTO.setPersonFirstName(requestV1.getPersonFirstName());
         personDTO.setPersonLastName(requestV1.getPersonLastName());
         personDTO.setPersonBirthDate(requestV1.getBirthday());
+        personDTO.setMedicalRiskLimitLevel(requestV1.getMedicalRiskLimitLevel());
         return personDTO;
     }
 
@@ -65,12 +65,11 @@ public class DtoV1Converter {
         responseV1.setPersonFirstName(result.getAgreement().getPersons().get(0).getPersonFirstName());
         responseV1.setPersonLastName(result.getAgreement().getPersons().get(0).getPersonLastName());
         responseV1.setBirthday(result.getAgreement().getPersons().get(0).getPersonBirthDate());
-
         responseV1.setRisks(ListOfRisksFromDTO(result.getAgreement().getPersons().get(0).getRisks()));
         responseV1.setAgreementPremium(result.getAgreement().getAgreementPremium());
+        responseV1.setMedicalRiskLimitLevel(result.getAgreement().getPersons().get(0).getMedicalRiskLimitLevel());
 
         responseV1.setCountry(result.getAgreement().getCountry());
-        responseV1.setMedicalRiskLimitLevel(result.getAgreement().getMedicalRiskLimitLevel());
         responseV1.setAgreementDateFrom(result.getAgreement().getAgreementDateFrom());
         responseV1.setAgreementDateTo(result.getAgreement().getAgreementDateTo());
 

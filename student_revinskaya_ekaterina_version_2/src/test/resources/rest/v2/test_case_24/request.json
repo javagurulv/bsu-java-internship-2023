@@ -8,7 +8,9 @@
     {
       "personFirstName" : null,
       "personLastName" : null,
-      "personBirthDate" : null
+      "personBirthDate" : null,
+      "medicalRiskLimitLevel" : null
+
     }
   ]
 }

@@ -30,8 +30,6 @@ public class TravelCalculatePremiumResponseV2 extends CoreResponse {
     @JsonAlias("agreement_date_to")
     private Date agreementDateTo;
     private String country;
-    @JsonAlias("medical_risk_limit_level")
-    private String medicalRiskLimitLevel;
     @JsonSerialize(using = BigDecimalSerializer.class)
     @JsonAlias("agreement_premium")
     private BigDecimal agreementPremium;

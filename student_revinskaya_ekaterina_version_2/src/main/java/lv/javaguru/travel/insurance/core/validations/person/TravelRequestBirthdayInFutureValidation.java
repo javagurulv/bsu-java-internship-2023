@@ -1,5 +1,6 @@
 package lv.javaguru.travel.insurance.core.validations.person;
 
+import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import lv.javaguru.travel.insurance.core.util.DateTimeUtil;
@@ -15,7 +16,7 @@ public class TravelRequestBirthdayInFutureValidation extends TravelPersonFieldVa
     @Autowired
     ValidationErrorFactory validationErrorFactory;
     @Override
-    public Optional<ValidationErrorDTO> validate(PersonDTO request){
+    public Optional<ValidationErrorDTO> validate(AgreementDTO agreementDTO, PersonDTO request){
         return (request.getPersonBirthDate() != null && dateTimeUtil.getCurrentDateTime().before(request.getPersonBirthDate()))
                 ? Optional.of(validationErrorFactory.buildError("ERROR_CODE_13"))
                 : Optional.empty();

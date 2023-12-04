@@ -1,8 +1,10 @@
-package lv.javaguru.travel.insurance.core.validations.agreement;
+package lv.javaguru.travel.insurance.core.validations.person;
 
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
+import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import lv.javaguru.travel.insurance.core.validations.ValidationErrorFactory;
+import lv.javaguru.travel.insurance.core.validations.person.MedicalRiskLimitLevelValidation;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -25,44 +27,43 @@ public class MedicalRiskLimitLevelValidationTest {
     @Mock
     private ValidationErrorFactory validationErrorFactory;
     @Mock
-    private AgreementDTO request;
+    private AgreementDTO agreementDTO;
+    @Mock
+    private PersonDTO personDTO;
 
     @Test
     public void responseShouldContainErrorNullMedicalRiskLimitLevelTest() {
-        AgreementDTO request = mock(AgreementDTO.class);
-        when(request.getMedicalRiskLimitLevel()).thenReturn(null);
-        when(request.getSelectedRisks()).thenReturn(List.of("TRAVEL_MEDICAL"));
+        when(personDTO.getMedicalRiskLimitLevel()).thenReturn(null);
+        when(agreementDTO.getSelectedRisks()).thenReturn(List.of("TRAVEL_MEDICAL"));
         ReflectionTestUtils.setField(travelRequestMedicalRiskLimitLevelValidation,
                 "medicalRiskLimitLevelEnabled", true);
         ValidationErrorDTO validationError = mock(ValidationErrorDTO.class);
         when(validationErrorFactory.buildError("ERROR_CODE_14")).thenReturn(validationError);
-        Optional<ValidationErrorDTO> error = travelRequestMedicalRiskLimitLevelValidation.validate(request);
+        Optional<ValidationErrorDTO> error = travelRequestMedicalRiskLimitLevelValidation.validate(agreementDTO, personDTO);
         assertTrue(error.isPresent());
         assertEquals(error.get(), validationError);
     }
 
     @Test
     public void responseShouldContainErrorEmptyMedicalRiskLimitLevelTest() {
-        AgreementDTO request = mock(AgreementDTO.class);
-        when(request.getMedicalRiskLimitLevel()).thenReturn("");
-        when(request.getSelectedRisks()).thenReturn(List.of("TRAVEL_MEDICAL"));
+        when(personDTO.getMedicalRiskLimitLevel()).thenReturn("");
+        when(agreementDTO.getSelectedRisks()).thenReturn(List.of("TRAVEL_MEDICAL"));
         ReflectionTestUtils.setField(travelRequestMedicalRiskLimitLevelValidation,
                 "medicalRiskLimitLevelEnabled", true);
         ValidationErrorDTO validationError = mock(ValidationErrorDTO.class);
         when(validationErrorFactory.buildError("ERROR_CODE_14")).thenReturn(validationError);
-        Optional<ValidationErrorDTO> error = travelRequestMedicalRiskLimitLevelValidation.validate(request);
+        Optional<ValidationErrorDTO> error = travelRequestMedicalRiskLimitLevelValidation.validate(agreementDTO, personDTO);
         assertTrue(error.isPresent());
         assertEquals(error.get(), validationError);
     }
 
     @Test
     public void responseShouldNotContainErrorTest() {
-        AgreementDTO request = mock(AgreementDTO.class);
-        when(request.getMedicalRiskLimitLevel()).thenReturn("");
-        when(request.getSelectedRisks()).thenReturn(List.of("TRAVEL_MEDICAL"));
+        when(personDTO.getMedicalRiskLimitLevel()).thenReturn("");
+        when(agreementDTO.getSelectedRisks()).thenReturn(List.of("TRAVEL_MEDICAL"));
         ReflectionTestUtils.setField(travelRequestMedicalRiskLimitLevelValidation,
                 "medicalRiskLimitLevelEnabled", false);
-        Optional<ValidationErrorDTO> error = travelRequestMedicalRiskLimitLevelValidation.validate(request);
+        Optional<ValidationErrorDTO> error = travelRequestMedicalRiskLimitLevelValidation.validate(agreementDTO, personDTO);
         assertTrue(error.isEmpty());
     }
 }

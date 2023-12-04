@@ -17,31 +17,31 @@ public class ListPersonFieldValidations {
     @Autowired
     private List<TravelPersonFieldValidation> personFieldValidations;
 
-    public List<ValidationErrorDTO> validateErrors(AgreementDTO request) {
-        return request.getPersons() != null
-                ? request.getPersons().stream()
-                .flatMap(person -> validatePersonSingleAndList(person).stream())
+    public List<ValidationErrorDTO> validateErrors(AgreementDTO agreementDTO) {
+        return agreementDTO.getPersons() != null
+                ? agreementDTO.getPersons().stream()
+                .flatMap(person -> validatePersonSingleAndList(agreementDTO, person).stream())
                 .collect(Collectors.toList())
                 : List.of();
     }
 
-    private List<ValidationErrorDTO> validatePersonSingleAndList(PersonDTO request) {
-        List<ValidationErrorDTO> personSingleErrors = validatePersonSingleErrors(request);
-        List<ValidationErrorDTO> personListErrors = validatePersonListErrors(request);
+    private List<ValidationErrorDTO> validatePersonSingleAndList(AgreementDTO agreementDTO, PersonDTO personDTO) {
+        List<ValidationErrorDTO> personSingleErrors = validatePersonSingleErrors(agreementDTO, personDTO);
+        List<ValidationErrorDTO> personListErrors = validatePersonListErrors(agreementDTO, personDTO);
         return concatenateErrorLists(personSingleErrors, personListErrors);
     }
 
-    private List<ValidationErrorDTO> validatePersonSingleErrors(PersonDTO person) {
+    private List<ValidationErrorDTO> validatePersonSingleErrors(AgreementDTO agreementDTO, PersonDTO person) {
         return personFieldValidations.stream()
-                .map(validation -> validation.validate(person))
+                .map(validation -> validation.validate(agreementDTO, person))
                 .filter(Optional::isPresent)
                 .map(Optional::get)
                 .collect(Collectors.toList());
     }
 
-    private List<ValidationErrorDTO> validatePersonListErrors(PersonDTO person) {
+    private List<ValidationErrorDTO> validatePersonListErrors(AgreementDTO agreementDTO, PersonDTO person) {
         return personFieldValidations.stream()
-                .map(validation -> validation.validateList(person))
+                .map(validation -> validation.validateList(agreementDTO, person))
                 .flatMap(Collection::stream)
                 .collect(Collectors.toList());
     }

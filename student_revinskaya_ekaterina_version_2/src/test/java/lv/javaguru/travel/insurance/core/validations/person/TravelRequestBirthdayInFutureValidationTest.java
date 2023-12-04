@@ -1,5 +1,6 @@
 package lv.javaguru.travel.insurance.core.validations.person;
 
+import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import lv.javaguru.travel.insurance.core.util.DateTimeUtil;
@@ -27,16 +28,18 @@ public class TravelRequestBirthdayInFutureValidationTest {
     @Mock
     DateTimeUtil dateTimeUtil;
     @Mock
-    PersonDTO request;
+    AgreementDTO agreementDTO;
+    @Mock
+    PersonDTO personDTO;
     @Mock
     ValidationErrorFactory validationErrorFactory;
     @Test
     public void responseShouldContainsErrorBirthdayInFutureTest(){
         ValidationErrorDTO validationError = mock(ValidationErrorDTO.class);
-        when(request.getPersonBirthDate()).thenReturn(createDate("2024.04.08"));
+        when(personDTO.getPersonBirthDate()).thenReturn(createDate("2024.04.08"));
         when(dateTimeUtil.getCurrentDateTime()).thenReturn(createDate("2024.01.08"));
         when(validationErrorFactory.buildError("ERROR_CODE_13")).thenReturn(validationError);
-        Optional<ValidationErrorDTO> error= birthdayInFutureValidation.validate(request);
+        Optional<ValidationErrorDTO> error= birthdayInFutureValidation.validate(agreementDTO, personDTO);
         assertTrue(error.isPresent());
         assertEquals(error.get(), validationError);
     }

@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lv.javaguru.travel.insurance.core.domain.MedicalRiskLimitLevel;
 
 import java.util.Date;
 import java.util.List;
@@ -19,6 +20,8 @@ public class PersonDTO {
     private String personLastName;
 
     private Date personBirthDate;
+
+    private String medicalRiskLimitLevel;
 
     private List<RiskDTO> risks;
 
