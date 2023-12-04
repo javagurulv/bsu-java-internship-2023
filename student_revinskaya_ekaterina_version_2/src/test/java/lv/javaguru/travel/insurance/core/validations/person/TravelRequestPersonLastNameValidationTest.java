@@ -1,5 +1,6 @@
 package lv.javaguru.travel.insurance.core.validations.person;
 
+import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import lv.javaguru.travel.insurance.core.validations.ValidationErrorFactory;
@@ -22,23 +23,25 @@ public class TravelRequestPersonLastNameValidationTest {
     private TravelRequestPersonLastNameValidation personLastNameValidation;
     @Mock
     private ValidationErrorFactory validationErrorFactory;
+    @Mock
+    AgreementDTO agreementDTO;
+    @Mock
+    PersonDTO personDTO;
     @Test
     public void responseShouldContainErrorEmptyLastNameTest() {
-        PersonDTO request = mock(PersonDTO.class);
-        when(request.getPersonLastName()).thenReturn("");
+        when(personDTO.getPersonLastName()).thenReturn("");
         ValidationErrorDTO validationError = mock(ValidationErrorDTO.class);
         when(validationErrorFactory.buildError("ERROR_CODE_2")).thenReturn(validationError);
-        Optional<ValidationErrorDTO> error= personLastNameValidation.validate(request);
+        Optional<ValidationErrorDTO> error= personLastNameValidation.validate(agreementDTO, personDTO);
         assertTrue(error.isPresent());
         assertEquals(error.get(), validationError);
     }
     @Test
     public void responseShouldContainErrorNullLastNameTest() {
-        PersonDTO request = mock(PersonDTO.class);
-        when(request.getPersonLastName()).thenReturn(null);
+        when(personDTO.getPersonLastName()).thenReturn(null);
         ValidationErrorDTO validationError = mock(ValidationErrorDTO.class);
         when(validationErrorFactory.buildError("ERROR_CODE_2")).thenReturn(validationError);
-        Optional<ValidationErrorDTO> error= personLastNameValidation.validate(request);
+        Optional<ValidationErrorDTO> error= personLastNameValidation.validate(agreementDTO, personDTO);
         assertTrue(error.isPresent());
         assertEquals(error.get(), validationError);
     }

@@ -1,7 +1,5 @@
 package lv.javaguru.travel.insurance.core.validations;
 
-import lv.javaguru.travel.insurance.core.validations.TravelCalculatePremiumRequestValidatorImpl;
-import lv.javaguru.travel.insurance.core.validations.TravelRequestValidation;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.Test;
@@ -36,7 +34,7 @@ class TravelCalculatePremiumRequestValidatorImplTest {
         ReflectionTestUtils.setField(validator, "validations", expextedList);
         List<ValidationError> errors = validator.validate(request);
         assertEquals(1, errors.size());
-        assertEquals("field", errors.get(0).getField());
-        assertEquals("message", errors.get(0).getMessage());
+        assertEquals("field", errors.get(0).getErrorCode());
+        assertEquals("message", errors.get(0).getDescription());
     }
 }

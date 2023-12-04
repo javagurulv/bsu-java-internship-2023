@@ -27,6 +27,8 @@ public class PersonResponse {
     @JsonFormat(pattern = "yyyy-MM-dd")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthday;
+    @JsonAlias("medical_risk_limit_level")
+    private String medicalRiskLimitLevel;
     @JsonSerialize(using = BigDecimalSerializer.class)
     @JsonAlias("person_premium")
     private BigDecimal personPremium;

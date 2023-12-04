@@ -18,6 +18,8 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class TravelCalculateDateToPastValidatorTest {
     @Mock
+    PropertyReader propertyReader;
+    @Mock
     TravelCalculatePremiumRequest request;
     @InjectMocks
     TravelCalculateDateToPastValidator validator;
@@ -30,10 +32,11 @@ class TravelCalculateDateToPastValidatorTest {
     @Test
     void validateDateToPast() {
         when(request.getAgreementDateTo()).thenReturn(createDate("15.11.2023"));
+        when(propertyReader.getProperty("ERROR_CODE_2")).thenReturn("Date from past!");
         Optional<ValidationError> validationError = validator.validate(request);
         assertTrue(validationError.isPresent());
-        assertEquals("Date from past", validationError.get().getMessage());
-        assertEquals("agreementDateDifference", validationError.get().getField());
+        assertEquals("Date from past!", validationError.get().getDescription());
+        assertEquals("ERROR_CODE_2", validationError.get().getErrorCode());
     }
     @Test
     void validateNoErrorsDateToPast() {

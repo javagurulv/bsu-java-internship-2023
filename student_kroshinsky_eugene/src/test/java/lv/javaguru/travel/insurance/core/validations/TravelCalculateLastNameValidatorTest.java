@@ -15,23 +15,27 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class TravelCalculateLastNameValidatorTest {
+    @Mock
+    PropertyReader propertyReader;
     @Mock TravelCalculatePremiumRequest request;
     @InjectMocks TravelCalculateLastNameValidator validator;
     @Test
     void validateEmptyLastName() {
         when(request.getPersonLastName()).thenReturn("");
+        when(propertyReader.getProperty("ERROR_CODE_6")).thenReturn("Field personLastName is empty!");
         Optional<ValidationError> validationError = validator.validate(request);
         assertTrue(validationError.isPresent());
-        assertEquals("Must not be empty!", validationError.get().getMessage());
-        assertEquals("personLastName", validationError.get().getField());
+        assertEquals("Field personLastName is empty!", validationError.get().getDescription());
+        assertEquals("ERROR_CODE_6", validationError.get().getErrorCode());
     }
     @Test
     void validateNullLastName() {
         when(request.getPersonLastName()).thenReturn(null);
+        when(propertyReader.getProperty("ERROR_CODE_6")).thenReturn("Field personLastName is empty!");
         Optional<ValidationError> validationError = validator.validate(request);
         assertTrue(validationError.isPresent());
-        assertEquals("Must not be empty!", validationError.get().getMessage());
-        assertEquals("personLastName", validationError.get().getField());
+        assertEquals("Field personLastName is empty!", validationError.get().getDescription());
+        assertEquals("ERROR_CODE_6", validationError.get().getErrorCode());
     }
     @Test
     void validateNoErrorsLastName() {

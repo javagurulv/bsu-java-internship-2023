@@ -29,13 +29,20 @@ public class TravelCalculatePremiumServiceImplTest {
     @InjectMocks
     private TravelCalculatePremiumServiceImpl travelCalculatePremiumService;
     @Mock
+    private TravelAgreementValidator agreementValidator;
+    @Mock
     private CalculatorForTotalAgreementPremium calculatorForTotalAgreementPremium;
     @Mock
     private CalculatorRiskPremiumsForAllPersons calculatorRiskPremiumsForAllPersons;
-    @Mock
-    private TravelAgreementValidator agreementValidator;
+    @Test
+    public void calculatePremiumResultWithoutErrorsTest() {
+        AgreementDTO agreement = new AgreementDTO();
+        when(calculatorForTotalAgreementPremium.calculate(agreement)).thenReturn(BigDecimal.valueOf(12));
+        Mockito.doNothing().when(calculatorRiskPremiumsForAllPersons).calculate(agreement);
+        assertEquals(travelCalculatePremiumService
+                .calculatePremium(new TravelCalculatePremiumCoreCommand(agreement)).getAgreement(), agreement);
 
-
+    }
     @Test
     public void calculatePremiumResultWithErrorsTest() {
         AgreementDTO agreement = mock(AgreementDTO.class);
@@ -45,15 +52,5 @@ public class TravelCalculatePremiumServiceImplTest {
         when(agreementValidator.validate(agreement)).thenReturn(List.of(error));
         assertEquals(travelCalculatePremiumService.calculatePremium(command).getErrors(), List.of(error));
         assertNull(travelCalculatePremiumService.calculatePremium(command).getAgreement());
-    }
-
-    @Test
-    public void calculatePremiumResultWithoutErrorsTest() {
-        AgreementDTO agreement = new AgreementDTO();
-        when(calculatorForTotalAgreementPremium.calculate(agreement)).thenReturn(BigDecimal.valueOf(12));
-        Mockito.doNothing().when(calculatorRiskPremiumsForAllPersons).calculate(agreement);
-        assertEquals(travelCalculatePremiumService
-                .calculatePremium(new TravelCalculatePremiumCoreCommand(agreement)).getAgreement(), agreement);
-
     }
 }

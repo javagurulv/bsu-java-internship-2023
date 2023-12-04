@@ -20,7 +20,7 @@ public class TravelMedicalRiskPremiumCalculator implements TravelRiskPremiumCalc
         BigDecimal dayCount = dayCountCalculator.calculate(agreement);
         BigDecimal countryDefaultDayPremium = countryDefaultDayPremiumCalculator.calculate(agreement);
         BigDecimal ageCoefficient = ageCoefficientCalculator.calculate(person);
-        BigDecimal insuranceLimitCoefficient = insuranceLimitCoefficientCalculator.calculate(agreement);
+        BigDecimal insuranceLimitCoefficient = insuranceLimitCoefficientCalculator.calculate(person);
         return dayCount.multiply(countryDefaultDayPremium).multiply(ageCoefficient).multiply(insuranceLimitCoefficient);
     }
 
