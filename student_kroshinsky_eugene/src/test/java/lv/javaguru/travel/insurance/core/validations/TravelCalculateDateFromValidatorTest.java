@@ -18,16 +18,19 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class TravelCalculateDateFromValidatorTest {
     @Mock
+    PropertyReader propertyReader;
+    @Mock
     TravelCalculatePremiumRequest request;
     @InjectMocks
     TravelCalculateDateFromValidator validator;
     @Test
     void validateNullDateFrom() {
         when(request.getAgreementDateFrom()).thenReturn(null);
+        when(propertyReader.getProperty("ERROR_CODE_3")).thenReturn("Field agreementDateFrom is empty!");
         Optional<ValidationError> validationError = validator.validate(request);
         assertTrue(validationError.isPresent());
-        assertEquals("Must not be empty!", validationError.get().getMessage());
-        assertEquals("agreementDateFrom", validationError.get().getField());
+        assertEquals("Field agreementDateFrom is empty!", validationError.get().getDescription());
+        assertEquals("ERROR_CODE_3", validationError.get().getErrorCode());
     }
     @Test
     void validateNoErrorsDateFrom() {

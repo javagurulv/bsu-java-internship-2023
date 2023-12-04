@@ -17,24 +17,28 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class TravelCalculateSelectedRiskValidatorTest {
     @Mock
+    PropertyReader propertyReader;
+    @Mock
     TravelCalculatePremiumRequest request;
     @InjectMocks
     TravelCalculateSelectedRiskValidator validator;
     @Test
     void validateNullSelectedRisk() {
         when(request.getSelectedRisks()).thenReturn(null);
+        when(propertyReader.getProperty("ERROR_CODE_7")).thenReturn("Field selectedRisk is empty!");
         Optional<ValidationError> validationError = validator.validate(request);
         assertTrue(validationError.isPresent());
-        assertEquals("Must not be empty!", validationError.get().getMessage());
-        assertEquals("selectedRisk", validationError.get().getField());
+        assertEquals("Field selectedRisk is empty!", validationError.get().getDescription());
+        assertEquals("ERROR_CODE_7", validationError.get().getErrorCode());
     }
     @Test
     void validateEmptySelectedRisk() {
         when(request.getSelectedRisks()).thenReturn(List.of());
+        when(propertyReader.getProperty("ERROR_CODE_7")).thenReturn("Field selectedRisk is empty!");
         Optional<ValidationError> validationError = validator.validate(request);
         assertTrue(validationError.isPresent());
-        assertEquals("Must not be empty!", validationError.get().getMessage());
-        assertEquals("selectedRisk", validationError.get().getField());
+        assertEquals("Field selectedRisk is empty!", validationError.get().getDescription());
+        assertEquals("ERROR_CODE_7", validationError.get().getErrorCode());
     }
 
     @Test

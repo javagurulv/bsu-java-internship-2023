@@ -13,19 +13,19 @@ import java.util.Objects;
 @AllArgsConstructor
 public class ValidationError {
 
-    private String field;
-    private String message;
+    private String errorCode;
+    private String description;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ValidationError that = (ValidationError) o;
-        return Objects.equals(field, that.field) && Objects.equals(message, that.message);
+        return Objects.equals(errorCode, that.errorCode) && Objects.equals(description, that.description);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(field, message);
+        return Objects.hash(errorCode, description);
     }
 }
