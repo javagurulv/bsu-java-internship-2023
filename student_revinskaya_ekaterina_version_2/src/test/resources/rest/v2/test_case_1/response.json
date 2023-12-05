@@ -3,18 +3,18 @@
   "agreementDateFrom": "2025-05-25",
   "agreementDateTo": "2025-05-29",
   "country": "SPAIN",
-  "medicalRiskLimitLevel": "LEVEL_10000",
-  "agreementPremium": 26.00,
+  "agreementPremium": 37.00,
   "persons": [
     {
       "personFirstName": "Vasja",
       "personLastName": "Pupkin",
       "birthday": "2000-05-29",
-      "personPremium": 11.00,
+      "medicalRiskLimitLevel": "LEVEL_50000",
+      "personPremium": 22.00,
       "personRisks": [
         {
           "riskIc": "TRAVEL_MEDICAL",
-          "premium": 11.00
+          "premium": 22.00
         }
       ]
     },
@@ -22,6 +22,7 @@
       "personFirstName": "Petja",
       "personLastName": "Pupkin",
       "birthday": "1950-03-01",
+      "medicalRiskLimitLevel": "LEVEL_10000",
       "personPremium": 15.00,
       "personRisks": [
         {

@@ -23,4 +23,6 @@ public class PersonRequest {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @JsonAlias("personBirthDate")
     private Date birthday;
+    @JsonAlias("medical_risk_limit_level")
+    private String medicalRiskLimitLevel;
 }

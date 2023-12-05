@@ -1,6 +1,10 @@
 {
   "errors": [
     {
+      "errorCode": "ERROR_CODE_14",
+      "description": "Field medicalRiskLimitLevel must not be empty because TRAVEL_MEDICAL risk is selected and medicalRiskLimitLevel is enabled!"
+    },
+    {
       "errorCode": "ERROR_CODE_12",
       "description": "Field birthday is empty!"
     },
@@ -11,6 +15,10 @@
     {
       "errorCode": "ERROR_CODE_2",
       "description": "Field personLastName is empty!"
+    },
+    {
+      "errorCode": "ERROR_CODE_14",
+      "description": "Field medicalRiskLimitLevel must not be empty because TRAVEL_MEDICAL risk is selected and medicalRiskLimitLevel is enabled!"
     },
     {
       "errorCode": "ERROR_CODE_12",
@@ -28,7 +36,6 @@
   "agreementDateFrom": null,
   "agreementDateTo": null,
   "country": null,
-  "medicalRiskLimitLevel": null,
   "agreementPremium": null,
   "persons": null
 }

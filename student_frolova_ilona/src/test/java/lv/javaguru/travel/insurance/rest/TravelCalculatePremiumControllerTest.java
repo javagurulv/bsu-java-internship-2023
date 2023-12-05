@@ -32,7 +32,8 @@ public class TravelCalculatePremiumControllerTest {
                                 {"personFirstName" : "Vasja",
                                 "personLastName" : "Pupkin",
                                 "agreementDateFrom" : "2029-05-25",
-                                "agreementDateTo" : "2029-05-29"
+                                "agreementDateTo" : "2029-05-29",
+                                "selectedRisks": ["TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"]
                                 }""")
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
@@ -51,7 +52,8 @@ public class TravelCalculatePremiumControllerTest {
                                 {"personFirstName" : "Name",
                                 "personLastName" : "Surname",
                                 "agreementDateFrom" : "2029-05-20",
-                                "agreementDateTo" : "2029-05-29"
+                                "agreementDateTo" : "2029-05-29",
+                                "selectedRisks":["TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"]
                                 }""")
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
@@ -65,6 +67,7 @@ public class TravelCalculatePremiumControllerTest {
 
     @Test
     public void jsonFilesTest() throws Exception {
+
         compareResponseToRequestInJsonFiles(
                 "rest/TravelCalculatePremiumRequest_correct.json",
                 "rest/TravelCalculatePremiumResponse_correct.json"
@@ -98,6 +101,11 @@ public class TravelCalculatePremiumControllerTest {
         compareResponseToRequestInJsonFiles(
                 "rest/TravelCalculatePremiumRequest_dateSeq.json",
                 "rest/TravelCalculatePremiumResponse_dateSeq.json"
+        );
+
+        compareResponseToRequestInJsonFiles(
+                "rest/TravelCalculatePremiumRequest_risksNotSelected.json",
+                "rest/TravelCalculatePremiumResponse_risksNotSelected.json"
         );
     }
 
