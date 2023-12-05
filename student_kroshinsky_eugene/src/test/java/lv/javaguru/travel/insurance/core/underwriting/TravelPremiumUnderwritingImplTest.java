@@ -1,4 +1,5 @@
-package lv.javaguru.travel.insurance.core;
+package lv.javaguru.travel.insurance.core.underwriting;
+import lv.javaguru.travel.insurance.core.utils.DateTimeUtil;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -15,10 +16,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
-class TravelPremiumUnderwritingTest {
+class TravelPremiumUnderwritingImplTest {
     @Mock TravelCalculatePremiumRequest request;
-    @Mock private DateDifferenceService dateDifferenceService;
-    @InjectMocks private TravelPremiumUnderwriting underwriting;
+    @Mock private DateTimeUtil dateDifferenceService;
+    @InjectMocks private TravelPremiumUnderwritingImpl underwriting;
 
     @Test
     void calculatePremiumTest(){

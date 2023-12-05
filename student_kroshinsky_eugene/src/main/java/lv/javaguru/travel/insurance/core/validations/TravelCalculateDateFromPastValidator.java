@@ -10,16 +10,12 @@ import java.util.Optional;
 
 @Component
 class TravelCalculateDateFromPastValidator implements TravelRequestValidation {
-    @Autowired
-    private PropertyReader propertyReader;
+    @Autowired private ValidationErrorFactory validationErrorFactory;
     @Override
     public Optional<ValidationError> validate(TravelCalculatePremiumRequest request) {
         Date currentTime = new Date();
         return (request.getAgreementDateFrom() != null && request.getAgreementDateFrom().before(currentTime))
-                ? Optional.of(createValidationError("ERROR_CODE_2"))
+                ? Optional.of(validationErrorFactory.createValidationError("ERROR_CODE_2"))
                 : Optional.empty();
-    }
-    private ValidationError createValidationError(String errorCode) {
-        return new ValidationError(errorCode, propertyReader.getProperty(errorCode));
     }
 }

@@ -1,5 +1,7 @@
-package lv.javaguru.travel.insurance.core;
+package lv.javaguru.travel.insurance.core.services;
 
+import lv.javaguru.travel.insurance.core.services.TravelCalculatePremiumServiceImpl;
+import lv.javaguru.travel.insurance.core.utils.DateTimeUtil;
 import lv.javaguru.travel.insurance.core.validations.TravelCalculatePremiumRequestValidator;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumResponse;
@@ -17,10 +19,9 @@ import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
-
 @ExtendWith(MockitoExtension.class)
 class TravelCalculatePremiumServiceImplTest {
-    @Mock private DateDifferenceService dateDifferenceService;
+    @Mock private DateTimeUtil dateDifferenceService;
     @Mock private TravelCalculatePremiumRequest request;
     @Mock private TravelCalculatePremiumRequestValidator requestValidator;
     @InjectMocks TravelCalculatePremiumServiceImpl calculator;
