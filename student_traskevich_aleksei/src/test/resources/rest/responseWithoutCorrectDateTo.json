@@ -1,0 +1,13 @@
+{
+    "errors": [
+        {
+            "field": "DateTo",
+            "message": "Must not be empty and more than DateFrom!"
+        }
+    ],
+    "personFirstName": null,
+    "personLastName": null,
+    "agreementDateFrom": null,
+    "agreementDateTo": null,
+    "agreementPrice": null
+}

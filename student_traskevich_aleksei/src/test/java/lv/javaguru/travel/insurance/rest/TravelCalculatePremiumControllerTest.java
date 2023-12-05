@@ -30,7 +30,13 @@ public class TravelCalculatePremiumControllerTest {
 
     @Test
     public void simpleRestControllerTest() throws Exception {
-        compareResponseFromRequest("request.json", "response.json");
+        compareResponseFromRequest("requestCorrect.json", "responseCorrect.json");
+        compareResponseFromRequest("requestWithoutFirstName.json", "responseWithoutFirstName.json");
+        compareResponseFromRequest("requestWithoutLastName.json", "responseWithoutLastName.json");
+        compareResponseFromRequest("requestWithoutDateFrom.json", "responseWithoutDateFrom.json");
+        compareResponseFromRequest("requestWithoutDateTo.json", "responseWithoutCorrectDateTo.json");
+        compareResponseFromRequest("requestWithDateFromMoreThanDateTo.json", "responseWithoutCorrectDateTo.json");
+        compareResponseFromRequest("requestEmpty.json", "responseEmpty.json");
     }
 
     private void compareResponseFromRequest(String pathToRequestJson,
@@ -51,7 +57,7 @@ public class TravelCalculatePremiumControllerTest {
 
     public String parseData(String pathToFile) {
         try {
-            File jsonFile = ResourceUtils.getFile("classpath:" + pathToFile);
+            File jsonFile = ResourceUtils.getFile("classpath:rest/" + pathToFile);
             return new String(Files.readAllBytes(jsonFile.toPath()));
         } catch (IOException e) {
             throw new RuntimeException(e);

@@ -42,7 +42,7 @@ class TravelCalculatePremiumRequestValidator {
         return (request.getAgreementDateFrom() == null
                 || request.getAgreementDateTo() == null
                 || request.getAgreementDateTo().compareTo(request.getAgreementDateFrom()) <= 0)
-                ? Optional.of(new ValidationError("DateTo", "Must not be empty!"))
+                ? Optional.of(new ValidationError("DateTo", "Must not be empty and more than DateFrom!"))
                 : Optional.empty();
     }
 
