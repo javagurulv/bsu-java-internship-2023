@@ -17,6 +17,8 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.anyList;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -34,11 +36,12 @@ public class MedicalRiskLimitLevelValidationTest {
     @Test
     public void responseShouldContainErrorNullMedicalRiskLimitLevelTest() {
         when(personDTO.getMedicalRiskLimitLevel()).thenReturn(null);
+        when(personDTO.getPersonalCode()).thenReturn(1323123L);
         when(agreementDTO.getSelectedRisks()).thenReturn(List.of("TRAVEL_MEDICAL"));
         ReflectionTestUtils.setField(travelRequestMedicalRiskLimitLevelValidation,
                 "medicalRiskLimitLevelEnabled", true);
         ValidationErrorDTO validationError = mock(ValidationErrorDTO.class);
-        when(validationErrorFactory.buildError("ERROR_CODE_14")).thenReturn(validationError);
+        when(validationErrorFactory.buildError(eq("ERROR_CODE_14"), anyList())).thenReturn(validationError);
         Optional<ValidationErrorDTO> error = travelRequestMedicalRiskLimitLevelValidation.validate(agreementDTO, personDTO);
         assertTrue(error.isPresent());
         assertEquals(error.get(), validationError);
@@ -47,11 +50,12 @@ public class MedicalRiskLimitLevelValidationTest {
     @Test
     public void responseShouldContainErrorEmptyMedicalRiskLimitLevelTest() {
         when(personDTO.getMedicalRiskLimitLevel()).thenReturn("");
+        when(personDTO.getPersonalCode()).thenReturn(1323123L);
         when(agreementDTO.getSelectedRisks()).thenReturn(List.of("TRAVEL_MEDICAL"));
         ReflectionTestUtils.setField(travelRequestMedicalRiskLimitLevelValidation,
                 "medicalRiskLimitLevelEnabled", true);
         ValidationErrorDTO validationError = mock(ValidationErrorDTO.class);
-        when(validationErrorFactory.buildError("ERROR_CODE_14")).thenReturn(validationError);
+        when(validationErrorFactory.buildError(eq("ERROR_CODE_14"), anyList())).thenReturn(validationError);
         Optional<ValidationErrorDTO> error = travelRequestMedicalRiskLimitLevelValidation.validate(agreementDTO, personDTO);
         assertTrue(error.isPresent());
         assertEquals(error.get(), validationError);

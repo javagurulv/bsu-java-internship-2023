@@ -14,6 +14,8 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.anyList;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
@@ -30,8 +32,9 @@ public class TravelRequestPersonLastNameValidationTest {
     @Test
     public void responseShouldContainErrorEmptyLastNameTest() {
         when(personDTO.getPersonLastName()).thenReturn("");
+        when(personDTO.getPersonalCode()).thenReturn(1323123L);
         ValidationErrorDTO validationError = mock(ValidationErrorDTO.class);
-        when(validationErrorFactory.buildError("ERROR_CODE_2")).thenReturn(validationError);
+        when(validationErrorFactory.buildError(eq("ERROR_CODE_2"), anyList())).thenReturn(validationError);
         Optional<ValidationErrorDTO> error= personLastNameValidation.validate(agreementDTO, personDTO);
         assertTrue(error.isPresent());
         assertEquals(error.get(), validationError);
@@ -39,8 +42,9 @@ public class TravelRequestPersonLastNameValidationTest {
     @Test
     public void responseShouldContainErrorNullLastNameTest() {
         when(personDTO.getPersonLastName()).thenReturn(null);
+        when(personDTO.getPersonalCode()).thenReturn(1323123L);
         ValidationErrorDTO validationError = mock(ValidationErrorDTO.class);
-        when(validationErrorFactory.buildError("ERROR_CODE_2")).thenReturn(validationError);
+        when(validationErrorFactory.buildError(eq("ERROR_CODE_2"), anyList())).thenReturn(validationError);
         Optional<ValidationErrorDTO> error= personLastNameValidation.validate(agreementDTO, personDTO);
         assertTrue(error.isPresent());
         assertEquals(error.get(), validationError);

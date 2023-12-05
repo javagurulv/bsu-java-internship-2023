@@ -22,15 +22,15 @@
     },
     {
       "errorCode": "ERROR_CODE_12",
-      "description": "Field birthday is empty!"
+      "description": "person which personal code is missing: Field birthday is empty!"
     },
     {
       "errorCode": "ERROR_CODE_1",
-      "description": "Field personFirstName is empty!"
+      "description": "person which personal code is missing: Field personFirstName is empty!"
     },
     {
       "errorCode": "ERROR_CODE_2",
-      "description": "Field personLastName is empty!"
+      "description": "person which personal code is missing: Field personLastName is empty!"
     }
   ],
   "agreementDateFrom": null,
