@@ -79,6 +79,7 @@ public class DtoV2Converter {
         personDTO.setPersonFirstName(request.getPersonFirstName());
         personDTO.setPersonLastName(request.getPersonLastName());
         personDTO.setPersonBirthDate(request.getBirthday());
+        personDTO.setPersonalCode(request.getPersonalCode());
         personDTO.setMedicalRiskLimitLevel(request.getMedicalRiskLimitLevel());
         return personDTO;
     }
@@ -96,7 +97,7 @@ public class DtoV2Converter {
         personResponse.setBirthday(personDTO.getPersonBirthDate());
         personResponse.setMedicalRiskLimitLevel(personDTO.getMedicalRiskLimitLevel());
         personResponse.setPersonPremium(calculatePersonPremium(personDTO));
-
+        personResponse.setPersonalCode(personDTO.getPersonalCode());
         personResponse.setPersonRisks(listOfTravelRiskFromDTO(personDTO.getRisks()));
         return personResponse;
     }

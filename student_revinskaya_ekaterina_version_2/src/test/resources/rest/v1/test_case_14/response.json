@@ -10,6 +10,7 @@
   "agreementDateFrom": null,
   "agreementDateTo": null,
   "country": null,
+  "personalCode": null,
   "birthday": null,
   "medicalRiskLimitLevel": null,
   "agreementPremium": null,

@@ -5,6 +5,10 @@
       "description": "Field agreementDateFrom is empty!"
     },
     {
+      "errorCode": "ERROR_CODE_17",
+      "description": "Field personalCode mustn't be empty!"
+    },
+    {
       "errorCode": "ERROR_CODE_4",
       "description": "Field agreementDateTo is empty!"
     },
@@ -36,6 +40,7 @@
   "country": null,
   "birthday": null,
   "medicalRiskLimitLevel": null,
+  "personalCode": null,
   "agreementPremium": null,
   "risks": null
 }

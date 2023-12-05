@@ -5,6 +5,7 @@
   "agreementDateTo" : null,
   "birthday" : null,
   "selectedRisks":null,
+  "personalCode": null,
   "country": null,
   "medicalRiskLimitLevel": null
 }

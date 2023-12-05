@@ -1,6 +1,10 @@
 {
   "errors": [
     {
+      "errorCode": "ERROR_CODE_17",
+      "description": "Field personalCode mustn't be empty!"
+    },
+    {
       "errorCode": "ERROR_CODE_14",
       "description": "Field medicalRiskLimitLevel must not be empty because TRAVEL_MEDICAL risk is selected and medicalRiskLimitLevel is enabled!"
     },
