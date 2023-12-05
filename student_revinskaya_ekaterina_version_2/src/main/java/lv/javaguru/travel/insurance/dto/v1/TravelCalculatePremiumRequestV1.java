@@ -28,6 +28,7 @@ public class TravelCalculatePremiumRequestV1 {
     @JsonFormat(pattern = "yyyy-MM-dd")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthday;
+    private Long personalCode;
     private List<String> selectedRisks;
     private String country;
     private String medicalRiskLimitLevel;

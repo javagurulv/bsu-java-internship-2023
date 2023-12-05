@@ -1,8 +1,8 @@
 {
   "errors": [
     {
-      "errorCode": "ERROR_CODE_3",
-      "description": "Field agreementDateFrom is empty!"
+      "errorCode": "ERROR_CODE_17",
+      "description": "Field personalCode mustn't be empty!"
     }
   ],
   "personFirstName": null,

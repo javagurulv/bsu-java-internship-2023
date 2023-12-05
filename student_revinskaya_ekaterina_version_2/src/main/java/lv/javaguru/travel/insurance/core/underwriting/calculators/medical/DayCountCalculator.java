@@ -16,8 +16,7 @@ public class DayCountCalculator {
     BigDecimal calculate(AgreementDTO agreement){
        return dateTimeUtil
                .calculateDiffBetweenDays(agreement.getAgreementDateFrom(),
-                       agreement.getAgreementDateTo())
-               .setScale(2, RoundingMode.HALF_UP);
+                       agreement.getAgreementDateTo());
 
     }
 }

@@ -26,7 +26,8 @@ public class TravelMedicalRiskPremiumCalculator implements TravelRiskPremiumCalc
                 .multiply(countryDefaultDayPremium)
                 .multiply(ageCoefficient)
                 .multiply(insuranceLimitCoefficient)
-                .setScale(2, RoundingMode.HALF_UP);
+                .setScale(2, RoundingMode.HALF_UP)
+                .stripTrailingZeros();
 
     }
 

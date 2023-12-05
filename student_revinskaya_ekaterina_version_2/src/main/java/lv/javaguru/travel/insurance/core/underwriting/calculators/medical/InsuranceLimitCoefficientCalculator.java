@@ -30,7 +30,6 @@ public class InsuranceLimitCoefficientCalculator {
                 .findByMedicalRiskLimitLevelIc(personDTO.getMedicalRiskLimitLevel())
                 .orElseThrow(()->new RuntimeException(
                         "medicalRiskLimitLevel with ic "+personDTO.getMedicalRiskLimitLevel()+" not found"))
-                .getCoefficient()
-                .setScale(2, RoundingMode.HALF_UP);
+                .getCoefficient();
             }
 }

@@ -41,6 +41,7 @@ public class SelectedRisksValidationIntegrationTest {
                         .withLastName("Pupkin")
                         .withBirthDate(createDate("01.01.2000"))
                         .withMedicalRiskLimitLevel("LEVEL_10000")
+                        .withPersonalCode(7585858L)
                 ).build();
         List<ValidationErrorDTO> errors = validator.validate(agreement);
         assertEquals(errors.size(), 1);
@@ -60,6 +61,7 @@ public class SelectedRisksValidationIntegrationTest {
                         .withLastName("Pupkin")
                         .withBirthDate(createDate("01.01.2000"))
                         .withMedicalRiskLimitLevel("LEVEL_10000")
+                        .withPersonalCode(567585L)
                 ).build();
         List<ValidationErrorDTO> errors = validator.validate(agreement);
         assertEquals(errors.size(), 1);

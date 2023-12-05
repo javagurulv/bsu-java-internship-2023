@@ -18,7 +18,8 @@ Test_case_17 - tests a request with empty selected_risks;
 Test_case_18 - tests a request with selectedRisk is not supported by the system.
 Test_case_19 - tests a request with selectedRisks is not supported by the system(two risks).
 Test_case_20 - tests a request where all fields null;
-Test_case_21 - tests a request without errors.
+Test_case_21 - tests a request without errors;
+Test_case_22 - tests a request with null personal code.
 
 
 

@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
@@ -32,8 +33,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(properties = {"age.coefficient.enabled=false"})
-@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 @AutoConfigureMockMvc
+@AutoConfigureTestDatabase
+
 public class AgeCoefficientCalculatorDisableCoefficientIntegrationTest {
     @Autowired
     private TravelPremiumUnderwriting premiumUnderwriting;
@@ -53,8 +55,8 @@ public class AgeCoefficientCalculatorDisableCoefficientIntegrationTest {
                 .withPerson(person)
                 .build();
 
-        assertEquals(0, premiumUnderwriting.calculatePremium(agreement, person).getTotalPremium()
-                .compareTo(BigDecimal.valueOf(2.50)));
+        assertEquals(premiumUnderwriting.calculatePremium(agreement, person).getTotalPremium()
+                ,BigDecimal.valueOf(2.5));
     }
     private Date createDate(String dateStr) {
         try {

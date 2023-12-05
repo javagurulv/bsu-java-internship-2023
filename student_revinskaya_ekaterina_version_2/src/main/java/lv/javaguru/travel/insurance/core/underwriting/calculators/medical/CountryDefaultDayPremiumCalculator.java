@@ -16,7 +16,6 @@ public class CountryDefaultDayPremiumCalculator {
     BigDecimal calculate(AgreementDTO agreement) {
         return countryDefaultDayRateRepository.findByCountryIc(agreement.getCountry())
                 .orElseThrow(() -> new RuntimeException("default day rate for country " + agreement.getCountry() + " not found"))
-                .getDefaultDayRate()
-                .setScale(2, RoundingMode.HALF_UP);
+                .getDefaultDayRate();
             }
 }
