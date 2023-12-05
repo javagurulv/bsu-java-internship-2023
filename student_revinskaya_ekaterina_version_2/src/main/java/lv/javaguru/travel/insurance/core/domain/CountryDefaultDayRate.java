@@ -17,6 +17,6 @@ public class CountryDefaultDayRate {
     private Long id;
     @Column(name = "country_ic", nullable = false)
     private String countryIc;
-    @Column(name = "default_day_rate", nullable = false)
+    @Column(name = "default_day_rate", precision = 2, nullable = false)
     private BigDecimal defaultDayRate;
 }
