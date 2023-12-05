@@ -5,8 +5,8 @@ import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Stream;
 
 @Component
 class TravelCalculatePremiumRequestValidatorImplementation implements TravelCalculatePremiumRequestValidator {
@@ -15,13 +15,26 @@ class TravelCalculatePremiumRequestValidatorImplementation implements TravelCalc
 
 
     public List<ValidationError> validate(TravelCalculatePremiumRequest request) {
-        List<ValidationError> errors = new ArrayList<>();
-        validations.forEach(v -> {
-            v.validate(request).ifPresent(errors::add);
-            List<ValidationError> selectedRisksErrorsList = v.validateList(request);
-            errors.addAll(selectedRisksErrorsList);
-        });
-        return errors;
+        List<ValidationError> singleErrorsList = getSingleErrorsList(request);
+        List<ValidationError> selectedRisksErrorsList = getSelectedRisksErrorsList(request);
+        return Stream.concat(singleErrorsList.stream(), selectedRisksErrorsList.stream())
+                .toList();
+    }
+
+    private List<ValidationError> getSingleErrorsList(TravelCalculatePremiumRequest request) {
+        return validations.stream()
+                .map(validation -> validation.validate(request))
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .toList();
+    }
+
+    private List<ValidationError> getSelectedRisksErrorsList(TravelCalculatePremiumRequest request) {
+        return validations.stream()
+                .map(validation -> validation.validateList(request))
+                .filter(Objects::nonNull)
+                .flatMap(Collection::stream)
+                .toList();
     }
 
     public TravelCalculatePremiumRequestValidatorImplementation(List<TravelRequestValidation> validations) {

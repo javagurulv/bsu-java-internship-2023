@@ -17,7 +17,7 @@ import java.util.Date;
 class AgeCoefficientCalculator {
     @Autowired
     private AgeCoefficientRepository ageCoefficientRepository;
-    @Value("${age.coefficient.enabled}")
+    @Value("${age.coefficient.enabled:false}")
     boolean ageCoefficientEnabled;
     BigDecimal getAgeCoefficient(TravelCalculatePremiumRequest request) {
         return ageCoefficientEnabled ?

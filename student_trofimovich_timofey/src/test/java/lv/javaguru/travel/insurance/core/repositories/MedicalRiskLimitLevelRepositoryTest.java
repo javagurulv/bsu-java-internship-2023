@@ -47,7 +47,7 @@ public class MedicalRiskLimitLevelRepositoryTest {
     @Test
     void shouldNotFindCoefficient() {
         Optional<MedicalRiskLimitLevel> rate = getLimitLevel("DUMMY");
-        assertThat(rate.isEmpty());
+        assertThat(rate).isEmpty();
     }
 
     private Optional<MedicalRiskLimitLevel> getLimitLevel(String limitIc) {
@@ -56,7 +56,7 @@ public class MedicalRiskLimitLevelRepositoryTest {
 
     private void checkIfCoefficientForLimitIcExists (String limitIc) {
         Optional<MedicalRiskLimitLevel> rate = getLimitLevel(limitIc);
-        assertThat(rate.isPresent());
+        assertThat(rate).isPresent();
         assertThat(rate.get().getMedicalRiskLimitLevelIc()).isEqualTo(limitIc);
     }
 

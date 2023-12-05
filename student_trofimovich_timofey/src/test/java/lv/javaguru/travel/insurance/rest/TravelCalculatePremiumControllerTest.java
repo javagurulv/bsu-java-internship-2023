@@ -98,10 +98,34 @@ public class TravelCalculatePremiumControllerTest {
     }
 
     @Test
-    public void selectedRisksListIsNullError() throws Exception {
+    public void emptyCountryError() throws Exception {
         getResponseAndCompare(
-                "rest/SelectedRisksListIsNullRequest.json/",
-                "rest/SelectedRisksListIsNullResponse.json"
+                "rest/EmptyCountryRequest.json/",
+                "rest/EmptyCountryErrorResponse.json"
+        );
+    }
+
+    @Test
+    public void emptyMedicalLimitLevelError() throws Exception {
+        getResponseAndCompare(
+                "rest/EmptyMedicalLimitLevelRequest.json/",
+                "rest/EmptyMedicalLimitLevelErrorResponse.json"
+        );
+    }
+
+    @Test
+    public void unsupportedCountryError() throws Exception {
+        getResponseAndCompare(
+                "rest/UnsupportedCountryRequest.json/",
+                "rest/UnsupportedCountryErrorResponse.json"
+        );
+    }
+
+    @Test
+    public void unsupportedMedicalLimitLevelError() throws Exception {
+        getResponseAndCompare(
+                "rest/UnsupportedMedicalLimitLevelRequest.json/",
+                "rest/UnsupportedMedicalLimitLevelErrorResponse.json"
         );
     }
     @Test
@@ -109,6 +133,13 @@ public class TravelCalculatePremiumControllerTest {
         getResponseAndCompare(
                 "rest/NothingProvidedRequest.json",
                 "rest/NothingProvidedErrorsResponse.json"
+        );
+    }
+    @Test
+    public void selectedRisksListIsNullError() throws Exception {
+        getResponseAndCompare(
+                "rest/SelectedRisksListIsNullRequest.json/",
+                "rest/SelectedRisksListIsNullResponse.json"
         );
     }
 
