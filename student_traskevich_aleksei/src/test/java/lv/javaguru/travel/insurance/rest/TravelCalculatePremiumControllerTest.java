@@ -2,6 +2,7 @@ package lv.javaguru.travel.insurance.rest;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -9,36 +10,52 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.util.ResourceUtils;
 
-import static org.hamcrest.Matchers.is;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @AutoConfigureMockMvc
 public class TravelCalculatePremiumControllerTest {
 
-    @Autowired private MockMvc mockMvc;
+    @Autowired
+    private MockMvc mockMvc;
 
     @Test
     public void simpleRestControllerTest() throws Exception {
-        mockMvc.perform(post("/insurance/travel/")
-                        .content("{" +
-                                "\"personFirstName\" : \"Vasja\",\n" +
-                                "\"personLastName\" : \"Pupkin\",\n" +
-                                "\"agreementDateFrom\" : \"2021-05-25\",\n" +
-                                "\"agreementDateTo\" : \"2021-05-29\"\n" +
-                                "}")
+        compareResponseFromRequest("request.json", "response.json");
+    }
+
+    private void compareResponseFromRequest(String pathToRequestJson,
+                                            String pathToCorrectResponseJson) throws Exception {
+        String jsonRequestAsString = parseData(pathToRequestJson);
+
+        MvcResult resultOfResponse = mockMvc.perform(post("/insurance/travel/")
+                        .content(jsonRequestAsString)
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("personFirstName", is("Vasja")))
-                .andExpect(jsonPath("personLastName", is("Pupkin")))
-                .andExpect(jsonPath("agreementDateFrom", is("2021-05-25")))
-                .andExpect(jsonPath("agreementDateTo", is("2021-05-29")))
-                .andExpect(jsonPath("agreementPrice", is(4)))
                 .andReturn();
+
+        String responseAsString = resultOfResponse.getResponse().getContentAsString();
+        String correctResponse = parseData(pathToCorrectResponseJson);
+
+        JSONAssert.assertEquals(responseAsString, correctResponse, true);
+    }
+
+    public String parseData(String pathToFile) {
+        try {
+            File jsonFile = ResourceUtils.getFile("classpath:" + pathToFile);
+            return new String(Files.readAllBytes(jsonFile.toPath()));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }
