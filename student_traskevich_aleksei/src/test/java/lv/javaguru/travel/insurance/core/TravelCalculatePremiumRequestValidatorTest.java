@@ -15,8 +15,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TravelCalculatePremiumRequestValidatorTest {
     TravelCalculatePremiumRequestValidator validator = new TravelCalculatePremiumRequestValidator();
-    Date dateLess = createDate("01.01.2023");
-    Date dateMore = createDate("02.01.2023");
+    Date dateLess = createDate("01.01.2025");
+    Date dateMore = createDate("02.01.2025");
 
 
     @Test
