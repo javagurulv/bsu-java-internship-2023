@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.core;
+package lv.javaguru.travel.insurance.core.utils;
 
 import org.junit.jupiter.api.Test;
 
@@ -9,8 +9,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-class DateDifferenceServiceTest {
-    DateDifferenceService dateDifferenceService = new DateDifferenceService();
+class DateTimeUtilTest {
+    DateTimeUtil dateDifferenceService = new DateTimeUtil();
 
     @Test
     void calculateDateDifferenceTestPositive(){

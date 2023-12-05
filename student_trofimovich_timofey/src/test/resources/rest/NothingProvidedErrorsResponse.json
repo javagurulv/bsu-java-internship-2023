@@ -21,6 +21,10 @@
       "description": "Field personLastName is empty!"
     },
     {
+      "errorCode": "ERROR_CODE_14",
+      "description": "Field medicalRiskLimit is empty!"
+    },
+    {
       "errorCode": "ERROR_CODE_8",
       "description": "Field selectedRisks is empty!"
     }

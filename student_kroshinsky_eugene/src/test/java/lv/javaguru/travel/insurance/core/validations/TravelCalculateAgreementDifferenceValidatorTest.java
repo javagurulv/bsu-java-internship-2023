@@ -18,7 +18,7 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class TravelCalculateAgreementDifferenceValidatorTest {
     @Mock
-    PropertyReader propertyReader;
+    ValidationErrorFactory validationErrorFactory;
     @Mock
     TravelCalculatePremiumRequest request;
     @InjectMocks
@@ -40,11 +40,12 @@ class TravelCalculateAgreementDifferenceValidatorTest {
     void validateWrongDifference() {
         when(request.getAgreementDateFrom()).thenReturn(createDate("30.11.2024"));
         when(request.getAgreementDateTo()).thenReturn(createDate("28.11.2024"));
-        when(propertyReader.getProperty("ERROR_CODE_1")).thenReturn("DateTo must be greater than DateFrom!");
+        ValidationError expectedError = new ValidationError("ERROR_CODE", "Description");
+        when(validationErrorFactory.createValidationError("ERROR_CODE_1")).thenReturn(expectedError);
         Optional<ValidationError> validationError = validator.validate(request);
         assertTrue(validationError.isPresent());
-        assertEquals("DateTo must be greater than DateFrom!", validationError.get().getDescription());
-        assertEquals("ERROR_CODE_1", validationError.get().getErrorCode());
+        assertEquals("Description", validationError.get().getDescription());
+        assertEquals("ERROR_CODE", validationError.get().getErrorCode());
     }
     @Test
     void validateRightDifference(){

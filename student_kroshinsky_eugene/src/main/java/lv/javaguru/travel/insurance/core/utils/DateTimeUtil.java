@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.core;
+package lv.javaguru.travel.insurance.core.utils;
 
 import org.springframework.stereotype.Component;
 
@@ -7,8 +7,8 @@ import java.time.Duration;
 import java.util.Date;
 
 @Component
-public class DateDifferenceService {
-    BigDecimal calculateDateDifference(Date dateFrom, Date dateTo){
+public class DateTimeUtil {
+    public BigDecimal calculateDateDifference(Date dateFrom, Date dateTo){
         return new BigDecimal(Duration.between(dateFrom.toInstant(), dateTo.toInstant()).toDays());
     }
 }

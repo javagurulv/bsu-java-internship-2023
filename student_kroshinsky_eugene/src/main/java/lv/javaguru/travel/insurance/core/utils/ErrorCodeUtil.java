@@ -1,15 +1,15 @@
-package lv.javaguru.travel.insurance.core.validations;
+package lv.javaguru.travel.insurance.core.utils;
 
-import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
+
 @Component
-class PropertyReader {
-    Properties properties;
-    public PropertyReader() {
+public class ErrorCodeUtil {
+    private Properties properties;
+    public ErrorCodeUtil() {
         properties = new Properties();
         try (InputStream input = getClass().getResourceAsStream("/errorCode.properties")) {
             properties.load(input);
