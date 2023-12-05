@@ -37,6 +37,9 @@ public class TravelCalculatePremiumControllerTest {
         compareResponseFromRequest("requestWithoutDateTo.json", "responseWithoutCorrectDateTo.json");
         compareResponseFromRequest("requestWithDateFromMoreThanDateTo.json", "responseWithoutCorrectDateTo.json");
         compareResponseFromRequest("requestEmpty.json", "responseEmpty.json");
+        compareResponseFromRequest("requestDateFromInPast.json", "responseDateFromInPast.json");
+
+
     }
 
     private void compareResponseFromRequest(String pathToRequestJson,

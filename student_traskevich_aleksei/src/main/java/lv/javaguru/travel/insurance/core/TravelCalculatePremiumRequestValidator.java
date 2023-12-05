@@ -33,9 +33,11 @@ class TravelCalculatePremiumRequestValidator {
     }
 
     private Optional<ValidationError> validateAgreementDateFrom(TravelCalculatePremiumRequest request) {
-        return (request.getAgreementDateFrom() == null)
-                ? Optional.of(new ValidationError("DateFrom", "Must not be empty!"))
-                : Optional.empty();
+        if (request.getAgreementDateFrom() == null)
+            return Optional.of(new ValidationError("DateFrom", "Must not be empty!"));
+        if (request.getAgreementDateFrom().compareTo(new java.util.Date()) < 0)
+            return Optional.of(new ValidationError("DateFrom", "Must not be in past!"));
+        return Optional.empty();
     }
 
     private Optional<ValidationError> validateAgreementDateTo(TravelCalculatePremiumRequest request) {
