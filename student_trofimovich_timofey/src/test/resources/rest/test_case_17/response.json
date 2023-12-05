@@ -2,7 +2,7 @@
   "errors": [
     {
       "errorCode": "ERROR_CODE_10",
-      "description": "Field country must not be empty!"
+      "description": "Field country is empty!"
     }
   ],
   "personFirstName": null,

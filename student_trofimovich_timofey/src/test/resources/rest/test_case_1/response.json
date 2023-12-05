@@ -10,14 +10,6 @@
     {
       "ic": "TRAVEL_MEDICAL",
       "premium": 8.25
-    },
-    {
-      "ic": "TRAVEL_CANCELLATION",
-      "premium": 0.00
-    },
-    {
-      "ic": "TRAVEL_LOSS_BAGGAGE",
-      "premium": 0.00
     }
   ],
   "country": "SPAIN",

@@ -1,0 +1,9 @@
+{
+  "personFirstName": "Harry",
+  "personLastName": "Kane",
+  "dateOfBirth": "2004-03-02",
+  "agreementDateFrom": "2025-03-07",
+  "agreementDateTo": "2025-04-08",
+  "selected_risks":["my_risk"],
+  "medicalRiskLimitLevel": "LEVEL_10000"
+}
