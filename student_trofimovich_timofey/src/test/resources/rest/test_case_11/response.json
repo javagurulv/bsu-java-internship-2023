@@ -1,8 +1,12 @@
 {
   "errors": [
     {
-      "errorCode": "ERROR_CODE_5",
-      "description": "Field agreementDateFrom is not in the future!"
+      "errorCode": "ERROR_CODE_7",
+      "description": "Field agreementDateFrom is not before field agreementDateTo!"
+    },
+    {
+      "errorCode": "ERROR_CODE_6",
+      "description": "Field agreementDateTo is in the past!"
     }
   ],
   "personFirstName": null,

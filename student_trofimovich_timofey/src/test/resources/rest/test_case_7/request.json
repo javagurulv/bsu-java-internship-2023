@@ -1,10 +1,10 @@
 {
   "personFirstName": "Harry",
   "personLastName": "Kane",
-  "dateOfBirth": "2004-03-02",
+  "dateOfBirth": "3000-05-05",
   "agreementDateFrom": "2025-04-05",
   "agreementDateTo": "2025-04-08",
-  "selected_risks":["TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"],
+  "selected_risks":["TRAVEL_MEDICAL"],
   "country": "SPAIN",
   "medicalRiskLimitLevel": "LEVEL_10000"
 }
