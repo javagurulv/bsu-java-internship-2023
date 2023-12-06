@@ -32,7 +32,7 @@ public class TravelRequestDateToNotPastValidationTest {
 
         Optional<ValidationError> expected = Optional.of(
                 new ValidationError(
-                        "agreementDateTo", "Must not be from the past!"
+                        "ERROR_CODE_3", "Must not be from the past!"
                 )
         );
 

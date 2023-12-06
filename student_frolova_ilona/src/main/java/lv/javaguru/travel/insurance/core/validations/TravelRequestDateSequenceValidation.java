@@ -1,8 +1,10 @@
 package lv.javaguru.travel.insurance.core.validations;
 
 import lombok.Getter;
+import lv.javaguru.travel.insurance.core.ErrorManager;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
@@ -10,13 +12,20 @@ import java.util.Optional;
 @Component
 @Getter
 class TravelRequestDateSequenceValidation implements TravelRequestValidation {
+
+    @Autowired
+    private ErrorManager errorManager;
+
     @Override
     public Optional<ValidationError> check(TravelCalculatePremiumRequest request) {
         if (request.getAgreementDateFrom() == null || request.getAgreementDateTo() == null)
             return Optional.empty();
 
         return (request.getAgreementDateTo().getTime() - request.getAgreementDateFrom().getTime() < 0)
-                ? Optional.of(new ValidationError("agreementDateTo", "Must be after agreementDateFrom!"))
+                ? Optional.of(new ValidationError(
+                    "ERROR_CODE_5",
+                    errorManager.getErrorDescription("ERROR_CODE_5")
+                ))
                 : Optional.empty();
     }
 }

@@ -28,7 +28,7 @@ public class TravelRequestDateToNotEmptyValidationTest {
     public void returnErrorIfDateToNotOk() {
         when(request.getAgreementDateTo()).thenReturn(null);
         Optional<ValidationError> expected = Optional.of(
-                new ValidationError("agreementDateTo", "Must not be empty!")
+                new ValidationError("ERROR_CODE_4", "Must not be empty!")
         );
 
         Optional<ValidationError> error = validation.check(request);

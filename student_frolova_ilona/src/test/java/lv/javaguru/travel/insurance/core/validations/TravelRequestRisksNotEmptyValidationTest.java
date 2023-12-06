@@ -27,7 +27,7 @@ public class TravelRequestRisksNotEmptyValidationTest {
     public void returnErrorIfRisksAreNull() {
         when(request.getSelectedRisks()).thenReturn(null);
         Optional<ValidationError> expected = Optional.of(
-                new ValidationError("selectedRisks", "Must not be empty!")
+                new ValidationError("ERROR_CODE_6", "Must not be empty!")
         );
         assertEquals(expected, validation.check(request));
     }
@@ -36,7 +36,7 @@ public class TravelRequestRisksNotEmptyValidationTest {
     public void returnErrorIfRisksAreNotSelected() {
         when(request.getSelectedRisks()).thenReturn(new ArrayList<>());
         Optional<ValidationError> expected = Optional.of(
-                new ValidationError("selectedRisks", "Must not be empty!")
+                new ValidationError("ERROR_CODE_6", "Must not be empty!")
         );
         assertEquals(expected, validation.check(request));
     }

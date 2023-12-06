@@ -27,7 +27,7 @@ public class TravelRequestFirstNameValidationTest {
     public void returnErrorIfFirstNameIsEmpty() {
         when(request.getPersonFirstName()).thenReturn("");
         Optional<ValidationError> expected = Optional.of(
-                new ValidationError("personFirstName", "Must not be empty!")
+                new ValidationError("ERROR_CODE_7", "Must not be empty!")
         );
 
         Optional<ValidationError> error = validation.check(request);
@@ -38,7 +38,7 @@ public class TravelRequestFirstNameValidationTest {
     public void returnErrorIfFirstNameConsistsOfSpaces() {
         when(request.getPersonFirstName()).thenReturn("     ");
         Optional<ValidationError> expected = Optional.of(
-                new ValidationError("personFirstName", "Must not be empty!")
+                new ValidationError("ERROR_CODE_7", "Must not be empty!")
         );
 
         Optional<ValidationError> error = validation.check(request);

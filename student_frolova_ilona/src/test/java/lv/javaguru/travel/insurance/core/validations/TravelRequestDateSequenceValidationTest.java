@@ -28,7 +28,7 @@ public class TravelRequestDateSequenceValidationTest {
         when(request.getAgreementDateTo()).thenReturn(new Date(100L));
         Optional<ValidationError> expected = Optional.of(
                 new ValidationError(
-                        "agreementDateTo", "Must be after agreementDateFrom!"
+                        "ERROR_CODE_5", "Must be after agreementDateFrom!"
                 )
         );
 

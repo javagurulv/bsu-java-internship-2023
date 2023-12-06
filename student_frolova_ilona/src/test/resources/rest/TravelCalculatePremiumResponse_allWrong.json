@@ -1,28 +1,29 @@
 {
   "errors": [
+
     {
-      "field": "agreementDateTo",
-      "message": "Must not be empty!"
+      "errorCode": "ERROR_CODE_6",
+      "description": "Must not be empty!"
     },
 
     {
-      "field": "agreementDateFrom",
-      "message": "Must not be empty!"
+      "errorCode": "ERROR_CODE_4",
+      "description": "Must not be empty!"
     },
 
     {
-      "field": "personLastName",
-      "message": "Must not be empty!"
+      "errorCode": "ERROR_CODE_2",
+      "description": "Must not be empty!"
     },
 
     {
-      "field": "personFirstName",
-      "message": "Must not be empty!"
+      "errorCode": "ERROR_CODE_8",
+      "description": "Must not be empty!"
     },
 
     {
-      "field": "selectedRisks",
-      "message": "Must not be empty!"
+      "errorCode": "ERROR_CODE_7",
+      "description": "Must not be empty!"
     }
   ],
   "personFirstName": null,
