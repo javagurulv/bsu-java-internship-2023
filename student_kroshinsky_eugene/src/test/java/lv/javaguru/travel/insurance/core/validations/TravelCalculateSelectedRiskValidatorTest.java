@@ -17,24 +17,30 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class TravelCalculateSelectedRiskValidatorTest {
     @Mock
+    ValidationErrorFactory validationErrorFactory;
+    @Mock
     TravelCalculatePremiumRequest request;
     @InjectMocks
     TravelCalculateSelectedRiskValidator validator;
     @Test
     void validateNullSelectedRisk() {
         when(request.getSelectedRisks()).thenReturn(null);
+        ValidationError expectedError = new ValidationError("ERROR_CODE", "Description");
+        when(validationErrorFactory.createValidationError("ERROR_CODE_7")).thenReturn(expectedError);
         Optional<ValidationError> validationError = validator.validate(request);
         assertTrue(validationError.isPresent());
-        assertEquals("Must not be empty!", validationError.get().getMessage());
-        assertEquals("selectedRisk", validationError.get().getField());
+        assertEquals("Description", validationError.get().getDescription());
+        assertEquals("ERROR_CODE", validationError.get().getErrorCode());
     }
     @Test
     void validateEmptySelectedRisk() {
         when(request.getSelectedRisks()).thenReturn(List.of());
+        ValidationError expectedError = new ValidationError("ERROR_CODE", "Description");
+        when(validationErrorFactory.createValidationError("ERROR_CODE_7")).thenReturn(expectedError);
         Optional<ValidationError> validationError = validator.validate(request);
         assertTrue(validationError.isPresent());
-        assertEquals("Must not be empty!", validationError.get().getMessage());
-        assertEquals("selectedRisk", validationError.get().getField());
+        assertEquals("Description", validationError.get().getDescription());
+        assertEquals("ERROR_CODE", validationError.get().getErrorCode());
     }
 
     @Test

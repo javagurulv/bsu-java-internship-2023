@@ -17,6 +17,6 @@ public class MedicalRiskLimitLevel {
     private Long id;
     @Column(name = "medical_risk_limit_level_ic", nullable = false)
     private String medicalRiskLimitLevelIc;
-    @Column(name = "coefficient", nullable = false)
+    @Column(name = "coefficient", precision = 2, nullable = false)
     private BigDecimal coefficient;
 }

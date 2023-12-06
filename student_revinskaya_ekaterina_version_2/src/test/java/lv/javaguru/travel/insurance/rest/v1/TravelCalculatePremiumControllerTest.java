@@ -31,7 +31,7 @@ public abstract class TravelCalculatePremiumControllerTest {
     protected abstract String getTestCaseName();
     @Test
     public void testRequest() throws Exception {
-        equalsJsonFiles("rest/v1/" +getTestCaseName() + "Request.json", "rest/v1/" +getTestCaseName() + "Response.json");
+        equalsJsonFiles("rest/v1/" +getTestCaseName() + "/request.json", "rest/v1/" +getTestCaseName() + "/response.json");
     }
 
     public void equalsJsonFiles(String requestFile, String responseFile) throws Exception {
