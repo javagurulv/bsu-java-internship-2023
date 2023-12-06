@@ -6,6 +6,7 @@
   "agreementDateTo": "2025-05-19",
   "country": "SPAIN",
   "birthday": "2005-08-03",
+  "personalCode": 1313131,
   "medicalRiskLimitLevel": "LEVEL_10000",
   "agreementPremium": 19.25,
   "risks": [

@@ -1,5 +1,6 @@
 package lv.javaguru.travel.insurance.core.validations;
 
+
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.Test;
@@ -18,7 +19,7 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class TravelCalculateDateFromValidatorTest {
     @Mock
-    PropertyReader propertyReader;
+    ValidationErrorFactory validationErrorFactory;
     @Mock
     TravelCalculatePremiumRequest request;
     @InjectMocks
@@ -26,11 +27,12 @@ class TravelCalculateDateFromValidatorTest {
     @Test
     void validateNullDateFrom() {
         when(request.getAgreementDateFrom()).thenReturn(null);
-        when(propertyReader.getProperty("ERROR_CODE_3")).thenReturn("Field agreementDateFrom is empty!");
+        ValidationError expectedError = new ValidationError("ERROR_CODE", "Description");
+        when(validationErrorFactory.createValidationError("ERROR_CODE_3")).thenReturn(expectedError);
         Optional<ValidationError> validationError = validator.validate(request);
         assertTrue(validationError.isPresent());
-        assertEquals("Field agreementDateFrom is empty!", validationError.get().getDescription());
-        assertEquals("ERROR_CODE_3", validationError.get().getErrorCode());
+        assertEquals("Description", validationError.get().getDescription());
+        assertEquals("ERROR_CODE", validationError.get().getErrorCode());
     }
     @Test
     void validateNoErrorsDateFrom() {

@@ -2,7 +2,7 @@
   "errors": [
     {
       "errorCode": "ERROR_CODE_1",
-      "description": "Field personFirstName is empty!"
+      "description": "person which personal code is 1212121: Field personFirstName is empty!"
     }
   ],
   "agreementDateFrom": null,

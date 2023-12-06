@@ -1,0 +1,22 @@
+{
+  "agreementDateFrom" : "",
+  "agreementDateTo" : "",
+  "country" : "",
+  "selected_risks":["TRAVEL_MEDICAL"],
+  "persons" : [
+    {
+      "personFirstName" : "Vasja",
+      "personLastName" : "Pupkin",
+      "personCode" : "123",
+      "personBirthDate" : "2000-05-29",
+      "medicalRiskLimitLevel" : "LEVEL_10000"
+    },
+    {
+      "personFirstName" : "Petja",
+      "personLastName" : "Pupkin",
+      "personCode" : "123",
+      "personBirthDate" : "1950-02-29",
+      "medicalRiskLimitLevel" : "LEVEL_10000"
+    }
+  ]
+}

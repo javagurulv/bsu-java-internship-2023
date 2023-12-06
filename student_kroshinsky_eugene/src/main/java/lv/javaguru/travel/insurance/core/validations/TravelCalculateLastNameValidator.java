@@ -8,15 +8,11 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 @Component
 class TravelCalculateLastNameValidator implements TravelRequestValidation {
-    @Autowired
-    private PropertyReader propertyReader;
+    @Autowired private ValidationErrorFactory validationErrorFactory;
     @Override
     public Optional<ValidationError> validate(TravelCalculatePremiumRequest request) {
         return (request.getPersonLastName() == null || request.getPersonLastName().isEmpty())
-                ? Optional.of(createValidationError("ERROR_CODE_6"))
+                ? Optional.of(validationErrorFactory.createValidationError("ERROR_CODE_6"))
                 : Optional.empty();
-    }
-    private ValidationError createValidationError(String errorCode) {
-        return new ValidationError(errorCode, propertyReader.getProperty(errorCode));
     }
 }

@@ -34,6 +34,7 @@ public class TravelCalculatePremiumResponseV1 extends CoreResponse {
     @JsonFormat(pattern = "yyyy-MM-dd")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthday;
+    private Long personalCode;
     private String medicalRiskLimitLevel;
     @JsonSerialize(using = BigDecimalSerializer.class)
     private BigDecimal agreementPremium;

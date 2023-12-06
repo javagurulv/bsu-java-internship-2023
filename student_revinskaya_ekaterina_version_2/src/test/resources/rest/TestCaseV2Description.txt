@@ -22,9 +22,11 @@ Test_case_21 - tests a request with birthday of first person in future;
 Test_case_22 - tests a request without fields for the first person;
 Test_case_23 - tests a request without fields for both persons;
 Test_case_24 - tests a request without fields (one person);
+Test_case_25 - tests a request with empty list of persons;
+Test_case_26 - tests a request with null list of persons;
+Test_case_27 - tests a request with null personal code of one person.
 
-Test_case_25 - .
-Test_case_26 - .
+
 
 
 
