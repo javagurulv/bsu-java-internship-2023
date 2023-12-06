@@ -2,7 +2,7 @@
   "errors": [
     {
       "errorCode": "ERROR_CODE_4",
-      "description": "Must not be empty!"
+      "description": "Field agreementDateTo must not be empty!"
     }
   ],
   "personFirstName": null,

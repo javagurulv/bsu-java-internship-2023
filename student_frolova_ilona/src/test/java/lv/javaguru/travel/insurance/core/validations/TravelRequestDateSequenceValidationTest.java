@@ -1,7 +1,9 @@
 package lv.javaguru.travel.insurance.core.validations;
 
+import lv.javaguru.travel.insurance.core.ErrorManager;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -11,6 +13,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -19,6 +22,9 @@ public class TravelRequestDateSequenceValidationTest {
     @Mock
     private TravelCalculatePremiumRequest request;
 
+    @Mock
+    private ErrorManager errorManager;
+
     @InjectMocks
     private TravelRequestDateSequenceValidation validation;
 
@@ -26,9 +32,11 @@ public class TravelRequestDateSequenceValidationTest {
     public void returnErrorIfDateFromAfterDateTo() {
         when(request.getAgreementDateFrom()).thenReturn(new Date(200L));
         when(request.getAgreementDateTo()).thenReturn(new Date(100L));
+        when(errorManager.getErrorDescription(any())).thenReturn("description");
+
         Optional<ValidationError> expected = Optional.of(
                 new ValidationError(
-                        "ERROR_CODE_5", "Must be after agreementDateFrom!"
+                        "ERROR_CODE_5", "description"
                 )
         );
 

@@ -2,7 +2,7 @@
   "errors": [
     {
       "errorCode": "ERROR_CODE_5",
-      "description": "Must be after agreementDateFrom!"
+      "description": "Field agreementDateTo must be after agreementDateFrom!"
     }
   ],
   "personFirstName": null,

@@ -2,7 +2,7 @@
   "errors": [
     {
       "errorCode": "ERROR_CODE_6",
-      "description": "Must not be empty!"
+      "description": "Field selectedRisks must not be empty!"
     }
   ],
   "personFirstName": null,

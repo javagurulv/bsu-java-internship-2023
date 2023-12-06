@@ -3,27 +3,27 @@
 
     {
       "errorCode": "ERROR_CODE_6",
-      "description": "Must not be empty!"
+      "description": "Field selectedRisks must not be empty!"
     },
 
     {
       "errorCode": "ERROR_CODE_4",
-      "description": "Must not be empty!"
+      "description": "Field agreementDateTo must not be empty!"
     },
 
     {
       "errorCode": "ERROR_CODE_2",
-      "description": "Must not be empty!"
+      "description": "Field agreementDateFrom must not be empty!"
     },
 
     {
       "errorCode": "ERROR_CODE_8",
-      "description": "Must not be empty!"
+      "description": "Field personLastName must not be empty!"
     },
 
     {
       "errorCode": "ERROR_CODE_7",
-      "description": "Must not be empty!"
+      "description": "Field personFirstName must not be empty!"
     }
   ],
   "personFirstName": null,

@@ -2,7 +2,7 @@
   "errors": [
     {
       "errorCode": "ERROR_CODE_8",
-      "description": "Must not be empty!"
+      "description": "Field personLastName must not be empty!"
     }
   ],
   "personFirstName": null,

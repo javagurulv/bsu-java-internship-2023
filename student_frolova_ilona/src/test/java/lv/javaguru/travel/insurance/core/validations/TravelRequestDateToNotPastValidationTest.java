@@ -1,7 +1,9 @@
 package lv.javaguru.travel.insurance.core.validations;
 
+import lv.javaguru.travel.insurance.core.ErrorManager;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -12,6 +14,7 @@ import java.util.Date;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 
@@ -21,6 +24,9 @@ public class TravelRequestDateToNotPastValidationTest {
     @Mock
     private TravelCalculatePremiumRequest request;
 
+    @Mock
+    private ErrorManager errorManager;
+
     @InjectMocks
     private TravelRequestDateToNotPastValidation validation;
 
@@ -29,10 +35,11 @@ public class TravelRequestDateToNotPastValidationTest {
         when(request.getAgreementDateTo()).thenReturn(
                 new Date(validation.getMillisecondsNow() - 172800000L)
         );
+        when(errorManager.getErrorDescription(any())).thenReturn("description");
 
         Optional<ValidationError> expected = Optional.of(
                 new ValidationError(
-                        "ERROR_CODE_3", "Must not be from the past!"
+                        "ERROR_CODE_3", "description"
                 )
         );
 

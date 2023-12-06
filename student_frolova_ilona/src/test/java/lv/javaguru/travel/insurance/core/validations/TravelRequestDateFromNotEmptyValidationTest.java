@@ -24,19 +24,16 @@ public class TravelRequestDateFromNotEmptyValidationTest {
     private TravelCalculatePremiumRequest request;
 
     @Mock
-    ErrorManager errorManager;
+    private ErrorManager errorManager;
 
     @InjectMocks
     private TravelRequestDateFromNotEmptyValidation validation;
 
-    @BeforeEach
-    public void initMocks() {
-        when(errorManager.getErrorDescription(any())).thenReturn("description");
-    }
-
     @Test
     public void returnErrorIfDateFromNotOk() {
         when(request.getAgreementDateFrom()).thenReturn(null);
+        when(errorManager.getErrorDescription(any())).thenReturn("description");
+
         Optional<ValidationError> expected = Optional.of(
                 new ValidationError(
                         "ERROR_CODE_2",
