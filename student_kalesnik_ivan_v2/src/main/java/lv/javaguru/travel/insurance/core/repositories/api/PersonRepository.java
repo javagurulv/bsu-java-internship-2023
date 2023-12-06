@@ -1,6 +1,6 @@
-package lv.javaguru.travel.insurance.core.repositories;
+package lv.javaguru.travel.insurance.core.repositories.api;
 
-import lv.javaguru.travel.insurance.core.domain.PersonEntity;
+import lv.javaguru.travel.insurance.core.domain.api.PersonEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

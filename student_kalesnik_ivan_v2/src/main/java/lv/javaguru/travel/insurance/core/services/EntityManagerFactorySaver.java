@@ -1,8 +1,8 @@
 package lv.javaguru.travel.insurance.core.services;
 
 import lv.javaguru.travel.insurance.core.api.dto.PersonDto;
-import lv.javaguru.travel.insurance.core.domain.PersonEntity;
-import lv.javaguru.travel.insurance.core.repositories.PersonRepository;
+import lv.javaguru.travel.insurance.core.domain.api.PersonEntity;
+import lv.javaguru.travel.insurance.core.repositories.api.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

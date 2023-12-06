@@ -21,6 +21,7 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
     @Autowired private TravelPremiumUnderwriting premiumUnderwriting;
 
     @Autowired private  EntityManagerFactorySaver saver;
+    @Autowired private  AgreementManagerFactorySaver agreementEntityFactory;
 
     @Override
     public TravelCalculatePremiumCoreResult calculatePremium(TravelCalculatePremiumCoreCommand command) {
@@ -39,14 +40,15 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
 
         BigDecimal totalAgreementPremium = calculateTotalAgreementPremium(agreement);
         agreement.setAgreementPremium(totalAgreementPremium);
-
+        agreementEntityFactory.createAgreementEntity(agreement);
         TravelCalculatePremiumCoreResult coreResult = new TravelCalculatePremiumCoreResult();
         coreResult.setAgreement(agreement);
         return coreResult;
     }
-    private void saveAllPersons(AgreementDto agreement) {
+
+    /*private void saveAllPersons(AgreementDto agreement) {
         agreement.getPersons().forEach(personDTO -> saver.savePerson(personDTO));
-    }
+    }*/
 
     private void calculateRiskPremiumsForAllPersons(AgreementDto agreement) {
         agreement.getPersons().forEach(person -> {

@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.core.domain;
+package lv.javaguru.travel.insurance.core.domain.api;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
