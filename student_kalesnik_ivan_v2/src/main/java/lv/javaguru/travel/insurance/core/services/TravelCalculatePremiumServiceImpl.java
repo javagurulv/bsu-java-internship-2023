@@ -4,6 +4,7 @@ import lv.javaguru.travel.insurance.core.api.command.TravelCalculatePremiumCoreC
 import lv.javaguru.travel.insurance.core.api.command.TravelCalculatePremiumCoreResult;
 import lv.javaguru.travel.insurance.core.api.dto.*;
 import lv.javaguru.travel.insurance.core.services.factory.AgreementManagerFactorySaver;
+import lv.javaguru.travel.insurance.core.services.factory.CommonFactorySaver;
 import lv.javaguru.travel.insurance.core.services.factory.EntityManagerFactorySaver;
 import lv.javaguru.travel.insurance.core.services.factory.RiskManagerFactorySaver;
 import lv.javaguru.travel.insurance.core.underwriting.TravelPremiumCalculationResult;
@@ -21,9 +22,7 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
 
     @Autowired private TravelAgreementValidator agreementValidator;
     @Autowired private TravelPremiumUnderwriting premiumUnderwriting;
-
-    @Autowired private EntityManagerFactorySaver saver;
-    @Autowired private RiskManagerFactorySaver agreementEntityFactory;
+    @Autowired private CommonFactorySaver agreementEntityFactory;
 
     @Override
     public TravelCalculatePremiumCoreResult calculatePremium(TravelCalculatePremiumCoreCommand command) {
