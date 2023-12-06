@@ -19,14 +19,12 @@ public class CountryValidation extends TravelRequestValidationImpl {
 
     @Override
     public Optional<ValidationError> validate(TravelCalculatePremiumRequest request) {
-        if (travelMedicalRiskIsPresent(request)) {
             if (countryIsEmpty(request)) {
                 return Optional.of(errorFactory.buildError("ERROR_CODE_10"));
             }
             else if (!countryIsRecognised(request)) {
                 return Optional.of(errorFactory.buildError("ERROR_CODE_11", List.of(new Placeholder("country", request.getCountry()))));
             }
-        }
         return Optional.empty();
     }
     private boolean countryIsEmpty(TravelCalculatePremiumRequest request) {
@@ -37,9 +35,5 @@ public class CountryValidation extends TravelRequestValidationImpl {
         String country = request.getCountry();
         return classifierValueRepository.findByClassifierTitleAndIc("COUNTRY", country).isPresent();
 
-    }
-
-    private boolean travelMedicalRiskIsPresent(TravelCalculatePremiumRequest request) {
-        return !(request.getSelectedRisks() == null) && !(request.getSelectedRisks().isEmpty()) && request.getSelectedRisks().contains("TRAVEL_MEDICAL");
     }
 }
