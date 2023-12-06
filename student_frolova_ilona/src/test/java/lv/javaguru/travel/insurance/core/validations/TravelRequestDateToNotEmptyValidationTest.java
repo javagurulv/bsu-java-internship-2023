@@ -24,7 +24,7 @@ public class TravelRequestDateToNotEmptyValidationTest {
     private TravelCalculatePremiumRequest request;
 
     @Mock
-    private ErrorManager errorManager;
+    private ValidationErrorFactory errorFactory;
 
     @InjectMocks
     private TravelRequestDateToNotEmptyValidation validation;
@@ -32,13 +32,11 @@ public class TravelRequestDateToNotEmptyValidationTest {
     @Test
     public void returnErrorIfDateToNotOk() {
         when(request.getAgreementDateTo()).thenReturn(null);
-        when(errorManager.getErrorDescription(any())).thenReturn("description");
+        when(errorFactory.buildError(any())).thenReturn(new ValidationError());
 
-        Optional<ValidationError> expected = Optional.of(
-                new ValidationError("ERROR_CODE_4", "description")
-        );
-
+        Optional<ValidationError> expected = Optional.of(new ValidationError());
         Optional<ValidationError> error = validation.check(request);
+
         assertEquals(expected, error);
     }
 

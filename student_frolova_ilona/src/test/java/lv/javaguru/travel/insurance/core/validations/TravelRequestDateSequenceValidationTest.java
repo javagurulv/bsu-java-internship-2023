@@ -22,7 +22,7 @@ public class TravelRequestDateSequenceValidationTest {
     private TravelCalculatePremiumRequest request;
 
     @Mock
-    private ErrorManager errorManager;
+    private ValidationErrorFactory errorFactory;
 
     @InjectMocks
     private TravelRequestDateSequenceValidation validation;
@@ -31,15 +31,11 @@ public class TravelRequestDateSequenceValidationTest {
     public void returnErrorIfDateFromAfterDateTo() {
         when(request.getAgreementDateFrom()).thenReturn(new Date(200L));
         when(request.getAgreementDateTo()).thenReturn(new Date(100L));
-        when(errorManager.getErrorDescription(any())).thenReturn("description");
+        when(errorFactory.buildError(any())).thenReturn(new ValidationError());
 
-        Optional<ValidationError> expected = Optional.of(
-                new ValidationError(
-                        "ERROR_CODE_5", "description"
-                )
-        );
-
+        Optional<ValidationError> expected = Optional.of(new ValidationError());
         Optional<ValidationError> error = validation.check(request);
+
         assertEquals(expected, error);
     }
 

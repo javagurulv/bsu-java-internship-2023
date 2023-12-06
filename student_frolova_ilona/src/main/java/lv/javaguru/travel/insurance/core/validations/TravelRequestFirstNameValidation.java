@@ -12,15 +12,12 @@ import java.util.Optional;
 class TravelRequestFirstNameValidation implements TravelRequestValidation {
 
     @Autowired
-    private ErrorManager errorManager;
+    private ValidationErrorFactory errorFactory;
 
     @Override
     public Optional<ValidationError> check(TravelCalculatePremiumRequest request) {
         return (request.getPersonFirstName() == null || request.getPersonFirstName().trim().isEmpty())
-                ? Optional.of(new ValidationError(
-                    "ERROR_CODE_7",
-                    errorManager.getErrorDescription("ERROR_CODE_7")
-                ))
+                ? Optional.of(errorFactory.buildError("ERROR_CODE_7"))
                 : Optional.empty();
     }
 }

@@ -12,15 +12,12 @@ import java.util.Optional;
 class TravelRequestDateToNotEmptyValidation implements TravelRequestValidation {
 
     @Autowired
-    private ErrorManager errorManager;
+    private ValidationErrorFactory errorFactory;
 
     @Override
     public Optional<ValidationError> check(TravelCalculatePremiumRequest request) {
         return (request.getAgreementDateTo() == null)
-                ? Optional.of(new ValidationError(
-                    "ERROR_CODE_4",
-                    errorManager.getErrorDescription("ERROR_CODE_4")
-                ))
+                ? Optional.of(errorFactory.buildError("ERROR_CODE_4"))
                 : Optional.empty();
     }
 }

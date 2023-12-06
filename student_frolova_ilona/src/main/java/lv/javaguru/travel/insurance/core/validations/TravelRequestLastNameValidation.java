@@ -12,15 +12,12 @@ import java.util.Optional;
 class TravelRequestLastNameValidation implements TravelRequestValidation {
 
     @Autowired
-    private ErrorManager errorManager;
+    private ValidationErrorFactory errorFactory;
 
     @Override
     public Optional<ValidationError> check(TravelCalculatePremiumRequest request) {
         return (request.getPersonLastName() == null || request.getPersonLastName().trim().isEmpty())
-                ? Optional.of(new ValidationError(
-                    "ERROR_CODE_8",
-                    errorManager.getErrorDescription("ERROR_CODE_8")
-                ))
+                ? Optional.of(errorFactory.buildError("ERROR_CODE_8"))
                 : Optional.empty();
     }
 }

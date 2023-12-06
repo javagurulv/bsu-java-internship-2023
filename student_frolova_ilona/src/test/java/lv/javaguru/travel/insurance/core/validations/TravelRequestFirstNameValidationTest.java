@@ -1,6 +1,5 @@
 package lv.javaguru.travel.insurance.core.validations;
 
-import lv.javaguru.travel.insurance.core.ErrorManager;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.Test;
@@ -23,7 +22,7 @@ public class TravelRequestFirstNameValidationTest {
     private TravelCalculatePremiumRequest request;
 
     @Mock
-    private ErrorManager errorManager;
+    private ValidationErrorFactory errorFactory;
 
     @InjectMocks
     private TravelRequestFirstNameValidation validation;
@@ -31,26 +30,22 @@ public class TravelRequestFirstNameValidationTest {
     @Test
     public void returnErrorIfFirstNameIsEmpty() {
         when(request.getPersonFirstName()).thenReturn("");
-        when(errorManager.getErrorDescription(any())).thenReturn("description");
+        when(errorFactory.buildError(any())).thenReturn(new ValidationError());
 
-        Optional<ValidationError> expected = Optional.of(
-                new ValidationError("ERROR_CODE_7", "description")
-        );
-
+        Optional<ValidationError> expected = Optional.of(new ValidationError());
         Optional<ValidationError> error = validation.check(request);
+
         assertEquals(expected, error);
     }
 
     @Test
     public void returnErrorIfFirstNameConsistsOfSpaces() {
         when(request.getPersonFirstName()).thenReturn("     ");
-        when(errorManager.getErrorDescription(any())).thenReturn("description");
+        when(errorFactory.buildError(any())).thenReturn(new ValidationError());
 
-        Optional<ValidationError> expected = Optional.of(
-                new ValidationError("ERROR_CODE_7", "description")
-        );
-
+        Optional<ValidationError> expected = Optional.of(new ValidationError());
         Optional<ValidationError> error = validation.check(request);
+
         assertEquals(expected, error);
     }
 

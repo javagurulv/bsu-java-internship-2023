@@ -20,17 +20,14 @@ class TravelRequestDateFromNotPastValidation implements TravelRequestValidation 
     private final long millisecondsNow =  LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
 
     @Autowired
-    private ErrorManager errorManager;
+    private ValidationErrorFactory errorFactory;
 
     @Override
     public Optional<ValidationError> check(TravelCalculatePremiumRequest request) {
         if (request.getAgreementDateFrom() == null) return Optional.empty();
 
         return (request.getAgreementDateFrom().getTime() + allowedDelayFromPresent < millisecondsNow)
-                ? Optional.of(new ValidationError(
-                        "ERROR_CODE_1",
-                        errorManager.getErrorDescription("ERROR_CODE_1")
-                ))
+                ? Optional.of(errorFactory.buildError("ERROR_CODE_1"))
                 : Optional.empty();
     }
 }

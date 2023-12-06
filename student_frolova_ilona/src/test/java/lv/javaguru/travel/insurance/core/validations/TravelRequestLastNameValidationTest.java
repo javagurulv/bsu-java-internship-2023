@@ -22,7 +22,7 @@ public class TravelRequestLastNameValidationTest {
     private TravelCalculatePremiumRequest request;
 
     @Mock
-    ErrorManager errorManager;
+    private ValidationErrorFactory errorFactory;
 
     @InjectMocks
     private TravelRequestLastNameValidation validation;
@@ -30,22 +30,18 @@ public class TravelRequestLastNameValidationTest {
     @Test
     public void returnErrorIfLastNameIsEmpty() {
         when(request.getPersonLastName()).thenReturn("");
-        when(errorManager.getErrorDescription(any())).thenReturn("description");
+        when(errorFactory.buildError(any())).thenReturn(new ValidationError());
 
-        Optional<ValidationError> expected = Optional.of(
-                new ValidationError("ERROR_CODE_8", "description")
-        );
+        Optional<ValidationError> expected = Optional.of(new ValidationError());
         assertEquals(expected, validation.check(request));
     }
 
     @Test
     public void returnErrorIfLastNameConsistsOfSpaces() {
         when(request.getPersonLastName()).thenReturn("     ");
-        when(errorManager.getErrorDescription(any())).thenReturn("description");
+        when(errorFactory.buildError(any())).thenReturn(new ValidationError());
 
-        Optional<ValidationError> expected = Optional.of(
-                new ValidationError("ERROR_CODE_8", "description")
-        );
+        Optional<ValidationError> expected = Optional.of(new ValidationError());
         assertEquals(expected, validation.check(request));
     }
 

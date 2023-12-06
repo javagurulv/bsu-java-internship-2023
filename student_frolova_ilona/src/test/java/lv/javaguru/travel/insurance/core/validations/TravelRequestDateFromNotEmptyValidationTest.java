@@ -1,6 +1,5 @@
 package lv.javaguru.travel.insurance.core.validations;
 
-import lv.javaguru.travel.insurance.core.ErrorManager;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.Test;
@@ -23,7 +22,7 @@ public class TravelRequestDateFromNotEmptyValidationTest {
     private TravelCalculatePremiumRequest request;
 
     @Mock
-    private ErrorManager errorManager;
+    private ValidationErrorFactory errorFactory;
 
     @InjectMocks
     private TravelRequestDateFromNotEmptyValidation validation;
@@ -31,16 +30,11 @@ public class TravelRequestDateFromNotEmptyValidationTest {
     @Test
     public void returnErrorIfDateFromNotOk() {
         when(request.getAgreementDateFrom()).thenReturn(null);
-        when(errorManager.getErrorDescription(any())).thenReturn("description");
+        when(errorFactory.buildError(any())).thenReturn(new ValidationError());
 
-        Optional<ValidationError> expected = Optional.of(
-                new ValidationError(
-                        "ERROR_CODE_2",
-                        "description"
-                )
-        );
-
+        Optional<ValidationError> expected = Optional.of(new ValidationError());
         Optional<ValidationError> error = validation.check(request);
+
         assertEquals(expected, error);
     }
 

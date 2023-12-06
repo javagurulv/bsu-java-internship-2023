@@ -23,7 +23,7 @@ public class TravelRequestDateFromNotPastValidationTest {
     private TravelCalculatePremiumRequest request;
 
     @Mock
-    private ErrorManager errorManager;
+    private ValidationErrorFactory errorFactory;
 
     @InjectMocks
     private TravelRequestDateFromNotPastValidation validation;
@@ -33,15 +33,11 @@ public class TravelRequestDateFromNotPastValidationTest {
         when(request.getAgreementDateFrom()).thenReturn(
                 new Date(validation.getMillisecondsNow() - 172800000L)
         );
-        when(errorManager.getErrorDescription(any())).thenReturn("description");
+        when(errorFactory.buildError(any())).thenReturn(new ValidationError());
 
-        Optional<ValidationError> expected = Optional.of(
-            new ValidationError(
-                    "ERROR_CODE_1", "description"
-            )
-        );
-
+        Optional<ValidationError> expected = Optional.of(new ValidationError());
         Optional<ValidationError> error = validation.check(request);
+
         assertEquals(expected, error);
     }
 

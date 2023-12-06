@@ -14,7 +14,7 @@ import java.util.Optional;
 class TravelRequestDateSequenceValidation implements TravelRequestValidation {
 
     @Autowired
-    private ErrorManager errorManager;
+    private ValidationErrorFactory errorFactory;
 
     @Override
     public Optional<ValidationError> check(TravelCalculatePremiumRequest request) {
@@ -22,10 +22,7 @@ class TravelRequestDateSequenceValidation implements TravelRequestValidation {
             return Optional.empty();
 
         return (request.getAgreementDateTo().getTime() - request.getAgreementDateFrom().getTime() < 0)
-                ? Optional.of(new ValidationError(
-                    "ERROR_CODE_5",
-                    errorManager.getErrorDescription("ERROR_CODE_5")
-                ))
+                ? Optional.of(errorFactory.buildError("ERROR_CODE_5"))
                 : Optional.empty();
     }
 }

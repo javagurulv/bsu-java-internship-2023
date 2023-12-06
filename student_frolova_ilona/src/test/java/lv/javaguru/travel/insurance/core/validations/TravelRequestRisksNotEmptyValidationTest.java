@@ -23,7 +23,7 @@ public class TravelRequestRisksNotEmptyValidationTest {
     private TravelCalculatePremiumRequest request;
 
     @Mock
-    ErrorManager errorManager;
+    private ValidationErrorFactory errorFactory;
 
     @InjectMocks
     private TravelRequestRisksNotEmptyValidation validation;
@@ -31,22 +31,18 @@ public class TravelRequestRisksNotEmptyValidationTest {
     @Test
     public void returnErrorIfRisksAreNull() {
         when(request.getSelectedRisks()).thenReturn(null);
-        when(errorManager.getErrorDescription(any())).thenReturn("description");
+        when(errorFactory.buildError(any())).thenReturn(new ValidationError());
 
-        Optional<ValidationError> expected = Optional.of(
-                new ValidationError("ERROR_CODE_6", "description")
-        );
+        Optional<ValidationError> expected = Optional.of(new ValidationError());
         assertEquals(expected, validation.check(request));
     }
 
     @Test
     public void returnErrorIfRisksAreNotSelected() {
         when(request.getSelectedRisks()).thenReturn(new ArrayList<>());
-        when(errorManager.getErrorDescription(any())).thenReturn("description");
+        when(errorFactory.buildError(any())).thenReturn(new ValidationError());
 
-        Optional<ValidationError> expected = Optional.of(
-                new ValidationError("ERROR_CODE_6", "description")
-        );
+        Optional<ValidationError> expected = Optional.of(new ValidationError());
         assertEquals(expected, validation.check(request));
     }
 
