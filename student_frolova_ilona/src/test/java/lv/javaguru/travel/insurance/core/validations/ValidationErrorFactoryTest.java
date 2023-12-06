@@ -1,6 +1,6 @@
 package lv.javaguru.travel.insurance.core.validations;
 
-import lv.javaguru.travel.insurance.core.ErrorManager;
+import lv.javaguru.travel.insurance.core.util.ErrorCodeUtil;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -15,14 +15,14 @@ import static org.mockito.Mockito.when;
 public class ValidationErrorFactoryTest {
 
     @Mock
-    private ErrorManager errorManager;
+    private ErrorCodeUtil errorCodeUtil;
 
     @InjectMocks
     private ValidationErrorFactory errorFactory;
 
     @Test
     public void errorCreation() {
-        when(errorManager.getErrorDescription("ERROR_CODE")).thenReturn("description");
+        when(errorCodeUtil.getErrorDescription("ERROR_CODE")).thenReturn("description");
         ValidationError error = errorFactory.buildError("ERROR_CODE");
 
         assertEquals(error.getErrorCode(), "ERROR_CODE");

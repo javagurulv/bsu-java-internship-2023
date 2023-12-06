@@ -1,7 +1,6 @@
 package lv.javaguru.travel.insurance.core.validations;
 
 import lombok.Getter;
-import lv.javaguru.travel.insurance.core.ErrorManager;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.springframework.beans.factory.annotation.Autowired;

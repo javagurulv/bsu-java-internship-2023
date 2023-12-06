@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.core;
+package lv.javaguru.travel.insurance.core.util;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,16 +7,16 @@ import org.springframework.boot.test.context.SpringBootTest;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
-public class ErrorManagerTest {
+public class ErrorCodeUtilTest {
 
     @Autowired
-    private ErrorManager errorManager;
+    private ErrorCodeUtil errorCodeUtil;
 
     @Test
     public void dateFromIsFromThePastDescription() {
         assertEquals(
                 "Field agreementDateFrom must not be from the past!",
-                errorManager.getErrorDescription("ERROR_CODE_1")
+                errorCodeUtil.getErrorDescription("ERROR_CODE_1")
         );
     }
 
@@ -24,7 +24,7 @@ public class ErrorManagerTest {
     public void dateFromIsEmptyDescription() {
         assertEquals(
                 "Field agreementDateFrom must not be empty!",
-                errorManager.getErrorDescription("ERROR_CODE_2")
+                errorCodeUtil.getErrorDescription("ERROR_CODE_2")
         );
     }
 
@@ -32,7 +32,7 @@ public class ErrorManagerTest {
     public void dateToIsFromThePastDescription() {
         assertEquals(
                 "Field agreementDateTo must not be from the past!",
-                errorManager.getErrorDescription("ERROR_CODE_3")
+                errorCodeUtil.getErrorDescription("ERROR_CODE_3")
         );
     }
 
@@ -40,7 +40,7 @@ public class ErrorManagerTest {
     public void dateToIsEmptyDescription() {
         assertEquals(
                 "Field agreementDateTo must not be empty!",
-                errorManager.getErrorDescription("ERROR_CODE_4")
+                errorCodeUtil.getErrorDescription("ERROR_CODE_4")
         );
     }
 
@@ -48,7 +48,7 @@ public class ErrorManagerTest {
     public void datesSequenceErrorDescription() {
         assertEquals(
                 "Field agreementDateTo must be after agreementDateFrom!",
-                errorManager.getErrorDescription("ERROR_CODE_5")
+                errorCodeUtil.getErrorDescription("ERROR_CODE_5")
         );
     }
 
@@ -56,7 +56,7 @@ public class ErrorManagerTest {
     public void risksAreNotSelectedDescription() {
         assertEquals(
                 "Field selectedRisks must not be empty!",
-                errorManager.getErrorDescription("ERROR_CODE_6")
+                errorCodeUtil.getErrorDescription("ERROR_CODE_6")
         );
     }
 
@@ -64,7 +64,7 @@ public class ErrorManagerTest {
     public void firstNameIsEmptyDescription() {
         assertEquals(
                 "Field personFirstName must not be empty!",
-                errorManager.getErrorDescription("ERROR_CODE_7")
+                errorCodeUtil.getErrorDescription("ERROR_CODE_7")
         );
     }
 
@@ -72,7 +72,7 @@ public class ErrorManagerTest {
     public void lastNameIsEmptyDescription() {
         assertEquals(
                 "Field personLastName must not be empty!",
-                errorManager.getErrorDescription("ERROR_CODE_8")
+                errorCodeUtil.getErrorDescription("ERROR_CODE_8")
         );
     }
 }
