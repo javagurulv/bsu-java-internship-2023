@@ -3,7 +3,6 @@ package lv.javaguru.travel.insurance.core.validations;
 import lv.javaguru.travel.insurance.core.ErrorManager;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
