@@ -39,7 +39,7 @@ public class TravelRequestBirthdayInFutureValidationTest {
     public void responseShouldContainsErrorBirthdayInFutureTest(){
         ValidationErrorDTO validationError = mock(ValidationErrorDTO.class);
         when(personDTO.getPersonBirthDate()).thenReturn(createDate("2024.04.08"));
-        when(personDTO.getPersonalCode()).thenReturn(1323123L);
+        when(personDTO.getPersonalCode()).thenReturn("1323123");
         when(dateTimeUtil.getCurrentDateTime()).thenReturn(createDate("2024.01.08"));
         when(validationErrorFactory.buildError(eq("ERROR_CODE_13"), anyList())).thenReturn(validationError);
         Optional<ValidationErrorDTO> error= birthdayInFutureValidation.validate(agreementDTO, personDTO);

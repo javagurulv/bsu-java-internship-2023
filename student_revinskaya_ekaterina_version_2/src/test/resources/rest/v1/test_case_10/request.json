@@ -4,7 +4,7 @@
   "agreementDateFrom" : "2025-05-25",
   "agreementDateTo" : "2025-05-29",
   "birthday" : null,
-  "personalCode": 1313131,
+  "personalCode": "1313131",
   "selectedRisks":["TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"],
   "country": "SPAIN",
   "medicalRiskLimitLevel": "LEVEL_10000"

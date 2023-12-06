@@ -32,9 +32,9 @@ public class TravelRequestBirthdayInFutureValidation extends TravelPersonFieldVa
                 : buildingErrorWithPersonalCode(person.getPersonalCode());
     }
 
-    private ValidationErrorDTO buildingErrorWithPersonalCode(Long personalCode) {
+    private ValidationErrorDTO buildingErrorWithPersonalCode(String personalCode) {
         return validationErrorFactory.buildError("ERROR_CODE_13",
-                List.of( new Placeholder("PERSONAL_CODE", personalCode.toString())));
+                List.of( new Placeholder("PERSONAL_CODE", personalCode)));
     }
 
     private ValidationErrorDTO buildingErrorWithoutPersonalCode() {

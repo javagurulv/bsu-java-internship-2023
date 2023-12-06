@@ -23,15 +23,15 @@ class TravelRequestPersonFirstNameValidation extends TravelPersonFieldValidation
                 : Optional.empty();
     }
     private ValidationErrorDTO buildError(PersonDTO personalCode) {
-        Long code = personalCode.getPersonalCode();
+        String code = personalCode.getPersonalCode();
         return code == null ?
                 buildErrorWithoutPersonalCode()
                 : buildErrorWithPersonalCode(code);
     }
-    private ValidationErrorDTO buildErrorWithPersonalCode(Long personalCode) {
+    private ValidationErrorDTO buildErrorWithPersonalCode(String personalCode) {
         return validationErrorFactory
                 .buildError("ERROR_CODE_1",
-                        List.of(new Placeholder("PERSONAL_CODE", personalCode.toString())));
+                        List.of(new Placeholder("PERSONAL_CODE", personalCode)));
     }
     private ValidationErrorDTO buildErrorWithoutPersonalCode() {
         return validationErrorFactory

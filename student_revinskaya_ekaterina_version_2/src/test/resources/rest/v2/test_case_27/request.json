@@ -15,7 +15,7 @@
       "personFirstName" : "Petja",
       "personLastName" : "Pupkin",
       "personBirthDate" : "2000-02-29",
-      "personalCode": 1434333,
+      "personalCode": "1434333",
       "medicalRiskLimitLevel" : "LEVEL_10000"
     }
   ]
