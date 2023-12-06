@@ -73,3 +73,13 @@ CREATE TABLE agreements (
                             PRIMARY KEY (id)
 );
 
+CREATE TABLE selected_risks (
+                                id NUMERIC NOT NULL AUTO_INCREMENT,
+                                agreement_id NUMERIC NOT NULL,
+                                risk_ic VARCHAR(100) NOT NULL,
+                                PRIMARY KEY (id)
+);
+
+CREATE UNIQUE INDEX ix_selected_risks_agreement_id_risk_ic
+    ON selected_risks(agreement_id, risk_ic);
+

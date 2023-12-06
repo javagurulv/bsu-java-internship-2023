@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.core.services;
+package lv.javaguru.travel.insurance.core.services.factory;
 
 import lv.javaguru.travel.insurance.core.api.dto.PersonDto;
 import lv.javaguru.travel.insurance.core.domain.api.PersonEntity;
@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
+public
 class EntityManagerFactorySaver {
 
     @Autowired private PersonRepository repository;

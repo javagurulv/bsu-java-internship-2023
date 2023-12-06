@@ -3,11 +3,13 @@ package lv.javaguru.travel.insurance.core.services;
 import lv.javaguru.travel.insurance.core.api.command.TravelCalculatePremiumCoreCommand;
 import lv.javaguru.travel.insurance.core.api.command.TravelCalculatePremiumCoreResult;
 import lv.javaguru.travel.insurance.core.api.dto.*;
+import lv.javaguru.travel.insurance.core.services.factory.AgreementManagerFactorySaver;
+import lv.javaguru.travel.insurance.core.services.factory.EntityManagerFactorySaver;
+import lv.javaguru.travel.insurance.core.services.factory.RiskManagerFactorySaver;
 import lv.javaguru.travel.insurance.core.underwriting.TravelPremiumCalculationResult;
 import lv.javaguru.travel.insurance.core.underwriting.TravelPremiumUnderwriting;
 import lv.javaguru.travel.insurance.core.validations.TravelAgreementValidator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -20,8 +22,8 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
     @Autowired private TravelAgreementValidator agreementValidator;
     @Autowired private TravelPremiumUnderwriting premiumUnderwriting;
 
-    @Autowired private  EntityManagerFactorySaver saver;
-    @Autowired private  AgreementManagerFactorySaver agreementEntityFactory;
+    @Autowired private EntityManagerFactorySaver saver;
+    @Autowired private RiskManagerFactorySaver agreementEntityFactory;
 
     @Override
     public TravelCalculatePremiumCoreResult calculatePremium(TravelCalculatePremiumCoreCommand command) {
@@ -46,7 +48,7 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
         return coreResult;
     }
 
-    /*private void saveAllPersons(AgreementDto agreement) {
+    /* private void saveAllPersons(AgreementDto agreement) {
         agreement.getPersons().forEach(personDTO -> saver.savePerson(personDTO));
     }*/
 

@@ -144,10 +144,10 @@
         </div>
     </div>
 
-        <div th:each="person, personStat : *{persons}" class="person-form">
-
-            <td th:if="${response.persons != null}">
-                <h3>Travel Insurance Premium Calculation PERSONS</h3>
+    <div th:if="${response.persons != null}">
+        <h3>Travel Insurance Premium Calculation PERSONS</h3>
+        <div class="person-form">
+            <td>
                 <div class="person-data" th:each="person : ${response.persons}">
                     <h3 th:text="${person.personFirstName} + ' ' + ${person.personLastName}"></h3>
                     <p th:text="'Person Code: ' + ${person.personCode}"></p>
@@ -160,10 +160,13 @@
                     </ul>
                 </div>
             </td>
+        </div>
+    </div>
 
-
-            <td th:if="${response.errors != null}">
-                <h3>Travel Insurance Premium Calculation ERRORS</h3>
+    <div th:if="${response.errors != null}">
+        <h3>Travel Insurance Premium Calculation ERRORS</h3>
+        <div class="person-form">
+            <td>
                 <tr th:each="error : ${response.errors}">
                     <td th:text="${error.errorCode}" />
                     <td th:text="${error.description}" />
@@ -171,15 +174,14 @@
                     <br>
                 </tr>
             </td>
-
-            <br>
-
-            <h3>
-                <label th:if="${response.agreementPremium != null}"
-                       th:text="'AGREEMENT PREMIUM: ' + ${response.agreementPremium}"></label>
-            </h3>
         </div>
     </div>
+
+    <br>
+
+    <h3>
+        <label th:if="${response.agreementPremium != null}" th:text="'AGREEMENT PREMIUM: ' + ${response.agreementPremium}"></label>
+    </h3>
 
     <!-- Buttons for adding/removing persons and submitting the form -->
     <button type="button" onclick="addPerson()">Add Person</button>

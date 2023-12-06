@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.core.services;
+package lv.javaguru.travel.insurance.core.services.factory;
 
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDto;
 import lv.javaguru.travel.insurance.core.domain.api.AgreementEntity;
@@ -13,7 +13,7 @@ public class AgreementManagerFactorySaver {
     private AgreementRepository agreementEntityRepository;
     @Autowired private EntityManagerFactorySaver personEntityFactory;
 
-    AgreementEntity createAgreementEntity(AgreementDto agreementDTO) {
+    public AgreementEntity createAgreementEntity(AgreementDto agreementDTO) {
         saveAllPersons(agreementDTO);
 
         AgreementEntity agreementEntity = new AgreementEntity().builder()
