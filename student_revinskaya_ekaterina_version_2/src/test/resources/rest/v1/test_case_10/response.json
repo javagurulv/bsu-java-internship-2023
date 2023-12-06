@@ -2,7 +2,7 @@
   "errors": [
     {
       "errorCode": "ERROR_CODE_12",
-      "description": "Field birthday is empty!"
+      "description": "person which personal code is 1313131: Field birthday is empty!"
     }
   ],
   "personFirstName": null,

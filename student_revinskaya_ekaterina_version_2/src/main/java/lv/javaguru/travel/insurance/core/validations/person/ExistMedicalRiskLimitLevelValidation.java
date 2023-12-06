@@ -23,22 +23,36 @@ public class ExistMedicalRiskLimitLevelValidation extends TravelPersonFieldValid
     public Optional<ValidationErrorDTO> validate(AgreementDTO agreementDTO, PersonDTO personDTO) {
         return medicalRiskLevelNotEmptyOrNull(personDTO)
                 && notExistLimitLevel(personDTO) ?
-                Optional.of(buildError(personDTO)) : Optional.empty();
+                Optional.of(buildingError(personDTO))
+                : Optional.empty();
     }
 
     private boolean medicalRiskLevelNotEmptyOrNull(PersonDTO request) {
         return !(request.getMedicalRiskLimitLevel() == null || request.getMedicalRiskLimitLevel().isEmpty());
     }
-
-    private ValidationErrorDTO buildError(PersonDTO request) {
-        return errorFactory.buildError("ERROR_CODE_15", List.of(
-                new Placeholder("NOT_EXISTING_MEDICAL_RISK_LIMIT_LEVEL",
-                        request.getMedicalRiskLimitLevel())));
-
-    }
-
     private boolean notExistLimitLevel(PersonDTO request) {
         return classifierValueRepository.findByClassifierTitleAndIc(
                 "MEDICAL_RISK_LIMIT_LEVEL", request.getMedicalRiskLimitLevel()).isEmpty();
+    }
+    private ValidationErrorDTO buildingError(PersonDTO person) {
+        Long code = person.getPersonalCode();
+        return code == null ?
+                buildErrorWithoutPersonalCode(person)
+                : buildErrorWithPersonalCode(person);
+    }
+
+    private ValidationErrorDTO buildErrorWithPersonalCode(PersonDTO person) {
+        return errorFactory
+                .buildError("ERROR_CODE_15",
+                        List.of(new Placeholder("PERSONAL_CODE", person.getPersonalCode().toString()),
+                                new Placeholder("NOT_EXISTING_MEDICAL_RISK_LIMIT_LEVEL",
+                                        person.getMedicalRiskLimitLevel())));
+    }
+    private ValidationErrorDTO buildErrorWithoutPersonalCode(PersonDTO person) {
+        return errorFactory
+                .buildError("ERROR_CODE_15",
+                        List.of(new Placeholder("PERSONAL_CODE", "missing"),
+                                new Placeholder("NOT_EXISTING_MEDICAL_RISK_LIMIT_LEVEL",
+                                        person.getMedicalRiskLimitLevel())));
     }
 }
