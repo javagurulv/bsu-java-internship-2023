@@ -1,8 +1,8 @@
 {
   "errorList": [
     {
-      "field": "personLastName",
-      "error": "Shouldn't be empty!"
+      "errorCode": "personLastName",
+      "errorDescription": "Shouldn't be empty!"
     }
   ],
   "personFirstName": null,

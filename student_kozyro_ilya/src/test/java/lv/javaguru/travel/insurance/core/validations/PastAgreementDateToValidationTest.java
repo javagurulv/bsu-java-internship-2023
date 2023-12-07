@@ -43,8 +43,8 @@ public class PastAgreementDateToValidationTest {
         var error = validation.execute(request);
 
         assertFalse(error.isEmpty());
-        assertEquals("agreementDateTo", error.get().getField());
-        assertEquals("Should be in a future, not in a past!", error.get().getError());
+        assertEquals("agreementDateTo", error.get().getErrorCode());
+        assertEquals("Should be in a future, not in a past!", error.get().getErrorDescription());
     }
 
     @Test

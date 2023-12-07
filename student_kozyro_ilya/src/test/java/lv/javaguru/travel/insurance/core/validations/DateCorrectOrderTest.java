@@ -37,8 +37,8 @@ public class DateCorrectOrderTest {
         var error = validation.execute(request);
 
         assertFalse(error.isEmpty());
-        assertEquals("agreementDayFrom", error.get().getField());
-        assertEquals("Must be before agreementDayTo", error.get().getError());
+        assertEquals("agreementDayFrom", error.get().getErrorCode());
+        assertEquals("Must be before agreementDayTo", error.get().getErrorDescription());
     }
 
     @Test

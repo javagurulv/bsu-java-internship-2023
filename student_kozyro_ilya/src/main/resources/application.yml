@@ -1,5 +1,6 @@
 dateService:
   format: yyyy-MM-dd
-
+errorCodeFile:
+  fileName: errorCodes.properties
 server:
   port: 8090

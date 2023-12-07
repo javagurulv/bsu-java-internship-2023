@@ -34,8 +34,8 @@ public class AgreementDateToValidationTest {
         Optional<ValidationError> error = validation.execute(request);
 
         assertFalse(error.isEmpty());
-        assertEquals("agreementDateTo", error.get().getField());
-        assertEquals("Shouldn't be empty!", error.get().getError());
+        assertEquals("agreementDateTo", error.get().getErrorCode());
+        assertEquals("Shouldn't be empty!", error.get().getErrorDescription());
     }
 
     @Test

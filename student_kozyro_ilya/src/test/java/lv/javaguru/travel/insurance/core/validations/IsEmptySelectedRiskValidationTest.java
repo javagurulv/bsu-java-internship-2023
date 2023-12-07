@@ -26,7 +26,7 @@ public class IsEmptySelectedRiskValidationTest {
         var error = validation.execute(request);
 
         assertFalse(error.isEmpty());
-        assertEquals("selected_risks", error.get().getField());
+        assertEquals("selected_risks", error.get().getErrorCode());
     }
 
     @Test
@@ -37,7 +37,7 @@ public class IsEmptySelectedRiskValidationTest {
         var error = validation.execute(request);
 
         assertFalse(error.isEmpty());
-        assertEquals("selected_risks", error.get().getField());
+        assertEquals("selected_risks", error.get().getErrorCode());
     }
 
     @Test

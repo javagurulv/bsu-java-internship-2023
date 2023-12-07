@@ -33,8 +33,8 @@ public class PersonLastNameValidationTest {
         Optional<ValidationError> error = validation.execute(request);
 
         assertFalse(error.isEmpty());
-        assertEquals("personLastName", error.get().getField());
-        assertEquals("Shouldn't be empty!", error.get().getError());
+        assertEquals("personLastName", error.get().getErrorCode());
+        assertEquals("Shouldn't be empty!", error.get().getErrorDescription());
     }
 
     @Test
@@ -45,8 +45,8 @@ public class PersonLastNameValidationTest {
         Optional<ValidationError> error = validation.execute(request);
 
         assertFalse(error.isEmpty());
-        assertEquals("personLastName", error.get().getField());
-        assertEquals("Shouldn't be empty!", error.get().getError());
+        assertEquals("personLastName", error.get().getErrorCode());
+        assertEquals("Shouldn't be empty!", error.get().getErrorDescription());
     }
 
     @Test
