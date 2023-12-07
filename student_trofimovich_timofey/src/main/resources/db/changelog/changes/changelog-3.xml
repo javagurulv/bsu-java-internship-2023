@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
+
+
+    <changeSet id="6" author="Timofey">
+        <createTable tableName="country_default_day_rate">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="country_ic" type="varchar(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="country_default_day_rate" type="decimal(10, 2)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="7" author="Timofey">
+        <createIndex tableName="country_default_day_rate"
+                     indexName="ix_country_default_day_rate"
+                     unique="true">
+            <column name="country_ic"/>
+        </createIndex>
+    </changeSet>
+</databaseChangeLog>
