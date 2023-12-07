@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.core;
+package lv.javaguru.travel.insurance.core.util;
 
 import org.springframework.stereotype.Component;
 
@@ -9,7 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Component
-public class DateTimeService {
+public class DateTimeUtil {
 
     public BigDecimal getDifferenceInDays(Date date1, Date date2) {
         BigDecimal difference = new BigDecimal(date2.getTime() - date1.getTime());

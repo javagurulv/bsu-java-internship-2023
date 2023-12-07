@@ -11,6 +11,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 
@@ -20,28 +21,31 @@ public class TravelRequestFirstNameValidationTest {
     @Mock
     private TravelCalculatePremiumRequest request;
 
+    @Mock
+    private ValidationErrorFactory errorFactory;
+
     @InjectMocks
     private TravelRequestFirstNameValidation validation;
 
     @Test
     public void returnErrorIfFirstNameIsEmpty() {
         when(request.getPersonFirstName()).thenReturn("");
-        Optional<ValidationError> expected = Optional.of(
-                new ValidationError("personFirstName", "Must not be empty!")
-        );
+        when(errorFactory.buildError(any())).thenReturn(new ValidationError());
 
+        Optional<ValidationError> expected = Optional.of(new ValidationError());
         Optional<ValidationError> error = validation.check(request);
+
         assertEquals(expected, error);
     }
 
     @Test
     public void returnErrorIfFirstNameConsistsOfSpaces() {
         when(request.getPersonFirstName()).thenReturn("     ");
-        Optional<ValidationError> expected = Optional.of(
-                new ValidationError("personFirstName", "Must not be empty!")
-        );
+        when(errorFactory.buildError(any())).thenReturn(new ValidationError());
 
+        Optional<ValidationError> expected = Optional.of(new ValidationError());
         Optional<ValidationError> error = validation.check(request);
+
         assertEquals(expected, error);
     }
 

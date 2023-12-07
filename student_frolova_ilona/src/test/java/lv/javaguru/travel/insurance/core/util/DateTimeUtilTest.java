@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.core;
+package lv.javaguru.travel.insurance.core.util;
 
 import org.junit.jupiter.api.Test;
 
@@ -9,12 +9,12 @@ import java.util.Date;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class DateTimeServiceTest {
+public class DateTimeUtilTest {
 
-    private DateTimeService service;
+    private DateTimeUtil service;
 
-    public DateTimeServiceTest() {
-        service = new DateTimeService();
+    public DateTimeUtilTest() {
+        service = new DateTimeUtil();
     }
 
     @Test
