@@ -93,3 +93,18 @@ CREATE TABLE agreement_persons (
                                    foreign key (person_id) references persons(id)
 );
 
+CREATE UNIQUE INDEX ix_agreement_persons_agreement_id_person_id
+    ON agreement_persons(agreement_id, person_id);
+
+
+CREATE TABLE polis_risks (
+                                        id NUMERIC NOT NULL AUTO_INCREMENT,
+                                        polis_id NUMERIC NOT NULL,
+                                        risk_ic VARCHAR(100) NOT NULL,
+                                        premium DECIMAL(10,2) NOT NULL,
+                                        PRIMARY KEY (id),
+                                        foreign key (polis_id) references agreement_persons(id)
+);
+
+CREATE UNIQUE INDEX ix_agreement_person_risks_agreement_person_id_risk_ic
+    ON polis_risks(polis_id, risk_ic);
