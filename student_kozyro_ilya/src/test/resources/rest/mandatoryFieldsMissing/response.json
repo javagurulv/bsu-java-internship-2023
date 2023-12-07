@@ -15,6 +15,10 @@
     {
       "field": "agreementDateTo",
       "error": "Shouldn't be empty!"
+    },
+    {
+      "field": "selected_risks",
+      "error": "Should be at least one selected risk and not empty"
     }
   ],
   "personFirstName": null,

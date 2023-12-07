@@ -1,0 +1,13 @@
+{
+  "errorList": [
+    {
+      "field": "selected_risks",
+      "error": "Should be at least one selected risk and not empty"
+    }
+  ],
+  "personFirstName": null,
+  "personLastName": null,
+  "agreementDateFrom": null,
+  "agreementDateTo": null,
+  "agreementPrice": null
+}

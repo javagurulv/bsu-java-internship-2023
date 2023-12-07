@@ -49,15 +49,16 @@ public class TravelPremiumControllerTest {
     public void oneMandatoryFieldMissing() throws Exception {
         compareData("oneFieldMissing");
     }
-    /*
-
-
-
 
     @Test
-    public void oneFieldMissing() throws Exception {
-        compareData("oneFieldMissing");
-    }*/
+    public void nullRisks() throws Exception {
+        compareData("nullRisks");
+    }
+
+    @Test
+    public void emptyRisks() throws Exception {
+        compareData("emptyRisks");
+    }
 
     void compareData(String folder) throws Exception {
         String requestFilePath = testRestJSONFilePath + folder + requestFileName;
