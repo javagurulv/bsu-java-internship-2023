@@ -1,12 +1,14 @@
 package lv.javaguru.travel.insurance.core.underwriting.calculators.medical;
 
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
+import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.repositories.MedicalRiskLimitLevelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 @Component
 public class InsuranceLimitCoefficientCalculator {
@@ -14,20 +16,20 @@ public class InsuranceLimitCoefficientCalculator {
     private MedicalRiskLimitLevelRepository medicalRiskLimitLevelRepository;
     @Value( "${medical.risk.limit.level.enabled:false}" )
     private Boolean medicalRiskLimitLevelEnabled;
-    BigDecimal calculate(AgreementDTO agreement){
+    BigDecimal calculate(PersonDTO personDTO){
         return medicalRiskLimitLevelEnabled
-                ? calculateValue(agreement)
+                ? calculateValue(personDTO)
                 : defaulterValue();
 
     }
     private BigDecimal defaulterValue(){
         return BigDecimal.ONE;
     }
-    private BigDecimal calculateValue(AgreementDTO agreement){
+    private BigDecimal calculateValue(PersonDTO personDTO){
         return medicalRiskLimitLevelRepository
-                .findByMedicalRiskLimitLevelIc(agreement.getMedicalRiskLimitLevel())
+                .findByMedicalRiskLimitLevelIc(personDTO.getMedicalRiskLimitLevel())
                 .orElseThrow(()->new RuntimeException(
-                        "medicalRiskLimitLevel with ic "+agreement.getMedicalRiskLimitLevel()+" not found"))
+                        "medicalRiskLimitLevel with ic "+personDTO.getMedicalRiskLimitLevel()+" not found"))
                 .getCoefficient();
-    }
+            }
 }

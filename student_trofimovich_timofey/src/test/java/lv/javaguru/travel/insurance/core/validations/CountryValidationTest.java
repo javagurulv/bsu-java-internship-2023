@@ -11,7 +11,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -28,7 +27,6 @@ public class CountryValidationTest {
     void shouldReturnEmptyCountryError() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getCountry()).thenReturn("");
-        when(request.getSelectedRisks()).thenReturn(List.of("TRAVEL_MEDICAL"));
         when(errorFactory.buildError("ERROR_CODE_10")).thenReturn(new ValidationError());
         assertThat(validation.validate(request)).isPresent();
     }
@@ -36,7 +34,6 @@ public class CountryValidationTest {
     void shouldReturnNullCountryError() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getCountry()).thenReturn(null);
-        when(request.getSelectedRisks()).thenReturn(List.of("TRAVEL_MEDICAL"));
         when(errorFactory.buildError("ERROR_CODE_10")).thenReturn(new ValidationError());
         assertThat(validation.validate(request)).isPresent();
     }
@@ -45,15 +42,15 @@ public class CountryValidationTest {
     void shouldNotReturnError() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getCountry()).thenReturn("LATVIA");
-        when(request.getSelectedRisks()).thenReturn(List.of("TRAVEL_MEDICAL"));
         when(classifierValueRepository.findByClassifierTitleAndIc("COUNTRY", "LATVIA")).thenReturn(Optional.of(new ClassifierValue()));
         assertThat(validation.validate(request)).isEmpty();
     }
 
     @Test
-    void shouldNotReturnErrorWhenTravelMedicalIsNotChosen() {
+    void shouldReturnErrorWhenTravelMedicalIsNotChosen() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
-        when(request.getSelectedRisks()).thenReturn(List.of());
+        when(request.getCountry()).thenReturn("LATVIA");
+        when(classifierValueRepository.findByClassifierTitleAndIc("COUNTRY", "LATVIA")).thenReturn(Optional.of(new ClassifierValue()));
         assertThat(validation.validate(request)).isEmpty();
     }
 }

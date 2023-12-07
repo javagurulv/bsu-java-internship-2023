@@ -1,5 +1,6 @@
 insert into classifiers (title, description)
 values ('RISK_TYPE', 'travel policy risk type classifier');
+
 insert into classifier_values (classifier_id, ic, description)
 values ((select id from classifiers where title = 'RISK_TYPE'), 'TRAVEL_MEDICAL', 'travel policy medical risk'),
        ((select id from classifiers where title = 'RISK_TYPE'), 'TRAVEL_CANCELLATION',
@@ -43,3 +44,11 @@ VALUES ((SELECT id FROM classifiers WHERE title = 'MEDICAL_RISK_LIMIT_LEVEL'), '
      ((SELECT id FROM classifiers WHERE title = 'MEDICAL_RISK_LIMIT_LEVEL'), 'LEVEL_15000', 'Medical Risk 15000 euro limit level'),
      ((SELECT id FROM classifiers WHERE title = 'MEDICAL_RISK_LIMIT_LEVEL'), 'LEVEL_20000', 'Medical Risk 20000 euro limit level'),
      ((SELECT id FROM classifiers WHERE title = 'MEDICAL_RISK_LIMIT_LEVEL'), 'LEVEL_50000', 'Medical Risk 50000 euro limit level');
+
+INSERT INTO medical_risk_limit_level(medical_risk_limit_level_ic, coefficient) VALUES
+                                                                                       ('LEVEL_10000', 1.0),
+                                                                                       ('LEVEL_15000', 1.2),
+                                                                                       ('LEVEL_20000', 1.5),
+                                                                                       ('LEVEL_50000', 2.0);
+
+

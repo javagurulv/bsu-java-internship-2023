@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface TravelPersonFieldValidation {
-    Optional<ValidationErrorDTO> validate(PersonDTO request);
+    Optional<ValidationErrorDTO> validate(AgreementDTO agreementDTO, PersonDTO request);
 
-    List<ValidationErrorDTO> validateList(PersonDTO request);
+    List<ValidationErrorDTO> validateList(AgreementDTO agreementDTO, PersonDTO personDTO);
 
 }
