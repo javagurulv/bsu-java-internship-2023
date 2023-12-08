@@ -45,6 +45,11 @@ public class TravelPremiumControllerTest {
     public void mandatoryFieldsMissing() throws Exception {
         compareData("mandatoryFieldsMissing");
     }
+
+    @Test
+    public void wrongDateDistanceAndOrder() throws Exception {
+        compareData("wrongDateDistanceAndOrder");
+    }
     @Test
     public void oneMandatoryFieldMissing() throws Exception {
         compareData("oneFieldMissing");

@@ -1,17 +1,15 @@
-package lv.javaguru.travel.insurance.core.services;
+package lv.javaguru.travel.insurance.core.util;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-@Service
-public class DateServiceImpl implements DateService{
+@Component
+class DateServiceImpl implements DateServiceUtil {
 
     @Override
     public Date createDate(String date, String format) throws ParseException {

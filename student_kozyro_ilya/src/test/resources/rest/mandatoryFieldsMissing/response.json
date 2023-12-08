@@ -1,24 +1,24 @@
 {
   "errorList": [
     {
-      "errorCode": "personFirstName",
-      "errorDescription": "Shouldn't be empty!"
+      "errorCode": "MANDATORY_FIELD_MISSING",
+      "errorDescription": "Mandatory field 'agreementDateFrom' is missing"
     },
     {
-      "errorCode": "personLastName",
-      "errorDescription": "Shouldn't be empty!"
+      "errorCode": "MANDATORY_FIELD_MISSING",
+      "errorDescription": "Mandatory field 'agreementDateTo' is missing"
     },
     {
-      "errorCode": "agreementDateFrom",
-      "errorDescription": "Shouldn't be empty!"
+      "errorCode": "MANDATORY_FIELD_MISSING",
+      "errorDescription": "Mandatory field 'personFirstName' is missing"
     },
     {
-      "errorCode": "agreementDateTo",
-      "errorDescription": "Shouldn't be empty!"
+      "errorCode": "MANDATORY_FIELD_MISSING",
+      "errorDescription": "Mandatory field 'personLastName' is missing"
     },
     {
-      "errorCode": "selected_risks",
-      "errorDescription": "Should be at least one selected risk and not empty"
+      "errorCode": "MANDATORY_FIELD_MISSING",
+      "errorDescription": "Mandatory field 'selected_risks' is missing"
     }
   ],
   "personFirstName": null,

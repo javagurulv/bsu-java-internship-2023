@@ -7,7 +7,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class Placer {
+public class Placeholder {
     String key;
     String value;
 }

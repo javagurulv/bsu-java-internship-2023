@@ -1,8 +1,8 @@
 {
   "errorList": [
     {
-      "errorCode": "personLastName",
-      "errorDescription": "Shouldn't be empty!"
+      "errorCode": "MANDATORY_FIELD_MISSING",
+      "errorDescription": "Mandatory field 'personLastName' is missing"
     }
   ],
   "personFirstName": null,

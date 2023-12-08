@@ -1,34 +1,30 @@
 package lv.javaguru.travel.insurance.core.validations;
 
-import lv.javaguru.travel.insurance.core.services.DateService;
+import lv.javaguru.travel.insurance.core.util.DateServiceUtil;
 import lv.javaguru.travel.insurance.core.services.ValidationErrorFactory;
-import lv.javaguru.travel.insurance.core.util.ErrorFileLoaderUtil;
-import lv.javaguru.travel.insurance.dto.Placer;
+import lv.javaguru.travel.insurance.dto.Placeholder;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentMatcher;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Date;
-import java.util.List;
 import java.util.Optional;
 
-import static lv.javaguru.travel.insurance.core.validations.errors.ValidationErrorCodes.MISSING_MANDATORY_FIELD;
+import static lv.javaguru.travel.insurance.core.validations.errors.ValidationErrorCodes.MANDATORY_FIELD_MISSING;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.ArgumentMatchers.nullable;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class AgreementDateFromValidationTest {
     @Mock
-    private DateService dateService;
-
+    private DateServiceUtil dateService;
 
     @Mock
     private ValidationErrorFactory validationErrorFactory;
@@ -38,14 +34,17 @@ public class AgreementDateFromValidationTest {
 
 
     @Test
-    void dontHaveMandatoryDateFrom() {
+    void dontHaveMandatoryFieldDateFrom() {
+        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
 
-        //Optional<ValidationError> error = validation.execute(request);
+        when(request.getAgreementDateFrom()).thenReturn(null);
+        when(validationErrorFactory.buildError(eq(MANDATORY_FIELD_MISSING), argThat(isPlaceHolder())))
+                .thenReturn(new ValidationError(MANDATORY_FIELD_MISSING, "description"));
 
-        //System.out.println(error.get());
-        //assertFalse(error.isEmpty());
-        //assertEquals(MISSING_MANDATORY_FIELD, error.get().getErrorCode());
-        //assertEquals("missing agreementDateFrom", error.get().getErrorDescription());
+        Optional<ValidationError> error = validation.execute(request);
+
+        assertTrue(error.isPresent());
+        assertEquals(new ValidationError(MANDATORY_FIELD_MISSING, "description"), error.get());
     }
 
     @Test
@@ -59,5 +58,8 @@ public class AgreementDateFromValidationTest {
         assertTrue(error.isEmpty());
     }
 
+    private ArgumentMatcher<Placeholder> isPlaceHolder() {
+        return argument -> argument.getKey().equals("fieldName") && argument.getValue().equals("agreementDateFrom");
+    }
 
 }

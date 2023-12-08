@@ -1,17 +1,12 @@
 package lv.javaguru.travel.insurance.core.services;
 
 import lv.javaguru.travel.insurance.core.util.ErrorFileLoaderUtil;
-import lv.javaguru.travel.insurance.dto.Placer;
+import lv.javaguru.travel.insurance.dto.Placeholder;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Component;
 
-import java.io.IOException;
 import java.util.List;
-import java.util.Properties;
 import java.util.concurrent.atomic.AtomicReference;
 
 @Component
@@ -24,16 +19,17 @@ public class ValidationErrorFactory {
         return new ValidationError(code, src.get());
     }
 
-    public ValidationError buildError(String code, List<Placer> placers) {
+    public ValidationError buildError(String code, List<Placeholder> placeholders) {
+        var desr = errorFileLoaderUtil.getErrorDescription(code);
         AtomicReference<String> src = new AtomicReference<>(errorFileLoaderUtil.getErrorDescription(code));
-        placers.forEach(
+        placeholders.forEach(
                 p -> src.set(replaceText(src.get(), p.getKey(), p.getValue()))
         );
         return new ValidationError(code, src.get());
     }
 
-    public ValidationError buildError(String code, Placer placer) {
-        return buildError(code, List.of(placer));
+    public ValidationError buildError(String code, Placeholder placeholder) {
+        return buildError(code, List.of(placeholder));
     }
 
     private String replaceText(String src, String it, String to) {

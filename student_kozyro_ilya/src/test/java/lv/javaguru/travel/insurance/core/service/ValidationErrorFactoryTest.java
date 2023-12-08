@@ -2,7 +2,7 @@ package lv.javaguru.travel.insurance.core.service;
 
 import lv.javaguru.travel.insurance.core.services.ValidationErrorFactory;
 import lv.javaguru.travel.insurance.core.util.ErrorFileLoaderUtil;
-import lv.javaguru.travel.insurance.dto.Placer;
+import lv.javaguru.travel.insurance.dto.Placeholder;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -37,39 +37,39 @@ public class ValidationErrorFactoryTest {
 
     @Test
     void testPlacerDescription() {
-        Placer placer = new Placer("something", "1");
+        Placeholder placeholder = new Placeholder("something", "1");
         String trueDescription = "description 1";
         when(errorFileLoaderUtil.getErrorDescription(code)).thenReturn("description ${something}");
 
-        var error = validationErrorFactory.buildError(code, placer);
+        var error = validationErrorFactory.buildError(code, placeholder);
 
         assertEquals(new ValidationError(code, trueDescription), error);
     }
 
     @Test
     void testMultiPlacerDescription() {
-        List<Placer> placers = List.of(
-                new Placer("something1", "1"),
-                new Placer("something2", "2")
+        List<Placeholder> placeholders = List.of(
+                new Placeholder("something1", "1"),
+                new Placeholder("something2", "2")
         );
         String trueDescription = "description 1 2";
         when(errorFileLoaderUtil.getErrorDescription(code)).thenReturn("description ${something1} ${something2}");
 
-        var error = validationErrorFactory.buildError(code, placers);
+        var error = validationErrorFactory.buildError(code, placeholders);
 
         assertEquals(new ValidationError(code, trueDescription), error);
     }
 
     @Test
     void testMultiPlacerDescriptionBetweenText() {
-        List<Placer> placers = List.of(
-                new Placer("something1", "1"),
-                new Placer("something2", "2")
+        List<Placeholder> placeholders = List.of(
+                new Placeholder("something1", "1"),
+                new Placeholder("something2", "2")
         );
         String trueDescription = "desc1ripti2on";
         when(errorFileLoaderUtil.getErrorDescription(code)).thenReturn("desc${something1}ripti${something2}on");
 
-        var error = validationErrorFactory.buildError(code, placers);
+        var error = validationErrorFactory.buildError(code, placeholders);
 
         assertEquals(new ValidationError(code, trueDescription), error);
     }
