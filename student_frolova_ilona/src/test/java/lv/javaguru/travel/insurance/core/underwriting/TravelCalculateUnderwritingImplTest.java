@@ -1,5 +1,7 @@
-package lv.javaguru.travel.insurance.core;
+package lv.javaguru.travel.insurance.core.underwriting;
 
+import lv.javaguru.travel.insurance.core.underwriting.TravelCalculateUnderwriting;
+import lv.javaguru.travel.insurance.core.underwriting.TravelCalculateUnderwritingImpl;
 import lv.javaguru.travel.insurance.core.util.DateTimeUtil;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,10 +16,9 @@ import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class TravelCalculateUnderwritingTest {
+public class TravelCalculateUnderwritingImplTest {
 
     @Mock
     private TravelCalculatePremiumRequest request;
@@ -26,7 +27,7 @@ public class TravelCalculateUnderwritingTest {
     private DateTimeUtil dateTimeUtil;
 
     @InjectMocks
-    private TravelCalculateUnderwriting underwritingCalculator;
+    private TravelCalculateUnderwritingImpl underwritingCalculator;
 
     @BeforeEach
     public void defineMocksBehavior() {

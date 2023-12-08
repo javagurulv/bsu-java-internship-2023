@@ -1,10 +1,14 @@
 package lv.javaguru.travel.insurance.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonKey;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.*;
 import lv.javaguru.travel.insurance.format.AppDatePattern;
 
 import java.util.Date;
+import java.util.List;
 
 
 @Getter
@@ -22,5 +26,8 @@ public class TravelCalculatePremiumRequest extends CoreRequest{
 
     @JsonFormat(pattern = AppDatePattern.datePattern)
     private Date agreementDateTo;
+
+    @JsonProperty("selected_risks")
+    private List<String> selectedRisks;
 
 }
