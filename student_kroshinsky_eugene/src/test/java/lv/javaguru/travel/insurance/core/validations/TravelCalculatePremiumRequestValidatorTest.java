@@ -15,7 +15,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
-class TravelCalculatePremiumRequestValidatorImplTest {
+class TravelCalculatePremiumRequestValidatorTest {
     @Mock private TravelRequestValidation validationObject;
     @Mock private  TravelCalculatePremiumRequest request;
     @InjectMocks private TravelCalculatePremiumRequestValidatorImpl validator;
