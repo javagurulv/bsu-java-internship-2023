@@ -21,6 +21,12 @@ class TravelCalculateLastNameValidatorTest {
     @Mock TravelCalculatePremiumRequest request;
     @InjectMocks TravelCalculateLastNameValidator validator;
     @Test
+    public void injectedRepositoryAreNotNull() {
+        assertNotNull(validationErrorFactory);
+        assertNotNull(request);
+        assertNotNull(validator);
+    }
+    @Test
     void validateEmptyLastName() {
         when(request.getPersonLastName()).thenReturn("");
         ValidationError expectedError = new ValidationError("ERROR_CODE", "Description");

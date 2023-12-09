@@ -1,8 +1,8 @@
 {
   "errorList": [
     {
-      "field": "selected_risks",
-      "error": "Should be at least one selected risk and not empty"
+      "errorCode": "MANDATORY_FIELD_MISSING",
+      "errorDescription": "Mandatory field 'selected_risks' is missing"
     }
   ],
   "personFirstName": null,

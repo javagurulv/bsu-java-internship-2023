@@ -1,6 +1,6 @@
-package lv.javaguru.travel.insurance.core.service;
+package lv.javaguru.travel.insurance.core.util;
 
-import lv.javaguru.travel.insurance.core.services.DateServiceImpl;
+import lv.javaguru.travel.insurance.core.util.DateServiceUtil;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
