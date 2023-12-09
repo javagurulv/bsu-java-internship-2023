@@ -3,7 +3,7 @@ package lv.javaguru.travel.insurance.core.domain;
 import javax.persistence.*;
 
 @Entity
-@Table(name="classifiers_values", schema="java-real-practice-insurance")
+@Table(name="classifier_values")
 public class ClassifierValue {
     @Id
     @Column(name = "id")
@@ -17,7 +17,7 @@ public class ClassifierValue {
     @Column(name = "ic", unique=true, length = 200,nullable=false)
     private String ic;
 
-    @Column(name = "descripption", length = 500, nullable=false)
+    @Column(name = "description", length = 500, nullable=false)
     private String description;
 
     public ClassifierValue() {

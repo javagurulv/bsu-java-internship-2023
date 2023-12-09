@@ -24,6 +24,12 @@ class TravelCalculateAgreementDifferenceValidatorTest {
     @InjectMocks
     TravelCalculateAgreementDifferenceValidator validator;
     @Test
+    public void injectedRepositoryAreNotNull() {
+        assertNotNull(validationErrorFactory);
+        assertNotNull(request);
+        assertNotNull(validator);
+    }
+    @Test
     void validateNullDateFrom() {
         when(request.getAgreementDateFrom()).thenReturn(null);
         Optional<ValidationError> validationError = validator.validate(request);

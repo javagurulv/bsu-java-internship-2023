@@ -3,6 +3,7 @@ package lv.javaguru.travel.insurance.core.domain;
 import javax.persistence.*;
 
 @Entity
+@Table(name="classifiers")
 public class Classifier {
     @Id
     @Column(name = "id")

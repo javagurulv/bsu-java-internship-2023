@@ -20,6 +20,12 @@ class TravelCalculatePremiumRequestValidatorTest {
     @Mock private  TravelCalculatePremiumRequest request;
     @InjectMocks private TravelCalculatePremiumRequestValidatorImpl validator;
     @Test
+    public void injectedRepositoryAreNotNull() {
+        assertNotNull(validationObject);
+        assertNotNull(request);
+        assertNotNull(validator);
+    }
+    @Test
     void validateTestNotEmptyList() {
         when(validationObject.validate(request)).thenReturn(Optional.empty());
         List<TravelRequestValidation> expextedList = List.of(validationObject);
