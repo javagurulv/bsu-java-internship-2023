@@ -9,6 +9,7 @@
   "personLastName": null,
   "agreementDateFrom": null,
   "agreementDateTo": null,
+  "personalCode": null,
   "country": null,
   "birthday": null,
   "medicalRiskLimitLevel": null,

@@ -14,6 +14,8 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.anyList;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -31,7 +33,8 @@ public class TravelRequestBirthdayValidationTest {
     public void responseShouldContainsErrorBirthdayInFutureTest(){
         ValidationErrorDTO validationError = mock(ValidationErrorDTO.class);
         when(personDTO.getPersonBirthDate()).thenReturn(null);
-        when(validationErrorFactory.buildError("ERROR_CODE_12")).thenReturn(validationError);
+        when(personDTO.getPersonalCode()).thenReturn(1323123L);
+        when(validationErrorFactory.buildError(eq("ERROR_CODE_12"), anyList())).thenReturn(validationError);
         Optional<ValidationErrorDTO> error= birthdayValidation.validate(agreementDTO, personDTO);
         assertTrue(error.isPresent());
         assertEquals(error.get(), validationError);

@@ -19,7 +19,7 @@ public class AgeCoefficient {
     private int ageFrom;
     @Column(name="age_to", nullable = false)
     private int ageTo;
-    @Column(name= "coefficient", nullable = false)
+    @Column(name= "coefficient", precision = 2, nullable = false)
     private BigDecimal coefficient;
 
 }

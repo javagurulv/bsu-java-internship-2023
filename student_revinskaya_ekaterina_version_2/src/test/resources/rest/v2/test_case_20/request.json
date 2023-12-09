@@ -8,12 +8,14 @@
       "personFirstName" : "Vasja",
       "personLastName" : "Pupkin",
       "personBirthDate" : "2000-05-29",
+      "personalCode": 1212121,
       "medicalRiskLimitLevel" : "LEVEL_10000"
     },
     {
       "personFirstName" : "Petja",
       "personLastName" : "Pupkin",
       "personBirthDate" : "2050-02-29",
+      "personalCode": 1434333,
       "medicalRiskLimitLevel" : "LEVEL_10000"
     }
   ]

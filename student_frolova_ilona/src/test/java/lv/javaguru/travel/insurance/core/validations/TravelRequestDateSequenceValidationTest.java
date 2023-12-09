@@ -11,6 +11,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -19,6 +20,9 @@ public class TravelRequestDateSequenceValidationTest {
     @Mock
     private TravelCalculatePremiumRequest request;
 
+    @Mock
+    private ValidationErrorFactory errorFactory;
+
     @InjectMocks
     private TravelRequestDateSequenceValidation validation;
 
@@ -26,13 +30,11 @@ public class TravelRequestDateSequenceValidationTest {
     public void returnErrorIfDateFromAfterDateTo() {
         when(request.getAgreementDateFrom()).thenReturn(new Date(200L));
         when(request.getAgreementDateTo()).thenReturn(new Date(100L));
-        Optional<ValidationError> expected = Optional.of(
-                new ValidationError(
-                        "agreementDateTo", "Must be after agreementDateFrom!"
-                )
-        );
+        when(errorFactory.buildError(any())).thenReturn(new ValidationError());
 
+        Optional<ValidationError> expected = Optional.of(new ValidationError());
         Optional<ValidationError> error = validation.check(request);
+
         assertEquals(expected, error);
     }
 

@@ -1,10 +1,13 @@
 plugins {
     id("io.freefair.lombok") version "8.4"
+    id 'org.springframework.boot' version "2.7.5"
 }
+
 dependencies {
 
     implementation('mysql:mysql-connector-java:8.0.22')
     implementation('org.hibernate:hibernate-core:5.4.25.Final')
+    implementation ('org.liquibase:liquibase-core:4.2.2')
 
     implementation('org.springframework.boot:spring-boot-starter-data-jpa:2.7.5')
 
@@ -31,6 +34,16 @@ dependencies {
 
     test {
         useJUnitPlatform()
+    }
+
+    jar {
+        enabled = false
+    }
+
+    bootJar {
+        enabled = true
+        archiveBaseName = 'insurance-calculator'
+        archiveVersion = '1.0.2'
     }
 
 }

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
 @Component
 public class DtoV1Converter {
 
@@ -43,6 +44,7 @@ public class DtoV1Converter {
         personDTO.setPersonLastName(requestV1.getPersonLastName());
         personDTO.setPersonBirthDate(requestV1.getBirthday());
         personDTO.setMedicalRiskLimitLevel(requestV1.getMedicalRiskLimitLevel());
+        personDTO.setPersonalCode(requestV1.getPersonalCode());
         return personDTO;
     }
 
@@ -68,7 +70,7 @@ public class DtoV1Converter {
         responseV1.setRisks(ListOfRisksFromDTO(result.getAgreement().getPersons().get(0).getRisks()));
         responseV1.setAgreementPremium(result.getAgreement().getAgreementPremium());
         responseV1.setMedicalRiskLimitLevel(result.getAgreement().getPersons().get(0).getMedicalRiskLimitLevel());
-
+        responseV1.setPersonalCode(result.getAgreement().getPersons().get(0).getPersonalCode());
         responseV1.setCountry(result.getAgreement().getCountry());
         responseV1.setAgreementDateFrom(result.getAgreement().getAgreementDateFrom());
         responseV1.setAgreementDateTo(result.getAgreement().getAgreementDateTo());

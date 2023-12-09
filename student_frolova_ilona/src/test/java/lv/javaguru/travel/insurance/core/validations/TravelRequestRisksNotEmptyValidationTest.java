@@ -13,6 +13,7 @@ import java.util.Arrays;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -20,24 +21,27 @@ public class TravelRequestRisksNotEmptyValidationTest {
     @Mock
     private TravelCalculatePremiumRequest request;
 
+    @Mock
+    private ValidationErrorFactory errorFactory;
+
     @InjectMocks
     private TravelRequestRisksNotEmptyValidation validation;
 
     @Test
     public void returnErrorIfRisksAreNull() {
         when(request.getSelectedRisks()).thenReturn(null);
-        Optional<ValidationError> expected = Optional.of(
-                new ValidationError("selectedRisks", "Must not be empty!")
-        );
+        when(errorFactory.buildError(any())).thenReturn(new ValidationError());
+
+        Optional<ValidationError> expected = Optional.of(new ValidationError());
         assertEquals(expected, validation.check(request));
     }
 
     @Test
     public void returnErrorIfRisksAreNotSelected() {
         when(request.getSelectedRisks()).thenReturn(new ArrayList<>());
-        Optional<ValidationError> expected = Optional.of(
-                new ValidationError("selectedRisks", "Must not be empty!")
-        );
+        when(errorFactory.buildError(any())).thenReturn(new ValidationError());
+
+        Optional<ValidationError> expected = Optional.of(new ValidationError());
         assertEquals(expected, validation.check(request));
     }
 

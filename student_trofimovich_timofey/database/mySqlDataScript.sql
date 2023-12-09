@@ -1,5 +1,6 @@
 insert into classifiers (title, description)
 values ('RISK_TYPE', 'travel policy risk type classifier');
+
 insert into classifier_values (classifier_id, ic, description)
 values ((select id from classifiers where title = 'RISK_TYPE'), 'TRAVEL_MEDICAL', 'travel policy medical risk'),
        ((select id from classifiers where title = 'RISK_TYPE'), 'TRAVEL_CANCELLATION',

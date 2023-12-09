@@ -2,7 +2,7 @@
   "errors": [
     {
       "errorCode": "ERROR_CODE_13",
-      "description": "Field birthday must not future date!"
+      "description": "person which personal code is 1313131: Field birthday must not future date!"
     }
   ],
   "personFirstName": null,
@@ -11,6 +11,7 @@
   "agreementDateTo": null,
   "country": null,
   "birthday": null,
+  "personalCode": null,
   "medicalRiskLimitLevel": null,
   "agreementPremium": null,
   "risks": null

@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -20,17 +21,20 @@ public class TravelRequestDateFromNotEmptyValidationTest {
     @Mock
     private TravelCalculatePremiumRequest request;
 
+    @Mock
+    private ValidationErrorFactory errorFactory;
+
     @InjectMocks
     private TravelRequestDateFromNotEmptyValidation validation;
 
     @Test
     public void returnErrorIfDateFromNotOk() {
         when(request.getAgreementDateFrom()).thenReturn(null);
-        Optional<ValidationError> expected = Optional.of(
-                new ValidationError("agreementDateFrom", "Must not be empty!")
-        );
+        when(errorFactory.buildError(any())).thenReturn(new ValidationError());
 
+        Optional<ValidationError> expected = Optional.of(new ValidationError());
         Optional<ValidationError> error = validation.check(request);
+
         assertEquals(expected, error);
     }
 

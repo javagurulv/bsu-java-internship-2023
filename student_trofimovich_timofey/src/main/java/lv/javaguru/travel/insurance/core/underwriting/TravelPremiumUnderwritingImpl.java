@@ -22,8 +22,7 @@ class TravelPremiumUnderwritingImpl implements TravelPremiumUnderwriting{
     }
 
     private BigDecimal calculateTotalPremium(List<RiskPremium> riskPremiums) {
-        BigDecimal sumOfRisksPremiums = calculateSumOfRisksPremiums(riskPremiums);
-        return sumOfRisksPremiums;
+        return calculateSumOfRisksPremiums(riskPremiums);
     }
     private BigDecimal calculateSumOfRisksPremiums(List<RiskPremium> riskPremiums) {
         return riskPremiums.stream().map(RiskPremium::getPremium).reduce(BigDecimal.ZERO, BigDecimal::add);

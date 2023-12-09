@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 @Component
 public class InsuranceLimitCoefficientCalculator {
@@ -30,5 +31,5 @@ public class InsuranceLimitCoefficientCalculator {
                 .orElseThrow(()->new RuntimeException(
                         "medicalRiskLimitLevel with ic "+personDTO.getMedicalRiskLimitLevel()+" not found"))
                 .getCoefficient();
-    }
+            }
 }
