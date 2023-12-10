@@ -1,9 +1,13 @@
 package lv.javaguru.travel.insurance.core.validations;
 
-import lv.javaguru.travel.insurance.core.services.DateService;
+import lv.javaguru.travel.insurance.core.util.DateServiceUtil;
+import lv.javaguru.travel.insurance.core.services.ValidationErrorFactory;
+import lv.javaguru.travel.insurance.dto.Placeholder;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentMatcher;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -12,7 +16,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import static lv.javaguru.travel.insurance.core.validations.errors.ValidationErrorCodes.PAST_DATE;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.argThat;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -20,7 +27,9 @@ import static org.mockito.Mockito.when;
 public class PastAgreementDateToValidationTest {
 
     @Mock
-    DateService dateService;
+    ValidationErrorFactory validationErrorFactory;
+    @Mock
+    DateServiceUtil dateService;
 
     @InjectMocks
     PastAgreementDateToValidation validation;
@@ -40,11 +49,14 @@ public class PastAgreementDateToValidationTest {
 
         when(request.getAgreementDateTo()).thenReturn(date);
 
+        when(validationErrorFactory.buildError(eq(PAST_DATE), argThat(isPlaceHolder())))
+                .thenReturn(new ValidationError(PAST_DATE, "description"));
+
         var error = validation.execute(request);
 
         assertFalse(error.isEmpty());
-        assertEquals("agreementDateTo", error.get().getField());
-        assertEquals("Should be in a future, not in a past!", error.get().getError());
+        assertEquals(PAST_DATE, error.get().getErrorCode());
+        assertEquals("description", error.get().getErrorDescription());
     }
 
     @Test
@@ -74,5 +86,9 @@ public class PastAgreementDateToValidationTest {
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private ArgumentMatcher<Placeholder> isPlaceHolder() {
+        return argument -> argument.getKey().equals("fieldName") && argument.getValue().equals("agreementDateTo");
     }
 }

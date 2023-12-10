@@ -23,6 +23,12 @@ class TravelCalculateSelectedRiskValidatorTest {
     @InjectMocks
     TravelCalculateSelectedRiskValidator validator;
     @Test
+    public void injectedRepositoryAreNotNull() {
+        assertNotNull(validationErrorFactory);
+        assertNotNull(request);
+        assertNotNull(validator);
+    }
+    @Test
     void validateNullSelectedRisk() {
         when(request.getSelectedRisks()).thenReturn(null);
         ValidationError expectedError = new ValidationError("ERROR_CODE", "Description");

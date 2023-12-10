@@ -1,10 +1,10 @@
-package lv.javaguru.travel.insurance.core.services;
+package lv.javaguru.travel.insurance.core.util;
 
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.util.Date;
 
-public interface DateService {
+public interface DateServiceUtil {
     Date createDate(String date, String format) throws ParseException;
 
     Date getTodayDate();

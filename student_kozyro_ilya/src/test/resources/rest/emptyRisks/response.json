@@ -1,8 +1,8 @@
 {
   "errorList": [
     {
-      "field": "selected_risks",
-      "error": "Should be at least one selected risk and not empty"
+      "errorCode": "EMPTY_RISKS",
+      "errorDescription": "Risks shouldn't be empty"
     }
   ],
   "personFirstName": null,

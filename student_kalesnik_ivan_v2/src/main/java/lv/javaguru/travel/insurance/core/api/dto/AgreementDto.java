@@ -24,4 +24,6 @@ public class AgreementDto {
 
     private BigDecimal agreementPremium;
 
+    private String uuid;
+
 }

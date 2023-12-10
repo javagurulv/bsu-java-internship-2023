@@ -25,6 +25,12 @@ class TravelCalculateDateFromPastValidatorTest {
     @InjectMocks
     TravelCalculateDateFromPastValidator validator;
     @Test
+    public void injectedRepositoryAreNotNull() {
+        assertNotNull(validationErrorFactory);
+        assertNotNull(request);
+        assertNotNull(validator);
+    }
+    @Test
     void validateNullDateFromPast() {
         when(request.getAgreementDateFrom()).thenReturn(null);
         Optional<ValidationError> validationError = validator.validate(request);
