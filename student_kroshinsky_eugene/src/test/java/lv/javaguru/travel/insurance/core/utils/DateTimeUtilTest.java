@@ -3,6 +3,7 @@ package lv.javaguru.travel.insurance.core.utils;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.math.BigDecimal;
 import java.text.ParseException;
@@ -11,7 +12,10 @@ import java.util.Date;
 
 class DateTimeUtilTest {
     DateTimeUtil dateDifferenceService = new DateTimeUtil();
-
+    @Test
+    public void injectedRepositoryAreNotNull() {
+        assertNotNull(dateDifferenceService);
+    }
     @Test
     void calculateDateDifferenceTestPositive(){
         Date dateTo = createDate("12.11.2023");

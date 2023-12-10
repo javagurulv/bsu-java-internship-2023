@@ -1,0 +1,22 @@
+{
+  "agreementDateFrom" : "",
+  "agreementDateTo" : "",
+  "country" : "",
+  "selected_risks": null,
+  "persons" : [
+    {
+      "personFirstName" : "",
+      "personLastName" : "",
+      "personCode" : "123",
+      "personBirthDate" : "",
+      "medicalRiskLimitLevel" : ""
+    },
+    {
+      "personFirstName" : "",
+      "personLastName" : "",
+      "personCode" : "123",
+      "personBirthDate" : "1950-02-29",
+      "medicalRiskLimitLevel" : "LEVEL_10000"
+    }
+  ]
+}

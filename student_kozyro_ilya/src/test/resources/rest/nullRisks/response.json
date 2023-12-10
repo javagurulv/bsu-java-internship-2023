@@ -1,0 +1,13 @@
+{
+  "errorList": [
+    {
+      "errorCode": "MANDATORY_FIELD_MISSING",
+      "errorDescription": "Mandatory field 'selected_risks' is missing"
+    }
+  ],
+  "personFirstName": null,
+  "personLastName": null,
+  "agreementDateFrom": null,
+  "agreementDateTo": null,
+  "agreementPrice": null
+}

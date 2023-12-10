@@ -13,6 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
@@ -20,7 +21,12 @@ class TravelPremiumUnderwritingImplTest {
     @Mock TravelCalculatePremiumRequest request;
     @Mock private DateTimeUtil dateDifferenceService;
     @InjectMocks private TravelPremiumUnderwritingImpl underwriting;
-
+    @Test
+    public void injectedRepositoryAreNotNull() {
+        assertNotNull(dateDifferenceService);
+        assertNotNull(request);
+        assertNotNull(underwriting);
+    }
     @Test
     void calculatePremiumTest(){
         when(request.getAgreementDateFrom()).thenReturn(createDate("18.11.2023"));
