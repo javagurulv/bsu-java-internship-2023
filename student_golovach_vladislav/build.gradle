@@ -1,14 +1,14 @@
 dependencies {
+
 	implementation('mysql:mysql-connector-java:8.0.22')
 	implementation('org.hibernate:hibernate-core:5.4.25.Final')
-	implementation ('javax.persistence:javax.persistence-api:2.2')
+
 	implementation('org.springframework.boot:spring-boot-starter-data-jpa:2.7.5')
-	implementation 'jakarta.persistence:jakarta.persistence-api:3.1.0'
+
 	implementation('org.springframework.boot:spring-boot-starter-web:2.7.5')
 
 	implementation('com.fasterxml.jackson.core:jackson-core:2.14.2')
 	implementation('com.google.guava:guava:31.0.1-jre')
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
 	compileOnly('org.projectlombok:lombok:1.18.24')
 	annotationProcessor('org.projectlombok:lombok:1.18.24')
