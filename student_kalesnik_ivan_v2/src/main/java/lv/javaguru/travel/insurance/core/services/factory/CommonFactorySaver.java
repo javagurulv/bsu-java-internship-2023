@@ -70,7 +70,7 @@ public class CommonFactorySaver {
                                     PolisEntity agreementPersonEntity) {
         personDTO.getRisks().forEach(riskDTO -> {
             AgreementRiskEntity agreementPersonRiskEntity = new AgreementRiskEntity().builder()
-                    .polis(agreementPersonEntity)
+                    .agreementPerson(agreementPersonEntity)
                     .riskIc(riskDTO.getRiskIc())
                     .premium(riskDTO.getPremium())
                     .build();

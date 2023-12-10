@@ -4,11 +4,13 @@ import lv.javaguru.travel.insurance.core.domain.api.PersonEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.Optional;
 
-public interface PersonRepository extends JpaRepository<PersonEntity, BigDecimal> {
+@Component
+public interface PersonRepository extends JpaRepository<PersonEntity, Long> {
     @Query("SELECT pe from PersonEntity pe " +
             "where pe.firstName = :firstName " +
             "      and pe.lastName = :lastName " +

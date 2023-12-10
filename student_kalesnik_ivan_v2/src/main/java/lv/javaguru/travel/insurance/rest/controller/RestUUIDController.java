@@ -1,6 +1,10 @@
 package lv.javaguru.travel.insurance.rest.controller;
 
 import com.google.common.base.Stopwatch;
+import lv.javaguru.travel.insurance.core.api.command.TravelCoreCommand;
+import lv.javaguru.travel.insurance.core.api.command.TravelCoreResult;
+import lv.javaguru.travel.insurance.core.services.cute.cuteStarterImpl;
+import lv.javaguru.travel.insurance.dto.controller.DtoController;
 import lv.javaguru.travel.insurance.dto.controller.TravelAgreementResponseGetter;
 import lv.javaguru.travel.insurance.rest.common.TravelCalculatePremiumRequestExecutionTimeLogger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,30 +26,27 @@ public class RestUUIDController {
     private UUIDResponse responseLogger;
 
     @Autowired
+    private cuteStarterImpl cuteStarter;
+
+    @Autowired
     private TravelCalculatePremiumRequestExecutionTimeLogger loggerTime;
+
+    @Autowired
+    private DtoController DtoController;
 
     @GetMapping(path = "/{uuid}",
             produces = "application/json")
     public TravelAgreementResponseGetter getAgreement(@PathVariable String uuid) {
         Stopwatch stopwatch = Stopwatch.createStarted();
         TravelAgreementResponseGetter response = processRequest(uuid);
-        new TravelAgreementResponseGetter().builder()
-                .agreementDateFrom(new Date())
-                .agreementDateTo(new Date())
-                .uuid(uuid)
-                .build();
         loggerTime.logExecutionTime(stopwatch);
         return response;
     }
 
     private TravelAgreementResponseGetter processRequest(String uuid) {
         requestLogger.log(uuid);
-        TravelAgreementResponseGetter response = new TravelAgreementResponseGetter().builder()
-                .agreementDateFrom(new Date())
-                .agreementDateTo(new Date())
-                .uuid(uuid)
-                .build();
-        responseLogger.log(response);
-        return response;
+        TravelCoreCommand coreCommand = DtoController.buildCoreCommand(uuid);
+        TravelCoreResult coreResult = cuteStarter.getAgreement(coreCommand);
+        return DtoController.buildResponse(coreResult);
     }
 }
