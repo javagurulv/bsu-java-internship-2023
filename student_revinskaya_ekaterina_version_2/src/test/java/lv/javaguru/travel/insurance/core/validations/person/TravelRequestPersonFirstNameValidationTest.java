@@ -34,7 +34,7 @@ public class TravelRequestPersonFirstNameValidationTest {
     @Test
     public void responseShouldContainErrorEmptyFirstNameTest() {
         when(personDTO.getPersonFirstName()).thenReturn("");
-        when(personDTO.getPersonalCode()).thenReturn(1323123L);
+        when(personDTO.getPersonalCode()).thenReturn("1323123");
         ValidationErrorDTO validationError = mock(ValidationErrorDTO.class);
         when(validationErrorFactory.buildError(eq("ERROR_CODE_1"), anyList())).thenReturn(validationError);
         Optional<ValidationErrorDTO> error= personFirstNameValidation.validate(agreementDTO, personDTO);
@@ -44,7 +44,7 @@ public class TravelRequestPersonFirstNameValidationTest {
     @Test
     public void responseShouldContainErrorNullFirstNameTest() {
         when(personDTO.getPersonFirstName()).thenReturn(null);
-        when(personDTO.getPersonalCode()).thenReturn(1323123L);
+        when(personDTO.getPersonalCode()).thenReturn("1323123");
         ValidationErrorDTO validationError = mock(ValidationErrorDTO.class);
         when(validationErrorFactory.buildError(eq("ERROR_CODE_1"), anyList())).thenReturn(validationError);
         Optional<ValidationErrorDTO> error= personFirstNameValidation.validate(agreementDTO, personDTO);

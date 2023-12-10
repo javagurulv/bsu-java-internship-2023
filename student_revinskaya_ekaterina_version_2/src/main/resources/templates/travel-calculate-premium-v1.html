@@ -19,6 +19,9 @@
     <input type="date" id="birthday"
            th:field="${request.birthday}"><br><br>
 
+    <label for="personalCode">PersonalCode:</label>
+    <input type="text" id="personalCode" th:field="${request.personalCode}"><br><br>
+
     <label for="agreementDateFrom">Agreement Date From:</label>
     <input type="date" id="agreementDateFrom" th:field="${request.agreementDateFrom}"><br><br>
 
@@ -49,13 +52,6 @@
 
 <br>
 
-<h3>
-    <label th:if="${response?.agreementPremium != null}"
-           th:text="'AGREEMENT PREMIUM: ' + ${response?.agreementPremium}"></label>
-</h3>
-
-<br>
-
 <td th:if="${response?.risks != null}">
     <h3>Travel Insurance Premium Calculation RISKS</h3>
     <tr th:each="risk : ${response?.risks}">
@@ -64,6 +60,11 @@
         <br>
     </tr>
 </td>
+<br>
 
+<h3>
+    <label th:if="${response?.agreementPremium != null}"
+           th:text="'AGREEMENT PREMIUM: ' + ${response?.agreementPremium}"></label>
+</h3>
 </body>
 </html>
