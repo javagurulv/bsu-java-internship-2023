@@ -1,5 +1,6 @@
-package lv.javaguru.travel.insurance.core.validations;
+package lv.javaguru.travel.insurance.core.validations.person;
 
+import lv.javaguru.travel.insurance.core.validations.ValidationErrorFactory;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.Test;
@@ -18,27 +19,27 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class DateToIsInFutureValidationTest {
+public class DateOfBirthIsInPastValidationTest {
     @Mock
-    ValidationErrorFactory factory;
+    ValidationErrorFactory errorFactory;
     @InjectMocks
-    private DateToIsInFutureValidation validation;
+    DateOfBirthIsInPastValidation validation;
 
     @Test
-    public void shouldReturnErrorWhenDateFromIsInThePast() {
+    public void shouldReturnErrorWhenDateOfBirthIsInTheFuture() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
-        when(request.getAgreementDateTo()).thenReturn(createDate("20.12.2020"));
-        when(factory.buildError("ERROR_CODE_6")).thenReturn(new ValidationError("ERROR_CODE_6", "Date to must be in the future!"));
+        when(request.getDateOfBirth()).thenReturn(createDate("20.12.2025"));
+        when(errorFactory.buildError("ERROR_CODE_13")).thenReturn(new ValidationError("ERROR_CODE_13", "desc"));
         Optional<ValidationError> validationError = validation.validate(request);
         assertThat(validationError).isPresent();
-        assertThat(validationError.get().getErrorCode()).isEqualTo("ERROR_CODE_6");
-        assertThat(validationError.get().getDescription()).isEqualTo("Date to must be in the future!");
+        assertThat(validationError.get().getErrorCode()).isEqualTo("ERROR_CODE_13");
+        assertThat(validationError.get().getDescription()).isEqualTo("desc");
     }
 
     @Test
     void shouldNotReturnError() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
-        when(request.getAgreementDateTo()).thenReturn(createDate("12.03.2025"));
+        when(request.getDateOfBirth()).thenReturn(createDate("12.03.2020"));
         Optional<ValidationError> validationError = validation.validate(request);
         assertThat(validationError).isEmpty();
     }

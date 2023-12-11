@@ -1,5 +1,6 @@
-package lv.javaguru.travel.insurance.core.validations;
+package lv.javaguru.travel.insurance.core.validations.person;
 
+import lv.javaguru.travel.insurance.core.validations.ValidationErrorFactory;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.Test;
@@ -16,31 +17,30 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class DateToValidatonTest {
+public class DateOfBirthIsNotEmptyValidatonTest {
     @Mock
-    ValidationErrorFactory factory;
+    ValidationErrorFactory errorFactory;
     @InjectMocks
-    private DateToValidation validation;
-
+    DateOfBirthIsNotEmptyValidaton validaton;
 
     @Test
-    void shouldReturnErrorWhenAgreementDateFromIsEmpty() {
+    void shouldReturnErrorWhenDateOfBirthIsNull() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
-        when(request.getAgreementDateTo()).thenReturn(null);
-        when(factory.buildError("ERROR_CODE_4")).thenReturn(new ValidationError("ERROR_CODE_4","Date to field must not be empty!"));
-        Optional<ValidationError> validationError = validation.validate(request);
+        when(request.getDateOfBirth()).thenReturn(null);
+        when(errorFactory.buildError("ERROR_CODE_12")).thenReturn(new ValidationError("ERROR_CODE_12", "desc"));
+        Optional<ValidationError> validationError = validaton.validate(request);
         assertThat(validationError).isPresent();
-        assertThat(validationError.get().getErrorCode()).isEqualTo("ERROR_CODE_4");
-        assertThat(validationError.get().getDescription()).isEqualTo("Date to field must not be empty!");
+        assertThat(validationError.get().getErrorCode()).isEqualTo("ERROR_CODE_12");
+        assertThat(validationError.get().getDescription()).isEqualTo("desc");
     }
+
 
     @Test
     void shouldNotReturnError() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
-        when(request.getAgreementDateTo()).thenReturn(new Date());
-        Optional<ValidationError> validationError = validation.validate(request);
+        when(request.getDateOfBirth()).thenReturn(new Date());
+        Optional<ValidationError> validationError = validaton.validate(request);
         assertThat(validationError).isEmpty();
     }
+
 }
-
-

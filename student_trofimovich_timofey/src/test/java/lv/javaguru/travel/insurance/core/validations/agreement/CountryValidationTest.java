@@ -1,8 +1,9 @@
 
-package lv.javaguru.travel.insurance.core.validations;
+package lv.javaguru.travel.insurance.core.validations.agreement;
 
 import lv.javaguru.travel.insurance.core.domain.ClassifierValue;
 import lv.javaguru.travel.insurance.core.repositories.ClassifierValueRepository;
+import lv.javaguru.travel.insurance.core.validations.ValidationErrorFactory;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.Test;
@@ -19,10 +20,12 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class CountryValidationTest {
-    @Mock ValidationErrorFactory errorFactory;
+    @Mock
+    ValidationErrorFactory errorFactory;
     @Mock
     ClassifierValueRepository classifierValueRepository;
-    @InjectMocks CountryValidation validation;
+    @InjectMocks
+    CountryValidation validation;
     @Test
     void shouldReturnEmptyCountryError() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
