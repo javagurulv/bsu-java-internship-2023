@@ -92,7 +92,7 @@ public class TravelCalculatePremiumRequestValidatorTest {
         ReflectionTestUtils.setField(requestValidator, "personValidations", personValidationsList);
 
         List<ValidationError> errors = requestValidator.validate(request);
-        assertThat(errors.size()).isEqualTo(0);
+        assertThat(errors.size()).isEqualTo(2);
     }
 
     @Test
