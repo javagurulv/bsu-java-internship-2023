@@ -23,7 +23,7 @@ public class PersonDTO {
 
     private String medicalRiskLimitLevel;
 
-    private Long personalCode;
+    private String personalCode;
 
     private List<RiskDTO> risks;
 

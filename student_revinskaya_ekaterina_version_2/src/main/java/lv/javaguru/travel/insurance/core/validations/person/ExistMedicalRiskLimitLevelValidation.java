@@ -35,7 +35,7 @@ public class ExistMedicalRiskLimitLevelValidation extends TravelPersonFieldValid
                 "MEDICAL_RISK_LIMIT_LEVEL", request.getMedicalRiskLimitLevel()).isEmpty();
     }
     private ValidationErrorDTO buildingError(PersonDTO person) {
-        Long code = person.getPersonalCode();
+        String code = person.getPersonalCode();
         return code == null ?
                 buildErrorWithoutPersonalCode(person)
                 : buildErrorWithPersonalCode(person);
@@ -44,7 +44,7 @@ public class ExistMedicalRiskLimitLevelValidation extends TravelPersonFieldValid
     private ValidationErrorDTO buildErrorWithPersonalCode(PersonDTO person) {
         return errorFactory
                 .buildError("ERROR_CODE_15",
-                        List.of(new Placeholder("PERSONAL_CODE", person.getPersonalCode().toString()),
+                        List.of(new Placeholder("PERSONAL_CODE", person.getPersonalCode()),
                                 new Placeholder("NOT_EXISTING_MEDICAL_RISK_LIMIT_LEVEL",
                                         person.getMedicalRiskLimitLevel())));
     }

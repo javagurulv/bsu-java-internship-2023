@@ -13,7 +13,7 @@ public class PersonDTOBuilder {
     private String personLastName;
     private Date personBirthDate;
 
-    private Long personalCode;
+    private String personalCode;
     private String medicalRiskLimitLevel;
     private List<RiskDTO> risks = new ArrayList<>();
 
@@ -61,7 +61,7 @@ public class PersonDTOBuilder {
         this.risks.add(riskDTOBuilder.build());
         return this;
     }
-    public PersonDTOBuilder withPersonalCode(Long personalCode){
+    public PersonDTOBuilder withPersonalCode(String personalCode){
         this.personalCode = personalCode;
         return this;
     }

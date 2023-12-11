@@ -26,6 +26,13 @@ class TravelCalculatePremiumServiceImplTest {
     @Mock private TravelCalculatePremiumRequestValidator requestValidator;
     @InjectMocks TravelCalculatePremiumServiceImpl calculator;
     @Test
+    public void injectedRepositoryAreNotNull() {
+        assertNotNull(dateDifferenceService);
+        assertNotNull(request);
+        assertNotNull(requestValidator);
+        assertNotNull(calculator);
+    }
+    @Test
     void calculatePremiumTestFirstName() {
         when(request.getPersonFirstName()).thenReturn("personFirstName");
         when(requestValidator.validate(request)).thenReturn(List.of());

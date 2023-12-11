@@ -22,6 +22,12 @@ class TravelCalculateFirstNameValidatorTest {
     TravelCalculatePremiumRequest request;
     @InjectMocks
     TravelCalculateFirstNameValidator validator;
+    @Test
+    public void injectedRepositoryAreNotNull() {
+        assertNotNull(validationErrorFactory);
+        assertNotNull(request);
+        assertNotNull(validator);
+    }
 
     @Test
     void validateEmptyFirstName() {

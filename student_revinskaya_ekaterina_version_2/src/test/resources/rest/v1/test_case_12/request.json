@@ -6,6 +6,6 @@
   "birthday" : "2005-08-03",
   "selectedRisks":["TRAVEL_MEDICAL"],
   "country": null,
-  "personalCode": 1313131,
+  "personalCode": "1313131",
   "medicalRiskLimitLevel": "LEVEL_10000"
 }

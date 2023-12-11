@@ -17,6 +17,11 @@ class ValidationErrorFactoryImplTest {
     ErrorCodeUtil propertyReader;
     @InjectMocks  ValidationErrorFactoryImpl validationErrorFactory;
     @Test
+    public void injectedRepositoryAreNotNull() {
+        assertNotNull(validationErrorFactory);
+        assertNotNull(propertyReader);
+    }
+    @Test
     void createValidationError() {
         when(propertyReader.getProperty("ERROR_CODE")).thenReturn("Description");
         ValidationError actualValidationError = validationErrorFactory.createValidationError("ERROR_CODE");

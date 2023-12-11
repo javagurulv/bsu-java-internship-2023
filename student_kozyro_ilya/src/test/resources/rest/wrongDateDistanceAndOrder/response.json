@@ -1,0 +1,21 @@
+{
+  "errorList": [
+    {
+      "errorCode": "NOT_CORRECT_DATE_ORDER",
+      "errorDescription": "Dates should have a correct order"
+    },
+    {
+      "errorCode": "PAST_DATE",
+      "errorDescription": "Date field 'agreementDateTo' shouldn't be in the past"
+    },
+    {
+      "errorCode": "PAST_DATE",
+      "errorDescription": "Date field 'agreementDateFrom' shouldn't be in the past"
+    }
+  ],
+  "personFirstName": null,
+  "personLastName": null,
+  "agreementDateFrom": null,
+  "agreementDateTo": null,
+  "agreementPrice": null
+}

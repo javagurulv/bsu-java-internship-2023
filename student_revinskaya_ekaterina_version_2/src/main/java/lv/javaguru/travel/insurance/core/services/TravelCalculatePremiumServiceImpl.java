@@ -3,19 +3,15 @@ package lv.javaguru.travel.insurance.core.services;
 import lv.javaguru.travel.insurance.core.api.command.TravelCalculatePremiumCoreCommand;
 import lv.javaguru.travel.insurance.core.api.command.TravelCalculatePremiumCoreResult;
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
-import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
-import lv.javaguru.travel.insurance.core.api.dto.RiskDTO;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import lv.javaguru.travel.insurance.core.services.calculators.CalculatorForTotalAgreementPremium;
 import lv.javaguru.travel.insurance.core.services.calculators.CalculatorRiskPremiumsForAllPersons;
-import lv.javaguru.travel.insurance.core.underwriting.TravelPremiumCalculationResult;
-import lv.javaguru.travel.insurance.core.underwriting.TravelPremiumUnderwriting;
+import lv.javaguru.travel.insurance.core.util.PersonSaver;
 import lv.javaguru.travel.insurance.core.validations.TravelAgreementValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
-import java.util.Collection;
 import java.util.List;
 
 @Component
@@ -26,6 +22,9 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
     private CalculatorForTotalAgreementPremium calculatorForTotalAgreementPremium;
     @Autowired
     private CalculatorRiskPremiumsForAllPersons calculatorRiskPremiumsForAllPersons;
+
+    @Autowired
+    private PersonSaver personEntityUtil;
 
     @Override
     public TravelCalculatePremiumCoreResult calculatePremium(TravelCalculatePremiumCoreCommand command) {
@@ -42,6 +41,8 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
     }
 
     private TravelCalculatePremiumCoreResult buildSuccessResponse(AgreementDTO agreement) {
+        personEntityUtil.saveNotAlreadyExistPersons(agreement);
+
         calculatorRiskPremiumsForAllPersons.calculate(agreement);
 
         BigDecimal totalAgreementPremium = calculatorForTotalAgreementPremium.calculate(agreement);
@@ -51,5 +52,6 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
         coreResult.setAgreement(agreement);
         return coreResult;
     }
+
 
 }

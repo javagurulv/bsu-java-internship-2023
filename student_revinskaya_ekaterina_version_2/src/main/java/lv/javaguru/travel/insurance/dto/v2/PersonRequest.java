@@ -24,7 +24,7 @@ public class PersonRequest {
     @JsonAlias("personBirthDate")
     private Date birthday;
     @JsonAlias("personal_code")
-    private Long personalCode;
+    private String personalCode;
     @JsonAlias("medical_risk_limit_level")
     private String medicalRiskLimitLevel;
 }

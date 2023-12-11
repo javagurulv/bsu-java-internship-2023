@@ -10,6 +10,8 @@ import lv.javaguru.travel.insurance.core.repositories.api.RiskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.UUID;
+
 @Component
 public class CommonFactorySaver {
     @Autowired private AgreementRepository agreementEntityRepository;
@@ -31,6 +33,7 @@ public class CommonFactorySaver {
                         .agreementDateTo(agreementDto.getAgreementDateTo())
                         .country(agreementDto.getCountry())
                         .agreementPremium(agreementDto.getAgreementPremium())
+                        .uuid(UUID.randomUUID().toString())
                         .build();
         return agreementEntityRepository.save(agreementEntity);
     }
@@ -67,7 +70,7 @@ public class CommonFactorySaver {
                                     PolisEntity agreementPersonEntity) {
         personDTO.getRisks().forEach(riskDTO -> {
             AgreementRiskEntity agreementPersonRiskEntity = new AgreementRiskEntity().builder()
-                    .polis(agreementPersonEntity)
+                    .agreementPerson(agreementPersonEntity)
                     .riskIc(riskDTO.getRiskIc())
                     .premium(riskDTO.getPremium())
                     .build();

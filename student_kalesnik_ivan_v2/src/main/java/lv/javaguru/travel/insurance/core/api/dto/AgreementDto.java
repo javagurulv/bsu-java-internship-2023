@@ -10,7 +10,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder(access = AccessLevel.PUBLIC, toBuilder = true)
+@Builder(access = AccessLevel.PUBLIC)
 public class AgreementDto {
     private Date agreementDateFrom;
 
@@ -23,5 +23,7 @@ public class AgreementDto {
     private List<PersonDto> persons;
 
     private BigDecimal agreementPremium;
+
+    private String uuid;
 
 }

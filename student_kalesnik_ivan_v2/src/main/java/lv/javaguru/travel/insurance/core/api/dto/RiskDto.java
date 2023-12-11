@@ -12,6 +12,5 @@ import java.math.BigDecimal;
 public class RiskDto {
     private String riskIc;
 
-
     private BigDecimal premium;
 }

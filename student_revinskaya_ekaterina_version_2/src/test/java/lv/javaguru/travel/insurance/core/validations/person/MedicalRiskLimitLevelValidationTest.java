@@ -36,7 +36,7 @@ public class MedicalRiskLimitLevelValidationTest {
     @Test
     public void responseShouldContainErrorNullMedicalRiskLimitLevelTest() {
         when(personDTO.getMedicalRiskLimitLevel()).thenReturn(null);
-        when(personDTO.getPersonalCode()).thenReturn(1323123L);
+        when(personDTO.getPersonalCode()).thenReturn("1323123");
         when(agreementDTO.getSelectedRisks()).thenReturn(List.of("TRAVEL_MEDICAL"));
         ReflectionTestUtils.setField(travelRequestMedicalRiskLimitLevelValidation,
                 "medicalRiskLimitLevelEnabled", true);
@@ -50,7 +50,7 @@ public class MedicalRiskLimitLevelValidationTest {
     @Test
     public void responseShouldContainErrorEmptyMedicalRiskLimitLevelTest() {
         when(personDTO.getMedicalRiskLimitLevel()).thenReturn("");
-        when(personDTO.getPersonalCode()).thenReturn(1323123L);
+        when(personDTO.getPersonalCode()).thenReturn("1323123");
         when(agreementDTO.getSelectedRisks()).thenReturn(List.of("TRAVEL_MEDICAL"));
         ReflectionTestUtils.setField(travelRequestMedicalRiskLimitLevelValidation,
                 "medicalRiskLimitLevelEnabled", true);
