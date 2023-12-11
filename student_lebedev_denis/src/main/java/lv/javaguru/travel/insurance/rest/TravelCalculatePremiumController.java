@@ -17,13 +17,17 @@ public class TravelCalculatePremiumController {
     private TravelCalculatePremiumService calculatePremiumService;
     @Autowired
     private TravelCalculatePremiumRequestLogger requestLogger;
+    @Autowired
+    private TravelCalculatePremiumResponseLogger responseLogger;
 
     @PostMapping(path = "/",
             consumes = "application/json",
             produces = "application/json")
     public TravelCalculatePremiumResponse calculatePremium(@RequestBody TravelCalculatePremiumRequest request) {
         requestLogger.log(request);
-        return calculatePremiumService.calculatePremium(request);
+        TravelCalculatePremiumResponse response =  calculatePremiumService.calculatePremium(request);
+        responseLogger.log(response);
+        return response;
     }
 
 }
