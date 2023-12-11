@@ -11,8 +11,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class TravelCalculatePremiumResponseLogger {
     private static final Logger logger = LoggerFactory.getLogger(TravelCalculatePremiumResponseLogger.class);
+
+    private final ObjectMapper objectMapper = new ObjectMapper();
+
     public void log(TravelCalculatePremiumResponse response) {
-        ObjectMapper objectMapper = new ObjectMapper();
         try {
             logger.info("RESPONSE: " + objectMapper.writeValueAsString(response));
         } catch (JsonProcessingException e) {

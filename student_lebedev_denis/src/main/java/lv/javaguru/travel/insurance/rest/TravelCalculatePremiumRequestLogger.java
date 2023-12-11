@@ -10,8 +10,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class TravelCalculatePremiumRequestLogger {
     private static final Logger logger = LoggerFactory.getLogger(TravelCalculatePremiumRequestLogger.class);
+    private final ObjectMapper objectMapper = new ObjectMapper();
+
     public void log(TravelCalculatePremiumRequest request) {
-        ObjectMapper objectMapper = new ObjectMapper();
         try {
             logger.info("REQUEST: " + objectMapper.writeValueAsString(request));
         } catch (JsonProcessingException e) {
