@@ -3,20 +3,22 @@ package lv.javaguru.travel.insurance.rest;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 @Component
-public class TravelCalculatePremiumRequestLogger {
-    private static final Logger logger = LoggerFactory.getLogger(TravelCalculatePremiumRequestLogger.class);
+public class TravelCalculatePremiumResponseLogger {
+    private static final Logger logger = LoggerFactory.getLogger(TravelCalculatePremiumResponseLogger.class);
+
     private final ObjectMapper objectMapper = new ObjectMapper();
 
-    public void log(TravelCalculatePremiumRequest request) {
+    public void log(TravelCalculatePremiumResponse response) {
         try {
-            logger.info("REQUEST: " + objectMapper.writeValueAsString(request));
+            logger.info("RESPONSE: " + objectMapper.writeValueAsString(response));
         } catch (JsonProcessingException e) {
-            logger.error("Cannot convert request to json", e);
+            logger.error("Cannot convert response to json", e);
         }
     }
 }

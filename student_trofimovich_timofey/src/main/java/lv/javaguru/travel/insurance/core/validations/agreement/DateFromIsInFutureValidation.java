@@ -1,5 +1,7 @@
-package lv.javaguru.travel.insurance.core.validations;
+package lv.javaguru.travel.insurance.core.validations.agreement;
 
+
+import lv.javaguru.travel.insurance.core.validations.ValidationErrorFactory;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +11,7 @@ import java.util.Date;
 import java.util.Optional;
 
 @Component
-class DateFromIsInFutureValidation extends TravelRequestValidationImpl {
+class DateFromIsInFutureValidation extends TravelAgreementFieldValidationImpl {
     @Autowired
     ValidationErrorFactory factory;
     @Override
