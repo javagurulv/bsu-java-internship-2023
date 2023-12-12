@@ -4,9 +4,11 @@ import lv.javaguru.travel.insurance.core.api.command.TravelCalculatePremiumCoreC
 import lv.javaguru.travel.insurance.core.api.command.TravelCalculatePremiumCoreResult;
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
+import lv.javaguru.travel.insurance.core.domain.Person;
 import lv.javaguru.travel.insurance.core.services.calculators.CalculatorForTotalAgreementPremium;
 import lv.javaguru.travel.insurance.core.services.calculators.CalculatorRiskPremiumsForAllPersons;
-import lv.javaguru.travel.insurance.core.util.PersonSaver;
+import lv.javaguru.travel.insurance.core.services.savers.AgreementSaver;
+import lv.javaguru.travel.insurance.core.services.savers.PersonSaver;
 import lv.javaguru.travel.insurance.core.validations.TravelAgreementValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -22,10 +24,11 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
     private CalculatorForTotalAgreementPremium calculatorForTotalAgreementPremium;
     @Autowired
     private CalculatorRiskPremiumsForAllPersons calculatorRiskPremiumsForAllPersons;
+    @Autowired
+    private AgreementSaver agreementSaver;
 
     @Autowired
-    private PersonSaver personEntityUtil;
-
+    private PersonSaver personSaver;
     @Override
     public TravelCalculatePremiumCoreResult calculatePremium(TravelCalculatePremiumCoreCommand command) {
 
@@ -41,13 +44,13 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
     }
 
     private TravelCalculatePremiumCoreResult buildSuccessResponse(AgreementDTO agreement) {
-        personEntityUtil.saveNotAlreadyExistPersons(agreement);
 
+        personSaver.saveNotAlreadyExistPersons(agreement);
         calculatorRiskPremiumsForAllPersons.calculate(agreement);
 
         BigDecimal totalAgreementPremium = calculatorForTotalAgreementPremium.calculate(agreement);
         agreement.setAgreementPremium(totalAgreementPremium);
-
+        agreementSaver.saveNotAlreadyExistAgreements(agreement);
         TravelCalculatePremiumCoreResult coreResult = new TravelCalculatePremiumCoreResult();
         coreResult.setAgreement(agreement);
         return coreResult;

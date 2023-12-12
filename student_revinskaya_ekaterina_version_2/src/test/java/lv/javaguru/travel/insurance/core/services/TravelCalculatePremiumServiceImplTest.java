@@ -5,7 +5,8 @@ import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import lv.javaguru.travel.insurance.core.services.calculators.CalculatorForTotalAgreementPremium;
 import lv.javaguru.travel.insurance.core.services.calculators.CalculatorRiskPremiumsForAllPersons;
-import lv.javaguru.travel.insurance.core.util.PersonSaver;
+import lv.javaguru.travel.insurance.core.services.savers.AgreementSaver;
+import lv.javaguru.travel.insurance.core.services.savers.PersonSaver;
 import lv.javaguru.travel.insurance.core.validations.TravelAgreementValidator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -27,6 +28,8 @@ public class TravelCalculatePremiumServiceImplTest {
     @Mock
     private PersonSaver personSaver;
     @Mock
+    private AgreementSaver agreementSaver;
+    @Mock
     private TravelAgreementValidator agreementValidator;
     @Mock
     private CalculatorForTotalAgreementPremium calculatorForTotalAgreementPremium;
@@ -37,6 +40,7 @@ public class TravelCalculatePremiumServiceImplTest {
         AgreementDTO agreement = new AgreementDTO();
         Mockito.doNothing().when(personSaver).saveNotAlreadyExistPersons(agreement);
         when(calculatorForTotalAgreementPremium.calculate(agreement)).thenReturn(BigDecimal.valueOf(12));
+        Mockito.doNothing().when(agreementSaver).saveNotAlreadyExistAgreements(agreement);
         Mockito.doNothing().when(calculatorRiskPremiumsForAllPersons).calculate(agreement);
         assertEquals(travelCalculatePremiumService
                 .calculatePremium(new TravelCalculatePremiumCoreCommand(agreement)).getAgreement(), agreement);
