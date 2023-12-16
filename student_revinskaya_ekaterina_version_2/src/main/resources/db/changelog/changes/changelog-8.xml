@@ -25,18 +25,4 @@
         </createTable>
     </changeSet>
 
-    <changeSet author = "katierevinska" id = "25">
-        <createTable tableName="selected_risks">
-            <column autoIncrement="true" name="id" type="BIGINT">
-                <constraints primaryKey="true"/>
-            </column>
-            <column name="risk_ic" type="VARCHAR(200)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="risk_agreement" type="DECIMAL(10,2)">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-    </changeSet>
-
 </databaseChangeLog>

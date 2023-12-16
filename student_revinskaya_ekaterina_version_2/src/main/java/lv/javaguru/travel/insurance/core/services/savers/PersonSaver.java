@@ -20,8 +20,7 @@ public class PersonSaver {
     }
 
     private boolean notExist(Person person) {
-        return personRepository.findBy(person.getFirstName(),
-                        person.getLastName(),
+        return personRepository.findByPersonalCode(
                         person.getPersonalCode())
                 .isEmpty();
     }

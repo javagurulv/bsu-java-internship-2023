@@ -28,8 +28,6 @@
         <createIndex indexName="ix_person"
                      tableName="persons"
                      unique="true">
-            <column name="first_name"/>
-            <column name="last_name"/>
             <column name="personal_code"/>
         </createIndex>
     </changeSet>

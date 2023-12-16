@@ -63,7 +63,7 @@ birthday timestamp not null,
 primary key(id)
 );
 CREATE UNIQUE INDEX if not exists ix_person
-ON persons (first_name, last_name, personal_code);
+ON persons (personal_code);
 
 
 create table if not exists agreements
@@ -79,7 +79,13 @@ primary key(id)
 create table if not exists selected_risks
 (
 id bigint not null auto_increment,
+agreement_id BIGINT not null,
 risk_ic varchar(200) not null,
 risk_agreement decimal(10,2) not null,
 primary key(id)
 );
+ALTER TABLE selected_risks
+ADD FOREIGN KEY (agreement_id) REFERENCES agreements(id);
+
+CREATE UNIQUE INDEX if not exists ix_selected_risk_ic_agreement_id
+ON selected_risks(agreement_id, risk_ic);

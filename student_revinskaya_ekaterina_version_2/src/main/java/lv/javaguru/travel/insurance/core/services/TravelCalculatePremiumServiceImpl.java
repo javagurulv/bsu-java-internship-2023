@@ -3,21 +3,16 @@ package lv.javaguru.travel.insurance.core.services;
 import lv.javaguru.travel.insurance.core.api.command.TravelCalculatePremiumCoreCommand;
 import lv.javaguru.travel.insurance.core.api.command.TravelCalculatePremiumCoreResult;
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
-import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
-import lv.javaguru.travel.insurance.core.domain.Person;
 import lv.javaguru.travel.insurance.core.services.calculators.CalculatorForTotalAgreementPremium;
 import lv.javaguru.travel.insurance.core.services.calculators.CalculatorRiskPremiumsForAllPersons;
 import lv.javaguru.travel.insurance.core.services.savers.AgreementSaver;
 import lv.javaguru.travel.insurance.core.services.savers.PersonSaver;
-import lv.javaguru.travel.insurance.core.services.savers.SelectedRiskSaver;
 import lv.javaguru.travel.insurance.core.validations.TravelAgreementValidator;
-import org.hibernate.cache.spi.SecondLevelCacheLogger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
-import java.util.Collection;
 import java.util.List;
 
 @Component
@@ -30,8 +25,7 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
     private CalculatorRiskPremiumsForAllPersons calculatorRiskPremiumsForAllPersons;
     @Autowired
     private AgreementSaver agreementSaver;
-    @Autowired
-    private SelectedRiskSaver selectedRiskSaver;
+
     @Autowired
     private PersonSaver personSaver;
 
@@ -53,10 +47,9 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
 
         personSaver.saveNotAlreadyExistPersons(agreement);
         calculatorRiskPremiumsForAllPersons.calculate(agreement);
-        selectedRiskSaver.saveNotAlreadyExistRisks(agreement);
         BigDecimal totalAgreementPremium = calculatorForTotalAgreementPremium.calculate(agreement);
         agreement.setAgreementPremium(totalAgreementPremium);
-        agreementSaver.saveNotAlreadyExistAgreements(agreement);
+        agreementSaver.saveAgreements(agreement);//save to agreements and selected_risks tables
         TravelCalculatePremiumCoreResult coreResult = new TravelCalculatePremiumCoreResult();
         coreResult.setAgreement(agreement);
         return coreResult;
