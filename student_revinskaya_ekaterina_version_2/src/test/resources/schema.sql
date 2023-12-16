@@ -75,3 +75,11 @@ country varchar(200) not null,
 premium decimal(10,2) not null,
 primary key(id)
 );
+
+create table if not exists selected_risks
+(
+id bigint not null auto_increment,
+risk_ic varchar(200) not null,
+risk_agreement decimal(10,2) not null,
+primary key(id)
+);

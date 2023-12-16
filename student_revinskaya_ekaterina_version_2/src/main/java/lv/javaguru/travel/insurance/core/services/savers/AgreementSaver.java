@@ -4,6 +4,7 @@ import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.domain.Agreement;
 import lv.javaguru.travel.insurance.core.repositories.AgreementRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -13,19 +14,12 @@ public class AgreementSaver {
 
     public void saveNotAlreadyExistAgreements(AgreementDTO agreementDTO) {
         Agreement agreement = convertToEntity(agreementDTO);
-        if (notExist(agreement)) {
-            saveIfNotExist(agreement);
-        }
+        saveAgreement(agreement);
     }
 
-    private boolean notExist(Agreement agreement) {
-        return agreementRepository.findBy(
-                        agreement.getDateFrom(),
-                        agreement.getDateTo(),
-                        agreement.getCountry(),
-                        agreement.getPremium())
-                .isEmpty();
-    }
+// //   private boolean notExist(Agreement agreement) {
+//        return agreementRepository.findAll(Example.of(agreement)).isEmpty();
+//    }
 
     private Agreement convertToEntity(AgreementDTO agreementDTO) {
         Agreement agreement = new Agreement();
@@ -36,10 +30,10 @@ public class AgreementSaver {
         return agreement;
     }
 
-    private void saveIfNotExist(Agreement agreement) {
-        if (notExist(agreement)) {
+    private void saveAgreement(Agreement agreement) {
+       // if (notExist(agreement)) {
             agreementRepository.save(agreement);
-        }
+      //  }
     }
 
 }

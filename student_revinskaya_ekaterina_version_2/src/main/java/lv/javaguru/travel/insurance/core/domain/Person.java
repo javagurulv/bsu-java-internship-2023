@@ -15,9 +15,9 @@ public class Person {
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @JoinColumn(name = "first_name", nullable = false)
+    @Column(name = "first_name", nullable = false)
     private String firstName;
-    @JoinColumn(name = "last_name", nullable = false)
+    @Column(name = "last_name", nullable = false)
     private String lastName;
     @Column(name = "personal_code", nullable = false)
     private String personalCode;

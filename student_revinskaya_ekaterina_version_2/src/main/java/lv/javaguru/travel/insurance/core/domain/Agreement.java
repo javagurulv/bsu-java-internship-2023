@@ -16,9 +16,9 @@ public class Agreement {
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @JoinColumn(name = "date_from", nullable = false)
+    @Column(name = "date_from", nullable = false)
     private Date dateFrom;
-    @JoinColumn(name = "date_to", nullable = false)
+    @Column(name = "date_to", nullable = false)
     private Date dateTo;
     @Column(name = "country", nullable = false)
     private String country;

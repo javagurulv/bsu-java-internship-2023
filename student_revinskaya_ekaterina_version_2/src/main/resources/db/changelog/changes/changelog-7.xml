@@ -5,7 +5,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
 
-    <changeSet author = "katierevinska" id = "20">
+    <changeSet author = "katierevinska" id = "22">
         <createTable tableName="persons">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true"/>
@@ -24,25 +24,14 @@
             </column>
         </createTable>
     </changeSet>
-
-    <changeSet author = "katierevinska" id = "21">
-        <createTable tableName="agreements">
-            <column autoIncrement="true" name="id" type="BIGINT">
-                <constraints primaryKey="true"/>
-            </column>
-            <column name="date_from" type="TIMESTAMP">
-                <constraints nullable="false"/>
-            </column>
-            <column name="date_to" type="TIMESTAMP">
-                <constraints nullable="false"/>
-            </column>
-            <column name="country" type="VARCHAR(200)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="premium" type="DECIMAL(10,2)">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
+    <changeSet author="katierevinska" id="23">
+        <createIndex indexName="ix_person"
+                     tableName="persons"
+                     unique="true">
+            <column name="first_name"/>
+            <column name="last_name"/>
+            <column name="personal_code"/>
+        </createIndex>
     </changeSet>
 
 </databaseChangeLog>
