@@ -26,9 +26,6 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
     @Autowired
     private AgreementSaver agreementSaver;
 
-    @Autowired
-    private PersonSaver personSaver;
-
     @Override
     public TravelCalculatePremiumCoreResult calculatePremium(TravelCalculatePremiumCoreCommand command) {
 
@@ -44,8 +41,6 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
     }
 
     private TravelCalculatePremiumCoreResult buildSuccessResponse(AgreementDTO agreement) {
-
-        personSaver.saveNotAlreadyExistPersons(agreement);
         calculatorRiskPremiumsForAllPersons.calculate(agreement);
         BigDecimal totalAgreementPremium = calculatorForTotalAgreementPremium.calculate(agreement);
         agreement.setAgreementPremium(totalAgreementPremium);

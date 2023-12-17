@@ -38,7 +38,6 @@ public class TravelCalculatePremiumServiceImplTest {
     @Test
     public void calculatePremiumResultWithoutErrorsTest() {
         AgreementDTO agreement = new AgreementDTO();
-        Mockito.doNothing().when(personSaver).saveNotAlreadyExistPersons(agreement);
         when(calculatorForTotalAgreementPremium.calculate(agreement)).thenReturn(BigDecimal.valueOf(12));
         Mockito.doNothing().when(agreementSaver).saveAgreements(agreement);
         Mockito.doNothing().when(calculatorRiskPremiumsForAllPersons).calculate(agreement);

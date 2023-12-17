@@ -4,21 +4,22 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 
 @Entity
-@Table(name = "selected_risks")
+@Table(name = "person_agreements")
 @Getter
 @Setter
-public class SelectedRisk {
+public class PersonAgreement {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne//несколько рисков к одному agreement
-    @JoinColumn(name = "agreement_id", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "person_id")
+    private Person personId;
+    @ManyToOne
+    @JoinColumn(name = "agreement_id")
     private Agreement agreementId;
-    @Column(name = "risk_ic", nullable = false)
-    private String riskIc;
-
+    @Column(name = "medical_risk_limit_level")
+    private String medicalRiskLimitLevel;
 }

@@ -81,7 +81,6 @@ create table if not exists selected_risks
 id bigint not null auto_increment,
 agreement_id BIGINT not null,
 risk_ic varchar(200) not null,
-risk_agreement decimal(10,2) not null,
 primary key(id)
 );
 ALTER TABLE selected_risks
@@ -89,3 +88,21 @@ ADD FOREIGN KEY (agreement_id) REFERENCES agreements(id);
 
 CREATE UNIQUE INDEX if not exists ix_selected_risk_ic_agreement_id
 ON selected_risks(agreement_id, risk_ic);
+
+create table if not exists person_agreements
+(
+id bigint not null auto_increment,
+person_id BIGINT not null,
+agreement_id BIGINT not null,
+medical_risk_limit_level varchar(200) not null,
+primary key(id)
+);
+
+ALTER TABLE person_agreements
+ADD FOREIGN KEY (person_id) REFERENCES persons(id);
+
+ALTER TABLE person_agreements
+ADD FOREIGN KEY (agreement_id) REFERENCES agreements(id);
+
+CREATE UNIQUE INDEX if not exists ix_person_id_agreement_id
+ON person_agreements(person_id, agreement_id);

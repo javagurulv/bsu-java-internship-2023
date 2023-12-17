@@ -6,34 +6,44 @@
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
 
 
-    <changeSet author = "katierevinska" id = "25">
-        <createTable tableName="selected_risks">
+    <changeSet author = "javaguru" id = "28">
+        <createTable tableName="person_agreements">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true"/>
+            </column>
+            <column name="person_id" type="BIGINT">
+                <constraints nullable="false"/>
             </column>
             <column name="agreement_id" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
-            <column name="risk_ic" type="VARCHAR(200)">
+            <column name="medical_risk_limit_level" type="VARCHAR(100)">
                 <constraints nullable="false"/>
             </column>
         </createTable>
     </changeSet>
 
-    <changeSet author="katierevinska" id="26">
-        <addForeignKeyConstraint baseTableName="selected_risks"
+    <changeSet author="katierevinska" id="29">
+        <addForeignKeyConstraint baseTableName="person_agreements"
+                                 baseColumnNames="person_id"
+                                 constraintName="fk_person_agreements_person_id"
+                                 referencedTableName="persons"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+    <changeSet author="katierevinska" id="30">
+        <addForeignKeyConstraint baseTableName="person_agreements"
                                  baseColumnNames="agreement_id"
-                                 constraintName="fk_selected_risks_agreement_id"
+                                 constraintName="fk_person_agreements_agreement_id"
                                  referencedTableName="agreements"
                                  referencedColumnNames="id"/>
     </changeSet>
 
     <changeSet author="katierevinska" id="27">
-        <createIndex indexName="ix_selected_risk_ic_agreement_id"
-                     tableName="selected_risks"
+        <createIndex indexName="ix_person_id_agreement_id"
+                     tableName="person_agreements"
                      unique="true">
+            <column name="person_id"/>
             <column name="agreement_id"/>
-            <column name="risk_ic"/>
         </createIndex>
     </changeSet>
 

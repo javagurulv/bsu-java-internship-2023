@@ -8,22 +8,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 @Component
 public class PersonSaver {
     @Autowired
     PersonRepository personRepository;
 
-    public void saveNotAlreadyExistPersons(AgreementDTO agreement) {
-        agreement.getPersons().stream()
-                .map(this::convertToEntity)
-                .forEach(this::saveIfNotExist);
+    public Person saveNotAlreadyExistPerson(PersonDTO personDTO) {
+        return saveIfNotExist(convertToEntity(personDTO));
+
     }
 
-    private boolean notExist(Person person) {
-        return personRepository.findByPersonalCode(
-                        person.getPersonalCode())
-                .isEmpty();
-    }
 
     private Person convertToEntity(PersonDTO personDTO) {
         Person person = new Person();
@@ -33,10 +29,12 @@ public class PersonSaver {
         person.setBirthday(personDTO.getPersonBirthDate());
         return person;
     }
-    private void saveIfNotExist(Person person){
-        if(notExist(person)){
-            personRepository.save(person);
-        }
-    }
 
+    private Person saveIfNotExist(Person person) {
+        Optional<Person> findingPerson =personRepository.findByPersonalCode(
+                person.getPersonalCode());
+        return findingPerson.orElseGet(() -> personRepository.save(person));
+    }
 }
+
+
