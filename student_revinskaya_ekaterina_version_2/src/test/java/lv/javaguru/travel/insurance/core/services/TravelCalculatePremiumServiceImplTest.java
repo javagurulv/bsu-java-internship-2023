@@ -5,7 +5,7 @@ import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import lv.javaguru.travel.insurance.core.services.calculators.CalculatorForTotalAgreementPremium;
 import lv.javaguru.travel.insurance.core.services.calculators.CalculatorRiskPremiumsForAllPersons;
-import lv.javaguru.travel.insurance.core.services.savers.AgreementSaver;
+import lv.javaguru.travel.insurance.core.services.savers.entity_savers.AgreementSaver;
 import lv.javaguru.travel.insurance.core.services.savers.PersonSaver;
 import lv.javaguru.travel.insurance.core.validations.TravelAgreementValidator;
 import org.junit.jupiter.api.Test;
