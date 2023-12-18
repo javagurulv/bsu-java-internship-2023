@@ -1,6 +1,6 @@
 package lv.javaguru.travel.insurance.core.validations;
 
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.springframework.stereotype.Component;
 
@@ -9,6 +9,6 @@ import java.util.Optional;
 
 @Component
 public interface TravelPersonFieldValidation {
-    Optional<ValidationError> validate(TravelCalculatePremiumRequest request);
-    List<ValidationError> validateList(TravelCalculatePremiumRequest request);
+    Optional<ValidationError> validate(TravelCalculatePremiumRequestV1 request);
+    List<ValidationError> validateList(TravelCalculatePremiumRequestV1 request);
 }
