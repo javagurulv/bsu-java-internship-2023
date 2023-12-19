@@ -1,0 +1,12 @@
+{
+  "personFirstName" : "Vasja",
+  "personLastName" : "Pupkin",
+  "agreementDateFrom" : "",
+  "agreementDateTo" : "",
+  "risks" : [
+    {
+      "name" : "Medical expensive",
+      "cost" : 1
+    }
+  ]
+}
