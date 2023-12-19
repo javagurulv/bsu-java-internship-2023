@@ -23,7 +23,7 @@ public class DateTimeServiceTest {
     {
         Date date1 = createDate("14-04-2005");
         Date date2 = createDate("14-04-2006");
-        long days = dateTimeService.getDaysBetween(date2,date1);
+        long days = dateTimeService.getDaysBetween(date1,date2);
         assertEquals(365, days);
     }
 
@@ -32,7 +32,7 @@ public class DateTimeServiceTest {
     {
         Date date1 = createDate("14-04-2005");
         Date date2 = createDate("14-04-2006");
-        long days = dateTimeService.getDaysBetween(date1,date2);
+        long days = dateTimeService.getDaysBetween(date2,date1);
         assertEquals(-365, days);
     }
 
@@ -41,7 +41,7 @@ public class DateTimeServiceTest {
     {
         Date date1 = createDate("14-04-2005");
         Date date2 = createDate("14-04-2005");
-        long days = dateTimeService.getDaysBetween(date2,date1);
+        long days = dateTimeService.getDaysBetween(date1,date2);
         assertEquals(0, days);
     }
 

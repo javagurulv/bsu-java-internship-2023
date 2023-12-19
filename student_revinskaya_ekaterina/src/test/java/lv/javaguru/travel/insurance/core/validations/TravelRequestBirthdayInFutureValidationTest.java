@@ -22,23 +22,25 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 public class TravelRequestBirthdayInFutureValidationTest {
     @InjectMocks
-    TravelRequestBirthdayInFutureValidation birthdayInFutureValidation;
+    private TravelRequestBirthdayInFutureValidation birthdayInFutureValidation;
     @Mock
-    DateTimeUtil dateTimeUtil;
+    private DateTimeUtil dateTimeUtil;
     @Mock
-    TravelCalculatePremiumRequestV1 request;
+    private TravelCalculatePremiumRequestV1 request;
     @Mock
-    ValidationErrorFactory validationErrorFactory;
+    private ValidationErrorFactory validationErrorFactory;
+
     @Test
-    public void responseShouldContainsErrorBirthdayInFutureTest(){
+    public void responseShouldContainsErrorBirthdayInFutureTest() {
         ValidationError validationError = mock(ValidationError.class);
         when(request.getBirthday()).thenReturn(createDate("2024.04.08"));
         when(dateTimeUtil.getCurrentDateTime()).thenReturn(createDate("2024.01.08"));
         when(validationErrorFactory.buildError("ERROR_CODE_13")).thenReturn(validationError);
-        Optional<ValidationError> error= birthdayInFutureValidation.validate(request);
+        Optional<ValidationError> error = birthdayInFutureValidation.validate(request);
         assertTrue(error.isPresent());
         assertEquals(error.get(), validationError);
     }
+
     private Date createDate(String dateStr) {
         try {
             return new SimpleDateFormat("dd.MM.yyyy").parse(dateStr);

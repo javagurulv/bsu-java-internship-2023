@@ -23,7 +23,9 @@ public class ErrorCodeUtil {
     public String getErrorDescription(String errorCode, List<Placeholder> placeholders){
         String errorDescription = environment.getProperty(errorCode);
         for (Placeholder placeholder: placeholders){
-            errorDescription = errorDescription.replace("{"+placeholder.getPlaceholderName()+"}", placeholder.getPlaceholderValue());
+            String placeholderToReplace = "{" + placeholder.getPlaceholderName() + "}";
+            errorDescription = errorDescription
+                    .replace(placeholderToReplace, placeholder.getPlaceholderValue());
         }
         return errorDescription;
     }

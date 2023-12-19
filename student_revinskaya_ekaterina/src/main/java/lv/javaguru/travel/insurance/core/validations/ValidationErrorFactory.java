@@ -12,10 +12,12 @@ import java.util.List;
 public class ValidationErrorFactory {
     @Autowired
     private ErrorCodeUtil reader;
-    public ValidationError buildError(String errCode){
+
+    public ValidationError buildError(String errCode) {
         return new ValidationError(errCode, reader.getErrorDescription(errCode));
     }
-    public ValidationError buildError(String errorCode, List<Placeholder> placeholders){
+
+    public ValidationError buildError(String errorCode, List<Placeholder> placeholders) {
         return new ValidationError(errorCode, reader.getErrorDescription(errorCode, placeholders));
     }
 

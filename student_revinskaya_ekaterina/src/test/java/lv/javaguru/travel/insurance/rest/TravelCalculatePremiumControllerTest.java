@@ -23,12 +23,17 @@ import static uk.org.webcompere.modelassert.json.JsonAssertions.assertJson;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class TravelCalculatePremiumControllerTest {
+public abstract class TravelCalculatePremiumControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     private static final String BASE_URL = "/insurance/travel/api/";
+    protected abstract String getTestCaseName();
+    @Test
+    public void testRequestWithoutFirstName() throws Exception {
+        equalsJsonFiles(getTestCaseName() + "Request.json", getTestCaseName() + "Response.json");
+    }
 
     public void equalsJsonFiles(String requestFile, String responseFile) throws Exception {
         ObjectMapper mapper = new ObjectMapper();

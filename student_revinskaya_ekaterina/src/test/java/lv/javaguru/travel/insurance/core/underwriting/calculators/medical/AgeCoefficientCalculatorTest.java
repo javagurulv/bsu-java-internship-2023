@@ -21,23 +21,27 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+
 @ExtendWith(MockitoExtension.class)
 public class AgeCoefficientCalculatorTest {
     @InjectMocks
     private AgeCoefficientCalculator ageCoefficientCalculator;
     @Mock
     private AgeCoefficientRepository ageCoefficientRepository;
-    @Mock private DateTimeUtil dateTimeUtil;
-    @Mock private TravelCalculatePremiumRequestV1 request;
+    @Mock
+    private DateTimeUtil dateTimeUtil;
+    @Mock
+    private TravelCalculatePremiumRequestV1 request;
 
     @Test
-    public void shouldReturn1Test(){
+    public void shouldReturn1Test() {
         ReflectionTestUtils.setField(ageCoefficientCalculator, "ageCoefficientEnabled", false);
         assertEquals(ageCoefficientCalculator.calculate(request), BigDecimal.valueOf(1));
     }
+
     @Test
-    public void calculateDayCountTest(){
-        Date date =createDate("03.04.2003");
+    public void calculateDayCountTest() {
+        Date date = createDate("03.04.2003");
         when(request.getBirthday()).thenReturn(date);
         when(dateTimeUtil.getCurrentDateTime()).thenReturn(createDate("03.04.2023"));
         ReflectionTestUtils.setField(ageCoefficientCalculator, "ageCoefficientEnabled", true);
@@ -46,16 +50,18 @@ public class AgeCoefficientCalculatorTest {
         when(ageCoefficientRepository.findByAge(20)).thenReturn(Optional.of(ageCoefficient));
         assertEquals(ageCoefficientCalculator.calculate(request), BigDecimal.valueOf(1.2));
     }
+
     @Test
-    public void throwExceptionDayCountTest(){
-        Date date =createDate("03.04.2033");
+    public void throwExceptionDayCountTest() {
+        Date date = createDate("03.04.2033");
         when(request.getBirthday()).thenReturn(date);
         when(dateTimeUtil.getCurrentDateTime()).thenReturn(createDate("03.04.2023"));
         ReflectionTestUtils.setField(ageCoefficientCalculator, "ageCoefficientEnabled", true);
-        Throwable thrown = assertThrows(RuntimeException.class, ()->ageCoefficientCalculator.calculate(request));
+        Throwable thrown = assertThrows(RuntimeException.class, () -> ageCoefficientCalculator.calculate(request));
         assertEquals(thrown.getMessage(),
                 "coefficient for person with birthday 03.04.2033 not found");
     }
+
     private Date createDate(String dateStr) {
         try {
             return new SimpleDateFormat("dd.MM.yyyy").parse(dateStr);

@@ -17,10 +17,11 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class TravelCalculatePremiumRequestValidatorTest {
-@InjectMocks
-private TravelCalculatePremiumRequestValidatorImpl requestValidator;
+    @InjectMocks
+    private TravelCalculatePremiumRequestValidatorImpl requestValidator;
     @Mock
     private TravelCalculatePremiumRequestV1 request;
+
     @Test
     public void responseShouldContainSingleErrorsTest() {
         TravelRequestValidation requestSingleValidation = mock(TravelRequestValidation.class);
@@ -34,6 +35,7 @@ private TravelCalculatePremiumRequestValidatorImpl requestValidator;
         List<ValidationError> errors = requestValidator.validate(request);
         assertEquals(errors.size(), 1);
     }
+
     @Test
     public void responseShouldContainListErrorsTest() {
         TravelRequestValidation requestSingleValidation = mock(TravelRequestValidation.class);
@@ -47,6 +49,7 @@ private TravelCalculatePremiumRequestValidatorImpl requestValidator;
         List<ValidationError> errors = requestValidator.validate(request);
         assertEquals(errors.size(), 1);
     }
+
     @Test
     public void responseShouldContainSingleAndListErrorsTest() {
         TravelRequestValidation requestSingleValidation = mock(TravelRequestValidation.class);
