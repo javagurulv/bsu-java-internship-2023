@@ -2,7 +2,7 @@ package lv.javaguru.travel.insurance.core.underwriting.calculations.medical;
 
 import lv.javaguru.travel.insurance.core.domain.AgeCoefficient;
 import lv.javaguru.travel.insurance.core.repositories.AgeCoefficientRepository;
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -19,13 +19,13 @@ class AgeCoefficientCalculator {
     private AgeCoefficientRepository ageCoefficientRepository;
     @Value("${age.coefficient.enabled:false}")
     boolean ageCoefficientEnabled;
-    BigDecimal getAgeCoefficient(TravelCalculatePremiumRequest request) {
+    BigDecimal getAgeCoefficient(TravelCalculatePremiumRequestV1 request) {
         return ageCoefficientEnabled ?
                calculateAgeCoefficient(request)
                 : getDefaultAgeCoefficient();
     }
 
-    private BigDecimal calculateAgeCoefficient(TravelCalculatePremiumRequest request) {
+    private BigDecimal calculateAgeCoefficient(TravelCalculatePremiumRequestV1 request) {
         Integer age = calculateAge(request);
         return ageCoefficientRepository.findCoefficient(age)
                 .map(AgeCoefficient::getCoefficient)
@@ -37,7 +37,7 @@ class AgeCoefficientCalculator {
         return BigDecimal.ONE;
     }
 
-    private Integer calculateAge(TravelCalculatePremiumRequest request) {
+    private Integer calculateAge(TravelCalculatePremiumRequestV1 request) {
         LocalDate personBirthDate = toLocalDate(request.getDateOfBirth());
         LocalDate currentDate = toLocalDate(new Date());
         return Period.between(personBirthDate, currentDate).getYears();

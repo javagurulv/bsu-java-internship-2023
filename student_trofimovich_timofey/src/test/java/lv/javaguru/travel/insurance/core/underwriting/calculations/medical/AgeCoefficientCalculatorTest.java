@@ -2,7 +2,7 @@ package lv.javaguru.travel.insurance.core.underwriting.calculations.medical;
 
 import lv.javaguru.travel.insurance.core.domain.AgeCoefficient;
 import lv.javaguru.travel.insurance.core.repositories.AgeCoefficientRepository;
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -26,7 +26,7 @@ public class AgeCoefficientCalculatorTest {
     AgeCoefficientCalculator ageCoefficientCalculator;
     @Test
     void shouldNotReturnErrorWhenAgeCoefficientIsNotEnabled() {
-        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        TravelCalculatePremiumRequestV1 request = mock(TravelCalculatePremiumRequestV1.class);
         ReflectionTestUtils.setField(ageCoefficientCalculator, "ageCoefficientEnabled", false);
         BigDecimal ageCoefficient = ageCoefficientCalculator.getAgeCoefficient(request);
         assertThat(ageCoefficient).isEqualTo(BigDecimal.ONE);
@@ -36,7 +36,7 @@ public class AgeCoefficientCalculatorTest {
     void getCorrectAgeCoefficient() {
         BigDecimal expectedCoefficient = BigDecimal.valueOf(1.2);
         int age = 0;
-        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        TravelCalculatePremiumRequestV1 request = mock(TravelCalculatePremiumRequestV1.class);
         ReflectionTestUtils.setField(ageCoefficientCalculator, "ageCoefficientEnabled", true);
         when(request.getDateOfBirth()).thenReturn(new Date());
         AgeCoefficient ageCoefficient = mock(AgeCoefficient.class);
@@ -47,7 +47,7 @@ public class AgeCoefficientCalculatorTest {
     @Test
     void shouldThrowAnExceptionWhenAgeCoefficientNotFound() {
         int age = 0;
-        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        TravelCalculatePremiumRequestV1 request = mock(TravelCalculatePremiumRequestV1.class);
         ReflectionTestUtils.setField(ageCoefficientCalculator, "ageCoefficientEnabled", true);
         when(request.getDateOfBirth()).thenReturn(new Date());
         when(repository.findCoefficient(age)).thenReturn(Optional.empty());

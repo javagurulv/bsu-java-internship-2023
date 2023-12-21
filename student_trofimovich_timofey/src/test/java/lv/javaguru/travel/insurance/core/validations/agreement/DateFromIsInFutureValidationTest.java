@@ -1,7 +1,7 @@
 package lv.javaguru.travel.insurance.core.validations.agreement;
 
 import lv.javaguru.travel.insurance.core.validations.ValidationErrorFactory;
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,7 +26,7 @@ public class DateFromIsInFutureValidationTest {
 
     @Test
     public void shouldReturnErrorWhenDateFromIsInThePast() {
-        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        TravelCalculatePremiumRequestV1 request = mock(TravelCalculatePremiumRequestV1.class);
         when(request.getAgreementDateFrom()).thenReturn(createDate("20.12.2020"));
         when(factory.buildError("ERROR_CODE_5")).thenReturn(new ValidationError("ERROR_CODE_5", "Date from must be in the future!"));
         Optional<ValidationError> validationError = validation.validate(request);
@@ -37,7 +37,7 @@ public class DateFromIsInFutureValidationTest {
 
     @Test
     void shouldNotReturnError() {
-        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        TravelCalculatePremiumRequestV1 request = mock(TravelCalculatePremiumRequestV1.class);
         when(request.getAgreementDateFrom()).thenReturn(createDate("12.03.2025"));
         Optional<ValidationError> validationError = validation.validate(request);
         assertThat(validationError).isEmpty();

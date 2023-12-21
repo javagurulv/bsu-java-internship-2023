@@ -4,7 +4,7 @@ package lv.javaguru.travel.insurance.core.validations.agreement;
 import lv.javaguru.travel.insurance.core.domain.ClassifierValue;
 import lv.javaguru.travel.insurance.core.repositories.ClassifierValueRepository;
 import lv.javaguru.travel.insurance.core.validations.ValidationErrorFactory;
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -28,14 +28,14 @@ public class CountryValidationTest {
     CountryValidation validation;
     @Test
     void shouldReturnEmptyCountryError() {
-        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        TravelCalculatePremiumRequestV1 request = mock(TravelCalculatePremiumRequestV1.class);
         when(request.getCountry()).thenReturn("");
         when(errorFactory.buildError("ERROR_CODE_10")).thenReturn(new ValidationError());
         assertThat(validation.validate(request)).isPresent();
     }
     @Test
     void shouldReturnNullCountryError() {
-        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        TravelCalculatePremiumRequestV1 request = mock(TravelCalculatePremiumRequestV1.class);
         when(request.getCountry()).thenReturn(null);
         when(errorFactory.buildError("ERROR_CODE_10")).thenReturn(new ValidationError());
         assertThat(validation.validate(request)).isPresent();
@@ -43,7 +43,7 @@ public class CountryValidationTest {
 
     @Test
     void shouldNotReturnError() {
-        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        TravelCalculatePremiumRequestV1 request = mock(TravelCalculatePremiumRequestV1.class);
         when(request.getCountry()).thenReturn("LATVIA");
         when(classifierValueRepository.findByClassifierTitleAndIc("COUNTRY", "LATVIA")).thenReturn(Optional.of(new ClassifierValue()));
         assertThat(validation.validate(request)).isEmpty();
@@ -51,7 +51,7 @@ public class CountryValidationTest {
 
     @Test
     void shouldReturnErrorWhenTravelMedicalIsNotChosen() {
-        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        TravelCalculatePremiumRequestV1 request = mock(TravelCalculatePremiumRequestV1.class);
         when(request.getCountry()).thenReturn("LATVIA");
         when(classifierValueRepository.findByClassifierTitleAndIc("COUNTRY", "LATVIA")).thenReturn(Optional.of(new ClassifierValue()));
         assertThat(validation.validate(request)).isEmpty();

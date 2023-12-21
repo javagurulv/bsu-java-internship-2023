@@ -1,6 +1,6 @@
 package lv.javaguru.travel.insurance.core.validations;
 
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -17,13 +17,13 @@ class TravelCalculatePremiumRequestValidatorImplementation implements TravelCalc
     private List<TravelPersonFieldValidation> personValidations;
 
 
-    public List<ValidationError> validate(TravelCalculatePremiumRequest request) {
+    public List<ValidationError> validate(TravelCalculatePremiumRequestV1 request) {
         List<ValidationError> agreementErrors = getAgreementErrors(request);
         List<ValidationError> personErrors = getPersonErrors(request);
         return concatLists(agreementErrors, personErrors);
     }
 
-    private List<ValidationError> getSingleAgreementErrors(TravelCalculatePremiumRequest request) {
+    private List<ValidationError> getSingleAgreementErrors(TravelCalculatePremiumRequestV1 request) {
         return agreementValidations.stream()
                 .map(validation -> validation.validate(request))
                 .filter(Optional::isPresent)
@@ -31,21 +31,21 @@ class TravelCalculatePremiumRequestValidatorImplementation implements TravelCalc
                 .toList();
     }
 
-    private List<ValidationError> getListAgreementErrors(TravelCalculatePremiumRequest request) {
+    private List<ValidationError> getListAgreementErrors(TravelCalculatePremiumRequestV1 request) {
         return agreementValidations.stream()
                 .map(validation -> validation.validateList(request))
                 .filter(Objects::nonNull)
                 .flatMap(Collection::stream)
                 .toList();
     }
-    private List<ValidationError> getSinglePersonErrors(TravelCalculatePremiumRequest request) {
+    private List<ValidationError> getSinglePersonErrors(TravelCalculatePremiumRequestV1 request) {
         return personValidations.stream()
                 .map(validation -> validation.validate(request))
                 .filter(Optional::isPresent)
                 .map(Optional::get)
                 .toList();
     }
-    private List<ValidationError> getListPersonErrors(TravelCalculatePremiumRequest request) {
+    private List<ValidationError> getListPersonErrors(TravelCalculatePremiumRequestV1 request) {
         return personValidations.stream()
                 .map(validation -> validation.validateList(request))
                 .filter(Objects::nonNull)
@@ -54,13 +54,13 @@ class TravelCalculatePremiumRequestValidatorImplementation implements TravelCalc
     }
 
 
-    private List<ValidationError> getAgreementErrors(TravelCalculatePremiumRequest request) {
+    private List<ValidationError> getAgreementErrors(TravelCalculatePremiumRequestV1 request) {
         List<ValidationError> singleAgreementErrors = getSingleAgreementErrors(request);
         List<ValidationError> listAgreementErrors = getListAgreementErrors(request);
         return concatLists(singleAgreementErrors, listAgreementErrors);
     }
 
-    private List<ValidationError> getPersonErrors(TravelCalculatePremiumRequest request) {
+    private List<ValidationError> getPersonErrors(TravelCalculatePremiumRequestV1 request) {
         List<ValidationError> singleAgreementErrors = getSinglePersonErrors(request);
         List<ValidationError> listAgreementErrors = getListPersonErrors(request);
         return concatLists(singleAgreementErrors, listAgreementErrors);

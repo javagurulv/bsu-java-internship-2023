@@ -1,7 +1,7 @@
 package lv.javaguru.travel.insurance.core.validations.agreement;
 
 import lv.javaguru.travel.insurance.core.validations.ValidationErrorFactory;
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -25,7 +25,7 @@ public class DateFromValidationTest {
 
     @Test
     void shouldReturnErrorWhenAgreementDateFromIsEmpty() {
-        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        TravelCalculatePremiumRequestV1 request = mock(TravelCalculatePremiumRequestV1.class);
         when(request.getAgreementDateFrom()).thenReturn(null);
         when(factory.buildError("ERROR_CODE_3")).thenReturn(new ValidationError("ERROR_CODE_3", "Date from field must not be empty!"));
         Optional<ValidationError> validationError = validation.validate(request);
@@ -36,7 +36,7 @@ public class DateFromValidationTest {
 
     @Test
     void shouldNotReturnError() {
-        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        TravelCalculatePremiumRequestV1 request = mock(TravelCalculatePremiumRequestV1.class);
         when(request.getAgreementDateFrom()).thenReturn(new Date());
         Optional<ValidationError> validationError = validation.validate(request);
         assertThat(validationError).isEmpty();

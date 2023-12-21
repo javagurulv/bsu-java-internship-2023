@@ -2,5 +2,12 @@
   "personFirstName" : "Vasja",
   "personLastName" : "Pupkin",
   "agreementDateFrom" : "2026-05-25",
-  "agreementDateTo" : "2026-05-29"
+  "agreementDateTo" : "2026-05-29",
+  "risks" :
+  [
+    {
+      "name" : "Medical expenses",
+      "cost" : 4
+    }
+  ]
 }

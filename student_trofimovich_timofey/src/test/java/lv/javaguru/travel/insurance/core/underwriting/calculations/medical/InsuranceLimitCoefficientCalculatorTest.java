@@ -2,7 +2,7 @@ package lv.javaguru.travel.insurance.core.underwriting.calculations.medical;
 
 import lv.javaguru.travel.insurance.core.domain.MedicalRiskLimitLevel;
 import lv.javaguru.travel.insurance.core.repositories.MedicalRiskLimitLevelRepository;
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -26,7 +26,7 @@ public class InsuranceLimitCoefficientCalculatorTest {
 
     @Test
     void shouldReturnDefaultCoefficientWhenLimitLevelIsNotEnabled() {
-        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        TravelCalculatePremiumRequestV1 request = mock(TravelCalculatePremiumRequestV1.class);
         ReflectionTestUtils.setField(calculator, "limitLevelIsEnabled", false);
         BigDecimal insuranceLimitCoefficient = calculator.getInsuranceLimitCoefficient(request);
         assertThat(insuranceLimitCoefficient).isEqualTo(BigDecimal.ONE);
@@ -34,7 +34,7 @@ public class InsuranceLimitCoefficientCalculatorTest {
     }
     @Test
     void shouldReturnCoefficientWhenLimitLevelIcIsCorrect() {
-        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        TravelCalculatePremiumRequestV1 request = mock(TravelCalculatePremiumRequestV1.class);
         ReflectionTestUtils.setField(calculator, "limitLevelIsEnabled", true);
         BigDecimal expectedCoefficient = BigDecimal.valueOf(2.0);
         MedicalRiskLimitLevel medicalRiskLimitLevel = mock(MedicalRiskLimitLevel.class);
@@ -47,7 +47,7 @@ public class InsuranceLimitCoefficientCalculatorTest {
 
     @Test
     void shouldThrowExceptionWhenCountryDayRateNotFound() {
-        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        TravelCalculatePremiumRequestV1 request = mock(TravelCalculatePremiumRequestV1.class);
         ReflectionTestUtils.setField(calculator, "limitLevelIsEnabled", true);
         when(repository.findByMedicalRiskLimitLevelIc(request.getCountry())).thenReturn(Optional.empty());
         RuntimeException exception = assertThrows(RuntimeException.class, () -> calculator.getInsuranceLimitCoefficient(request));

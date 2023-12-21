@@ -1,6 +1,6 @@
 package lv.javaguru.travel.insurance.core.validations;
 
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -27,7 +27,7 @@ public class TravelCalculatePremiumRequestValidatorTest {
     @Test
     void shouldNotReturnErrors() {
 
-        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        TravelCalculatePremiumRequestV1 request = mock(TravelCalculatePremiumRequestV1.class);
 
         TravelAgreementFieldValidation agreementValidation1 = mock(TravelAgreementFieldValidation.class);
         when(agreementValidation1.validate(request)).thenReturn(Optional.empty());
@@ -56,7 +56,7 @@ public class TravelCalculatePremiumRequestValidatorTest {
 
     @Test
     void shouldReturnAgreementListErrors() {
-        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        TravelCalculatePremiumRequestV1 request = mock(TravelCalculatePremiumRequestV1.class);
 
         TravelAgreementFieldValidation agreementValidation1 = mock(TravelAgreementFieldValidation.class);
         when(agreementValidation1.validate(request)).thenReturn(Optional.empty());
@@ -77,7 +77,7 @@ public class TravelCalculatePremiumRequestValidatorTest {
 
     @Test
     void shouldReturnListPersonErrors() {
-        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        TravelCalculatePremiumRequestV1 request = mock(TravelCalculatePremiumRequestV1.class);
 
         TravelPersonFieldValidation personVal1 = mock(TravelPersonFieldValidation.class);
         when(personVal1.validate(request)).thenReturn(Optional.empty());
@@ -97,7 +97,7 @@ public class TravelCalculatePremiumRequestValidatorTest {
 
     @Test
     void shouldReturnSingleAgreementErrors() {
-        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        TravelCalculatePremiumRequestV1 request = mock(TravelCalculatePremiumRequestV1.class);
 
         TravelAgreementFieldValidation agreementValidation1 = mock(TravelAgreementFieldValidation.class);
         when(agreementValidation1.validate(request)).thenReturn(Optional.of(mock(ValidationError.class)));
@@ -119,7 +119,7 @@ public class TravelCalculatePremiumRequestValidatorTest {
 
     @Test
     void shouldReturnSinglePersonErrors() {
-        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        TravelCalculatePremiumRequestV1 request = mock(TravelCalculatePremiumRequestV1.class);
 
         TravelPersonFieldValidation personVal1 = mock(TravelPersonFieldValidation.class);
         when(personVal1.validate(request)).thenReturn(Optional.of(mock(ValidationError.class)));

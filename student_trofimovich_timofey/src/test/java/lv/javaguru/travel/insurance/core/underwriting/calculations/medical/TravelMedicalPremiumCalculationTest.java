@@ -1,6 +1,6 @@
 package lv.javaguru.travel.insurance.core.underwriting.calculations.medical;
 
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -32,7 +32,7 @@ public class TravelMedicalPremiumCalculationTest {
         BigDecimal countryRate = new BigDecimal("1.3");
         BigDecimal ageCoefficient = new BigDecimal("1.6");
         BigDecimal limitLevelCoefficient = new BigDecimal("2.0");
-        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        TravelCalculatePremiumRequestV1 request = mock(TravelCalculatePremiumRequestV1.class);
         when(dayCountCalculator.getNumberOfDays(request)).thenReturn(numberOfDays);
         when(countryDefaultDayRateCalculator.getCountryDefaultDayRate(request)).thenReturn(countryRate);
         when(ageCoefficientCalculator.getAgeCoefficient(request)).thenReturn(ageCoefficient);

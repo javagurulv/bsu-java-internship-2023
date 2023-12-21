@@ -3,7 +3,7 @@ package lv.javaguru.travel.insurance.core.validations.agreement;
 import lv.javaguru.travel.insurance.core.domain.ClassifierValue;
 import lv.javaguru.travel.insurance.core.repositories.ClassifierValueRepository;
 import lv.javaguru.travel.insurance.core.validations.ValidationErrorFactory;
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -29,7 +29,7 @@ public class SelectedRisksValidationTest {
     private SelectedRisksValidation validation;
     @Test
     void shouldReturnErrorWhenSelectedRisksListIsEmpty() {
-        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        TravelCalculatePremiumRequestV1 request = mock(TravelCalculatePremiumRequestV1.class);
         when(request.getSelectedRisks()).thenReturn(Collections.emptyList());
         when(factory.buildError("ERROR_CODE_8")).thenReturn(new ValidationError("ERROR_CODE_8", "Selected risks list must not be empty!"));
         Optional<ValidationError> validationError = validation.validate(request);
@@ -40,7 +40,7 @@ public class SelectedRisksValidationTest {
 
     @Test
     void shouldReturnErrorWhenSelectedRisksListIsNull() {
-        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        TravelCalculatePremiumRequestV1 request = mock(TravelCalculatePremiumRequestV1.class);
         when(request.getSelectedRisks()).thenReturn(null);
         when(factory.buildError("ERROR_CODE_8")).thenReturn(new ValidationError("ERROR_CODE_8", "Selected risks list must not be empty!"));
         Optional<ValidationError> validationError = validation.validate(request);
@@ -51,7 +51,7 @@ public class SelectedRisksValidationTest {
 
     @Test
     void shouldNotReturnError() {
-        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        TravelCalculatePremiumRequestV1 request = mock(TravelCalculatePremiumRequestV1.class);
         when(request.getSelectedRisks()).thenReturn(List.of("RISK_IC_1"));
         when(classifierValueRepository
                 .findByClassifierTitleAndIc("RISK_TYPE", "RISK_IC_1"))
@@ -64,7 +64,7 @@ public class SelectedRisksValidationTest {
 
     @Test
     void shouldReturnRiskNotFoundException() {
-        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        TravelCalculatePremiumRequestV1 request = mock(TravelCalculatePremiumRequestV1.class);
         when(request.getSelectedRisks()).thenReturn(List.of("RISK_IC_1", "RISK_IC_2"));
         when(classifierValueRepository
                 .findByClassifierTitleAndIc("RISK_TYPE", "RISK_IC_1"))
