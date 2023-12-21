@@ -38,7 +38,7 @@
                                  referencedColumnNames="id"/>
     </changeSet>
 
-    <changeSet author="katierevinska" id="27">
+    <changeSet author="katierevinska" id="31">
         <createIndex indexName="ix_person_id_agreement_id"
                      tableName="person_agreements"
                      unique="true">

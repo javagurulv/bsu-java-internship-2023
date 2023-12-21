@@ -10,8 +10,7 @@ import org.springframework.data.repository.query.Param;
 import java.util.Optional;
 
 public interface PersonAgreementRepository extends JpaRepository<PersonAgreement, Long> {
-    @Query(
-            "SELECT pa from PersonAgreement pa "
+    @Query("SELECT pa from PersonAgreement pa "
             + "where pa.personId = :personId "
             + "and pa.agreementId = :agreementId"
     )
