@@ -55,8 +55,8 @@ class TravelCalculatePremiumServiceImplTest {
 
         assertEquals(response.getErrorList().size(), 1);
 
-        assertEquals(response.getErrorList().get(0).getField(), "field");
-        assertEquals(response.getErrorList().get(0).getError(), "errorMessage");
+        assertEquals(response.getErrorList().get(0).getErrorCode(), "field");
+        assertEquals(response.getErrorList().get(0).getErrorDescription(), "errorMessage");
 
     }
 

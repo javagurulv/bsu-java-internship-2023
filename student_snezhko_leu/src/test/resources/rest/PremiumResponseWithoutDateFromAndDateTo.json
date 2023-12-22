@@ -1,8 +1,0 @@
-{
-  "errors": [{"field" : "agreementDateFrom", "message" : "Must not be null!"}, {"field" :  "agreementDateTo", "message" :  "Must not be null!"}],
-  "personFirstName": null,
-  "personLastName": null,
-  "agreementDateFrom": null,
-  "agreementDateTo": null,
-  "agreementPrice": null
-}

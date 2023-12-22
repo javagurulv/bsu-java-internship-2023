@@ -36,15 +36,15 @@ public class MedicalRiskLimitLevelValidation extends TravelPersonFieldValidation
                 request.getSelectedRisks().contains("TRAVEL_MEDICAL");
     }
     private ValidationErrorDTO buildError(PersonDTO personalCode) {
-        Long code = personalCode.getPersonalCode();
+        String code = personalCode.getPersonalCode();
         return code == null ?
                 buildErrorWithoutPersonalCode()
                 : buildErrorWithPersonalCode(code);
     }
-    private ValidationErrorDTO buildErrorWithPersonalCode(Long personalCode) {
+    private ValidationErrorDTO buildErrorWithPersonalCode(String personalCode) {
         return validationErrorFactory
                 .buildError("ERROR_CODE_14",
-                        List.of(new Placeholder("PERSONAL_CODE", personalCode.toString())));
+                        List.of(new Placeholder("PERSONAL_CODE", personalCode)));
     }
     private ValidationErrorDTO buildErrorWithoutPersonalCode() {
         return validationErrorFactory

@@ -72,25 +72,28 @@ public class TravelCalculatePremiumControllerV1 {
 				: buildSuccessfulResponse(coreResult);
 	}
 
-	private TravelCalculatePremiumResponseV1 buildResponseWithErrors(List<ValidationErrorDto> coreErrors) {
-		List<ValidationError> errors = transformValidationErrorsToV1(coreErrors);
-		return new TravelCalculatePremiumResponseV1(errors);
-	}
-
 	private List<ValidationError> transformValidationErrorsToV1(List<ValidationErrorDto> coreErrors) {
 		return coreErrors.stream()
 				.map(error -> new ValidationError(error.getErrorCode(), error.getDescription()))
 				.collect(Collectors.toList());
 	}
 
+	private TravelCalculatePremiumResponseV1 buildResponseWithErrors(List<ValidationErrorDto> coreErrors) {
+		List<ValidationError> errors = transformValidationErrorsToV1(coreErrors);
+		return new TravelCalculatePremiumResponseV1(errors);
+	}
+
 	private TravelCalculatePremiumResponseV1 buildSuccessfulResponse(TravelCalculatePremiumCoreResult coreResult) {
 		AgreementDto agreement = coreResult.getAgreement();
 		TravelCalculatePremiumResponseV1 response = new TravelCalculatePremiumResponseV1();
-		setAgreementDetails(response, agreement);
-		setPersonAndRiskDetails(response, agreement);
+
+		if (!coreResult.hasErrors()) {
+			setAgreementDetails(response, agreement);
+			setPersonAndRiskDetails(response, agreement);
+		}
+
 		return response;
 	}
-
 	private void setAgreementDetails(TravelCalculatePremiumResponseV1 response, AgreementDto agreement) {
 		response.setPersonFirstName(agreement.getPersons().get(0).getPersonFirstName());
 		response.setPersonLastName(agreement.getPersons().get(0).getPersonLastName());

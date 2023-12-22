@@ -32,10 +32,5 @@
       "errorCode": "ERROR_CODE_7",
       "description": "Field personFirstName must not be empty!"
     }
-  ],
-  "agreementDateFrom": null,
-  "agreementDateTo": null,
-  "country": null,
-  "agreementPremium": null,
-  "persons": null
+  ]
 }

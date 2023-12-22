@@ -1,12 +1,10 @@
 package lv.javaguru.travel.insurance.core;
 
+import lv.javaguru.travel.insurance.rest.InsurancePremiumRisk;
 import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumResponse;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.List;
+import java.util.*;
 
 import lv.javaguru.travel.insurance.rest.loggers.TravelCalculatePremiumRequestExecutionTimeLogger;
 import lv.javaguru.travel.insurance.rest.loggers.TravelCalculatePremiumRequestLogger;
@@ -60,10 +58,14 @@ TravelCalculatePremiumServiceImplTest {
     @Test
     public void correctReturnResponsesFirstNameTest() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        ArrayList<InsurancePremiumRisk> risks = new ArrayList<>();
+        risks.add(new InsurancePremiumRisk("Loss luggage", 2));
+
         when(request.getPersonFirstName()).thenReturn("FirstName");
         when(request.getPersonLastName()).thenReturn("LastName");
         when(request.getAgreementDateFrom()).thenReturn(new Date(1000));
         when(request.getAgreementDateTo()).thenReturn(new Date(2000));
+        when(request.getRisks()).thenReturn(risks);
         TravelCalculatePremiumResponse response = test.buildResponse(request);
         assertEquals(response.getPersonFirstName(), "FirstName");
     }

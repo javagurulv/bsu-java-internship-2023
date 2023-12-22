@@ -5,14 +5,14 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
 
-    <changeSet author = "katierevinska" id = "11">
+    <changeSet author = "katierevinska" id = "13">
         <sql>
             INSERT INTO classifiers(title, description)
             VALUES('RISK_TYPE', 'Risk type classifier');
         </sql>
     </changeSet>
 
-    <changeSet author = "katierevinska" id = "12">
+    <changeSet author = "katierevinska" id = "14">
         <sql>
             INSERT INTO classifier_values(
             classifier_id,
@@ -87,14 +87,14 @@
         </sql>
     </changeSet>
 
-    <changeSet author = "katierevinska" id = "13">
+    <changeSet author = "katierevinska" id = "15">
         <sql>
             INSERT INTO classifiers(title, description)
             VALUES('COUNTRY', 'Country classifier');
         </sql>
     </changeSet>
 
-    <changeSet author = "katierevinska" id = "14">
+    <changeSet author = "katierevinska" id = "16">
         <sql>
             INSERT INTO classifier_values(
             classifier_id,
@@ -131,7 +131,7 @@
         </sql>
     </changeSet>
 
-    <changeSet author = "katierevinska" id = "15">
+    <changeSet author = "katierevinska" id = "17">
         <sql>
             INSERT INTO country_default_day_rate(country_ic, default_day_rate)
             VALUES('LATVIA', 1.00);
@@ -144,7 +144,7 @@
         </sql>
     </changeSet>
 
-    <changeSet author = "katierevinska" id = "16">
+    <changeSet author = "katierevinska" id = "18">
         <sql>
             INSERT INTO age_coefficient(age_from, age_to, coefficient)
             VALUES(0, 5, 1.1);
@@ -166,14 +166,14 @@
         </sql>
     </changeSet>
 
-    <changeSet author = "katierevinska" id = "17">
+    <changeSet author = "katierevinska" id = "19">
         <sql>
             INSERT INTO classifiers(title, description)
             VALUES('MEDICAL_RISK_LIMIT_LEVEL', 'Medical Risk limit level classifier');
         </sql>
     </changeSet>
 
-    <changeSet author = "katierevinska" id = "18">
+    <changeSet author = "katierevinska" id = "20">
         <sql>
             INSERT INTO classifier_values(
             classifier_id,
@@ -222,7 +222,7 @@
         </sql>
     </changeSet>
 
-    <changeSet author = "katierevinska" id = "19">
+    <changeSet author = "katierevinska" id = "21">
         <sql>
             INSERT INTO medical_risk_limit_level(medical_risk_limit_level_ic, coefficient)
             VALUES('LEVEL_10000', 1.0);

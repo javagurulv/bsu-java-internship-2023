@@ -21,7 +21,7 @@ public class AgreementRiskEntity {
 
     @ManyToOne
     @JoinColumn(name = "polis_id", nullable = false)
-    private PolisEntity polis;
+    private PolisEntity agreementPerson;
 
     @Column(name = "risk_ic", nullable = false)
     private String riskIc;

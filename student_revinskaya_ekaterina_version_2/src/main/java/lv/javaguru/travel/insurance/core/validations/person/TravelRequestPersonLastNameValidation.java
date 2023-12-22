@@ -21,12 +21,12 @@ class TravelRequestPersonLastNameValidation extends TravelPersonFieldValidationI
                 : Optional.empty();
     }
     private ValidationErrorDTO buildError(PersonDTO personalCode) {
-        Long code = personalCode.getPersonalCode();
+        String code = personalCode.getPersonalCode();
         return code == null ?
                 buildErrorWithoutPersonalCode()
                 : buildErrorWithPersonalCode(code);
     }
-    private ValidationErrorDTO buildErrorWithPersonalCode(Long personalCode) {
+    private ValidationErrorDTO buildErrorWithPersonalCode(String personalCode) {
         return validationErrorFactory
                 .buildError("ERROR_CODE_2",
                         List.of(new Placeholder("PERSONAL_CODE", personalCode.toString())));

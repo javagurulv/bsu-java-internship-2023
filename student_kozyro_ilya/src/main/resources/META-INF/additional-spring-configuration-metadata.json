@@ -1,0 +1,13 @@
+{
+  "properties": [
+    {
+      "name": "dateService.format",
+      "type": "java.lang.String",
+      "description": "Format of date in DTO"
+    },
+    {
+      "name": "errorCodeFile.fileName",
+      "type": "java.lang.String",
+      "description": "Name of the file, that contains error descriptions"
+    }
+  ] }

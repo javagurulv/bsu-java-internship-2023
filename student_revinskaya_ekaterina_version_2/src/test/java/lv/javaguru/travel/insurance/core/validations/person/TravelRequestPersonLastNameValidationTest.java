@@ -32,7 +32,7 @@ public class TravelRequestPersonLastNameValidationTest {
     @Test
     public void responseShouldContainErrorEmptyLastNameTest() {
         when(personDTO.getPersonLastName()).thenReturn("");
-        when(personDTO.getPersonalCode()).thenReturn(1323123L);
+        when(personDTO.getPersonalCode()).thenReturn("1323123");
         ValidationErrorDTO validationError = mock(ValidationErrorDTO.class);
         when(validationErrorFactory.buildError(eq("ERROR_CODE_2"), anyList())).thenReturn(validationError);
         Optional<ValidationErrorDTO> error= personLastNameValidation.validate(agreementDTO, personDTO);
@@ -42,7 +42,7 @@ public class TravelRequestPersonLastNameValidationTest {
     @Test
     public void responseShouldContainErrorNullLastNameTest() {
         when(personDTO.getPersonLastName()).thenReturn(null);
-        when(personDTO.getPersonalCode()).thenReturn(1323123L);
+        when(personDTO.getPersonalCode()).thenReturn("1323123");
         ValidationErrorDTO validationError = mock(ValidationErrorDTO.class);
         when(validationErrorFactory.buildError(eq("ERROR_CODE_2"), anyList())).thenReturn(validationError);
         Optional<ValidationErrorDTO> error= personLastNameValidation.validate(agreementDTO, personDTO);

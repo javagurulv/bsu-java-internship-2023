@@ -1,23 +1,25 @@
 package lv.javaguru.travel.insurance.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lv.javaguru.travel.insurance.core.TravelCalculatePremiumService;
+//import lv.javaguru.travel.insurance.core.TravelCalculatePremiumServiceImpl;
+import lv.javaguru.travel.insurance.core.TravelUnderwriting;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.stereotype.Component;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-
 import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -29,23 +31,31 @@ public class TravelCalculatePremiumControllerTest {
     @Autowired private MockMvc mockMvc;
     @Autowired private JsonFileReader jsonFileReader; //= new JsonFileReader();
     //    private MockMvc mockMvc;
+/*
+    @InjectMocks
+    private TravelCalculatePremiumServiceImpl service;
+    @Mock
+    TravelUnderwriting underwriting;
 
+ */
     @Test
     public void ControllerAllParametersIsCorrectTest() throws Exception {//throws FileNotFoundException, IOException {
+
         ObjectMapper mapper = new ObjectMapper();
         String pathRequest = "rest/TravelCalculatePremiumRequest.json";
         String pathResponse = "rest/TravelCalculatePremiumResponse.json";
 
         String responseFromRequest = getResponseFromRequest(pathRequest);
         String responseFromFile = jsonFileReader.readJsonFile("rest/TravelCalculatePremiumResponse.json");
+        //when(underwriting.calculatePremium(TravelCalculatePremiumResponse.class)).thenReturn()
         assertEquals(mapper.readTree(responseFromFile), mapper.readTree(responseFromRequest));
     }
 
     @Test
     public void ControllerWithoutFirstNameTest() throws Exception{
         ObjectMapper mapper = new ObjectMapper();
-        String pathRequest = "rest/PremiumRequestWithoutFirstName.json";
-        String pathResponse = "rest/PremiumResponseWithoutFirstName.json";
+        String pathRequest = "rest/PremiumWithoutFirstNameRequest.json";
+        String pathResponse = "rest/PremiumWithoutFirstNameResponse.json";
         String responseFromRequest = getResponseFromRequest(pathRequest);
         String responseFromFile = jsonFileReader.readJsonFile(pathResponse);
         assertEquals(mapper.readTree(responseFromFile), mapper.readTree(responseFromRequest));
@@ -53,8 +63,8 @@ public class TravelCalculatePremiumControllerTest {
     @Test
     public void ControllerWithoutLastNameTest() throws Exception{
         ObjectMapper mapper = new ObjectMapper();
-        String pathRequest = "rest/PremiumRequestWithoutLastName.json";
-        String pathResponse = "rest/PremiumResponseWithoutLastName.json";
+        String pathRequest = "rest/PremiumWithoutLastNameRequest.json";
+        String pathResponse = "rest/PremiumWithoutLastNameResponse.json";
         String responseFromRequest = getResponseFromRequest(pathRequest);
         String responseFromFile = jsonFileReader.readJsonFile(pathResponse);
         assertEquals(mapper.readTree(responseFromFile), mapper.readTree(responseFromRequest));
@@ -62,8 +72,26 @@ public class TravelCalculatePremiumControllerTest {
     @Test
     public void ControllerWithoutDateFromAndDateToTest() throws Exception{
         ObjectMapper mapper = new ObjectMapper();
-        String pathRequest = "rest/PremiumRequestWithoutDateFromAndDateTo.json";
-        String pathResponse = "rest/PremiumResponseWithoutDateFromAndDateTo.json";
+        String pathRequest = "rest/PremiumWithoutDateFromAndDateToRequest.json";
+        String pathResponse = "rest/PremiumWithoutDateFromAndDateToResponse.json";
+        String responseFromRequest = getResponseFromRequest(pathRequest);
+        String responseFromFile = jsonFileReader.readJsonFile(pathResponse);
+        assertEquals(mapper.readTree(responseFromFile), mapper.readTree(responseFromRequest));
+    }
+    @Test
+    public void ControllerWithoutRisksTest() throws Exception{
+        ObjectMapper mapper = new ObjectMapper();
+        String pathRequest = "rest/PremiumWithoutRisksRequest.json";
+        String pathResponse = "rest/PremiumWithoutRisksResponse.json";
+        String responseFromRequest = getResponseFromRequest(pathRequest);
+        String responseFromFile = jsonFileReader.readJsonFile(pathResponse);
+        assertEquals(mapper.readTree(responseFromFile), mapper.readTree(responseFromRequest));
+    }
+    @Test
+    public void ControllerWithNullRisksTest() throws Exception{
+        ObjectMapper mapper = new ObjectMapper();
+        String pathRequest = "rest/PremiumWithNullRisksRequest.json";
+        String pathResponse = "rest/PremiumWithNullRisksResponse.json";
         String responseFromRequest = getResponseFromRequest(pathRequest);
         String responseFromFile = jsonFileReader.readJsonFile(pathResponse);
         assertEquals(mapper.readTree(responseFromFile), mapper.readTree(responseFromRequest));

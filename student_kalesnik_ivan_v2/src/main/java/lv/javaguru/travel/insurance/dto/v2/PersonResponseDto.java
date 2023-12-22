@@ -3,10 +3,7 @@ package lv.javaguru.travel.insurance.dto.v2;
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import lv.javaguru.travel.insurance.dto.RiskPremium;
 import lv.javaguru.travel.insurance.dto.util.BigDecimalSerializer;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -19,6 +16,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class PersonResponseDto {
 
     private String personFirstName;

@@ -15,10 +15,16 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
-class TravelCalculatePremiumRequestValidatorImplTest {
+class TravelCalculatePremiumRequestValidatorTest {
     @Mock private TravelRequestValidation validationObject;
     @Mock private  TravelCalculatePremiumRequest request;
     @InjectMocks private TravelCalculatePremiumRequestValidatorImpl validator;
+    @Test
+    public void injectedRepositoryAreNotNull() {
+        assertNotNull(validationObject);
+        assertNotNull(request);
+        assertNotNull(validator);
+    }
     @Test
     void validateTestNotEmptyList() {
         when(validationObject.validate(request)).thenReturn(Optional.empty());

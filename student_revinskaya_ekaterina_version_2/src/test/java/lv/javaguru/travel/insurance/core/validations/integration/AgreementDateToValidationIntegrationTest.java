@@ -44,7 +44,7 @@ public class AgreementDateToValidationIntegrationTest {
                         .withLastName("Pupkin")
                         .withBirthDate(createDate("01.01.2000"))
                         .withMedicalRiskLimitLevel("LEVEL_10000")
-                        .withPersonalCode(657758L)
+                        .withPersonalCode("657758")
                 ).build();
         List<ValidationErrorDTO> errors = validator.validate(agreement);
         assertEquals(errors.size(), 1);
@@ -64,7 +64,7 @@ public class AgreementDateToValidationIntegrationTest {
                         .withLastName("Pupkin")
                         .withBirthDate(createDate("01.01.2000"))
                         .withMedicalRiskLimitLevel("LEVEL_10000")
-                        .withPersonalCode(7578585L)
+                        .withPersonalCode("7578585")
                 ).build();
         List<ValidationErrorDTO> errors = validator.validate(agreement);
         assertEquals(errors.size(), 2);

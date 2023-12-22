@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.UUID;
 
 @Entity
 @Table(name = "agreements")
@@ -31,6 +32,8 @@ public class AgreementEntity {
 
     @Column(name = "premium", nullable = false)
     private BigDecimal agreementPremium;
+    @Column(name = "uuid", nullable = false)
+    private String uuid;
 
 }
 
