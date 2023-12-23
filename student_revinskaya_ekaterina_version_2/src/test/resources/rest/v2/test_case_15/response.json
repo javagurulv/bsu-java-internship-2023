@@ -4,10 +4,5 @@
       "errorCode": "ERROR_CODE_1",
       "description": "person which personal code is 1212121: Field personFirstName is empty!"
     }
-  ],
-  "agreementDateFrom": null,
-  "agreementDateTo": null,
-  "country": null,
-  "agreementPremium": null,
-  "persons": null
+  ]
 }

@@ -8,10 +8,5 @@
       "errorCode": "ERROR_CODE_12",
       "description": "person which personal code is 54546444: Field birthday is empty!"
     }
-  ],
-  "agreementDateFrom": null,
-  "agreementDateTo": null,
-  "country": null,
-  "agreementPremium": null,
-  "persons": null
+  ]
 }
