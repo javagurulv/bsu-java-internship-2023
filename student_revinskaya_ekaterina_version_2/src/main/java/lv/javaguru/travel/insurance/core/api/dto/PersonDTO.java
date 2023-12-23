@@ -1,9 +1,6 @@
 package lv.javaguru.travel.insurance.core.api.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import lv.javaguru.travel.insurance.core.domain.MedicalRiskLimitLevel;
 
 import java.util.Date;
@@ -11,6 +8,7 @@ import java.util.List;
 
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class PersonDTO {

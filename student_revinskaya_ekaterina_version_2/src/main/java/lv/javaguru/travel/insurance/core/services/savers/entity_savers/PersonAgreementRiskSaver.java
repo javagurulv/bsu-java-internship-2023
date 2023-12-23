@@ -2,9 +2,9 @@ package lv.javaguru.travel.insurance.core.services.savers.entity_savers;
 
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.api.dto.RiskDTO;
-import lv.javaguru.travel.insurance.core.domain.PersonAgreement;
-import lv.javaguru.travel.insurance.core.domain.PersonAgreementRisk;
-import lv.javaguru.travel.insurance.core.repositories.PersonAgreementRiskRepository;
+import lv.javaguru.travel.insurance.core.domain.entity.PersonAgreement;
+import lv.javaguru.travel.insurance.core.domain.entity.PersonAgreementRisk;
+import lv.javaguru.travel.insurance.core.repositories.entity.PersonAgreementRiskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

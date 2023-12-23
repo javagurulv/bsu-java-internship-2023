@@ -6,7 +6,7 @@ import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import lv.javaguru.travel.insurance.core.services.calculators.CalculatorForTotalAgreementPremium;
 import lv.javaguru.travel.insurance.core.services.calculators.CalculatorRiskPremiumsForAllPersons;
-import lv.javaguru.travel.insurance.core.services.savers.AgreementSaver;
+import lv.javaguru.travel.insurance.core.services.savers.PremiumSaver;
 import lv.javaguru.travel.insurance.core.validations.TravelAgreementValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -24,7 +24,7 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
     @Autowired
     private CalculatorRiskPremiumsForAllPersons calculatorRiskPremiumsForAllPersons;
     @Autowired
-    private AgreementSaver agreementSaver;
+    private PremiumSaver premiumSaver;
 
     @Override
     public TravelCalculatePremiumCoreResult calculatePremium(TravelCalculatePremiumCoreCommand command) {
@@ -44,7 +44,7 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
         calculatorRiskPremiumsForAllPersons.calculate(agreement);
         BigDecimal totalAgreementPremium = calculatorForTotalAgreementPremium.calculate(agreement);
         agreement.setAgreementPremium(totalAgreementPremium);
-        agreementSaver.saveAgreements(agreement);
+        premiumSaver.savePremiums(agreement);
         TravelCalculatePremiumCoreResult coreResult = new TravelCalculatePremiumCoreResult();
         coreResult.setAgreement(agreement);
         return coreResult;
