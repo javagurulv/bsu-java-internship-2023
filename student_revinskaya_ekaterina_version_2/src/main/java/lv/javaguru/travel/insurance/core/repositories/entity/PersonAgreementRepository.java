@@ -1,8 +1,8 @@
-package lv.javaguru.travel.insurance.core.repositories;
+package lv.javaguru.travel.insurance.core.repositories.entity;
 
-import lv.javaguru.travel.insurance.core.domain.Agreement;
-import lv.javaguru.travel.insurance.core.domain.Person;
-import lv.javaguru.travel.insurance.core.domain.PersonAgreement;
+import lv.javaguru.travel.insurance.core.domain.entity.Agreement;
+import lv.javaguru.travel.insurance.core.domain.entity.Person;
+import lv.javaguru.travel.insurance.core.domain.entity.PersonAgreement;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
