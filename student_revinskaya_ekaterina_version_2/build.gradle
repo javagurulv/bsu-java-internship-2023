@@ -2,6 +2,8 @@ plugins {
 	id 'org.springframework.boot' version "2.7.5"
 }
 dependencies {
+	implementation ('org.springdoc:springdoc-openapi-ui:1.6.4')
+
 	implementation('mysql:mysql-connector-java:8.0.22')
 	implementation('org.hibernate:hibernate-core:5.4.25.Final')
 	implementation ('org.liquibase:liquibase-core:4.2.2')

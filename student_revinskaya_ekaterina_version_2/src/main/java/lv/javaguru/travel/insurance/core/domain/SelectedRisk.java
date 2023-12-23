@@ -15,7 +15,7 @@ public class SelectedRisk {
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne//несколько рисков к одному agreement
+    @ManyToOne
     @JoinColumn(name = "agreement_id", nullable = false)
     private Agreement agreementId;
     @Column(name = "risk_ic", nullable = false)
