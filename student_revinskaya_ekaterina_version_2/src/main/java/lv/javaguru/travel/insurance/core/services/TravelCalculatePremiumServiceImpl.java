@@ -10,10 +10,11 @@ import lv.javaguru.travel.insurance.core.services.savers.AgreementSaver;
 import lv.javaguru.travel.insurance.core.validations.TravelAgreementValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.List;
-
+@Transactional
 @Component
 class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService {
     @Autowired

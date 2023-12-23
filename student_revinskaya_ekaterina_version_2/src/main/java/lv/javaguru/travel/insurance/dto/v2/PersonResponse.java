@@ -24,6 +24,7 @@ public class PersonResponse {
     private String personFirstName;
     @JsonAlias("person_last_name")
     private String personLastName;
+    @JsonAlias("personBirthDate")
     @JsonFormat(pattern = "yyyy-MM-dd")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthday;

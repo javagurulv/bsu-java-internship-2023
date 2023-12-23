@@ -19,9 +19,9 @@ public class PersonRequest {
     private String personFirstName;
     @JsonAlias("person_last_name")
     private String personLastName;
+    @JsonAlias("personBirthDate")
     @JsonFormat(pattern = "yyyy-MM-dd")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @JsonAlias("personBirthDate")
     private Date birthday;
     @JsonAlias("personal_code")
     private String personalCode;
