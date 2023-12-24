@@ -1,11 +1,9 @@
 package lv.javaguru.travel.insurance.core.services.savers.entity_savers;
 
-import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
-import lv.javaguru.travel.insurance.core.domain.Person;
-import lv.javaguru.travel.insurance.core.repositories.PersonRepository;
+import lv.javaguru.travel.insurance.core.domain.entity.Person;
+import lv.javaguru.travel.insurance.core.repositories.entity.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;

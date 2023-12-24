@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.core.domain;
+package lv.javaguru.travel.insurance.core.domain.entity;
 
 import lombok.Getter;
 import lombok.Setter;

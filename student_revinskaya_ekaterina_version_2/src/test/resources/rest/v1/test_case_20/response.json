@@ -32,15 +32,5 @@
       "errorCode": "ERROR_CODE_2",
       "description": "person which personal code is missing: Field personLastName is empty!"
     }
-  ],
-  "personFirstName": null,
-  "personLastName": null,
-  "agreementDateFrom": null,
-  "agreementDateTo": null,
-  "country": null,
-  "birthday": null,
-  "medicalRiskLimitLevel": null,
-  "personalCode": null,
-  "agreementPremium": null,
-  "risks": null
+  ]
 }

@@ -1,10 +1,9 @@
-package lv.javaguru.travel.insurance.core.domain;
+package lv.javaguru.travel.insurance.core.domain.entity;
 
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 
 @Entity
 @Table(name = "selected_risks")
@@ -15,7 +14,7 @@ public class SelectedRisk {
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne//несколько рисков к одному agreement
+    @ManyToOne
     @JoinColumn(name = "agreement_id", nullable = false)
     private Agreement agreementId;
     @Column(name = "risk_ic", nullable = false)
