@@ -16,6 +16,8 @@ public class Agreement {
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "uuid", nullable = false)
+    private String uuid;
     @Column(name = "date_from", nullable = false)
     private Date dateFrom;
     @Column(name = "date_to", nullable = false)

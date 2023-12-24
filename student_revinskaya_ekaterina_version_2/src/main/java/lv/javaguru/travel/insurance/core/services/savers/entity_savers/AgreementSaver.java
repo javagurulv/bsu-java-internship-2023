@@ -6,6 +6,8 @@ import lv.javaguru.travel.insurance.core.repositories.entity.AgreementRepository
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.UUID;
+
 @Component
 public class AgreementSaver {
     @Autowired
@@ -21,10 +23,15 @@ public class AgreementSaver {
 
     private Agreement convertToAgreement(AgreementDTO agreementDTO) {
         Agreement agreement = new Agreement();
+        agreement.setUuid(createUuid());
         agreement.setDateFrom(agreementDTO.getAgreementDateFrom());
         agreement.setDateTo(agreementDTO.getAgreementDateTo());
         agreement.setCountry(agreementDTO.getCountry());
         agreement.setPremium(agreementDTO.getAgreementPremium());
         return agreement;
+    }
+    private String createUuid(){
+        UUID uuid = UUID.randomUUID();
+        return uuid.toString();
     }
 }

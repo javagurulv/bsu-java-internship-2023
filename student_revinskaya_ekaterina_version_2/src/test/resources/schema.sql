@@ -69,12 +69,16 @@ ON persons (personal_code);
 create table if not exists agreements
 (
 id bigint not null auto_increment,
+uuid varchar(36) not null,
 date_from timestamp not null,
 date_to timestamp not null,
 country varchar(200) not null,
 premium decimal(10,2) not null,
 primary key(id)
 );
+
+CREATE UNIQUE INDEX if not exists ix_agreements_uuid
+ON agreements(uuid);
 
 create table if not exists selected_risks
 (
