@@ -26,6 +26,7 @@ public class PremiumSaver {
 
     public void savePremiums(AgreementDTO agreementDTO) {
         Agreement agreement = agreementSaver.saveAgreementEntity(agreementDTO);
+        agreementDTO.setUuid(agreement.getUuid());
         agreementDTO.getPersons()
                 .forEach(personDTO -> savePersonAndPersonAgreement(personDTO, agreement));
         selectedRiskSaver.saveRisks(agreementDTO, agreement);

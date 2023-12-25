@@ -15,9 +15,9 @@ public class AgreementSaver {
 
     public Agreement saveAgreementEntity(AgreementDTO agreementDTO){
         Agreement agreement = convertToAgreement(agreementDTO);
-        return saveAgreementEntity(agreement);
+        return saveAgreement(agreement);
     }
-    private Agreement saveAgreementEntity(Agreement agreement) {
+    private Agreement saveAgreement(Agreement agreement) {
         return agreementRepository.save(agreement);
     }
 

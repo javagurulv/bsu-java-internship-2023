@@ -1,6 +1,7 @@
 package lv.javaguru.travel.insurance.dto.v1;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.AllArgsConstructor;
@@ -23,7 +24,7 @@ import java.util.List;
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class TravelCalculatePremiumResponseV1 extends CoreResponse {
-
+    private String uuid;
     private String personFirstName;
     private String personLastName;
     @JsonFormat(pattern = "yyyy-MM-dd")

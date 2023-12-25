@@ -40,13 +40,13 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
         return new TravelCalculatePremiumCoreResult(errors);
     }
 
-    private TravelCalculatePremiumCoreResult buildSuccessResponse(AgreementDTO agreement) {
-        calculatorRiskPremiumsForAllPersons.calculate(agreement);
-        BigDecimal totalAgreementPremium = calculatorForTotalAgreementPremium.calculate(agreement);
-        agreement.setAgreementPremium(totalAgreementPremium);
-        premiumSaver.savePremiums(agreement);
+    private TravelCalculatePremiumCoreResult buildSuccessResponse(AgreementDTO agreementDTO) {
+        calculatorRiskPremiumsForAllPersons.calculate(agreementDTO);
+        BigDecimal totalAgreementPremium = calculatorForTotalAgreementPremium.calculate(agreementDTO);
+        agreementDTO.setAgreementPremium(totalAgreementPremium);
+        premiumSaver.savePremiums(agreementDTO);
         TravelCalculatePremiumCoreResult coreResult = new TravelCalculatePremiumCoreResult();
-        coreResult.setAgreement(agreement);
+        coreResult.setAgreement(agreementDTO);
         return coreResult;
     }
 

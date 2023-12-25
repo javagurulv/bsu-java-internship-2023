@@ -64,6 +64,7 @@ public class DtoV1Converter {
     private TravelCalculatePremiumResponseV1 successResponseV1FromFromCoreResult
             (TravelCalculatePremiumCoreResult result) {
         TravelCalculatePremiumResponseV1 responseV1 = new TravelCalculatePremiumResponseV1();
+        responseV1.setUuid(result.getAgreement().getUuid());
         responseV1.setPersonFirstName(result.getAgreement().getPersons().get(0).getPersonFirstName());
         responseV1.setPersonLastName(result.getAgreement().getPersons().get(0).getPersonLastName());
         responseV1.setBirthday(result.getAgreement().getPersons().get(0).getPersonBirthDate());
