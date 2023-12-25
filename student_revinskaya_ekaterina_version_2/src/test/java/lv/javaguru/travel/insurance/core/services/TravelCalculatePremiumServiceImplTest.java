@@ -5,7 +5,7 @@ import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import lv.javaguru.travel.insurance.core.services.calculators.CalculatorForTotalAgreementPremium;
 import lv.javaguru.travel.insurance.core.services.calculators.CalculatorRiskPremiumsForAllPersons;
-import lv.javaguru.travel.insurance.core.services.savers.PremiumSaver;
+import lv.javaguru.travel.insurance.core.services.savers.PolicySaver;
 import lv.javaguru.travel.insurance.core.validations.TravelAgreementValidator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -25,7 +25,7 @@ public class TravelCalculatePremiumServiceImplTest {
     @InjectMocks
     private TravelCalculatePremiumServiceImpl travelCalculatePremiumService;
     @Mock
-    private PremiumSaver premiumSaver;
+    private PolicySaver policySaver;
     @Mock
     private TravelAgreementValidator agreementValidator;
     @Mock
@@ -36,7 +36,7 @@ public class TravelCalculatePremiumServiceImplTest {
     public void calculatePremiumResultWithoutErrorsTest() {
         AgreementDTO agreementDTO = new AgreementDTO();
         when(calculatorForTotalAgreementPremium.calculate(agreementDTO)).thenReturn(BigDecimal.valueOf(12));
-        Mockito.doNothing().when(premiumSaver).savePremiums(agreementDTO);
+        Mockito.doNothing().when(policySaver).savePolicy(agreementDTO);
         Mockito.doNothing().when(calculatorRiskPremiumsForAllPersons).calculate(agreementDTO);
         assertEquals(travelCalculatePremiumService
                 .calculatePremium(new TravelCalculatePremiumCoreCommand(agreementDTO)).getAgreement(), agreementDTO);

@@ -5,13 +5,12 @@ import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.domain.entity.Agreement;
 import lv.javaguru.travel.insurance.core.domain.entity.Person;
 import lv.javaguru.travel.insurance.core.domain.entity.PersonAgreement;
-import lv.javaguru.travel.insurance.core.repositories.entity.AgreementRepository;
 import lv.javaguru.travel.insurance.core.services.savers.entity_savers.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class PremiumSaver {
+public class PolicySaver {
     @Autowired
     AgreementSaver agreementSaver;
     @Autowired
@@ -24,7 +23,7 @@ public class PremiumSaver {
     PersonAgreementRiskSaver personAgreementRiskSaver;
 
 
-    public void savePremiums(AgreementDTO agreementDTO) {
+    public void savePolicy(AgreementDTO agreementDTO) {
         Agreement agreement = agreementSaver.saveAgreementEntity(agreementDTO);
         agreementDTO.setUuid(agreement.getUuid());
         agreementDTO.getPersons()
