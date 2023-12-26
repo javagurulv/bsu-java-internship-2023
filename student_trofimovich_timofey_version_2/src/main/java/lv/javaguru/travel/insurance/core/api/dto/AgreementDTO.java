@@ -23,7 +23,7 @@ public class AgreementDTO {
 
     private String medicalRiskLimitLevel;
 
-    private List<RiskDTO> selectedRisks;
+    private List<String> selectedRisks;
 
     private List<PersonDTO> persons;
 
