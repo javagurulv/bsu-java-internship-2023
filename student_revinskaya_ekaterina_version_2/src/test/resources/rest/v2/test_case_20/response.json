@@ -4,10 +4,5 @@
       "errorCode": "ERROR_CODE_13",
       "description": "person which personal code is 1434333: Field birthday must not future date!"
     }
-  ],
-  "agreementDateFrom": null,
-  "agreementDateTo": null,
-  "country": null,
-  "agreementPremium": null,
-  "persons": null
+  ]
 }

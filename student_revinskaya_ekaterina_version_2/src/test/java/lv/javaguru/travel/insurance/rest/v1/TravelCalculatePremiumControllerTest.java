@@ -18,6 +18,7 @@ import java.nio.file.Files;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static uk.org.webcompere.modelassert.json.JsonAssertions.assertJson;
+import static uk.org.webcompere.modelassert.json.Patterns.GUID_PATTERN;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -29,6 +30,8 @@ public abstract class TravelCalculatePremiumControllerTest {
 
     private static final String BASE_URL = "/insurance/travel/api/v1/";
     protected abstract String getTestCaseName();
+
+    protected abstract boolean uuidIsPresent();
     @Test
     public void testRequest() throws Exception {
         equalsJsonFiles("rest/v1/" +getTestCaseName() + "/request.json", "rest/v1/" +getTestCaseName() + "/response.json");
@@ -42,11 +45,20 @@ public abstract class TravelCalculatePremiumControllerTest {
                 .andExpect(status().isOk())
                 .andReturn().getResponse().getContentAsString();
 
-        assertJson(mapper.readTree(response))
-                .where()
-                .keysInAnyOrder()
-                .arrayInAnyOrder()
-                .isEqualTo(parseJSONIntoString(responseFile));
+        if (uuidIsPresent()) {
+            assertJson(mapper.readTree(response))
+                    .where()
+                    .path("uuid").matches("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
+                    .keysInAnyOrder()
+                    .arrayInAnyOrder()
+                    .isEqualTo(parseJSONIntoString(responseFile));
+        } else {
+            assertJson(mapper.readTree(response))
+                    .where()
+                    .keysInAnyOrder()
+                    .arrayInAnyOrder()
+                    .isEqualTo(parseJSONIntoString(responseFile));
+        }
     }
 
     private String parseJSONIntoString(String filePath) {

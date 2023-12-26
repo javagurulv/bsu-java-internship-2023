@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
+
+
+    <changeSet id="3" author="Timofey">
+        <createTable tableName="classifier_values">
+            <column name="id"
+                    type="bigint"
+                    autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="classifier_id" type="bigint">
+
+                <constraints nullable="false"/>
+            </column>
+            <column name="ic" type="varchar(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="varchar(500)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="4" author="Timofey">
+        <addForeignKeyConstraint baseTableName="classifier_values"
+                                 baseColumnNames="classifier_id"
+                                 constraintName="fk_classifier_values_classifier_id"
+                                 referencedTableName="classifiers"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+
+    <changeSet id="5" author="Timofey">
+        <createIndex tableName="classifier_values"
+                     indexName="ix_classifier_values_ic"
+                     unique="true">
+            <column name="ic"/>
+        </createIndex>
+    </changeSet>
+</databaseChangeLog>

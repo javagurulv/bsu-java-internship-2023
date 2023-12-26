@@ -4,15 +4,5 @@
       "errorCode": "ERROR_CODE_8",
       "description": "Field selected_risks must not be empty!"
     }
-  ],
-  "personFirstName": null,
-  "personLastName": null,
-  "agreementDateFrom": null,
-  "agreementDateTo": null,
-  "country": null,
-  "personalCode": null,
-  "birthday": null,
-  "medicalRiskLimitLevel": null,
-  "agreementPremium": null,
-  "risks": null
+  ]
 }

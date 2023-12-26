@@ -115,3 +115,11 @@ CREATE UNIQUE INDEX ix_agreement_person_risks_agreement_person_id_risk_ic
     ON polis_risks(polis_id, risk_ic);
 
 ALTER TABLE agreements ADD uuid VARCHAR(255) NOT NULL;
+
+CREATE TABLE IF NOT EXISTS travel_cost_coefficient (
+                                                       id BIGINT NOT NULL AUTO_INCREMENT,
+                                                       travel_cost_from DECIMAL(10,2) NOT NULL,
+                                                       travel_cost_to DECIMAL(10,2) NOT NULL,
+                                                       coefficient DECIMAL(10,2) NOT NULL,
+                                                       PRIMARY KEY (id)
+);

@@ -39,6 +39,7 @@ public class DtoV2Converter {
     private TravelCalculatePremiumResponseV2 successResponseV2FromFromCoreResult
             (TravelCalculatePremiumCoreResult result) {
         TravelCalculatePremiumResponseV2 responseV2 = new TravelCalculatePremiumResponseV2();
+        responseV2.setUuid(result.getAgreement().getUuid());
         responseV2.setPersons(listPersonResponseFromPersonDTO(result.getAgreement().getPersons()));
 
         responseV2.setAgreementPremium(result.getAgreement().getAgreementPremium());

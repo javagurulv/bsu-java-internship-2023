@@ -16,8 +16,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import static lv.javaguru.travel.insurance.core.api.dto.builders.AgreementDTOBuilder.createAgreement;
-import static lv.javaguru.travel.insurance.core.api.dto.builders.PersonDTOBuilder.createPersonDTO;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
@@ -32,11 +30,11 @@ public class ListPersonsValidationIntegrationTest {
 
     @Test
     public void shouldReturnErrorWhenListPersonsIsNull() {
-        AgreementDTO agreement = createAgreement()
-                .withDateFrom(createDate("01.01.2030"))
-                .withDateTo(createDate("07.01.2030"))
-                .withCountry("SPAIN")
-                .withSelectedRisk("TRAVEL_MEDICAL")
+        AgreementDTO agreement = AgreementDTO.builder()
+                .agreementDateFrom(createDate("01.01.2030"))
+                .agreementDateTo(createDate("07.01.2030"))
+                .country("SPAIN")
+                .selectedRisks(List.of("TRAVEL_MEDICAL"))
                 .build();
         List<ValidationErrorDTO> errors = validator.validate(agreement);
         assertEquals(errors.size(), 1);

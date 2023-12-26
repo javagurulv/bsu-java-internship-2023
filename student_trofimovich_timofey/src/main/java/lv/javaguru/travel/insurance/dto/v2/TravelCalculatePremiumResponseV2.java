@@ -3,7 +3,7 @@ package lv.javaguru.travel.insurance.dto.v2;
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import lv.javaguru.travel.insurance.core.util.BigDecimalSerializer;
+import lv.javaguru.travel.insurance.dto.util.BigDecimalSerializer;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;

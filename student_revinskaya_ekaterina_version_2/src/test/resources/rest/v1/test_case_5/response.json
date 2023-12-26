@@ -4,15 +4,5 @@
       "errorCode": "ERROR_CODE_3",
       "description": "Field agreementDateFrom is empty!"
     }
-  ],
-  "personFirstName": null,
-  "personLastName": null,
-  "agreementDateFrom": null,
-  "agreementDateTo": null,
-  "country": null,
-  "birthday": null,
-  "personalCode": null,
-  "medicalRiskLimitLevel": null,
-  "agreementPremium": null,
-  "risks": null
+  ]
 }

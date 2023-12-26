@@ -69,12 +69,16 @@ ON persons (personal_code);
 create table if not exists agreements
 (
 id bigint not null auto_increment,
+uuid varchar(36) not null,
 date_from timestamp not null,
 date_to timestamp not null,
 country varchar(200) not null,
 premium decimal(10,2) not null,
 primary key(id)
 );
+
+CREATE UNIQUE INDEX if not exists ix_agreements_uuid
+ON agreements(uuid);
 
 create table if not exists selected_risks
 (
@@ -106,3 +110,17 @@ ADD FOREIGN KEY (agreement_id) REFERENCES agreements(id);
 
 CREATE UNIQUE INDEX if not exists ix_person_id_agreement_id
 ON person_agreements(person_id, agreement_id);
+
+create table if not exists person_agreement_risks
+(
+id bigint not null auto_increment,
+person_agreement_id bigint not null ,
+risk_ic varchar(200) not null,
+premium decimal(10,2) not null,
+primary key(id)
+);
+ALTER TABLE person_agreement_risks
+ADD FOREIGN KEY (person_agreement_id) REFERENCES person_agreements(id);
+
+CREATE UNIQUE INDEX if not exists ix_person_agreement_id_risk_ic
+ON person_agreement_risks(person_agreement_id, risk_ic);
