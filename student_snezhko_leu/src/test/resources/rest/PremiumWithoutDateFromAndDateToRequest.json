@@ -3,10 +3,8 @@
   "personLastName" : "Pupkin",
   "agreementDateFrom" : "",
   "agreementDateTo" : "",
-  "risks" : [
-    {
-      "name" : "Medical expensive",
-      "cost" : 1
-    }
+  "selected_risks" :
+  [
+    "MEDICAL RISK"
   ]
 }

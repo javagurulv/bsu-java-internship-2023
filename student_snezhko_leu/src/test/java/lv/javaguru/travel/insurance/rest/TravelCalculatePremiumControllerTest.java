@@ -23,12 +23,14 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static uk.org.webcompere.modelassert.json.JsonAssertions.assertJson;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @AutoConfigureMockMvc
 public class TravelCalculatePremiumControllerTest {
     @Autowired private MockMvc mockMvc;
+ //   ModelAssert assert;
     @Autowired private JsonFileReader jsonFileReader; //= new JsonFileReader();
     //    private MockMvc mockMvc;
 /*
@@ -47,8 +49,13 @@ public class TravelCalculatePremiumControllerTest {
 
         String responseFromRequest = getResponseFromRequest(pathRequest);
         String responseFromFile = jsonFileReader.readJsonFile("rest/TravelCalculatePremiumResponse.json");
+        assertJson(responseFromRequest)
+                .where()
+                .keysInAnyOrder()
+                .arrayInAnyOrder()
+                .isEqualTo(responseFromFile);
         //when(underwriting.calculatePremium(TravelCalculatePremiumResponse.class)).thenReturn()
-        assertEquals(mapper.readTree(responseFromFile), mapper.readTree(responseFromRequest));
+        //assertEquals(mapper.readTree(responseFromFile), mapper.readTree(responseFromRequest));
     }
 
     @Test
@@ -58,7 +65,12 @@ public class TravelCalculatePremiumControllerTest {
         String pathResponse = "rest/PremiumWithoutFirstNameResponse.json";
         String responseFromRequest = getResponseFromRequest(pathRequest);
         String responseFromFile = jsonFileReader.readJsonFile(pathResponse);
-        assertEquals(mapper.readTree(responseFromFile), mapper.readTree(responseFromRequest));
+        assertJson(responseFromRequest)
+                .where()
+                .keysInAnyOrder()
+                .arrayInAnyOrder()
+                .isEqualTo(responseFromFile);
+        //assertEquals(mapper.readTree(responseFromFile), mapper.readTree(responseFromRequest));
     }
     @Test
     public void ControllerWithoutLastNameTest() throws Exception{
@@ -67,7 +79,12 @@ public class TravelCalculatePremiumControllerTest {
         String pathResponse = "rest/PremiumWithoutLastNameResponse.json";
         String responseFromRequest = getResponseFromRequest(pathRequest);
         String responseFromFile = jsonFileReader.readJsonFile(pathResponse);
-        assertEquals(mapper.readTree(responseFromFile), mapper.readTree(responseFromRequest));
+        assertJson(responseFromRequest)
+                .where()
+                .keysInAnyOrder()
+                .arrayInAnyOrder()
+                .isEqualTo(responseFromFile);
+        //assertEquals(mapper.readTree(responseFromFile), mapper.readTree(responseFromRequest));
     }
     @Test
     public void ControllerWithoutDateFromAndDateToTest() throws Exception{
@@ -76,7 +93,12 @@ public class TravelCalculatePremiumControllerTest {
         String pathResponse = "rest/PremiumWithoutDateFromAndDateToResponse.json";
         String responseFromRequest = getResponseFromRequest(pathRequest);
         String responseFromFile = jsonFileReader.readJsonFile(pathResponse);
-        assertEquals(mapper.readTree(responseFromFile), mapper.readTree(responseFromRequest));
+        assertJson(responseFromRequest)
+                .where()
+                .keysInAnyOrder()
+                .arrayInAnyOrder()
+                .isEqualTo(responseFromFile);
+        //assertEquals(mapper.readTree(responseFromFile), mapper.readTree(responseFromRequest));
     }
     @Test
     public void ControllerWithoutRisksTest() throws Exception{
@@ -85,7 +107,12 @@ public class TravelCalculatePremiumControllerTest {
         String pathResponse = "rest/PremiumWithoutRisksResponse.json";
         String responseFromRequest = getResponseFromRequest(pathRequest);
         String responseFromFile = jsonFileReader.readJsonFile(pathResponse);
-        assertEquals(mapper.readTree(responseFromFile), mapper.readTree(responseFromRequest));
+        assertJson(responseFromRequest)
+                .where()
+                .keysInAnyOrder()
+                .arrayInAnyOrder()
+                .isEqualTo(responseFromFile);
+        //assertEquals(mapper.readTree(responseFromFile), mapper.readTree(responseFromRequest));
     }
     @Test
     public void ControllerWithNullRisksTest() throws Exception{
@@ -94,7 +121,12 @@ public class TravelCalculatePremiumControllerTest {
         String pathResponse = "rest/PremiumWithNullRisksResponse.json";
         String responseFromRequest = getResponseFromRequest(pathRequest);
         String responseFromFile = jsonFileReader.readJsonFile(pathResponse);
-        assertEquals(mapper.readTree(responseFromFile), mapper.readTree(responseFromRequest));
+        assertJson(responseFromRequest)
+                .where()
+                .keysInAnyOrder()
+                .arrayInAnyOrder()
+                .isEqualTo(responseFromFile);
+        //assertEquals(mapper.readTree(responseFromFile), mapper.readTree(responseFromRequest));
     }
     private String getResponseFromRequest(String pathRequest) throws Exception{
         MvcResult result = mockMvc.perform(

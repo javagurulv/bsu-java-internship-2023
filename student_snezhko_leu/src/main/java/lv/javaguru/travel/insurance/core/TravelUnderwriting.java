@@ -17,13 +17,13 @@ import static lv.javaguru.travel.insurance.rest.DateService.findDiffBetweenTwoDa
 //@AllArgsConstructor
 public class TravelUnderwriting {
     public BigDecimal calculatePremium(TravelCalculatePremiumResponse response) {
-        return BigDecimal.valueOf(
+        /*return BigDecimal.valueOf(
                 response.getRisks().stream()
                         .mapToLong(risk -> risk.getCost())
                         .sum()
         );
+*/
 
-
-//        return findDiffBetweenTwoDate(response.getAgreementDateTo(), response.getAgreementDateFrom());
+        return findDiffBetweenTwoDate(response.getAgreementDateTo(), response.getAgreementDateFrom());
     }
 }

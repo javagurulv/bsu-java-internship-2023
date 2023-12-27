@@ -18,5 +18,6 @@ public class TravelCalculatePremiumRequest {
     private Date agreementDateFrom;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date agreementDateTo;
-    private List<InsurancePremiumRisk> risks;
+//    private List<InsurancePremiumRisk> risks;
+    private List<String> selected_risks;
 }

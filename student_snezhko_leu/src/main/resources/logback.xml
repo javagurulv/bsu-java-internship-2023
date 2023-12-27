@@ -1,6 +1,6 @@
 <configuration>
 
-    <property name="LOGS" value="student_snezhko_leu/logs"/>
+    <property name="LOGS" value="./logs"/>
 
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>

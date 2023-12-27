@@ -3,10 +3,7 @@
   "personLastName": "",
   "agreementDateFrom": "2026-05-25",
   "agreementDateTo": "2026-05-29",
-  "risks" : [
-    {
-      "name" : "Medical expensive",
-      "cost" : 1
-    }
+  "selected_risks" : [
+    "MEDICAL RISK"
   ]
 }

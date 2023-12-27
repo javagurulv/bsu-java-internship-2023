@@ -4,6 +4,5 @@
   "personLastName": null,
   "agreementDateFrom": null,
   "agreementDateTo": null,
-  "agreementPrice": null,
-  "risks" : null
+  "agreementPrice": null
 }
