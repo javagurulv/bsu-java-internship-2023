@@ -15,9 +15,19 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
     @Autowired private TravelCalculatePremiumRequestValidator requestValidator;
     @Autowired private DateTimeService dateTimeService;
 
+    @Autowired
+    public TravelCalculatePremiumServiceImpl(TravelCalculatePremiumRequestValidator requestValidator, DateTimeService dateTimeService) {
+        this.requestValidator = requestValidator;
+        this.dateTimeService = dateTimeService;
+    }
+
     @Override
     public TravelCalculatePremiumResponse calculatePremium(TravelCalculatePremiumRequest request) {
         List<ValidationError> errors = requestValidator.validate(request);
+        return buildResponse(request, errors);
+    }
+
+    private TravelCalculatePremiumResponse buildResponse(TravelCalculatePremiumRequest request, List<ValidationError> errors) {
         if (!errors.isEmpty()) {
             return new TravelCalculatePremiumResponse(errors);
         }
@@ -33,5 +43,4 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
 
         return response;
     }
-
 }
