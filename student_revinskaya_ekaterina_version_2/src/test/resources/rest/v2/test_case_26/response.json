@@ -1,0 +1,8 @@
+{
+  "errors": [
+    {
+      "errorCode": "ERROR_CODE_16",
+      "description": "Field list of persons mustn't be empty!!!"
+    }
+  ]
+}

@@ -3,44 +3,75 @@ package lv.javaguru.travel.insurance.core;
 
 //import lv.javaguru.travel.insurance.dto.ValidationError;
 import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.rest.TravelRequestValidation;
+import lv.javaguru.travel.insurance.rest.validation.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.math.BigDecimal;
+import java.util.*;
+
 
 @Component
 class TravelCalculatePremiumRequestValidator {
-
     public List<ValidationError> validate(TravelCalculatePremiumRequest request) {
+        List<TravelRequestValidation> validations = new ArrayList<>();
         List<ValidationError> errors = new ArrayList<>();
+        /*
         validatePersonFirstName(request).ifPresent(errors::add);
         validatePersonLastName(request).ifPresent(errors::add);
         validateAgreementDateFrom(request).ifPresent(errors::add);
         validateAgreementDateTo(request).ifPresent(errors::add);
+        */
+        validations.add(new TravelRequestFirstNameValidation());
+        validations.add(new TravelRequestLastNameValidation());
+        validations.add(new TravelRequestDateFromValidation());
+        validations.add(new TravelRequestDateToValidation());
+        validations.add(new TravelRequestWithoutRisksValidation());
+
+        validations.forEach(validation -> {
+            Optional<ValidationError> error = validation.validate(request);
+            if (!error.isEmpty()) {
+                errors.add(error.get());
+            }
+        });
         return errors;
     }
 
+    /*
     private Optional<ValidationError> validatePersonFirstName(TravelCalculatePremiumRequest request) {
         return (request.getPersonFirstName() == null || request.getPersonFirstName().isEmpty())
                 ? Optional.of(new ValidationError("personFirstName", "Must not be empty!"))
                 : Optional.empty();
     }
+     */
+    /*
     private Optional<ValidationError> validatePersonLastName(TravelCalculatePremiumRequest request) {
         return (request.getPersonLastName() == null || request.getPersonLastName().isEmpty())
                 ? Optional.of(new ValidationError("personLastName", "Must not be empty!"))
                 : Optional.empty();
     }
+    */
+    /*
     private Optional<ValidationError> validateAgreementDateFrom(TravelCalculatePremiumRequest request) {
-        return request.getAgreementDateFrom() == null
-                ? Optional.of(new ValidationError("agreementDateFrom", "Must not be null!"))
-                :Optional.empty();
+        if (request.getAgreementDateFrom() == null) {
+            return Optional.of(new ValidationError("agreementDateFrom", "Must not be null!"));
+        }
+        else if (request.getAgreementDateFrom().compareTo(new Date()) <= 0) {
+            return Optional.of(new ValidationError("agreementDateFrom", "Must not be in the past!"));
+        }
+        return Optional.empty();
     }
+    */
+    /*
     private Optional<ValidationError> validateAgreementDateTo(TravelCalculatePremiumRequest request) {
-        return (request.getAgreementDateTo() == null)
-                ? Optional.of(new ValidationError("agreementDateTo", "Must not be null!"))
-                : ((request.getAgreementDateTo().before(request.getAgreementDateFrom()))
-                ? Optional.of(new ValidationError("agreementDateTo", "Must not be before agreementDateFrom!!!"))
-                :Optional.empty());
+        if (request.getAgreementDateTo() == null) {
+            return Optional.of(new ValidationError("agreementDateTo", "Must not be null!"));
+        }
+        else if (request.getAgreementDateTo().before(request.getAgreementDateFrom())) {
+            return Optional.of(new ValidationError("agreementDateTo", "Must not be before agreementDateFrom!!!"));
+        }
+        return Optional.empty();
     }
+     */
 }

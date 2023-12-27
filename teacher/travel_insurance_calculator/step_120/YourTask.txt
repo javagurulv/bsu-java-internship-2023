@@ -1,0 +1,22 @@
+Ментор решил показать вам, как можно документировать REST API.
+
+Ментор подключил к приложению OPEN API:
+<dependency>
+    <groupId>org.springdoc</groupId>
+    <artifactId>springdoc-openapi-ui</artifactId>
+    <version>1.6.4</version>
+</dependency>
+
+Ресурс с описанием:
+https://www.baeldung.com/spring-rest-openapi-documentation
+
+
+To use a custom path, we can indicate in the application.properties file:
+springdoc.api-docs.path=/insurance/travel/api-docs
+
+
+Swagger UI link:
+http://localhost:8080/swagger-ui.html
+
+Ваша задача: ознакомиться с Swagger UI и попробовать выполнить
+через него запросы к REST API /v1 и /v2.

@@ -1,15 +1,13 @@
 package lv.javaguru.travel.insurance.core.validations;
 
-import lv.javaguru.travel.insurance.core.validations.PublicTravelCalculatePremiumRequestValidator;
-import lv.javaguru.travel.insurance.core.validations.TravelCalculatePremiumRequestValidator;
-import lv.javaguru.travel.insurance.core.validations.TravelRequestValidation;
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.test.util.ReflectionTestUtils;
 
 import java.util.*;
 
@@ -19,18 +17,49 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class TravelCalculatePremiumRequestValidatorTest {
-@InjectMocks
-TravelCalculatePremiumRequestValidator requestValidator;
+    @InjectMocks
+    private TravelCalculatePremiumRequestValidatorImpl requestValidator;
     @Mock
-    private TravelCalculatePremiumRequest request;
+    private TravelCalculatePremiumRequestV1 request;
 
     @Test
-    public void responseShouldContainErrorTest() {
-        TravelRequestValidation requestValidation1 = mock(TravelRequestValidation.class);
-        when(requestValidation1.validate(request)).thenReturn(Optional.of(new ValidationError()));
-        TravelRequestValidation requestValidation2 = mock(TravelRequestValidation.class);
-        when(requestValidation2.validate(request)).thenReturn(Optional.of(new ValidationError()));
-        requestValidator.travelRequestValidations = List.of(requestValidation1, requestValidation2);
+    public void responseShouldContainSingleErrorsTest() {
+        TravelRequestValidation requestSingleValidation = mock(TravelRequestValidation.class);
+        TravelRequestValidation requestListValidation = mock(TravelRequestValidation.class);
+        when(requestSingleValidation.validate(request)).thenReturn(Optional.of(new ValidationError()));
+        when(requestListValidation.validateList(request)).thenReturn(List.of());
+        List<TravelRequestValidation> travelValidations = List.of(
+                requestSingleValidation, requestListValidation
+        );
+        ReflectionTestUtils.setField(requestValidator, "travelRequestValidations", travelValidations);
+        List<ValidationError> errors = requestValidator.validate(request);
+        assertEquals(errors.size(), 1);
+    }
+
+    @Test
+    public void responseShouldContainListErrorsTest() {
+        TravelRequestValidation requestSingleValidation = mock(TravelRequestValidation.class);
+        TravelRequestValidation requestListValidation = mock(TravelRequestValidation.class);
+        when(requestSingleValidation.validate(request)).thenReturn(Optional.empty());
+        when(requestListValidation.validateList(request)).thenReturn(List.of(new ValidationError()));
+        List<TravelRequestValidation> travelValidations = List.of(
+                requestSingleValidation, requestListValidation
+        );
+        ReflectionTestUtils.setField(requestValidator, "travelRequestValidations", travelValidations);
+        List<ValidationError> errors = requestValidator.validate(request);
+        assertEquals(errors.size(), 1);
+    }
+
+    @Test
+    public void responseShouldContainSingleAndListErrorsTest() {
+        TravelRequestValidation requestSingleValidation = mock(TravelRequestValidation.class);
+        TravelRequestValidation requestListValidation = mock(TravelRequestValidation.class);
+        when(requestSingleValidation.validate(request)).thenReturn(Optional.of(new ValidationError()));
+        when(requestListValidation.validateList(request)).thenReturn(List.of(new ValidationError()));
+        List<TravelRequestValidation> travelValidations = List.of(
+                requestSingleValidation, requestListValidation
+        );
+        ReflectionTestUtils.setField(requestValidator, "travelRequestValidations", travelValidations);
         List<ValidationError> errors = requestValidator.validate(request);
         assertEquals(errors.size(), 2);
     }
@@ -38,11 +67,13 @@ TravelCalculatePremiumRequestValidator requestValidator;
 
     @Test
     public void responseNotContainErrorTest() {
-        TravelRequestValidation requestValidation1 = mock(TravelRequestValidation.class);
-        when(requestValidation1.validate(request)).thenReturn(Optional.empty());
-        TravelRequestValidation requestValidation2 = mock(TravelRequestValidation.class);
-        when(requestValidation2.validate(request)).thenReturn(Optional.empty());
-        requestValidator.travelRequestValidations = List.of(requestValidation1, requestValidation2);
+        TravelRequestValidation requestValidation = mock(TravelRequestValidation.class);
+        when(requestValidation.validate(request)).thenReturn(Optional.empty());
+        when(requestValidation.validateList(request)).thenReturn(List.of());
+        List<TravelRequestValidation> travelValidations = List.of(
+                requestValidation
+        );
+        ReflectionTestUtils.setField(requestValidator, "travelRequestValidations", travelValidations);
         List<ValidationError> errors = requestValidator.validate(request);
         assertEquals(errors.size(), 0);
     }

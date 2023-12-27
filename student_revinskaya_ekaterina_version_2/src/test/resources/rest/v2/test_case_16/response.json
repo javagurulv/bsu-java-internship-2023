@@ -1,0 +1,8 @@
+{
+  "errors": [
+    {
+      "errorCode": "ERROR_CODE_1",
+      "description": "person which personal code is 13131313: Field personFirstName is empty!"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+package lv.javaguru.travel.insurance.rest.internal;
+
+import lv.javaguru.travel.insurance.core.api.command.internal.TravelGetPolicyCoreCommand;
+import lv.javaguru.travel.insurance.core.api.command.internal.TravelGetPolicyCoreResult;
+import lv.javaguru.travel.insurance.core.services.TravelGetPolicyService;
+import lv.javaguru.travel.insurance.dto.internal.DTOInternalConverter;
+import lv.javaguru.travel.insurance.dto.internal.TravelGetPolicyResponse;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/insurance/travel/api/internal/agreement/{uuid}")
+class TravelGetPremiumController {
+    @Autowired
+    TravelGetPolicyService service;
+    @Autowired
+    DTOInternalConverter converter;
+
+    @GetMapping(path = "/",
+            produces = "application/json")
+    public TravelGetPolicyResponse getPolicy(@PathVariable String uuid) {
+        TravelGetPolicyCoreCommand command = new TravelGetPolicyCoreCommand(uuid);
+        TravelGetPolicyCoreResult result = service.getPolicy(command);
+        return converter.convert(result);
+    }
+}

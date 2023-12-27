@@ -1,6 +1,6 @@
 package lv.javaguru.travel.insurance.core.valids;
 
-import lv.javaguru.travel.insurance.validation.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.validation.v1.TravelCalculatePremiumRequestV1;
 import lv.javaguru.travel.insurance.validation.ValidationError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -9,13 +9,12 @@ import java.util.Date;
 import java.util.Optional;
 
 @Component
-public
-class DateAfterLessThenDateBefore implements TravelRequestValidation {
+class DateAfterLessThenDateBefore extends TravelRequestValidationImpl {
 
     @Autowired private ValidationErrorFactory errorFactory;
 
     @Override
-    public Optional<ValidationError> execute(TravelCalculatePremiumRequest request) {
+    public Optional<ValidationError> validate(TravelCalculatePremiumRequestV1 request) {
         Date dateFrom = request.getAgreementDateFrom();
         Date dateTo = request.getAgreementDateTo();
         return (dateFrom != null && dateTo != null

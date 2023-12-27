@@ -1,7 +1,0 @@
-{
-  "personFirstName" : null,
-  "personLastName" : "Pupkin",
-  "agreementDateFrom" : "2025-05-12",
-  "agreementDateTo" : "2025-05-19",
-  "selected_risks":["TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"]
-}

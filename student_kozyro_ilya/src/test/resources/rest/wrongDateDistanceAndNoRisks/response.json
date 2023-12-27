@@ -1,0 +1,17 @@
+{
+  "errorList": [
+    {
+    "errorCode" : "agreementDayFrom",
+    "errorDescription" : "Must be before agreementDayTo"
+    },
+    {
+      "errorCode": "selected_risks",
+      "errorDescription": "Should be at least one selected risk and not empty"
+    }
+ ],
+  "personFirstName": null,
+  "personLastName": null,
+  "agreementDateFrom": null,
+  "agreementDateTo": null,
+  "agreementPrice": null
+}
