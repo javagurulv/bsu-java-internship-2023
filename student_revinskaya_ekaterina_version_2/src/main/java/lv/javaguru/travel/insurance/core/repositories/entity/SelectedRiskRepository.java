@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface SelectedRiskRepository extends JpaRepository<SelectedRisk, Long> {
@@ -15,5 +16,10 @@ public interface SelectedRiskRepository extends JpaRepository<SelectedRisk, Long
     Optional<SelectedRisk> findByAgreementIdAndRiskIc(
             @Param("agreementId") Agreement agreementId,
             @Param("riskIc") String riskIc
+    );
+    @Query("SELECT risks from SelectedRisk risks " +
+            "where risks.agreementId = :agreementId ")
+    List<SelectedRisk> findByAgreementId(
+            @Param("agreementId") Agreement agreementId
     );
 }
