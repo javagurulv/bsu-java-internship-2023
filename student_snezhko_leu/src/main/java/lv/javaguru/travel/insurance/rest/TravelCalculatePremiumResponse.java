@@ -21,7 +21,7 @@ public class TravelCalculatePremiumResponse extends CoreResponse {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date agreementDateTo;
     private BigDecimal agreementPrice;
-    private List<InsurancePremiumRisk> risks;
+//    private List<InsurancePremiumRisk> risks;
     public TravelCalculatePremiumResponse(List<ValidationError> errors) {
         super(errors);
     }

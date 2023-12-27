@@ -58,14 +58,14 @@ TravelCalculatePremiumServiceImplTest {
     @Test
     public void correctReturnResponsesFirstNameTest() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
-        ArrayList<InsurancePremiumRisk> risks = new ArrayList<>();
-        risks.add(new InsurancePremiumRisk("Loss luggage", 2));
+        ArrayList<String> risks = new ArrayList<>();
+        risks.add("MEDICAL RISK");
 
         when(request.getPersonFirstName()).thenReturn("FirstName");
         when(request.getPersonLastName()).thenReturn("LastName");
         when(request.getAgreementDateFrom()).thenReturn(new Date(1000));
         when(request.getAgreementDateTo()).thenReturn(new Date(2000));
-        when(request.getRisks()).thenReturn(risks);
+//        when(request.getSelected_risks()).thenReturn(risks);
         TravelCalculatePremiumResponse response = test.buildResponse(request);
         assertEquals(response.getPersonFirstName(), "FirstName");
     }

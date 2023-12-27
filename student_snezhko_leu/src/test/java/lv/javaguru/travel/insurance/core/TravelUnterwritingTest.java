@@ -16,12 +16,12 @@ public class TravelUnterwritingTest {
 
     @Test
     public void calculatePremiumTest() {
-        ArrayList<InsurancePremiumRisk> risks = new ArrayList<>();
-        risks.add(new InsurancePremiumRisk("Medicial expense", 1l));
+        //ArrayList<String> risks = new ArrayList<>();
+        //risks.add("MEDICAL RISK");
         TravelCalculatePremiumResponse response = mock(TravelCalculatePremiumResponse.class);
-       // when(response.getAgreementDateTo()).thenReturn(Date.valueOf("2022-09-12"));
-       // when(response.getAgreementDateFrom()).thenReturn(Date.valueOf("2022-09-11"));
-        when(response.getRisks()).thenReturn(risks);
+       when(response.getAgreementDateTo()).thenReturn(Date.valueOf("2022-09-12"));
+       when(response.getAgreementDateFrom()).thenReturn(Date.valueOf("2022-09-11"));
+       //when(response.getSelected_risks()).thenReturn(risks);
         TravelUnderwriting underwriting = new TravelUnderwriting();
         assertEquals(underwriting.calculatePremium(response), BigDecimal.valueOf(1));
     }

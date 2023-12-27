@@ -10,11 +10,11 @@ public class TravelRequestWithoutRisksValidation implements TravelRequestValidat
     @Override
     public Optional<ValidationError> validate(TravelCalculatePremiumRequest request) {
         //Optional<ValidationError> result = Optional.empty();
-        if (request.getRisks() == null) {
-            return Optional.of(new ValidationError("risks", "Must not be null!"));
+        if (request.getSelected_risks() == null) {
+            return Optional.of(new ValidationError("selected_risks", "Must not be null!"));
         }
-        else if (request.getRisks().isEmpty()) {
-            return Optional.of(new ValidationError("risks", "Must not be empty!"));
+        else if (request.getSelected_risks().isEmpty()) {
+            return Optional.of(new ValidationError("selected_risks", "Must not be empty!"));
         }
         //return result;
         return Optional.empty();

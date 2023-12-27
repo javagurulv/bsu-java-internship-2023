@@ -4,11 +4,5 @@
   "personLastName": "Pupkin",
   "agreementDateFrom": "2026-05-25",
   "agreementDateTo": "2026-05-29",
-  "agreementPrice": 4,
-  "risks" : [
-    {
-      "name" : "Medical expenses",
-      "cost" : 4
-    }
-  ]
+  "agreementPrice": 4
 }
