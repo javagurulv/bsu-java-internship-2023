@@ -1,7 +1,5 @@
 package lv.javaguru.travel.insurance.core.util;
 
-import lv.javaguru.travel.insurance.core.util.ErrorCodeUtil;
-import lv.javaguru.travel.insurance.core.util.Placeholder;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
