@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.rest.v1;
+package lv.javaguru.travel.insurance.rest.internal;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
@@ -16,51 +16,55 @@ import java.io.File;
 import java.nio.file.Files;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static uk.org.webcompere.modelassert.json.JsonAssertions.assertJson;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public abstract class TravelCalculatePremiumControllerTest {
-
+public abstract class TravelGetPolicyControllerTest {
     @Autowired
-    private MockMvc mockMvc;
+    MockMvc mockMvc;
 
-    private static final String BASE_URL = "/insurance/travel/api/v1/";
+    private static final String URL_GET = "/insurance/travel/api/internal/agreement/%s/";
+
     protected abstract String getTestCaseName();
 
-    protected abstract boolean uuidIsPresent();
+    protected abstract boolean testWithCorrectUuid();
+
+    protected abstract String providedUuid() throws Exception;
+
     @Test
     public void testRequest() throws Exception {
-        equalsJsonFiles("rest/v1/" +getTestCaseName() + "/request.json", "rest/v1/" +getTestCaseName() + "/response.json");
+        equalsJsonFiles("rest/internal/" + getTestCaseName() + "/get_response.json");
     }
 
-    public void equalsJsonFiles(String requestFile, String responseFile) throws Exception {
+    public void equalsJsonFiles(String responseFile) throws Exception {
         ObjectMapper mapper = new ObjectMapper();
-        String response = mockMvc.perform(post(BASE_URL)
-                        .content(parseJSONIntoString(requestFile))
-                        .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(status().isOk())
-                .andReturn().getResponse().getContentAsString();
-
-        if (uuidIsPresent()) {
-            assertJson(mapper.readTree(response))
+        String getResponse = getResponse();
+        if (testWithCorrectUuid()) {
+            assertJson(mapper.readTree(getResponse))
                     .where()
                     .path("uuid").matches("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
                     .keysInAnyOrder()
                     .arrayInAnyOrder()
                     .isEqualTo(parseJSONIntoString(responseFile));
         } else {
-            assertJson(mapper.readTree(response))
+            assertJson(mapper.readTree(getResponse))
                     .where()
                     .keysInAnyOrder()
                     .arrayInAnyOrder()
                     .isEqualTo(parseJSONIntoString(responseFile));
         }
     }
-
-    private String parseJSONIntoString(String filePath) {
+    private String getResponse() throws Exception {
+        return mockMvc.perform(get(String.format(URL_GET, providedUuid()))
+                        .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isOk())
+                .andReturn().getResponse().getContentAsString();
+    }
+    String parseJSONIntoString(String filePath) {
         try {
             File file = ResourceUtils.getFile("classpath:" + filePath);
             return new String(Files.readAllBytes(file.toPath()));
@@ -69,5 +73,4 @@ public abstract class TravelCalculatePremiumControllerTest {
             throw new RuntimeException();
         }
     }
-
 }
