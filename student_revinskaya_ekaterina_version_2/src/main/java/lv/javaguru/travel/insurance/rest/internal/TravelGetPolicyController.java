@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/insurance/travel/api/internal/agreement/{uuid}")
-class TravelGetPremiumController {
+class TravelGetPolicyController {
     @Autowired
     TravelGetPolicyService service;
     @Autowired

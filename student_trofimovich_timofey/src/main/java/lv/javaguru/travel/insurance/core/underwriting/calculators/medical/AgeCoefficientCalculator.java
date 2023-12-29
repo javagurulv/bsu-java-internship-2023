@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.core.underwriting.calculations.medical;
+package lv.javaguru.travel.insurance.core.underwriting.calculators.medical;
 
 import lv.javaguru.travel.insurance.core.domain.AgeCoefficient;
 import lv.javaguru.travel.insurance.core.repositories.AgeCoefficientRepository;

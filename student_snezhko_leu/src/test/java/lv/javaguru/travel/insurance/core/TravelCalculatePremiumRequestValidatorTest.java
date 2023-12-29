@@ -1,7 +1,13 @@
 package lv.javaguru.travel.insurance.core;
 
+import lv.javaguru.travel.insurance.rest.InsurancePremiumRisk;
 import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.rest.validation.ValidationErrorsUtil;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.springframework.core.env.Environment;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -17,7 +23,7 @@ public class TravelCalculatePremiumRequestValidatorTest {
     private TravelCalculatePremiumRequestValidator validator = new TravelCalculatePremiumRequestValidator();
     private TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
     private boolean isEqual(ValidationError e1, ValidationError e2) {
-        return e1.getField().equals(e2.getField()) && e1.getMessage().equals(e2.getMessage());
+        return e1.getErrorCode().equals(e2.getErrorCode()) && e1.getDescription().equals(e2.getDescription());
     }
     @Test
     public void TravelCalculatePremiumRequestValidatorFirstNameTest() {
@@ -25,7 +31,7 @@ public class TravelCalculatePremiumRequestValidatorTest {
         when(request.getPersonFirstName()).thenReturn("");
         List<ValidationError> errors = validator.validate(request);
         ValidationError error = errors.get(0);
-        assertTrue(isEqual(errors.get(0), new ValidationError("personFirstName", "Must not be empty!")));
+        assertTrue(isEqual(errors.get(0), new ValidationError("ERROR_CODE_1", "Field personFirstName is empty!")));
     }
     @Test
     public void TravelCalculatePremiumRequestValidatorLastNameTest() {
@@ -34,7 +40,7 @@ public class TravelCalculatePremiumRequestValidatorTest {
         List<ValidationError> errors = validator.validate(request);
         //this.beforeForNotNullTests();
         ValidationError error = errors.get(0);
-        assertTrue(isEqual(errors.get(0), new ValidationError("personLastName", "Must not be empty!")));
+        assertTrue(isEqual(errors.get(0), new ValidationError("ERROR_CODE_2", "Field personLastName is empty!")));
     }
     @Test
     public void TravelCalculatePremiumRequestValidatorAgreementDateFromTest() {
@@ -43,7 +49,7 @@ public class TravelCalculatePremiumRequestValidatorTest {
         when(request.getPersonLastName()).thenReturn("LastName");
         List<ValidationError> errors = validator.validate(request);
         ValidationError error = errors.get(0);
-        assertTrue(isEqual(errors.get(0), new ValidationError("agreementDateFrom", "Must not be null!")));
+        assertTrue(isEqual(errors.get(0), new ValidationError("ERROR_CODE_3", "Field agreementDateFrom is empty!")));
     }
     @Test
     public void TravelCalculatePremiumRequestValidatorDateFromMustBeNotInPast() {
@@ -54,7 +60,7 @@ public class TravelCalculatePremiumRequestValidatorTest {
 
         List<ValidationError> errors = validator.validate(request);
         ValidationError error = errors.get(0);
-        assertTrue(isEqual(errors.get(0), new ValidationError("agreementDateFrom", "Must not be in the past!")));
+        assertTrue(isEqual(errors.get(0), new ValidationError("ERROR_CODE_4", "Field agreementDateFrom is in the past!")));
     }
     @Test
     public void TravelCalculatePremiumRequestValidatorAgreementDateToTest() {
@@ -67,7 +73,7 @@ public class TravelCalculatePremiumRequestValidatorTest {
 
         List<ValidationError> errors = validator.validate(request);
         ValidationError error = errors.get(0);
-        assertTrue(isEqual(errors.get(0), new ValidationError("agreementDateTo", "Must not be null!")));
+        assertTrue(isEqual(errors.get(0), new ValidationError("ERROR_CODE_5", "Field agreementDateTo is empty!")));
     }
     @Test
     public void TravelCalculatePremiumRequestValidatorDateToIsNotBeforeDateFromTest() {
@@ -80,6 +86,32 @@ public class TravelCalculatePremiumRequestValidatorTest {
 
         List<ValidationError> errors = validator.validate(request);
         ValidationError error = errors.get(1);
-        assertTrue(isEqual(errors.get(1), new ValidationError("agreementDateTo", "Must not be before agreementDateFrom!!!")));
+        assertTrue(isEqual(errors.get(1), new ValidationError("ERROR_CODE_6", "Field agreementDateTo is before the value of field agreementDateFrom!")));
+    }
+
+    @Test
+    public void TravelCalculatePremiumRequestValidatorSelectedRisksIsNotBeEmptyTest() {
+        Date d2 = java.sql.Date.valueOf("2029-02-05");
+        Date d1 = java.sql.Date.valueOf("2029-02-03");
+        when(request.getPersonFirstName()).thenReturn("FirstName");
+        when(request.getPersonLastName()).thenReturn("LastName");
+        when(request.getAgreementDateFrom()).thenReturn(d1);
+        when(request.getAgreementDateTo()).thenReturn(d2);
+        when(request.getSelected_risks()).thenReturn(new ArrayList<String>());
+        List<ValidationError> errors = validator.validate(request);
+        assertTrue(isEqual(errors.get(0), new ValidationError("ERROR_CODE_7", "Field selected_risks is empty!")));
+    }
+
+    @Test
+    public void TravelCalculatePremiumRequestValidatorSelectedRisksIsNotNullTest() {
+        Date d2 = java.sql.Date.valueOf("2029-02-05");
+        Date d1 = java.sql.Date.valueOf("2029-02-03");
+        when(request.getPersonFirstName()).thenReturn("FirstName");
+        when(request.getPersonLastName()).thenReturn("LastName");
+        when(request.getAgreementDateFrom()).thenReturn(d1);
+        when(request.getAgreementDateTo()).thenReturn(d2);
+        when(request.getSelected_risks()).thenReturn(null);
+        List<ValidationError> errors = validator.validate(request);
+        assertTrue(isEqual(errors.get(0), new ValidationError("ERROR_CODE_8", "Field selected_risks is null!")));
     }
 }

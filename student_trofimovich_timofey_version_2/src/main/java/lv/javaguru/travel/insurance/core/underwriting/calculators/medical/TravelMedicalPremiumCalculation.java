@@ -1,6 +1,7 @@
-package lv.javaguru.travel.insurance.core.underwriting.calculations.medical;
-import lv.javaguru.travel.insurance.core.underwriting.calculations.TravelRiskPremiumCalculator;
-import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
+package lv.javaguru.travel.insurance.core.underwriting.calculators.medical;
+import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
+import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
+import lv.javaguru.travel.insurance.core.underwriting.TravelRiskPremiumCalculator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,11 +17,11 @@ class TravelMedicalPremiumCalculation implements TravelRiskPremiumCalculator {
     @Autowired private DayCountCalculator dayCountCalculator;
     @Autowired private InsuranceLimitCoefficientCalculator limitCoefficientCalculator;
     @Override
-    public BigDecimal calculatePremium(TravelCalculatePremiumRequestV1 request) {
-        long numberOfDays = dayCountCalculator.getNumberOfDays(request);
-        BigDecimal countryDefaultDayRate = countryDefaultDayRateCalculator.getCountryDefaultDayRate(request);
-        BigDecimal ageCoefficient = ageCoefficientCalculator.getAgeCoefficient(request);
-        BigDecimal insuranceLimitCoefficient = limitCoefficientCalculator.getInsuranceLimitCoefficient(request);
+    public BigDecimal calculatePremium(AgreementDTO agreement, PersonDTO person) {
+        long numberOfDays = dayCountCalculator.getNumberOfDays(agreement);
+        BigDecimal countryDefaultDayRate = countryDefaultDayRateCalculator.getCountryDefaultDayRate(agreement);
+        BigDecimal ageCoefficient = ageCoefficientCalculator.getAgeCoefficient(person);
+        BigDecimal insuranceLimitCoefficient = limitCoefficientCalculator.getInsuranceLimitCoefficient(agreement);
         return new BigDecimal(numberOfDays)
                 .multiply(countryDefaultDayRate)
                 .multiply(ageCoefficient)
