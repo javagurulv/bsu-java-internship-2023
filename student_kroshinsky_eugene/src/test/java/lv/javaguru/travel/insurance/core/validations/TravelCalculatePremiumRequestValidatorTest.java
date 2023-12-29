@@ -16,9 +16,12 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class TravelCalculatePremiumRequestValidatorTest {
-    @Mock private TravelRequestValidation validationObject;
-    @Mock private  TravelCalculatePremiumRequest request;
-    @InjectMocks private TravelCalculatePremiumRequestValidatorImpl validator;
+    @Mock
+    private TravelRequestValidation validationObject;
+    @Mock
+    private  TravelCalculatePremiumRequest request;
+    @InjectMocks
+    private TravelCalculatePremiumRequestValidatorImpl validator;
     @Test
     public void injectedRepositoryAreNotNull() {
         assertNotNull(validationObject);

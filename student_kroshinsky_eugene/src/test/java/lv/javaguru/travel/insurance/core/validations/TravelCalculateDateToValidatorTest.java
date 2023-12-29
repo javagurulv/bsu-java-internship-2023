@@ -20,11 +20,11 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class TravelCalculateDateToValidatorTest {
     @Mock
-    ValidationErrorFactory validationErrorFactory;
+    private ValidationErrorFactory validationErrorFactory;
     @Mock
-    TravelCalculatePremiumRequest request;
+    private TravelCalculatePremiumRequest request;
     @InjectMocks
-    TravelCalculateDateToValidator validator;
+    private TravelCalculateDateToValidator validator;
     @Test
     public void injectedRepositoryAreNotNull() {
         assertNotNull(validationErrorFactory);
