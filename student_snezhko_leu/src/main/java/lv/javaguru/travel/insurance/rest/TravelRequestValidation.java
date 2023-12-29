@@ -6,5 +6,5 @@ import java.io.IOException;
 import java.util.Optional;
 
 public interface TravelRequestValidation {
-    public Optional<ValidationError> validate(TravelCalculatePremiumRequest request) throws IOException;
+    public Optional<ValidationError> validate(TravelCalculatePremiumRequest request);
 }

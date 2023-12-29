@@ -39,7 +39,7 @@ TravelCalculatePremiumServiceImplTest {
     @Test
     public void hasErrorsTest() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
-        List<ValidationError> errors = List.of(new ValidationError("field", "error"));
+        List<ValidationError> errors = List.of(new ValidationError("ERROR_CODE_1", "Field personFirstName is empty!"));
         when(validator.validate(request)).thenReturn(errors);
         TravelCalculatePremiumResponse response = test.calculatePremium(request);
         assertTrue(response.hasErrors());
@@ -47,13 +47,13 @@ TravelCalculatePremiumServiceImplTest {
     @Test
     public void validationErrorsTest() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
-        List<ValidationError> errors = List.of(new ValidationError("EMPTY_ERROR_CODE", "empty description"));
+        List<ValidationError> errors = List.of(new ValidationError("ERROR_CODE_1", "Field personFirstName is empty!"));
         when(validator.validate(request)).thenReturn(errors);
         TravelCalculatePremiumResponse response = test.calculatePremium(request);
 
         ValidationError error = errors.get(0);
-        assertEquals(error.getErrorCode(), "EMPTY_ERROR_CODE");
-        assertEquals(error.getDescription(), "empty description");
+        assertEquals(error.getErrorCode(), "ERROR_CODE_1");
+        assertEquals(error.getDescription(), "Field personFirstName is empty!");
     }
     @Test
     public void correctReturnResponsesFirstNameTest() {

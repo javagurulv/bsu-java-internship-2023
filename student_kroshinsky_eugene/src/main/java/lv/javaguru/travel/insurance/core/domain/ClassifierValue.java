@@ -1,7 +1,13 @@
 package lv.javaguru.travel.insurance.core.domain;
 
-import javax.persistence.*;
+import lombok.*;
 
+import javax.persistence.*;
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 @Entity
 @Table(name="classifier_values")
 public class ClassifierValue {
@@ -19,46 +25,4 @@ public class ClassifierValue {
 
     @Column(name = "description", length = 500, nullable=false)
     private String description;
-
-    public ClassifierValue() {
-    }
-
-    public ClassifierValue(Long id, Classifier classifier, String ic, String description) {
-        this.id = id;
-        this.classifier = classifier;
-        this.ic = ic;
-        this.description = description;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Classifier getClassifier() {
-        return classifier;
-    }
-
-    public void setClassifier(Classifier classifier) {
-        this.classifier = classifier;
-    }
-
-    public String getIc() {
-        return ic;
-    }
-
-    public void setIc(String ic) {
-        this.ic = ic;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
 }
