@@ -20,8 +20,6 @@ import java.util.List;
 import java.sql.*;
 
 public class TravelCalculatePremiumRequestValidatorTest {
-    @Mock
-    Environment env;
     private TravelCalculatePremiumRequestValidator validator = new TravelCalculatePremiumRequestValidator();
     private TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
     private boolean isEqual(ValidationError e1, ValidationError e2) {
