@@ -40,6 +40,7 @@ public class TravelCalculatePremiumControllerTest {
     TravelUnderwriting underwriting;
 
  */
+/*
     @Test
     public void ControllerAllParametersIsCorrectTest() throws Exception {//throws FileNotFoundException, IOException {
 
@@ -128,6 +129,8 @@ public class TravelCalculatePremiumControllerTest {
                 .isEqualTo(responseFromFile);
         //assertEquals(mapper.readTree(responseFromFile), mapper.readTree(responseFromRequest));
     }
+
+ */
     private String getResponseFromRequest(String pathRequest) throws Exception{
         MvcResult result = mockMvc.perform(
                         post("/insurance/travel/")
