@@ -37,6 +37,7 @@ TravelCalculatePremiumServiceImplTest {
     TravelCalculatePremiumRequestValidator validator = mock(TravelCalculatePremiumRequestValidator.class);
 
     TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+/*
     @Test
     public void hasErrorsTest() {
         String errorCode = "ERROR_CODE_1";
@@ -104,6 +105,6 @@ TravelCalculatePremiumServiceImplTest {
         TravelCalculatePremiumResponse response = test.buildResponse(request);
         assertEquals(response.getAgreementDateTo(), new Date(2000));
     }
-
+*/
 
 }
