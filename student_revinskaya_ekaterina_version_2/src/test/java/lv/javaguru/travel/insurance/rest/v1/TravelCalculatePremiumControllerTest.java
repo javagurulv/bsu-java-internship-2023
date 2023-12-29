@@ -18,7 +18,6 @@ import java.nio.file.Files;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static uk.org.webcompere.modelassert.json.JsonAssertions.assertJson;
-import static uk.org.webcompere.modelassert.json.Patterns.GUID_PATTERN;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
