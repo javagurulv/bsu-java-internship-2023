@@ -47,13 +47,13 @@ TravelCalculatePremiumServiceImplTest {
     @Test
     public void validationErrorsTest() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
-        List<ValidationError> errors = List.of(new ValidationError("field", "message"));
+        List<ValidationError> errors = List.of(new ValidationError("EMPTY_ERROR_CODE", "empty description"));
         when(validator.validate(request)).thenReturn(errors);
         TravelCalculatePremiumResponse response = test.calculatePremium(request);
 
         ValidationError error = errors.get(0);
-        assertEquals(error.getField(), "field");
-        assertEquals(error.getMessage(), "message");
+        assertEquals(error.getErrorCode(), "EMPTY_ERROR_CODE");
+        assertEquals(error.getDescription(), "empty description");
     }
     @Test
     public void correctReturnResponsesFirstNameTest() {

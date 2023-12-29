@@ -8,6 +8,7 @@ import lv.javaguru.travel.insurance.rest.validation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.*;
 
@@ -29,12 +30,17 @@ class TravelCalculatePremiumRequestValidator {
         validations.add(new TravelRequestDateToValidation());
         validations.add(new TravelRequestWithoutRisksValidation());
 
-        validations.forEach(validation -> {
-            Optional<ValidationError> error = validation.validate(request);
-            if (!error.isEmpty()) {
-                errors.add(error.get());
-            }
-        });
+            validations.forEach(validation -> {
+                Optional<ValidationError> error = null;
+                try {
+                    error = validation.validate(request);
+                } catch (IOException e) {
+                    errors.add(new ValidationError("MY_ERROR_CODE", "IOException by errors properties file"));
+                }
+                if (!error.isEmpty()) {
+                    errors.add(error.get());
+                }
+            });
         return errors;
     }
 

@@ -3,17 +3,24 @@ package lv.javaguru.travel.insurance.rest.validation;
 import lv.javaguru.travel.insurance.core.ValidationError;
 import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.rest.TravelRequestValidation;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import java.io.IOException;
 import java.util.Optional;
 
 public class TravelRequestDateToValidation implements TravelRequestValidation {
+    @Autowired
+    ValidationErrorsUtil util;
     @Override
-    public Optional<ValidationError> validate(TravelCalculatePremiumRequest request) {
+    public Optional<ValidationError> validate(TravelCalculatePremiumRequest request) throws IOException {
+        util = new ValidationErrorsUtil();
         if (request.getAgreementDateTo() == null) {
-            return Optional.of(new ValidationError("agreementDateTo", "Must not be null!"));
+            String errorCode = "ERROR_CODE_5";
+            return Optional.of(new ValidationError(errorCode, util.getDescriptionByErrorCode(errorCode)));
         }
         else if (request.getAgreementDateTo().before(request.getAgreementDateFrom())) {
-            return Optional.of(new ValidationError("agreementDateTo", "Must not be before agreementDateFrom!!!"));
+            String errorCode = "ERROR_CODE_6";
+            return Optional.of(new ValidationError(errorCode, util.getDescriptionByErrorCode(errorCode)));
         }
         return Optional.empty();
     }
