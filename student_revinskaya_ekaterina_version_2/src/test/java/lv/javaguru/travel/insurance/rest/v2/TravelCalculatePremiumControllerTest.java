@@ -28,10 +28,14 @@ public abstract class TravelCalculatePremiumControllerTest {
     private MockMvc mockMvc;
 
     private static final String BASE_URL = "/insurance/travel/api/v2/";
+
     protected abstract String getTestCaseName();
+
+    protected abstract boolean uuidIsPresent();
+
     @Test
     public void testRequest() throws Exception {
-        equalsJsonFiles("rest/v2/" +getTestCaseName() + "/request.json", "rest/v2/" +getTestCaseName() + "/response.json");
+        equalsJsonFiles("rest/v2/" + getTestCaseName() + "/request.json", "rest/v2/" + getTestCaseName() + "/response.json");
     }
 
     public void equalsJsonFiles(String requestFile, String responseFile) throws Exception {
@@ -41,12 +45,20 @@ public abstract class TravelCalculatePremiumControllerTest {
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
                 .andReturn().getResponse().getContentAsString();
-
-        assertJson(mapper.readTree(response))
-                .where()
-                .keysInAnyOrder()
-                .arrayInAnyOrder()
-                .isEqualTo(parseJSONIntoString(responseFile));
+        if (uuidIsPresent()) {
+            assertJson(mapper.readTree(response))
+                    .where()
+                    .path("uuid").matches("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
+                    .keysInAnyOrder()
+                    .arrayInAnyOrder()
+                    .isEqualTo(parseJSONIntoString(responseFile));
+        } else {
+            assertJson(mapper.readTree(response))
+                    .where()
+                    .keysInAnyOrder()
+                    .arrayInAnyOrder()
+                    .isEqualTo(parseJSONIntoString(responseFile));
+        }
     }
 
     private String parseJSONIntoString(String filePath) {

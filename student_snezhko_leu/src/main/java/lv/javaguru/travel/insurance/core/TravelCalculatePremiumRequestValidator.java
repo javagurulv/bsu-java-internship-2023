@@ -4,13 +4,11 @@ package lv.javaguru.travel.insurance.core;
 //import lv.javaguru.travel.insurance.dto.ValidationError;
 import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.rest.TravelRequestValidation;
-import lv.javaguru.travel.insurance.rest.validation.TravelRequestDateFromValidation;
-import lv.javaguru.travel.insurance.rest.validation.TravelRequestDateToValidation;
-import lv.javaguru.travel.insurance.rest.validation.TravelRequestFirstNameValidation;
-import lv.javaguru.travel.insurance.rest.validation.TravelRequestLastNameValidation;
+import lv.javaguru.travel.insurance.rest.validation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.*;
 
@@ -30,13 +28,15 @@ class TravelCalculatePremiumRequestValidator {
         validations.add(new TravelRequestLastNameValidation());
         validations.add(new TravelRequestDateFromValidation());
         validations.add(new TravelRequestDateToValidation());
+        validations.add(new TravelRequestWithoutRisksValidation());
 
-        validations.forEach(validation -> {
-            Optional<ValidationError> error = validation.validate(request);
-            if (!error.isEmpty()) {
-                errors.add(error.get());
-            }
-        });
+            validations.forEach(validation -> {
+                Optional<ValidationError> error = null;
+                error = validation.validate(request);
+                if (!error.isEmpty()) {
+                    errors.add(error.get());
+                }
+            });
         return errors;
     }
 

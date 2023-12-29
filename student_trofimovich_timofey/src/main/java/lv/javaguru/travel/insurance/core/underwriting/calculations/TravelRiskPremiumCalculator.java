@@ -1,10 +1,10 @@
 package lv.javaguru.travel.insurance.core.underwriting.calculations;
 
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 
 import java.math.BigDecimal;
 
 public interface TravelRiskPremiumCalculator {
-    BigDecimal calculatePremium(TravelCalculatePremiumRequest request);
+    BigDecimal calculatePremium(TravelCalculatePremiumRequestV1 request);
     String getRiskIc();
 }

@@ -8,10 +8,5 @@
       "errorCode": "ERROR_CODE_6",
       "description": "Field agreementDateTo must be future date!"
     }
-  ],
-  "agreementDateFrom": null,
-  "agreementDateTo": null,
-  "country": null,
-  "agreementPremium": null,
-  "persons": null
+  ]
 }

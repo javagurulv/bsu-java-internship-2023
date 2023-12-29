@@ -47,16 +47,6 @@ class TravelCalculatePremiumRequestValidator {
                 : Optional.empty();
     }
 
-//    private Optional<ValidationError> validateDateFromLessThenDateTo(TravelCalculatePremiumRequest request) {
-//        Date dateFrom = request.getAgreementDateFrom();
-//        Date dateTo = request.getAgreementDateTo();
-//        return (dateFrom != null && dateTo != null
-//                && (dateFrom.equals(dateTo) || dateFrom.after(dateTo)))
-//                ? Optional.of(new ValidationError("agreementDateFrom", "Must be less then agreementDateTo!"))
-//                : Optional.empty();
-//    }
-
-
     private long getDaysBetween(Date date1, Date date2) {
         long diff = date2.getTime() - date1.getTime();
         return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);

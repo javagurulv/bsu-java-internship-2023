@@ -9,16 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
-import static lv.javaguru.travel.insurance.core.api.dto.builders.AgreementDTOBuilder.createAgreement;
-import static lv.javaguru.travel.insurance.core.api.dto.builders.PersonDTOBuilder.createPersonDTO;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(SpringExtension.class)
@@ -32,17 +30,17 @@ public class AgeCoefficientCalculatorEnableCoefficientIntegrationTest {
 
     @Test
     public void AgeCoefficientEnableTest() {
-        PersonDTO person = createPersonDTO()
-                .withFirstName("Vasja")
-                .withLastName("Pupkin")
-                .withBirthDate(createDate("01.01.1933"))
-                .withMedicalRiskLimitLevel("LEVEL_10000").build();
-        AgreementDTO agreement = createAgreement()
-                .withDateFrom(createDate("01.01.2030"))
-                .withDateTo(createDate("02.01.2030"))
-                .withCountry("SPAIN")
-                .withSelectedRisk("TRAVEL_MEDICAL")
-                .withPerson(person)
+        PersonDTO person = PersonDTO.builder()
+                .personFirstName("Vasja")
+                .personLastName("Pupkin")
+                .personBirthDate(createDate("01.01.1933"))
+                .medicalRiskLimitLevel("LEVEL_10000").build();
+        AgreementDTO agreement = AgreementDTO.builder()
+                .agreementDateFrom(createDate("01.01.2030"))
+                .agreementDateTo(createDate("02.01.2030"))
+                .country("SPAIN")
+                .selectedRisks(List.of("TRAVEL_MEDICAL"))
+                .persons(List.of(person))
                 .build();
         assertEquals(premiumUnderwriting.calculatePremium(agreement, person).getTotalPremium(),
                 BigDecimal.valueOf(3.75));

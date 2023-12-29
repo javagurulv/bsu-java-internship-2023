@@ -6,14 +6,15 @@ import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import lv.javaguru.travel.insurance.core.services.calculators.CalculatorForTotalAgreementPremium;
 import lv.javaguru.travel.insurance.core.services.calculators.CalculatorRiskPremiumsForAllPersons;
-import lv.javaguru.travel.insurance.core.util.PersonSaver;
+import lv.javaguru.travel.insurance.core.services.savers.PolicySaver;
 import lv.javaguru.travel.insurance.core.validations.TravelAgreementValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.List;
-
+@Transactional
 @Component
 class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService {
     @Autowired
@@ -22,9 +23,8 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
     private CalculatorForTotalAgreementPremium calculatorForTotalAgreementPremium;
     @Autowired
     private CalculatorRiskPremiumsForAllPersons calculatorRiskPremiumsForAllPersons;
-
     @Autowired
-    private PersonSaver personEntityUtil;
+    private PolicySaver policySaver;
 
     @Override
     public TravelCalculatePremiumCoreResult calculatePremium(TravelCalculatePremiumCoreCommand command) {
@@ -40,18 +40,16 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
         return new TravelCalculatePremiumCoreResult(errors);
     }
 
-    private TravelCalculatePremiumCoreResult buildSuccessResponse(AgreementDTO agreement) {
-        personEntityUtil.saveNotAlreadyExistPersons(agreement);
-
-        calculatorRiskPremiumsForAllPersons.calculate(agreement);
-
-        BigDecimal totalAgreementPremium = calculatorForTotalAgreementPremium.calculate(agreement);
-        agreement.setAgreementPremium(totalAgreementPremium);
-
+    private TravelCalculatePremiumCoreResult buildSuccessResponse(AgreementDTO agreementDTO) {
+        calculatorRiskPremiumsForAllPersons.calculate(agreementDTO);
+        BigDecimal totalAgreementPremium = calculatorForTotalAgreementPremium.calculate(agreementDTO);
+        agreementDTO.setAgreementPremium(totalAgreementPremium);
+        policySaver.savePolicy(agreementDTO);
         TravelCalculatePremiumCoreResult coreResult = new TravelCalculatePremiumCoreResult();
-        coreResult.setAgreement(agreement);
+        coreResult.setAgreement(agreementDTO);
         return coreResult;
     }
+
 
 
 }

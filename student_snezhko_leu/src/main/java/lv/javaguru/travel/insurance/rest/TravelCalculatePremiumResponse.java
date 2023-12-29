@@ -1,7 +1,6 @@
 package lv.javaguru.travel.insurance.rest;
 
 import java.math.BigDecimal;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -22,7 +21,7 @@ public class TravelCalculatePremiumResponse extends CoreResponse {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date agreementDateTo;
     private BigDecimal agreementPrice;
-
+//    private List<InsurancePremiumRisk> risks;
     public TravelCalculatePremiumResponse(List<ValidationError> errors) {
         super(errors);
     }
