@@ -9,8 +9,10 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 
 import static org.hamcrest.Matchers.is;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -21,6 +23,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class TravelCalculatePremiumControllerTest {
 
     @Autowired private MockMvc mockMvc;
+
+    @Autowired private JsonFileReader jsonFileReader;
+
+    @Test
+    public void simpleRestControllerTestUpgraded() throws Exception{
+        compareRequestAndResponse("rest/TravelCalculatePremiumRequest.json",
+                "rest/TravelCalculatePremiumResponse.json");
+    }
 
     @Test
     public void simpleRestControllerTest() throws Exception {
@@ -39,5 +49,20 @@ public class TravelCalculatePremiumControllerTest {
                 .andExpect(jsonPath("agreementDateTo", is("2021-05-29")))
                 .andExpect(jsonPath("agreementPrice", is(4)))
                 .andReturn();
+    }
+
+    private void compareRequestAndResponse(String pathRequestJson, String pathResponseJson) throws Exception{
+        String requestJson = jsonFileReader.readJsonFile(pathRequestJson);
+        String responseJson = jsonFileReader.readJsonFile(pathResponseJson);
+
+        MvcResult result = mockMvc.perform(post("/insurance/travel/")
+                        .content(requestJson)
+                        .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        String responseBodyContent = result.getResponse().getContentAsString();
+
+        assertEquals(responseBodyContent, responseJson);
     }
 }
