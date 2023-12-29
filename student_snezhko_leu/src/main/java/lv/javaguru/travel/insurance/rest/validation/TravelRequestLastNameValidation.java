@@ -22,6 +22,8 @@ public class TravelRequestLastNameValidation implements TravelRequestValidation 
             catch (IOException e) {
                 return Optional.of(new ValidationError("ERROR_CODE_0", "IOException is errorCode.properties!"));//util.buildError("ERROR_CODE_3"));
             }
+
+
             //ValidationErrorsUtil util = new ValidationErrorsUtil();
             String errorCode = "ERROR_CODE_2";
             return Optional.of(new ValidationError(errorCode, util.getDescriptionByErrorCode(errorCode)));

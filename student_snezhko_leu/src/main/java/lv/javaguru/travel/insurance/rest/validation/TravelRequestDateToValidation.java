@@ -24,6 +24,8 @@ public class TravelRequestDateToValidation implements TravelRequestValidation {
         catch (IOException e) {
             return Optional.of(new ValidationError("ERROR_CODE_0", "IOException is errorCode.properties!"));//util.buildError("ERROR_CODE_3"));
         }
+
+
         if (request.getAgreementDateTo() == null) {
             String errorCode = "ERROR_CODE_5";
             return Optional.of(new ValidationError(errorCode, util.getDescriptionByErrorCode(errorCode)));

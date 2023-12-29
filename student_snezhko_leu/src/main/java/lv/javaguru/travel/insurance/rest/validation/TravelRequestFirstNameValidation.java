@@ -25,6 +25,7 @@ public class TravelRequestFirstNameValidation implements TravelRequestValidation
         catch (IOException e) {
             return Optional.of(new ValidationError("ERROR_CODE_0", "IOException is errorCode.properties!"));//util.buildError("ERROR_CODE_3"));
         }
+
         if (request.getPersonFirstName() == null || request.getPersonFirstName().isEmpty()) {
             String errorCode = "ERROR_CODE_1";
             return Optional.of(new ValidationError(errorCode, util.getDescriptionByErrorCode(errorCode)));

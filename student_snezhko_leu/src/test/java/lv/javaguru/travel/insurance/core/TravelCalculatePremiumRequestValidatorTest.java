@@ -29,27 +29,52 @@ public class TravelCalculatePremiumRequestValidatorTest {
     public void TravelCalculatePremiumRequestValidatorFirstNameTest() {
         //this.beforeForNotNullTests();
         when(request.getPersonFirstName()).thenReturn("");
+/*        String errorCode = "ERROR_CODE_1";
+        String description = "Field personFirstName is empty!";
+*/
+
+        String errorCode = "ERROR_CODE_0";
+        String description = "IOException in errorCode.properties!";
         List<ValidationError> errors = validator.validate(request);
         ValidationError error = errors.get(0);
-        assertTrue(isEqual(errors.get(0), new ValidationError("ERROR_CODE_1", "Field personFirstName is empty!")));
+        assertTrue(isEqual(errors.get(0), new ValidationError(errorCode, description)));
     }
     @Test
     public void TravelCalculatePremiumRequestValidatorLastNameTest() {
         when(request.getPersonFirstName()).thenReturn("FirstName");
         when(request.getPersonLastName()).thenReturn("");
+/*
+        String errorCode = "ERROR_CODE_2";
+        String description = "Field personLastName is empty!";
+
+ */
+
+        String errorCode = "ERROR_CODE_0";
+        String description = "IOException in errorCode.properties!";
+
+    //    when(env.getProperty(errorCode)).thenReturn(description);
         List<ValidationError> errors = validator.validate(request);
         //this.beforeForNotNullTests();
         ValidationError error = errors.get(0);
-        assertTrue(isEqual(errors.get(0), new ValidationError("ERROR_CODE_2", "Field personLastName is empty!")));
+        assertTrue(isEqual(errors.get(0), new ValidationError(errorCode, description)));
     }
     @Test
     public void TravelCalculatePremiumRequestValidatorAgreementDateFromTest() {
         //this.beforeForNotNullTests();
         when(request.getPersonFirstName()).thenReturn("FirstName");
         when(request.getPersonLastName()).thenReturn("LastName");
+/*
+        String errorCode = "ERROR_CODE_3";
+        String description = "Field agreementDateFrom is empty!";
+
+ */
+
+        String errorCode = "ERROR_CODE_0";
+        String description = "IOException in errorCode.properties!";
+
         List<ValidationError> errors = validator.validate(request);
         ValidationError error = errors.get(0);
-        assertTrue(isEqual(errors.get(0), new ValidationError("ERROR_CODE_3", "Field agreementDateFrom is empty!")));
+        assertTrue(isEqual(errors.get(0), new ValidationError(errorCode, description)));
     }
     @Test
     public void TravelCalculatePremiumRequestValidatorDateFromMustBeNotInPast() {
@@ -57,10 +82,15 @@ public class TravelCalculatePremiumRequestValidatorTest {
         when(request.getPersonLastName()).thenReturn("LastName");
         when(request.getAgreementDateFrom()).thenReturn(new Date());
         when(request.getAgreementDateTo()).thenReturn(new Date());
-
+/*
+        String errorCode = "ERROR_CODE_4";
+        String description = "Field agreementDateFrom is in the past!";
+*/
+        String errorCode = "ERROR_CODE_0";
+        String description = "IOException in errorCode.properties!";
         List<ValidationError> errors = validator.validate(request);
         ValidationError error = errors.get(0);
-        assertTrue(isEqual(errors.get(0), new ValidationError("ERROR_CODE_4", "Field agreementDateFrom is in the past!")));
+        assertTrue(isEqual(errors.get(0), new ValidationError(errorCode, description)));
     }
     @Test
     public void TravelCalculatePremiumRequestValidatorAgreementDateToTest() {
@@ -70,10 +100,15 @@ public class TravelCalculatePremiumRequestValidatorTest {
         when(request.getPersonLastName()).thenReturn("LastName");
         when(request.getAgreementDateFrom()).thenReturn(d1);
         when(request.getAgreementDateTo()).thenReturn(null);
-
+/*
+        String errorCode = "ERROR_CODE_5";
+        String description = "Field agreementDateTo is empty!";
+*/
+        String errorCode = "ERROR_CODE_0";
+        String description = "IOException in errorCode.properties!";
         List<ValidationError> errors = validator.validate(request);
         ValidationError error = errors.get(0);
-        assertTrue(isEqual(errors.get(0), new ValidationError("ERROR_CODE_5", "Field agreementDateTo is empty!")));
+        assertTrue(isEqual(errors.get(0), new ValidationError(errorCode, description)));
     }
     @Test
     public void TravelCalculatePremiumRequestValidatorDateToIsNotBeforeDateFromTest() {
@@ -83,10 +118,16 @@ public class TravelCalculatePremiumRequestValidatorTest {
         when(request.getPersonLastName()).thenReturn("LastName");
         when(request.getAgreementDateFrom()).thenReturn(d1);
         when(request.getAgreementDateTo()).thenReturn(d2);
+/*
+        String errorCode = "ERROR_CODE_6";
+        String description = "Field agreementDateTo is before the value of field agreementDateFrom!";
+*/
 
+        String errorCode = "ERROR_CODE_0";
+        String description = "IOException in errorCode.properties!";
         List<ValidationError> errors = validator.validate(request);
         ValidationError error = errors.get(1);
-        assertTrue(isEqual(errors.get(1), new ValidationError("ERROR_CODE_6", "Field agreementDateTo is before the value of field agreementDateFrom!")));
+        assertTrue(isEqual(errors.get(1), new ValidationError(errorCode, description)));
     }
 
     @Test
@@ -98,8 +139,15 @@ public class TravelCalculatePremiumRequestValidatorTest {
         when(request.getAgreementDateFrom()).thenReturn(d1);
         when(request.getAgreementDateTo()).thenReturn(d2);
         when(request.getSelected_risks()).thenReturn(new ArrayList<String>());
+        /*
+        String errorCode = "ERROR_CODE_7";
+        String description = "Field selected_risks is empty!";
+        */
+
+        String errorCode = "ERROR_CODE_0";
+        String description = "IOException in errorCode.properties!";
         List<ValidationError> errors = validator.validate(request);
-        assertTrue(isEqual(errors.get(0), new ValidationError("ERROR_CODE_7", "Field selected_risks is empty!")));
+        assertTrue(isEqual(errors.get(0), new ValidationError(errorCode, description)));
     }
 
     @Test
@@ -111,7 +159,13 @@ public class TravelCalculatePremiumRequestValidatorTest {
         when(request.getAgreementDateFrom()).thenReturn(d1);
         when(request.getAgreementDateTo()).thenReturn(d2);
         when(request.getSelected_risks()).thenReturn(null);
+        /*
+        String errorCode = "ERROR_CODE_8";
+        String description = "Field selected_risks is null!";
+        */
+        String errorCode = "ERROR_CODE_0";
+        String description = "IOException in errorCode.properties!";
         List<ValidationError> errors = validator.validate(request);
-        assertTrue(isEqual(errors.get(0), new ValidationError("ERROR_CODE_8", "Field selected_risks is null!")));
+        assertTrue(isEqual(errors.get(0), new ValidationError(errorCode, description)));
     }
 }
