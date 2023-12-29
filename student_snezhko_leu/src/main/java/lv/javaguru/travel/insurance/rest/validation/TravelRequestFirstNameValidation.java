@@ -11,11 +11,9 @@ import java.util.Optional;
 
 @Setter
 public class TravelRequestFirstNameValidation implements TravelRequestValidation {
-    @Autowired
-    ValidationErrorsUtil util;
     @Override
     public Optional<ValidationError> validate(TravelCalculatePremiumRequest request) throws IOException {
-        util = new ValidationErrorsUtil();
+        ValidationErrorsUtil util = new ValidationErrorsUtil();
         if (request.getPersonFirstName() == null || request.getPersonFirstName().isEmpty()) {
             String errorCode = "ERROR_CODE_1";
             return Optional.of(new ValidationError(errorCode, util.getDescriptionByErrorCode(errorCode)));

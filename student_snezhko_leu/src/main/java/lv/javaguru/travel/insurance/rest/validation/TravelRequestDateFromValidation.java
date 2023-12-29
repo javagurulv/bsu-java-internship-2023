@@ -15,11 +15,9 @@ import java.io.IOException;
 @Setter
 @Component
 public class TravelRequestDateFromValidation implements TravelRequestValidation {
-    @Autowired
-    ValidationErrorsUtil util;
     @Override
     public Optional<ValidationError> validate(TravelCalculatePremiumRequest request) throws IOException{
-        util = new ValidationErrorsUtil();
+        ValidationErrorsUtil util = new ValidationErrorsUtil();
         if (request.getAgreementDateFrom() == null) {
             String errorCode = "ERROR_CODE_3";
             return Optional.of(new ValidationError(errorCode, util.getDescriptionByErrorCode(errorCode)));//util.buildError("ERROR_CODE_3"));

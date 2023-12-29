@@ -9,11 +9,9 @@ import java.io.IOException;
 import java.util.Optional;
 
 public class TravelRequestDateToValidation implements TravelRequestValidation {
-    @Autowired
-    ValidationErrorsUtil util;
     @Override
     public Optional<ValidationError> validate(TravelCalculatePremiumRequest request) throws IOException {
-        util = new ValidationErrorsUtil();
+        ValidationErrorsUtil util = new ValidationErrorsUtil();
         if (request.getAgreementDateTo() == null) {
             String errorCode = "ERROR_CODE_5";
             return Optional.of(new ValidationError(errorCode, util.getDescriptionByErrorCode(errorCode)));

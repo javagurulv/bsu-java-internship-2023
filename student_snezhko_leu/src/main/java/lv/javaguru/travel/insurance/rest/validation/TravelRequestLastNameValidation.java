@@ -9,12 +9,10 @@ import java.io.IOException;
 import java.util.Optional;
 
 public class TravelRequestLastNameValidation implements TravelRequestValidation {
-    @Autowired
-    ValidationErrorsUtil util;
     @Override
     public Optional<ValidationError> validate(TravelCalculatePremiumRequest request) throws IOException {
         if (request.getPersonLastName() == null || request.getPersonLastName().isEmpty()) {
-            util = new ValidationErrorsUtil();
+            ValidationErrorsUtil util = new ValidationErrorsUtil();
             String errorCode = "ERROR_CODE_2";
             return Optional.of(new ValidationError(errorCode, util.getDescriptionByErrorCode(errorCode)));
         }
