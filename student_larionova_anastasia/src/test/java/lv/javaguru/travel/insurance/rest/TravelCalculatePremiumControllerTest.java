@@ -46,8 +46,8 @@ public class TravelCalculatePremiumControllerTest {
 
     @Test
     public void simpleRestControllerDateFromIsEmptyTest() throws Exception{
-        compareRequestAndResponse("rest/TravelCalculatePremiumRequestWithoutDatefrom.json",
-                "rest/TravelCalculatePremiumResponseWithoutDatefrom.json");
+        compareRequestAndResponse("rest/TravelCalculatePremiumRequestWithoutDateFrom.json",
+                "rest/TravelCalculatePremiumResponseWithoutDateFrom.json");
     }
 
     @Test
