@@ -22,6 +22,7 @@ public class TravelRequestDateFromValidation implements TravelRequestValidation 
     */
     @Override
     public Optional<ValidationError> validate(TravelCalculatePremiumRequest request) {
+        //errorFactory = new ValidationErrorFactory();
         /*ValidationErrorsUtil util;
         try {
             util = new ValidationErrorsUtil();

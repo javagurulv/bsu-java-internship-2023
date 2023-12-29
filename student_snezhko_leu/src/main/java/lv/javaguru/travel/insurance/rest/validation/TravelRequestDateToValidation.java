@@ -30,6 +30,7 @@ public class TravelRequestDateToValidation implements TravelRequestValidation {
         }
 */
 
+//        errorFactory = new ValidationErrorFactory();
         if (request.getAgreementDateTo() == null) {
             String errorCode = "ERROR_CODE_5";
             return Optional.of(errorFactory.buildError(errorCode));

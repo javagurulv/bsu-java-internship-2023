@@ -2,7 +2,9 @@ package lv.javaguru.travel.insurance.rest.validation;
 
 import lv.javaguru.travel.insurance.core.ValidationError;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ValidationErrorFactory {
     @Autowired
     private ValidationErrorsUtil util;

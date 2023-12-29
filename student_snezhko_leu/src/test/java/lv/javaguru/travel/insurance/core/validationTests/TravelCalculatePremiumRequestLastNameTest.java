@@ -1,47 +1,42 @@
 package lv.javaguru.travel.insurance.core.validationTests;
 
-import lv.javaguru.travel.insurance.rest.InsurancePremiumRisk;
+import lv.javaguru.travel.insurance.core.ValidationError;
 import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
-
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.util.AssertionErrors.assertTrue;
-
+import lv.javaguru.travel.insurance.rest.TravelRequestValidation;
 import lv.javaguru.travel.insurance.rest.validation.TravelRequestFirstNameValidation;
+import lv.javaguru.travel.insurance.rest.validation.TravelRequestLastNameValidation;
 import lv.javaguru.travel.insurance.rest.validation.ValidationErrorFactory;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.springframework.test.util.ReflectionTestUtils;
 
 import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
-import lv.javaguru.travel.insurance.rest.TravelRequestValidation;
-import lv.javaguru.travel.insurance.core.ValidationError;
+import static lv.javaguru.travel.insurance.core.validationTests.TravelCalculatePremiumRequestFirstNameValidatorTest.isEqual;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.util.AssertionErrors.assertTrue;
 
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.springframework.test.util.ReflectionTestUtils;
-
-public class TravelCalculatePremiumRequestFirstNameValidatorTest {
+public class TravelCalculatePremiumRequestLastNameTest {
     private TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
     @InjectMocks
-    private TravelRequestValidation validator = new TravelRequestFirstNameValidation();
+    private TravelRequestValidation validator = new TravelRequestLastNameValidation();
     @Mock
     private ValidationErrorFactory errorFactory = mock(ValidationErrorFactory.class);
-    public static boolean isEqual(ValidationError e1, ValidationError e2) {
-        return e1.getErrorCode().equals(e2.getErrorCode()) && e1.getDescription().equals(e2.getDescription());
-    }
 
     @Test
-    public void TravelCalculatePremiumRequestValidatorFirstNameTest() {
-        when(request.getPersonFirstName()).thenReturn("");
-        when(request.getPersonLastName()).thenReturn("Last Name");
+    public void TravelCalculatePremiumRequestValidatorLastNameTest() {
+        when(request.getPersonFirstName()).thenReturn("First Name");
+        when(request.getPersonLastName()).thenReturn("");
         when(request.getAgreementDateFrom()).thenReturn(Date.valueOf("2026-05-03"));
         when(request.getAgreementDateTo()).thenReturn(Date.valueOf("2026-10-03"));
         when(request.getSelected_risks()).thenReturn(List.of("MEDICAL RISK"));
 
-        String errorCode = "ERROR_CODE_1";
-        String description = "Field personFirstName is empty!";
+        String errorCode = "ERROR_CODE_2";
+        String description = "Field personLastName is empty!";
 
         when(errorFactory.buildError(errorCode)).thenReturn(new ValidationError(errorCode, description));
         ReflectionTestUtils.setField(validator, "errorFactory", errorFactory);
@@ -49,6 +44,4 @@ public class TravelCalculatePremiumRequestFirstNameValidatorTest {
         Optional<ValidationError> error = validator.validate(request);
         assertTrue("",isEqual(error.get(), new ValidationError(errorCode, description)));
     }
-
-
 }

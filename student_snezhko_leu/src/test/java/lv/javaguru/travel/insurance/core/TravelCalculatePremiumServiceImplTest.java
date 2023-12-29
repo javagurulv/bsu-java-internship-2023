@@ -33,13 +33,16 @@ TravelCalculatePremiumServiceImplTest {
     TravelCalculatePremiumRequestLogger requestLogger;
     @Mock
     TravelCalculatePremiumRequestExecutionTimeLogger timeLogger;
-    @Mock
-    TravelCalculatePremiumRequestValidator validator;
-/*
+
+    TravelCalculatePremiumRequestValidator validator = mock(TravelCalculatePremiumRequestValidator.class);
+
+    TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
     @Test
     public void hasErrorsTest() {
-        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
-        List<ValidationError> errors = List.of(new ValidationError("ERROR_CODE_1", "Field personFirstName is empty!"));
+        String errorCode = "ERROR_CODE_1";
+        String description = "Field personFirstName is empty!";
+        List<ValidationError> errors = List.of(new ValidationError(errorCode, description));
+        when(request.getPersonFirstName()).thenReturn("First Name");
         when(validator.validate(request)).thenReturn(errors);
         TravelCalculatePremiumResponse response = test.calculatePremium(request);
         assertTrue(response.hasErrors());
@@ -102,5 +105,5 @@ TravelCalculatePremiumServiceImplTest {
         assertEquals(response.getAgreementDateTo(), new Date(2000));
     }
 
- */
+
 }

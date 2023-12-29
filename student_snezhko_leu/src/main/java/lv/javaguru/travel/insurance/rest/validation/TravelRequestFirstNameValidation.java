@@ -29,6 +29,7 @@ ValidationErrorFactory errorFactory;
             return Optional.of(new ValidationError("ERROR_CODE_0", "IOException is errorCode.properties!"));//util.buildError("ERROR_CODE_3"));
         }
 */
+        //errorFactory = new ValidationErrorFactory();
         if (request.getPersonFirstName() == null || request.getPersonFirstName().isEmpty()) {
             String errorCode = "ERROR_CODE_1";
             return Optional.of(errorFactory.buildError(errorCode));

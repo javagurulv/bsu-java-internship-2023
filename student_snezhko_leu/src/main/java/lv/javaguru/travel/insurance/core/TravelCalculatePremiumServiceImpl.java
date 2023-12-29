@@ -14,13 +14,15 @@ import java.util.List;
 @Component
 class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService {
 
-//    @Autowired
-    private TravelCalculatePremiumRequestValidator validator = new TravelCalculatePremiumRequestValidator();
+    @Autowired
+
+    private TravelCalculatePremiumRequestValidator validator;
     @Autowired private TravelCalculatePremiumRequestLogger requestLogger;
     @Autowired private TravelCalculatePremiumResponseLogger responseLogger;
     @Autowired private TravelCalculatePremiumRequestExecutionTimeLogger requestTimeLogger;
     @Override
     public TravelCalculatePremiumResponse calculatePremium(TravelCalculatePremiumRequest request) {
+//        validator = new TravelCalculatePremiumRequestValidator();
         final Stopwatch stopWatch = Stopwatch.createStarted();
         List<ValidationError> errors = validator.validate(request);
         requestLogger.log(request);

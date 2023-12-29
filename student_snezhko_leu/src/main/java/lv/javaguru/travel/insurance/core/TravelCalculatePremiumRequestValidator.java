@@ -18,7 +18,7 @@ class TravelCalculatePremiumRequestValidator {
     @Autowired
     List<TravelRequestValidation> validations;
     public List<ValidationError> validate(TravelCalculatePremiumRequest request) {
-        //List<TravelRequestValidation> validations = new ArrayList<>();
+  //      List<TravelRequestValidation> validations = new ArrayList<>();
         List<ValidationError> errors = new ArrayList<>();
         /*
         validatePersonFirstName(request).ifPresent(errors::add);
@@ -26,7 +26,7 @@ class TravelCalculatePremiumRequestValidator {
         validateAgreementDateFrom(request).ifPresent(errors::add);
         validateAgreementDateTo(request).ifPresent(errors::add);
         */
-        /*
+/*
         validations.add(new TravelRequestFirstNameValidation());
         validations.add(new TravelRequestLastNameValidation());
         validations.add(new TravelRequestDateFromValidation());

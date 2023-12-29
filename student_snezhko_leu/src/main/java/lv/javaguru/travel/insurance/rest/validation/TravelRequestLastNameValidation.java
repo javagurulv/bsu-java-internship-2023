@@ -18,6 +18,7 @@ public class TravelRequestLastNameValidation implements TravelRequestValidation 
 ValidationErrorFactory errorFactory;
     @Override
     public Optional<ValidationError> validate(TravelCalculatePremiumRequest request) {
+        //errorFactory = new ValidationErrorFactory();
         if (request.getPersonLastName() == null || request.getPersonLastName().isEmpty()) {
            /*
             ValidationErrorsUtil util;
