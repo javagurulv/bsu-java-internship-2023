@@ -33,6 +33,36 @@ public class TravelCalculatePremiumControllerTest {
     }
 
     @Test
+    public void simpleRestControllerFirstNameIsEmptyTest() throws Exception{
+        compareRequestAndResponse("rest/TravelCalculatePremiumRequestWithoutFirstName.json",
+                "rest/TravelCalculatePremiumResponseWithoutFirstName.json");
+    }
+
+    @Test
+    public void simpleRestControllerLastNameIsEmptyTest() throws Exception{
+        compareRequestAndResponse("rest/TravelCalculatePremiumRequestWithoutLastName.json",
+                "rest/TravelCalculatePremiumResponseWithoutLastName.json");
+    }
+
+    @Test
+    public void simpleRestControllerDateFromIsEmptyTest() throws Exception{
+        compareRequestAndResponse("rest/TravelCalculatePremiumRequestWithoutDatefrom.json",
+                "rest/TravelCalculatePremiumResponseWithoutDatefrom.json");
+    }
+
+    @Test
+    public void simpleRestControllerDateToIsEmptyTest() throws Exception{
+        compareRequestAndResponse("rest/TravelCalculatePremiumRequestWithoutDateTo.json",
+                "rest/TravelCalculatePremiumResponseWithoutDateTo.json");
+    }
+
+    @Test
+    public void simpleRestControllerDateToEarlierDateFromTest() throws Exception{
+        compareRequestAndResponse("rest/TravelCalculatePremiumRequestWithErrorDateToEarlierDateFrom.json",
+                "rest/TravelCalculatePremiumResponseWithErrorDateToEarlierDateFrom.json");
+    }
+
+    @Test
     public void simpleRestControllerTest() throws Exception {
         mockMvc.perform(post("/insurance/travel/")
                         .content("{" +
