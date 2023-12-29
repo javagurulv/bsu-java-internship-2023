@@ -32,11 +32,7 @@ class TravelCalculatePremiumRequestValidator {
 
             validations.forEach(validation -> {
                 Optional<ValidationError> error = null;
-                try {
-                    error = validation.validate(request);
-                } catch (IOException e) {
-                    errors.add(new ValidationError("MY_ERROR_CODE", "IOException by errors properties file"));
-                }
+                error = validation.validate(request);
                 if (!error.isEmpty()) {
                     errors.add(error.get());
                 }

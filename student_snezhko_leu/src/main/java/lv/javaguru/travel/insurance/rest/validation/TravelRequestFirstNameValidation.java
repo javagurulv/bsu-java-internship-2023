@@ -11,9 +11,20 @@ import java.util.Optional;
 
 @Setter
 public class TravelRequestFirstNameValidation implements TravelRequestValidation {
+/*
+    @Autowired
+    ValidationErrorsUtil util;
+*/
     @Override
-    public Optional<ValidationError> validate(TravelCalculatePremiumRequest request) throws IOException {
-        ValidationErrorsUtil util = new ValidationErrorsUtil();
+    public Optional<ValidationError> validate(TravelCalculatePremiumRequest request) {
+        //ValidationErrorsUtil util = new ValidationErrorsUtil();
+        ValidationErrorsUtil util;
+        try {
+            util = new ValidationErrorsUtil();
+        }
+        catch (IOException e) {
+            return Optional.of(new ValidationError("ERROR_CODE_0", "IOException is errorCode.properties!"));//util.buildError("ERROR_CODE_3"));
+        }
         if (request.getPersonFirstName() == null || request.getPersonFirstName().isEmpty()) {
             String errorCode = "ERROR_CODE_1";
             return Optional.of(new ValidationError(errorCode, util.getDescriptionByErrorCode(errorCode)));
