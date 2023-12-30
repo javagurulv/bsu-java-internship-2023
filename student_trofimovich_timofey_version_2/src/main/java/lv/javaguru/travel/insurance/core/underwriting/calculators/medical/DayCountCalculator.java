@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 class DayCountCalculator {
     @Autowired
     private DateTimeUtil dateTimeUtil;
+
     long getNumberOfDays(AgreementDTO agreement) {
         return dateTimeUtil.getDaysBetween(agreement.getAgreementDateFrom(), agreement.getAgreementDateTo());
     }

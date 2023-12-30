@@ -5,6 +5,7 @@ import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import lv.javaguru.travel.insurance.core.domain.ClassifierValue;
 import lv.javaguru.travel.insurance.core.repositories.ClassifierValueRepository;
 import lv.javaguru.travel.insurance.core.validations.ValidationErrorFactory;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -22,14 +23,20 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 public class SelectedRisksValidationTest {
     @Mock
-    ValidationErrorFactory factory;
+    private ValidationErrorFactory factory;
     @Mock
-    ClassifierValueRepository classifierValueRepository;
+    private ClassifierValueRepository classifierValueRepository;
     @InjectMocks
     private SelectedRisksValidation validation;
+    private AgreementDTO agreement;
+
+    @BeforeEach
+    void init() {
+        agreement = mock(AgreementDTO.class);
+    }
+
     @Test
     void shouldReturnErrorWhenSelectedRisksListIsEmpty() {
-        AgreementDTO agreement = mock(AgreementDTO.class);
         when(agreement.getSelectedRisks()).thenReturn(Collections.emptyList());
         when(factory.buildError("ERROR_CODE_8")).thenReturn(new ValidationErrorDTO("ERROR_CODE_8", "Selected risks list must not be empty!"));
         Optional<ValidationErrorDTO> validationError = validation.validate(agreement);
@@ -40,7 +47,6 @@ public class SelectedRisksValidationTest {
 
     @Test
     void shouldReturnErrorWhenSelectedRisksListIsNull() {
-        AgreementDTO agreement = mock(AgreementDTO.class);
         when(agreement.getSelectedRisks()).thenReturn(null);
         when(factory.buildError("ERROR_CODE_8")).thenReturn(new ValidationErrorDTO("ERROR_CODE_8", "Selected risks list must not be empty!"));
         Optional<ValidationErrorDTO> validationError = validation.validate(agreement);
@@ -51,7 +57,6 @@ public class SelectedRisksValidationTest {
 
     @Test
     void shouldNotReturnError() {
-        AgreementDTO agreement = mock(AgreementDTO.class);
         when(agreement.getSelectedRisks()).thenReturn(List.of("RISK_IC_1"));
         when(classifierValueRepository
                 .findByClassifierTitleAndIc("RISK_TYPE", "RISK_IC_1"))
@@ -64,7 +69,6 @@ public class SelectedRisksValidationTest {
 
     @Test
     void shouldReturnRiskNotFoundException() {
-        AgreementDTO agreement = mock(AgreementDTO.class);
         when(agreement.getSelectedRisks()).thenReturn(List.of("RISK_IC_1", "RISK_IC_2"));
         when(classifierValueRepository
                 .findByClassifierTitleAndIc("RISK_TYPE", "RISK_IC_1"))

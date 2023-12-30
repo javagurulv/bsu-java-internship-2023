@@ -9,9 +9,9 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-public class DateOfBirthIsNotEmptyValidaton extends TravelPersonFieldValidationImpl {
+class DateOfBirthIsNotEmptyValidation extends TravelPersonFieldValidationImpl {
     @Autowired
-    ValidationErrorFactory errorFactory;
+    private ValidationErrorFactory errorFactory;
 
     @Override
     public Optional<ValidationErrorDTO> validate(PersonDTO person) {

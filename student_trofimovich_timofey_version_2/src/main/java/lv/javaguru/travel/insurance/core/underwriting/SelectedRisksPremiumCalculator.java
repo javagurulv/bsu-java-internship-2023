@@ -13,6 +13,7 @@ import java.util.List;
 class SelectedRisksPremiumCalculator {
     @Autowired
     private List<TravelRiskPremiumCalculator> riskPremiumCalculators;
+
     List<RiskDTO> calculatePremiumForAllRisks(AgreementDTO agreement, PersonDTO person) {
         return agreement.getSelectedRisks().stream()
                 .map(riskIc -> new RiskDTO(riskIc, calculatePremiumForRisk(riskIc, agreement, person)))

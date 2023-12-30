@@ -19,17 +19,18 @@ class InsuranceLimitCoefficientCalculator {
     private MedicalRiskLimitLevelRepository repository;
 
 
-
     BigDecimal getInsuranceLimitCoefficient(AgreementDTO agreement) {
         return limitLevelIsEnabled ? getCoefficientFromDB(agreement) : getDefaultCoefficient();
     }
+
     private BigDecimal getCoefficientFromDB(AgreementDTO agreement) {
         Optional<MedicalRiskLimitLevel> limitLevel = repository.findByMedicalRiskLimitLevelIc(agreement.getMedicalRiskLimitLevel());
         return limitLevel.map(MedicalRiskLimitLevel::getCoefficient)
                 .orElseThrow(() -> new RuntimeException("Insurance limit level coefficient not found for limit level ic: "
                         + agreement.getMedicalRiskLimitLevel()));
     }
-    private  BigDecimal getDefaultCoefficient() {
+
+    private BigDecimal getDefaultCoefficient() {
         return BigDecimal.ONE;
     }
 }

@@ -16,7 +16,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @ExtendWith(SpringExtension.class)
 @DataJpaTest
 public class AgeCoefficentRepositoryTest {
-    @Autowired AgeCoefficientRepository repository;
+    @Autowired
+    private AgeCoefficientRepository repository;
 
     @Test
     public void injectedRepositoryIsNotNull() {
@@ -29,24 +30,28 @@ public class AgeCoefficentRepositoryTest {
         assertThat(coefficient.isPresent());
         assertThat(coefficient.get().getCoefficient().stripTrailingZeros()).isEqualTo(new BigDecimal("1.1"));
     }
+
     @Test
     public void shouldFindAgeCoefficientForAgeGroup2() {
         Optional<AgeCoefficient> coefficient = repository.findCoefficient(7);
         assertThat(coefficient.isPresent());
         assertThat(coefficient.get().getCoefficient().stripTrailingZeros()).isEqualTo(new BigDecimal("0.7"));
     }
+
     @Test
     public void shouldFindAgeCoefficientForAgeGroup3() {
         Optional<AgeCoefficient> coefficient = repository.findCoefficient(15);
         assertThat(coefficient.isPresent());
         assertThat(coefficient.get().getCoefficient().stripTrailingZeros()).isEqualTo(new BigDecimal("1"));
     }
+
     @Test
     public void shouldFindAgeCoefficientForAgeGroup4() {
         Optional<AgeCoefficient> coefficient = repository.findCoefficient(30);
         assertThat(coefficient.isPresent());
         assertThat(coefficient.get().getCoefficient().stripTrailingZeros()).isEqualTo(new BigDecimal("1.1"));
     }
+
     @Test
     public void shouldFindAgeCoefficientForAgeGroup5() {
         Optional<AgeCoefficient> coefficient = repository.findCoefficient(50);

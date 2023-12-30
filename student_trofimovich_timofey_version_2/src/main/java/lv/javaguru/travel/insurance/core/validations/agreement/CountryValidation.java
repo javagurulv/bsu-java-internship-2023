@@ -14,20 +14,20 @@ import java.util.Optional;
 @Component
 public class CountryValidation extends TravelAgreementFieldValidationImpl {
     @Autowired
-    ValidationErrorFactory errorFactory;
+    private ValidationErrorFactory errorFactory;
     @Autowired
-    ClassifierValueRepository classifierValueRepository;
+    private ClassifierValueRepository classifierValueRepository;
 
     @Override
     public Optional<ValidationErrorDTO> validate(AgreementDTO agreement) {
-            if (countryIsEmpty(agreement)) {
-                return Optional.of(errorFactory.buildError("ERROR_CODE_10"));
-            }
-            else if (!countryIsRecognised(agreement)) {
-                return Optional.of(errorFactory.buildError("ERROR_CODE_11", List.of(new Placeholder("country", agreement.getCountry()))));
-            }
+        if (countryIsEmpty(agreement)) {
+            return Optional.of(errorFactory.buildError("ERROR_CODE_10"));
+        } else if (!countryIsRecognised(agreement)) {
+            return Optional.of(errorFactory.buildError("ERROR_CODE_11", List.of(new Placeholder("country", agreement.getCountry()))));
+        }
         return Optional.empty();
     }
+
     private boolean countryIsEmpty(AgreementDTO agreement) {
         return agreement.getCountry() == null || agreement.getCountry().isBlank();
     }

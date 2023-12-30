@@ -3,6 +3,7 @@ package lv.javaguru.travel.insurance.core.validations.agreement;
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import lv.javaguru.travel.insurance.core.validations.ValidationErrorFactory;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -19,16 +20,21 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 public class DateToValidatonTest {
     @Mock
-    ValidationErrorFactory factory;
+    private ValidationErrorFactory factory;
     @InjectMocks
     private DateToValidation validation;
+    private AgreementDTO agreement;
+
+    @BeforeEach
+    void init() {
+        agreement = mock(AgreementDTO.class);
+    }
 
 
     @Test
     void shouldReturnErrorWhenAgreementDateFromIsEmpty() {
-        AgreementDTO agreement = mock(AgreementDTO.class);
         when(agreement.getAgreementDateTo()).thenReturn(null);
-        when(factory.buildError("ERROR_CODE_4")).thenReturn(new ValidationErrorDTO("ERROR_CODE_4","Date to field must not be empty!"));
+        when(factory.buildError("ERROR_CODE_4")).thenReturn(new ValidationErrorDTO("ERROR_CODE_4", "Date to field must not be empty!"));
         Optional<ValidationErrorDTO> validationError = validation.validate(agreement);
         assertThat(validationError).isPresent();
         assertThat(validationError.get().getErrorCode()).isEqualTo("ERROR_CODE_4");
@@ -37,7 +43,6 @@ public class DateToValidatonTest {
 
     @Test
     void shouldNotReturnError() {
-        AgreementDTO agreement = mock(AgreementDTO.class);
         when(agreement.getAgreementDateTo()).thenReturn(new Date());
         Optional<ValidationErrorDTO> validationError = validation.validate(agreement);
         assertThat(validationError).isEmpty();

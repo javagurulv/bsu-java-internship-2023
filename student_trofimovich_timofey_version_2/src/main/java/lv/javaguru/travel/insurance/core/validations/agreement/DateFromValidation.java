@@ -12,7 +12,8 @@ import java.util.Optional;
 @Component
 class DateFromValidation extends TravelAgreementFieldValidationImpl {
     @Autowired
-    ValidationErrorFactory factory;
+    private ValidationErrorFactory factory;
+
     @Override
     public Optional<ValidationErrorDTO> validate(AgreementDTO agreement) {
         return (agreement.getAgreementDateFrom() == null)
