@@ -20,7 +20,7 @@ public class AgeCoefficientCalculator {
     @Value("${age.coefficient.enabled:false}")
     boolean ageCoefficientEnabled;
 
-    public BigDecimal getAgeCoefficient(PersonDTO person) {
+    BigDecimal getAgeCoefficient(PersonDTO person) {
         return ageCoefficientEnabled ?
                 calculateAgeCoefficient(person)
                 : getDefaultAgeCoefficient();

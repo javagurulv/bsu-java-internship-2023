@@ -19,7 +19,7 @@ public class InsuranceLimitCoefficientCalculator {
     private MedicalRiskLimitLevelRepository repository;
 
 
-    public BigDecimal getInsuranceLimitCoefficient(AgreementDTO agreement) {
+     BigDecimal getInsuranceLimitCoefficient(AgreementDTO agreement) {
         return limitLevelIsEnabled ? getCoefficientFromDB(agreement) : getDefaultCoefficient();
     }
 

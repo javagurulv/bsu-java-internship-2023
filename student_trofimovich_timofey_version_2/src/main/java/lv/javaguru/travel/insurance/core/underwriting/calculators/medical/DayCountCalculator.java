@@ -10,7 +10,7 @@ public class DayCountCalculator {
     @Autowired
     private DateTimeUtil dateTimeUtil;
 
-    public long getNumberOfDays(AgreementDTO agreement) {
+     long getNumberOfDays(AgreementDTO agreement) {
         return dateTimeUtil.getDaysBetween(agreement.getAgreementDateFrom(), agreement.getAgreementDateTo());
     }
 }
