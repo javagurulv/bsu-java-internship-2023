@@ -21,8 +21,7 @@ public class ValidationErrorsUtil {
     private Properties property;
 
     public ValidationErrorsUtil() throws IOException {
-
-          ClassPathResource resource = new ClassPathResource("errorCodes.properties");
+        ClassPathResource resource = new ClassPathResource("ErrorCodes.properties");
         property = PropertiesLoaderUtils.loadProperties(resource);
 
 

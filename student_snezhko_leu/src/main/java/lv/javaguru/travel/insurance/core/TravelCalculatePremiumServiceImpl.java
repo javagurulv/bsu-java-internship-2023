@@ -15,7 +15,6 @@ import java.util.List;
 class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService {
 
     @Autowired
-
     private TravelCalculatePremiumRequestValidator validator;
     @Autowired private TravelCalculatePremiumRequestLogger requestLogger;
     @Autowired private TravelCalculatePremiumResponseLogger responseLogger;
