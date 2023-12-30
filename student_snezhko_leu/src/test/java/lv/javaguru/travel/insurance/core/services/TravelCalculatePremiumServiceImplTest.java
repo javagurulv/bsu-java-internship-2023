@@ -1,6 +1,9 @@
-package lv.javaguru.travel.insurance.core;
+package lv.javaguru.travel.insurance.core.services;
 
-import lv.javaguru.travel.insurance.rest.InsurancePremiumRisk;
+import lv.javaguru.travel.insurance.core.TravelCalculatePremiumRequestValidator;
+import lv.javaguru.travel.insurance.core.ValidationError;
+import lv.javaguru.travel.insurance.core.services.TravelCalculatePremiumServiceImpl;
+import lv.javaguru.travel.insurance.core.underwriting.TravelUnderwriting;
 import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumResponse;
 
@@ -9,7 +12,6 @@ import java.util.*;
 import lv.javaguru.travel.insurance.rest.loggers.TravelCalculatePremiumRequestExecutionTimeLogger;
 import lv.javaguru.travel.insurance.rest.loggers.TravelCalculatePremiumRequestLogger;
 import lv.javaguru.travel.insurance.rest.loggers.TravelCalculatePremiumResponseLogger;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -26,7 +28,8 @@ import static org.mockito.Mockito.when;
 class
 TravelCalculatePremiumServiceImplTest {
 
-    @InjectMocks TravelCalculatePremiumServiceImpl test;
+    @InjectMocks
+    TravelCalculatePremiumServiceImpl test;
     @Mock
     TravelCalculatePremiumResponseLogger responseLogger;
     @Mock
@@ -34,6 +37,8 @@ TravelCalculatePremiumServiceImplTest {
     @Mock
     TravelCalculatePremiumRequestExecutionTimeLogger timeLogger;
 
+    @Mock
+    TravelUnderwriting underwriting;
     TravelCalculatePremiumRequestValidator validator = mock(TravelCalculatePremiumRequestValidator.class);
 
     TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
@@ -69,6 +74,7 @@ TravelCalculatePremiumServiceImplTest {
         when(request.getPersonLastName()).thenReturn("LastName");
         when(request.getAgreementDateFrom()).thenReturn(new Date(1000));
         when(request.getAgreementDateTo()).thenReturn(new Date(2000));
+        //when(underwriting.calculatePremium())
 //        when(request.getSelected_risks()).thenReturn(risks);
         TravelCalculatePremiumResponse response = test.buildResponse(request);
         assertEquals(response.getPersonFirstName(), "FirstName");

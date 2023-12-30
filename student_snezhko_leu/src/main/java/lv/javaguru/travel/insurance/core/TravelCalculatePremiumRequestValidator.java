@@ -14,7 +14,7 @@ import java.util.*;
 
 
 @Component
-class TravelCalculatePremiumRequestValidator {
+public class TravelCalculatePremiumRequestValidator {       //will make default access mod
     @Autowired
     List<TravelRequestValidation> validations;
     public List<ValidationError> validate(TravelCalculatePremiumRequest request) {

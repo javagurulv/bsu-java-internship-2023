@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.rest.validation;
+package lv.javaguru.travel.insurance.core.util;
 
 import lv.javaguru.travel.insurance.core.ValidationError;
 import org.springframework.beans.factory.annotation.Autowired;
