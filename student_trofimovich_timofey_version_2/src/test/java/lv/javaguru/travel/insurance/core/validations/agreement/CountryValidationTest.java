@@ -9,6 +9,8 @@ import lv.javaguru.travel.insurance.core.validations.ValidationErrorFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -34,16 +36,10 @@ public class CountryValidationTest {
         agreement = mock(AgreementDTO.class);
     }
 
-    @Test
-    void shouldReturnEmptyCountryError() {
-        when(agreement.getCountry()).thenReturn("");
-        when(errorFactory.buildError("ERROR_CODE_10")).thenReturn(new ValidationErrorDTO());
-        assertThat(validation.validate(agreement)).isPresent();
-    }
-
-    @Test
-    void shouldReturnNullCountryError() {
-        when(agreement.getCountry()).thenReturn(null);
+    @ParameterizedTest
+    @NullAndEmptySource
+    void shouldReturnEmptyOrNullCountryError(String country) {
+        when(agreement.getCountry()).thenReturn(country);
         when(errorFactory.buildError("ERROR_CODE_10")).thenReturn(new ValidationErrorDTO());
         assertThat(validation.validate(agreement)).isPresent();
     }

@@ -6,6 +6,8 @@ import lv.javaguru.travel.insurance.core.validations.ValidationErrorFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullSource;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -31,9 +33,10 @@ public class DateFromValidationTest {
         agreement = mock(AgreementDTO.class);
     }
 
-    @Test
-    void shouldReturnErrorWhenAgreementDateFromIsEmpty() {
-        when(agreement.getAgreementDateFrom()).thenReturn(null);
+    @ParameterizedTest
+    @NullSource
+    void shouldReturnErrorWhenAgreementDateFromIsNull(Date date) {
+        when(agreement.getAgreementDateFrom()).thenReturn(date);
         when(factory.buildError("ERROR_CODE_3")).thenReturn(new ValidationErrorDTO("ERROR_CODE_3", "Date from field must not be empty!"));
         Optional<ValidationErrorDTO> validationError = validation.validate(agreement);
         assertThat(validationError).isPresent();

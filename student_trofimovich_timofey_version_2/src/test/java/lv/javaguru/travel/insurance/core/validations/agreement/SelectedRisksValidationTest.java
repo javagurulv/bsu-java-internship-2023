@@ -8,11 +8,12 @@ import lv.javaguru.travel.insurance.core.validations.ValidationErrorFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,19 +36,10 @@ public class SelectedRisksValidationTest {
         agreement = mock(AgreementDTO.class);
     }
 
-    @Test
-    void shouldReturnErrorWhenSelectedRisksListIsEmpty() {
-        when(agreement.getSelectedRisks()).thenReturn(Collections.emptyList());
-        when(factory.buildError("ERROR_CODE_8")).thenReturn(new ValidationErrorDTO("ERROR_CODE_8", "Selected risks list must not be empty!"));
-        Optional<ValidationErrorDTO> validationError = validation.validate(agreement);
-        assertThat(validationError).isPresent();
-        assertThat(validationError.get().getErrorCode()).isEqualTo("ERROR_CODE_8");
-        assertThat(validationError.get().getDescription()).isEqualTo("Selected risks list must not be empty!");
-    }
-
-    @Test
-    void shouldReturnErrorWhenSelectedRisksListIsNull() {
-        when(agreement.getSelectedRisks()).thenReturn(null);
+    @ParameterizedTest
+    @NullAndEmptySource
+    void shouldReturnErrorWhenSelectedRisksListIsEmptyOrNull(List<String> risks) {
+        when(agreement.getSelectedRisks()).thenReturn(risks);
         when(factory.buildError("ERROR_CODE_8")).thenReturn(new ValidationErrorDTO("ERROR_CODE_8", "Selected risks list must not be empty!"));
         Optional<ValidationErrorDTO> validationError = validation.validate(agreement);
         assertThat(validationError).isPresent();

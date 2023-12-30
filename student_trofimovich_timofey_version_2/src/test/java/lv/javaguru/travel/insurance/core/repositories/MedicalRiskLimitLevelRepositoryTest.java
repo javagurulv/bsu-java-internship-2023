@@ -4,6 +4,8 @@ package lv.javaguru.travel.insurance.core.repositories;
 import lv.javaguru.travel.insurance.core.domain.MedicalRiskLimitLevel;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -24,25 +26,10 @@ public class MedicalRiskLimitLevelRepositoryTest {
         assertThat(repository).isNotNull();
     }
 
-
-    @Test
-    void shouldFindCoefficientForLimit_10000() {
-        checkIfCoefficientForLimitIcExists("LEVEL_10000");
-    }
-
-    @Test
-    void shouldFindCoefficientForLimit_15000() {
-        checkIfCoefficientForLimitIcExists("LEVEL_15000");
-    }
-
-    @Test
-    void shouldFindCoefficientForLimit_20000() {
-        checkIfCoefficientForLimitIcExists("LEVEL_20000");
-    }
-
-    @Test
-    void shouldFindCoefficientForLimit_50000() {
-        checkIfCoefficientForLimitIcExists("LEVEL_50000");
+    @ParameterizedTest
+    @ValueSource(strings = {"LEVEL_10000", "LEVEL_15000", "LEVEL_20000", "LEVEL_50000"})
+    void shouldFindCoefficientForLimit(String limit) {
+        checkIfCoefficientForLimitIcExists(limit);
     }
 
     @Test

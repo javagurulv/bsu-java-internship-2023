@@ -18,7 +18,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class DateToValidatonTest {
+public class DateToValidationTest {
     @Mock
     private ValidationErrorFactory factory;
     @InjectMocks
@@ -32,7 +32,7 @@ public class DateToValidatonTest {
 
 
     @Test
-    void shouldReturnErrorWhenAgreementDateFromIsEmpty() {
+    void shouldReturnErrorWhenAgreementDateFromIsNull() {
         when(agreement.getAgreementDateTo()).thenReturn(null);
         when(factory.buildError("ERROR_CODE_4")).thenReturn(new ValidationErrorDTO("ERROR_CODE_4", "Date to field must not be empty!"));
         Optional<ValidationErrorDTO> validationError = validation.validate(agreement);

@@ -6,6 +6,8 @@ import lv.javaguru.travel.insurance.core.validations.ValidationErrorFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -29,19 +31,10 @@ public class LastNameValidationTest {
         person = mock(PersonDTO.class);
     }
 
-    @Test
-    void shouldReturnErrorWhenLastNameIsNull() {
-        when(person.getPersonLastName()).thenReturn(null);
-        when(factory.buildError("ERROR_CODE_2")).thenReturn(new ValidationErrorDTO("ERROR_CODE_2", "Last name must not be empty!"));
-        Optional<ValidationErrorDTO> ValidationErrorDTO = validation.validate(person);
-        assertThat(ValidationErrorDTO).isPresent();
-        assertThat(ValidationErrorDTO.get().getErrorCode()).isEqualTo("ERROR_CODE_2");
-        assertThat(ValidationErrorDTO.get().getDescription()).isEqualTo("Last name must not be empty!");
-    }
-
-    @Test
-    void shouldReturnErrorWhenLastNameIsEmpty() {
-        when(person.getPersonLastName()).thenReturn("");
+    @ParameterizedTest
+    @NullAndEmptySource
+    void shouldReturnErrorWhenLastNameIsNullOrEmpty(String lastName) {
+        when(person.getPersonLastName()).thenReturn(lastName);
         when(factory.buildError("ERROR_CODE_2")).thenReturn(new ValidationErrorDTO("ERROR_CODE_2", "Last name must not be empty!"));
         Optional<ValidationErrorDTO> ValidationErrorDTO = validation.validate(person);
         assertThat(ValidationErrorDTO).isPresent();

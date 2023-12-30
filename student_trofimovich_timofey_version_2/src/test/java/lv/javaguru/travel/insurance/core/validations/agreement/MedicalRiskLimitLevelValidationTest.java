@@ -8,6 +8,8 @@ import lv.javaguru.travel.insurance.core.validations.ValidationErrorFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -18,7 +20,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class MedicalRiskLimitLevelValidatonTest {
+public class MedicalRiskLimitLevelValidationTest {
     @Mock
     private ValidationErrorFactory factory;
     @Mock
@@ -32,19 +34,14 @@ public class MedicalRiskLimitLevelValidatonTest {
         agreement = mock(AgreementDTO.class);
     }
 
-    @Test
-    void shouldReturnEmptyLimitLevelError() {
-        when(agreement.getMedicalRiskLimitLevel()).thenReturn("");
+    @ParameterizedTest
+    @NullAndEmptySource
+    void shouldReturnEmptyOrNullLimitLevelError(String limit_level) {
+        when(agreement.getMedicalRiskLimitLevel()).thenReturn(limit_level);
         when(factory.buildError("ERROR_CODE_14")).thenReturn(new ValidationErrorDTO());
         assertThat(validation.validate(agreement)).isPresent();
     }
 
-    @Test
-    void shouldReturnNullLimitLevelError() {
-        when(agreement.getMedicalRiskLimitLevel()).thenReturn(null);
-        when(factory.buildError("ERROR_CODE_14")).thenReturn(new ValidationErrorDTO());
-        assertThat(validation.validate(agreement)).isPresent();
-    }
 
     @Test
     void shouldReturnLimitNotSupportedError() {
