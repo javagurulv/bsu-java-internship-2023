@@ -14,13 +14,13 @@ import java.time.ZoneId;
 import java.util.Date;
 
 @Component
-class AgeCoefficientCalculator {
+public class AgeCoefficientCalculator {
     @Autowired
     private AgeCoefficientRepository ageCoefficientRepository;
     @Value("${age.coefficient.enabled:false}")
     boolean ageCoefficientEnabled;
 
-    BigDecimal getAgeCoefficient(PersonDTO person) {
+    public BigDecimal getAgeCoefficient(PersonDTO person) {
         return ageCoefficientEnabled ?
                 calculateAgeCoefficient(person)
                 : getDefaultAgeCoefficient();

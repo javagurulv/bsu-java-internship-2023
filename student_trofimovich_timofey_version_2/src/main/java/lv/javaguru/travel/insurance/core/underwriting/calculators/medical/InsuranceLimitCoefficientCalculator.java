@@ -12,14 +12,14 @@ import java.math.BigDecimal;
 import java.util.Optional;
 
 @Component
-class InsuranceLimitCoefficientCalculator {
+public class InsuranceLimitCoefficientCalculator {
     @Value("${medical.risk.limit.level.enabled}")
     private boolean limitLevelIsEnabled;
     @Autowired
     private MedicalRiskLimitLevelRepository repository;
 
 
-    BigDecimal getInsuranceLimitCoefficient(AgreementDTO agreement) {
+    public BigDecimal getInsuranceLimitCoefficient(AgreementDTO agreement) {
         return limitLevelIsEnabled ? getCoefficientFromDB(agreement) : getDefaultCoefficient();
     }
 

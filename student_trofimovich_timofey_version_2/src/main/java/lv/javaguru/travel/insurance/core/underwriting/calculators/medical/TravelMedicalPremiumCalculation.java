@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 @Component
-class TravelMedicalPremiumCalculation implements TravelRiskPremiumCalculator {
+public class TravelMedicalPremiumCalculation implements TravelRiskPremiumCalculator {
 
 
     @Autowired
