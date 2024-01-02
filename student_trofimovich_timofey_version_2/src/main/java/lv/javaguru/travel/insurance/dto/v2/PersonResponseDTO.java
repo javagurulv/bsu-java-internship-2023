@@ -26,7 +26,7 @@ public class PersonResponseDTO {
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date dateOfBirth;
+    private Date personBirthDate;
 
     @JsonSerialize(using = BigDecimalSerializer.class)
     private BigDecimal agreementPremium;

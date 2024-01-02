@@ -17,7 +17,7 @@ import static uk.org.webcompere.modelassert.json.JsonAssertions.assertJson;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public abstract class TravelCalculatePremiumControllerTest {
+public abstract class TravelCalculatePremiumControllerV1Test {
 
     @Autowired
     private MockMvc mockMvc;

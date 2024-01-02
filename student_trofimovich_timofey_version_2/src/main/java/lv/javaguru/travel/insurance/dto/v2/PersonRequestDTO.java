@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.xml.crypto.Data;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -15,11 +15,11 @@ import javax.xml.crypto.Data;
 @AllArgsConstructor
 public class PersonRequestDTO {
 
-    private String firstName;
-    private String lastName;
+    private String personFirstName;
+    private String personLastName;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Data dateOfBirth;
+    private Date personBirthDate;
 
 }

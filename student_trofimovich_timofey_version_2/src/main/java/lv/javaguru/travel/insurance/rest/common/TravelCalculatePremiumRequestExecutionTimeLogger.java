@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.rest.v1;
+package lv.javaguru.travel.insurance.rest.common;
 
 import com.google.common.base.Stopwatch;
 import org.slf4j.Logger;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import java.util.concurrent.TimeUnit;
 
 @Component
-class TravelCalculatePremiumRequestExecutionTimeLogger {
+public class TravelCalculatePremiumRequestExecutionTimeLogger {
     public static final Logger logger = LoggerFactory.getLogger(TravelCalculatePremiumRequestExecutionTimeLogger.class);
     public void log(Stopwatch stopwatch) {
         stopwatch.stop();

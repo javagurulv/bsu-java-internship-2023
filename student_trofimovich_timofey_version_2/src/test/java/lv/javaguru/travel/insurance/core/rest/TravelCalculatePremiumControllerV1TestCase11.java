@@ -2,10 +2,10 @@ package lv.javaguru.travel.insurance.core.rest;
 
 import org.junit.jupiter.api.Test;
 
-public class TravelCalculatePremiumControllerTestCase6 extends TravelCalculatePremiumControllerTest {
+public class TravelCalculatePremiumControllerV1TestCase11 extends TravelCalculatePremiumControllerV1Test {
     @Override
     protected String getTestCaseFolderName() {
-        return "test_case_6";
+        return "test_case_11";
     }
     @Test
     public void execute() throws Exception {

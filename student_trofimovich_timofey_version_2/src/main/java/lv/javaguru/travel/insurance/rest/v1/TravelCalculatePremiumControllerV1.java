@@ -7,6 +7,7 @@ import lv.javaguru.travel.insurance.core.services.TravelCalculatePremiumService;
 import lv.javaguru.travel.insurance.dto.v1.DTOV1Converter;
 import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumResponseV1;
+import lv.javaguru.travel.insurance.rest.common.TravelCalculatePremiumRequestExecutionTimeLogger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,13 +16,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/insurance/travel/api/v1")
-public class TravelCalculatePremiumController {
+public class TravelCalculatePremiumControllerV1 {
     @Autowired
     private TravelCalculatePremiumService calculatePremiumService;
     @Autowired
-    private TravelCalculatePremiumRequestLogger requestLogger;
+    private TravelCalculatePremiumRequestLoggerV1 requestLogger;
     @Autowired
-    private TravelCalculatePremiumResponseLogger responseLogger;
+    private TravelCalculatePremiumResponseLoggerV1 responseLogger;
     @Autowired
     private TravelCalculatePremiumRequestExecutionTimeLogger timeLogger;
 	@Autowired
