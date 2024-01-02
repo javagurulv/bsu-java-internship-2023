@@ -1,0 +1,14 @@
+{
+  "errors": [
+    {
+      "errorCode": "ERROR_CODE_13",
+      "description": "Field dateOfBirth is from the future!"
+    }
+  ],
+  "agreementDateFrom": null,
+  "agreementDateTo": null,
+  "country": null,
+  "medicalRiskLimitLevel": null,
+  "persons": null,
+  "agreementPremium": null
+}
