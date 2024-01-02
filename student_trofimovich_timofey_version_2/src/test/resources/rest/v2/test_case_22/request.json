@@ -1,14 +1,19 @@
 {
-  "errors": [
+  "agreementDateFrom" : "2025-05-25",
+  "agreementDateTo" : "2025-05-29",
+  "country" : "SPAIN",
+  "medicalRiskLimitLevel" : "LEVEL_10000",
+  "selected_risks":["TRAVEL_MEDICAL"],
+  "persons" : [
     {
-      "errorCode": "ERROR_CODE_13",
-      "description": "Field dateOfBirth is from the future!"
+      "personFirstName" : "Vasja",
+      "personLastName" : "Pupkin",
+      "personBirthDate" : "3000-05-29"
+    },
+    {
+      "personFirstName" : "Petja",
+      "personLastName" : "Pupkin",
+      "personBirthDate" : "1950-02-29"
     }
-  ],
-  "agreementDateFrom": null,
-  "agreementDateTo": null,
-  "country": null,
-  "medicalRiskLimitLevel": null,
-  "persons": null,
-  "agreementPremium": null
+  ]
 }
