@@ -26,7 +26,6 @@ public class DTOV2Converter {
         response.setAgreementDateTo(agreement.getAgreementDateTo());
         response.setCountry(agreement.getCountry());
         response.setAgreementPremium(agreement.getAgreementPremium());
-        response.setMedicalRiskLimitLevel(agreement.getMedicalRiskLimitLevel());
 
         List<PersonResponseDTO> persons = agreement.getPersons().stream()
                 .map(this::buildPersonFromResponse)
@@ -67,7 +66,6 @@ public class DTOV2Converter {
         AgreementDTO agreement = new AgreementDTO();
         agreement.setAgreementDateFrom(request.getAgreementDateFrom());
         agreement.setAgreementDateTo(request.getAgreementDateTo());
-        agreement.setMedicalRiskLimitLevel(request.getMedicalRiskLimitLevel());
         agreement.setCountry(request.getCountry());
         agreement.setSelectedRisks(request.getSelectedRisks());
         agreement.setPersons(transformPersonDTOs(request));
@@ -77,7 +75,7 @@ public class DTOV2Converter {
     private List<PersonDTO> transformPersonDTOs(TravelCalculatePremiumRequestV2 request) {
         return request.getPersons().stream()
                 .map(person -> new PersonDTO(person.getPersonFirstName(), person.getPersonLastName()
-                        , person.getPersonBirthDate(), null))
+                        , person.getPersonBirthDate(), null, person.getMedicalRiskLimitLevel()))
                 .toList();
     }
 

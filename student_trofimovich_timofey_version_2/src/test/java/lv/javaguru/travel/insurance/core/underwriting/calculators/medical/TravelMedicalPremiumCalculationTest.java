@@ -42,7 +42,7 @@ public class TravelMedicalPremiumCalculationTest {
         when(dayCountCalculator.getNumberOfDays(agreement)).thenReturn(numberOfDays);
         when(countryDefaultDayRateCalculator.getCountryDefaultDayRate(agreement)).thenReturn(countryRate);
         when(ageCoefficientCalculator.getAgeCoefficient(person)).thenReturn(ageCoefficient);
-        when(limitCoefficientCalculator.getInsuranceLimitCoefficient(agreement)).thenReturn(limitLevelCoefficient);
+        when(limitCoefficientCalculator.getInsuranceLimitCoefficient(person)).thenReturn(limitLevelCoefficient);
         BigDecimal calculatedPremium = medicalPremiumCalculation.calculatePremium(agreement, person);
         BigDecimal expectedPremium = countryRate
                 .multiply(ageCoefficient)
