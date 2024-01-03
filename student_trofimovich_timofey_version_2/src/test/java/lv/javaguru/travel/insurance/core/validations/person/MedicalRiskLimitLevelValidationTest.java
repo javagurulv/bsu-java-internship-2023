@@ -1,6 +1,7 @@
-package lv.javaguru.travel.insurance.core.validations.agreement;
+package lv.javaguru.travel.insurance.core.validations.person;
 
-import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
+
+import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import lv.javaguru.travel.insurance.core.domain.ClassifierValue;
 import lv.javaguru.travel.insurance.core.repositories.ClassifierValueRepository;
@@ -27,39 +28,39 @@ public class MedicalRiskLimitLevelValidationTest {
     private ClassifierValueRepository repository;
     @InjectMocks
     private MedicalRiskLimitLevelValidation validation;
-    private AgreementDTO agreement;
+    private PersonDTO person;
 
     @BeforeEach
     void init() {
-        agreement = mock(AgreementDTO.class);
+        person = mock(PersonDTO.class);
     }
 
     @ParameterizedTest
     @NullAndEmptySource
     void shouldReturnEmptyOrNullLimitLevelError(String limit_level) {
-        when(agreement.getMedicalRiskLimitLevel()).thenReturn(limit_level);
+        when(person.getMedicalRiskLimitLevel()).thenReturn(limit_level);
         when(factory.buildError("ERROR_CODE_14")).thenReturn(new ValidationErrorDTO());
-        assertThat(validation.validate(agreement)).isPresent();
+        assertThat(validation.validate(person)).isPresent();
     }
 
 
     @Test
     void shouldReturnLimitNotSupportedError() {
-        when(agreement.getMedicalRiskLimitLevel()).thenReturn("level");
+        when(person.getMedicalRiskLimitLevel()).thenReturn("level");
         when(repository.findByClassifierTitleAndIc("MEDICAL_RISK_LIMIT_LEVEL",
-                agreement.getMedicalRiskLimitLevel()))
+                person.getMedicalRiskLimitLevel()))
                 .thenReturn(Optional.empty());
         when(factory.buildError(eq("ERROR_CODE_15"), anyList())).thenReturn(new ValidationErrorDTO());
-        assertThat(validation.validate(agreement)).isPresent();
+        assertThat(validation.validate(person)).isPresent();
     }
 
     @Test
     void shouldNotReturnError() {
-        when(agreement.getMedicalRiskLimitLevel()).thenReturn("level");
+        when(person.getMedicalRiskLimitLevel()).thenReturn("level");
         when(repository.findByClassifierTitleAndIc("MEDICAL_RISK_LIMIT_LEVEL",
-                agreement.getMedicalRiskLimitLevel()))
+                person.getMedicalRiskLimitLevel()))
                 .thenReturn(Optional.of(mock(ClassifierValue.class)));
-        assertThat(validation.validate(agreement)).isEmpty();
+        assertThat(validation.validate(person)).isEmpty();
     }
 
 

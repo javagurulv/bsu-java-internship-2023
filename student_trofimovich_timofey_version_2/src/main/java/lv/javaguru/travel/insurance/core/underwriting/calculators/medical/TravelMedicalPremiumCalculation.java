@@ -27,7 +27,7 @@ public class TravelMedicalPremiumCalculation implements TravelRiskPremiumCalcula
         long numberOfDays = dayCountCalculator.getNumberOfDays(agreement);
         BigDecimal countryDefaultDayRate = countryDefaultDayRateCalculator.getCountryDefaultDayRate(agreement);
         BigDecimal ageCoefficient = ageCoefficientCalculator.getAgeCoefficient(person);
-        BigDecimal insuranceLimitCoefficient = limitCoefficientCalculator.getInsuranceLimitCoefficient(agreement);
+        BigDecimal insuranceLimitCoefficient = limitCoefficientCalculator.getInsuranceLimitCoefficient(person);
         return new BigDecimal(numberOfDays)
                 .multiply(countryDefaultDayRate)
                 .multiply(ageCoefficient)

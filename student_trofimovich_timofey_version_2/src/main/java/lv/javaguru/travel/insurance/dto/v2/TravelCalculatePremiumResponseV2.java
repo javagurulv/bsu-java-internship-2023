@@ -32,8 +32,6 @@ public class TravelCalculatePremiumResponseV2 extends CoreResponse {
 
     private String country;
 
-    private String medicalRiskLimitLevel;
-
     @JsonAlias("persons")
     private List<PersonResponseDTO> persons;
 

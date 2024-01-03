@@ -1,6 +1,7 @@
 package lv.javaguru.travel.insurance.core.underwriting.calculators.medical;
 
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
+import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.domain.MedicalRiskLimitLevel;
 import lv.javaguru.travel.insurance.core.repositories.MedicalRiskLimitLevelRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -25,17 +26,19 @@ public class InsuranceLimitCoefficientCalculatorTest {
     private MedicalRiskLimitLevelRepository repository;
     @InjectMocks
     private InsuranceLimitCoefficientCalculator calculator;
+    private PersonDTO person;
     private AgreementDTO agreement;
 
     @BeforeEach
     void init() {
+        person = mock(PersonDTO.class);
         agreement = mock(AgreementDTO.class);
     }
 
     @Test
     void shouldReturnDefaultCoefficientWhenLimitLevelIsNotEnabled() {
         ReflectionTestUtils.setField(calculator, "limitLevelIsEnabled", false);
-        BigDecimal insuranceLimitCoefficient = calculator.getInsuranceLimitCoefficient(agreement);
+        BigDecimal insuranceLimitCoefficient = calculator.getInsuranceLimitCoefficient(person);
         assertThat(insuranceLimitCoefficient).isEqualTo(BigDecimal.ONE);
         verifyNoInteractions(repository);
     }
@@ -46,9 +49,9 @@ public class InsuranceLimitCoefficientCalculatorTest {
         BigDecimal expectedCoefficient = BigDecimal.valueOf(2.0);
         MedicalRiskLimitLevel medicalRiskLimitLevel = mock(MedicalRiskLimitLevel.class);
         when(medicalRiskLimitLevel.getCoefficient()).thenReturn(expectedCoefficient);
-        when(repository.findByMedicalRiskLimitLevelIc(agreement.getMedicalRiskLimitLevel()))
+        when(repository.findByMedicalRiskLimitLevelIc(person.getMedicalRiskLimitLevel()))
                 .thenReturn(Optional.of(medicalRiskLimitLevel));
-        BigDecimal result = calculator.getInsuranceLimitCoefficient(agreement);
+        BigDecimal result = calculator.getInsuranceLimitCoefficient(person);
         assertEquals(expectedCoefficient, result);
     }
 
@@ -57,7 +60,7 @@ public class InsuranceLimitCoefficientCalculatorTest {
         ReflectionTestUtils.setField(calculator, "limitLevelIsEnabled", true);
         when(repository.findByMedicalRiskLimitLevelIc(agreement.getCountry())).thenReturn(Optional.empty());
         RuntimeException exception = assertThrows(RuntimeException.class,
-                () -> calculator.getInsuranceLimitCoefficient(agreement));
-        assertEquals("Insurance limit level coefficient not found for limit level ic: " + agreement.getMedicalRiskLimitLevel(), exception.getMessage());
+                () -> calculator.getInsuranceLimitCoefficient(person));
+        assertEquals("Insurance limit level coefficient not found for limit level ic: " + person.getMedicalRiskLimitLevel(), exception.getMessage());
     }
 }

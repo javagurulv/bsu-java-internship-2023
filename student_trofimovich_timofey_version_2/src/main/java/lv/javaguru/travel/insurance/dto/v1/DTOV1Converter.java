@@ -27,7 +27,7 @@ public class DTOV1Converter {
         response.setDateOfBirth(agreement.getPersons().get(0).getPersonBirthDate());
         response.setCountry(agreement.getCountry());
         response.setAgreementPremium(agreement.getAgreementPremium());
-        response.setMedicalRiskLimitLevel(agreement.getMedicalRiskLimitLevel());
+        response.setMedicalRiskLimitLevel(agreement.getPersons().get(0).getMedicalRiskLimitLevel());
         List<RiskPremium> risks = agreement.getPersons().get(0).getSelectedRisks().stream()
                 .map(risk -> new RiskPremium(risk.getRiskIc(), risk.getPremium()))
                 .toList();
@@ -53,7 +53,6 @@ public class DTOV1Converter {
         AgreementDTO agreement = new AgreementDTO();
         agreement.setAgreementDateFrom(requestV1.getAgreementDateFrom());
         agreement.setAgreementDateTo(requestV1.getAgreementDateTo());
-        agreement.setMedicalRiskLimitLevel(requestV1.getMedicalRiskLimitLevel());
         agreement.setCountry(requestV1.getCountry());
         agreement.setSelectedRisks(requestV1.getSelectedRisks());
         PersonDTO person = buildPerson(requestV1);
@@ -66,6 +65,7 @@ public class DTOV1Converter {
         person.setPersonFirstName(requestV1.getPersonFirstName());
         person.setPersonBirthDate(requestV1.getDateOfBirth());
         person.setPersonLastName(requestV1.getPersonLastName());
+        person.setMedicalRiskLimitLevel(requestV1.getMedicalRiskLimitLevel());
         return person;
     }
 }

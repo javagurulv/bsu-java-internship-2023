@@ -32,5 +32,4 @@ public class TravelCalculatePremiumRequestV2 {
     private List<PersonRequestDTO> persons;
 
     private String country;
-    private String medicalRiskLimitLevel;
 }
