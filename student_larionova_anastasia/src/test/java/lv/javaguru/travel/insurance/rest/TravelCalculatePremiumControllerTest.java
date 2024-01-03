@@ -111,6 +111,6 @@ public class TravelCalculatePremiumControllerTest {
 
         String responseBodyContent = result.getResponse().getContentAsString();
 
-        assertEquals(responseBodyContent, responseJson);
+        assertEquals(responseBodyContent, responseJson); // TODO сравнение содержимого без учёта порядка внутренних полей
     }
 }
