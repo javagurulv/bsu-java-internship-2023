@@ -2,7 +2,8 @@ package lv.javaguru.travel.insurance.core.services;
 
 import lv.javaguru.travel.insurance.core.TravelCalculatePremiumRequestValidator;
 import lv.javaguru.travel.insurance.core.ValidationError;
-import lv.javaguru.travel.insurance.core.services.TravelCalculatePremiumServiceImpl;
+import lv.javaguru.travel.insurance.core.repositories.ClassifierRepository;
+import lv.javaguru.travel.insurance.core.repositories.ClassifierValueRepository;
 import lv.javaguru.travel.insurance.core.underwriting.TravelUnderwriting;
 import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumResponse;
@@ -34,6 +35,12 @@ TravelCalculatePremiumServiceImplTest {
     TravelCalculatePremiumResponseLogger responseLogger;
     @Mock
     TravelCalculatePremiumRequestLogger requestLogger;
+
+    @Mock
+    ClassifierRepository classifierRepository;
+
+    @Mock
+    ClassifierValueRepository classifierValueRepository;
     @Mock
     TravelCalculatePremiumRequestExecutionTimeLogger timeLogger;
 
