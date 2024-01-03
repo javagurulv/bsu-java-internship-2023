@@ -6,10 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-class DayCountCalculator {
+public class DayCountCalculator {
     @Autowired
     private DateTimeUtil dateTimeUtil;
-    long getNumberOfDays(AgreementDTO agreement) {
+
+     long getNumberOfDays(AgreementDTO agreement) {
         return dateTimeUtil.getDaysBetween(agreement.getAgreementDateFrom(), agreement.getAgreementDateTo());
     }
 }

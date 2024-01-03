@@ -1,4 +1,5 @@
 package lv.javaguru.travel.insurance.core.underwriting.calculators.medical;
+
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.underwriting.TravelRiskPremiumCalculator;
@@ -9,13 +10,18 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 @Component
-class TravelMedicalPremiumCalculation implements TravelRiskPremiumCalculator {
+public class TravelMedicalPremiumCalculation implements TravelRiskPremiumCalculator {
 
 
-    @Autowired private AgeCoefficientCalculator ageCoefficientCalculator;
-    @Autowired private CountryDefaultDayRateCalculator countryDefaultDayRateCalculator;
-    @Autowired private DayCountCalculator dayCountCalculator;
-    @Autowired private InsuranceLimitCoefficientCalculator limitCoefficientCalculator;
+    @Autowired
+    private AgeCoefficientCalculator ageCoefficientCalculator;
+    @Autowired
+    private CountryDefaultDayRateCalculator countryDefaultDayRateCalculator;
+    @Autowired
+    private DayCountCalculator dayCountCalculator;
+    @Autowired
+    private InsuranceLimitCoefficientCalculator limitCoefficientCalculator;
+
     @Override
     public BigDecimal calculatePremium(AgreementDTO agreement, PersonDTO person) {
         long numberOfDays = dayCountCalculator.getNumberOfDays(agreement);
@@ -31,7 +37,7 @@ class TravelMedicalPremiumCalculation implements TravelRiskPremiumCalculator {
 
     @Override
     public String getRiskIc() {
-       return "TRAVEL_MEDICAL";
+        return "TRAVEL_MEDICAL";
     }
 
 

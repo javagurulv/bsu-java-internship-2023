@@ -11,7 +11,7 @@ import java.util.Optional;
 @Component
 class LastNameValidation extends TravelPersonFieldValidationImpl {
     @Autowired
-    ValidationErrorFactory factory;
+    private ValidationErrorFactory factory;
     @Override
     public Optional<ValidationErrorDTO> validate(PersonDTO person) {
         return (person.getPersonLastName() == null || person.getPersonLastName().isBlank())

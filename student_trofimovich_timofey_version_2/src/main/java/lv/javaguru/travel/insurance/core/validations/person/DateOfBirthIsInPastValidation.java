@@ -11,9 +11,9 @@ import java.util.Optional;
 
 @Component
 
-public class DateOfBirthIsInPastValidation extends TravelPersonFieldValidationImpl {
+class DateOfBirthIsInPastValidation extends TravelPersonFieldValidationImpl {
     @Autowired
-    ValidationErrorFactory errorFactory;
+    private ValidationErrorFactory errorFactory;
     @Override
     public Optional<ValidationErrorDTO> validate(PersonDTO person) {
         Date birthDate = person.getPersonBirthDate();

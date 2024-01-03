@@ -1,0 +1,34 @@
+{
+  "errors": [
+    {
+      "errorCode": "ERROR_CODE_12",
+      "description": "Field dateOfBirth is empty!"
+    },
+    {
+      "errorCode": "ERROR_CODE_1",
+      "description": "Field personFirstName is empty!"
+    },
+    {
+      "errorCode": "ERROR_CODE_2",
+      "description": "Field personLastName is empty!"
+    },
+    {
+      "errorCode": "ERROR_CODE_12",
+      "description": "Field dateOfBirth is empty!"
+    },
+    {
+      "errorCode": "ERROR_CODE_1",
+      "description": "Field personFirstName is empty!"
+    },
+    {
+      "errorCode": "ERROR_CODE_2",
+      "description": "Field personLastName is empty!"
+    }
+  ],
+  "agreementDateFrom": null,
+  "agreementDateTo": null,
+  "country": null,
+  "medicalRiskLimitLevel": null,
+  "persons": null,
+  "agreementPremium": null
+}

@@ -12,24 +12,25 @@ import java.math.BigDecimal;
 import java.util.Optional;
 
 @Component
-class InsuranceLimitCoefficientCalculator {
+public class InsuranceLimitCoefficientCalculator {
     @Value("${medical.risk.limit.level.enabled}")
     private boolean limitLevelIsEnabled;
     @Autowired
     private MedicalRiskLimitLevelRepository repository;
 
 
-
-    BigDecimal getInsuranceLimitCoefficient(AgreementDTO agreement) {
+     BigDecimal getInsuranceLimitCoefficient(AgreementDTO agreement) {
         return limitLevelIsEnabled ? getCoefficientFromDB(agreement) : getDefaultCoefficient();
     }
+
     private BigDecimal getCoefficientFromDB(AgreementDTO agreement) {
         Optional<MedicalRiskLimitLevel> limitLevel = repository.findByMedicalRiskLimitLevelIc(agreement.getMedicalRiskLimitLevel());
         return limitLevel.map(MedicalRiskLimitLevel::getCoefficient)
                 .orElseThrow(() -> new RuntimeException("Insurance limit level coefficient not found for limit level ic: "
                         + agreement.getMedicalRiskLimitLevel()));
     }
-    private  BigDecimal getDefaultCoefficient() {
+
+    private BigDecimal getDefaultCoefficient() {
         return BigDecimal.ONE;
     }
 }

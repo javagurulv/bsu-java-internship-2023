@@ -2,7 +2,6 @@ package lv.javaguru.travel.insurance.core.validations.agreement;
 
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
-import lv.javaguru.travel.insurance.core.validations.TravelAgreementFieldValidation;
 
 import java.util.Collections;
 import java.util.List;

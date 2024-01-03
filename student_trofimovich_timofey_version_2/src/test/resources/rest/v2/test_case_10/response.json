@@ -1,0 +1,18 @@
+{
+  "errors": [
+    {
+      "errorCode": "ERROR_CODE_9",
+      "description": "Selected risk TRAVEL_UNSUPPORTED_1 is not supported by the system!"
+    },
+    {
+      "errorCode": "ERROR_CODE_9",
+      "description": "Selected risk TRAVEL_UNSUPPORTED_2 is not supported by the system!"
+    }
+  ],
+  "agreementDateFrom": null,
+  "agreementDateTo": null,
+  "country": null,
+  "medicalRiskLimitLevel": null,
+  "persons": null,
+  "agreementPremium": null
+}

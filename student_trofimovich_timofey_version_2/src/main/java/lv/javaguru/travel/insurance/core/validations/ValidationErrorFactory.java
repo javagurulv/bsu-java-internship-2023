@@ -17,6 +17,7 @@ public class ValidationErrorFactory {
         String errorDescription = errorCodeUtil.getErrorDescription(errorCode);
         return new ValidationErrorDTO(errorCode, errorDescription);
     }
+
     public ValidationErrorDTO buildError(String errorCode, List<Placeholder> placeholders) {
         String errorDescription = errorCodeUtil.getErrorDescription(errorCode, placeholders);
         return new ValidationErrorDTO(errorCode, errorDescription);

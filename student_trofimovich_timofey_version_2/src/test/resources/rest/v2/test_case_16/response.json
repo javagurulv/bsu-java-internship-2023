@@ -1,0 +1,14 @@
+{
+  "errors": [
+    {
+      "errorCode": "ERROR_CODE_16",
+      "description": "Persons list is empty!"
+    }
+  ],
+  "agreementDateFrom": null,
+  "agreementDateTo": null,
+  "country": null,
+  "medicalRiskLimitLevel": null,
+  "persons": null,
+  "agreementPremium": null
+}

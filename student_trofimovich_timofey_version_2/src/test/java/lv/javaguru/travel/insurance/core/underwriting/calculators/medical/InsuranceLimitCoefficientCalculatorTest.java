@@ -3,6 +3,7 @@ package lv.javaguru.travel.insurance.core.underwriting.calculators.medical;
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.domain.MedicalRiskLimitLevel;
 import lv.javaguru.travel.insurance.core.repositories.MedicalRiskLimitLevelRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -21,33 +22,38 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 public class InsuranceLimitCoefficientCalculatorTest {
     @Mock
-    MedicalRiskLimitLevelRepository repository;
-    @InjectMocks InsuranceLimitCoefficientCalculator calculator;
+    private MedicalRiskLimitLevelRepository repository;
+    @InjectMocks
+    private InsuranceLimitCoefficientCalculator calculator;
+    private AgreementDTO agreement;
+
+    @BeforeEach
+    void init() {
+        agreement = mock(AgreementDTO.class);
+    }
 
     @Test
     void shouldReturnDefaultCoefficientWhenLimitLevelIsNotEnabled() {
-        AgreementDTO request = mock(AgreementDTO.class);
         ReflectionTestUtils.setField(calculator, "limitLevelIsEnabled", false);
-        BigDecimal insuranceLimitCoefficient = calculator.getInsuranceLimitCoefficient(request);
+        BigDecimal insuranceLimitCoefficient = calculator.getInsuranceLimitCoefficient(agreement);
         assertThat(insuranceLimitCoefficient).isEqualTo(BigDecimal.ONE);
         verifyNoInteractions(repository);
     }
+
     @Test
     void shouldReturnCoefficientWhenLimitLevelIcIsCorrect() {
-        AgreementDTO request = mock(AgreementDTO.class);
         ReflectionTestUtils.setField(calculator, "limitLevelIsEnabled", true);
         BigDecimal expectedCoefficient = BigDecimal.valueOf(2.0);
         MedicalRiskLimitLevel medicalRiskLimitLevel = mock(MedicalRiskLimitLevel.class);
         when(medicalRiskLimitLevel.getCoefficient()).thenReturn(expectedCoefficient);
-        when(repository.findByMedicalRiskLimitLevelIc(request.getMedicalRiskLimitLevel()))
+        when(repository.findByMedicalRiskLimitLevelIc(agreement.getMedicalRiskLimitLevel()))
                 .thenReturn(Optional.of(medicalRiskLimitLevel));
-        BigDecimal result = calculator.getInsuranceLimitCoefficient(request);
+        BigDecimal result = calculator.getInsuranceLimitCoefficient(agreement);
         assertEquals(expectedCoefficient, result);
     }
 
     @Test
     void shouldThrowExceptionWhenCountryDayRateNotFound() {
-        AgreementDTO agreement = mock(AgreementDTO.class);
         ReflectionTestUtils.setField(calculator, "limitLevelIsEnabled", true);
         when(repository.findByMedicalRiskLimitLevelIc(agreement.getCountry())).thenReturn(Optional.empty());
         RuntimeException exception = assertThrows(RuntimeException.class,

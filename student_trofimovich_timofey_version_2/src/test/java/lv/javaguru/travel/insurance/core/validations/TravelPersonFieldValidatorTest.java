@@ -3,6 +3,7 @@ package lv.javaguru.travel.insurance.core.validations;
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
+import lv.javaguru.travel.insurance.core.validations.person.TravelPersonFieldValidation;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -28,7 +29,7 @@ public class TravelPersonFieldValidatorTest {
 
     private PersonDTO person1;
     private PersonDTO person2;
-    
+
     private AgreementDTO agreement;
 
     @BeforeEach
@@ -42,7 +43,7 @@ public class TravelPersonFieldValidatorTest {
 
     @Test
     void shouldNotReturnErrors() {
-        
+
         when(personFieldValidation1.validate(any(PersonDTO.class))).thenReturn(Optional.empty());
         when(personFieldValidation1.validateList(any())).thenReturn(List.of());
 
