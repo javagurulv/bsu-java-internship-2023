@@ -102,4 +102,8 @@ Test Case 26:
 Request: all fields not provided.
 Response: multiple error codes.
 
+Test Case 27:
+Request: country is empty, RISK_TYPE - TRAVEL_MEDICAL.
+Response: error code = ERROR_CODE_10.
+
 
