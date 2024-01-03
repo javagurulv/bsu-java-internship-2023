@@ -18,13 +18,15 @@ import static org.mockito.Mockito.when;
 public class TravelMedicalPremiumCalculationTest {
 
     @Mock
-    AgeCoefficientCalculator ageCoefficientCalculator;
+    private AgeCoefficientCalculator ageCoefficientCalculator;
     @Mock
-    CountryDefaultDayRateCalculator countryDefaultDayRateCalculator;
+    private CountryDefaultDayRateCalculator countryDefaultDayRateCalculator;
     @Mock
-    DayCountCalculator dayCountCalculator;
-    @Mock InsuranceLimitCoefficientCalculator limitCoefficientCalculator;
-    @InjectMocks TravelMedicalPremiumCalculation medicalPremiumCalculation;
+    private DayCountCalculator dayCountCalculator;
+    @Mock
+    private InsuranceLimitCoefficientCalculator limitCoefficientCalculator;
+    @InjectMocks
+    private TravelMedicalPremiumCalculation medicalPremiumCalculation;
 
     @Test
     public void shouldReturnCorrectPremium() {
@@ -40,7 +42,7 @@ public class TravelMedicalPremiumCalculationTest {
         when(dayCountCalculator.getNumberOfDays(agreement)).thenReturn(numberOfDays);
         when(countryDefaultDayRateCalculator.getCountryDefaultDayRate(agreement)).thenReturn(countryRate);
         when(ageCoefficientCalculator.getAgeCoefficient(person)).thenReturn(ageCoefficient);
-        when(limitCoefficientCalculator.getInsuranceLimitCoefficient(agreement)).thenReturn(limitLevelCoefficient);
+        when(limitCoefficientCalculator.getInsuranceLimitCoefficient(person)).thenReturn(limitLevelCoefficient);
         BigDecimal calculatedPremium = medicalPremiumCalculation.calculatePremium(agreement, person);
         BigDecimal expectedPremium = countryRate
                 .multiply(ageCoefficient)
@@ -48,8 +50,6 @@ public class TravelMedicalPremiumCalculationTest {
                 .multiply(limitLevelCoefficient);
         assertThat(calculatedPremium.stripTrailingZeros()).isEqualTo(expectedPremium.stripTrailingZeros());
     }
-
-
 
 
 }

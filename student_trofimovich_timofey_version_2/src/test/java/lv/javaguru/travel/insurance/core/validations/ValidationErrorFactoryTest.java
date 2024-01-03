@@ -17,8 +17,9 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 public class ValidationErrorFactoryTest {
     @Mock
-    ErrorCodeUtil errorCodeUtil;
-    @InjectMocks ValidationErrorFactory factory;
+    private ErrorCodeUtil errorCodeUtil;
+    @InjectMocks
+    private ValidationErrorFactory factory;
 
     @Test
     public void shouldBuildError() {

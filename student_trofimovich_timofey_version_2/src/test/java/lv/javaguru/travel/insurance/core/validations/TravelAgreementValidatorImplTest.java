@@ -34,7 +34,7 @@ public class TravelAgreementValidatorImplTest {
     void init() {
         agreement = mock(AgreementDTO.class);
     }
-    
+
     @Test
     void shouldNotReturnErrors() {
 

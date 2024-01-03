@@ -1,0 +1,20 @@
+{
+  "agreementDateFrom" : "",
+  "agreementDateTo" : "",
+  "country" : "",
+  "selected_risks":["TRAVEL_MEDICAL"],
+  "persons" : [
+    {
+      "personFirstName" : "",
+      "personLastName" : "",
+      "personBirthDate" : null,
+      "medicalRiskLimitLevel" : ""
+    },
+    {
+      "personFirstName" : "",
+      "personLastName" : "",
+      "personBirthDate" : "",
+      "medicalRiskLimitLevel" : ""
+    }
+  ]
+}

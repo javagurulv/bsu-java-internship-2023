@@ -6,8 +6,11 @@ import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import lv.javaguru.travel.insurance.core.domain.ClassifierValue;
 import lv.javaguru.travel.insurance.core.repositories.ClassifierValueRepository;
 import lv.javaguru.travel.insurance.core.validations.ValidationErrorFactory;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -21,29 +24,28 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 public class CountryValidationTest {
     @Mock
-    ValidationErrorFactory errorFactory;
+    private ValidationErrorFactory errorFactory;
     @Mock
-    ClassifierValueRepository classifierValueRepository;
+    private ClassifierValueRepository classifierValueRepository;
     @InjectMocks
-    CountryValidation validation;
-    @Test
-    void shouldReturnEmptyCountryError() {
-        AgreementDTO agreement = mock(AgreementDTO.class);
-        when(agreement.getCountry()).thenReturn("");
-        when(errorFactory.buildError("ERROR_CODE_10")).thenReturn(new ValidationErrorDTO());
-        assertThat(validation.validate(agreement)).isPresent();
+    private CountryValidation validation;
+    private AgreementDTO agreement;
+
+    @BeforeEach
+    void init() {
+        agreement = mock(AgreementDTO.class);
     }
-    @Test
-    void shouldReturnNullCountryError() {
-        AgreementDTO agreement = mock(AgreementDTO.class);
-        when(agreement.getCountry()).thenReturn(null);
+
+    @ParameterizedTest
+    @NullAndEmptySource
+    void shouldReturnEmptyOrNullCountryError(String country) {
+        when(agreement.getCountry()).thenReturn(country);
         when(errorFactory.buildError("ERROR_CODE_10")).thenReturn(new ValidationErrorDTO());
         assertThat(validation.validate(agreement)).isPresent();
     }
 
     @Test
     void shouldNotReturnError() {
-        AgreementDTO agreement = mock(AgreementDTO.class);
         when(agreement.getCountry()).thenReturn("LATVIA");
         when(classifierValueRepository.findByClassifierTitleAndIc("COUNTRY", "LATVIA")).thenReturn(Optional.of(new ClassifierValue()));
         assertThat(validation.validate(agreement)).isEmpty();
@@ -51,7 +53,6 @@ public class CountryValidationTest {
 
     @Test
     void shouldReturnErrorWhenTravelMedicalIsNotChosen() {
-        AgreementDTO agreement = mock(AgreementDTO.class);
         when(agreement.getCountry()).thenReturn("LATVIA");
         when(classifierValueRepository.findByClassifierTitleAndIc("COUNTRY", "LATVIA")).thenReturn(Optional.of(new ClassifierValue()));
         assertThat(validation.validate(agreement)).isEmpty();

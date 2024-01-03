@@ -3,6 +3,7 @@ package lv.javaguru.travel.insurance.core.validations.person;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import lv.javaguru.travel.insurance.core.validations.ValidationErrorFactory;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -21,11 +22,16 @@ public class DateOfBirthIsNotEmptyValidatonTest {
     @Mock
     ValidationErrorFactory errorFactory;
     @InjectMocks
-    DateOfBirthIsNotEmptyValidaton validaton;
+    private DateOfBirthIsNotEmptyValidation validaton;
+    private PersonDTO person;
+
+    @BeforeEach
+    void init() {
+        person = mock(PersonDTO.class);
+    }
 
     @Test
     void shouldReturnErrorWhenDateOfBirthIsNull() {
-        PersonDTO person = mock(PersonDTO.class);
         when(person.getPersonBirthDate()).thenReturn(null);
         when(errorFactory.buildError("ERROR_CODE_12")).thenReturn(new ValidationErrorDTO("ERROR_CODE_12", "desc"));
         Optional<ValidationErrorDTO> ValidationErrorDTO = validaton.validate(person);
@@ -37,7 +43,6 @@ public class DateOfBirthIsNotEmptyValidatonTest {
 
     @Test
     void shouldNotReturnError() {
-        PersonDTO person = mock(PersonDTO.class);
         when(person.getPersonBirthDate()).thenReturn(new Date());
         Optional<ValidationErrorDTO> ValidationErrorDTO = validaton.validate(person);
         assertThat(ValidationErrorDTO).isEmpty();

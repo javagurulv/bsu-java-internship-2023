@@ -2,7 +2,6 @@ package lv.javaguru.travel.insurance.core.validations.person;
 
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
-import lv.javaguru.travel.insurance.core.validations.TravelPersonFieldValidation;
 
 import java.util.Collections;
 import java.util.List;

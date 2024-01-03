@@ -10,9 +10,10 @@ import java.math.BigDecimal;
 import java.util.Optional;
 
 @Component
-class CountryDefaultDayRateCalculator {
+public class CountryDefaultDayRateCalculator {
     @Autowired
     private CountryDefaultDayRateRepository rateRepository;
+
      BigDecimal getCountryDefaultDayRate(AgreementDTO agreement) {
         Optional<CountryDefaultDayRate> countryRate = rateRepository.findByCountryIc(agreement.getCountry());
         return countryRate.map(CountryDefaultDayRate::getCountryDefaultDayRate)

@@ -14,9 +14,11 @@ import java.util.*;
 
 
 @Component
-class TravelCalculatePremiumRequestValidator {
+public class TravelCalculatePremiumRequestValidator {       //will make default access mod
+    @Autowired
+    List<TravelRequestValidation> validations;
     public List<ValidationError> validate(TravelCalculatePremiumRequest request) {
-        List<TravelRequestValidation> validations = new ArrayList<>();
+  //      List<TravelRequestValidation> validations = new ArrayList<>();
         List<ValidationError> errors = new ArrayList<>();
         /*
         validatePersonFirstName(request).ifPresent(errors::add);
@@ -24,12 +26,13 @@ class TravelCalculatePremiumRequestValidator {
         validateAgreementDateFrom(request).ifPresent(errors::add);
         validateAgreementDateTo(request).ifPresent(errors::add);
         */
+/*
         validations.add(new TravelRequestFirstNameValidation());
         validations.add(new TravelRequestLastNameValidation());
         validations.add(new TravelRequestDateFromValidation());
         validations.add(new TravelRequestDateToValidation());
         validations.add(new TravelRequestWithoutRisksValidation());
-
+*/
             validations.forEach(validation -> {
                 Optional<ValidationError> error = null;
                 error = validation.validate(request);

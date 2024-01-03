@@ -3,6 +3,8 @@ package lv.javaguru.travel.insurance.core.repositories;
 import lv.javaguru.travel.insurance.core.domain.AgeCoefficient;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -16,51 +18,20 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @ExtendWith(SpringExtension.class)
 @DataJpaTest
 public class AgeCoefficentRepositoryTest {
-    @Autowired AgeCoefficientRepository repository;
+    @Autowired
+    private AgeCoefficientRepository repository;
 
     @Test
     public void injectedRepositoryIsNotNull() {
         assertNotNull(repository);
     }
 
-    @Test
-    public void shouldFindAgeCoefficientForAgeGroup1() {
-        Optional<AgeCoefficient> coefficient = repository.findCoefficient(1);
+    @ParameterizedTest
+    @CsvSource({"1, 1.1", "7, 0.7", "15, 1", "30, 1.1", "50, 1.2", "100, 1.5"})
+    public void shouldFindAgeCoefficientForAgeGroup(int age, BigDecimal expectedCoefficient) {
+        Optional<AgeCoefficient> coefficient = repository.findCoefficient(age);
         assertThat(coefficient.isPresent());
-        assertThat(coefficient.get().getCoefficient().stripTrailingZeros()).isEqualTo(new BigDecimal("1.1"));
-    }
-    @Test
-    public void shouldFindAgeCoefficientForAgeGroup2() {
-        Optional<AgeCoefficient> coefficient = repository.findCoefficient(7);
-        assertThat(coefficient.isPresent());
-        assertThat(coefficient.get().getCoefficient().stripTrailingZeros()).isEqualTo(new BigDecimal("0.7"));
-    }
-    @Test
-    public void shouldFindAgeCoefficientForAgeGroup3() {
-        Optional<AgeCoefficient> coefficient = repository.findCoefficient(15);
-        assertThat(coefficient.isPresent());
-        assertThat(coefficient.get().getCoefficient().stripTrailingZeros()).isEqualTo(new BigDecimal("1"));
-    }
-    @Test
-    public void shouldFindAgeCoefficientForAgeGroup4() {
-        Optional<AgeCoefficient> coefficient = repository.findCoefficient(30);
-        assertThat(coefficient.isPresent());
-        assertThat(coefficient.get().getCoefficient().stripTrailingZeros()).isEqualTo(new BigDecimal("1.1"));
-    }
-    @Test
-    public void shouldFindAgeCoefficientForAgeGroup5() {
-        Optional<AgeCoefficient> coefficient = repository.findCoefficient(50);
-        assertThat(coefficient.isPresent());
-        assertThat(coefficient.get().getCoefficient().stripTrailingZeros()).isEqualTo(new BigDecimal("1.2"));
-
-    }
-
-    @Test
-    public void shouldFindAgeCoefficientForAgeGroup6() {
-        Optional<AgeCoefficient> coefficient = repository.findCoefficient(100);
-        assertThat(coefficient.isPresent());
-        assertThat(coefficient.get().getCoefficient().stripTrailingZeros()).isEqualTo(new BigDecimal("1.5"));
-
+        assertThat(coefficient.get().getCoefficient().stripTrailingZeros()).isEqualTo(expectedCoefficient);
     }
 
 }

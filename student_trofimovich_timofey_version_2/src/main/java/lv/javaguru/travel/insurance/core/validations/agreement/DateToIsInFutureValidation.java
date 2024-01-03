@@ -13,7 +13,8 @@ import java.util.Optional;
 @Component
 class DateToIsInFutureValidation extends TravelAgreementFieldValidationImpl {
     @Autowired
-    ValidationErrorFactory factory;
+    private ValidationErrorFactory factory;
+
     @Override
     public Optional<ValidationErrorDTO> validate(AgreementDTO agreement) {
         Date dateTo = agreement.getAgreementDateTo();

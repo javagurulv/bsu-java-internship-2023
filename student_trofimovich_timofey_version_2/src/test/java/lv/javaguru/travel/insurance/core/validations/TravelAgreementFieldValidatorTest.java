@@ -2,6 +2,7 @@ package lv.javaguru.travel.insurance.core.validations;
 
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
+import lv.javaguru.travel.insurance.core.validations.agreement.TravelAgreementFieldValidation;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -54,7 +55,7 @@ public class TravelAgreementFieldValidatorTest {
     void shouldReturnSingleAgreementErrors() {
 
         AgreementDTO agreementDTO = mock(AgreementDTO.class);
-        
+
         when(agreementFieldValidation1.validate(agreementDTO)).thenReturn(Optional.of(mock(ValidationErrorDTO.class)));
         when(agreementFieldValidation2.validate(agreementDTO)).thenReturn(Optional.of(mock(ValidationErrorDTO.class)));
 

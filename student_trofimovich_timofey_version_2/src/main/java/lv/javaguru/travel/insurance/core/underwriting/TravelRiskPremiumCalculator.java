@@ -7,5 +7,6 @@ import java.math.BigDecimal;
 
 public interface TravelRiskPremiumCalculator {
     BigDecimal calculatePremium(AgreementDTO agreement, PersonDTO person);
+
     String getRiskIc();
 }
