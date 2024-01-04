@@ -11,6 +11,8 @@ TravelCost указано корректное значение. Иначе запрос должен считаться некорректн
 
 5. Внести изменение в функционал получения информации о страховке по uuid
 
+пункт 1-5 2-3 часа
+
 6. Добавить в базу данных таблицу travel_cost.
 
 7. Создать пакет cancellation_of_travel и перенести туда TravelCancellationRiskPremiumCalculator
@@ -23,7 +25,11 @@ calculate который будет возвращать коэффициент из travel_cost
 должен возвращать значение согласно формуле
 TRAVEL_CANCELLATION premium = TravelCostCoefficient
 
+пункт 6-7 1 час
+
 10. Написать тесты на валидаторы и калькуляторы, проверить подсчёт премии.
+
+1-2 часа
 
 11. Добавить в базу данных таблицу country_safety_rating.
 
@@ -34,6 +40,8 @@ CountrySafetyRatingCoefficient = стоимость путешествия / рейтинг безопасности ст
 13. Внести изменения в TravelCancellationRiskPremiumCalculator:
 TRAVEL_CANCELLATION premium =
 TravelCostCoefficient + CountrySafetyRatingCoefficient
+
+пункт 11-13 1 час
 
 14. Добавить в базу данных таблицу для задания зависимости
 между возрастом клиента и AgeCoefficient.
@@ -49,4 +57,8 @@ TravelCostCoefficient + CountrySafetyRatingCoefficient
 TRAVEL_CANCELLATION premium =
                  TravelCostCoefficient + CountrySafetyRatingCoefficient + AgeCoefficient
 
+пункт 15-16 1 час
+
 17. Дописать тесты на все колькуляторы и общий расчёт премии, проверить при разных значениях флагов.
+
+2 часа
