@@ -2,6 +2,9 @@ dependencies {
 
 	implementation('org.springframework.boot:spring-boot-starter-web:2.7.5')
 
+	// https://mvnrepository.com/artifact/ch.qos.logback/logback-classic //
+	testImplementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.4.11'
+
 	testImplementation('org.springframework.boot:spring-boot-starter-test:2.7.5')
 
 	compileOnly('org.projectlombok:lombok:1.18.24')
