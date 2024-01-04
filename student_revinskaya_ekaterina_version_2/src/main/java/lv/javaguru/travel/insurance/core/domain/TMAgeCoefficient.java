@@ -7,10 +7,10 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name="age_coefficient")
+@Table(name="travel_medical_age_coefficient")
 @Setter
 @Getter
-public class AgeCoefficient {
+public class TMAgeCoefficient {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)

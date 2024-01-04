@@ -1,6 +1,6 @@
 package lv.javaguru.travel.insurance.core.repositories;
 
-import lv.javaguru.travel.insurance.core.domain.AgeCoefficient;
+import lv.javaguru.travel.insurance.core.domain.TMAgeCoefficient;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,13 +14,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(SpringExtension.class)
 @DataJpaTest
-public class AgeCoefficientRepositoryTest {
+public class TMTMAgeCoefficientRepositoryTest {
     @Autowired
-    private AgeCoefficientRepository ageCoefficientRepository;
+    private TMAgeCoefficientRepository TMAgeCoefficientRepository;
 
     @Test
     public void injectedRepositoryAreNotNull() {
-        assertNotNull(ageCoefficientRepository);
+        assertNotNull(TMAgeCoefficientRepository);
     }
 
     @Test
@@ -55,18 +55,18 @@ public class AgeCoefficientRepositoryTest {
 
     @Test
     public void shouldNotFindAgeMoreThanExist() {
-        Optional<AgeCoefficient> valueOpt = ageCoefficientRepository.findByAge(200);
+        Optional<TMAgeCoefficient> valueOpt = TMAgeCoefficientRepository.findByAge(200);
         assertTrue(valueOpt.isEmpty());
     }
 
     @Test
     public void shouldNotFindAgeLessThanExist() {
-        Optional<AgeCoefficient> valueOpt = ageCoefficientRepository.findByAge(-2);
+        Optional<TMAgeCoefficient> valueOpt = TMAgeCoefficientRepository.findByAge(-2);
         assertTrue(valueOpt.isEmpty());
     }
 
     public void testValueByAge(int age) {
-        Optional<AgeCoefficient> valueOpt = ageCoefficientRepository.findByAge(age);
+        Optional<TMAgeCoefficient> valueOpt = TMAgeCoefficientRepository.findByAge(age);
         assertTrue(valueOpt.isPresent());
         assertTrue(valueOpt.get().getAgeFrom() <= age);
         assertTrue(valueOpt.get().getAgeTo() >= age);

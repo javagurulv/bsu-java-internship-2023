@@ -24,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @AutoConfigureMockMvc
 @AutoConfigureTestDatabase
 
-public class AgeCoefficientCalculatorDisableCoefficientIntegrationTest {
+public class TMAgeCoefficientCalculatorDisableCoefficientIntegrationTest {
     @Autowired
     private TravelPremiumUnderwriting premiumUnderwriting;
 
