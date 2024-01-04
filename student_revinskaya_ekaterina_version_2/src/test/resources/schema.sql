@@ -124,3 +124,46 @@ ADD FOREIGN KEY (person_agreement_id) REFERENCES person_agreements(id);
 
 CREATE UNIQUE INDEX if not exists ix_person_agreement_id_risk_ic
 ON person_agreement_risks(person_agreement_id, risk_ic);
+
+create table if not exists travel_cancellation_age_coefficient
+(
+  id BIGINT NOT NULL AUTO_INCREMENT,
+  age_from INT NOT NULL,
+  age_to INT NOT NULL,
+  coefficient DECIMAL(10,2) NOT NULL,
+  PRIMARY KEY (id)
+);
+CREATE UNIQUE INDEX if not exists  ix_travel_cancellation_age_coefficient_age_from
+ON travel_cancellation_age_coefficient(age_from);
+
+CREATE UNIQUE INDEX if not exists ix_travel_cancellation_age_coefficient_age_to
+ON travel_cancellation_age_coefficient(age_to);
+
+create table if not exists travel_cost_coefficient
+(
+  id BIGINT NOT NULL AUTO_INCREMENT,
+  cost_from DECIMAL(10,2) NOT NULL,
+  cost_to DECIMAL(10,2) NOT NULL,
+  coefficient DECIMAL(10,2) NOT NULL,
+  PRIMARY KEY (id)
+);
+CREATE UNIQUE INDEX if not exists ix_travel_cost_coefficient_cost_from
+ON travel_cost_coefficient (cost_from);
+
+CREATE UNIQUE INDEX if not exists ix_travel_cost_coefficient_cost_to
+ON travel_cost_coefficient (cost_to);
+
+create table if not exists country_safety_rating_coefficient
+(
+  id BIGINT NOT NULL AUTO_INCREMENT,
+  country_ic VARCHAR(200) NOT NULL,
+  coefficient DECIMAL(10,2) NOT NULL,
+  PRIMARY KEY (id)
+);
+CREATE UNIQUE INDEX if not exists ix_country_safety_rating_coefficient_country_ic
+ON country_safety_rating_coefficient (country_ic);
+
+ALTER TABLE age_coefficient
+RENAME TO travel_medical_age_coefficient;
+ALTER TABLE agreements
+ADD COLUMN travel_cost DECIMAL(10,2) NOT NULL;

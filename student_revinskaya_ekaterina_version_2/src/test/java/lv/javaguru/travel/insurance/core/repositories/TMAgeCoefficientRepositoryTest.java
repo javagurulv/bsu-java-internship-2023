@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(SpringExtension.class)
 @DataJpaTest
-public class TMTMAgeCoefficientRepositoryTest {
+public class TMAgeCoefficientRepositoryTest {
     @Autowired
     private TMAgeCoefficientRepository TMAgeCoefficientRepository;
 

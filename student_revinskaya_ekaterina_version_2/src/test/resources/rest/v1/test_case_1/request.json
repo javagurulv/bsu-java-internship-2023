@@ -1,6 +1,7 @@
 {
   "personFirstName" : null,
   "personLastName" : "Pupkin",
+  "travelCost" : 100.00,
   "agreementDateFrom" : "2025-05-12",
   "agreementDateTo" : "2025-05-19",
   "birthday" : "2005-08-03",
