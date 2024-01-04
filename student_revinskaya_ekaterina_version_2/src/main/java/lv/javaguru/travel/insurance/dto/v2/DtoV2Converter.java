@@ -34,6 +34,7 @@ public class DtoV2Converter {
             (TravelCalculatePremiumCoreResult result) {
         TravelCalculatePremiumResponseV2 responseV2 = new TravelCalculatePremiumResponseV2();
         responseV2.setUuid(result.getAgreement().getUuid());
+        responseV2.setTravelCost(result.getAgreement().getTravelCost());
         responseV2.setPersons(functions.listPersonResponseFromPersonDTO(result.getAgreement().getPersons()));
 
         responseV2.setAgreementPremium(result.getAgreement().getAgreementPremium());
@@ -52,6 +53,7 @@ public class DtoV2Converter {
 
     private AgreementDTO buildAgreementFromRequestV2(TravelCalculatePremiumRequestV2 requestV2) {
         AgreementDTO agreement = new AgreementDTO();
+        agreement.setTravelCost(requestV2.getTravelCost());
         agreement.setCountry(requestV2.getCountry());
         agreement.setSelectedRisks(requestV2.getSelectedRisks());
         agreement.setAgreementDateFrom(requestV2.getAgreementDateFrom());

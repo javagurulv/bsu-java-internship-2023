@@ -25,6 +25,7 @@ import java.util.List;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class TravelCalculatePremiumResponseV1 extends CoreResponse {
     private String uuid;
+    private BigDecimal travelCost;
     private String personFirstName;
     private String personLastName;
     @JsonFormat(pattern = "yyyy-MM-dd")

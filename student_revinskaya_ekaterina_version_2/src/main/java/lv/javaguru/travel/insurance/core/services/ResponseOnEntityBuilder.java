@@ -37,6 +37,7 @@ public class ResponseOnEntityBuilder {
     private AgreementDTO buildAgreementDTO(Agreement agreement, List<SelectedRisk> risks, List<PersonAgreement> personAgreements) {
         return AgreementDTO.builder()
                 .uuid(agreement.getUuid())
+                .travelCost(agreement.getTravelCost())
                 .agreementDateFrom(agreement.getDateFrom())
                 .agreementDateTo(agreement.getDateTo())
                 .selectedRisks(selectedRisksListFromEntity(risks))

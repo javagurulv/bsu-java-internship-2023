@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public interface TCAgeCoefficientRepository extends JpaRepository<TCAgeCoefficient, Long> {
 
-    @Query("SELECT ac from TMAgeCoefficient ac " +
+    @Query("SELECT ac from TCAgeCoefficient ac " +
             "where ac.ageFrom <= :age " +
             "and ac.ageTo > :age")
     Optional<TCAgeCoefficient> findByAge(
