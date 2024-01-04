@@ -15,8 +15,6 @@ import static org.mockito.Mockito.when;
 @SpringBootTest
 class PersonFirstNameValidateTest {
 
-    @Autowired private CreateDate createDate;
-
     private PersonFirstNameValidate validate = new PersonFirstNameValidate();
 
     @Test
