@@ -8,14 +8,17 @@ import lv.javaguru.travel.insurance.rest.validation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.*;
 
 
 @Component
-class TravelCalculatePremiumRequestValidator {
+public class TravelCalculatePremiumRequestValidator {       //will make default access mod
+    @Autowired
+    List<TravelRequestValidation> validations;
     public List<ValidationError> validate(TravelCalculatePremiumRequest request) {
-        List<TravelRequestValidation> validations = new ArrayList<>();
+  //      List<TravelRequestValidation> validations = new ArrayList<>();
         List<ValidationError> errors = new ArrayList<>();
         /*
         validatePersonFirstName(request).ifPresent(errors::add);
@@ -23,18 +26,20 @@ class TravelCalculatePremiumRequestValidator {
         validateAgreementDateFrom(request).ifPresent(errors::add);
         validateAgreementDateTo(request).ifPresent(errors::add);
         */
+/*
         validations.add(new TravelRequestFirstNameValidation());
         validations.add(new TravelRequestLastNameValidation());
         validations.add(new TravelRequestDateFromValidation());
         validations.add(new TravelRequestDateToValidation());
         validations.add(new TravelRequestWithoutRisksValidation());
-
-        validations.forEach(validation -> {
-            Optional<ValidationError> error = validation.validate(request);
-            if (!error.isEmpty()) {
-                errors.add(error.get());
-            }
-        });
+*/
+            validations.forEach(validation -> {
+                Optional<ValidationError> error = null;
+                error = validation.validate(request);
+                if (!error.isEmpty()) {
+                    errors.add(error.get());
+                }
+            });
         return errors;
     }
 

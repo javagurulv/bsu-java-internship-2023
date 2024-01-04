@@ -16,7 +16,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(SpringExtension.class)
 @DataJpaTest
 public class ClassifierRepositoryTest {
-    @Autowired private ClassifierRepository classifierRepository;
+    @Autowired
+    private ClassifierRepository classifierRepository;
+
     @Test
     public void injectedRepositoryIsNotNull() {
         assertNotNull(classifierRepository);

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-class TravelCalculateSelectedRiskValidator implements TravelRequestValidation{
+class TravelCalculateSelectedRiskValidator extends TravelRequestValidationImpl{
     @Autowired private ValidationErrorFactory validationErrorFactory;
     @Override
     public Optional<ValidationError> validate(TravelCalculatePremiumRequest request) {

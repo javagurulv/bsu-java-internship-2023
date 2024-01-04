@@ -17,15 +17,17 @@ import java.util.Optional;
 @Component
 class SelectedRisksValidation extends TravelAgreementFieldValidationImpl {
     @Autowired
-    ValidationErrorFactory factory;
+    private ValidationErrorFactory factory;
     @Autowired
-    ClassifierValueRepository classifierValueRepository;
+    private ClassifierValueRepository classifierValueRepository;
+
     @Override
     public Optional<ValidationErrorDTO> validate(AgreementDTO request) {
         return (request.getSelectedRisks() == null || request.getSelectedRisks().isEmpty())
                 ? Optional.of(factory.buildError("ERROR_CODE_8"))
                 : Optional.empty();
     }
+
     @Override
     public List<ValidationErrorDTO> validateList(AgreementDTO agreement) {
         List<ValidationErrorDTO> errors = new ArrayList<>();

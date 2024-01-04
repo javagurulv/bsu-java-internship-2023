@@ -3,6 +3,7 @@ package lv.javaguru.travel.insurance.core.validations.person;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import lv.javaguru.travel.insurance.core.validations.ValidationErrorFactory;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -21,13 +22,18 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 public class DateOfBirthIsInPastValidationTest {
     @Mock
-    ValidationErrorFactory errorFactory;
+    private ValidationErrorFactory errorFactory;
     @InjectMocks
-    DateOfBirthIsInPastValidation validation;
+    private DateOfBirthIsInPastValidation validation;
+    private PersonDTO person;
+
+    @BeforeEach
+    void init() {
+        person = mock(PersonDTO.class);
+    }
 
     @Test
     public void shouldReturnErrorWhenDateOfBirthIsInTheFuture() {
-        PersonDTO person = mock(PersonDTO.class);
         when(person.getPersonBirthDate()).thenReturn(createDate("20.12.2025"));
         when(errorFactory.buildError("ERROR_CODE_13")).thenReturn(new ValidationErrorDTO("ERROR_CODE_13", "desc"));
         Optional<ValidationErrorDTO> ValidationErrorDTO = validation.validate(person);
@@ -38,7 +44,6 @@ public class DateOfBirthIsInPastValidationTest {
 
     @Test
     void shouldNotReturnError() {
-        PersonDTO person = mock(PersonDTO.class);
         when(person.getPersonBirthDate()).thenReturn(createDate("12.03.2020"));
         Optional<ValidationErrorDTO> ValidationErrorDTO = validation.validate(person);
         assertThat(ValidationErrorDTO).isEmpty();

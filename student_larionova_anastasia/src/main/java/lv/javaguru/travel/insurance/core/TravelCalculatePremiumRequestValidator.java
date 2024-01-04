@@ -2,60 +2,27 @@ package lv.javaguru.travel.insurance.core;
 
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
+import lv.javaguru.travel.insurance.core.validations.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.TimeUnit;
+
 
 @Component
-class TravelCalculatePremiumRequestValidator {
+public class TravelCalculatePremiumRequestValidator {
 
+    @Autowired private List<TravelRequestValidator> travelValidations;
     public List<ValidationError> validate(TravelCalculatePremiumRequest request) {
         List<ValidationError> errors = new ArrayList<>();
-        validatePersonFirstName(request).ifPresent(errors::add);
-        validatePersonLastName(request).ifPresent(errors::add);
-        validateAgreementDateFrom(request).ifPresent(errors::add);
-        validateAgreementDateTo(request).ifPresent(errors::add);
-        validateagreementDateFromLessagreementDateTo(request).ifPresent(errors::add);
+        for (var validation : travelValidations) {
+            Optional<ValidationError> error = validation.validator(request);
+            if (error.isPresent()) {
+                errors.add(error.get());
+            }
+        }
         return errors;
-    }
-
-    private Optional<ValidationError> validatePersonFirstName(TravelCalculatePremiumRequest request) {
-        return (request.getPersonFirstName() == null || request.getPersonFirstName().isEmpty())
-                ? Optional.of(new ValidationError("personFirstName", "Must not be empty!"))
-                : Optional.empty();
-    }
-
-    private Optional<ValidationError> validatePersonLastName(TravelCalculatePremiumRequest request) {
-        return (request.getPersonLastName() == null || request.getPersonLastName().isEmpty())
-                ? Optional.of(new ValidationError("personLastName", "Must not be empty!"))
-                : Optional.empty();
-    }
-
-    private Optional<ValidationError> validateAgreementDateFrom(TravelCalculatePremiumRequest request) {
-        return (request.getAgreementDateFrom() == null)
-                ? Optional.of(new ValidationError("agreementDateFrom", "Must not be empty!"))
-                : Optional.empty();
-    }
-
-    private Optional<ValidationError> validateAgreementDateTo(TravelCalculatePremiumRequest request) {
-        return (request.getAgreementDateTo() == null)
-                ? Optional.of(new ValidationError("agreementDateTo", "Must not be empty!"))
-                : Optional.empty();
-    }
-
-    private long getDaysBetween(Date date1, Date date2) {
-        long diff = date2.getTime() - date1.getTime();
-        return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
-    }
-
-        private Optional<ValidationError> validateagreementDateFromLessagreementDateTo(TravelCalculatePremiumRequest request) {
-        return (request.getAgreementDateFrom() != null && request.getAgreementDateTo() != null
-                && getDaysBetween(request.getAgreementDateFrom(), request.getAgreementDateTo()) < 0)
-                ? Optional.of(new ValidationError("agreementDateFrom and agreementDateTo", "AgreementDateFrom should be less than AgreementDateTo!"))
-                : Optional.empty();
     }
 }

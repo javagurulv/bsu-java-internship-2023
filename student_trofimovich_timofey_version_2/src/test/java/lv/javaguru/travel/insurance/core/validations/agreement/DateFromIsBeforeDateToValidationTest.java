@@ -3,6 +3,7 @@ package lv.javaguru.travel.insurance.core.validations.agreement;
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import lv.javaguru.travel.insurance.core.validations.ValidationErrorFactory;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -21,13 +22,18 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 public class DateFromIsBeforeDateToValidationTest {
     @Mock
-    ValidationErrorFactory factory;
+    private ValidationErrorFactory factory;
     @InjectMocks
     private DateFromIsBeforeDateToValidation validation;
+    private AgreementDTO agreement;
+
+    @BeforeEach
+    void init() {
+        agreement = mock(AgreementDTO.class);
+    }
 
     @Test
     void shouldReturnErrorWhenAgreementDateToIsBeforeAgreementDateFrom() {
-        AgreementDTO agreement = mock(AgreementDTO.class);
         when(agreement.getAgreementDateFrom()).thenReturn(createDate("20.12.2025"));
         when(agreement.getAgreementDateTo()).thenReturn(createDate("19.12.2025"));
         when(factory.buildError("ERROR_CODE_7")).thenReturn(new ValidationErrorDTO("ERROR_CODE_7", "Date from must be before date to!"));
@@ -40,7 +46,6 @@ public class DateFromIsBeforeDateToValidationTest {
 
     @Test
     void shouldNotReturnError() {
-        AgreementDTO agreement = mock(AgreementDTO.class);
         when(agreement.getAgreementDateFrom()).thenReturn(createDate("12.03.2025"));
         when(agreement.getAgreementDateTo()).thenReturn(createDate("13.03.2025"));
         Optional<ValidationErrorDTO> validationError = validation.validate(agreement);

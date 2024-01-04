@@ -17,9 +17,11 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class TravelCalculateLastNameValidatorTest {
     @Mock
-    ValidationErrorFactory validationErrorFactory;
-    @Mock TravelCalculatePremiumRequest request;
-    @InjectMocks TravelCalculateLastNameValidator validator;
+    private ValidationErrorFactory validationErrorFactory;
+    @Mock
+    private TravelCalculatePremiumRequest request;
+    @InjectMocks
+    private TravelCalculateLastNameValidator validator;
     @Test
     public void injectedRepositoryAreNotNull() {
         assertNotNull(validationErrorFactory);

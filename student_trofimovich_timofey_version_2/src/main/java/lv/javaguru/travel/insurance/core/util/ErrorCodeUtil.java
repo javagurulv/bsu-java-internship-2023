@@ -11,6 +11,7 @@ import java.util.Properties;
 @Component
 public class ErrorCodeUtil {
     private Properties properties;
+
     public ErrorCodeUtil() throws IOException {
         ClassPathResource classPathResource = new ClassPathResource("errorCodes.properties");
         properties = PropertiesLoaderUtils.loadProperties(classPathResource);

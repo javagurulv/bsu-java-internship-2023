@@ -1,13 +1,10 @@
 package lv.javaguru.travel.insurance.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lv.javaguru.travel.insurance.core.TravelCalculatePremiumService;
 //import lv.javaguru.travel.insurance.core.TravelCalculatePremiumServiceImpl;
-import lv.javaguru.travel.insurance.core.TravelUnderwriting;
+//import lv.javaguru.travel.insurance.core.TravelCalculatePremiumServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,19 +16,20 @@ import org.springframework.test.web.servlet.MvcResult;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static uk.org.webcompere.modelassert.json.JsonAssertions.assertJson;
 
 @ExtendWith(SpringExtension.class)
-@SpringBootTest
+@SpringBootTest//(classes = {TravelCalculatePremiumServiceImpl.class})
 @AutoConfigureMockMvc
+//@WebMvcTest(JsonFileReader.class)
 public class TravelCalculatePremiumControllerTest {
     @Autowired private MockMvc mockMvc;
+
  //   ModelAssert assert;
-    @Autowired private JsonFileReader jsonFileReader; //= new JsonFileReader();
+    private JsonFileReader jsonFileReader = new JsonFileReader(); //= new JsonFileReader();
     //    private MockMvc mockMvc;
 /*
     @InjectMocks
@@ -40,6 +38,7 @@ public class TravelCalculatePremiumControllerTest {
     TravelUnderwriting underwriting;
 
  */
+
     @Test
     public void ControllerAllParametersIsCorrectTest() throws Exception {//throws FileNotFoundException, IOException {
 
@@ -128,6 +127,8 @@ public class TravelCalculatePremiumControllerTest {
                 .isEqualTo(responseFromFile);
         //assertEquals(mapper.readTree(responseFromFile), mapper.readTree(responseFromRequest));
     }
+
+
     private String getResponseFromRequest(String pathRequest) throws Exception{
         MvcResult result = mockMvc.perform(
                         post("/insurance/travel/")
