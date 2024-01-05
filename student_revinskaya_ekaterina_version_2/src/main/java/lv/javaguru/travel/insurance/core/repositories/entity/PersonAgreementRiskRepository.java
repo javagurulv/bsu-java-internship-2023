@@ -15,7 +15,6 @@ public interface PersonAgreementRiskRepository extends JpaRepository<PersonAgree
             "and par.riskIc = :riskIc")
     Optional<PersonAgreementRiskEntity> findByPersonAgreementIdAndRiskIc(@Param("personAgreementEntityId") PersonAgreementEntity personAgreementEntityId,
                                                                          @Param("riskIc") String riskIc);
-    @Query("SELECT par from PersonAgreementRiskEntity par " +
-            "where par.personAgreementEntityId = :personAgreementEntityId ")
-    List<PersonAgreementRiskEntity> findByPersonAgreementId(@Param("personAgreementEntityId") PersonAgreementEntity personAgreementEntityId);
+
+    List<PersonAgreementRiskEntity> findByPersonAgreementEntityId(@Param("personAgreementEntityId") PersonAgreementEntity personAgreementEntityId);
 }

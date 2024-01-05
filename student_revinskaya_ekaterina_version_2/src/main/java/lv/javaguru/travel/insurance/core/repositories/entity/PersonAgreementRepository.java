@@ -17,9 +17,7 @@ public interface PersonAgreementRepository extends JpaRepository<PersonAgreement
     )
     Optional<PersonAgreementEntity> findByPersonIdAndAgreementId(@Param("personEntityId") PersonEntity personEntityId,
                                                                  @Param("agreementEntityId") AgreementEntity agreementEntityId);
-    @Query("SELECT pa from PersonAgreementEntity pa "
-            + "WHERE pa.agreementEntityId = :agreementEntityId"
-    )
-    List<PersonAgreementEntity> findByAgreementId(@Param("agreementEntityId") AgreementEntity agreementEntityId);
+
+    List<PersonAgreementEntity> findByAgreementEntityId(@Param("agreementEntityId") AgreementEntity agreementEntityId);
 
 }

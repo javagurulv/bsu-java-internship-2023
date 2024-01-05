@@ -13,8 +13,5 @@ public interface AgreementRepository extends JpaRepository<AgreementEntity, Long
     )
     boolean existByUuid(@Param("uuid") String uuid);
 
-    @Query("SELECT ag from AgreementEntity ag "
-            + "where ag.uuid = :uuid "
-    )
     Optional<AgreementEntity> findByUuid(@Param("uuid") String uuid);
 }

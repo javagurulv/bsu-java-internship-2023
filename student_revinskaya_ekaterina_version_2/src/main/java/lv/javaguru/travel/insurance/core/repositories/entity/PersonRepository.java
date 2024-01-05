@@ -8,8 +8,7 @@ import org.springframework.data.repository.query.Param;
 import java.util.Optional;
 
 public interface PersonRepository  extends JpaRepository<PersonEntity, Long> {
-    @Query("SELECT person from PersonEntity person " +
-            "where person.personalCode = :personalCode" )
+
     Optional<PersonEntity> findByPersonalCode(
             @Param("personalCode") String personCode
     );

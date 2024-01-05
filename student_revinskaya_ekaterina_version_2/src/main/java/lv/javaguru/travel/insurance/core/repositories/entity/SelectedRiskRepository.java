@@ -17,9 +17,8 @@ public interface SelectedRiskRepository extends JpaRepository<SelectedRisk, Long
             @Param("agreementEntityId") AgreementEntity agreementEntityId,
             @Param("riskIc") String riskIc
     );
-    @Query("SELECT risks from SelectedRisk risks " +
-            "where risks.agreementEntityId = :agreementEntityId ")
-    List<SelectedRisk> findByAgreementId(
+
+    List<SelectedRisk> findByAgreementEntityId(
             @Param("agreementEntityId") AgreementEntity agreementEntityId
     );
 }

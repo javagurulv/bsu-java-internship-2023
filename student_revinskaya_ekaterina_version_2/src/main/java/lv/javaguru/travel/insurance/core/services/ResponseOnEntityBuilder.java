@@ -28,8 +28,8 @@ public class ResponseOnEntityBuilder {
     public TravelGetPolicyCoreResult buildResponse(String uuid) {
         TravelGetPolicyCoreResult result = new TravelGetPolicyCoreResult();
         AgreementEntity agreementEntity = agreementRepository.findByUuid(uuid).get();
-        List<SelectedRisk> risks = selectedRiskRepository.findByAgreementId(agreementEntity);
-        List<PersonAgreementEntity> personAgreementEntities = personAgreementRepository.findByAgreementId(agreementEntity);
+        List<SelectedRisk> risks = selectedRiskRepository.findByAgreementEntityId(agreementEntity);
+        List<PersonAgreementEntity> personAgreementEntities = personAgreementRepository.findByAgreementEntityId(agreementEntity);
         result.setAgreement(buildAgreementDTO(agreementEntity, risks, personAgreementEntities));
         return result;
     }
@@ -60,7 +60,7 @@ public class ResponseOnEntityBuilder {
                 .personLastName(personEntity.getLastName())
                 .personBirthDate(personEntity.getBirthday())
                 .medicalRiskLimitLevel(personAgreementEntity.getMedicalRiskLimitLevel())
-                .risks(listRiskRTO(personAgreementRiskRepository.findByPersonAgreementId(personAgreementEntity)))
+                .risks(listRiskRTO(personAgreementRiskRepository.findByPersonAgreementEntityId(personAgreementEntity)))
                 .build();
     }
 
