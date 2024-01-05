@@ -21,7 +21,7 @@ public class DtoV1Converter {
     private ConverterFunctions functions;
 
     public TravelCalculatePremiumResponseV1 buildResponseV1fromCoreResult(TravelCalculatePremiumCoreResult result) {
-        if (result.getErrors() != null) {
+        if (result.hasErrors()) {
             return errorResponseV1FromCoreResult(result);
         }
         return successResponseV1FromFromCoreResult(result);
