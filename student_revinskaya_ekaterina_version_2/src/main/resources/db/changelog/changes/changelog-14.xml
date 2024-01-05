@@ -14,7 +14,7 @@
             <column name="country_ic" type="VARCHAR(200)">
                 <constraints nullable="false"/>
             </column>
-            <column name="coefficient" type="DECIMAL(10,2)">
+            <column name="rating" type="DECIMAL(10,2)">
                 <constraints nullable="false"/>
             </column>
         </createTable>

@@ -17,7 +17,7 @@ public class CountrySafetyRatingCoefficient {
     private Long id;
     @Column(name="country_ic", nullable = false)
     private String countryIc;
-    @Column(name= "coefficient", precision = 2, nullable = false)
-    private BigDecimal coefficient;
+    @Column(name= "rating", precision = 2, nullable = false)
+    private BigDecimal rating;
 
 }
