@@ -11,7 +11,7 @@ import java.util.Date;
 @Table(name = "agreements")
 @Getter
 @Setter
-public class Agreement {
+public class AgreementEntity {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)

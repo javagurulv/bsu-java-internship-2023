@@ -6,7 +6,7 @@
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
 
 
-    <changeSet author = "javaguru" id = "28">
+    <changeSet author = "katierevinska" id = "28">
         <createTable tableName="person_agreements">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true"/>

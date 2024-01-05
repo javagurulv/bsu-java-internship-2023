@@ -10,14 +10,14 @@ import java.math.BigDecimal;
 @Table(name="person_agreement_risks")
 @Getter
 @Setter
-public class PersonAgreementRisk {
+public class PersonAgreementRiskEntity {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
     @JoinColumn(name = "person_agreement_id", nullable = false)
-    private PersonAgreement personAgreementId;
+    private PersonAgreementEntity personAgreementEntityId;
     @Column(name = "risk_ic", nullable = false)
     private String riskIc;
     @Column(name = "premium", nullable = false)

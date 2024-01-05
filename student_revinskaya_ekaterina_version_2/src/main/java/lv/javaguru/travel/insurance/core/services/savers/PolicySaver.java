@@ -2,9 +2,9 @@ package lv.javaguru.travel.insurance.core.services.savers;
 
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
-import lv.javaguru.travel.insurance.core.domain.entity.Agreement;
-import lv.javaguru.travel.insurance.core.domain.entity.Person;
-import lv.javaguru.travel.insurance.core.domain.entity.PersonAgreement;
+import lv.javaguru.travel.insurance.core.domain.entity.AgreementEntity;
+import lv.javaguru.travel.insurance.core.domain.entity.PersonAgreementEntity;
+import lv.javaguru.travel.insurance.core.domain.entity.PersonEntity;
 import lv.javaguru.travel.insurance.core.services.savers.entity_savers.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -12,29 +12,29 @@ import org.springframework.stereotype.Component;
 @Component
 public class PolicySaver {
     @Autowired
-    AgreementSaver agreementSaver;
+    AgreementEntitySaver agreementEntitySaver;
     @Autowired
-    PersonSaver personSaver;
+    PersonEntitySaver personEntitySaver;
     @Autowired
-    PersonAgreementSaver personAgreementSaver;
+    PersonAgreementEntitySaver personAgreementEntitySaver;
     @Autowired
-    SelectedRiskSaver selectedRiskSaver;
+    SelectedRiskEntitySaver selectedRiskEntitySaver;
     @Autowired
-    PersonAgreementRiskSaver personAgreementRiskSaver;
+    PersonAgreementRiskEntitySaver personAgreementRiskEntitySaver;
 
 
     public void savePolicy(AgreementDTO agreementDTO) {
-        Agreement agreement = agreementSaver.saveAgreementEntity(agreementDTO);
-        agreementDTO.setUuid(agreement.getUuid());
+        AgreementEntity agreementEntity = agreementEntitySaver.saveAgreementEntity(agreementDTO);
+        agreementDTO.setUuid(agreementEntity.getUuid());
         agreementDTO.getPersons()
-                .forEach(personDTO -> savePersonAndPersonAgreement(personDTO, agreement));
-        selectedRiskSaver.saveRisks(agreementDTO, agreement);
+                .forEach(personDTO -> savePersonAndPersonAgreementEntity(personDTO, agreementEntity));
+        selectedRiskEntitySaver.saveRisksEntity(agreementDTO, agreementEntity);
     }
 
-    private void savePersonAndPersonAgreement(PersonDTO personDTO, Agreement agreement) {
-        Person person = personSaver.saveNotAlreadyExistPerson(personDTO);
-        PersonAgreement personAgreement = personAgreementSaver.savePersonAgreement(person, agreement, personDTO);
-        personAgreementRiskSaver.saveAllPersonAgreementRisk(personAgreement, personDTO);
+    private void savePersonAndPersonAgreementEntity(PersonDTO personDTO, AgreementEntity agreementEntity) {
+        PersonEntity personEntity = personEntitySaver.saveNotAlreadyExistPersonEntity(personDTO);
+        PersonAgreementEntity personAgreementEntity = personAgreementEntitySaver.savePersonAgreementEntity(personEntity, agreementEntity, personDTO);
+        personAgreementRiskEntitySaver.saveAllPersonAgreementRiskEntity(personAgreementEntity, personDTO);
     }
 
 
