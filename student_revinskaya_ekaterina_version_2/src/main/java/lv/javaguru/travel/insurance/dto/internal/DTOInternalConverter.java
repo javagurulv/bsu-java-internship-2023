@@ -24,6 +24,7 @@ public class DTOInternalConverter {
     private TravelGetPolicyResponse successResponseInternalFromCoreResult(TravelGetPolicyCoreResult result){
         TravelGetPolicyResponse response = new TravelGetPolicyResponse();
         response.setUuid(result.getAgreement().getUuid());
+        response.setTravelCost(result.getAgreement().getTravelCost());
         response.setAgreementDateFrom(result.getAgreement().getAgreementDateFrom());
         response.setAgreementDateTo(result.getAgreement().getAgreementDateTo());
         response.setCountry(result.getAgreement().getCountry());

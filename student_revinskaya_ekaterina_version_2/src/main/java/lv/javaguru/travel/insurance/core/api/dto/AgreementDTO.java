@@ -14,6 +14,8 @@ import java.util.List;
 public class AgreementDTO {
     private String uuid;
 
+    private BigDecimal travelCost;
+
     private Date agreementDateFrom;
 
     private Date agreementDateTo;

@@ -16,10 +16,10 @@ public class PersonAgreementRisk {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
-    @JoinColumn(name = "person_agreement_id")
+    @JoinColumn(name = "person_agreement_id", nullable = false)
     private PersonAgreement personAgreementId;
-    @Column(name = "risk_ic")
+    @Column(name = "risk_ic", nullable = false)
     private String riskIc;
-    @Column(name = "premium")
+    @Column(name = "premium", nullable = false)
     private BigDecimal premium;
 }

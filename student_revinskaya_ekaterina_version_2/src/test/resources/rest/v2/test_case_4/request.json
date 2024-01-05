@@ -1,6 +1,7 @@
 {
   "agreementDateFrom" : "2025-05-25",
   "agreementDateTo" : null,
+  "travelCost" : 100.00,
   "country" : "SPAIN",
   "selected_risks":["TRAVEL_MEDICAL"],
   "persons" : [

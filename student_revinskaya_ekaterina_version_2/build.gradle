@@ -2,6 +2,7 @@ plugins {
 	id 'org.springframework.boot' version "2.7.5"
 }
 dependencies {
+	implementation ('org.apache.ant:ant:1.10.11')
 	implementation ('org.springdoc:springdoc-openapi-ui:1.6.4')
 
 	implementation('mysql:mysql-connector-java:8.0.22')
@@ -31,11 +32,9 @@ dependencies {
 	testImplementation('org.hamcrest:hamcrest:2.2')
 	testImplementation('uk.org.webcompere:model-assert:1.0.0')
 
-
 	test {
 		useJUnitPlatform()
 	}
-
 }
 
 jar {
@@ -47,3 +46,8 @@ bootJar {
 	archiveBaseName = 'insurance-calculator'
 	archiveVersion = '1.0.2'
 }
+
+task cleanLogs(type: Delete) {
+	delete "${projectDir}/logs/"
+}
+clean.dependsOn(cleanLogs)

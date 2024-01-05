@@ -1,5 +1,6 @@
 {
   "uuid": "6783c91a-7de9-4c19-a344-c0214f81d6fa",
+  "travelCost" : 100.00,
   "agreementDateFrom": "2025-05-25",
   "agreementDateTo": "2025-05-29",
   "country": "SPAIN",

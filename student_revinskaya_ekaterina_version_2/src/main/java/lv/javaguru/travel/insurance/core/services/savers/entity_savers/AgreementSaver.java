@@ -24,6 +24,7 @@ public class AgreementSaver {
     private Agreement convertToAgreement(AgreementDTO agreementDTO) {
         Agreement agreement = new Agreement();
         agreement.setUuid(createUuid());
+        agreement.setTravelCost(agreementDTO.getTravelCost());
         agreement.setDateFrom(agreementDTO.getAgreementDateFrom());
         agreement.setDateTo(agreementDTO.getAgreementDateTo());
         agreement.setCountry(agreementDTO.getCountry());

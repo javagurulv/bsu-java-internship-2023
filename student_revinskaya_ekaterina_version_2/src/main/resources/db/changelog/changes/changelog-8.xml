@@ -13,6 +13,9 @@
             <column name = "uuid" type="VARCHAR(36)">
                 <constraints nullable="false"/>
             </column>
+            <column name = "travel_cost" type="DECIMAL(10,2)">
+                <constraints nullable="false"/>
+            </column>
             <column name="date_from" type="TIMESTAMP">
                 <constraints nullable="false"/>
             </column>
