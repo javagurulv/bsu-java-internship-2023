@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.Optional;
 
 @Component
-public class TravelRequestLastNameValidation implements TravelRequestValidation {
+public class TravelRequestLastNameValidation extends TravelRequestValidationImpl {
 /*    @Autowired
     ValidationErrorsUtil util;
 */
