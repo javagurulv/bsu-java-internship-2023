@@ -14,14 +14,14 @@ public class AgreementEntitySaver {
     AgreementRepository agreementRepository;
 
     public AgreementEntity saveAgreementEntity(AgreementDTO agreementDTO){
-        AgreementEntity agreementEntity = convertToAgreement(agreementDTO);
+        AgreementEntity agreementEntity = convertToAgreementEntity(agreementDTO);
         return saveAgreementEntity(agreementEntity);
     }
     private AgreementEntity saveAgreementEntity(AgreementEntity agreementEntity) {
         return agreementRepository.save(agreementEntity);
     }
 
-    private AgreementEntity convertToAgreement(AgreementDTO agreementDTO) {
+    private AgreementEntity convertToAgreementEntity(AgreementDTO agreementDTO) {
         AgreementEntity agreementEntity = new AgreementEntity();
         agreementEntity.setUuid(createUuid());
         agreementEntity.setTravelCost(agreementDTO.getTravelCost());

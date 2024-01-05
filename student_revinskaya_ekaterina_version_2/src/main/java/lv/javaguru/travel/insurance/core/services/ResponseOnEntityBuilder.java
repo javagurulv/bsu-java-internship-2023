@@ -27,7 +27,9 @@ public class ResponseOnEntityBuilder {
 
     public TravelGetPolicyCoreResult buildResponse(String uuid) {
         TravelGetPolicyCoreResult result = new TravelGetPolicyCoreResult();
-        AgreementEntity agreementEntity = agreementRepository.findByUuid(uuid).get();
+        AgreementEntity agreementEntity = agreementRepository.findByUuid(uuid)
+                .orElseThrow(()->new RuntimeException(
+                        "uuid "+ uuid+" not exist in the system"));
         List<SelectedRisk> risks = selectedRiskRepository.findByAgreementEntityId(agreementEntity);
         List<PersonAgreementEntity> personAgreementEntities = personAgreementRepository.findByAgreementEntityId(agreementEntity);
         result.setAgreement(buildAgreementDTO(agreementEntity, risks, personAgreementEntities));
