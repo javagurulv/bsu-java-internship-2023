@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.rest;
+package lv.javaguru.travel.insurance.logger;
 
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumResponse;
 

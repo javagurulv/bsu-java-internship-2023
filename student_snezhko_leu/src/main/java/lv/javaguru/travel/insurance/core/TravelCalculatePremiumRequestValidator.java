@@ -39,6 +39,10 @@ public class TravelCalculatePremiumRequestValidator {       //will make default 
                 if (!error.isEmpty()) {
                     errors.add(error.get());
                 }
+                List<ValidationError> validList = validation.validateList(request);
+                if (validList != null) {
+                    errors.addAll(validList);
+                }
             });
         return errors;
     }

@@ -13,7 +13,7 @@ import java.io.IOException;
 
 
 @Component
-public class TravelRequestDateFromValidation implements TravelRequestValidation {
+public class TravelRequestDateFromValidation extends TravelRequestValidationImpl {
     @Autowired
     ValidationErrorFactory errorFactory;
     /*
