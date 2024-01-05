@@ -19,7 +19,7 @@ class TravelCostValidation extends TravelAgreementFieldValidationImpl {
     public Optional<ValidationErrorDTO> validate(AgreementDTO request) {
         String cancellationRiskIc = "TRAVEL_CANCELLATION";
         return  request.getSelectedRisks() != null
-                && request.getTravelCost() == null && request.getSelectedRisks().contains(cancellationRiskIc)
+                && request.getSelectedRisks().contains(cancellationRiskIc) && request.getTravelCost() == null
                 ? Optional.of(validationErrorFactory.buildError("ERROR_CODE_21"))
                 : Optional.empty();
     }

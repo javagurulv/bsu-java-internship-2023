@@ -167,3 +167,5 @@ ALTER TABLE age_coefficient
 RENAME TO travel_medical_age_coefficient;
 ALTER TABLE agreements
 ADD COLUMN travel_cost DECIMAL(10,2) NOT NULL;
+
+ALTER TABLE person_agreements ALTER COLUMN medical_risk_limit_level  VARCHAR(200) NULL;
