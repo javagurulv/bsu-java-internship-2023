@@ -1,8 +1,8 @@
 package lv.javaguru.travel.insurance.core.repositories.entity;
 
-import lv.javaguru.travel.insurance.core.domain.entity.Agreement;
-import lv.javaguru.travel.insurance.core.domain.entity.Person;
-import lv.javaguru.travel.insurance.core.domain.entity.PersonAgreement;
+import lv.javaguru.travel.insurance.core.domain.entity.AgreementEntity;
+import lv.javaguru.travel.insurance.core.domain.entity.PersonAgreementEntity;
+import lv.javaguru.travel.insurance.core.domain.entity.PersonEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -10,16 +10,14 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 import java.util.Optional;
 
-public interface PersonAgreementRepository extends JpaRepository<PersonAgreement, Long> {
-    @Query("SELECT pa from PersonAgreement pa "
-            + "where pa.personId = :personId "
-            + "and pa.agreementId = :agreementId"
+public interface PersonAgreementRepository extends JpaRepository<PersonAgreementEntity, Long> {
+    @Query("SELECT pa from PersonAgreementEntity pa "
+            + "where pa.personEntityId = :personEntityId "
+            + "and pa.agreementEntityId = :agreementEntityId"
     )
-    Optional<PersonAgreement> findByPersonIdAndAgreementId(@Param("personId") Person personId,
-                                                           @Param("agreementId")Agreement agreementId);
-    @Query("SELECT pa from PersonAgreement pa "
-            + "WHERE pa.agreementId = :agreementId"
-    )
-    List<PersonAgreement> findByAgreementId(@Param("agreementId")Agreement agreementId);
+    Optional<PersonAgreementEntity> findByPersonIdAndAgreementId(@Param("personEntityId") PersonEntity personEntityId,
+                                                                 @Param("agreementEntityId") AgreementEntity agreementEntityId);
+
+    List<PersonAgreementEntity> findByAgreementEntityId(@Param("agreementEntityId") AgreementEntity agreementEntityId);
 
 }

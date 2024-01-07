@@ -19,7 +19,7 @@ public class DtoV2Converter {
     private ConverterFunctions functions;
 
     public TravelCalculatePremiumResponseV2 buildResponseV2fromCoreResult(TravelCalculatePremiumCoreResult result) {
-        if (result.getErrors() != null) {
+        if (result.hasErrors()) {
             return errorResponseV2FromCoreResult(result);
         }
         return successResponseV2FromCoreResult(result);

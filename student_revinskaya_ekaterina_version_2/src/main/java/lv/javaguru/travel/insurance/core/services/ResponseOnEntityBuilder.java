@@ -27,52 +27,54 @@ public class ResponseOnEntityBuilder {
 
     public TravelGetPolicyCoreResult buildResponse(String uuid) {
         TravelGetPolicyCoreResult result = new TravelGetPolicyCoreResult();
-        Agreement agreement = agreementRepository.findByUuid(uuid).get();
-        List<SelectedRisk> risks = selectedRiskRepository.findByAgreementId(agreement);
-        List<PersonAgreement> personAgreements = personAgreementRepository.findByAgreementId(agreement);
-        result.setAgreement(buildAgreementDTO(agreement, risks, personAgreements));
+        AgreementEntity agreementEntity = agreementRepository.findByUuid(uuid)
+                .orElseThrow(()->new RuntimeException(
+                        "uuid "+ uuid+" not exist in the system"));
+        List<SelectedRisk> risks = selectedRiskRepository.findByAgreementEntityId(agreementEntity);
+        List<PersonAgreementEntity> personAgreementEntities = personAgreementRepository.findByAgreementEntityId(agreementEntity);
+        result.setAgreement(buildAgreementDTO(agreementEntity, risks, personAgreementEntities));
         return result;
     }
 
-    private AgreementDTO buildAgreementDTO(Agreement agreement, List<SelectedRisk> risks, List<PersonAgreement> personAgreements) {
+    private AgreementDTO buildAgreementDTO(AgreementEntity agreementEntity, List<SelectedRisk> risks, List<PersonAgreementEntity> personAgreementEntities) {
         return AgreementDTO.builder()
-                .uuid(agreement.getUuid())
-                .travelCost(agreement.getTravelCost())
-                .agreementDateFrom(agreement.getDateFrom())
-                .agreementDateTo(agreement.getDateTo())
+                .uuid(agreementEntity.getUuid())
+                .travelCost(agreementEntity.getTravelCost())
+                .agreementDateFrom(agreementEntity.getDateFrom())
+                .agreementDateTo(agreementEntity.getDateTo())
                 .selectedRisks(selectedRisksListFromEntity(risks))
-                .country(agreement.getCountry())
-                .agreementPremium(agreement.getPremium())
-                .persons(listPersonDTOFromEntityList(personAgreements))
+                .country(agreementEntity.getCountry())
+                .agreementPremium(agreementEntity.getPremium())
+                .persons(listPersonDTOFromEntityList(personAgreementEntities))
                 .build();
     }
 
-    private List<PersonDTO> listPersonDTOFromEntityList(List<PersonAgreement> personAgreements) {
-        return personAgreements.stream()
-                .map(personAgreement -> personDTOFromPerson(personAgreement.getPersonId(), personAgreement))
+    private List<PersonDTO> listPersonDTOFromEntityList(List<PersonAgreementEntity> personAgreementEntities) {
+        return personAgreementEntities.stream()
+                .map(personAgreement -> personDTOFromPersonEntity(personAgreement.getPersonEntityId(), personAgreement))
                 .collect(Collectors.toList());
     }
 
-    private PersonDTO personDTOFromPerson(Person person, PersonAgreement personAgreement) {
+    private PersonDTO personDTOFromPersonEntity(PersonEntity personEntity, PersonAgreementEntity personAgreementEntity) {
         return PersonDTO.builder()
-                .personalCode(person.getPersonalCode())
-                .personFirstName(person.getFirstName())
-                .personLastName(person.getLastName())
-                .personBirthDate(person.getBirthday())
-                .medicalRiskLimitLevel(personAgreement.getMedicalRiskLimitLevel())
-                .risks(listRiskRTO(personAgreementRiskRepository.findByPersonAgreementId(personAgreement)))
+                .personalCode(personEntity.getPersonalCode())
+                .personFirstName(personEntity.getFirstName())
+                .personLastName(personEntity.getLastName())
+                .personBirthDate(personEntity.getBirthday())
+                .medicalRiskLimitLevel(personAgreementEntity.getMedicalRiskLimitLevel())
+                .risks(listRiskRTO(personAgreementRiskRepository.findByPersonAgreementEntityId(personAgreementEntity)))
                 .build();
     }
 
-    private List<RiskDTO> listRiskRTO(List<PersonAgreementRisk> personAgreementRisks) {
-        return personAgreementRisks.stream()
-                .map(personAgreementRisk -> new RiskDTO(
-                        personAgreementRisk.getRiskIc(), personAgreementRisk.getPremium()))
+    private List<RiskDTO> listRiskRTO(List<PersonAgreementRiskEntity> personAgreementRiskEntities) {
+        return personAgreementRiskEntities.stream()
+                .map(personAgreementRiskEntity -> new RiskDTO(
+                        personAgreementRiskEntity.getRiskIc(), personAgreementRiskEntity.getPremium()))
                 .collect(Collectors.toList());
     }
 
-    private List<String> selectedRisksListFromEntity(List<SelectedRisk> selectedRisks) {
-        return selectedRisks.stream()
+    private List<String> selectedRisksListFromEntity(List<SelectedRisk> selectedRiskEntities) {
+        return selectedRiskEntities.stream()
                 .map(SelectedRisk::getRiskIc)
                 .collect(Collectors.toList());
     }

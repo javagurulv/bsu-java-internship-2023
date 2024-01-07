@@ -1,5 +1,6 @@
 package lv.javaguru.travel.insurance.dto.v1;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -25,22 +26,30 @@ import java.util.List;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class TravelCalculatePremiumResponseV1 extends CoreResponse {
     private String uuid;
+    @JsonAlias("travel_cost")
     private BigDecimal travelCost;
+    @JsonAlias("person_first_name")
     private String personFirstName;
+    @JsonAlias("person_last_name")
     private String personLastName;
     @JsonFormat(pattern = "yyyy-MM-dd")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonAlias("agreement_date_from")
     private Date agreementDateFrom;
     @JsonFormat(pattern = "yyyy-MM-dd")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonAlias("agreement_date_to")
     private Date agreementDateTo;
     private String country;
     @JsonFormat(pattern = "yyyy-MM-dd")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthday;
+    @JsonAlias("personal_code")
     private String personalCode;
+    @JsonAlias("medical_risk_limit_level")
     private String medicalRiskLimitLevel;
     @JsonSerialize(using = BigDecimalSerializer.class)
+    @JsonAlias("agreement_premium")
     private BigDecimal agreementPremium;
     private List<TravelRisk> risks;
 

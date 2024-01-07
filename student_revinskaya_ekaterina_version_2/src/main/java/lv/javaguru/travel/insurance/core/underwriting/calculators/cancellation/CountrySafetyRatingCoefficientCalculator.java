@@ -2,7 +2,6 @@ package lv.javaguru.travel.insurance.core.underwriting.calculators.cancellation;
 
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.repositories.CountrySafetyRatingCoefficientRepository;
-import lv.javaguru.travel.insurance.core.repositories.TravelCostCoefficientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,7 +16,7 @@ public class CountrySafetyRatingCoefficientCalculator {
         BigDecimal countryRating = countrySafetyRatingCoefficientRepository.findByCountryIc(agreementDTO.getCountry())
                 .orElseThrow(()->new RuntimeException(
                         "country "+ agreementDTO.getCountry()+" not supports by the system"))
-                .getCoefficient();
+                .getRating();
         return agreementDTO.getTravelCost().
                 divide(countryRating, RoundingMode.HALF_EVEN);
     }

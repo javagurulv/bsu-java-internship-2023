@@ -6,7 +6,7 @@
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
 
 
-    <changeSet author = "javaguru" id = "38">
+    <changeSet author = "katierevinska" id = "38">
         <createTable tableName="travel_cost_coefficient">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true"/>

@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.Optional;
 
 @Component
-public class TravelRequestDateToValidation implements TravelRequestValidation {
+public class TravelRequestDateToValidation extends TravelRequestValidationImpl {
     @Autowired
     ValidationErrorFactory errorFactory;
     /*

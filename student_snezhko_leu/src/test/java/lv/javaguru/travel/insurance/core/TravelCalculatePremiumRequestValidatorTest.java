@@ -1,25 +1,19 @@
 package lv.javaguru.travel.insurance.core;
 
-import lv.javaguru.travel.insurance.rest.InsurancePremiumRisk;
 import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.rest.TravelRequestValidation;
 import lv.javaguru.travel.insurance.rest.validation.*;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.springframework.core.env.Environment;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import java.time.LocalDate;
 import java.util.*;
 
-import java.util.Date;
 import java.util.List;
-import java.sql.*;
 
 public class TravelCalculatePremiumRequestValidatorTest {
     @InjectMocks
@@ -39,7 +33,7 @@ public class TravelCalculatePremiumRequestValidatorTest {
         TravelRequestValidation dateTo = mock(TravelRequestDateToValidation.class);
         when(dateTo.validate(request)).thenReturn(Optional.empty());
 
-        TravelRequestValidation selectRisks = mock(TravelRequestWithoutRisksValidation.class);
+        TravelRequestValidation selectRisks = mock(TravelRequestRisksIsNotNullValidation.class);
         when(selectRisks.validate(request)).thenReturn(Optional.empty());
 
         TravelRequestValidation firstName = mock(TravelRequestFirstNameValidation.class);
@@ -74,7 +68,7 @@ public class TravelCalculatePremiumRequestValidatorTest {
         TravelRequestValidation dateTo = mock(TravelRequestDateToValidation.class);
         when(dateTo.validate(request)).thenReturn(Optional.empty());
 
-        TravelRequestValidation selectRisks = mock(TravelRequestWithoutRisksValidation.class);
+        TravelRequestValidation selectRisks = mock(TravelRequestRisksIsNotNullValidation.class);
         when(selectRisks.validate(request)).thenReturn(Optional.empty());
 
         TravelRequestValidation firstName = mock(TravelRequestFirstNameValidation.class);

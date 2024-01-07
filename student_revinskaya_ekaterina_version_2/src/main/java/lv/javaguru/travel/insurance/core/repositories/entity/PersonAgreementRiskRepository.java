@@ -1,22 +1,20 @@
 package lv.javaguru.travel.insurance.core.repositories.entity;
 
-import lv.javaguru.travel.insurance.core.domain.entity.PersonAgreement;
-import lv.javaguru.travel.insurance.core.domain.entity.PersonAgreementRisk;
+import lv.javaguru.travel.insurance.core.domain.entity.PersonAgreementEntity;
+import lv.javaguru.travel.insurance.core.domain.entity.PersonAgreementRiskEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
-public interface PersonAgreementRiskRepository extends JpaRepository<PersonAgreementRisk, Long> {
-    @Query("SELECT par from PersonAgreementRisk par " +
-            "where par.personAgreementId = :personAgreementId " +
+public interface PersonAgreementRiskRepository extends JpaRepository<PersonAgreementRiskEntity, Long> {
+    @Query("SELECT par from PersonAgreementRiskEntity par " +
+            "where par.personAgreementEntityId = :personAgreementEntityId " +
             "and par.riskIc = :riskIc")
-    Optional<PersonAgreementRisk> findByPersonAgreementIdAndRiskIc(@Param("personAgreementId") PersonAgreement personAgreementId,
-                                                                   @Param("riskIc") String riskIc);
-    @Query("SELECT par from PersonAgreementRisk par " +
-            "where par.personAgreementId = :personAgreementId ")
-    List<PersonAgreementRisk> findByPersonAgreementId(@Param("personAgreementId") PersonAgreement personAgreementId);
+    Optional<PersonAgreementRiskEntity> findByPersonAgreementIdAndRiskIc(@Param("personAgreementEntityId") PersonAgreementEntity personAgreementEntityId,
+                                                                         @Param("riskIc") String riskIc);
+
+    List<PersonAgreementRiskEntity> findByPersonAgreementEntityId(@Param("personAgreementEntityId") PersonAgreementEntity personAgreementEntityId);
 }

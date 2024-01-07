@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.Optional;
 
 @Component
-public class TravelRequestFirstNameValidation implements TravelRequestValidation {
+public class TravelRequestFirstNameValidation extends TravelRequestValidationImpl {
 /*
     @Autowired
     ValidationErrorsUtil util;
