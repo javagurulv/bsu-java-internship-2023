@@ -16,7 +16,7 @@ import static uk.org.webcompere.modelassert.json.JsonAssertions.assertJson;
 import com.google.common.base.Stopwatch;
 
 @Component
-public class RestRequestSender {
+public class CommonCall {
     private RestTemplate restTemplate = new RestTemplate();
     public void sendRequest(String testCase, String url) throws JsonProcessingException {
         HttpHeaders headers = new HttpHeaders();
