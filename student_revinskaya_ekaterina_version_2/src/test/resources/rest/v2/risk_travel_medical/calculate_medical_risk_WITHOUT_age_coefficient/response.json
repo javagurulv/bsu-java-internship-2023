@@ -1,0 +1,23 @@
+{
+  "uuid": "d5ae03c1-d425-49be-9126-1ec0a4e328c1",
+  "agreementDateFrom": "2025-05-25",
+  "agreementDateTo": "2025-05-29",
+  "country": "SPAIN",
+  "agreementPremium": 10.00,
+  "persons": [
+    {
+      "personFirstName": "Vasja",
+      "personLastName": "Pupkin",
+      "birthday": "1954-05-29",
+      "personalCode": "35h5325",
+      "medicalRiskLimitLevel": "LEVEL_10000",
+      "personPremium": 10.00,
+      "personRisks": [
+        {
+          "riskIc": "TRAVEL_MEDICAL",
+          "premium": 10.00
+        }
+      ]
+    }
+  ]
+}

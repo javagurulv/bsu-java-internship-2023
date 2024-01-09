@@ -47,7 +47,7 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
         //response.setRisks(request.getSelectedisks());
         //response.initAgreementPrice();
 
-        response.setAgreementPrice(underwriting.calculatePremium(response));
+        response.setAgreementPrice(underwriting.calculatePremium(request));//response));
         return response;
     }
     public TravelCalculatePremiumResponse buildResponse(List<ValidationError> errors) {

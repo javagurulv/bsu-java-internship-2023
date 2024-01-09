@@ -1,9 +1,12 @@
 package lv.javaguru.travel.insurance.rest.internal;
 
+import org.junit.jupiter.api.DisplayName;
+
 public class TravelGetPolicyControllerTestCase3 extends TravelGetPolicyControllerTest {
     @Override
+    @DisplayName("request with not exist uuid")
     protected String getTestCaseName() {
-        return "test_case_3";
+        return "not_exist_uuid";
     }
 
     @Override

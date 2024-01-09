@@ -1,3 +1,12 @@
+DELETE FROM classifier_values where id >0;
+DELETE FROM classifiers where id >0;
+DELETE FROM country_default_day_rate where id >0;
+DELETE FROM travel_medical_age_coefficient where id >0;
+DELETE FROM medical_risk_limit_level where id >0;
+DELETE FROM travel_cancellation_age_coefficient where id >0;
+DELETE FROM travel_cost_coefficient where id >0;
+DELETE FROM country_safety_rating_coefficient where id >0;
+
 INSERT INTO classifiers(title, description)
 VALUES('RISK_TYPE', 'Risk type classifier');
 

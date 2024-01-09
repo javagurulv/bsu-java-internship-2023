@@ -2,9 +2,9 @@ package lv.javaguru.travel.insurance.dto.v2;
 
 import lv.javaguru.travel.insurance.core.api.command.TravelCalculatePremiumCoreCommand;
 import lv.javaguru.travel.insurance.core.api.command.TravelCalculatePremiumCoreResult;
-import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
-import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
-import lv.javaguru.travel.insurance.core.api.dto.RiskDTO;
+import lv.javaguru.travel.insurance.core.api.dto.agreement.AgreementDTO;
+import lv.javaguru.travel.insurance.core.api.dto.person.PersonDTO;
+import lv.javaguru.travel.insurance.core.api.dto.risk.RiskDTO;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import lv.javaguru.travel.insurance.dto.RiskPremium;
 import lv.javaguru.travel.insurance.dto.ValidationError;
@@ -36,6 +36,7 @@ public class DTOV2Converter {
 
     private PersonResponseDTO buildPersonFromResponse(PersonDTO personDTO) {
         PersonResponseDTO personResponseDTO = new PersonResponseDTO();
+        personResponseDTO.setPersonUUID(personDTO.getPersonUUID());
         personResponseDTO.setPersonFirstName(personDTO.getPersonFirstName());
         personResponseDTO.setPersonLastName(personDTO.getPersonLastName());
         personResponseDTO.setRisks(personDTO.getSelectedRisks().stream()
@@ -74,7 +75,7 @@ public class DTOV2Converter {
 
     private List<PersonDTO> transformPersonDTOs(TravelCalculatePremiumRequestV2 request) {
         return request.getPersons().stream()
-                .map(person -> new PersonDTO(person.getPersonFirstName(), person.getPersonLastName()
+                .map(person -> new PersonDTO(person.getPersonUUID(), person.getPersonFirstName(), person.getPersonLastName()
                         , person.getPersonBirthDate(), null, person.getMedicalRiskLimitLevel()))
                 .toList();
     }

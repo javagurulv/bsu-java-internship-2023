@@ -14,7 +14,7 @@
                 <constraints nullable="false"/>
             </column>
             <column name = "travel_cost" type="DECIMAL(10,2)">
-                <constraints nullable="false"/>
+                <constraints nullable="true"/>
             </column>
             <column name="date_from" type="TIMESTAMP">
                 <constraints nullable="false"/>

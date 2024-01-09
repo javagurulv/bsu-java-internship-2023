@@ -6,5 +6,5 @@ import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumResponse;
 import java.math.BigDecimal;
 
 public interface TravelUnderwriting {
-    public BigDecimal calculatePremium(TravelCalculatePremiumResponse response);
+    public BigDecimal calculatePremium(TravelCalculatePremiumRequest request);//TravelCalculatePremiumResponse response);
 }
