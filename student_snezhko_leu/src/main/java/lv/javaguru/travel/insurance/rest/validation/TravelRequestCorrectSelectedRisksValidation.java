@@ -6,6 +6,7 @@ import lv.javaguru.travel.insurance.core.repositories.ClassifierValueRepository;
 import lv.javaguru.travel.insurance.rest.InsurancePremiumRisk;
 import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.rest.TravelRequestValidation;
+import lv.javaguru.travel.insurance.rest.placeholder.Placeholder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -19,6 +20,7 @@ public class TravelRequestCorrectSelectedRisksValidation extends TravelRequestVa
     @Autowired private ValidationErrorFactory errorFactory;
     @Autowired private ClassifierValueRepository classifierValueRepository;
 
+    private List<Placeholder> placeholders;
     /*
     @Override
     public Optional<ValidationError> validate(TravelCalculatePremiumRequest request) {
@@ -46,12 +48,25 @@ public class TravelRequestCorrectSelectedRisksValidation extends TravelRequestVa
         if (risks == null || risks.isEmpty()) {
             return null;
         }
+        //List<Placeholder> placeholders = new ArrayList<>();
         for (String risk : risks) {
             Optional<ClassifierValue> cv = classifierValueRepository.findByClassifierTitleAndIc("RISK_TYPE", risk);
             if (cv.isEmpty()) {
-                result.add(new ValidationError("ERROR_CODE_9", "Risk with ic = " + risk + " is not supported!"));//Optional.of(errorFactory.buildError("ERROR_CODE_9"));//"ERROR_CODE_9", "Risk with ic = " + risk + "is not exist"));
+                initPlaceholders(placeholders, risk);
+                result.add(errorFactory.buildError("ERROR_CODE_9",placeholders));
+                        //"ERROR_CODE_9", "Risk with ic = " + risk + " is not supported!"));//Optional.of(errorFactory.buildError("ERROR_CODE_9"));//"ERROR_CODE_9", "Risk with ic = " + risk + "is not exist"));
             }
         }
         return result;
+    }
+
+    private void initPlaceholders(List<Placeholder> placeholders, String risk) {
+        Placeholder notExistingRisk = new Placeholder("NOT_EXISTING_RISK", risk);
+        if (placeholders == null) {
+            placeholders = new ArrayList<>();
+        }
+        placeholders.clear();
+        placeholders.add(notExistingRisk);
+        //return placeholders;
     }
 }

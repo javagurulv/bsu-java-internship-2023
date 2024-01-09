@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.core.api.dto;
+package lv.javaguru.travel.insurance.core.api.dto.risk;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
