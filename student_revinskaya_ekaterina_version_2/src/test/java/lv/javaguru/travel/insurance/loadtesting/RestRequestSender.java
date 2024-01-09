@@ -13,6 +13,7 @@ import java.io.File;
 import java.nio.file.Files;
 
 import static uk.org.webcompere.modelassert.json.JsonAssertions.assertJson;
+import com.google.common.base.Stopwatch;
 
 @Component
 public class RestRequestSender {
@@ -24,10 +25,13 @@ public class RestRequestSender {
         String requestFile = testCase + "/request.json";
         String responseFile = testCase + "/response.json";
 
+        Stopwatch stopwatch = Stopwatch.createStarted();
         String response = restTemplate.postForObject(
                 url,
                 new HttpEntity<>(parseJSONIntoString(requestFile), headers),
                 String.class);
+        stopwatch.stop();
+        System.out.println("Request processing time (ms): " + stopwatch.elapsed().toMillis());
 
         compareJsons(response, responseFile);
     }
