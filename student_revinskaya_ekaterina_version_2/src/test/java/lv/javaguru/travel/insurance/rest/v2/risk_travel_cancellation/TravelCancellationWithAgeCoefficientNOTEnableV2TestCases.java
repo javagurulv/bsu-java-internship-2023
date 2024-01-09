@@ -10,8 +10,8 @@ import org.springframework.test.context.ActiveProfiles;
 public class TravelCancellationWithAgeCoefficientNOTEnableV2TestCases extends TravelCalculatePremiumControllerV2Test {
     @Test
     @DisplayName("response with age coefficient not enable")
-    public void testRequest1() throws Exception {
-        equalsJsonFiles("risk_travel_cancellation/test_case_31", true);
+    public void testRequest() throws Exception {
+        equalsJsonFiles("risk_travel_cancellation/calculate_cancellation_risk_WITHOUT_age_coefficient", true);
     }
 
 }

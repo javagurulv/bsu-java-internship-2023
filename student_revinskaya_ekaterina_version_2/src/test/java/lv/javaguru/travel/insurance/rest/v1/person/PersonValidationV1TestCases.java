@@ -9,43 +9,43 @@ public class PersonValidationV1TestCases extends TravelCalculatePremiumControlle
     @Test
     @DisplayName("request with null first name")
     public void testRequest1() throws Exception {
-        equalsJsonFiles("person/test_case_1");
+        equalsJsonFiles("person/ERROR_CODE_1_null_first_name");
     }
 
     @Test
     @DisplayName("request with empty first name")
     public void testRequest2() throws Exception {
-        equalsJsonFiles("person/test_case_2");
+        equalsJsonFiles("person/ERROR_CODE_1_empty_first_name");
     }
 
     @Test
     @DisplayName("request with null last name")
     public void testRequest3() throws Exception {
-        equalsJsonFiles("person/test_case_3");
+        equalsJsonFiles("person/ERROR_CODE_2_null_last_name");
     }
 
     @Test
     @DisplayName("request with empty last name")
     public void testRequest4() throws Exception {
-        equalsJsonFiles("person/test_case_4");
+        equalsJsonFiles("person/ERROR_CODE_2_empty_last_name");
     }
 
     @Test
     @DisplayName("request with null personBirthDate")
-    public void testRequest10() throws Exception {
-        equalsJsonFiles("person/test_case_10");
+    public void testRequest5() throws Exception {
+        equalsJsonFiles("person/ERROR_CODE_12_null_person_birthday");
     }
 
     @Test
     @DisplayName("request with personBirthDate in the future")
-    public void testRequest11() throws Exception {
-        equalsJsonFiles("person/test_case_11");
+    public void testRequest6() throws Exception {
+        equalsJsonFiles("person/ERROR_CODE_13_person_birthday_in_future");
     }
 
     @Test
     @DisplayName("request with null personal code")
-    public void testRequest22() throws Exception {
-        equalsJsonFiles("person/test_case_22");
+    public void testRequest7() throws Exception {
+        equalsJsonFiles("person/ERROR_CODE_17_null_personal_code");
     }
 
 }

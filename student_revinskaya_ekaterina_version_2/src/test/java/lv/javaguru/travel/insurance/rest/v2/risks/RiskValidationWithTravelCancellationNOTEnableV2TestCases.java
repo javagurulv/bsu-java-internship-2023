@@ -9,7 +9,7 @@ import org.springframework.test.context.ActiveProfiles;
 public class RiskValidationWithTravelCancellationNOTEnableV2TestCases extends TravelCalculatePremiumControllerV2Test {
     @Test
     @DisplayName("request with TRAVEL_CANCELLATION selected, but not enable")
-    public void testRequest28() throws Exception {
-        equalsJsonFiles("risks/test_case_37");
+    public void testRequest() throws Exception {
+        equalsJsonFiles("risks/ERROR_CODE_22_cancellation_risk_selected_and_not_enable");
     }
 }
