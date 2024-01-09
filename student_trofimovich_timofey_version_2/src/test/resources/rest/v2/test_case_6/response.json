@@ -1,0 +1,13 @@
+{
+  "errors": [
+    {
+      "errorCode": "ERROR_CODE_7",
+      "description": "Field agreementDateFrom is not before field agreementDateTo!"
+    }
+  ],
+  "agreementDateFrom": null,
+  "agreementDateTo": null,
+  "country": null,
+  "persons": null,
+  "agreementPremium": null
+}

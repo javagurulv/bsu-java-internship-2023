@@ -1,0 +1,10 @@
+{
+  "personFirstName" : "Vasja",
+  "personLastName" : "Pupkin",
+  "agreementDateFrom" : "",
+  "agreementDateTo" : "",
+  "selected_risks" :
+  [
+    "TRAVEL_MEDICAL"
+  ]
+}

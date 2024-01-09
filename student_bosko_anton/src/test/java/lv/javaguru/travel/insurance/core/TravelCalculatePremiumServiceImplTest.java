@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TravelCalculatePremiumServiceImplTest {
-    DateTimeService date = new DateTimeService();
+    private DateTimeService date = new DateTimeService();
 
     @Test
     public void test_first() {

@@ -1,0 +1,23 @@
+{
+  "agreementDateFrom" : "2025-05-25",
+  "agreementDateTo" : "2025-05-29",
+  "travelCost" : 100.00,
+  "country" : "SPAIN",
+  "selected_risks":["TRAVEL_MEDICAL"],
+  "persons" : [
+    {
+      "personFirstName" : "Vasja",
+      "personLastName" : "Pupkin",
+      "personBirthDate" : "2000-05-29",
+      "personalCode": null,
+      "medicalRiskLimitLevel" : "LEVEL_10000"
+    },
+    {
+      "personFirstName" : "Petja",
+      "personLastName" : "Pupkin",
+      "personBirthDate" : "2000-02-29",
+      "personalCode": "1434333",
+      "medicalRiskLimitLevel" : "LEVEL_10000"
+    }
+  ]
+}

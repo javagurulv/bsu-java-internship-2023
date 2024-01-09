@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 @Component
 public class CountryDefaultDayPremiumCalculator {
@@ -16,6 +17,5 @@ public class CountryDefaultDayPremiumCalculator {
         return countryDefaultDayRateRepository.findByCountryIc(agreement.getCountry())
                 .orElseThrow(() -> new RuntimeException("default day rate for country " + agreement.getCountry() + " not found"))
                 .getDefaultDayRate();
-
-    }
+            }
 }

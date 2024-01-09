@@ -8,12 +8,11 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -21,6 +20,9 @@ public class TravelRequestDateFromNotPastValidationTest {
 
     @Mock
     private TravelCalculatePremiumRequest request;
+
+    @Mock
+    private ValidationErrorFactory errorFactory;
 
     @InjectMocks
     private TravelRequestDateFromNotPastValidation validation;
@@ -30,14 +32,11 @@ public class TravelRequestDateFromNotPastValidationTest {
         when(request.getAgreementDateFrom()).thenReturn(
                 new Date(validation.getMillisecondsNow() - 172800000L)
         );
+        when(errorFactory.buildError(any())).thenReturn(new ValidationError());
 
-        Optional<ValidationError> expected = Optional.of(
-            new ValidationError(
-                    "agreementDateFrom", "Must not be from the past!"
-            )
-        );
-
+        Optional<ValidationError> expected = Optional.of(new ValidationError());
         Optional<ValidationError> error = validation.check(request);
+
         assertEquals(expected, error);
     }
 

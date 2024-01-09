@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
+
+
+    <changeSet id="11" author="Timofey">
+        <sql>
+            insert into classifiers (title, description)
+            values ('RISK_TYPE', 'travel policy risk type classifier')
+        </sql>
+    </changeSet>
+
+    <changeSet id="12" author="Timofey">
+        <sql>
+            insert into classifier_values (classifier_id, ic, description)
+            values ((select id from classifiers where title = 'RISK_TYPE'), 'TRAVEL_MEDICAL',
+                    'travel policy medical risk'),
+                   ((select id from classifiers where title = 'RISK_TYPE'), 'TRAVEL_CANCELLATION',
+                    'travel policy trip cancellation risk'),
+                   ((select id from classifiers where title = 'RISK_TYPE'), 'TRAVEL_LOSS_BAGGAGE',
+                    'travel policy baggage lose risk');
+            insert into classifier_values (classifier_id, ic, description)
+            values ((select id from classifiers where title = 'RISK_TYPE'), 'TRAVEL_THIRD_PARTY_LIABILITY',
+                    'Travel policy third party liability risk type'),
+                   ((select id from classifiers where title = 'RISK_TYPE'), 'TRAVEL_EVACUATION',
+                    'Travel policy evacuation risk type'),
+                   ((select id from classifiers where title = 'RISK_TYPE'), 'TRAVEL_SPORT_ACTIVITIES',
+                    'Travel policy sport activities risk type');
+        </sql>
+    </changeSet>
+
+    <changeSet id="13" author="Timofey">
+        <sql>
+            insert into classifiers(title, description)
+            values ('COUNTRY', 'country classifier');
+        </sql>
+    </changeSet>
+
+    <changeSet id="14" author="Timofey">
+        <sql>
+            insert into classifier_values(classifier_id, ic, description)
+            VALUES ((SELECT id from classifiers where title = 'COUNTRY'), 'LATVIA', 'country: Latvia'),
+                   ((SELECT id from classifiers where title = 'COUNTRY'), 'SPAIN', 'country: Spain'),
+                   ((SELECT id from classifiers where title = 'COUNTRY'), 'JAPAN', 'country: Japan')
+        </sql>
+    </changeSet>
+
+    <changeSet id="15" author="Timofey">
+        <sql>
+            INSERT INTO country_default_day_rate(country_ic, country_default_day_rate)
+            VALUES ('LATVIA', 1.00),
+                   ('SPAIN', 2.50),
+                   ('JAPAN', 3.50)
+        </sql>
+    </changeSet>
+
+    <changeSet id="16" author="Timofey">
+        <sql>
+            INSERT INTO age_coefficient(age_from, age_to, coefficient)
+            VALUES (0, 5, 1.1),
+                   (6, 10, 0.7),
+                   (11, 17, 1.0),
+                   (18, 40, 1.1),
+                   (41, 65, 1.2),
+                   (65, 150, 1.5)
+        </sql>
+    </changeSet>
+
+    <changeSet id="17" author="Timofey">
+        <sql>
+            INSERT INTO classifiers(title, description)
+            VALUES ('MEDICAL_RISK_LIMIT_LEVEL', 'medical risk limit level')
+        </sql>
+    </changeSet>
+
+    <changeSet id="18" author="Timofey">
+        <sql>
+            INSERT INTO classifier_values(classifier_id, ic, description)
+            VALUES ((SELECT id FROM classifiers WHERE title = 'MEDICAL_RISK_LIMIT_LEVEL'), 'LEVEL_10000',
+                    'Medical Risk 10000 euro limit level'),
+                   ((SELECT id FROM classifiers WHERE title = 'MEDICAL_RISK_LIMIT_LEVEL'), 'LEVEL_15000',
+                    'Medical Risk 15000 euro limit level'),
+                   ((SELECT id FROM classifiers WHERE title = 'MEDICAL_RISK_LIMIT_LEVEL'), 'LEVEL_20000',
+                    'Medical Risk 20000 euro limit level'),
+                   ((SELECT id FROM classifiers WHERE title = 'MEDICAL_RISK_LIMIT_LEVEL'), 'LEVEL_50000',
+                    'Medical Risk 50000 euro limit level');
+        </sql>
+    </changeSet>
+
+    <changeSet id="19" author="Timofey">
+        <sql>
+            INSERT INTO medical_risk_limit_level(medical_risk_limit_level_ic, coefficient)
+            VALUES ('LEVEL_10000', 1.0),
+                   ('LEVEL_15000', 1.2),
+                   ('LEVEL_20000', 1.5),
+                   ('LEVEL_50000', 2.0);
+        </sql>
+    </changeSet>
+</databaseChangeLog>

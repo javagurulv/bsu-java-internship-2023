@@ -1,0 +1,12 @@
+{
+  "errors": [
+    {
+      "errorCode": "ERROR_CODE_9",
+      "description": "Risk Type ic = FAKE_RISK not supported by the system"
+    },
+    {
+      "errorCode": "ERROR_CODE_9",
+      "description": "Risk Type ic = FAKE_RISK_2 not supported by the system"
+    }
+  ]
+}

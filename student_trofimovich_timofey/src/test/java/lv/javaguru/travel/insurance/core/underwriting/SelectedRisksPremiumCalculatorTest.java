@@ -2,7 +2,7 @@ package lv.javaguru.travel.insurance.core.underwriting;
 
 import lv.javaguru.travel.insurance.core.underwriting.calculations.TravelRiskPremiumCalculator;
 import lv.javaguru.travel.insurance.dto.RiskPremium;
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -24,7 +24,7 @@ public class SelectedRisksPremiumCalculatorTest {
 
     @Test
     void shouldReturnCorrectListOfRiskPremiums() {
-        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        TravelCalculatePremiumRequestV1 request = mock(TravelCalculatePremiumRequestV1.class);
         when(request.getSelectedRisks()).thenReturn(List.of("RISK_1", "RISK_2"));
         TravelRiskPremiumCalculator mock1 = mock(TravelRiskPremiumCalculator.class);
         when(mock1.getRiskIc()).thenReturn("RISK_1");

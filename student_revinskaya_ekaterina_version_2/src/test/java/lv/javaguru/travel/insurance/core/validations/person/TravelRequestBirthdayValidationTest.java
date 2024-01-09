@@ -1,5 +1,6 @@
 package lv.javaguru.travel.insurance.core.validations.person;
 
+import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import lv.javaguru.travel.insurance.core.validations.ValidationErrorFactory;
@@ -13,6 +14,8 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.anyList;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -21,15 +24,18 @@ public class TravelRequestBirthdayValidationTest {
     @InjectMocks
     TravelRequestBirthdayValidation birthdayValidation;
     @Mock
-    PersonDTO request;
+    AgreementDTO agreementDTO;
+    @Mock
+    PersonDTO personDTO;
     @Mock
     ValidationErrorFactory validationErrorFactory;
     @Test
     public void responseShouldContainsErrorBirthdayInFutureTest(){
         ValidationErrorDTO validationError = mock(ValidationErrorDTO.class);
-        when(request.getPersonBirthDate()).thenReturn(null);
-        when(validationErrorFactory.buildError("ERROR_CODE_12")).thenReturn(validationError);
-        Optional<ValidationErrorDTO> error= birthdayValidation.validate(request);
+        when(personDTO.getPersonBirthDate()).thenReturn(null);
+        when(personDTO.getPersonalCode()).thenReturn("1323123");
+        when(validationErrorFactory.buildError(eq("ERROR_CODE_12"), anyList())).thenReturn(validationError);
+        Optional<ValidationErrorDTO> error= birthdayValidation.validate(agreementDTO, personDTO);
         assertTrue(error.isPresent());
         assertEquals(error.get(), validationError);
     }

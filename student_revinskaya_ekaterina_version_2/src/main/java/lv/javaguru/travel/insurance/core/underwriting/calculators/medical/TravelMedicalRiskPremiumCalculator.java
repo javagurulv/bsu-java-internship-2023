@@ -7,21 +7,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 @Component
 public class TravelMedicalRiskPremiumCalculator implements TravelRiskPremiumCalculator {
     @Autowired private DayCountCalculator dayCountCalculator;
     @Autowired private CountryDefaultDayPremiumCalculator countryDefaultDayPremiumCalculator;
-    @Autowired private AgeCoefficientCalculator ageCoefficientCalculator;
+    @Autowired private TMAgeCoefficientCalculator TMAgeCoefficientCalculator;
 
     @Autowired private InsuranceLimitCoefficientCalculator insuranceLimitCoefficientCalculator;
     @Override
     public BigDecimal calculatePremium(AgreementDTO agreement, PersonDTO person) {
         BigDecimal dayCount = dayCountCalculator.calculate(agreement);
         BigDecimal countryDefaultDayPremium = countryDefaultDayPremiumCalculator.calculate(agreement);
-        BigDecimal ageCoefficient = ageCoefficientCalculator.calculate(person);
-        BigDecimal insuranceLimitCoefficient = insuranceLimitCoefficientCalculator.calculate(agreement);
-        return dayCount.multiply(countryDefaultDayPremium).multiply(ageCoefficient).multiply(insuranceLimitCoefficient);
+        BigDecimal ageCoefficient = TMAgeCoefficientCalculator.calculate(person);
+        BigDecimal insuranceLimitCoefficient = insuranceLimitCoefficientCalculator.calculate(person);
+        return dayCount
+                .multiply(countryDefaultDayPremium)
+                .multiply(ageCoefficient)
+                .multiply(insuranceLimitCoefficient)
+                .setScale(2, RoundingMode.HALF_UP)
+                .stripTrailingZeros();
+
     }
 
     @Override

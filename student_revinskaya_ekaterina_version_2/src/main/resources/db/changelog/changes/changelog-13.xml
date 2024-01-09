@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
+
+
+    <changeSet author = "katierevinska" id = "38">
+        <createTable tableName="travel_cost_coefficient">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="cost_from" type="DECIMAL(10,2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="cost_to" type="DECIMAL(10,2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="coefficient" type="DECIMAL(10,2)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="katierevinska" id="39">
+        <createIndex indexName="ix_travel_cost_coefficient_cost_from"
+                     tableName="travel_cost_coefficient"
+                     unique="true">
+            <column name="cost_from"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet author="katierevinska" id="40">
+        <createIndex indexName="ix_travel_cost_coefficient_cost_to"
+                     tableName="travel_cost_coefficient"
+                     unique="true">
+            <column name="cost_to"/>
+        </createIndex>
+    </changeSet>
+
+</databaseChangeLog>

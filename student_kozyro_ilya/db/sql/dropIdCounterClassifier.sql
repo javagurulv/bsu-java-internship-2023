@@ -1,0 +1,1 @@
+ALTER SEQUENCE insurance_schema.classifiers_id_seq RESTART WITH 1;

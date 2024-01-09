@@ -4,21 +4,22 @@ package lv.javaguru.travel.insurance.core;
 //import lv.javaguru.travel.insurance.dto.ValidationError;
 import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.rest.TravelRequestValidation;
-import lv.javaguru.travel.insurance.rest.validation.TravelRequestDateFromValidation;
-import lv.javaguru.travel.insurance.rest.validation.TravelRequestDateToValidation;
-import lv.javaguru.travel.insurance.rest.validation.TravelRequestFirstNameValidation;
-import lv.javaguru.travel.insurance.rest.validation.TravelRequestLastNameValidation;
+import lv.javaguru.travel.insurance.rest.placeholder.Placeholder;
+import lv.javaguru.travel.insurance.rest.validation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.*;
 
 
 @Component
-class TravelCalculatePremiumRequestValidator {
+public class TravelCalculatePremiumRequestValidator {       //will make default access mod
+    @Autowired
+    List<TravelRequestValidation> validations;
     public List<ValidationError> validate(TravelCalculatePremiumRequest request) {
-        List<TravelRequestValidation> validations = new ArrayList<>();
+  //      List<TravelRequestValidation> validations = new ArrayList<>();
         List<ValidationError> errors = new ArrayList<>();
         /*
         validatePersonFirstName(request).ifPresent(errors::add);
@@ -26,17 +27,24 @@ class TravelCalculatePremiumRequestValidator {
         validateAgreementDateFrom(request).ifPresent(errors::add);
         validateAgreementDateTo(request).ifPresent(errors::add);
         */
+/*
         validations.add(new TravelRequestFirstNameValidation());
         validations.add(new TravelRequestLastNameValidation());
         validations.add(new TravelRequestDateFromValidation());
         validations.add(new TravelRequestDateToValidation());
-
-        validations.forEach(validation -> {
-            Optional<ValidationError> error = validation.validate(request);
-            if (!error.isEmpty()) {
-                errors.add(error.get());
-            }
-        });
+        validations.add(new TravelRequestWithoutRisksValidation());
+*/
+            validations.forEach(validation -> {
+                Optional<ValidationError> error = null;
+                error = validation.validate(request);
+                if (!error.isEmpty()) {
+                    errors.add(error.get());
+                }
+                List<ValidationError> validList = validation.validateList(request);
+                if (validList != null) {
+                    errors.addAll(validList);
+                }
+            });
         return errors;
     }
 

@@ -3,7 +3,7 @@ package lv.javaguru.travel.insurance.core.underwriting;
 
 
 import lv.javaguru.travel.insurance.dto.RiskPremium;
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -28,7 +28,7 @@ public class TravelPremiumUnderwritingImplTest {
 
     @Test
     public void shouldReturnResponseWithCorrectTravelCalculatePremiumResult() {
-        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        TravelCalculatePremiumRequestV1 request = mock(TravelCalculatePremiumRequestV1.class);
         RiskPremium riskPremium1 = mock(RiskPremium.class);
         when(riskPremium1.getPremium()).thenReturn(new BigDecimal(10));
         RiskPremium riskPremium2 = mock(RiskPremium.class);
