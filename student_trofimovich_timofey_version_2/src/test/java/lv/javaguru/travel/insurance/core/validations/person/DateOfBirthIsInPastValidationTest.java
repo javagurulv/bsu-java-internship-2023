@@ -1,6 +1,6 @@
 package lv.javaguru.travel.insurance.core.validations.person;
 
-import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
+import lv.javaguru.travel.insurance.core.api.dto.person.PersonDTO;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import lv.javaguru.travel.insurance.core.validations.ValidationErrorFactory;
 import org.junit.jupiter.api.BeforeEach;

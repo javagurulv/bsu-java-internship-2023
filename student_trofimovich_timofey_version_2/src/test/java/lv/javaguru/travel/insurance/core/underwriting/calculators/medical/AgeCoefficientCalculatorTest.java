@@ -1,6 +1,6 @@
 package lv.javaguru.travel.insurance.core.underwriting.calculators.medical;
 
-import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
+import lv.javaguru.travel.insurance.core.api.dto.person.PersonDTO;
 import lv.javaguru.travel.insurance.core.domain.AgeCoefficient;
 import lv.javaguru.travel.insurance.core.repositories.AgeCoefficientRepository;
 import org.junit.jupiter.api.BeforeEach;

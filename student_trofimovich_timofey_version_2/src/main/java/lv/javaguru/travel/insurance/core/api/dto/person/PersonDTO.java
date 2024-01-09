@@ -1,9 +1,10 @@
-package lv.javaguru.travel.insurance.core.api.dto;
+package lv.javaguru.travel.insurance.core.api.dto.person;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lv.javaguru.travel.insurance.core.api.dto.risk.RiskDTO;
 
 import java.util.Date;
 import java.util.List;

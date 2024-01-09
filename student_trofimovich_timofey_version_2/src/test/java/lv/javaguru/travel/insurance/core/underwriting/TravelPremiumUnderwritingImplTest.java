@@ -1,9 +1,9 @@
 package lv.javaguru.travel.insurance.core.underwriting;
 
 
-import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
-import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
-import lv.javaguru.travel.insurance.core.api.dto.RiskDTO;
+import lv.javaguru.travel.insurance.core.api.dto.agreement.AgreementDTO;
+import lv.javaguru.travel.insurance.core.api.dto.person.PersonDTO;
+import lv.javaguru.travel.insurance.core.api.dto.risk.RiskDTO;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

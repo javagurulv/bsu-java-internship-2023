@@ -1,7 +1,7 @@
 package lv.javaguru.travel.insurance.core.underwriting.calculators.medical;
 
-import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
-import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
+import lv.javaguru.travel.insurance.core.api.dto.agreement.AgreementDTO;
+import lv.javaguru.travel.insurance.core.api.dto.person.PersonDTO;
 import lv.javaguru.travel.insurance.core.underwriting.TravelRiskPremiumCalculator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
