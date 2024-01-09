@@ -11,12 +11,12 @@ public class PersonValidationWithMedicalLimitLevelEnableV1TestCases extends Trav
     @Test
     @DisplayName("request where medical limit level null but enable, RISK_TYPE-TRAVEL_MEDICAL")
     public void testRequest23() throws Exception {
-        equalsJsonFiles("test_case_23");
+        equalsJsonFiles("person/test_case_23");
     }
 
     @Test
     @DisplayName("request where medical limit level not exist but enable, RISK_TYPE-TRAVEL_MEDICAL")
     public void testRequest24() throws Exception {
-        equalsJsonFiles("test_case_24");
+        equalsJsonFiles("person/test_case_24");
     }
 }

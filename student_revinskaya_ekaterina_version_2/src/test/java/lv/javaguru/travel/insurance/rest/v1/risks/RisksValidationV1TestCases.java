@@ -8,24 +8,24 @@ public class RisksValidationV1TestCases extends TravelCalculatePremiumController
     @Test
     @DisplayName("request with null selected_risks")
     public void testRequest16() throws Exception {
-        equalsJsonFiles("test_case_16");
+        equalsJsonFiles("risks/test_case_16");
     }
 
     @Test
     @DisplayName("request with empty selected_risks")
     public void testRequest17() throws Exception {
-        equalsJsonFiles("test_case_17");
+        equalsJsonFiles("risks/test_case_17");
     }
 
     @Test
     @DisplayName("request with selectedRisk is not supported by the system")
     public void testRequest18() throws Exception {
-        equalsJsonFiles("test_case_18");
+        equalsJsonFiles("risks/test_case_18");
     }
     @Test
     @DisplayName("request with selectedRisks is not supported by the system(two risks)")
     public void testRequest19() throws Exception {
-        equalsJsonFiles("test_case_19");
+        equalsJsonFiles("risks/test_case_19");
     }
 
 }

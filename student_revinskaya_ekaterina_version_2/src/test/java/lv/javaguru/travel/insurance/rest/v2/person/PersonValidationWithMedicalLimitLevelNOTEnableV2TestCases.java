@@ -12,7 +12,7 @@ public class PersonValidationWithMedicalLimitLevelNOTEnableV2TestCases extends T
     @Test
     @DisplayName("request where medical limit level specified but not enable, RISK_TYPE-TRAVEL_MEDICAL")
     public void testRequest25() throws Exception {
-        equalsJsonFiles("test_case_36");
+        equalsJsonFiles("person/test_case_36");
     }
 
 }

@@ -9,19 +9,19 @@ public class RisksValidationV2TestCases extends TravelCalculatePremiumController
     @Test
     @DisplayName("request with empty selected risks")
     public void testRequest12() throws Exception {
-        equalsJsonFiles("test_case_12");
+        equalsJsonFiles("risks/test_case_12");
     }
 
     @Test
     @DisplayName("request with null selected risks")
     public void testRequest13() throws Exception {
-        equalsJsonFiles("test_case_13");
+        equalsJsonFiles("risks/test_case_13");
     }
 
     @Test
     @DisplayName("request with not exist selected risks")
     public void testRequest14() throws Exception {
-        equalsJsonFiles("test_case_14");
+        equalsJsonFiles("risks/test_case_14");
     }
 
 }

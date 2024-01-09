@@ -10,6 +10,6 @@ public class RiskValidationWithTravelCancellationNOTEnableV2TestCases extends Tr
     @Test
     @DisplayName("request with TRAVEL_CANCELLATION selected, but not enable")
     public void testRequest28() throws Exception {
-        equalsJsonFiles("test_case_37");
+        equalsJsonFiles("risks/test_case_37");
     }
 }

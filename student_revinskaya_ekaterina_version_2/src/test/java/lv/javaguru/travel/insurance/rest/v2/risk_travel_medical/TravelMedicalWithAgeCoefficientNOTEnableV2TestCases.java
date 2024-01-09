@@ -9,7 +9,7 @@ public class TravelMedicalWithAgeCoefficientNOTEnableV2TestCases extends TravelC
         @Test
         @DisplayName("response with age coefficient not enable")
         public void testRequest1() throws Exception {
-            equalsJsonFiles("test_case_33", true);
+            equalsJsonFiles("risk_travel_medical/test_case_33", true);
         }
 
     }

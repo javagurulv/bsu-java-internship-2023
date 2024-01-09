@@ -10,7 +10,7 @@ public class TravelCancellationWithAgeCoefficientEnableV1TestCases extends Trave
     @Test
     @DisplayName("response with age coefficient enable")
     public void testRequest30() throws Exception {
-        equalsJsonFiles("test_case_30", true);
+        equalsJsonFiles("risk_travel_cancellation/test_case_30", true);
     }
 
 }
