@@ -36,6 +36,7 @@ public class DTOV2Converter {
 
     private PersonResponseDTO buildPersonFromResponse(PersonDTO personDTO) {
         PersonResponseDTO personResponseDTO = new PersonResponseDTO();
+        personResponseDTO.setPersonUUID(personDTO.getPersonUUID());
         personResponseDTO.setPersonFirstName(personDTO.getPersonFirstName());
         personResponseDTO.setPersonLastName(personDTO.getPersonLastName());
         personResponseDTO.setRisks(personDTO.getSelectedRisks().stream()
@@ -74,7 +75,7 @@ public class DTOV2Converter {
 
     private List<PersonDTO> transformPersonDTOs(TravelCalculatePremiumRequestV2 request) {
         return request.getPersons().stream()
-                .map(person -> new PersonDTO(person.getPersonFirstName(), person.getPersonLastName()
+                .map(person -> new PersonDTO(person.getPersonUUID(), person.getPersonFirstName(), person.getPersonLastName()
                         , person.getPersonBirthDate(), null, person.getMedicalRiskLimitLevel()))
                 .toList();
     }

@@ -15,6 +15,8 @@ import java.util.Date;
 @AllArgsConstructor
 public class PersonRequestDTO {
 
+    private String personUUID;
+
     private String personFirstName;
     private String personLastName;
 

@@ -9,6 +9,7 @@ import java.util.List;
 @Setter
 public class PersonDTOBuilder {
 
+    private String personUUID;
     private String personFirstName;
     private String personLastName;
     private Date personBirthDate;
@@ -17,6 +18,7 @@ public class PersonDTOBuilder {
 
     public PersonDTO build() {
         PersonDTO personDTO = new PersonDTO();
+        personDTO.setPersonUUID(personUUID);
         personDTO.setPersonFirstName(personFirstName);
         personDTO.setPersonLastName(personLastName);
         personDTO.setPersonBirthDate(personBirthDate);
@@ -29,6 +31,10 @@ public class PersonDTOBuilder {
         return new PersonDTOBuilder();
     }
 
+    public PersonDTOBuilder withPersonUUID(String personUUID) {
+        this.setPersonUUID(personUUID);
+        return this;
+    }
     public PersonDTOBuilder withPersonFirstName(String personFirstName) {
         this.setPersonFirstName(personFirstName);
         return this;

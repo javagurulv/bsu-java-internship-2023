@@ -91,4 +91,7 @@ Test Case 23:
 Request: all fields not provided.
 Response: multiple error codes.
 
+Test Case 24:
+Request: personUUID is null, RISK_TYPE - TRAVEL_MEDICAL.
+Response: error code = ERROR_CODE_17.
 

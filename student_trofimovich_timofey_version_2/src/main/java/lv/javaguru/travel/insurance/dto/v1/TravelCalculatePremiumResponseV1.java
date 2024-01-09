@@ -22,18 +22,28 @@ import java.util.List;
 
 public class TravelCalculatePremiumResponseV1 extends CoreResponse {
 
+    private String personUUID;
+
     private String personFirstName;
+
     private String personLastName;
+
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date dateOfBirth;
+
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date agreementDateFrom;
+
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date agreementDateTo;
+
     @JsonSerialize(using = BigDecimalSerializer.class)
     private BigDecimal agreementPremium;
+
     private List<RiskPremium> risks;
+
     private String country;
+
     private String medicalRiskLimitLevel;
 
     public TravelCalculatePremiumResponseV1(List<ValidationError> errors) {
