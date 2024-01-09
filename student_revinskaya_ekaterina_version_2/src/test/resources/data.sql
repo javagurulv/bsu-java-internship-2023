@@ -138,7 +138,7 @@ VALUES
 (10000, 20000, 100),
 (20000, 1000000, 500)
 ;
-INSERT INTO country_safety_rating_coefficient(country_ic, coefficient)
+INSERT INTO country_safety_rating_coefficient(country_ic, rating)
 VALUES
 ('LATVIA', 5),
 ('SPAIN', 8),

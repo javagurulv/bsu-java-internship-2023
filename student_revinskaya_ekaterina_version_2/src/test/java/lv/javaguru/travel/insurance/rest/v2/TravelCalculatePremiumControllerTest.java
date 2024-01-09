@@ -29,23 +29,20 @@ public abstract class TravelCalculatePremiumControllerTest {
 
     private static final String BASE_URL = "/insurance/travel/api/v2/";
 
-    protected abstract String getTestCaseName();
-
-    protected abstract boolean uuidIsPresent();
-
-    @Test
-    public void testRequest() throws Exception {
-        equalsJsonFiles("rest/v2/" + getTestCaseName() + "/request.json", "rest/v2/" + getTestCaseName() + "/response.json");
+    public void equalsJsonFiles(String testCase) throws Exception {
+        equalsJsonFiles(testCase, false);
     }
 
-    public void equalsJsonFiles(String requestFile, String responseFile) throws Exception {
+    public void equalsJsonFiles(String testCase, boolean uuidIsPresent) throws Exception {
+        String requestFile = "rest/v2/" +testCase + "/request.json";
+        String responseFile = "rest/v2/" +testCase + "/response.json";
         ObjectMapper mapper = new ObjectMapper();
         String response = mockMvc.perform(post(BASE_URL)
                         .content(parseJSONIntoString(requestFile))
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
                 .andReturn().getResponse().getContentAsString();
-        if (uuidIsPresent()) {
+        if (uuidIsPresent) {
             assertJson(mapper.readTree(response))
                     .where()
                     .path("uuid").matches("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")

@@ -23,7 +23,8 @@ public class TravelCancellationRiskPremiumCalculator implements TravelRiskPremiu
         BigDecimal ageCoefficient = TCAgeCoefficientCalculator.calculate(person);
         BigDecimal travelCostCoefficient = travelCostCoefficientCalculator.calculate(agreement);
         BigDecimal countrySafetyRatingCoefficient = countrySafetyRatingCoefficientCalculator.calculate(agreement);
-        return ageCoefficient.add(travelCostCoefficient)
+        return ageCoefficient
+                .add(travelCostCoefficient)
                 .add(countrySafetyRatingCoefficient)
                 .setScale(2, RoundingMode.HALF_UP)
                 .stripTrailingZeros();

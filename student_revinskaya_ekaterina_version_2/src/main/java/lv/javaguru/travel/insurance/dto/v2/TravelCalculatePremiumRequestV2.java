@@ -18,6 +18,7 @@ import java.util.List;
 @NoArgsConstructor
 
 public class TravelCalculatePremiumRequestV2 {
+    @JsonAlias("travel_cost")
     private BigDecimal travelCost;
     @JsonFormat(pattern = "yyyy-MM-dd")
     @DateTimeFormat(pattern = "yyyy-MM-dd")

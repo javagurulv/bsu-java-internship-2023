@@ -28,15 +28,14 @@ public abstract class TravelCalculatePremiumControllerTest {
     private MockMvc mockMvc;
 
     private static final String BASE_URL = "/insurance/travel/api/v1/";
-    protected abstract String getTestCaseName();
 
-    protected abstract boolean uuidIsPresent();
-    @Test
-    public void testRequest() throws Exception {
-        equalsJsonFiles("rest/v1/" +getTestCaseName() + "/request.json", "rest/v1/" +getTestCaseName() + "/response.json");
+    public void equalsJsonFiles(String testCase) throws Exception {
+        equalsJsonFiles(testCase, false);
     }
 
-    public void equalsJsonFiles(String requestFile, String responseFile) throws Exception {
+    public void equalsJsonFiles(String testCase, Boolean uuidIsPresent) throws Exception {
+        String requestFile = "rest/v1/" +testCase + "/request.json";
+        String responseFile = "rest/v1/" +testCase + "/response.json";
         ObjectMapper mapper = new ObjectMapper();
         String response = mockMvc.perform(post(BASE_URL)
                         .content(parseJSONIntoString(requestFile))
@@ -44,7 +43,7 @@ public abstract class TravelCalculatePremiumControllerTest {
                 .andExpect(status().isOk())
                 .andReturn().getResponse().getContentAsString();
 
-        if (uuidIsPresent()) {
+        if (uuidIsPresent) {
             assertJson(mapper.readTree(response))
                     .where()
                     .path("uuid").matches("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")

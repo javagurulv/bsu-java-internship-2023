@@ -157,7 +157,7 @@ create table if not exists country_safety_rating_coefficient
 (
   id BIGINT NOT NULL AUTO_INCREMENT,
   country_ic VARCHAR(200) NOT NULL,
-  coefficient DECIMAL(10,2) NOT NULL,
+  rating DECIMAL(10,2) NOT NULL,
   PRIMARY KEY (id)
 );
 CREATE UNIQUE INDEX if not exists ix_country_safety_rating_coefficient_country_ic

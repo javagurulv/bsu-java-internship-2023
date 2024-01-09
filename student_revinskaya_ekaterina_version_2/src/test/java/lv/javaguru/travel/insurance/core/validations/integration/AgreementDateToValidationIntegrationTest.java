@@ -1,7 +1,6 @@
 package lv.javaguru.travel.insurance.core.validations.integration;
 
 
-import liquibase.pro.packaged.L;
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
