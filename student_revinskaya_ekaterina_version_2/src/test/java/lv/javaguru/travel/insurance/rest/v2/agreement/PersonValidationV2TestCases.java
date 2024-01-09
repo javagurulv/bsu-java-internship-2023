@@ -1,56 +1,11 @@
-package lv.javaguru.travel.insurance.rest.v2;
+package lv.javaguru.travel.insurance.rest.v2.agreement;
 
+import lv.javaguru.travel.insurance.rest.v2.TravelCalculatePremiumControllerV2Test;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class TrCalculatePremiumControllerTestCases extends TravelCalculatePremiumControllerTest {
-    @Test
-    @DisplayName("request without errors")
-    public void testRequest1() throws Exception {
-        equalsJsonFiles("test_case_1", true);
-    }
+public class PersonValidationV2TestCases extends TravelCalculatePremiumControllerV2Test {
 
-    @Test
-    @DisplayName("request with null agreement date from")
-    public void testRequest2() throws Exception {
-        equalsJsonFiles("test_case_2");
-    }
-
-    @Test
-    @DisplayName("request with agreement date from in the past")
-    public void testRequest3() throws Exception {
-        equalsJsonFiles("test_case_3");
-    }
-
-    @Test
-    @DisplayName("request with null agreement date to")
-    public void testRequest4() throws Exception {
-        equalsJsonFiles("test_case_4");
-    }
-
-    @Test
-    @DisplayName("request with agreement date to in the past")
-    public void testRequest5() throws Exception {
-        equalsJsonFiles("test_case_5");
-    }
-
-    @Test
-    @DisplayName("request with agreement date to less than agreement date from")
-    public void testRequest6() throws Exception {
-        equalsJsonFiles("test_case_6");
-    }
-
-    @Test
-    @DisplayName("request with null country")
-    public void testRequest7() throws Exception {
-        equalsJsonFiles("test_case_7");
-    }
-
-    @Test
-    @DisplayName("request with empty country")
-    public void testRequest8() throws Exception {
-        equalsJsonFiles("test_case_8");
-    }
 
     @Test
     @DisplayName("request with country not supported by the system, RISK_TYPE - MEDICAL_RISK")
@@ -67,25 +22,7 @@ public class TrCalculatePremiumControllerTestCases extends TravelCalculatePremiu
     @Test
     @DisplayName("request with not exist medical risk limit level of both persons")
     public void testRequest11() throws Exception {
-        equalsJsonFiles("test_case_11", true);
-    }
-
-    @Test
-    @DisplayName("request with empty selected risks")
-    public void testRequest12() throws Exception {
-        equalsJsonFiles("test_case_12");
-    }
-
-    @Test
-    @DisplayName("request with null selected risks")
-    public void testRequest13() throws Exception {
-        equalsJsonFiles("test_case_13");
-    }
-
-    @Test
-    @DisplayName("request with not exist selected risks")
-    public void testRequest14() throws Exception {
-        equalsJsonFiles("test_case_14");
+        equalsJsonFiles("test_case_11");
     }
 
     @Test

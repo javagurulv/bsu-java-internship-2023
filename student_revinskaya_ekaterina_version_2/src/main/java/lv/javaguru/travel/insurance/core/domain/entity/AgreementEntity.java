@@ -18,7 +18,7 @@ public class AgreementEntity {
     private Long id;
     @Column(name = "uuid", nullable = false)
     private String uuid;
-    @Column(name = "travel_cost", nullable = false)
+    @Column(name = "travel_cost")
     private BigDecimal travelCost;
     @Column(name = "date_from", nullable = false)
     private Date dateFrom;

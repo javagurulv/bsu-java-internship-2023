@@ -1,0 +1,8 @@
+{
+  "errors": [
+    {
+      "errorCode": "ERROR_CODE_15",
+      "description": "person which personal code is 76sf85s899: medicalRiskLimitLevel FAKE_LEVEL not supported by the system"
+    }
+  ]
+}

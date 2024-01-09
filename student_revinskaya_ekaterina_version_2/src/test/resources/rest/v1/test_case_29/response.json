@@ -1,0 +1,19 @@
+{
+  "uuid": "36168788-70e8-4b31-88e4-fcc8e668d59e",
+  "travelCost": 1000.00,
+  "personFirstName": "Vasja",
+  "personLastName": "Pupkin",
+  "agreementDateFrom": "2025-05-12",
+  "agreementDateTo": "2025-05-19",
+  "country": "SPAIN",
+  "birthday": "1954-08-03",
+  "personalCode": "76sf85s899",
+  "medicalRiskLimitLevel": "LEVEL_10000",
+  "agreementPremium": 17.50,
+  "risks": [
+    {
+      "riskIc": "TRAVEL_MEDICAL",
+      "premium": 17.50
+    }
+  ]
+}

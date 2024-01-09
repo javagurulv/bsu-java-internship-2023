@@ -1,7 +1,6 @@
 package lv.javaguru.travel.insurance.rest.v1;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -22,7 +21,7 @@ import static uk.org.webcompere.modelassert.json.JsonAssertions.assertJson;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public abstract class TravelCalculatePremiumControllerTest {
+public abstract class TravelCalculatePremiumControllerV1Test {
 
     @Autowired
     private MockMvc mockMvc;
