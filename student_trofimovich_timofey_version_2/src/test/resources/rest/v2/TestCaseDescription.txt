@@ -106,4 +106,8 @@ Test Case 27:
 Request: country is empty, RISK_TYPE - TRAVEL_MEDICAL.
 Response: error code = ERROR_CODE_10.
 
+Test Case 28:
+Request: personUUID is empty, RISK_TYPE - TRAVEL_MEDICAL.
+Response: error code = ERROR_CODE_17.
+
 

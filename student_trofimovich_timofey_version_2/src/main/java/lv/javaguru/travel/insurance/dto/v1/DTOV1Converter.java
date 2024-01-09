@@ -20,6 +20,7 @@ public class DTOV1Converter {
     private TravelCalculatePremiumResponseV1 buildSuccessfulResponse(TravelCalculatePremiumCoreResult coreResult) {
         TravelCalculatePremiumResponseV1 response = new TravelCalculatePremiumResponseV1();
         AgreementDTO agreement = coreResult.getAgreement();
+        response.setPersonUUID(agreement.getPersons().get(0).getPersonUUID());
         response.setPersonFirstName(agreement.getPersons().get(0).getPersonFirstName());
         response.setPersonLastName(agreement.getPersons().get(0).getPersonLastName());
         response.setAgreementDateFrom(agreement.getAgreementDateFrom());
@@ -62,6 +63,7 @@ public class DTOV1Converter {
 
     private PersonDTO buildPerson(TravelCalculatePremiumRequestV1 requestV1) {
         PersonDTO person = new PersonDTO();
+        person.setPersonUUID(requestV1.getPersonUUID());
         person.setPersonFirstName(requestV1.getPersonFirstName());
         person.setPersonBirthDate(requestV1.getDateOfBirth());
         person.setPersonLastName(requestV1.getPersonLastName());

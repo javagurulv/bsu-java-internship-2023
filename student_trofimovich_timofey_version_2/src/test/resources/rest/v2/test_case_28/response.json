@@ -1,0 +1,13 @@
+{
+  "errors": [
+    {
+      "errorCode": "ERROR_CODE_17",
+      "description": "PersonUUID is empty!"
+    }
+  ],
+  "agreementDateFrom": null,
+  "agreementDateTo": null,
+  "country": null,
+  "persons": null,
+  "agreementPremium": null
+}

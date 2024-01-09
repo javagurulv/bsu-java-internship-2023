@@ -21,6 +21,8 @@ import java.util.List;
 @AllArgsConstructor
 public class PersonResponseDTO {
 
+    private String personUUID;
+
     private String personFirstName;
     private String personLastName;
 

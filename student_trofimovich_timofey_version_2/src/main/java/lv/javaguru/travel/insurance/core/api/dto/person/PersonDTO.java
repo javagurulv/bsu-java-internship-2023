@@ -14,6 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PersonDTO {
+    private String personUUID;
     private String personFirstName;
     private String personLastName;
     private Date personBirthDate;

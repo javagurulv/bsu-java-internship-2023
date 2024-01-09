@@ -34,6 +34,7 @@ public class PersonFirstNameValidationIntegrationTest {
                 .withCountry("SPAIN")
                 .withSelectedRisk("TRAVEL_MEDICAL")
                 .withPerson(PersonDTOBuilder.createPerson()
+                        .withPersonUUID("1212")
                         .withPersonFirstName("")
                         .withPersonLastName("Pupkin")
                         .withPersonBirthDate(createDate("01.01.2000"))
