@@ -3,16 +3,12 @@ package lv.javaguru.travel.insurance.core.underwriting;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
-import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumResponse;
+import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.stream.Collectors;
-
-import static lv.javaguru.travel.insurance.core.util.DateTimeUtil.findDiffBetweenTwoDate;
 
 @Getter
 @Setter
@@ -21,7 +17,7 @@ import static lv.javaguru.travel.insurance.core.util.DateTimeUtil.findDiffBetwee
 //@AllArgsConstructor
 class TravelUnderwritingImpl implements TravelUnderwriting{
     @Autowired
-    List<TravelRiskPremiumCalculator> riskCalculators;
+    private List<TravelRiskPremiumCalculator> riskCalculators;
 
     public BigDecimal calculatePremium(TravelCalculatePremiumRequest request) {
         BigDecimal result = BigDecimal.ZERO;
@@ -41,5 +37,10 @@ class TravelUnderwritingImpl implements TravelUnderwriting{
 
 //        return findDiffBetweenTwoDate(response.getAgreementDateTo(), response.getAgreementDateFrom());
 
+    }
+
+    @Override
+    public List<TravelRiskPremiumCalculator> getRiskCalculators() {
+        return riskCalculators;
     }
 }

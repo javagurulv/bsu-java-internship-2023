@@ -1,6 +1,6 @@
 package lv.javaguru.travel.insurance.core;
 
-import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.rest.TravelRequestValidation;
 import lv.javaguru.travel.insurance.rest.validation.*;
 import org.junit.jupiter.api.Test;

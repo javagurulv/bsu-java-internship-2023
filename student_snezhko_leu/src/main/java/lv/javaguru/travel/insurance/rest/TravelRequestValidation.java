@@ -1,8 +1,8 @@
 package lv.javaguru.travel.insurance.rest;
 
 import lv.javaguru.travel.insurance.core.ValidationError;
+import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 

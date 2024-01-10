@@ -5,6 +5,7 @@
   "agreementDateTo" : "2026-05-29",
   "selected_risks" :
   [
-    "TRAVEL_MEDICAL"
+    "TRAVEL_MEDICAL",
+    "TRAVEL_CANCELLATION"
   ]
 }
