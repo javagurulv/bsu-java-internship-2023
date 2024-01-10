@@ -1,0 +1,8 @@
+{
+  "errors": [
+    {
+      "errorCode": "ERROR_CODE_22",
+      "description": "cancellation risk isn't enable but in the list of selected risks!"
+    }
+  ]
+}

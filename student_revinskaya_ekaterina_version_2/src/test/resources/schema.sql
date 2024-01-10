@@ -30,7 +30,7 @@ primary key(id)
 create unique index if not exists ix_country_default_day_rate_country_ic
 on country_default_day_rate(country_ic);
 
-create table if not exists age_coefficient
+create table if not exists travel_medical_age_coefficient
 (
 id bigint not null auto_increment,
 age_from int not null,
@@ -39,9 +39,9 @@ coefficient numeric(2,1) not null,
 primary key(id)
 );
 CREATE UNIQUE INDEX if not exists ix_age_coefficient_age_from
-ON age_coefficient (age_from);
+ON travel_medical_age_coefficient (age_from);
 CREATE UNIQUE INDEX if not exists ix_age_coefficient_age_to
-ON age_coefficient (age_to);
+ON travel_medical_age_coefficient (age_to);
 
 create table if not exists medical_risk_limit_level
 (
@@ -70,6 +70,7 @@ create table if not exists agreements
 (
 id bigint not null auto_increment,
 uuid varchar(36) not null,
+travel_cost DECIMAL(10,2) NULL,
 date_from timestamp not null,
 date_to timestamp not null,
 country varchar(200) not null,
@@ -98,7 +99,7 @@ create table if not exists person_agreements
 id bigint not null auto_increment,
 person_id BIGINT not null,
 agreement_id BIGINT not null,
-medical_risk_limit_level varchar(200) not null,
+medical_risk_limit_level varchar(200) null,
 primary key(id)
 );
 
@@ -162,10 +163,3 @@ create table if not exists country_safety_rating_coefficient
 );
 CREATE UNIQUE INDEX if not exists ix_country_safety_rating_coefficient_country_ic
 ON country_safety_rating_coefficient (country_ic);
-
-ALTER TABLE age_coefficient
-RENAME TO travel_medical_age_coefficient;
-ALTER TABLE agreements
-ADD COLUMN travel_cost DECIMAL(10,2) NOT NULL;
-
-ALTER TABLE person_agreements ALTER COLUMN medical_risk_limit_level  VARCHAR(200) NULL;

@@ -1,0 +1,8 @@
+{
+  "errors": [
+    {
+      "errorCode": "ERROR_CODE_23",
+      "description": "medical limit level ignores by system but specified!"
+    }
+  ]
+}

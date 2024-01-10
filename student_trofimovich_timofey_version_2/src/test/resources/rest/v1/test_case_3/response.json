@@ -5,6 +5,7 @@
             "description": "Field personFirstName is empty!"
         }
     ],
+    "personUUID" : null,
     "personFirstName": null,
     "personLastName": null,
     "dateOfBirth": null,

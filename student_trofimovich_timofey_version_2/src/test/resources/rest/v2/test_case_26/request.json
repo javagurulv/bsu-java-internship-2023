@@ -5,12 +5,14 @@
   "selected_risks":[],
   "persons" : [
     {
+      "personUUID" : "1212",
       "personFirstName" : "",
       "personLastName" : "",
       "personBirthDate" : null,
       "medicalRiskLimitLevel" : ""
     },
     {
+      "personUUID" : "1212",
       "personFirstName" : "",
       "personLastName" : "",
       "personBirthDate" : "",

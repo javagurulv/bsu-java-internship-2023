@@ -2,8 +2,8 @@ package lv.javaguru.travel.insurance.dto.v1;
 
 import lv.javaguru.travel.insurance.core.api.command.TravelCalculatePremiumCoreCommand;
 import lv.javaguru.travel.insurance.core.api.command.TravelCalculatePremiumCoreResult;
-import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
-import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
+import lv.javaguru.travel.insurance.core.api.dto.agreement.AgreementDTO;
+import lv.javaguru.travel.insurance.core.api.dto.person.PersonDTO;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import lv.javaguru.travel.insurance.dto.RiskPremium;
 import lv.javaguru.travel.insurance.dto.ValidationError;
@@ -20,6 +20,7 @@ public class DTOV1Converter {
     private TravelCalculatePremiumResponseV1 buildSuccessfulResponse(TravelCalculatePremiumCoreResult coreResult) {
         TravelCalculatePremiumResponseV1 response = new TravelCalculatePremiumResponseV1();
         AgreementDTO agreement = coreResult.getAgreement();
+        response.setPersonUUID(agreement.getPersons().get(0).getPersonUUID());
         response.setPersonFirstName(agreement.getPersons().get(0).getPersonFirstName());
         response.setPersonLastName(agreement.getPersons().get(0).getPersonLastName());
         response.setAgreementDateFrom(agreement.getAgreementDateFrom());
@@ -62,6 +63,7 @@ public class DTOV1Converter {
 
     private PersonDTO buildPerson(TravelCalculatePremiumRequestV1 requestV1) {
         PersonDTO person = new PersonDTO();
+        person.setPersonUUID(requestV1.getPersonUUID());
         person.setPersonFirstName(requestV1.getPersonFirstName());
         person.setPersonBirthDate(requestV1.getDateOfBirth());
         person.setPersonLastName(requestV1.getPersonLastName());

@@ -2,7 +2,7 @@ package lv.javaguru.travel.insurance.core.underwriting;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lv.javaguru.travel.insurance.core.api.dto.RiskDTO;
+import lv.javaguru.travel.insurance.core.api.dto.risk.RiskDTO;
 
 import java.math.BigDecimal;
 import java.util.List;
