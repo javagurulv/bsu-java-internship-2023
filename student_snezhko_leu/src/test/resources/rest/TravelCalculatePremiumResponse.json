@@ -4,5 +4,15 @@
   "personLastName": "Pupkin",
   "agreementDateFrom": "2026-05-25",
   "agreementDateTo": "2026-05-29",
-  "agreementPrice": 4
+  "agreementPremium": 4,
+  "risks" : [
+    {
+      "riskIc" : "TRAVEL_MEDICAL",
+      "premium" : 4
+    },
+    {
+      "riskIc" : "TRAVEL_CANCELLATION",
+      "premium" : 0
+    }
+  ]
 }

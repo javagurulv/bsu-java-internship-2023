@@ -1,13 +1,11 @@
 package lv.javaguru.travel.insurance.core.underwriting;
 
-import lv.javaguru.travel.insurance.core.underwriting.TravelUnderwriting;
 //import lv.javaguru.travel.insurance.core.underwriting.TravelUnderwritingImpl;
-import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
-import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumResponse;
-import org.junit.jupiter.api.Test;
+import lv.javaguru.travel.insurance.core.underwriting.calculators.TravelRiskPremiumCalculatorMedical;
+import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+        import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.util.ReflectionTestUtils;
+        import org.springframework.test.util.ReflectionTestUtils;
 
 import java.math.BigDecimal;
 import java.sql.Date;
@@ -22,6 +20,7 @@ public class TravelUnterwritingTest {
 
     @InjectMocks
     TravelUnderwriting underwriting = new TravelUnderwritingImpl();
+    //TravelRiskPremiumCalculator med = mock(TravelRiskPremiumCalculatorMedical.class);
     @Test
     public void calculatePremiumTest() {
         List<String> risks = new ArrayList<>();

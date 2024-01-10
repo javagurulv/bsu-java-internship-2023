@@ -80,6 +80,8 @@ public class TravelCalculatePremiumControllerTest {
                 "rest/TravelCalculatePremiumResponseWithErrorDateFromAndDateToInThePast.json");
     }
 
+    // TODO: добавить тесты на ошибки с selected_risks когда я напишу response
+
     @Test
     public void simpleRestControllerTest() throws Exception {
         mockMvc.perform(post("/insurance/travel/")
@@ -87,7 +89,8 @@ public class TravelCalculatePremiumControllerTest {
                                 "\"personFirstName\" : \"Nastya\", \n" +
                                 "\"personLastName\" : \"Larionova\", \n" +
                                 "\"agreementDateFrom\" : \"2029-05-25\",\n" +
-                                "\"agreementDateTo\" : \"2029-05-29\"\n" +
+                                "\"agreementDateTo\" : \"2029-05-29\",\n" +
+                                "\"selected_risks\":[\"TRAVEL_MEDICAL\", \"TRAVEL_CANCELLATION\", \"TRAVEL_LOSS_BAGGAGE\"]" +
                                 "}")
                     .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
@@ -95,6 +98,9 @@ public class TravelCalculatePremiumControllerTest {
                 .andExpect(jsonPath("personLastName", is("Larionova")))
                 .andExpect(jsonPath("agreementDateFrom", is("2029-05-25")))
                 .andExpect(jsonPath("agreementDateTo", is("2029-05-29")))
+/*
+                .andExpect(jsonPath("selected_risks", is("[\"TRAVEL_MEDICAL\", \"TRAVEL_CANCELLATION\", \"TRAVEL_LOSS_BAGGAGE\"]")))
+*/
                 .andExpect(jsonPath("agreementPrice", is(4)))
                 .andReturn();
     }

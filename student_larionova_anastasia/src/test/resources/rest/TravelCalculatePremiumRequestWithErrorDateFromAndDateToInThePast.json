@@ -2,5 +2,6 @@
   "personFirstName" : "Nastya",
   "personLastName" : "Larionova",
   "agreementDateFrom" : "2021-05-25",
-  "agreementDateTo" : "2021-05-29"
+  "agreementDateTo" : "2021-05-29",
+  "selected_risks":["TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"]
 }

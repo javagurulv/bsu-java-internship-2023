@@ -18,7 +18,7 @@ import com.google.common.base.Stopwatch;
 @Component
 public class CommonCall {
     private RestTemplate restTemplate = new RestTemplate();
-    public void sendRequest(String testCase, String url) throws JsonProcessingException {
+    public Long sendRequest(String testCase, String url) throws JsonProcessingException {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
@@ -34,6 +34,8 @@ public class CommonCall {
         System.out.println("Request processing time (ms): " + stopwatch.elapsed().toMillis());
 
         compareJsons(response, responseFile);
+
+        return stopwatch.elapsed().toMillis();
     }
 
     private void compareJsons(String response, String responseFile) throws JsonProcessingException {
