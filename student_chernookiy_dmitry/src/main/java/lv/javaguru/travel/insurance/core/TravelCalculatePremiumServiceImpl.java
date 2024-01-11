@@ -18,6 +18,7 @@ import java.util.List;
 class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService {
 
     TravelCalculatePremiumRequestValidator validator = new TravelCalculatePremiumRequestValidator();
+    TravelCalculatePremiumServiceUnderwriting underwriting = new TravelCalculatePremiumServiceUnderwriting();
 
     @Autowired
     public TravelCalculatePremiumServiceImpl(TravelCalculatePremiumRequestValidator requestValidator) {
@@ -40,12 +41,13 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
         response.setAgreementDateTo(request.getAgreementDateTo());
         response.setPersonFirstName(request.getPersonFirstName());
         response.setPersonLastName(request.getPersonLastName());
-        response.setAgreementPrice(calculateAgreementPrice(request.getAgreementDateFrom(), request.getAgreementDateTo()));
+        response.setAgreementPrice(underwriting
+                .calculatePremium(request.getAgreementDateFrom(), request.getAgreementDateTo()));
         return response;
     }
 
 
-    private static LocalDate dateToLocalDate(Date date) {
+   /* private static LocalDate dateToLocalDate(Date date) {
         return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
     }
 
@@ -54,5 +56,5 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
         LocalDate localDateTo = dateToLocalDate(to);
         Period period = Period.between(localDateFrom, localDateTo);
         return new BigDecimal(period.getDays());
-    }
+    }*/
 }

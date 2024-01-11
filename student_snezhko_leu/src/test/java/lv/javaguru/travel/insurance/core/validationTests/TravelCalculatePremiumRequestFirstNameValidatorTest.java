@@ -1,7 +1,6 @@
 package lv.javaguru.travel.insurance.core.validationTests;
 
-import lv.javaguru.travel.insurance.rest.InsurancePremiumRisk;
-import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
