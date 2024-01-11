@@ -8,7 +8,14 @@
 
 <h1>Travel Insurance Premium Calculation</h1>
 
-<form action="/insurance/travel/web" th:object="${request}" method="post">
+<form action="/insurance/travel/web/v1" th:object="${request}" method="post">
+
+    <label for="personUUID">Person UUID:</label>
+    <input type="text"
+           id="personUUID"
+           th:field="${request.personUUID}"><br><br>
+
+
     <label for="personFirstName">First Name:</label>
     <input type="text"
            id="personFirstName"

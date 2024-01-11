@@ -16,6 +16,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static uk.org.webcompere.modelassert.json.JsonAssertions.assertJson;
+
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -105,7 +107,7 @@ public class TravelCalculatePremiumControllerTest {
                 .andReturn();
     }
 
-    private void compareRequestAndResponse(String pathRequestJson, String pathResponseJson) throws Exception{
+    private void compareRequestAndResponse(String pathRequestJson, String pathResponseJson) throws Exception {
         String requestJson = jsonFileReader.readJsonFile(pathRequestJson);
         String responseJson = jsonFileReader.readJsonFile(pathResponseJson);
 
@@ -117,6 +119,10 @@ public class TravelCalculatePremiumControllerTest {
 
         String responseBodyContent = result.getResponse().getContentAsString();
 
-        assertEquals(responseBodyContent, responseJson); // TODO сравнение содержимого без учёта порядка внутренних полей
+        assertJson(responseBodyContent)
+                .where()
+                .keysInAnyOrder()
+                .arrayInAnyOrder()
+                .isEqualTo(responseJson);
     }
 }
