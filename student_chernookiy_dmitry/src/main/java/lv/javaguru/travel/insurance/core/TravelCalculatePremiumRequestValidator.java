@@ -2,6 +2,7 @@ package lv.javaguru.travel.insurance.core;
 
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -10,6 +11,7 @@ import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@Component
 public class TravelCalculatePremiumRequestValidator {
 
     Pattern firstAndLastNamePattern = Pattern.compile("^[A-Za-zА-Яа-я]+$");

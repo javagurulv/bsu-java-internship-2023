@@ -1,6 +1,7 @@
 package lv.javaguru.travel.insurance.core;
 
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -8,6 +9,7 @@ import java.time.Period;
 import java.time.ZoneId;
 import java.util.Date;
 
+@Component
 public class TravelCalculatePremiumServiceUnderwriting {
 
     public BigDecimal calculatePremium(Date dateFrom, Date dateTo) {

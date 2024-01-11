@@ -17,7 +17,9 @@ import java.util.List;
 @Component
 class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService {
 
+    @Autowired
     TravelCalculatePremiumRequestValidator validator = new TravelCalculatePremiumRequestValidator();
+    @Autowired
     TravelCalculatePremiumServiceUnderwriting underwriting = new TravelCalculatePremiumServiceUnderwriting();
 
     @Autowired
