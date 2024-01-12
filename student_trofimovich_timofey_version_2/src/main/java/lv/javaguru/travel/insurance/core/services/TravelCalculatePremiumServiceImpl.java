@@ -2,10 +2,10 @@ package lv.javaguru.travel.insurance.core.services;
 
 import lv.javaguru.travel.insurance.core.api.command.TravelCalculatePremiumCoreCommand;
 import lv.javaguru.travel.insurance.core.api.command.TravelCalculatePremiumCoreResult;
+import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import lv.javaguru.travel.insurance.core.api.dto.agreement.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.person.PersonDTO;
 import lv.javaguru.travel.insurance.core.api.dto.risk.RiskDTO;
-import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import lv.javaguru.travel.insurance.core.underwriting.TravelPremiumCalculationResult;
 import lv.javaguru.travel.insurance.core.underwriting.TravelPremiumUnderwriting;
 import lv.javaguru.travel.insurance.core.validations.TravelAgreementValidator;
@@ -19,9 +19,12 @@ import java.util.List;
 @Component
 class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService {
 
-    @Autowired private TravelAgreementValidator agreementValidator;
-    @Autowired private TravelPremiumUnderwriting premiumUnderwriting;
-    @Autowired private PersonSaver personSaver;
+    @Autowired
+    private TravelAgreementValidator agreementValidator;
+    @Autowired
+    private TravelPremiumUnderwriting premiumUnderwriting;
+    @Autowired
+    private AgreementEntityFactory agreementEntityFactory;
 
     @Override
     public TravelCalculatePremiumCoreResult calculatePremium(TravelCalculatePremiumCoreCommand command) {
@@ -36,20 +39,19 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
     }
 
     private TravelCalculatePremiumCoreResult buildResponse(AgreementDTO agreement) {
-        saveAllPersons(agreement);
+
         calculateRiskPremiumsForAllPersons(agreement);
 
         BigDecimal totalAgreementPremium = calculateTotalAgreementPremium(agreement);
         agreement.setAgreementPremium(totalAgreementPremium);
+
+        agreementEntityFactory.createAgreementEntity(agreement);
 
         TravelCalculatePremiumCoreResult coreResult = new TravelCalculatePremiumCoreResult();
         coreResult.setAgreement(agreement);
         return coreResult;
     }
 
-    private void saveAllPersons(AgreementDTO agreement) {
-        agreement.getPersons().forEach(personSaver::savePerson);
-    }
 
     private void calculateRiskPremiumsForAllPersons(AgreementDTO agreement) {
         agreement.getPersons().forEach(person -> {

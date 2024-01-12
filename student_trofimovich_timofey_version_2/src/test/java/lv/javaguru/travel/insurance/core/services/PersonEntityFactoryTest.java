@@ -1,7 +1,7 @@
 package lv.javaguru.travel.insurance.core.services;
 
 import lv.javaguru.travel.insurance.core.api.dto.person.PersonDTO;
-import lv.javaguru.travel.insurance.core.domain.PersonEntity;
+import lv.javaguru.travel.insurance.core.domain.entities.PersonEntity;
 import lv.javaguru.travel.insurance.core.repositories.PersonEntityRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,11 +17,11 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class PersonSaverTest {
+public class PersonEntityFactoryTest {
     @Mock
     private PersonEntityRepository repository;
     @InjectMocks
-    private PersonSaver personSaver;
+    private PersonEntityFactory personEntityFactory;
 
     @Test
     void shouldNotSaveIfPersonAlreadyExists() {
@@ -31,7 +31,7 @@ public class PersonSaverTest {
         when(personDTO.getPersonFirstName()).thenReturn("first_name");
         when(personDTO.getPersonLastName()).thenReturn("last_name");
         when(personDTO.getPersonUUID()).thenReturn("personCode");
-        personSaver.savePerson(personDTO);
+        personEntityFactory.createPersonEntity(personDTO);
         verify(repository, never()).save(any(PersonEntity.class));
     }
 
@@ -44,7 +44,7 @@ public class PersonSaverTest {
         when(personDTO.getPersonLastName()).thenReturn("last_name");
         when(personDTO.getPersonUUID()).thenReturn("personCode");
         when(repository.save(any(PersonEntity.class))).thenReturn(mock(PersonEntity.class));
-        PersonEntity personEntity = personSaver.savePerson(personDTO);
+        personEntityFactory.createPersonEntity(personDTO);
         verify(repository, times(1)).save(any(PersonEntity.class));
     }
 }

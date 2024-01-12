@@ -66,3 +66,14 @@ CREATE TABLE persons
 );
 
 CREATE UNIQUE INDEX ix_unique_persons on persons(first_name, last_name, person_code);
+
+CREATE TABLE agreements
+(
+  id BIGINT NOT NULL AUTO_INCREMENT,
+  date_from TIMESTAMP NOT NULL ,
+  date_to TIMESTAMP NOT NULL ,
+  country VARCHAR(100) NOT NULL ,
+  premium DECIMAL(10, 2) NOT NULL ,
+  PRIMARY KEY (id)
+);
+

@@ -31,7 +31,7 @@ public class TravelCalculatePremiumServiceImplTest {
     @Mock
     private TravelPremiumUnderwriting premiumUnderwriting;
     @Mock
-    private PersonSaver personSaver;
+    private AgreementEntityFactory agreementEntityFactory;
 
     @InjectMocks
     private TravelCalculatePremiumServiceImpl service;
