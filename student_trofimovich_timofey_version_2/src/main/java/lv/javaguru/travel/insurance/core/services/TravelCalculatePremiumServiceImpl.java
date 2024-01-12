@@ -21,6 +21,7 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
 
     @Autowired private TravelAgreementValidator agreementValidator;
     @Autowired private TravelPremiumUnderwriting premiumUnderwriting;
+    @Autowired private PersonSaver personSaver;
 
     @Override
     public TravelCalculatePremiumCoreResult calculatePremium(TravelCalculatePremiumCoreCommand command) {
@@ -35,6 +36,7 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
     }
 
     private TravelCalculatePremiumCoreResult buildResponse(AgreementDTO agreement) {
+        saveAllPersons(agreement);
         calculateRiskPremiumsForAllPersons(agreement);
 
         BigDecimal totalAgreementPremium = calculateTotalAgreementPremium(agreement);
@@ -43,6 +45,10 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
         TravelCalculatePremiumCoreResult coreResult = new TravelCalculatePremiumCoreResult();
         coreResult.setAgreement(agreement);
         return coreResult;
+    }
+
+    private void saveAllPersons(AgreementDTO agreement) {
+        agreement.getPersons().forEach(personSaver::savePerson);
     }
 
     private void calculateRiskPremiumsForAllPersons(AgreementDTO agreement) {
