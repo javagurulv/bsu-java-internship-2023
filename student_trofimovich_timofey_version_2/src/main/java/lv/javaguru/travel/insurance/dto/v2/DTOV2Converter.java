@@ -39,13 +39,14 @@ public class DTOV2Converter {
         personResponseDTO.setPersonUUID(personDTO.getPersonUUID());
         personResponseDTO.setPersonFirstName(personDTO.getPersonFirstName());
         personResponseDTO.setPersonLastName(personDTO.getPersonLastName());
-        personResponseDTO.setRisks(personDTO.getSelectedRisks().stream()
+        personResponseDTO.setPersonRisks(personDTO.getSelectedRisks().stream()
                 .map(risk -> new RiskPremium(risk.getRiskIc() , risk.getPremium()))
                 .toList());
         personResponseDTO.setPersonBirthDate(personDTO.getPersonBirthDate());
-        personResponseDTO.setAgreementPremium(personDTO.getSelectedRisks().stream()
+        personResponseDTO.setPersonPremium(personDTO.getSelectedRisks().stream()
                 .map(RiskDTO::getPremium)
                 .reduce(BigDecimal.ZERO, BigDecimal::add));
+        personResponseDTO.setMedicalRiskLimitLevel(personDTO.getMedicalRiskLimitLevel());
         return personResponseDTO;
     }
 
@@ -74,10 +75,14 @@ public class DTOV2Converter {
     }
 
     private List<PersonDTO> transformPersonDTOs(TravelCalculatePremiumRequestV2 request) {
-        return request.getPersons().stream()
-                .map(person -> new PersonDTO(person.getPersonUUID(), person.getPersonFirstName(), person.getPersonLastName()
-                        , person.getPersonBirthDate(), null, person.getMedicalRiskLimitLevel()))
-                .toList();
+        if (request.getPersons() == null) {
+            return List.of();
+        } else {
+            return request.getPersons().stream()
+                    .map(person -> new PersonDTO(person.getPersonUUID(), person.getPersonFirstName(), person.getPersonLastName()
+                            , person.getPersonBirthDate(), null, person.getMedicalRiskLimitLevel()))
+                    .toList();
+        }
     }
 
 }

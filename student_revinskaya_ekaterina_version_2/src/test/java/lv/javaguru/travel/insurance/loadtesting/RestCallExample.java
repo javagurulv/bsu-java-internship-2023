@@ -1,20 +1,35 @@
 package lv.javaguru.travel.insurance.loadtesting;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class RestCallExample {
-    private static final String BASE_URL = "http://localHost:8080/insurance/travel/api/";
-    private static RestRequestSender restRequestSender = new RestRequestSender();
+    public static void main(String[] args) {
+        LoadTestingStatistic loadTestingV1Statistic = new LoadTestingStatistic();
+        LoadTestingStatistic loadTestingV2Statistic = new LoadTestingStatistic();
+        List<Thread> threads = new ArrayList<>();
+        for (int i = 0; i < 50; i++) {
+            threads.add(new Thread(new V1Call(loadTestingV1Statistic)));
+            threads.add(new Thread(new V2Call(loadTestingV2Statistic)));
+        }
+        threads.forEach(Thread::start);
+        threads.forEach(thread -> {
+            try {
+                thread.join();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        });
 
-    public static void main(String[] args) throws JsonProcessingException {
-        String testCaseV1 = "rest/v1/risk_travel_cancellation/calculate_cancellation_risk_with_age_coefficient";
-        String testCaseV2 = "rest/v2/risk_travel_medical/calculate_medical_risk_with_age_coefficient";
+        System.out.println("Average request processing time for 1st version (ms): " + loadTestingV1Statistic.getAverageExecutionTime());
+        System.out.println("Minimum request processing time for 1st version (ms): " + loadTestingV1Statistic.getMinExecutionTime());
+        System.out.println("Maximum request processing time for 1st version (ms): " + loadTestingV1Statistic.getMaxExecutionTime());
+        System.out.println("Average request processing time for 2nd version (ms): " + loadTestingV2Statistic.getAverageExecutionTime());
+        System.out.println("Minimum request processing time for 2nd version (ms): " + loadTestingV2Statistic.getMinExecutionTime());
+        System.out.println("Maximum request processing time for 2nd version (ms): " + loadTestingV2Statistic.getMaxExecutionTime());
 
-        restRequestSender.sendRequest(testCaseV1, BASE_URL + "v1/");
-        restRequestSender.sendRequest(testCaseV2, BASE_URL + "v2/");
     }
-
-
 }
