@@ -42,6 +42,11 @@ jar {
 	enabled = false
 }
 
+clean.doFirst {
+	delete "${projectDir}/logs/"
+	println "${projectDir}/logs/"
+}
+
 bootJar {
 	enabled = true
 	archiveBaseName = 'insurance-calculator'

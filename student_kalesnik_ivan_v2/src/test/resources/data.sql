@@ -110,33 +110,33 @@ FROM classifiers as cl
 WHERE cl.title = 'COUNTRY';
 
 
-INSERT INTO country_default_day_rate(country_ic, default_day_rate)
+INSERT INTO travel_medical_country_default_day_rate(country_ic, default_day_rate)
 VALUES('LATVIA', 1.00);
 
-INSERT INTO country_default_day_rate(country_ic, default_day_rate)
+INSERT INTO travel_medical_country_default_day_rate(country_ic, default_day_rate)
 VALUES('SPAIN', 2.50);
 
-INSERT INTO country_default_day_rate(country_ic, default_day_rate)
+INSERT INTO travel_medical_country_default_day_rate(country_ic, default_day_rate)
 VALUES('JAPAN', 3.50);
 
 
 
-INSERT INTO age_coefficient(age_from, age_to, coefficient)
+INSERT INTO travel_medical_age_coefficient(age_from, age_to, coefficient)
 VALUES(0, 5, 1.1);
 
-INSERT INTO age_coefficient(age_from, age_to, coefficient)
+INSERT INTO travel_medical_age_coefficient(age_from, age_to, coefficient)
 VALUES(6, 10, 0.7);
 
-INSERT INTO age_coefficient(age_from, age_to, coefficient)
+INSERT INTO travel_medical_age_coefficient(age_from, age_to, coefficient)
 VALUES(11, 17, 1.0);
 
-INSERT INTO age_coefficient(age_from, age_to, coefficient)
+INSERT INTO travel_medical_age_coefficient(age_from, age_to, coefficient)
 VALUES(18, 40, 1.1);
 
-INSERT INTO age_coefficient(age_from, age_to, coefficient)
+INSERT INTO travel_medical_age_coefficient(age_from, age_to, coefficient)
 VALUES(41, 65, 1.2);
 
-INSERT INTO age_coefficient(age_from, age_to, coefficient)
+INSERT INTO travel_medical_age_coefficient(age_from, age_to, coefficient)
 VALUES(65, 150, 1.5);
 
 
@@ -189,26 +189,43 @@ FROM classifiers as cl
 WHERE cl.title = 'MEDICAL_RISK_LIMIT_LEVEL';
 
 
-INSERT INTO medical_risk_limit_level(medical_risk_limit_level_ic, coefficient)
+INSERT INTO travel_medical_risk_limit_level(medical_risk_limit_level_ic, coefficient)
 VALUES('LEVEL_10000', 1.0);
 
-INSERT INTO medical_risk_limit_level(medical_risk_limit_level_ic, coefficient)
+INSERT INTO travel_medical_risk_limit_level(medical_risk_limit_level_ic, coefficient)
 VALUES('LEVEL_15000', 1.2);
 
-INSERT INTO medical_risk_limit_level(medical_risk_limit_level_ic, coefficient)
+INSERT INTO travel_medical_risk_limit_level(medical_risk_limit_level_ic, coefficient)
 VALUES('LEVEL_20000', 1.5);
 
-INSERT INTO medical_risk_limit_level(medical_risk_limit_level_ic, coefficient)
+INSERT INTO travel_medical_risk_limit_level(medical_risk_limit_level_ic, coefficient)
 VALUES('LEVEL_50000', 2.0);
 
-INSERT INTO travel_cost_coefficient(travel_cost_from, travel_cost_to, coefficient)
+
+INSERT INTO travel_cancellation_travel_cost_coefficient(travel_cost_from, travel_cost_to, coefficient)
 VALUES(0, 4999.99, 10.0);
 
-INSERT INTO travel_cost_coefficient(travel_cost_from, travel_cost_to, coefficient)
+INSERT INTO travel_cancellation_travel_cost_coefficient(travel_cost_from, travel_cost_to, coefficient)
 VALUES(5000, 9999.99, 30.0);
 
-INSERT INTO travel_cost_coefficient(travel_cost_from, travel_cost_to, coefficient)
+INSERT INTO travel_cancellation_travel_cost_coefficient(travel_cost_from, travel_cost_to, coefficient)
 VALUES(10000, 19999.99, 100.0);
 
-INSERT INTO travel_cost_coefficient(travel_cost_from, travel_cost_to, coefficient)
+INSERT INTO travel_cancellation_travel_cost_coefficient(travel_cost_from, travel_cost_to, coefficient)
 VALUES(20000, 1000000, 500.0);
+
+
+INSERT INTO travel_cancellation_age_coefficient(age_from, age_to, coefficient)
+VALUES(0, 9, 5.0);
+
+INSERT INTO travel_cancellation_age_coefficient(age_from, age_to, coefficient)
+VALUES(10, 17, 10.0);
+
+INSERT INTO travel_cancellation_age_coefficient(age_from, age_to, coefficient)
+VALUES(18, 39, 20.0);
+
+INSERT INTO travel_cancellation_age_coefficient(age_from, age_to, coefficient)
+VALUES(40, 64, 30.0);
+
+INSERT INTO travel_cancellation_age_coefficient(age_from, age_to, coefficient)
+VALUES(65, 200, 50.0);
