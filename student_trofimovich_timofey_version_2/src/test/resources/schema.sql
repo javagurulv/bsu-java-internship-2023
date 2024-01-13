@@ -83,11 +83,22 @@ CREATE TABLE selected_risks
     id BIGINT NOT NULL AUTO_INCREMENT,
     agreement_id BIGINT NOT NULL,
     risk_ic VARCHAR(100) NOT NULL ,
-    PRIMARY KEY (id)
+    PRIMARY KEY (id),
+    FOREIGN KEY (agreement_id) REFERENCES agreements(id)
 );
 
 CREATE UNIQUE INDEX ix_selected_risks_agreement_id_risk_ic
 ON selected_risks(agreement_id, risk_ic);
 
-ALTER TABLE selected_risks ADD FOREIGN KEY (agreement_id) REFERENCES agreements(id);
+
+CREATE TABLE agreement_persons
+(
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    agreement_id BIGINT NOT NULL ,
+    person_id BIGINT NOT NULL ,
+    medical_risk_limit_level VARCHAR(100) NOT NULL ,
+    PRIMARY KEY (id),
+    FOREIGN KEY (agreement_id) REFERENCES agreements(id),
+    FOREIGN KEY (person_id) REFERENCES (person_id)
+);
 
