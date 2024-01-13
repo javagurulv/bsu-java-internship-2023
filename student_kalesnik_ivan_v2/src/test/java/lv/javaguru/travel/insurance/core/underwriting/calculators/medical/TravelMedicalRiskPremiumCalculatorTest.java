@@ -16,10 +16,10 @@ class TravelMedicalRiskPremiumCalculatorTest {
 
     private TravelMedicalRiskPremiumCalculator calculator;
 
-    @Mock private DayCountCalculator dayCountCalculator;
-    @Mock private CountryDefaultDayRateCalculator countryDefaultDayRateCalculator;
-    @Mock private AgeCoefficientCalculator ageCoefficientCalculator;
-    @Mock private RiskLimitLevelCalculator riskLimitLevelCalculator;
+    @Mock private TMDayCountCalculator dayCountCalculator;
+    @Mock private TMCountryDefaultDayRateCalculator countryDefaultDayRateCalculator;
+    @Mock private TMAgeCoefficientCalculator ageCoefficientCalculator;
+    @Mock private TMRiskLimitLevelCalculator riskLimitLevelCalculator;
 
     @BeforeEach
     void setUp() {

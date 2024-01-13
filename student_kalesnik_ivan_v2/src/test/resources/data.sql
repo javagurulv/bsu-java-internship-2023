@@ -229,3 +229,13 @@ VALUES(40, 64, 30.0);
 
 INSERT INTO travel_cancellation_age_coefficient(age_from, age_to, coefficient)
 VALUES(65, 200, 50.0);
+
+
+INSERT INTO travel_cancellation_country_safety_rating(country_ic, coefficient)
+VALUES('LATVIA', 5.0);
+
+INSERT INTO travel_cancellation_country_safety_rating(country_ic, coefficient)
+VALUES('SPAIN', 8.0);
+
+INSERT INTO travel_cancellation_country_safety_rating(country_ic, coefficient)
+VALUES('JAPAN', 9.0);

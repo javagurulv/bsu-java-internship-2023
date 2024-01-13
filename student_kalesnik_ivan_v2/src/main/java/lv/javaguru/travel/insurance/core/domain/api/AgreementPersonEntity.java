@@ -1,22 +1,26 @@
 package lv.javaguru.travel.insurance.core.domain.api;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.Builder;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 
 @Entity
 @Table(name = "agreement_persons")
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-public class PolisEntity {
+public class AgreementPersonEntity {
+
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private BigDecimal id;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "agreement_id", nullable = false)
@@ -28,4 +32,5 @@ public class PolisEntity {
 
     @Column(name = "medical_risk_limit_level", nullable = false)
     private String medicalRiskLimitLevel;
+
 }

@@ -1,31 +1,32 @@
 package lv.javaguru.travel.insurance.core.domain.api;
 
 import lombok.*;
-import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "polis_risks")
+@Table(name = "agreement_person_risks")
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-public class AgreementRiskEntity {
+public class AgreementPersonRiskEntity {
+
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private BigDecimal id;
+    private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "polis_id", nullable = false)
-    private PolisEntity agreementPerson;
+    @JoinColumn(name = "agreement_person_id", nullable = false)
+    private AgreementPersonEntity agreementPerson;
 
     @Column(name = "risk_ic", nullable = false)
     private String riskIc;
 
     @Column(name = "premium", nullable = false)
     private BigDecimal premium;
+
 }

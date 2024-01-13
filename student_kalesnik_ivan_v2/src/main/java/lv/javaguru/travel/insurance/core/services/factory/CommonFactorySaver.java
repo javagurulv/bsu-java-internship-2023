@@ -40,7 +40,7 @@ public class CommonFactorySaver {
 
     private void saveAllSelectedRisks(AgreementDto agreementDto, AgreementEntity agreementEntity) {
         agreementDto.getSelectedRisks().forEach(riskIc -> {
-            RiskEntity riskEntity = new RiskEntity().builder()
+            SelectedRiskEntity riskEntity = new SelectedRiskEntity().builder()
                             .agreement(agreementEntity)
                                     .riskIc(riskIc)
                                     .build();
@@ -52,13 +52,13 @@ public class CommonFactorySaver {
                                          AgreementEntity agreementEntity) {
         agreementDTO.getPersons().forEach(personDTO -> {
             PersonEntity personEntity = personEntityFactory.savePerson(personDTO);
-            PolisEntity agreementPersonEntity = saveAgreementPerson(agreementEntity, personDTO, personEntity);
+            AgreementPersonEntity agreementPersonEntity = saveAgreementPerson(agreementEntity, personDTO, personEntity);
             saveAllPersonRisks(personDTO, agreementPersonEntity);
         });
     }
 
-    private PolisEntity saveAgreementPerson(AgreementEntity agreementEntity, PersonDto personDTO, PersonEntity personEntity) {
-        PolisEntity agreementPersonEntity = new PolisEntity().builder()
+    private AgreementPersonEntity saveAgreementPerson(AgreementEntity agreementEntity, PersonDto personDTO, PersonEntity personEntity) {
+        AgreementPersonEntity agreementPersonEntity = new AgreementPersonEntity().builder()
                 .agreement(agreementEntity)
                 .person(personEntity)
                         .medicalRiskLimitLevel(personDTO.getMedicalRiskLimitLevel())
@@ -67,9 +67,9 @@ public class CommonFactorySaver {
     }
 
     private void saveAllPersonRisks(PersonDto personDTO,
-                                    PolisEntity agreementPersonEntity) {
+                                    AgreementPersonEntity agreementPersonEntity) {
         personDTO.getRisks().forEach(riskDTO -> {
-            AgreementRiskEntity agreementPersonRiskEntity = new AgreementRiskEntity().builder()
+            AgreementPersonRiskEntity agreementPersonRiskEntity = new AgreementPersonRiskEntity().builder()
                     .agreementPerson(agreementPersonEntity)
                     .riskIc(riskDTO.getRiskIc())
                     .premium(riskDTO.getPremium())

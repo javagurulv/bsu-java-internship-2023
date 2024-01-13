@@ -3,20 +3,20 @@ package lv.javaguru.travel.insurance.core.domain.api;
 import lombok.*;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 
 @Entity
 @Table(name = "selected_risks")
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-public class RiskEntity {
+public class SelectedRiskEntity {
+
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private BigDecimal id;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "agreement_id", nullable = false)

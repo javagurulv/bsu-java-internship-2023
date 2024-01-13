@@ -1,21 +1,21 @@
 package lv.javaguru.travel.insurance.core.underwriting.calculators.cancel;
 
 import lv.javaguru.travel.insurance.core.api.dto.PersonDto;
-import lv.javaguru.travel.insurance.core.domain.TravelCostCoefficient;
-import lv.javaguru.travel.insurance.core.repositories.TravelCostRepository;
+import lv.javaguru.travel.insurance.core.domain.TCTravelCostCoefficient;
+import lv.javaguru.travel.insurance.core.repositories.TCTravelCostCoefficientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 
 @Component
-class TravelCostCalculator {
+class TCTravelCostCoefficientCalculator {
 
-    @Autowired private TravelCostRepository travelCostRepository;
+    @Autowired private TCTravelCostCoefficientRepository TCTravelCostCoefficientRepository;
 
     BigDecimal calculate(PersonDto person) {
-        return travelCostRepository.findCoefficient(person.getTravelCost())
-                .map(TravelCostCoefficient::getCoefficient)
+        return TCTravelCostCoefficientRepository.findCoefficient(person.getTravelCost())
+                .map(TCTravelCostCoefficient::getCoefficient)
                 .orElseThrow(() -> new RuntimeException("Travel Cost coefficient not found for travel cost = " + person.getTravelCost()));
     }
 
