@@ -48,15 +48,4 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
         return response;
     }
 
-
-   /* private static LocalDate dateToLocalDate(Date date) {
-        return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-    }
-
-    public static BigDecimal calculateAgreementPrice(Date from, Date to) {
-        LocalDate localDateFrom = dateToLocalDate(from);
-        LocalDate localDateTo = dateToLocalDate(to);
-        Period period = Period.between(localDateFrom, localDateTo);
-        return new BigDecimal(period.getDays());
-    }*/
 }
