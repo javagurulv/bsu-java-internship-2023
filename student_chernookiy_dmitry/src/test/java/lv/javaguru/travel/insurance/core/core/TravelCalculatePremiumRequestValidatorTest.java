@@ -26,21 +26,18 @@ public class TravelCalculatePremiumRequestValidatorTest {
 
         List<ValidationError> errors = requestValidator.validate(request);
 
-        assertEquals(errors.size(), 5);
+        assertEquals(errors.size(), 4);
         assertEquals(errors.get(0).getField(), "personFirstName");
         assertEquals(errors.get(0).getMessage(), "Must not be empty!");
 
         assertEquals(errors.get(1).getField(), "personLastName");
         assertEquals(errors.get(1).getMessage(), "Must not be empty!");
 
-        assertEquals(errors.get(2).getField(), "Date from");
+        assertEquals(errors.get(2).getField(), "agreementDateFrom");
         assertEquals(errors.get(2).getMessage(), "Must not be empty!");
 
-        assertEquals(errors.get(3).getField(), "Date to");
+        assertEquals(errors.get(3).getField(), "agreementDateTo");
         assertEquals(errors.get(3).getMessage(), "Must not be empty!");
-
-        assertEquals(errors.get(4).getField(), "Date to or date from");
-        assertEquals(errors.get(4).getMessage(), "Must not be empty!");
     }
 
     @Test
@@ -53,21 +50,18 @@ public class TravelCalculatePremiumRequestValidatorTest {
 
         List<ValidationError> errors = requestValidator.validate(request);
 
-        assertEquals(errors.size(), 5);
+        assertEquals(errors.size(), 4);
         assertEquals(errors.get(0).getField(), "personFirstName");
         assertEquals(errors.get(0).getMessage(), "Must not be empty!");
 
         assertEquals(errors.get(1).getField(), "personLastName");
         assertEquals(errors.get(1).getMessage(), "Must not be empty!");
 
-        assertEquals(errors.get(2).getField(), "Date from");
+        assertEquals(errors.get(2).getField(), "agreementDateFrom");
         assertEquals(errors.get(2).getMessage(), "Must not be empty!");
 
-        assertEquals(errors.get(3).getField(), "Date to");
+        assertEquals(errors.get(3).getField(), "agreementDateTo");
         assertEquals(errors.get(3).getMessage(), "Must not be empty!");
-
-        assertEquals(errors.get(4).getField(), "Date to or date from");
-        assertEquals(errors.get(4).getMessage(), "Must not be empty!");
     }
 
     @Test

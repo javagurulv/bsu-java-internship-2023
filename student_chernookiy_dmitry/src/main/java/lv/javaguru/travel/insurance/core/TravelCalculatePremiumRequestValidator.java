@@ -65,7 +65,7 @@ public class TravelCalculatePremiumRequestValidator {
         Date dateFrom = request.getAgreementDateFrom();
 
         return (dateFrom == null)
-                ? Optional.of(new ValidationError("Date from", "Must not be empty!"))
+                ? Optional.of(new ValidationError("agreementDateFrom", "Must not be empty!"))
                 : Optional.empty();
     }
 
@@ -73,7 +73,7 @@ public class TravelCalculatePremiumRequestValidator {
         Date dateTo = request.getAgreementDateTo();
 
         return (dateTo == null)
-                ? Optional.of(new ValidationError("Date to", "Must not be empty!"))
+                ? Optional.of(new ValidationError("agreementDateTo", "Must not be empty!"))
                 : Optional.empty();
     }
 
@@ -81,18 +81,14 @@ public class TravelCalculatePremiumRequestValidator {
         Date dateTo = request.getAgreementDateTo();
         Date dateFrom = request.getAgreementDateFrom();
 
-        if (dateTo == null || dateFrom == null) {
-            return (dateTo == null)
-                    ? Optional.of(new ValidationError("Date to or date from", "Must not be empty!"))
-                    : Optional.empty();
+        if (dateFrom != null && dateTo != null) {
+            if (dateFrom.before(dateTo)) {
+                return Optional.empty();
+            } else {
+                return Optional.of(
+                        new ValidationError("Date to or date from", "Date to must be after date from"));
+            }
         }
-
-        if (dateFrom.before(dateTo)) {
-            return Optional.empty();
-        } else {
-            return Optional.of(
-                    new ValidationError("Date to or date from", "Date to must be after date from"));
-        }
-
+        return Optional.empty();
     }
 }
