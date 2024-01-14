@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRisk;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,15 +17,18 @@ import java.util.List;
 @Component
 //@AllArgsConstructor
 class TravelUnderwritingImpl implements TravelUnderwriting{
-    @Autowired
-    private List<TravelRiskPremiumCalculator> riskCalculators;
+    //@Autowired
+    //private List<TravelRiskPremiumCalculator> riskCalculators;
 
+    @Autowired
+    SelectedRisksPremiumCalculator calculator;
     public BigDecimal calculatePremium(TravelCalculatePremiumRequest request) {
+
         BigDecimal result = BigDecimal.ZERO;
-        for (TravelRiskPremiumCalculator calc : riskCalculators) {
-            if (request.getSelected_risks().contains(calc.getIc())) {
-                result = result.add(calc.calculatePremium(request));
-            }
+        List<TravelCalculatePremiumRisk> risks = calculator.calculatePremiumForAllRisks(request);
+
+        for (TravelCalculatePremiumRisk risk : risks) {
+            result = result.add(risk.getPremium());
         }
 
         return result;
@@ -39,8 +43,8 @@ class TravelUnderwritingImpl implements TravelUnderwriting{
 
     }
 
-    @Override
-    public List<TravelRiskPremiumCalculator> getRiskCalculators() {
+    //@Override
+    /*public List<TravelRiskPremiumCalculator> getRiskCalculators() {
         return riskCalculators;
-    }
+    }*/
 }

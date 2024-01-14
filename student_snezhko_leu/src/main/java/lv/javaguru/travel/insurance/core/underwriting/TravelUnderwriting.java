@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface TravelUnderwriting {
     public BigDecimal calculatePremium(TravelCalculatePremiumRequest request);//TravelCalculatePremiumResponse response);
-    public List<TravelRiskPremiumCalculator> getRiskCalculators();
+    //public List<TravelRiskPremiumCalculator> getRiskCalculators();
 }
