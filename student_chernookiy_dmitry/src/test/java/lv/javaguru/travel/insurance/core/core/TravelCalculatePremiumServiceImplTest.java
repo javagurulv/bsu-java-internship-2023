@@ -59,12 +59,12 @@ class TravelCalculatePremiumServiceImplTest {
 
     private static Stream<Map.Entry<Date[], BigDecimal>> dates() {
         return Stream.of(
-                new AbstractMap.SimpleEntry<>(new Date[]{new Date(2002, Calendar.MARCH, 2),
-                        new Date(2002, Calendar.MARCH, 5)}, new BigDecimal(3)),
-                new AbstractMap.SimpleEntry<>(new Date[]{new Date(2002, Calendar.MARCH, 1),
-                        new Date(2002, Calendar.MARCH, 3)}, new BigDecimal(2)),
-                new AbstractMap.SimpleEntry<>(new Date[]{new Date(2002, Calendar.MARCH, 3),
-                        new Date(2002, Calendar.MARCH, 11)}, new BigDecimal(8))
+                new AbstractMap.SimpleEntry<>(new Date[]{new Date(2029, Calendar.MARCH, 2),
+                        new Date(2029, Calendar.MARCH, 5)}, new BigDecimal(3)),
+                new AbstractMap.SimpleEntry<>(new Date[]{new Date(2029, Calendar.MARCH, 1),
+                        new Date(2029, Calendar.MARCH, 3)}, new BigDecimal(2)),
+                new AbstractMap.SimpleEntry<>(new Date[]{new Date(2029, Calendar.MARCH, 3),
+                        new Date(2029, Calendar.MARCH, 11)}, new BigDecimal(8))
         );
     }
 

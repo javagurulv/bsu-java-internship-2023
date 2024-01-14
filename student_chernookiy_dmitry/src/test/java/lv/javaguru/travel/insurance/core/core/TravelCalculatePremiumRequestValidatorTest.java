@@ -69,8 +69,8 @@ public class TravelCalculatePremiumRequestValidatorTest {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getPersonFirstName()).thenReturn(null);
         when(request.getPersonLastName()).thenReturn(null);
-        when(request.getAgreementDateTo()).thenReturn(new Date(2005, Calendar.FEBRUARY,1));
-        when(request.getAgreementDateFrom()).thenReturn(new Date(2005, Calendar.FEBRUARY,3));
+        when(request.getAgreementDateTo()).thenReturn(new Date(2029, Calendar.FEBRUARY,1));
+        when(request.getAgreementDateFrom()).thenReturn(new Date(2029, Calendar.FEBRUARY,3));
 
         List<ValidationError> errors = requestValidator.validate(request);
         assertEquals(errors.size(), 3);
@@ -84,8 +84,8 @@ public class TravelCalculatePremiumRequestValidatorTest {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getPersonFirstName()).thenReturn(null);
         when(request.getPersonLastName()).thenReturn(null);
-        when(request.getAgreementDateTo()).thenReturn(new Date(2005, Calendar.FEBRUARY,3));
-        when(request.getAgreementDateFrom()).thenReturn(new Date(2005, Calendar.FEBRUARY,3));
+        when(request.getAgreementDateTo()).thenReturn(new Date(2029, Calendar.FEBRUARY,3));
+        when(request.getAgreementDateFrom()).thenReturn(new Date(2029, Calendar.FEBRUARY,3));
 
         List<ValidationError> errors = requestValidator.validate(request);
         assertEquals(errors.size(), 3);
@@ -99,8 +99,8 @@ public class TravelCalculatePremiumRequestValidatorTest {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getPersonFirstName()).thenReturn("null");
         when(request.getPersonLastName()).thenReturn("null");
-        when(request.getAgreementDateTo()).thenReturn(new Date(2005, Calendar.FEBRUARY,5));
-        when(request.getAgreementDateFrom()).thenReturn(new Date(2005, Calendar.FEBRUARY,3));
+        when(request.getAgreementDateTo()).thenReturn(new Date(2029, Calendar.FEBRUARY,5));
+        when(request.getAgreementDateFrom()).thenReturn(new Date(2029, Calendar.FEBRUARY,3));
 
         List<ValidationError> errors = requestValidator.validate(request);
         assertEquals(errors.size(), 0);
