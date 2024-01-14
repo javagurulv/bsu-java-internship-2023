@@ -2,12 +2,10 @@ package lv.javaguru.travel.insurance.core.services;
 
 import lv.javaguru.travel.insurance.core.api.dto.agreement.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.person.PersonDTO;
-import lv.javaguru.travel.insurance.core.domain.entities.AgreementEntity;
-import lv.javaguru.travel.insurance.core.domain.entities.AgreementPersonEntity;
-import lv.javaguru.travel.insurance.core.domain.entities.PersonEntity;
-import lv.javaguru.travel.insurance.core.domain.entities.SelectedRiskEntity;
+import lv.javaguru.travel.insurance.core.domain.entities.*;
 import lv.javaguru.travel.insurance.core.repositories.AgreementEntityRepository;
 import lv.javaguru.travel.insurance.core.repositories.AgreementPersonEntityRepository;
+import lv.javaguru.travel.insurance.core.repositories.AgreementPersonRiskEntityRepository;
 import lv.javaguru.travel.insurance.core.repositories.SelectedRiskEntityRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -31,6 +29,8 @@ public class AgreementEntityFactoryTest {
 
     @Mock
     private AgreementPersonEntityRepository agreementPersonEntityRepository;
+    @Mock
+    private AgreementPersonRiskEntityRepository agreementPersonRiskEntityRepository;
     @InjectMocks
     private AgreementEntityFactory agreementEntityFactory;
 
@@ -62,4 +62,5 @@ public class AgreementEntityFactoryTest {
         verify(agreementPersonEntityRepository, times(2)).save(any(AgreementPersonEntity.class));
         verify(personEntityFactory, times(2)).createPersonEntity(any(PersonDTO.class));
     }
+
 }
