@@ -15,73 +15,73 @@
     <changeSet author = "LesnikBeats" id = "12">
         <sql>
             INSERT INTO classifier_values(
-            classifier_id,
-            ic,
-            description)
+                classifier_id,
+                ic,
+                description)
             SELECT
-            cl.id,
-            'TRAVEL_MEDICAL',
-            'Travel policy medical risk type'
+                cl.id,
+                'TRAVEL_MEDICAL',
+                'Travel policy medical risk type'
             FROM classifiers as cl
             WHERE cl.title = 'RISK_TYPE';
 
 
             INSERT INTO classifier_values(
-            classifier_id,
-            ic,
-            description)
+                classifier_id,
+                ic,
+                description)
             SELECT
-            cl.id,
-            'TRAVEL_CANCELLATION',
-            'Travel policy trip cancellation risk type'
+                cl.id,
+                'TRAVEL_CANCELLATION',
+                'Travel policy trip cancellation risk type'
             FROM classifiers as cl
             WHERE cl.title = 'RISK_TYPE';
 
 
             INSERT INTO classifier_values(
-            classifier_id,
-            ic,
-            description)
+                classifier_id,
+                ic,
+                description)
             SELECT
-            cl.id,
-            'TRAVEL_LOSS_BAGGAGE',
-            'Travel policy baggage lose risk type'
+                cl.id,
+                'TRAVEL_LOSS_BAGGAGE',
+                'Travel policy baggage lose risk type'
             FROM classifiers as cl
             WHERE cl.title = 'RISK_TYPE';
 
 
             INSERT INTO classifier_values(
-            classifier_id,
-            ic,
-            description)
+                classifier_id,
+                ic,
+                description)
             SELECT
-            cl.id,
-            'TRAVEL_THIRD_PARTY_LIABILITY',
-            'Travel policy third party liability risk type'
+                cl.id,
+                'TRAVEL_THIRD_PARTY_LIABILITY',
+                'Travel policy third party liability risk type'
             FROM classifiers as cl
             WHERE cl.title = 'RISK_TYPE';
 
 
             INSERT INTO classifier_values(
-            classifier_id,
-            ic,
-            description)
+                classifier_id,
+                ic,
+                description)
             SELECT
-            cl.id,
-            'TRAVEL_EVACUATION',
-            'Travel policy evacuation risk type'
+                cl.id,
+                'TRAVEL_EVACUATION',
+                'Travel policy evacuation risk type'
             FROM classifiers as cl
             WHERE cl.title = 'RISK_TYPE';
 
 
             INSERT INTO classifier_values(
-            classifier_id,
-            ic,
-            description)
+                classifier_id,
+                ic,
+                description)
             SELECT
-            cl.id,
-            'TRAVEL_SPORT_ACTIVITIES',
-            'Travel policy sport activities risk type'
+                cl.id,
+                'TRAVEL_SPORT_ACTIVITIES',
+                'Travel policy sport activities risk type'
             FROM classifiers as cl
             WHERE cl.title = 'RISK_TYPE';
         </sql>
@@ -97,35 +97,35 @@
     <changeSet author = "LesnikBeats" id = "14">
         <sql>
             INSERT INTO classifier_values(
-            classifier_id,
-            ic,
-            description)
+                classifier_id,
+                ic,
+                description)
             SELECT
-            cl.id,
-            'LATVIA',
-            'Country Latvia'
+                cl.id,
+                'LATVIA',
+                'Country Latvia'
             FROM classifiers as cl
             WHERE cl.title = 'COUNTRY';
 
             INSERT INTO classifier_values(
-            classifier_id,
-            ic,
-            description)
+                classifier_id,
+                ic,
+                description)
             SELECT
-            cl.id,
-            'SPAIN',
-            'Country Spain'
+                cl.id,
+                'SPAIN',
+                'Country Spain'
             FROM classifiers as cl
             WHERE cl.title = 'COUNTRY';
 
             INSERT INTO classifier_values(
-            classifier_id,
-            ic,
-            description)
+                classifier_id,
+                ic,
+                description)
             SELECT
-            cl.id,
-            'JAPAN',
-            'Country Japan'
+                cl.id,
+                'JAPAN',
+                'Country Japan'
             FROM classifiers as cl
             WHERE cl.title = 'COUNTRY';
         </sql>
@@ -176,47 +176,47 @@
     <changeSet author = "LesnikBeats" id = "18">
         <sql>
             INSERT INTO classifier_values(
-            classifier_id,
-            ic,
-            description)
+                classifier_id,
+                ic,
+                description)
             SELECT
-            cl.id,
-            'LEVEL_10000',
-            'Medical Risk 10000 euro limit level'
+                cl.id,
+                'LEVEL_10000',
+                'Medical Risk 10000 euro limit level'
             FROM classifiers as cl
             WHERE cl.title = 'MEDICAL_RISK_LIMIT_LEVEL';
 
             INSERT INTO classifier_values(
-            classifier_id,
-            ic,
-            description)
+                classifier_id,
+                ic,
+                description)
             SELECT
-            cl.id,
-            'LEVEL_15000',
-            'Medical Risk 15000 euro limit level'
+                cl.id,
+                'LEVEL_15000',
+                'Medical Risk 15000 euro limit level'
             FROM classifiers as cl
             WHERE cl.title = 'MEDICAL_RISK_LIMIT_LEVEL';
 
             INSERT INTO classifier_values(
-            classifier_id,
-            ic,
-            description)
+                classifier_id,
+                ic,
+                description)
             SELECT
-            cl.id,
-            'LEVEL_20000',
-            'Medical Risk 20000 euro limit level'
+                cl.id,
+                'LEVEL_20000',
+                'Medical Risk 20000 euro limit level'
             FROM classifiers as cl
             WHERE cl.title = 'MEDICAL_RISK_LIMIT_LEVEL';
 
 
             INSERT INTO classifier_values(
-            classifier_id,
-            ic,
-            description)
+                classifier_id,
+                ic,
+                description)
             SELECT
-            cl.id,
-            'LEVEL_50000',
-            'Medical Risk 50000 euro limit level'
+                cl.id,
+                'LEVEL_50000',
+                'Medical Risk 50000 euro limit level'
             FROM classifiers as cl
             WHERE cl.title = 'MEDICAL_RISK_LIMIT_LEVEL';
         </sql>

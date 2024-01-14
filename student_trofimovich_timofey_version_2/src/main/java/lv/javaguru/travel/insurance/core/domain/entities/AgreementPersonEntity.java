@@ -1,9 +1,11 @@
-package lv.javaguru.travel.insurance.core.domain.api;
+package lv.javaguru.travel.insurance.core.domain.entities;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 
 @Entity
 @Table(name = "agreement_persons")
@@ -11,12 +13,12 @@ import java.math.BigDecimal;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-public class PolisEntity {
+public class AgreementPersonEntity {
+
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private BigDecimal id;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "agreement_id", nullable = false)

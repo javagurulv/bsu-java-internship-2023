@@ -53,7 +53,7 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
 
         //here could use underwriting.calculatePremium, which just adds all risks from response,
         // not recalculate them once again
-        response.setRisks(riskFactory.buildRisksList(underwriting.getRiskCalculators(), request));
+        response.setRisks(riskFactory.buildRisksList(request));//underwriting.getRiskCalculators(), request));
         response.setAgreementPremium(underwriting.calculatePremium(request));//response));
         return response;
     }

@@ -1,25 +1,23 @@
 package lv.javaguru.travel.insurance.core.domain.api;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import java.util.Date;
+import lombok.*;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
+import java.util.Date;
 
 @Entity
 @Table(name = "persons")
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class PersonEntity {
+
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private BigDecimal id;
+    private Long id;
 
     @Column(name = "first_name", nullable = false)
     private String firstName;
@@ -32,4 +30,5 @@ public class PersonEntity {
 
     @Column(name = "birth_date", nullable = false)
     private Date birthDate;
+
 }

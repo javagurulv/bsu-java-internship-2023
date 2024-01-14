@@ -1,8 +1,8 @@
 package lv.javaguru.travel.insurance.core.underwriting.calculators.medical;
 
 import lv.javaguru.travel.insurance.core.api.dto.PersonDto;
-import lv.javaguru.travel.insurance.core.domain.AgeCoefficient;
-import lv.javaguru.travel.insurance.core.repositories.AgeCoefficientRepository;
+import lv.javaguru.travel.insurance.core.domain.TMAgeCoefficient;
+import lv.javaguru.travel.insurance.core.repositories.TMAgeCoefficientRepository;
 import lv.javaguru.travel.insurance.core.util.DateTimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,29 +15,29 @@ import java.time.ZoneId;
 import java.util.Date;
 
 @Component
-class AgeCoefficientCalculator {
+class TMAgeCoefficientCalculator {
 
     @Value( "${medical.risk.age.coefficient.enabled:false}" )
     private Boolean medicalRiskAgeCoefficientEnabled;
 
     @Autowired private DateTimeUtil dateTimeUtil;
-    @Autowired private AgeCoefficientRepository ageCoefficientRepository;
+    @Autowired private TMAgeCoefficientRepository ageCoefficientRepository;
 
-    BigDecimal calculate(PersonDto request) {
+    BigDecimal calculate(PersonDto person) {
         return medicalRiskAgeCoefficientEnabled
-                ? getCoefficient(request)
+                ? getCoefficient(person)
                 : getDefaultValue();
     }
 
-    private BigDecimal getCoefficient(PersonDto request) {
-        int age = calculateAge(request);
+    private BigDecimal getCoefficient(PersonDto person) {
+        int age = calculateAge(person);
         return ageCoefficientRepository.findCoefficient(age)
-                .map(AgeCoefficient::getCoefficient)
+                .map(TMAgeCoefficient::getCoefficient)
                 .orElseThrow(() -> new RuntimeException("Age coefficient not found for age = " + age));
     }
 
-    private Integer calculateAge(PersonDto request) {
-        LocalDate personBirthDate = toLocalDate(request.getPersonBirthDate());
+    private Integer calculateAge(PersonDto person) {
+        LocalDate personBirthDate = toLocalDate(person.getPersonBirthDate());
         LocalDate currentDate = toLocalDate(dateTimeUtil.getCurrentDateTime());
         return Period.between(personBirthDate, currentDate).getYears();
     }
