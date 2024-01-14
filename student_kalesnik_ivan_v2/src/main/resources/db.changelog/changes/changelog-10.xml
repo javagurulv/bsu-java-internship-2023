@@ -7,13 +7,13 @@
 
     <changeSet author = "LesnikBeats" id = "25">
         <createTable tableName="agreement_persons">
-            <column autoIncrement="true" name="id" type="NUMERIC">
+            <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true"/>
             </column>
-            <column name="agreement_id" type="NUMERIC">
+            <column name="agreement_id" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
-            <column name="person_id" type="NUMERIC">
+            <column name="person_id" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
             <column name="medical_risk_limit_level" type="VARCHAR(100)">

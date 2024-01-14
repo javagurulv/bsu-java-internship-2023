@@ -18,6 +18,8 @@ dependencies {
 
 	testImplementation('org.hamcrest:hamcrest:2.2')
 
+	testImplementation ('uk.org.webcompere:model-assert:1.0.0')
+
 	test {
 		useJUnitPlatform()
 	}
