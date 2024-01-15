@@ -24,6 +24,8 @@ public class TravelCalculatePremiumRequestValidator {
         validatePersonDateFrom(request).ifPresent(errors::add);
         validatePersonDateTo(request).ifPresent(errors::add);
         validateDateToWithDateFrom(request).ifPresent(errors::add);
+        validationDateFromInThePast(request).ifPresent(errors::add);
+        validationDateToInThePast(request).ifPresent(errors::add);
 
         return errors;
     }
@@ -65,7 +67,7 @@ public class TravelCalculatePremiumRequestValidator {
         Date dateFrom = request.getAgreementDateFrom();
 
         return (dateFrom == null)
-                ? Optional.of(new ValidationError("Date from", "Must not be empty!"))
+                ? Optional.of(new ValidationError("agreementDateFrom", "Must not be empty!"))
                 : Optional.empty();
     }
 
@@ -73,7 +75,7 @@ public class TravelCalculatePremiumRequestValidator {
         Date dateTo = request.getAgreementDateTo();
 
         return (dateTo == null)
-                ? Optional.of(new ValidationError("Date to", "Must not be empty!"))
+                ? Optional.of(new ValidationError("agreementDateTo", "Must not be empty!"))
                 : Optional.empty();
     }
 
@@ -81,18 +83,36 @@ public class TravelCalculatePremiumRequestValidator {
         Date dateTo = request.getAgreementDateTo();
         Date dateFrom = request.getAgreementDateFrom();
 
-        if (dateTo == null || dateFrom == null) {
-            return (dateTo == null)
-                    ? Optional.of(new ValidationError("Date to or date from", "Must not be empty!"))
-                    : Optional.empty();
+        if (dateFrom != null && dateTo != null) {
+            if (dateFrom.before(dateTo)) {
+                return Optional.empty();
+            } else {
+                return Optional.of(
+                        new ValidationError("Date to or date from", "Date to must be after date from"));
+            }
+        }
+        return Optional.empty();
+    }
+
+    private Optional<ValidationError> validationDateToInThePast(TravelCalculatePremiumRequest request) {
+        Date dateTo = request.getAgreementDateTo();
+        Date nowDate = new Date();
+
+        if (dateTo != null && dateTo.getTime() <= nowDate.getTime()) {
+            return Optional.of(new ValidationError("dateTo", "The dateTo in the past is invalid"));
         }
 
-        if (dateFrom.before(dateTo)) {
-            return Optional.empty();
-        } else {
-            return Optional.of(
-                    new ValidationError("Date to or date from", "Date to must be after date from"));
+        return Optional.empty();
+    }
+
+    private Optional<ValidationError> validationDateFromInThePast(TravelCalculatePremiumRequest request) {
+        Date dateFrom = request.getAgreementDateTo();
+        Date nowDate = new Date();
+
+        if (dateFrom != null && dateFrom.getTime() <= nowDate.getTime()) {
+            return Optional.of(new ValidationError("dateFrom", "The dateFrom in the past is invalid"));
         }
 
+        return Optional.empty();
     }
 }
