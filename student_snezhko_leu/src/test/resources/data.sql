@@ -2,6 +2,10 @@ MERGE INTO classifiers(title, description)
 KEY(title)
 VALUES('RISK_TYPE', 'Risk type classifier');
 
+MERGE INTO classifiers(title, description)
+KEY(title)
+VALUES('COUNTRY', 'Country of travel classifier');
+
 MERGE INTO classifier_values(
 	classifier_id,
     ic,
@@ -78,3 +82,42 @@ SELECT
     'Travel policy sport activities risk type'
  FROM classifiers as cl
  WHERE cl.title = 'RISK_TYPE';
+
+
+MERGE INTO classifier_values(
+	classifier_id,
+    ic,
+    description)
+KEY(ic)
+SELECT
+	cl.id,
+    'LATVIA',
+    'Latvia travel country'
+ FROM classifiers as cl
+ WHERE cl.title = 'COUNTRY';
+
+
+ MERGE INTO classifier_values(
+ 	classifier_id,
+     ic,
+     description)
+ KEY(ic)
+ SELECT
+ 	cl.id,
+     'SPAIN',
+     'Spain travel country'
+  FROM classifiers as cl
+  WHERE cl.title = 'COUNTRY';
+
+
+  MERGE INTO classifier_values(
+  	classifier_id,
+      ic,
+      description)
+  KEY(ic)
+  SELECT
+  	cl.id,
+      'JAPAN',
+      'Japan travel country'
+   FROM classifiers as cl
+   WHERE cl.title = 'COUNTRY';
