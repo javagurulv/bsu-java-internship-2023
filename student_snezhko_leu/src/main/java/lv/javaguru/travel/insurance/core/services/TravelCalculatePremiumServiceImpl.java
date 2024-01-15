@@ -55,6 +55,7 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
         // not recalculate them once again
         response.setRisks(riskFactory.buildRisksList(request));//underwriting.getRiskCalculators(), request));
         response.setAgreementPremium(underwriting.calculatePremium(request));//response));
+        response.setCountry(request.getCountry());
         return response;
     }
     public TravelCalculatePremiumResponse buildResponse(List<ValidationError> errors) {

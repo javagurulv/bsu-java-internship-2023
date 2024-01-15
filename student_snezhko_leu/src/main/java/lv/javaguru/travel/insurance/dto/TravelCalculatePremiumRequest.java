@@ -20,4 +20,5 @@ public class TravelCalculatePremiumRequest {
     private Date agreementDateTo;
 //    private List<InsurancePremiumRisk> risks;
     private List<String> selected_risks;
+    private String country;
 }
