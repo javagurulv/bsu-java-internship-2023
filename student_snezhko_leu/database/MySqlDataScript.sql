@@ -43,3 +43,16 @@ INSERT INTO classifier_values (classifier_id, ic, description)
     SELECT cl.id, 'JAPAN', "Japan travel country" FROM classifiers AS cl
     WHERE cl.title = "COUNTRY"
     ;
+
+INSERT INTO COUNTRY_DEFAULT_DAY_RATE (country_ic, country_default_day_rate)
+    SELECT cl.ic, 1.00 FROM classifier_values AS cl
+    WHERE cl.ic = "LATVIA"
+
+    UNION ALL
+    SELECT cl.ic, 2.50 FROM classifier_values AS cl
+    WHERE cl.ic = "SPAIN"
+
+    UNION ALL
+    SELECT cl.ic, 3.50 FROM classifier_values AS cl
+    WHERE cl.ic = "JAPAN"
+;

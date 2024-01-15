@@ -121,3 +121,35 @@ SELECT
       'Japan travel country'
    FROM classifiers as cl
    WHERE cl.title = 'COUNTRY';
+
+   MERGE INTO COUNTRY_DEFAULT_DAY_RATE (
+        country_ic,
+        country_default_day_rate)
+   KEY(country_ic)
+   SELECT
+        cl.ic,
+        1.00
+   FROM classifier_values AS cl
+   WHERE cl.ic = 'LATVIA';
+
+MERGE INTO COUNTRY_DEFAULT_DAY_RATE (
+    country_ic,
+    country_default_day_rate)
+KEY (country_ic)
+SELECT
+    cl.ic,
+    2.50
+FROM classifier_values AS cl
+WHERE cl.ic = 'SPAIN';
+
+
+MERGE INTO COUNTRY_DEFAULT_DAY_RATE (
+    country_ic,
+    country_default_day_rate
+)
+KEY(country_ic)
+SELECT
+    cl.ic,
+    3.50
+FROM classifier_values AS cl
+WHERE cl.ic = 'JAPAN';
