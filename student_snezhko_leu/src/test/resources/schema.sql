@@ -22,8 +22,10 @@ CREATE UNIQUE INDEX IF NOT EXISTS ix_classifier_values_ic
 ON classifier_values(ic);
 
 CREATE TABLE IF NOT EXISTS COUNTRY_DEFAULT_DAY_RATE (
+    id BIGINT NOT NULL AUTO_INCREMENT,
     country_ic  VARCHAR(200) NOT NULL UNIQUE,
-    country_default_day_rate FLOAT NOT NULL
+    country_default_day_rate FLOAT NOT NULL,
+    PRIMARY KEY(id)
 );
 
 ALTER TABLE COUNTRY_DEFAULT_DAY_RATE
