@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS `classifiers`
     `title`       VARCHAR(200) NOT NULL,
     `description` VARCHAR(100) NOT NULL,
     PRIMARY KEY (`id`)
-)
+    )
     ENGINE = InnoDB
     AUTO_INCREMENT = 1002;
 
@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS `classifier_values`
     `ic`            VARCHAR(200) NOT NULL,
     `description`   VARCHAR(500) NOT NULL,
     PRIMARY KEY (id)
-)
+    )
     ENGINE = InnoDB
     AUTO_INCREMENT = 1002;
 
@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `country_default_day_rate`
     `country_ic`               VARCHAR(200)   NOT NULL,
     `country_default_day_rate` DECIMAL(10, 2) NOT NULL,
     PRIMARY KEY ('id')
-);
+    );
 
 
 CREATE UNIQUE INDEX `ix_country_default_day_rate`
@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `age_coefficient`
     `age_to`      INT            NOT NULL,
     'coefficient' DECIMAL(10, 2) NOT NULL,
     PRIMARY KEY ('id')
-);
+    );
 
 CREATE TABLE IF NOT EXISTS `medical_risk_limit_level`
 (
@@ -64,12 +64,76 @@ CREATE TABLE IF NOT EXISTS `medical_risk_limit_level`
     `medical_risk_limit_level_ic` VARCHAR(200)   NOT NULL,
     `coefficient`                 DECIMAL(10, 2) NOT NULL,
     PRIMARY KEY (id)
-);
+    );
 
 
 CREATE UNIQUE INDEX `ix_medical_risk_limit_level`
     ON `medical_risk_limit_level` (`medical_risk_limit_level_ic`);
 
+CREATE TABLE persons
+(
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    first_name VARCHAR(200) NOT NULL,
+    last_name VARCHAR(200) NOT NULL,
+    person_code VARCHAR(200) NOT NULL,
+    birth_date DATE NOT NULL ,
+    PRIMARY KEY (id)
+);
+
+CREATE UNIQUE INDEX ix_unique_persons on persons(first_name, last_name, person_code);
+
+CREATE TABLE agreements
+(
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    date_from DATE NOT NULL ,
+    date_to DATE NOT NULL ,
+    country VARCHAR(100) NOT NULL ,
+    premium DECIMAL(10, 2) NOT NULL ,
+    PRIMARY KEY (id)
+);
+
+
+CREATE TABLE selected_risks
+(
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    agreement_id BIGINT NOT NULL,
+    risk_ic VARCHAR(100) NOT NULL ,
+    PRIMARY KEY (id),
+    FOREIGN KEY (agreement_id) REFERENCES agreements(id)
+);
+
+CREATE UNIQUE INDEX ix_selected_risks_agreement_id_risk_ic
+    ON selected_risks(agreement_id, risk_ic);
+
+
+CREATE TABLE agreement_persons
+(
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    agreement_id BIGINT NOT NULL ,
+    person_id BIGINT NOT NULL ,
+    medical_risk_limit_level VARCHAR(100) NOT NULL ,
+    PRIMARY KEY (id),
+    FOREIGN KEY (agreement_id) REFERENCES agreements(id),
+    FOREIGN KEY (person_id) REFERENCES persons(id)
+);
+
+
+CREATE UNIQUE INDEX ix_agreement_persons_agreement_id_person_id
+    ON agreement_persons(agreement_id, person_id);
+
+CREATE TABLE agreement_person_risks
+(
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    agreement_person_id BIGINT NOT NULL ,
+    risk_ic VARCHAR(200) NOT NULL ,
+    premium DECIMAL(10,2) NOT NULL ,
+    PRIMARY KEY (id),
+    FOREIGN KEY (agreement_person_id) REFERENCES agreement_persons(id)
+);
+
+
+CREATE UNIQUE INDEX ix_agreement_person_risks_agreement_person_id_risk_ic
+    ON agreement_person_risks(agreement_person_id, risk_ic);
 
 
 SET SQL_MODE = @OLD_SQL_MODE;

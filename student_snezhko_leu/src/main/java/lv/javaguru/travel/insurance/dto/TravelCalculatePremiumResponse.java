@@ -23,6 +23,7 @@ public class TravelCalculatePremiumResponse extends CoreResponse {
     private Date agreementDateTo;
     private BigDecimal agreementPremium;
     private List<TravelCalculatePremiumRisk> risks;
+    private String country;
 //    private List<InsurancePremiumRisk> risks;
     public TravelCalculatePremiumResponse(List<ValidationError> errors) {
         super(errors);

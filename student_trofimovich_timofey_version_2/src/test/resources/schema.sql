@@ -99,7 +99,7 @@ CREATE TABLE agreement_persons
     medical_risk_limit_level VARCHAR(100) NOT NULL ,
     PRIMARY KEY (id),
     FOREIGN KEY (agreement_id) REFERENCES agreements(id),
-    FOREIGN KEY (person_id) REFERENCES (person_id)
+    FOREIGN KEY (person_id) REFERENCES persons(id)
 );
 
 
