@@ -1,9 +1,12 @@
 package lv.javaguru.travel.insurance.core;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lv.javaguru.travel.insurance.core.validations.*;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -14,105 +17,32 @@ import java.util.regex.Pattern;
 @Component
 public class TravelCalculatePremiumRequestValidator {
 
-    Pattern firstAndLastNamePattern = Pattern.compile("^[A-Za-zА-Яа-я]+$");
-
     public List<ValidationError> validate(TravelCalculatePremiumRequest request) {
         List<ValidationError> errors = new ArrayList<>();
+        List<TravelRequestValidation> travelRequestValidations = createValidations();
 
-        validatePersonFirstName(request).ifPresent(errors::add);
-        validatePersonLastName(request).ifPresent(errors::add);
-        validatePersonDateFrom(request).ifPresent(errors::add);
-        validatePersonDateTo(request).ifPresent(errors::add);
-        validateDateToWithDateFrom(request).ifPresent(errors::add);
-        validationDateFromInThePast(request).ifPresent(errors::add);
-        validationDateToInThePast(request).ifPresent(errors::add);
-
+        for (TravelRequestValidation validation : travelRequestValidations) {
+            Optional<ValidationError> optionalValidationError = validation.execute(request);
+            if (optionalValidationError.isPresent()) {
+                errors.add(optionalValidationError.get());
+            }
+        }
         return errors;
     }
 
-    private Optional<ValidationError> validatePersonFirstName(TravelCalculatePremiumRequest request) {
-        String firstName = request.getPersonFirstName();
+    private List<TravelRequestValidation> createValidations() {
+        List<TravelRequestValidation> travelRequestValidations = new ArrayList<>();
 
-        if (firstName == null || firstName.isEmpty()) {
-              return Optional.of(new ValidationError("personFirstName", "Must not be empty!"));
-        }
+        travelRequestValidations.add(new ValidatePersonFirstName());
+        travelRequestValidations.add(new ValidatePersonLastName());
+        travelRequestValidations.add(new ValidatePersonDateFrom());
+        travelRequestValidations.add(new ValidatePersonDateTo());
+        travelRequestValidations.add(new ValidationDateFromInThePast());
+        travelRequestValidations.add(new ValidationDateToInThePast());
+        travelRequestValidations.add(new ValidateDateToWithDateFrom());
 
-        Matcher matcher = firstAndLastNamePattern.matcher(firstName);
-
-        if (matcher.find()) {
-            return Optional.empty();
-        } else {
-            return Optional.of(new ValidationError("personFirstName", "Invalid"));
-        }
-
+        return travelRequestValidations;
     }
 
-    private Optional<ValidationError> validatePersonLastName(TravelCalculatePremiumRequest request) {
-        String lastName = request.getPersonLastName();
-
-        if (lastName == null || lastName.isEmpty()) {
-            return Optional.of(new ValidationError("personLastName", "Must not be empty!"));
-        }
-
-        Matcher matcher = firstAndLastNamePattern.matcher(lastName);
-
-        if (matcher.find()) {
-            return Optional.empty();
-        } else {
-            return Optional.of(new ValidationError("personLastName", "Invalid"));
-        }
-    }
-
-    private Optional<ValidationError> validatePersonDateFrom(TravelCalculatePremiumRequest request) {
-        Date dateFrom = request.getAgreementDateFrom();
-
-        return (dateFrom == null)
-                ? Optional.of(new ValidationError("agreementDateFrom", "Must not be empty!"))
-                : Optional.empty();
-    }
-
-    private Optional<ValidationError> validatePersonDateTo(TravelCalculatePremiumRequest request) {
-        Date dateTo = request.getAgreementDateTo();
-
-        return (dateTo == null)
-                ? Optional.of(new ValidationError("agreementDateTo", "Must not be empty!"))
-                : Optional.empty();
-    }
-
-    private Optional<ValidationError> validateDateToWithDateFrom(TravelCalculatePremiumRequest request) {
-        Date dateTo = request.getAgreementDateTo();
-        Date dateFrom = request.getAgreementDateFrom();
-
-        if (dateFrom != null && dateTo != null) {
-            if (dateFrom.before(dateTo)) {
-                return Optional.empty();
-            } else {
-                return Optional.of(
-                        new ValidationError("Date to or date from", "Date to must be after date from"));
-            }
-        }
-        return Optional.empty();
-    }
-
-    private Optional<ValidationError> validationDateToInThePast(TravelCalculatePremiumRequest request) {
-        Date dateTo = request.getAgreementDateTo();
-        Date nowDate = new Date();
-
-        if (dateTo != null && dateTo.getTime() <= nowDate.getTime()) {
-            return Optional.of(new ValidationError("dateTo", "The dateTo in the past is invalid"));
-        }
-
-        return Optional.empty();
-    }
-
-    private Optional<ValidationError> validationDateFromInThePast(TravelCalculatePremiumRequest request) {
-        Date dateFrom = request.getAgreementDateTo();
-        Date nowDate = new Date();
-
-        if (dateFrom != null && dateFrom.getTime() <= nowDate.getTime()) {
-            return Optional.of(new ValidationError("dateFrom", "The dateFrom in the past is invalid"));
-        }
-
-        return Optional.empty();
-    }
 }
+
