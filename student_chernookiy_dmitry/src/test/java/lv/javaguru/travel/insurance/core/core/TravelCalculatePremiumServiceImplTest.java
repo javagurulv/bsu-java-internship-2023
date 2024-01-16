@@ -1,7 +1,8 @@
 package lv.javaguru.travel.insurance.core.core;
 
-import lv.javaguru.travel.insurance.core.TravelCalculatePremiumRequestValidator;
+import lv.javaguru.travel.insurance.core.validations.TravelCalculatePremiumRequestValidator;
 import lv.javaguru.travel.insurance.core.TravelCalculatePremiumServiceImpl;
+import lv.javaguru.travel.insurance.core.validations.TravelCalculatePremiumRequestValidatorImpl;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumResponse;
 import lv.javaguru.travel.insurance.dto.ValidationError;
@@ -15,7 +16,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Stream;
 
@@ -46,7 +46,7 @@ class TravelCalculatePremiumServiceImplTest {
                 TEST_LAST_NAME, dateFrom, dateTo);
 
         TravelCalculatePremiumServiceImpl travelCalculatePremiumService
-                = new TravelCalculatePremiumServiceImpl(new TravelCalculatePremiumRequestValidator());
+                = new TravelCalculatePremiumServiceImpl(new TravelCalculatePremiumRequestValidatorImpl());
         TravelCalculatePremiumResponse response = travelCalculatePremiumService.calculatePremium(request);
 
         assertThat(response.getPersonLastName()).isEqualTo(response.getPersonLastName());
@@ -78,7 +78,7 @@ class TravelCalculatePremiumServiceImplTest {
                 TEST_LAST_NAME, dates.getKey()[INDEX_OF_FROM_DATE], dates.getKey()[INDEX_OF_TO_DATE]);
 
         TravelCalculatePremiumServiceImpl travelCalculatePremiumService
-                = new TravelCalculatePremiumServiceImpl(new TravelCalculatePremiumRequestValidator());
+                = new TravelCalculatePremiumServiceImpl(new TravelCalculatePremiumRequestValidatorImpl());
         TravelCalculatePremiumResponse response = travelCalculatePremiumService.calculatePremium(request);
 
         assertThat(response.getPersonLastName()).isEqualTo(response.getPersonLastName());
