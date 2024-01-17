@@ -8,10 +8,5 @@
       "errorCode": "ERROR_CODE_6",
       "description": "Field agreementDateTo is in the past!"
     }
-  ],
-  "agreementDateFrom": null,
-  "agreementDateTo": null,
-  "country": null,
-  "persons": null,
-  "agreementPremium": null
+  ]
 }
