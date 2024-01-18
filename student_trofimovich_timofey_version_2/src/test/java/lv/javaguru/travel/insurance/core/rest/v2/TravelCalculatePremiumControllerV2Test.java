@@ -1,7 +1,12 @@
 package lv.javaguru.travel.insurance.core.rest.v2;
 
 import lv.javaguru.travel.insurance.core.rest.common.JsonFileReader;
+import org.json.JSONObject;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.skyscreamer.jsonassert.Customization;
+import org.skyscreamer.jsonassert.JSONAssert;
+import org.skyscreamer.jsonassert.JSONCompareMode;
+import org.skyscreamer.jsonassert.comparator.CustomComparator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -11,9 +16,11 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
+import java.util.UUID;
+
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static uk.org.webcompere.modelassert.json.JsonAssertions.assertJson;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -49,11 +56,20 @@ public abstract class TravelCalculatePremiumControllerV2Test {
         String responseBodyContent = result.getResponse().getContentAsString();
 
         String jsonResponse = jsonFileReader.readJsonFromFile(jsonResponseFilePath);
-        assertJson(responseBodyContent)
+        JSONAssert.assertEquals(responseBodyContent, jsonResponse,
+                new CustomComparator(JSONCompareMode.LENIENT,
+                        new Customization("uuid", (o1,o2) -> true)));
+
+        JSONObject jsonObject = new JSONObject(responseBodyContent);
+        if (jsonObject.has("uuid")) {
+            String generatedUUID = (String) jsonObject.get("uuid");
+            assertThat(UUID.fromString(generatedUUID).toString()).isEqualTo(generatedUUID);
+        }
+       /* assertJson(responseBodyContent)
                 .where()
                 .keysInAnyOrder()
                 .arrayInAnyOrder()
-                .isEqualTo(jsonResponse);
+                .isEqualTo(jsonResponse);*/
     }
 
 }

@@ -32,5 +32,6 @@
       "medicalRiskLimitLevel": "LEVEL_15000"
     }
   ],
-  "agreementPremium": 29.00
+  "agreementPremium": 29.00,
+  "uuid": ""
 }

@@ -40,6 +40,8 @@ public class TravelCalculatePremiumResponseV2 extends CoreResponse {
     @JsonSerialize(using = BigDecimalSerializer.class)
     private BigDecimal agreementPremium;
 
+    private String uuid;
+
     public TravelCalculatePremiumResponseV2(List<ValidationError> errors) {
         super(errors);
     }

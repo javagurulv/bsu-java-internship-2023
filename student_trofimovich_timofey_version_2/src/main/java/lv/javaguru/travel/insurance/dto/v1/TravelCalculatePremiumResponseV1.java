@@ -47,6 +47,8 @@ public class TravelCalculatePremiumResponseV1 extends CoreResponse {
 
     private String medicalRiskLimitLevel;
 
+    private String uuid;
+
     public TravelCalculatePremiumResponseV1(List<ValidationError> errors) {
         super(errors);
     }
