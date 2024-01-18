@@ -5,21 +5,23 @@ import lombok.*;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.UUID;
 
 @Entity
 @Table(name = "agreements")
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class AgreementEntity {
 
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private BigDecimal id;
+    private Long id;
+
+    @Column(name = "uuid", nullable = false)
+    private String uuid;
 
     @Column(name = "date_from", nullable = false)
     private Date agreementDateFrom;
@@ -32,8 +34,5 @@ public class AgreementEntity {
 
     @Column(name = "premium", nullable = false)
     private BigDecimal agreementPremium;
-    @Column(name = "uuid", nullable = false)
-    private String uuid;
 
 }
-

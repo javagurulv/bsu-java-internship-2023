@@ -52,14 +52,14 @@ class LoadAgreement {
         dto.setPersons(persons);
     }
 
-    private PersonDto createPersonDTO(PolisEntity personEntity) {
+    private PersonDto createPersonDTO(AgreementPersonEntity personEntity) {
         PersonDto personDTO = new PersonDto();
         loadPersonFields(personDTO, personEntity);
         loadPersonRisks(personDTO, personEntity);
         return personDTO;
     }
 
-    private void loadPersonFields(PersonDto personDTO, PolisEntity personEntity) {
+    private void loadPersonFields(PersonDto personDTO, AgreementPersonEntity personEntity) {
         personDTO.setPersonFirstName(personEntity.getPerson().getFirstName());
         personDTO.setPersonLastName(personEntity.getPerson().getLastName());
         personDTO.setPersonCode(personEntity.getPerson().getPersonCode());
@@ -67,7 +67,7 @@ class LoadAgreement {
         personDTO.setMedicalRiskLimitLevel(personEntity.getMedicalRiskLimitLevel());
     }
 
-    private void loadPersonRisks(PersonDto personDTO, PolisEntity personEntity) {
+    private void loadPersonRisks(PersonDto personDTO, AgreementPersonEntity personEntity) {
         List<RiskDto> risks = agreementRiskRepository.findByAgreementPerson(personEntity)
                 .stream()
                 .map(this::createRiskDTO)
@@ -75,7 +75,7 @@ class LoadAgreement {
         personDTO.setRisks(risks);
     }
 
-    private RiskDto createRiskDTO(AgreementRiskEntity agreementPersonRiskEntity) {
+    private RiskDto createRiskDTO(AgreementPersonRiskEntity agreementPersonRiskEntity) {
         return new RiskDto().builder()
                 .riskIc(agreementPersonRiskEntity.getRiskIc())
                 .premium(agreementPersonRiskEntity.getPremium())
@@ -85,7 +85,7 @@ class LoadAgreement {
     private void loadSelectedRisks(AgreementDto dto, AgreementEntity agreement) {
         List<String> selectedRisks = selectedRiskRepository.findByAgreement(agreement)
                 .stream()
-                .map(RiskEntity::getRiskIc)
+                .map(SelectedRiskEntity::getRiskIc)
                 .collect(Collectors.toList());
         dto.setSelectedRisks(selectedRisks);
     }

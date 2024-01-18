@@ -6,11 +6,11 @@
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
 
     <changeSet author = "LesnikBeats" id = "29">
-        <createTable tableName="polis_risks">
-            <column autoIncrement="true" name="id" type="NUMERIC">
+        <createTable tableName="agreement_person_risks">
+            <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true"/>
             </column>
-            <column name="polis_id" type="NUMERIC">
+            <column name="agreement_person_id" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
             <column name="risk_ic" type="VARCHAR(100)">
@@ -24,16 +24,16 @@
 
     <changeSet author="LesnikBeats" id="30">
         <createIndex indexName="ix_agreement_person_risks_person_risk_ic"
-                     tableName="polis_risks"
+                     tableName="agreement_person_risks"
                      unique="true">
-            <column name="polis_id"/>
+            <column name="agreement_person_id"/>
             <column name="risk_ic"/>
         </createIndex>
     </changeSet>
 
     <changeSet author="LesnikBeats" id="31">
-        <addForeignKeyConstraint baseTableName="polis_risks"
-                                 baseColumnNames="polis_id"
+        <addForeignKeyConstraint baseTableName="agreement_person_risks"
+                                 baseColumnNames="agreement_person_id"
                                  constraintName="fk_agreement_person_risks_agreement_person_id"
                                  referencedTableName="agreement_persons"
                                  referencedColumnNames="id"/>

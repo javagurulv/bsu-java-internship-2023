@@ -8,10 +8,5 @@
       "errorCode": "ERROR_CODE_9",
       "description": "Selected risk TRAVEL_UNSUPPORTED_2 is not supported by the system!"
     }
-  ],
-  "agreementDateFrom": null,
-  "agreementDateTo": null,
-  "country": null,
-  "persons": null,
-  "agreementPremium": null
+  ]
 }

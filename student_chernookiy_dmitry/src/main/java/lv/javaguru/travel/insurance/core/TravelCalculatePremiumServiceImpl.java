@@ -1,23 +1,23 @@
 package lv.javaguru.travel.insurance.core;
 
+import lv.javaguru.travel.insurance.core.validations.TravelCalculatePremiumRequestValidator;
+import lv.javaguru.travel.insurance.core.validations.TravelCalculatePremiumRequestValidatorImpl;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumResponse;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.time.Period;
-import java.time.ZoneId;
-import java.util.Date;
 import java.util.List;
 
 
 @Component
-class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService {
+public class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService {
 
-    TravelCalculatePremiumRequestValidator validator = new TravelCalculatePremiumRequestValidator();
+    @Autowired
+    TravelCalculatePremiumRequestValidator validator = new TravelCalculatePremiumRequestValidatorImpl();
+    @Autowired
+    TravelCalculatePremiumServiceUnderwriting underwriting = new TravelCalculatePremiumServiceUnderwriting();
 
     @Autowired
     public TravelCalculatePremiumServiceImpl(TravelCalculatePremiumRequestValidator requestValidator) {
@@ -40,19 +40,9 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
         response.setAgreementDateTo(request.getAgreementDateTo());
         response.setPersonFirstName(request.getPersonFirstName());
         response.setPersonLastName(request.getPersonLastName());
-        response.setAgreementPrice(calculateAgreementPrice(request.getAgreementDateFrom(), request.getAgreementDateTo()));
+        response.setAgreementPrice(underwriting
+                .calculatePremium(request.getAgreementDateFrom(), request.getAgreementDateTo()));
         return response;
     }
 
-
-    private static LocalDate dateToLocalDate(Date date) {
-        return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-    }
-
-    public static BigDecimal calculateAgreementPrice(Date from, Date to) {
-        LocalDate localDateFrom = dateToLocalDate(from);
-        LocalDate localDateTo = dateToLocalDate(to);
-        Period period = Period.between(localDateFrom, localDateTo);
-        return new BigDecimal(period.getDays());
-    }
 }

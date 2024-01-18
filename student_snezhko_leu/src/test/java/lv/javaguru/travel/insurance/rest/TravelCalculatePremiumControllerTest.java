@@ -48,7 +48,7 @@ public class TravelCalculatePremiumControllerTest {
         String pathResponse = "rest/TravelCalculatePremiumResponse.json";
 
         String responseFromRequest = getResponseFromRequest(pathRequest);
-        String responseFromFile = jsonFileReader.readJsonFile("rest/TravelCalculatePremiumResponse.json");
+        String responseFromFile = jsonFileReader.readJsonFile(pathResponse);
         assertJson(responseFromRequest)
                 .where()
                 .keysInAnyOrder()

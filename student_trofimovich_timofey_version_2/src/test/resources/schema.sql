@@ -43,6 +43,9 @@ CREATE TABLE age_coefficient
     PRIMARY KEY (id)
     );
 
+CREATE INDEX ix_age_coefficient_age_from_age_to
+ON age_coefficient(age_from, age_to);
+
 CREATE TABLE medical_risk_limit_level
 (
     id                          BIGINT         NOT NULL AUTO_INCREMENT,
@@ -54,3 +57,62 @@ CREATE TABLE medical_risk_limit_level
 
 CREATE UNIQUE INDEX ix_medical_risk_limit_level
     ON `medical_risk_limit_level` (medical_risk_limit_level_ic);
+
+CREATE TABLE persons
+(
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    first_name VARCHAR(200) NOT NULL,
+    last_name VARCHAR(200) NOT NULL,
+    person_code VARCHAR(200) NOT NULL,
+    birth_date TIMESTAMP NOT NULL ,
+    PRIMARY KEY (id)
+);
+
+CREATE UNIQUE INDEX ix_unique_persons on persons(first_name, last_name, person_code);
+
+CREATE TABLE agreements
+(
+  id BIGINT NOT NULL AUTO_INCREMENT,
+  date_from TIMESTAMP NOT NULL ,
+  date_to TIMESTAMP NOT NULL ,
+  country VARCHAR(100) NOT NULL ,
+  premium DECIMAL(10, 2) NOT NULL ,
+  uuid VARCHAR(100) UNIQUE NOT NULL ,
+  PRIMARY KEY (id)
+);
+
+CREATE UNIQUE INDEX ix_unique_agreements_id
+ON agreements(id);
+
+
+CREATE TABLE selected_risks
+(
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    agreement_id BIGINT NOT NULL,
+    risk_ic VARCHAR(100) NOT NULL ,
+    PRIMARY KEY (id),
+    FOREIGN KEY (agreement_id) REFERENCES agreements(id)
+);
+
+CREATE TABLE agreement_persons
+(
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    agreement_id BIGINT NOT NULL ,
+    person_id BIGINT NOT NULL ,
+    medical_risk_limit_level VARCHAR(100) NOT NULL ,
+    PRIMARY KEY (id),
+    FOREIGN KEY (agreement_id) REFERENCES agreements(id),
+    FOREIGN KEY (person_id) REFERENCES persons(id)
+);
+
+CREATE TABLE agreement_person_risks
+(
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    agreement_person_id BIGINT NOT NULL ,
+    risk_ic VARCHAR(200) NOT NULL ,
+    premium DECIMAL(10,2) NOT NULL ,
+    PRIMARY KEY (id),
+    FOREIGN KEY (agreement_person_id) REFERENCES agreement_persons(id)
+);
+
+

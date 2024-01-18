@@ -25,17 +25,17 @@ public class TravelInsuranceControllerV1 {
     public String showForm(ModelMap modelMap) {
         modelMap.addAttribute("request", new TravelCalculatePremiumRequestV1());
         modelMap.addAttribute("response", new TravelCalculatePremiumResponseV1());
-        return "travel-calculate-premium";
+        return "travel-calculate-premium-v1";
     }
 
-    @PostMapping("/insurance/travel/web")
+    @PostMapping("/insurance/travel/web/v1")
     public String processForm(@ModelAttribute(value = "request") TravelCalculatePremiumRequestV1 request,
                               ModelMap modelMap) {
         TravelCalculatePremiumCoreCommand coreCommand = converter.buildCoreCommand(request);
         TravelCalculatePremiumCoreResult coreResult = service.calculatePremium(coreCommand);
         TravelCalculatePremiumResponseV1 response = converter.buildResponse(coreResult);
         modelMap.addAttribute("response", response);
-        return "travel-calculate-premium";
+        return "travel-calculate-premium-v1";
     }
 
 }

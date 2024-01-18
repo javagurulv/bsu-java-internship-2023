@@ -1,36 +1,35 @@
 {
-  "errors": null,
   "agreementDateFrom": "2025-05-25",
   "agreementDateTo": "2025-05-29",
   "country": "SPAIN",
   "persons": [
     {
-      "personUUID" : "1212",
+      "personUUID": "1212",
       "personFirstName": "Vasja",
       "personLastName": "Pupkin",
       "personBirthDate": "2000-05-29",
-      "agreementPremium": 11.00,
-      "risks": [
+      "personPremium": 11.00,
+      "personRisks": [
         {
           "ic": "TRAVEL_MEDICAL",
           "premium": 11.00
         }
       ],
-      "medicalRiskLimitLevel": null
+      "medicalRiskLimitLevel": "LEVEL_10000"
     },
     {
-      "personUUID" : "1212",
+      "personUUID": "1212",
       "personFirstName": "Petja",
       "personLastName": "Pupkin",
       "personBirthDate": "1950-03-01",
-      "agreementPremium": 18.00,
-      "risks": [
+      "personPremium": 18.00,
+      "personRisks": [
         {
           "ic": "TRAVEL_MEDICAL",
           "premium": 18.00
         }
       ],
-      "medicalRiskLimitLevel": null
+      "medicalRiskLimitLevel": "LEVEL_15000"
     }
   ],
   "agreementPremium": 29.00

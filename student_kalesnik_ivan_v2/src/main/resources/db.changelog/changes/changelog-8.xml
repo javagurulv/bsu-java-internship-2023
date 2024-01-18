@@ -7,7 +7,7 @@
 
     <changeSet author = "LesnikBeats" id = "22">
         <createTable tableName="agreements">
-            <column autoIncrement="true" name="id" type="NUMERIC">
+            <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true"/>
             </column>
             <column name="date_from" type="DATETIME">
