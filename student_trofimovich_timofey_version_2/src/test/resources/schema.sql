@@ -77,8 +77,12 @@ CREATE TABLE agreements
   date_to TIMESTAMP NOT NULL ,
   country VARCHAR(100) NOT NULL ,
   premium DECIMAL(10, 2) NOT NULL ,
+  uuid VARCHAR(100) UNIQUE NOT NULL ,
   PRIMARY KEY (id)
 );
+
+CREATE UNIQUE INDEX ix_unique_agreements_id
+ON agreements(id);
 
 
 CREATE TABLE selected_risks
@@ -110,3 +114,5 @@ CREATE TABLE agreement_person_risks
     PRIMARY KEY (id),
     FOREIGN KEY (agreement_person_id) REFERENCES agreement_persons(id)
 );
+
+

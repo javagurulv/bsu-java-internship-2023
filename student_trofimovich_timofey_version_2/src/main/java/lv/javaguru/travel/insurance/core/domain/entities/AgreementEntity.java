@@ -35,4 +35,7 @@ public class AgreementEntity {
 
     @Column(name = "premium", nullable = false)
     private BigDecimal agreementPremium;
+
+    @Column(name = "uuid", nullable = false)
+    private String uuid;
 }
