@@ -8,15 +8,5 @@
       "errorCode": "ERROR_CODE_6",
       "description": "Field agreementDateTo is in the past!"
     }
-  ],
-  "personUUID" : null,
-  "personFirstName": null,
-  "personLastName": null,
-  "dateOfBirth": null,
-  "agreementDateFrom": null,
-  "agreementDateTo": null,
-  "agreementPremium": null,
-  "risks": null,
-  "country": null,
-  "medicalRiskLimitLevel": null
+  ]
 }

@@ -4,16 +4,5 @@
       "errorCode": "ERROR_CODE_12",
       "description": "Field dateOfBirth is empty!"
     }
-  ],
-  "personUUID" : null,
-  "personFirstName": null,
-  "personLastName": null,
-  "dateOfBirth": null,
-  "agreementDateFrom": null,
-  "agreementDateTo": null,
-  "agreementPremium": null,
-  "risks": null,
-  "country": null,
-  "medicalRiskLimitLevel": null
-
+  ]
 }
