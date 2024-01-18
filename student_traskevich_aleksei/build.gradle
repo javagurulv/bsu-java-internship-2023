@@ -10,6 +10,9 @@ dependencies {
     testCompileOnly('org.projectlombok:lombok:1.18.24')
     testAnnotationProcessor('org.projectlombok:lombok:1.18.24')
 
+    implementation group: 'com.google.guava', name: 'guava', version: '33.0.0-jre'
+
+
     test {
         useJUnitPlatform()
     }
