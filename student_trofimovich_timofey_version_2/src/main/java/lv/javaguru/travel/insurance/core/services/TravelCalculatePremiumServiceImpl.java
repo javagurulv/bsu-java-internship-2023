@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.List;
+import java.util.UUID;
 
 @Component
 @Transactional
@@ -46,6 +47,7 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
 
         BigDecimal totalAgreementPremium = calculateTotalAgreementPremium(agreement);
         agreement.setAgreementPremium(totalAgreementPremium);
+        agreement.setUuid(UUID.randomUUID().toString());
 
         agreementEntityFactory.createAgreementEntity(agreement);
 

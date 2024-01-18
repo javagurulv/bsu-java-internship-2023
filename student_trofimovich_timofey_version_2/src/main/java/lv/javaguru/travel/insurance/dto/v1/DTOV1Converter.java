@@ -28,6 +28,7 @@ public class DTOV1Converter {
         response.setDateOfBirth(agreement.getPersons().get(0).getPersonBirthDate());
         response.setCountry(agreement.getCountry());
         response.setAgreementPremium(agreement.getAgreementPremium());
+        response.setUuid(agreement.getUuid());
         response.setMedicalRiskLimitLevel(agreement.getPersons().get(0).getMedicalRiskLimitLevel());
         List<RiskPremium> risks = agreement.getPersons().get(0).getSelectedRisks().stream()
                 .map(risk -> new RiskPremium(risk.getRiskIc(), risk.getPremium()))

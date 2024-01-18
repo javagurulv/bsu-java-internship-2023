@@ -25,6 +25,8 @@ public class AgreementDTOBuilder {
 
     private BigDecimal agreementPremium;
 
+    private String uuid;
+
     public static AgreementDTOBuilder createAgreement() {
         return new AgreementDTOBuilder();
     }
@@ -34,6 +36,10 @@ public class AgreementDTOBuilder {
     }
     public AgreementDTOBuilder withAgreementDateTo(Date agreementDateTo) {
         this.setAgreementDateTo(agreementDateTo);
+        return this;
+    }
+    public AgreementDTOBuilder withUUID(String uuid) {
+        this.setUuid(uuid);
         return this;
     }
     public AgreementDTOBuilder withCountry(String country) {
@@ -66,6 +72,7 @@ public class AgreementDTOBuilder {
         agreementDTO.setSelectedRisks(selectedRisks);
         agreementDTO.setPersons(persons);
         agreementDTO.setAgreementPremium(agreementPremium);
+        agreementDTO.setUuid(uuid);
         return agreementDTO;
     }
 }

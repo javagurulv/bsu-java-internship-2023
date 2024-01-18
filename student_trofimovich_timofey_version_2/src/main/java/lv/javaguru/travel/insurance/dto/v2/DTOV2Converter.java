@@ -26,6 +26,7 @@ public class DTOV2Converter {
         response.setAgreementDateTo(agreement.getAgreementDateTo());
         response.setCountry(agreement.getCountry());
         response.setAgreementPremium(agreement.getAgreementPremium());
+        response.setUuid(agreement.getUuid());
 
         List<PersonResponseDTO> persons = agreement.getPersons().stream()
                 .map(this::buildPersonFromResponse)

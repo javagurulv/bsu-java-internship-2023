@@ -27,4 +27,5 @@ public class AgreementDTO {
     private List<PersonDTO> persons;
 
     private BigDecimal agreementPremium;
+    private String uuid;
 }

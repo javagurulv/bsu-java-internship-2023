@@ -13,5 +13,6 @@
     }
   ],
   "country": "SPAIN",
-  "medicalRiskLimitLevel": "LEVEL_10000"
+  "medicalRiskLimitLevel": "LEVEL_10000",
+  "uuid":""
 }
