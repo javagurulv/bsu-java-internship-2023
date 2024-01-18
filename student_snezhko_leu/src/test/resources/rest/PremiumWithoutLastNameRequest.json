@@ -6,5 +6,6 @@
   "selected_risks" : [
     "TRAVEL_MEDICAL"
   ],
-  "country" : "SPAIN"
+  "country" : "SPAIN",
+  "personBirthDate" : "2005-09-03"
 }

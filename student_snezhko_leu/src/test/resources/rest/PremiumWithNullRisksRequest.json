@@ -4,5 +4,6 @@
   "agreementDateFrom": "2026-05-25",
   "agreementDateTo": "2026-05-29",
   "selected_risks" : [],
-  "country" : "SPAIN"
+  "country" : "SPAIN",
+  "personBirthDate" : "2005-09-03"
 }

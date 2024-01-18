@@ -153,3 +153,54 @@ SELECT
     3.50
 FROM classifier_values AS cl
 WHERE cl.ic = 'JAPAN';
+
+
+
+MERGE INTO AGE_COEFFICIENT(
+    age_from,
+    age_to,
+    coefficient
+)
+KEY(age_from, age_to)
+VALUES (0, 5, 1.1);
+
+MERGE INTO AGE_COEFFICIENT (
+    age_from,
+    age_to,
+    coefficient
+)
+KEY(age_from, age_to)
+VALUES (6, 10, 0.7);
+
+MERGE INTO AGE_COEFFICIENT (
+    age_from,
+    age_to,
+    coefficient
+)
+KEY(age_from, age_to)
+VALUES (11, 17, 1.0);
+
+MERGE INTO AGE_COEFFICIENT (
+    age_from,
+    age_to,
+    coefficient
+)
+KEY(age_from, age_to)
+VALUES (18, 40, 1.1);
+
+MERGE INTO AGE_COEFFICIENT (
+    age_from,
+    age_to,
+    coefficient
+)
+KEY(age_from, age_to)
+VALUES (41, 65, 1.2);
+
+
+MERGE INTO AGE_COEFFICIENT (
+    age_from,
+    age_to,
+    coefficient
+)
+KEY(age_from, age_to)
+VALUES (66, 150, 1.5);

@@ -56,3 +56,11 @@ INSERT INTO COUNTRY_DEFAULT_DAY_RATE (country_ic, country_default_day_rate)
     SELECT cl.ic, 3.50 FROM classifier_values AS cl
     WHERE cl.ic = "JAPAN"
 ;
+
+INSERT INTO AGE_COEFFICIENT (age_from, age_to, coefficient)
+VALUES (0, 5, 1.1),
+        (6, 10, 0.7),
+        (11, 17, 1.0),
+        (18, 40, 1.1),
+        (41, 65, 1.2),
+        (66, 150, 1.5);
