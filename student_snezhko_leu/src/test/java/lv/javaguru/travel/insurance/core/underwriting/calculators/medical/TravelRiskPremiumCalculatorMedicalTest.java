@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.core.underwriting.calculators;
+package lv.javaguru.travel.insurance.core.underwriting.calculators.medical;
 
 import lv.javaguru.travel.insurance.core.domain.AgeCoefficient;
 import lv.javaguru.travel.insurance.core.domain.CountryDefaultDayRate;
@@ -25,15 +25,20 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
-@DataJpaTest
+//@DataJpaTest
 public class TravelRiskPremiumCalculatorMedicalTest {
     @InjectMocks
-    TravelRiskPremiumCalculatorMedical calculator = new TravelRiskPremiumCalculatorMedical();
+    private TravelRiskPremiumCalculatorMedical calculator = new TravelRiskPremiumCalculatorMedical();
     @Mock
-    CountryDefaultDayRateRepository cddrRepository = mock(CountryDefaultDayRateRepository.class);
+    private TravelCalculateDayCount dayCountCalculator = mock(TravelCalculateDayCount.class);
+    //CountryDefaultDayRateRepository cddrRepository = mock(CountryDefaultDayRateRepository.class);
 
     @Mock
-    private AgeCoefficientRepository acRepository = mock(AgeCoefficientRepository.class);
+    private TravelCalculateMedicalAgeCoefficient ageCoefficientCalculator = mock(TravelCalculateMedicalAgeCoefficient.class);
+    //private AgeCoefficientRepository acRepository = mock(AgeCoefficientRepository.class);
+
+    @Mock
+    private TravelCalculateMedicalCountryDefaultDayRate cddrCalculator = mock(TravelCalculateMedicalCountryDefaultDayRate.class);
     TravelCalculatePremiumRequest request;
     /*
     @BeforeEach
@@ -93,10 +98,13 @@ public class TravelRiskPremiumCalculatorMedicalTest {
         CountryDefaultDayRate cddr = mock(CountryDefaultDayRate.class);
         when(cddr.getCountryIc()).thenReturn(countryName);
         when(cddr.getCountryDefaultDayRate()).thenReturn(cddrValue);
-        when(cddrRepository.findByCountryIc(countryName)).thenReturn(Optional.of(cddr));
+        //when(cddrRepository.findByCountryIc(countryName)).thenReturn(Optional.of(cddr));
 
         AgeCoefficient ac = mock(AgeCoefficient.class);
         when(ac.getCoefficient()).thenReturn(1.1);
-        when(acRepository.findByAgeFromAndAgeTo(age)).thenReturn(Optional.of(ac));
+        //when(acRepository.findByAgeFromAndAgeTo(age)).thenReturn(Optional.of(ac));
+        when(dayCountCalculator.calculatePremium(request)).thenReturn(1l);
+        when(ageCoefficientCalculator.calculatePremium(request)).thenReturn(1.1);
+        when(cddrCalculator.calculatePremium(request)).thenReturn(cddrValue);
     }
 }

@@ -17,13 +17,22 @@ import static lv.javaguru.travel.insurance.core.util.DateTimeUtil.findDiffBetwee
 @Component
 public class TravelRiskPremiumCalculatorMedical implements TravelRiskPremiumCalculator {
     @Autowired
-    private CountryDefaultDayRateRepository cddrRepository;
+    private TravelCalculateDayCount dayCount;
 
     @Autowired
-    private AgeCoefficientRepository acRepository;
+    private TravelCalculateMedicalAgeCoefficient ageCoefficient;
+
+    @Autowired
+    private TravelCalculateMedicalCountryDefaultDayRate cddr;
 
     @Override
     public BigDecimal calculatePremium(TravelCalculatePremiumRequest request) {
+        BigDecimal result = BigDecimal.valueOf(
+                dayCount.calculatePremium(request)
+                * ageCoefficient.calculatePremium(request)
+                * cddr.calculatePremium(request)
+        );
+        /*
         BigDecimal result = BigDecimal.valueOf(
                 cddrRepository.findByCountryIc(
                         request.getCountry()).get().getCountryDefaultDayRate()
@@ -35,7 +44,9 @@ public class TravelRiskPremiumCalculatorMedical implements TravelRiskPremiumCalc
                         .get()
                         .getCoefficient()
         );//.setScale(2, RoundingMode.HALF_UP);
+        */
         return result;
+
                                 //.get().getCountryDefaultDayRate()), findDiffBetweenTwoDate(request.getAgreementDateTo(), request.getAgreementDateFrom()));
     }
 
