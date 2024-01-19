@@ -6,7 +6,7 @@ import java.util.List;
 public class LoadTestingSystem {
 
     public static void main(String[] args) {
-        new LoadTestingSystem().executeForAMinute(1, 30000);
+        new LoadTestingSystem().executeForAMinute(1, 60000);
     }
     private void executeForAMinute(int parallelThreadCount, int requestCount) {
         long intervalBetweenRequestsInMillis = 60000L / requestCount;

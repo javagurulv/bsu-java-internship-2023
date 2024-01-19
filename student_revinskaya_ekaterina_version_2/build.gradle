@@ -11,6 +11,7 @@ dependencies {
 
 	implementation('org.springframework.boot:spring-boot-starter-data-jpa:2.7.5')
 	implementation('org.springframework.boot:spring-boot-starter-web:2.7.5')
+	implementation('org.springframework.boot:spring-boot-starter-cache:2.7.5')
 
 	implementation('org.springframework.boot:spring-boot-starter-thymeleaf:2.7.5')
 
