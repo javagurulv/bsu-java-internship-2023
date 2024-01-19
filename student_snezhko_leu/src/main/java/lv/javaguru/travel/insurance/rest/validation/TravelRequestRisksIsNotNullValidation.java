@@ -1,7 +1,7 @@
 package lv.javaguru.travel.insurance.rest.validation;
 
 import lv.javaguru.travel.insurance.core.ValidationError;
-import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -31,6 +31,7 @@ public class TravelRequestRisksIsNotNullValidation extends TravelRequestValidati
 */
 
 //        errorFactory = new ValidationErrorFactory();
+
         if (request.getSelected_risks() == null) {
             String errorCode = "ERROR_CODE_8";
             return Optional.of(errorFactory.buildError(errorCode));

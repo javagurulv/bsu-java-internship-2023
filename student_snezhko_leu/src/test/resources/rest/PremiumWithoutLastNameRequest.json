@@ -5,5 +5,7 @@
   "agreementDateTo": "2026-05-29",
   "selected_risks" : [
     "TRAVEL_MEDICAL"
-  ]
+  ],
+  "country" : "SPAIN",
+  "personBirthDate" : "2005-09-03"
 }

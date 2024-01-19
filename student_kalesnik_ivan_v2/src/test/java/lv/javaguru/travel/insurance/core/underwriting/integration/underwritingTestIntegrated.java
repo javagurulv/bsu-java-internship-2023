@@ -41,6 +41,7 @@ public class underwritingTestIntegrated {
                 .personLastName("Pupkin")
                 .personBirthDate(createDate("01.01.2000"))
                 .medicalRiskLimitLevel("LEVEL_20000")
+                .travelCost(BigDecimal.ZERO)
                 .build();
         AgreementDto agreement = new AgreementDto().builder()
                 .agreementDateFrom(createDate("01.01.2030"))
