@@ -65,6 +65,7 @@ class LoadAgreement {
         personDTO.setPersonCode(personEntity.getPerson().getPersonCode());
         personDTO.setPersonBirthDate(personEntity.getPerson().getBirthDate());
         personDTO.setMedicalRiskLimitLevel(personEntity.getMedicalRiskLimitLevel());
+        personDTO.setTravelCost(personEntity.getTravelCost());
     }
 
     private void loadPersonRisks(PersonDto personDTO, AgreementPersonEntity personEntity) {

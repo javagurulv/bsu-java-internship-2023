@@ -152,3 +152,7 @@ CREATE TABLE travel_cancellation_country_safety_rating (
                                                            coefficient NUMERIC(10,2) NOT NULL,
                                                            PRIMARY KEY (id)
 );
+
+ALTER TABLE agreement_persons
+    ADD COLUMN travel_cost DECIMAL(10,2);
+

@@ -5,8 +5,13 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
 
-    <changeSet author="katierevinska" id="46">
-        <dropNotNullConstraint  tableName="person_agreements" columnName="medical_risk_limit_level"
-                                columnDataType="VARCHAR(200)"/>
-    </changeSet>
+
+<changeSet author="javaguru" id="44">
+    <addColumn tableName="agreement_persons">
+        <column name="travel_cost" type="DECIMAL(10,2)">
+            <constraints nullable="true"/>
+        </column>
+    </addColumn>
+</changeSet>
+
 </databaseChangeLog>
