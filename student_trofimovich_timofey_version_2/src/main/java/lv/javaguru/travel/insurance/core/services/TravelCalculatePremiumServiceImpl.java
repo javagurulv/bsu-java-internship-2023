@@ -11,12 +11,15 @@ import lv.javaguru.travel.insurance.core.underwriting.TravelPremiumUnderwriting;
 import lv.javaguru.travel.insurance.core.validations.TravelAgreementValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.List;
+import java.util.UUID;
 
 @Component
+@Transactional
 class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService {
 
     @Autowired
@@ -44,6 +47,7 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
 
         BigDecimal totalAgreementPremium = calculateTotalAgreementPremium(agreement);
         agreement.setAgreementPremium(totalAgreementPremium);
+        agreement.setUuid(UUID.randomUUID().toString());
 
         agreementEntityFactory.createAgreementEntity(agreement);
 

@@ -7,5 +7,7 @@
   [
     "TRAVEL_MEDICAL",
     "TRAVEL_CANCELLATION"
-  ]
+  ],
+  "country" : "SPAIN",
+  "personBirthDate" : "2005-09-03"
 }

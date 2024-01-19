@@ -10,5 +10,7 @@
   "agreementDateFrom": null,
   "agreementDateTo": null,
   "agreementPremium": null,
-  "risks" : null
+  "risks" : null,
+  "country" : null,
+  "personBirthDate" : null
 }

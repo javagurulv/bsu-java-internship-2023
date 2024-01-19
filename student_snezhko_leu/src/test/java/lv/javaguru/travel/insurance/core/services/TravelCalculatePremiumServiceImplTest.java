@@ -94,7 +94,7 @@ TravelCalculatePremiumServiceImplTest {
         List<TravelCalculatePremiumRisk> responseRisks = new ArrayList<>();
         responseRisks.add(new TravelCalculatePremiumRisk(riskName, BigDecimal.valueOf(1)));
 
-        when(riskFactory.buildRisksList(underwriting.getRiskCalculators(), request)).thenReturn(responseRisks);
+        when(riskFactory.buildRisksList(request)).thenReturn(responseRisks);
         //when(underwriting.calculatePremium())
 //        when(request.getSelected_risks()).thenReturn(risks);
         TravelCalculatePremiumResponse response = test.buildResponse(request);
@@ -112,7 +112,7 @@ TravelCalculatePremiumServiceImplTest {
         List<TravelCalculatePremiumRisk> responseRisks = new ArrayList<>();
         responseRisks.add(new TravelCalculatePremiumRisk(riskName, BigDecimal.valueOf(1)));
 
-        when(riskFactory.buildRisksList(underwriting.getRiskCalculators(), request)).thenReturn(responseRisks);
+        when(riskFactory.buildRisksList(request)).thenReturn(responseRisks);
 
         TravelCalculatePremiumResponse response = test.buildResponse(request);
         assertEquals(response.getPersonLastName(), "LastName");
@@ -129,7 +129,7 @@ TravelCalculatePremiumServiceImplTest {
         List<TravelCalculatePremiumRisk> responseRisks = new ArrayList<>();
         responseRisks.add(new TravelCalculatePremiumRisk(riskName, BigDecimal.valueOf(1)));
 
-        when(riskFactory.buildRisksList(underwriting.getRiskCalculators(), request)).thenReturn(responseRisks);
+        when(riskFactory.buildRisksList(request)).thenReturn(responseRisks);
 
         //when(validator.validate(request)).thenReturn(List.of());
         TravelCalculatePremiumResponse response = test.buildResponse(request);
@@ -147,7 +147,7 @@ TravelCalculatePremiumServiceImplTest {
         List<TravelCalculatePremiumRisk> responseRisks = new ArrayList<>();
         responseRisks.add(new TravelCalculatePremiumRisk(riskName, BigDecimal.valueOf(1)));
 
-        when(riskFactory.buildRisksList(underwriting.getRiskCalculators(), request)).thenReturn(responseRisks);
+        when(riskFactory.buildRisksList(request)).thenReturn(responseRisks);
         //when(validator.validate(request)).thenReturn(List.of());
         TravelCalculatePremiumResponse response = test.buildResponse(request);
         assertEquals(response.getAgreementDateTo(), new Date(2000));

@@ -1,5 +1,4 @@
 {
-  "errors": null,
   "agreementDateFrom": "2025-05-25",
   "agreementDateTo": "2025-05-29",
   "country": "SPAIN",
@@ -33,5 +32,6 @@
       "medicalRiskLimitLevel": "LEVEL_15000"
     }
   ],
-  "agreementPremium": 29.00
+  "agreementPremium": 29.00,
+  "uuid": ""
 }
