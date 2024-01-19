@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.core.underwriting.calculators;
+package lv.javaguru.travel.insurance.core.underwriting.calculators.medical;
 
 import lv.javaguru.travel.insurance.core.repositories.AgeCoefficientRepository;
 import lv.javaguru.travel.insurance.core.repositories.CountryDefaultDayRateRepository;
@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Date;
 
 import static lv.javaguru.travel.insurance.core.util.DateTimeUtil.findAge;
@@ -23,7 +24,7 @@ public class TravelRiskPremiumCalculatorMedical implements TravelRiskPremiumCalc
 
     @Override
     public BigDecimal calculatePremium(TravelCalculatePremiumRequest request) {
-        return  BigDecimal.valueOf(
+        BigDecimal result = BigDecimal.valueOf(
                 cddrRepository.findByCountryIc(
                         request.getCountry()).get().getCountryDefaultDayRate()
                 * findDiffBetweenTwoDate(request.getAgreementDateTo(), request.getAgreementDateFrom())
@@ -33,7 +34,8 @@ public class TravelRiskPremiumCalculatorMedical implements TravelRiskPremiumCalc
                         )
                         .get()
                         .getCoefficient()
-        );
+        );//.setScale(2, RoundingMode.HALF_UP);
+        return result;
                                 //.get().getCountryDefaultDayRate()), findDiffBetweenTwoDate(request.getAgreementDateTo(), request.getAgreementDateFrom()));
     }
 

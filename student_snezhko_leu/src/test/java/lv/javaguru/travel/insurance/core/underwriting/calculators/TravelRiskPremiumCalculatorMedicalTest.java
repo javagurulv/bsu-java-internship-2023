@@ -4,24 +4,22 @@ import lv.javaguru.travel.insurance.core.domain.AgeCoefficient;
 import lv.javaguru.travel.insurance.core.domain.CountryDefaultDayRate;
 import lv.javaguru.travel.insurance.core.repositories.AgeCoefficientRepository;
 import lv.javaguru.travel.insurance.core.repositories.CountryDefaultDayRateRepository;
-import lv.javaguru.travel.insurance.core.underwriting.TravelRiskPremiumCalculator;
+import lv.javaguru.travel.insurance.core.underwriting.calculators.medical.TravelRiskPremiumCalculatorMedical;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.stereotype.Component;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static lv.javaguru.travel.insurance.core.util.DateTimeUtil.findDiffBetweenTwoDate;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -60,13 +58,13 @@ public class TravelRiskPremiumCalculatorMedicalTest {
     @Test
     public void calculatePremiumForMedicalRiskLatviaTest() {
         init("LATVIA", 1.00d, 18);
-        assertEquals(calculator.calculatePremium(request), BigDecimal.valueOf(1.1));
+        assertEquals(BigDecimal.valueOf(1.10), calculator.calculatePremium(request));
     }
 
     @Test
     public void calculatePremiumForMedicalRiskSpainTest() {
         init("SPAIN", 2.50d, 18);
-        assertEquals(calculator.calculatePremium(request), BigDecimal.valueOf(2.75));
+        assertEquals(BigDecimal.valueOf(2.75), calculator.calculatePremium(request));
     }
 
     @Test
