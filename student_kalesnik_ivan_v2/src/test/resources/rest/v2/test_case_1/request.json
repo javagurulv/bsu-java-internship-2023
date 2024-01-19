@@ -2,21 +2,23 @@
   "agreementDateFrom" : "2025-05-25",
   "agreementDateTo" : "2025-05-29",
   "country" : "SPAIN",
-  "selected_risks":["TRAVEL_MEDICAL"],
+  "selected_risks":["TRAVEL_MEDICAL", "TRAVEL_CANCELLATION"],
   "persons" : [
     {
       "personFirstName" : "Vasja",
       "personLastName" : "Pupkin",
       "personCode" : "123",
       "personBirthDate" : "2000-05-29",
-      "medicalRiskLimitLevel" : "LEVEL_10000"
+      "medicalRiskLimitLevel" : "LEVEL_10000",
+      "travelCost" : 100
     },
     {
       "personFirstName" : "Petja",
       "personLastName" : "Pupkin",
       "personCode" : "123",
       "personBirthDate" : "1950-02-29",
-      "medicalRiskLimitLevel" : "LEVEL_10000"
+      "medicalRiskLimitLevel" : "LEVEL_10000",
+      "travelCost" : 100
     }
   ]
 }
