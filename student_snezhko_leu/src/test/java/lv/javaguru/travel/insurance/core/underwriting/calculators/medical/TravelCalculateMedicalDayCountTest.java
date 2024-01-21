@@ -5,7 +5,7 @@ import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
-import java.util.Date;
+import java.sql.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
@@ -24,12 +24,12 @@ public class TravelCalculateMedicalDayCountTest {
     private void init(int dayCount) {
         request = mock(TravelCalculatePremiumRequest.class);
 
-        Date dateTo = new Date();
-        Date dateFrom = new Date(dateTo.getYear(), dateTo.getMonth(), dateTo.getDay() - dayCount);
+        //Date dateTo = new Date();
+        //Date dateFrom = new Date(dateTo.getYear(), dateTo.getMonth(), dateTo.getDay() - dayCount);
         //dateFrom.setDate(dateFrom.getDay() - dayCount);
 
 
-        when(request.getAgreementDateTo()).thenReturn(dateTo);
-        when(request.getAgreementDateFrom()).thenReturn(dateFrom);
+        when(request.getAgreementDateTo()).thenReturn(Date.valueOf("2030-05-05"));
+        when(request.getAgreementDateFrom()).thenReturn(Date.valueOf("2030-05-02"));
     }
 }
