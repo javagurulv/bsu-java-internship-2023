@@ -17,6 +17,7 @@ import org.springframework.stereotype.Component;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 @Getter
@@ -42,7 +43,13 @@ public class TravelGetAgreementResponse extends CoreResponse {
     @JsonAlias("persons")
     private List<PersonResponseDTO> persons;
 
+    private Optional<ValidationError> error;
+
     public TravelGetAgreementResponse(List<ValidationError> errors) {
         super(errors);
+    }
+
+    public TravelGetAgreementResponse(Optional<ValidationError> error) {
+        this.error = error;
     }
 }

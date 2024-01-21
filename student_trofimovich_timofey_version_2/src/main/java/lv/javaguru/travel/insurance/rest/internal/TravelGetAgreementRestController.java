@@ -1,6 +1,10 @@
 package lv.javaguru.travel.insurance.rest.internal;
 
 import com.google.common.base.Stopwatch;
+import lv.javaguru.travel.insurance.core.api.command.get.agreement.TravelGetAgreementCoreCommand;
+import lv.javaguru.travel.insurance.core.api.command.get.agreement.TravelGetAgreementCoreResult;
+import lv.javaguru.travel.insurance.core.services.get.agreement.TravelGetAgreementService;
+import lv.javaguru.travel.insurance.dto.internal.DTOGetAgreementConverter;
 import lv.javaguru.travel.insurance.dto.internal.TravelGetAgreementResponse;
 import lv.javaguru.travel.insurance.rest.common.TravelCalculatePremiumRequestExecutionTimeLogger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +25,10 @@ public class TravelGetAgreementRestController {
     private TravelGetAgreementResponseLogger responseLogger;
     @Autowired
     private TravelCalculatePremiumRequestExecutionTimeLogger timeLogger;
+    @Autowired
+    private TravelGetAgreementService service;
+    @Autowired
+    private DTOGetAgreementConverter converter;
 
     @GetMapping(value = "/{uuid}", produces = "application/json")
     public TravelGetAgreementResponse getAgreement(@PathVariable String uuid) {
@@ -32,11 +40,9 @@ public class TravelGetAgreementRestController {
 
     private TravelGetAgreementResponse processRequest(String uuid) {
         requestLogger.log(uuid);
-        TravelGetAgreementResponse response = new TravelGetAgreementResponse();
-        response.setAgreementDateFrom(new Date());
-        response.setAgreementDateTo(new Date());
-        response.setUuid(uuid);
-
+        TravelGetAgreementCoreCommand coreCommand = new TravelGetAgreementCoreCommand(uuid);
+        TravelGetAgreementCoreResult coreResult = service.getAgreement(coreCommand);
+        TravelGetAgreementResponse response = converter.buildResponse(coreResult);
         responseLogger.log(response);
         return response;
     }
