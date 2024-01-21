@@ -25,7 +25,7 @@ import java.util.List;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class TravelGetPolicyResponse extends CoreResponse {
     private String uuid;
-    @JsonAlias("travel_ñost")
+    @JsonAlias("travel_cost")
     private BigDecimal travelCost;
     @JsonFormat(pattern = "yyyy-MM-dd")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
