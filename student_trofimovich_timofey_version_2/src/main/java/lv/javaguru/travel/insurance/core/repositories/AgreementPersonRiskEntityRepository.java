@@ -15,5 +15,6 @@ public interface AgreementPersonRiskEntityRepository extends JpaRepository<Agree
     and ape.person.firstName = :firstName
     and ape.person.lastName = :lastName
     """)
-    List<AgreementPersonRiskEntity> findByAgreementPersonEntity_Id(String personCode, String firstName, String lastName);
+    List<AgreementPersonRiskEntity> findByPersonUniqueInfo(String personCode, String firstName, String lastName);
+
 }

@@ -14,9 +14,7 @@ import lv.javaguru.travel.insurance.core.repositories.AgreementEntityRepository;
 import lv.javaguru.travel.insurance.core.repositories.AgreementPersonEntityRepository;
 import lv.javaguru.travel.insurance.core.repositories.AgreementPersonRiskEntityRepository;
 import lv.javaguru.travel.insurance.core.validations.get.agreement.TravelGetAgreementUuidValidator;
-import lv.javaguru.travel.insurance.dto.ValidationError;
-import lv.javaguru.travel.insurance.dto.common.PersonDTOConverter;
-import lv.javaguru.travel.insurance.dto.internal.DTOGetAgreementConverter;
+import lv.javaguru.travel.insurance.dto.common.EntitiesToDtoConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -34,22 +32,27 @@ public class TravelGetAgreementServiceImpl implements TravelGetAgreementService 
     private AgreementPersonRiskEntityRepository agreementPersonRiskEntityRepository;
     @Autowired
     private TravelGetAgreementUuidValidator validator;
+    @Autowired
+    private EntitiesToDtoConverter converter;
 
     @Override
     public TravelGetAgreementCoreResult getAgreement(TravelGetAgreementCoreCommand command) {
         Optional<ValidationErrorDTO> error = validator.validate(command.getUuid());
-        return error.isEmpty() ?
-                buildCoreResult(agreementEntityRepository.findByUuid(command.getUuid()).get())
-                : buildEmptyCoreResult(error.get());
+        return error.map(this::buildEmptyCoreResult)
+                .orElseGet(() -> buildCoreResult(findAgreementEntityInRepository(command)));
+    }
+
+    private AgreementEntity findAgreementEntityInRepository(TravelGetAgreementCoreCommand command) {
+        return agreementEntityRepository.findByUuid(command.getUuid()).get();
     }
 
     private TravelGetAgreementCoreResult buildEmptyCoreResult(ValidationErrorDTO error) {
-        return new TravelGetAgreementCoreResult(error);
+        return new TravelGetAgreementCoreResult(Optional.of(error));
     }
 
     private TravelGetAgreementCoreResult buildCoreResult(AgreementEntity agreementEntity) {
         TravelGetAgreementCoreResult result = new TravelGetAgreementCoreResult();
-        AgreementDTO agreementDTO = transformAgreementEntity(agreementEntity);
+        AgreementDTO agreementDTO = converter.transformAgreementEntity(agreementEntity);
         findPersonsForAgreement(agreementDTO);
         result.setAgreement(agreementDTO);
         result.setError(Optional.empty());
@@ -59,7 +62,7 @@ public class TravelGetAgreementServiceImpl implements TravelGetAgreementService 
     private void findPersonsForAgreement(AgreementDTO agreementDTO) {
         List<AgreementPersonEntity> agreementPersonEntities = agreementPersonEntityRepository.findByAgreement_Uuid(agreementDTO.getUuid());
         List<PersonEntity> personEntities = agreementPersonEntities.stream().map(AgreementPersonEntity::getPerson).toList();
-        List<PersonDTO> personDTOS = personEntities.stream().map(this::transformPersonEntity).toList();
+        List<PersonDTO> personDTOS = personEntities.stream().map(converter::transformPersonEntity).toList();
         addMedicalRiskLimitLevel(personDTOS, agreementPersonEntities);
         addPersonRisks(personDTOS);
         agreementDTO.setPersons(personDTOS);
@@ -68,18 +71,13 @@ public class TravelGetAgreementServiceImpl implements TravelGetAgreementService 
     private void addPersonRisks(List<PersonDTO> personDTOS) {
         personDTOS.forEach(personDTO -> {
             List<AgreementPersonRiskEntity> agreementPersonRiskEntities = agreementPersonRiskEntityRepository
-                    .findByAgreementPersonEntity_Id(personDTO.getPersonUUID(), personDTO.getPersonFirstName(), personDTO.getPersonLastName());
-            List<RiskDTO> riskDTOS = agreementPersonRiskEntities.stream().map(this::transformRiskEntity).toList();
+                    .findByPersonUniqueInfo(personDTO.getPersonUUID(), personDTO.getPersonFirstName(), personDTO.getPersonLastName());
+            List<RiskDTO> riskDTOS = agreementPersonRiskEntities.stream().map(converter::transformRiskEntity).toList();
             personDTO.setSelectedRisks(riskDTOS);
         });
     }
 
-    private RiskDTO transformRiskEntity(AgreementPersonRiskEntity agreementPersonRiskEntity) {
-        RiskDTO riskDTO = new RiskDTO();
-        riskDTO.setPremium(agreementPersonRiskEntity.getPremium());
-        riskDTO.setRiskIc(agreementPersonRiskEntity.getRiskIc());
-        return riskDTO;
-    }
+
 
     private void addMedicalRiskLimitLevel(List<PersonDTO> personDTOS, List<AgreementPersonEntity> agreementPersonEntities) {
         for (int i = 0; i < personDTOS.size(); i++) {
@@ -87,22 +85,5 @@ public class TravelGetAgreementServiceImpl implements TravelGetAgreementService 
         }
     }
 
-    private PersonDTO transformPersonEntity(PersonEntity personEntity) {
-        PersonDTO personDTO = new PersonDTO();
-        personDTO.setPersonUUID(personEntity.getPersonCode());
-        personDTO.setPersonFirstName(personEntity.getFirstName());
-        personDTO.setPersonLastName(personEntity.getLastName());
-        personDTO.setPersonBirthDate(personEntity.getBirthDate());
-        return personDTO;
-    }
 
-    private AgreementDTO transformAgreementEntity(AgreementEntity agreementEntity) {
-        AgreementDTO agreementDTO = new AgreementDTO();
-        agreementDTO.setAgreementDateFrom(agreementEntity.getAgreementDateFrom());
-        agreementDTO.setAgreementDateTo(agreementEntity.getAgreementDateTo());
-        agreementDTO.setAgreementPremium(agreementEntity.getAgreementPremium());
-        agreementDTO.setUuid(agreementEntity.getUuid());
-        agreementDTO.setCountry(agreementEntity.getCountry());
-        return agreementDTO;
-    }
 }

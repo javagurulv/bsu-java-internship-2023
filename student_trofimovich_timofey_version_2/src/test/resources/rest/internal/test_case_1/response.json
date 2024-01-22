@@ -1,0 +1,27 @@
+{
+  "uuid": "eb03153f-c1f4-4b1f-a147-82da3e9362cb",
+  "agreementDateFrom": "2024-01-21",
+  "agreementDateTo": "2024-01-30",
+  "country": "SPAIN",
+  "agreementPremium": 37.13,
+  "persons": [
+    {
+      "personUUID": "1",
+      "personFirstName": "TSIMAFEI",
+      "personLastName": "TRAFIMOVICH",
+      "personBirthDate": "2023-12-31",
+      "personPremium": 37.13,
+      "personRisks": [
+        {
+          "ic": "TRAVEL_MEDICAL",
+          "premium": 37.13
+        },
+        {
+          "ic": "TRAVEL_EVACUATION",
+          "premium": 0.00
+        }
+      ],
+      "medicalRiskLimitLevel": "LEVEL_20000"
+    }
+  ]
+}

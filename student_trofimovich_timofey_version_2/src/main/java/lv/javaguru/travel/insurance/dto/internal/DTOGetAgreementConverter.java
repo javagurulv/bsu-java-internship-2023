@@ -45,7 +45,7 @@ public class DTOGetAgreementConverter {
         response.setAgreementPremium(agreementDTO.getAgreementPremium());
 
         List<PersonResponseDTO> persons = agreementDTO.getPersons().stream()
-                .map(personDTOConverter::buildPersonFromResponse)
+                .map(personDTOConverter::buildPersonResponse)
                 .toList();
         response.setPersons(persons);
 

@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 
 @Component
 public class PersonDTOConverter {
-    public PersonResponseDTO buildPersonFromResponse(PersonDTO personDTO) {
+    public PersonResponseDTO buildPersonResponse(PersonDTO personDTO) {
         PersonResponseDTO personResponseDTO = new PersonResponseDTO();
         personResponseDTO.setPersonUUID(personDTO.getPersonUUID());
         personResponseDTO.setPersonFirstName(personDTO.getPersonFirstName());

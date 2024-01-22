@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import lv.javaguru.travel.insurance.core.api.dto.agreement.AgreementDTO;
-import lv.javaguru.travel.insurance.dto.ValidationError;
 
 import java.util.Optional;
 
@@ -20,8 +19,8 @@ public class TravelGetAgreementCoreResult {
     private AgreementDTO agreement;
     private Optional<ValidationErrorDTO> error;
 
-    public TravelGetAgreementCoreResult(ValidationErrorDTO error) {
-        this.error = Optional.of(error);
+    public TravelGetAgreementCoreResult(Optional<ValidationErrorDTO> error) {
+        this.error = error;
     }
 
     public  boolean hasError() {
