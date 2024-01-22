@@ -94,6 +94,9 @@ ADD uuid VARCHAR(200) NOT NULL;
 CREATE UNIQUE INDEX ix_unique_agreements_uuid
 ON agreements(uuid);
 
+CREATE UNIQUE INDEX ix_agreements_uuid
+    ON agreements(uuid);
+
 
 CREATE TABLE selected_risks
 (

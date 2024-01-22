@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
+
+    <changeSet id="22" author="Timofey">
+        <createTable tableName="agreements">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="date_from" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_to" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="country" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="premium" type="decimal(10,2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="uuid" type="varchar(100)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="23" author="Timofey">
+        <createIndex tableName="agreements"
+                     indexName="ix_unique_agreements_id"
+                     unique="true">
+            <column name="id"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet id="24" author="Timofey">
+        <createIndex tableName="agreements"
+                     indexName="ix_unique_agreements_uuid"
+                     unique="true">
+            <column name="uuid"/>
+        </createIndex>
+    </changeSet>
+
+</databaseChangeLog>
