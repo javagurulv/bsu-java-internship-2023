@@ -4,15 +4,12 @@ import lv.javaguru.travel.insurance.core.api.command.calculate.premium.TravelCal
 import lv.javaguru.travel.insurance.core.api.command.calculate.premium.TravelCalculatePremiumCoreResult;
 import lv.javaguru.travel.insurance.core.api.dto.agreement.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.person.PersonDTO;
-import lv.javaguru.travel.insurance.core.api.dto.risk.RiskDTO;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
-import lv.javaguru.travel.insurance.dto.RiskPremium;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import lv.javaguru.travel.insurance.dto.common.PersonDTOConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 @Component
@@ -33,7 +30,7 @@ public class DTOV2Converter {
         response.setUuid(agreement.getUuid());
 
         List<PersonResponseDTO> persons = agreement.getPersons().stream()
-                .map(personDTOConverter::buildPersonFromResponse)
+                .map(personDTOConverter::buildPersonResponse)
                 .toList();
         response.setPersons(persons);
         return response;
