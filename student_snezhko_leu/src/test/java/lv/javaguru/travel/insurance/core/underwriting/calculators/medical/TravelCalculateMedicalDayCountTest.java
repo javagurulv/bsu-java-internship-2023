@@ -18,10 +18,10 @@ public class TravelCalculateMedicalDayCountTest {
 
     @Test
     public void calculatorMedicalDayCountTest() {
-        init(3);
+        init();
         assertEquals(3, calculator.calculatePremium(request));
     }
-    private void init(int dayCount) {
+    private void init() {
         request = mock(TravelCalculatePremiumRequest.class);
 
         //Date dateTo = new Date();
