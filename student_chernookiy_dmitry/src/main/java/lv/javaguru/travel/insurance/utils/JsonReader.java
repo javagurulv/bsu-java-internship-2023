@@ -23,9 +23,12 @@ public class JsonReader {
                 throw new RuntimeException(e);
             }
         }
-
         return resultJson.toString();
+    }
 
+    public static String convertObjectToJson(Object object) throws JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        return objectMapper.writeValueAsString(object);
     }
 
     public static boolean compareJsonString(String json1, String json2) throws JsonProcessingException {
