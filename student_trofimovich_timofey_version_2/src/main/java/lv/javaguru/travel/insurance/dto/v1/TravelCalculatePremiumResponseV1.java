@@ -1,6 +1,7 @@
 package lv.javaguru.travel.insurance.dto.v1;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,7 +20,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class TravelCalculatePremiumResponseV1 extends CoreResponse {
 
     private String personUUID;
@@ -45,6 +46,8 @@ public class TravelCalculatePremiumResponseV1 extends CoreResponse {
     private String country;
 
     private String medicalRiskLimitLevel;
+
+    private String uuid;
 
     public TravelCalculatePremiumResponseV1(List<ValidationError> errors) {
         super(errors);

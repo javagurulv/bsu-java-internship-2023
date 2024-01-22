@@ -8,5 +8,7 @@
     "TRAVEL_MEDICAL",
     "TRAVEL_CANCELLATION"
   ],
-  "country" : "SPAIN"
+  "country" : "SPAIN",
+  "personBirthDate" : "2005-09-03",
+  "medicalRiskLimitLevel" : "LEVEL_10000"
 }

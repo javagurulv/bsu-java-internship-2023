@@ -73,6 +73,11 @@
                         <input type="text" id="persons[${index}].medicalRiskLimitLevel" name="persons[${index}].medicalRiskLimitLevel" />
                     </div>
                     <br>
+                    <div>
+                        <label for="persons[${index}].travelCost">Travel Cost:</label>
+                        <input type="text" id="persons[${index}].travelCost" name="persons[${index}].travelCost" />
+                    </div>
+                    <br>
                 </div>`;
             personsContainer.insertAdjacentHTML('beforeend', personTemplate);
         }
@@ -138,6 +143,11 @@
                 <div>
                     <label for="medicalRiskLimitLevel">Medical Risk Limit Level:</label>
                     <input type="text" th:field="*{persons[__${personStat.index}__].medicalRiskLimitLevel}" />
+                </div>
+                </br>
+                <div>
+                    <label for="travelCost">Travel Cost:</label>
+                    <input type="text" th:field="*{persons[__${personStat.index}__].travelCost}" />
                 </div>
                 </br>
             </div>

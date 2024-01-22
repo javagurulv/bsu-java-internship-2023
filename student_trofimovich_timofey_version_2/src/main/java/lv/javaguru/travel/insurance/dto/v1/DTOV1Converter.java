@@ -1,7 +1,7 @@
 package lv.javaguru.travel.insurance.dto.v1;
 
-import lv.javaguru.travel.insurance.core.api.command.TravelCalculatePremiumCoreCommand;
-import lv.javaguru.travel.insurance.core.api.command.TravelCalculatePremiumCoreResult;
+import lv.javaguru.travel.insurance.core.api.command.calculate.premium.TravelCalculatePremiumCoreCommand;
+import lv.javaguru.travel.insurance.core.api.command.calculate.premium.TravelCalculatePremiumCoreResult;
 import lv.javaguru.travel.insurance.core.api.dto.agreement.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.person.PersonDTO;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
@@ -28,6 +28,7 @@ public class DTOV1Converter {
         response.setDateOfBirth(agreement.getPersons().get(0).getPersonBirthDate());
         response.setCountry(agreement.getCountry());
         response.setAgreementPremium(agreement.getAgreementPremium());
+        response.setUuid(agreement.getUuid());
         response.setMedicalRiskLimitLevel(agreement.getPersons().get(0).getMedicalRiskLimitLevel());
         List<RiskPremium> risks = agreement.getPersons().get(0).getSelectedRisks().stream()
                 .map(risk -> new RiskPremium(risk.getRiskIc(), risk.getPremium()))

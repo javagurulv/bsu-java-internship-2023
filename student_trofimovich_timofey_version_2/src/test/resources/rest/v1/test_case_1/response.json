@@ -1,6 +1,5 @@
 {
-  "errors": null,
-  "personUUID" : "1212",
+  "personUUID": "1212",
   "personFirstName": "Harry",
   "personLastName": "Kane",
   "dateOfBirth": "2004-03-02",
@@ -14,5 +13,6 @@
     }
   ],
   "country": "SPAIN",
-  "medicalRiskLimitLevel": "LEVEL_10000"
+  "medicalRiskLimitLevel": "LEVEL_10000",
+  "uuid":""
 }

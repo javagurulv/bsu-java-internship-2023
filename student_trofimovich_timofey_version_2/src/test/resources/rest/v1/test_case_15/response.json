@@ -4,16 +4,5 @@
       "errorCode": "ERROR_CODE_9",
       "description": "Selected risk my_risk is not supported by the system!"
     }
-  ],
-  "personUUID" : null,
-  "personFirstName": null,
-  "personLastName": null,
-  "dateOfBirth": null,
-  "agreementDateFrom": null,
-  "agreementDateTo": null,
-  "agreementPremium": null,
-  "risks": null,
-  "country": null,
-  "medicalRiskLimitLevel": null
-
+  ]
 }

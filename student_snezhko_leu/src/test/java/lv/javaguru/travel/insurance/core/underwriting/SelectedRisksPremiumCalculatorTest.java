@@ -1,6 +1,6 @@
 package lv.javaguru.travel.insurance.core.underwriting;
 
-import lv.javaguru.travel.insurance.core.underwriting.calculators.TravelRiskPremiumCalculatorMedical;
+import lv.javaguru.travel.insurance.core.underwriting.calculators.medical.TravelRiskPremiumCalculatorMedical;
 import lv.javaguru.travel.insurance.core.underwriting.calculators.TravelRiskPremiumCalculatorSportActivities;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRisk;

@@ -1,20 +1,20 @@
 {
   "errors": [
     {
+      "field": "agreementDateFrom",
+      "message": "Must not be empty!"
+    },
+    {
+      "field": "agreementDateTo",
+      "message": "Must not be empty!"
+    },
+    {
       "field": "personFirstName",
       "message": "Must not be empty!"
     },
     {
       "field": "personLastName",
       "message": "Must not be empty!"
-    },
-    {
-      "field": "DateFrom",
-      "message": "Must not be empty!"
-    },
-    {
-      "field": "DateTo",
-      "message": "Must not be empty and more than DateFrom!"
     }
   ],
   "personFirstName": null,

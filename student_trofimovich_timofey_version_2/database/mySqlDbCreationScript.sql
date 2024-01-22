@@ -6,69 +6,65 @@ SET @OLD_SQL_MODE = @@SQL_MODE, SQL_MODE = 'TRADITIONAL,ALLOW_INVALID_DATES';
 CREATE SCHEMA IF NOT EXISTS `java-real-practice-insurance` DEFAULT CHARACTER SET utf8;
 USE `java-real-practice-insurance`;
 
-CREATE TABLE IF NOT EXISTS `classifiers`
-(
-    `id`          BIGINT       NOT NULL AUTO_INCREMENT,
-    `title`       VARCHAR(200) NOT NULL,
-    `description` VARCHAR(100) NOT NULL,
-    PRIMARY KEY (`id`)
-    )
-    ENGINE = InnoDB
-    AUTO_INCREMENT = 1002;
 
-CREATE UNIQUE INDEX `ix_classifiers_title` ON `classifiers` (`title`);
+CREATE TABLE classifiers (
+                             id BIGINT NOT NULL AUTO_INCREMENT,
+                             title VARCHAR(200) NOT NULL,
+                             description VARCHAR(100) NOT NULL,
+                             PRIMARY KEY (id)
+);
 
-CREATE TABLE IF NOT EXISTS `classifier_values`
+CREATE UNIQUE INDEX ix_classifiers_title ON classifiers(title);
+
+CREATE TABLE classifier_values (
+                                   id BIGINT NOT NULL AUTO_INCREMENT,
+                                   classifier_id BIGINT NOT NULL,
+                                   ic VARCHAR(200) NOT NULL,
+                                   description VARCHAR(500) NOT NULL,
+                                   PRIMARY KEY (id)
+);
+
+ALTER TABLE classifier_values
+    ADD FOREIGN KEY (classifier_id) REFERENCES classifiers(id);
+
+CREATE UNIQUE INDEX ix_classifier_values_ic
+    ON classifier_values(ic);
+
+CREATE TABLE country_default_day_rate
 (
-    `id`            BIGINT       NOT NULL AUTO_INCREMENT,
-    `classifier_id` BIGINT       NOT NULL,
-    `ic`            VARCHAR(200) NOT NULL,
-    `description`   VARCHAR(500) NOT NULL,
+    id                       BIGINT       NOT NULL AUTO_INCREMENT,
+    country_ic               VARCHAR(200) NOT NULL,
+    country_default_day_rate DECIMAL(10,2) NOT NULL,
     PRIMARY KEY (id)
-    )
-    ENGINE = InnoDB
-    AUTO_INCREMENT = 1002;
-
-ALTER TABLE `classifier_values`
-    ADD FOREIGN KEY (`classifier_id`) REFERENCES `classifiers` (`id`);
-
-CREATE UNIQUE INDEX `ix_classifier_values_ic`
-    ON `classifier_values` (`ic`);
+);
 
 
-CREATE TABLE IF NOT EXISTS `country_default_day_rate`
+CREATE UNIQUE INDEX ix_country_default_day_rate
+    ON country_default_day_rate (country_ic);
+
+CREATE TABLE age_coefficient
 (
-    `id`                       BIGINT         NOT NULL AUTO_INCREMENT,
-    `country_ic`               VARCHAR(200)   NOT NULL,
-    `country_default_day_rate` DECIMAL(10, 2) NOT NULL,
-    PRIMARY KEY ('id')
-    );
-
-
-CREATE UNIQUE INDEX `ix_country_default_day_rate`
-    ON `country_default_day_rate` (`country_ic`);
-
-
-CREATE TABLE IF NOT EXISTS `age_coefficient`
-(
-    `id`          BIGINT         NOT NULL AUTO_INCREMENT,
-    `age_from`    INT            NOT NULL,
-    `age_to`      INT            NOT NULL,
-    'coefficient' DECIMAL(10, 2) NOT NULL,
-    PRIMARY KEY ('id')
-    );
-
-CREATE TABLE IF NOT EXISTS `medical_risk_limit_level`
-(
-    `id`                          BIGINT         NOT NULL AUTO_INCREMENT,
-    `medical_risk_limit_level_ic` VARCHAR(200)   NOT NULL,
-    `coefficient`                 DECIMAL(10, 2) NOT NULL,
+    id         BIGINT         NOT NULL AUTO_INCREMENT,
+    age_from    INT            NOT NULL,
+    age_to      INT            NOT NULL,
+    coefficient DECIMAL(10, 2) NOT NULL,
     PRIMARY KEY (id)
-    );
+);
+
+CREATE INDEX ix_age_coefficient_age_from_age_to
+    ON age_coefficient(age_from, age_to);
+
+CREATE TABLE medical_risk_limit_level
+(
+    id                          BIGINT         NOT NULL AUTO_INCREMENT,
+    medical_risk_limit_level_ic VARCHAR(200)   NOT NULL,
+    coefficient                 DECIMAL(10, 2) NOT NULL,
+    PRIMARY KEY (id)
+);
 
 
-CREATE UNIQUE INDEX `ix_medical_risk_limit_level`
-    ON `medical_risk_limit_level` (`medical_risk_limit_level_ic`);
+CREATE UNIQUE INDEX ix_medical_risk_limit_level
+    ON `medical_risk_limit_level` (medical_risk_limit_level_ic);
 
 CREATE TABLE persons
 (
@@ -76,7 +72,7 @@ CREATE TABLE persons
     first_name VARCHAR(200) NOT NULL,
     last_name VARCHAR(200) NOT NULL,
     person_code VARCHAR(200) NOT NULL,
-    birth_date DATE NOT NULL ,
+    birth_date TIMESTAMP NOT NULL ,
     PRIMARY KEY (id)
 );
 
@@ -85,12 +81,21 @@ CREATE UNIQUE INDEX ix_unique_persons on persons(first_name, last_name, person_c
 CREATE TABLE agreements
 (
     id BIGINT NOT NULL AUTO_INCREMENT,
-    date_from DATE NOT NULL ,
-    date_to DATE NOT NULL ,
+    date_from TIMESTAMP NOT NULL ,
+    date_to TIMESTAMP NOT NULL ,
     country VARCHAR(100) NOT NULL ,
     premium DECIMAL(10, 2) NOT NULL ,
     PRIMARY KEY (id)
 );
+
+ALTER TABLE agreements
+ADD uuid VARCHAR(200) NOT NULL;
+
+CREATE UNIQUE INDEX ix_unique_agreements_uuid
+ON agreements(uuid);
+
+CREATE UNIQUE INDEX ix_agreements_uuid
+    ON agreements(uuid);
 
 
 CREATE TABLE selected_risks
@@ -101,10 +106,6 @@ CREATE TABLE selected_risks
     PRIMARY KEY (id),
     FOREIGN KEY (agreement_id) REFERENCES agreements(id)
 );
-
-CREATE UNIQUE INDEX ix_selected_risks_agreement_id_risk_ic
-    ON selected_risks(agreement_id, risk_ic);
-
 
 CREATE TABLE agreement_persons
 (
@@ -117,10 +118,6 @@ CREATE TABLE agreement_persons
     FOREIGN KEY (person_id) REFERENCES persons(id)
 );
 
-
-CREATE UNIQUE INDEX ix_agreement_persons_agreement_id_person_id
-    ON agreement_persons(agreement_id, person_id);
-
 CREATE TABLE agreement_person_risks
 (
     id BIGINT NOT NULL AUTO_INCREMENT,
@@ -130,10 +127,6 @@ CREATE TABLE agreement_person_risks
     PRIMARY KEY (id),
     FOREIGN KEY (agreement_person_id) REFERENCES agreement_persons(id)
 );
-
-
-CREATE UNIQUE INDEX ix_agreement_person_risks_agreement_person_id_risk_ic
-    ON agreement_person_risks(agreement_person_id, risk_ic);
 
 
 SET SQL_MODE = @OLD_SQL_MODE;
