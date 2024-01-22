@@ -84,6 +84,9 @@ CREATE TABLE agreements
 CREATE UNIQUE INDEX ix_unique_agreements_id
 ON agreements(id);
 
+CREATE UNIQUE INDEX ix_agreements_uuid
+ON agreements(uuid);
+
 
 CREATE TABLE selected_risks
 (
