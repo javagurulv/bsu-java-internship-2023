@@ -1,8 +1,8 @@
 package lv.javaguru.travel.insurance.core.underwriting.calculators.medical;
 
 import lv.javaguru.travel.insurance.core.api.dto.person.PersonDTO;
-import lv.javaguru.travel.insurance.core.domain.AgeCoefficient;
-import lv.javaguru.travel.insurance.core.repositories.AgeCoefficientRepository;
+import lv.javaguru.travel.insurance.core.domain.TMAgeCoefficient;
+import lv.javaguru.travel.insurance.core.repositories.TMAgeCoefficientRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,9 +20,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class AgeCoefficientCalculatorTest {
+public class TMAgeCoefficientCalculatorTest {
     @Mock
-    private AgeCoefficientRepository repository;
+    private TMAgeCoefficientRepository repository;
     @InjectMocks
     private AgeCoefficientCalculator ageCoefficientCalculator;
     private PersonDTO person;
@@ -46,9 +46,9 @@ public class AgeCoefficientCalculatorTest {
         int age = 0;
         ReflectionTestUtils.setField(ageCoefficientCalculator, "ageCoefficientEnabled", true);
         when(person.getPersonBirthDate()).thenReturn(new Date());
-        AgeCoefficient ageCoefficient = mock(AgeCoefficient.class);
-        when(ageCoefficient.getCoefficient()).thenReturn(expectedCoefficient);
-        when(repository.findCoefficient(age)).thenReturn(Optional.of(ageCoefficient));
+        TMAgeCoefficient TMAgeCoefficient = mock(TMAgeCoefficient.class);
+        when(TMAgeCoefficient.getCoefficient()).thenReturn(expectedCoefficient);
+        when(repository.findCoefficient(age)).thenReturn(Optional.of(TMAgeCoefficient));
         assertThat(ageCoefficientCalculator.getAgeCoefficient(person)).isEqualTo(expectedCoefficient);
     }
 

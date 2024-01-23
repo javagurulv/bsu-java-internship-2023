@@ -1,7 +1,7 @@
 package lv.javaguru.travel.insurance.core.repositories;
 
 
-import lv.javaguru.travel.insurance.core.domain.MedicalRiskLimitLevel;
+import lv.javaguru.travel.insurance.core.domain.TMMedicalRiskLimitLevel;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -16,9 +16,9 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @ExtendWith(SpringExtension.class)
 @DataJpaTest
-public class MedicalRiskLimitLevelRepositoryTest {
+public class TMTMMedicalRiskLimitLevelRepositoryTest {
     @Autowired
-    private MedicalRiskLimitLevelRepository repository;
+    private TMMedicalRiskLimitLevelRepository repository;
 
 
     @Test
@@ -34,16 +34,16 @@ public class MedicalRiskLimitLevelRepositoryTest {
 
     @Test
     void shouldNotFindCoefficient() {
-        Optional<MedicalRiskLimitLevel> rate = getLimitLevel("DUMMY");
+        Optional<TMMedicalRiskLimitLevel> rate = getLimitLevel("DUMMY");
         assertThat(rate).isEmpty();
     }
 
-    private Optional<MedicalRiskLimitLevel> getLimitLevel(String limitIc) {
+    private Optional<TMMedicalRiskLimitLevel> getLimitLevel(String limitIc) {
         return repository.findByMedicalRiskLimitLevelIc(limitIc);
     }
 
     private void checkIfCoefficientForLimitIcExists(String limitIc) {
-        Optional<MedicalRiskLimitLevel> rate = getLimitLevel(limitIc);
+        Optional<TMMedicalRiskLimitLevel> rate = getLimitLevel(limitIc);
         assertThat(rate).isPresent();
         assertThat(rate.get().getMedicalRiskLimitLevelIc()).isEqualTo(limitIc);
     }

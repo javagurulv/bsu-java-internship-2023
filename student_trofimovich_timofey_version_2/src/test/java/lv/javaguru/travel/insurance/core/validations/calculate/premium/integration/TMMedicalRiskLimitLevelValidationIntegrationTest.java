@@ -22,7 +22,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class MedicalRiskLimitLevelValidationIntegrationTest {
+public class TMMedicalRiskLimitLevelValidationIntegrationTest {
     @Autowired
     private TravelAgreementValidator validator;
 
