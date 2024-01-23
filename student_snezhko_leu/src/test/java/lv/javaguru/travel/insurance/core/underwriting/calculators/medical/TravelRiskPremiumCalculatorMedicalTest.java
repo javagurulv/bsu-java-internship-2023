@@ -12,6 +12,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.util.ReflectionTestUtils;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -39,6 +40,10 @@ public class TravelRiskPremiumCalculatorMedicalTest {
 
     @Mock
     private TravelCalculateMedicalCountryDefaultDayRate cddrCalculator = mock(TravelCalculateMedicalCountryDefaultDayRate.class);
+
+    @Mock
+    private TravelCalculateInsuranceLimitCoefficient mrllCoefficientCalculator = mock(TravelCalculateInsuranceLimitCoefficient.class);
+
     TravelCalculatePremiumRequest request;
     /*
     @BeforeEach
@@ -63,19 +68,22 @@ public class TravelRiskPremiumCalculatorMedicalTest {
     @Test
     public void calculatePremiumForMedicalRiskLatviaTest() {
         init("LATVIA", 1.00d, 18);
+        initMrllCoefficientCalculator(1.0);
         assertEquals(BigDecimal.valueOf(1.10), calculator.calculatePremium(request));
     }
 
     @Test
     public void calculatePremiumForMedicalRiskSpainTest() {
         init("SPAIN", 2.50d, 18);
-        assertEquals(BigDecimal.valueOf(2.75), calculator.calculatePremium(request));
+        initMrllCoefficientCalculator(1.5);
+        assertEquals(BigDecimal.valueOf(4.125), calculator.calculatePremium(request));
     }
 
     @Test
     public void calculatePremiumForMedicalRiskJapanTest() {
         init("JAPAN", 3.50d, 18);
-        assertEquals(BigDecimal.valueOf(3.85), calculator.calculatePremium(request).setScale(2, BigDecimal.ROUND_HALF_UP));
+        initMrllCoefficientCalculator(1.2);
+        assertEquals(BigDecimal.valueOf(4.62), calculator.calculatePremium(request).setScale(2, BigDecimal.ROUND_HALF_UP));
     }
 
     private void init(String countryName, Double cddrValue, int age) {
@@ -93,6 +101,7 @@ public class TravelRiskPremiumCalculatorMedicalTest {
         java.sql.Date birth = java.sql.Date.valueOf("2005-05-05");
         birth.setYear(date.getYear() - age);
 
+
         when(request.getPersonBirthDate()).thenReturn(birth);
 //        cddrRepository = mock(CountryDefaultDayRateRepository.class);
         CountryDefaultDayRate cddr = mock(CountryDefaultDayRate.class);
@@ -106,5 +115,10 @@ public class TravelRiskPremiumCalculatorMedicalTest {
         when(dayCountCalculator.calculatePremium(request)).thenReturn(1l);
         when(ageCoefficientCalculator.calculatePremium(request)).thenReturn(1.1);
         when(cddrCalculator.calculatePremium(request)).thenReturn(cddrValue);
+    }
+
+    private void initMrllCoefficientCalculator(Double mrllValue) {
+        when(mrllCoefficientCalculator.calculatePremium(request)).thenReturn(mrllValue);
+        ReflectionTestUtils.setField(calculator, "mrllCoefficientCalculator", mrllCoefficientCalculator);
     }
 }

@@ -25,12 +25,16 @@ public class TravelRiskPremiumCalculatorMedical implements TravelRiskPremiumCalc
     @Autowired
     private TravelCalculateMedicalCountryDefaultDayRate cddr;
 
+    @Autowired
+    private TravelCalculateInsuranceLimitCoefficient mrllCoefficientCalculator;
+
     @Override
     public BigDecimal calculatePremium(TravelCalculatePremiumRequest request) {
         BigDecimal result = BigDecimal.valueOf(
                 dayCount.calculatePremium(request)
                 * ageCoefficient.calculatePremium(request)
                 * cddr.calculatePremium(request)
+                * mrllCoefficientCalculator.calculatePremium(request)
         );
         /*
         BigDecimal result = BigDecimal.valueOf(
