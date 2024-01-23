@@ -84,6 +84,9 @@ CREATE TABLE agreements
 CREATE UNIQUE INDEX ix_unique_agreements_id
 ON agreements(id);
 
+CREATE UNIQUE INDEX ix_agreements_uuid
+ON agreements(uuid);
+
 
 CREATE TABLE selected_risks
 (
@@ -113,6 +116,14 @@ CREATE TABLE agreement_person_risks
     premium DECIMAL(10,2) NOT NULL ,
     PRIMARY KEY (id),
     FOREIGN KEY (agreement_person_id) REFERENCES agreement_persons(id)
+);
+
+CREATE TABLE IF NOT EXISTS travel_cost_coefficient
+(
+    id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+    travel_cost_from DECIMAL(10,2) NOT NULL ,
+    travel_cost_to DECIMAL(10,2) NOT NULL ,
+    coefficient DECIMAL(10,2) NOT NULL
 );
 
 

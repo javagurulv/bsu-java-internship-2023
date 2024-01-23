@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @Component
 @Getter
-class TravelRequestDateSequenceValidation implements TravelRequestValidation {
+class TravelRequestDateSequenceValidation extends TravelRequestValidationImpl {
 
     @Autowired
     private ValidationErrorFactory errorFactory;

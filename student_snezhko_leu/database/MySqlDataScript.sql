@@ -1,7 +1,8 @@
-INSERT INTO classifiers (id, title)
+INSERT INTO classifiers (title, description)
     VALUES
     ("RISK_TYPE", "Risk type classifier"),
-    ("COUNTRY", "Travel country classifier")
+    ("COUNTRY", "Travel country classifier"),
+    ('MEDICAL_RISK_LIMIT_LEVEL', 'Values of insurance limit coefficient')
     ;
 
 
@@ -42,6 +43,22 @@ INSERT INTO classifier_values (classifier_id, ic, description)
     UNION ALL
     SELECT cl.id, 'JAPAN', "Japan travel country" FROM classifiers AS cl
     WHERE cl.title = "COUNTRY"
+
+    UNION ALL
+    SELECT cl.id, 'LEVEL_10000', 'Coefficient for insurance limit 10000' FROM classifiers AS cl
+    WHERE cl.title = 'MEDICAL_RISK_LIMIT_LEVEL'
+
+    UNION ALL
+    SELECT cl.id, 'LEVEL_15000', 'Coefficient for insurance limit 15000' FROM classifiers AS cl
+    WHERE cl.title = 'MEDICAL_RISK_LIMIT_LEVEL'
+
+    UNION ALL
+    SELECT cl.id, 'LEVEL_20000', 'Coefficient for insurance limit 20000' FROM classifiers AS cl
+    WHERE cl.title = 'MEDICAL_RISK_LIMIT_LEVEL'
+
+    UNION ALL
+    SELECT cl.id, 'LEVEL_50000', 'Coefficient for insurance limit 50000' FROM classifiers AS cl
+    WHERE cl.title = 'MEDICAL_RISK_LIMIT_LEVEL'
     ;
 
 INSERT INTO COUNTRY_DEFAULT_DAY_RATE (country_ic, country_default_day_rate)

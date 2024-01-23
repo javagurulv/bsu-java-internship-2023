@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @Component
 @Getter
-class TravelRequestDateToNotPastValidation implements TravelRequestValidation {
+class TravelRequestDateToNotPastValidation extends TravelRequestValidationImpl {
 
     private final long allowedDelayFromPresent = 5000L;
 
