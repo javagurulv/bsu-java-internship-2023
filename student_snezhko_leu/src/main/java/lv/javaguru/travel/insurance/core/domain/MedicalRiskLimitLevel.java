@@ -6,23 +6,22 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 
-@Entity
-@Table(name = "medical_risk_limit_level")
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
+@Entity
+@Table(name = "MEDICAL_RISK_LIMIT_LEVEL")
 public class MedicalRiskLimitLevel {
     @Id
-    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "medical_risk_limit_level_ic", nullable = false)
-    String medicalRiskLimitLevelIc;
+    @Column(name = "MEDICAL_RISK_LIMIT_LEVEL_IC", nullable = false)
+    private String medicalRiskLimitLevelIc;
 
-    @Column(name = "coefficient", nullable = false, precision = 10, scale = 2)
-    BigDecimal coefficient;
+    @Column(name = "COEFFICIENT", nullable = false)
+    private Double coefficient;
 }

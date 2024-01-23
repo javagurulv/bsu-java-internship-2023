@@ -2,8 +2,8 @@ package lv.javaguru.travel.insurance.core.underwriting.calculators.medical;
 
 import lv.javaguru.travel.insurance.core.api.dto.agreement.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.person.PersonDTO;
-import lv.javaguru.travel.insurance.core.domain.MedicalRiskLimitLevel;
-import lv.javaguru.travel.insurance.core.repositories.MedicalRiskLimitLevelRepository;
+import lv.javaguru.travel.insurance.core.domain.TMMedicalRiskLimitLevel;
+import lv.javaguru.travel.insurance.core.repositories.TMMedicalRiskLimitLevelRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -23,7 +23,7 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 public class InsuranceLimitCoefficientCalculatorTest {
     @Mock
-    private MedicalRiskLimitLevelRepository repository;
+    private TMMedicalRiskLimitLevelRepository repository;
     @InjectMocks
     private InsuranceLimitCoefficientCalculator calculator;
     private PersonDTO person;
@@ -47,10 +47,10 @@ public class InsuranceLimitCoefficientCalculatorTest {
     void shouldReturnCoefficientWhenLimitLevelIcIsCorrect() {
         ReflectionTestUtils.setField(calculator, "limitLevelIsEnabled", true);
         BigDecimal expectedCoefficient = BigDecimal.valueOf(2.0);
-        MedicalRiskLimitLevel medicalRiskLimitLevel = mock(MedicalRiskLimitLevel.class);
-        when(medicalRiskLimitLevel.getCoefficient()).thenReturn(expectedCoefficient);
+        TMMedicalRiskLimitLevel TMMedicalRiskLimitLevel = mock(TMMedicalRiskLimitLevel.class);
+        when(TMMedicalRiskLimitLevel.getCoefficient()).thenReturn(expectedCoefficient);
         when(repository.findByMedicalRiskLimitLevelIc(person.getMedicalRiskLimitLevel()))
-                .thenReturn(Optional.of(medicalRiskLimitLevel));
+                .thenReturn(Optional.of(TMMedicalRiskLimitLevel));
         BigDecimal result = calculator.getInsuranceLimitCoefficient(person);
         assertEquals(expectedCoefficient, result);
     }

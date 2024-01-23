@@ -2,8 +2,8 @@ package lv.javaguru.travel.insurance.core.underwriting.calculators.cancellation;
 
 
 import lv.javaguru.travel.insurance.core.api.dto.agreement.AgreementDTO;
-import lv.javaguru.travel.insurance.core.domain.TravelCostCoefficient;
-import lv.javaguru.travel.insurance.core.repositories.TravelCostCoefficientRepository;
+import lv.javaguru.travel.insurance.core.domain.TCTravelCostCoefficient;
+import lv.javaguru.travel.insurance.core.repositories.TCTravelCostCoefficientRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,9 +20,9 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class TravelCostCoefficientCalculatorTest {
+public class TCTravelCostCoefficientCalculatorTest {
     @Mock
-    private TravelCostCoefficientRepository repository;
+    private TCTravelCostCoefficientRepository repository;
 
     @InjectMocks
     private TravelCostCoefficientCalculator calculator;
@@ -38,9 +38,9 @@ public class TravelCostCoefficientCalculatorTest {
     }
     @Test
     void shouldCalculateCoefficient() {
-        TravelCostCoefficient travelCostCoefficient = mock(TravelCostCoefficient.class);
-        when(travelCostCoefficient.getCoefficient()).thenReturn(expectedCoefficient);
-        when(repository.findCoefficient(cost)).thenReturn(Optional.of(travelCostCoefficient));
+        TCTravelCostCoefficient TCTravelCostCoefficient = mock(TCTravelCostCoefficient.class);
+        when(TCTravelCostCoefficient.getCoefficient()).thenReturn(expectedCoefficient);
+        when(repository.findCoefficient(cost)).thenReturn(Optional.of(TCTravelCostCoefficient));
         BigDecimal coefficient = calculator.getCostCoefficient(agreementDTO);
         assertThat(coefficient).isEqualTo(expectedCoefficient);
     }

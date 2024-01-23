@@ -156,3 +156,5 @@ CREATE TABLE travel_cancellation_country_safety_rating (
 ALTER TABLE agreement_persons
     ADD COLUMN travel_cost DECIMAL(10,2);
 
+ALTER TABLE agreement_persons
+    ALTER COLUMN medical_risk_limit_level DROP NOT NULL;
