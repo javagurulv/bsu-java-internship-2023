@@ -139,3 +139,9 @@ INSERT INTO medical_risk_limit_level(medical_risk_limit_level_ic, coefficient) V
                                                                                    ('LEVEL_15000', 1.2),
                                                                                    ('LEVEL_20000', 1.5),
                                                                                    ('LEVEL_50000', 2.0);
+
+INSERT INTO travel_cost_coefficient(travel_cost_from, travel_cost_to, coefficient)
+VALUES (0, 4999.99, 10.0),
+       (5000, 9999.99, 30.0),
+       (10000, 19999.99, 100.0),
+       (20000, 10000000, 500.0);
