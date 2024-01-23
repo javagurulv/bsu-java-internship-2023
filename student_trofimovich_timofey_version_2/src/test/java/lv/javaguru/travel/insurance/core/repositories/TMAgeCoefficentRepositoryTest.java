@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @ExtendWith(SpringExtension.class)
 @DataJpaTest
-public class AgeCoefficentRepositoryTest {
+public class TMAgeCoefficentRepositoryTest {
     @Autowired
     private TMAgeCoefficientRepository repository;
 

@@ -139,5 +139,18 @@ ALTER TABLE travel_cost_coefficient
 RENAME TO travel_cancellation_trip_cost_coefficient;
 
 
+CREATE TABLE travel_cancellation_age_coefficient
+(
+    id         BIGINT         NOT NULL AUTO_INCREMENT,
+    age_from    INT            NOT NULL,
+    age_to      INT            NOT NULL,
+    coefficient DECIMAL(10, 2) NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE INDEX ix_travel_cancellation_age_coefficient_age_from_age_to
+    ON travel_cancellation_age_coefficient(age_from, age_to);
+
+
 
 
