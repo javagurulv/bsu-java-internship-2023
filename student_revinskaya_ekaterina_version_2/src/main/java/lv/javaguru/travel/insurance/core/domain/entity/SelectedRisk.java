@@ -16,7 +16,7 @@ public class SelectedRisk {
     private Long id;
     @ManyToOne
     @JoinColumn(name = "agreement_id", nullable = false)
-    private Agreement agreementId;
+    private AgreementEntity agreementEntityId;
     @Column(name = "risk_ic", nullable = false)
     private String riskIc;
 

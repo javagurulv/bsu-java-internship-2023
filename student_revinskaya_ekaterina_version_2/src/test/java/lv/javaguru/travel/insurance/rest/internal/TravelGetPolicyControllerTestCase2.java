@@ -1,9 +1,12 @@
 package lv.javaguru.travel.insurance.rest.internal;
 
+import org.junit.jupiter.api.DisplayName;
+
 public class TravelGetPolicyControllerTestCase2 extends TravelGetPolicyControllerTest {
     @Override
+    @DisplayName("request with uuid in wrong pattern")
     protected String getTestCaseName() {
-        return "test_case_2";
+        return "uuid_wrong_pattern";
     }
 
     @Override

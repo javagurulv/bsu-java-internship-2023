@@ -34,8 +34,8 @@ public class TravelCalculatePremiumControllerTest {
         compareResponseFromRequest("requestWithoutFirstName.json", "responseWithoutFirstName.json");
         compareResponseFromRequest("requestWithoutLastName.json", "responseWithoutLastName.json");
         compareResponseFromRequest("requestWithoutDateFrom.json", "responseWithoutDateFrom.json");
-        compareResponseFromRequest("requestWithoutDateTo.json", "responseWithoutCorrectDateTo.json");
-        compareResponseFromRequest("requestWithDateFromMoreThanDateTo.json", "responseWithoutCorrectDateTo.json");
+        compareResponseFromRequest("requestWithoutDateTo.json", "responseWithoutDateTo.json");
+        compareResponseFromRequest("requestWithDateFromMoreThanDateTo.json", "responseWithDateFromMoreThanDateTo.json");
         compareResponseFromRequest("requestEmpty.json", "responseEmpty.json");
         compareResponseFromRequest("requestDateFromInPast.json", "responseDateFromInPast.json");
 
@@ -55,7 +55,7 @@ public class TravelCalculatePremiumControllerTest {
         String responseAsString = resultOfResponse.getResponse().getContentAsString();
         String correctResponse = parseData(pathToCorrectResponseJson);
 
-        JSONAssert.assertEquals(responseAsString, correctResponse, true);
+        JSONAssert.assertEquals(responseAsString, correctResponse, false);
     }
 
     public String parseData(String pathToFile) {

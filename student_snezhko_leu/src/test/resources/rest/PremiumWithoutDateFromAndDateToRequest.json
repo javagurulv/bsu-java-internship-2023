@@ -5,6 +5,9 @@
   "agreementDateTo" : "",
   "selected_risks" :
   [
-    "MEDICAL RISK"
-  ]
+    "TRAVEL_MEDICAL"
+  ],
+  "country" : "SPAIN",
+  "personBirthDate" : "2005-09-03",
+  "medicalRiskLimitLevel" : "LEVEL_10000"
 }

@@ -1,10 +1,9 @@
 package lv.javaguru.travel.insurance.core.validationTests;
 
 import lv.javaguru.travel.insurance.core.ValidationError;
-import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.rest.TravelRequestValidation;
-import lv.javaguru.travel.insurance.rest.validation.TravelRequestFirstNameValidation;
-import lv.javaguru.travel.insurance.rest.validation.TravelRequestWithoutRisksValidation;
+import lv.javaguru.travel.insurance.rest.validation.TravelRequestRisksIsNotNullValidation;
 import lv.javaguru.travel.insurance.rest.validation.ValidationErrorFactory;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -13,7 +12,6 @@ import org.springframework.test.util.ReflectionTestUtils;
 
 import java.sql.Date;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 import static org.mockito.Mockito.mock;
@@ -23,7 +21,7 @@ import static org.springframework.test.util.AssertionErrors.assertTrue;
 public class TravelCalculatePremiumSelectedRisksTest {
     private TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
     @InjectMocks
-    private TravelRequestValidation validator = new TravelRequestWithoutRisksValidation();
+    private TravelRequestValidation validator = new TravelRequestRisksIsNotNullValidation();
     @Mock
     private ValidationErrorFactory errorFactory = mock(ValidationErrorFactory.class);
     public static boolean isEqual(ValidationError e1, ValidationError e2) {

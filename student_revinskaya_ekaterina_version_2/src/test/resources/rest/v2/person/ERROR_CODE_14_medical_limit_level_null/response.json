@@ -1,0 +1,9 @@
+{
+  "errors": [
+    {
+      "errorCode": "ERROR_CODE_14",
+      "description": "person which personal code is 35h5325: Field medicalRiskLimitLevel must not be empty because TRAVEL_MEDICAL risk is selected and medicalRiskLimitLevel is enabled!"
+
+    }
+  ]
+}

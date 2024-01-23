@@ -21,7 +21,7 @@ public class DtoV1Converter {
     private ConverterFunctions functions;
 
     public TravelCalculatePremiumResponseV1 buildResponseV1fromCoreResult(TravelCalculatePremiumCoreResult result) {
-        if (result.getErrors() != null) {
+        if (result.hasErrors()) {
             return errorResponseV1FromCoreResult(result);
         }
         return successResponseV1FromFromCoreResult(result);
@@ -34,6 +34,7 @@ public class DtoV1Converter {
 
     private AgreementDTO buildAgreementFromRequestV1(TravelCalculatePremiumRequestV1 requestV1) {
         AgreementDTO agreement = new AgreementDTO();
+        agreement.setTravelCost(requestV1.getTravelCost());
         agreement.setCountry(requestV1.getCountry());
         agreement.setSelectedRisks(requestV1.getSelectedRisks());
         agreement.setAgreementDateFrom(requestV1.getAgreementDateFrom());
@@ -62,6 +63,7 @@ public class DtoV1Converter {
             (TravelCalculatePremiumCoreResult result) {
         TravelCalculatePremiumResponseV1 responseV1 = new TravelCalculatePremiumResponseV1();
         responseV1.setUuid(result.getAgreement().getUuid());
+        responseV1.setTravelCost(result.getAgreement().getTravelCost());
         responseV1.setPersonFirstName(result.getAgreement().getPersons().get(0).getPersonFirstName());
         responseV1.setPersonLastName(result.getAgreement().getPersons().get(0).getPersonLastName());
         responseV1.setBirthday(result.getAgreement().getPersons().get(0).getPersonBirthDate());

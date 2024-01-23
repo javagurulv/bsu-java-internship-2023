@@ -1,16 +1,12 @@
 {
   "errors": [
     {
-      "field": "agreementDateFrom",
-      "message": "AgreementDateFrom should only be from the future"
-    },
-    {
       "field": "agreementDateTo",
       "message": "AgreementDateTo should only be from the future"
     },
     {
-      "field": "agreementDateFrom and agreementDateTo",
-      "message": "AgreementDateFrom and AgreementDateTo should only be from the future"
+      "field": "agreementDateFrom",
+      "message": "AgreementDateFrom should only be from the future"
     }
   ],
   "personFirstName": null,

@@ -3,6 +3,8 @@ package lv.javaguru.travel.insurance.core.repositories;
 import lv.javaguru.travel.insurance.core.domain.CountryDefaultDayRate;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -21,20 +23,10 @@ class CountryDefaultDayRateRepositoryTest {
     void injectedRepositoryIsNotNull() {
         assertThat(repository).isNotNull();
     }
-
-    @Test
-    void shouldFindCountryRateForLatvia() {
-        checkIfRateForCountryExists("LATVIA");
-    }
-
-    @Test
-    void shouldFindCountryRateForSpain() {
-        checkIfRateForCountryExists("SPAIN");
-    }
-
-    @Test
-    void shouldFindCountryRateForJapan() {
-        checkIfRateForCountryExists("JAPAN");
+    @ParameterizedTest
+    @ValueSource(strings = {"LATVIA", "SPAIN", "JAPAN"})
+    void shouldFindCountryRate(String country) {
+        checkIfRateForCountryExists(country);
     }
 
     @Test

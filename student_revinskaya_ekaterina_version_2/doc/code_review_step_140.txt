@@ -1,0 +1,11 @@
+1. помен€ть использование gerErrors на hasErrors в двух местах
+2. добавить к именам классов окончание Entity в savers, domains и др. (Agreement, PersonAgreement и др.)
+3. в классе CalculatorRiskPremiumsForAllPersons в методе класса calculatePremium
+объект класса TravelPremiumCalculationResult создвЄтс€ зр€, можно напр€мую создать List<RiskDTO>
+который находитьс€ в TravelPremiumCalculationResult и используетс€ дальше
+4. им€ колонки coefficient лучше заменить на rating, так как коэффициент считаетс€ по формуле отдельно
+5. некоторые QUERY в findBy методах репозитори€ можно не прописывать вручную
+6. в классе ResponseOnEntityBuilder добавить исключение на метод get
+7. класс TravelRiskPremiumCalculator имеет дефолтную реализацию метода, но его наследники
+повтор€ют этот же код, можно не реализовывать метод у наследников впринцепе
+8. добавить @JsonAlias("travel_сost")

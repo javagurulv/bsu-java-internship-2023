@@ -7,6 +7,7 @@ import lv.javaguru.travel.insurance.core.repositories.ClassifierValueRepository;
 import lv.javaguru.travel.insurance.core.util.Placeholder;
 import lv.javaguru.travel.insurance.core.validations.ValidationErrorFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -19,40 +20,53 @@ public class ExistMedicalRiskLimitLevelValidation extends TravelPersonFieldValid
     @Autowired
     private ClassifierValueRepository classifierValueRepository;
 
+    @Value("${medical.risk.limit.level.enabled:false}")
+    private Boolean medicalRiskLimitLevelEnabled;
+
     @Override
     public Optional<ValidationErrorDTO> validate(AgreementDTO agreementDTO, PersonDTO personDTO) {
-        return medicalRiskLevelNotEmptyOrNull(personDTO)
-                && notExistLimitLevel(personDTO) ?
-                Optional.of(buildingError(personDTO))
+        return medicalRiskLevelSpecified(personDTO, agreementDTO) ?
+                buildErrorByValueOfFlag(personDTO)
                 : Optional.empty();
     }
 
-    private boolean medicalRiskLevelNotEmptyOrNull(PersonDTO request) {
-        return !(request.getMedicalRiskLimitLevel() == null || request.getMedicalRiskLimitLevel().isEmpty());
+    private boolean medicalRiskLevelSpecified(PersonDTO request, AgreementDTO agreementDTO) {
+        return !(request.getMedicalRiskLimitLevel() == null || request.getMedicalRiskLimitLevel().isEmpty())
+                && medicalRiskSelected(agreementDTO);
     }
+
+    boolean medicalRiskSelected(AgreementDTO agreementDTO) {
+        return agreementDTO.getSelectedRisks() != null
+                && agreementDTO.getSelectedRisks().contains("TRAVEL_MEDICAL");
+    }
+
+    private Optional<ValidationErrorDTO> buildErrorByValueOfFlag(PersonDTO personDTO) {
+        return !medicalRiskLimitLevelEnabled ?
+                Optional.of(buildingErrorNotEnable()) :
+                notExistLimitLevel(personDTO) ?
+                        Optional.of(buildingErrorNotExist(personDTO))
+                        : Optional.empty();
+    }
+
     private boolean notExistLimitLevel(PersonDTO request) {
         return classifierValueRepository.findByClassifierTitleAndIc(
                 "MEDICAL_RISK_LIMIT_LEVEL", request.getMedicalRiskLimitLevel()).isEmpty();
     }
-    private ValidationErrorDTO buildingError(PersonDTO person) {
-        String code = person.getPersonalCode();
-        return code == null ?
-                buildErrorWithoutPersonalCode(person)
-                : buildErrorWithPersonalCode(person);
+
+    private ValidationErrorDTO buildingErrorNotEnable() {
+        return errorFactory.buildError("ERROR_CODE_23");
     }
 
-    private ValidationErrorDTO buildErrorWithPersonalCode(PersonDTO person) {
-        return errorFactory
-                .buildError("ERROR_CODE_15",
+    private ValidationErrorDTO buildingErrorNotExist(PersonDTO person) {
+        return person.getPersonalCode() != null ?
+                errorFactory.buildError("ERROR_CODE_15",
                         List.of(new Placeholder("PERSONAL_CODE", person.getPersonalCode()),
                                 new Placeholder("NOT_EXISTING_MEDICAL_RISK_LIMIT_LEVEL",
-                                        person.getMedicalRiskLimitLevel())));
+                                        person.getMedicalRiskLimitLevel())))
+                : errorFactory.buildError("ERROR_CODE_15",
+                List.of(new Placeholder("PERSONAL_CODE", "missing"),
+                        new Placeholder("NOT_EXISTING_MEDICAL_RISK_LIMIT_LEVEL",
+                                person.getMedicalRiskLimitLevel())));
     }
-    private ValidationErrorDTO buildErrorWithoutPersonalCode(PersonDTO person) {
-        return errorFactory
-                .buildError("ERROR_CODE_15",
-                        List.of(new Placeholder("PERSONAL_CODE", "missing"),
-                                new Placeholder("NOT_EXISTING_MEDICAL_RISK_LIMIT_LEVEL",
-                                        person.getMedicalRiskLimitLevel())));
-    }
+
 }

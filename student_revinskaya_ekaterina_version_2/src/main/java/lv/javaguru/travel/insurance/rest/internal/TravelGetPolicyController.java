@@ -12,15 +12,15 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/insurance/travel/api/internal/agreement/{uuid}")
 class TravelGetPolicyController {
     @Autowired
-    TravelGetPolicyService service;
+    TravelGetPolicyService getPolicyService;
     @Autowired
-    DTOInternalConverter converter;
+    DTOInternalConverter dtoInternalConverter;
 
     @GetMapping(path = "/",
             produces = "application/json")
     public TravelGetPolicyResponse getPolicy(@PathVariable String uuid) {
         TravelGetPolicyCoreCommand command = new TravelGetPolicyCoreCommand(uuid);
-        TravelGetPolicyCoreResult result = service.getPolicy(command);
-        return converter.convert(result);
+        TravelGetPolicyCoreResult result = getPolicyService.getPolicy(command);
+        return dtoInternalConverter.convert(result);
     }
 }

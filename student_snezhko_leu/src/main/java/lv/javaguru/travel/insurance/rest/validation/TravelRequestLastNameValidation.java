@@ -1,16 +1,14 @@
 package lv.javaguru.travel.insurance.rest.validation;
 
 import lv.javaguru.travel.insurance.core.ValidationError;
-import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
-import lv.javaguru.travel.insurance.rest.TravelRequestValidation;
+import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.io.IOException;
 import java.util.Optional;
 
 @Component
-public class TravelRequestLastNameValidation implements TravelRequestValidation {
+public class TravelRequestLastNameValidation extends TravelRequestValidationImpl {
 /*    @Autowired
     ValidationErrorsUtil util;
 */

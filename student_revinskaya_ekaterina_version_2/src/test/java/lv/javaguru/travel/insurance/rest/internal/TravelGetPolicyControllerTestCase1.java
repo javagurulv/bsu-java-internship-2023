@@ -1,6 +1,7 @@
 package lv.javaguru.travel.insurance.rest.internal;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.DisplayName;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 
@@ -11,12 +12,13 @@ import static uk.org.webcompere.modelassert.json.JsonAssertions.assertJson;
 
 public class TravelGetPolicyControllerTestCase1 extends TravelGetPolicyControllerTest {
     private static final String URL_CALCULATE = "/insurance/travel/api/v2/";
-    private final String requestFileName = "rest/internal/test_case_1/calculate_premium_request.json";
+    private final String requestFileName = "rest/internal/exist_uuid/calculate_premium_request.json";
 
 
     @Override
+    @DisplayName("request with exist uuid")
     protected String getTestCaseName() {
-        return "test_case_1";
+        return "exist_uuid";
     }
 
     @Override

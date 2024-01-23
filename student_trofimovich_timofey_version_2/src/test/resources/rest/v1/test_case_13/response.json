@@ -1,0 +1,8 @@
+{
+  "errors": [
+    {
+      "errorCode": "ERROR_CODE_8",
+      "description": "Field selectedRisks is empty!"
+    }
+  ]
+}

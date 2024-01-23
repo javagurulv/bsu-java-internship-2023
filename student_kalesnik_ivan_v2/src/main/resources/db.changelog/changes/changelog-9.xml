@@ -7,16 +7,24 @@
 
     <changeSet author = "LesnikBeats" id = "23">
         <createTable tableName="selected_risks">
-            <column autoIncrement="true" name="id" type="NUMERIC">
+            <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true"/>
             </column>
-            <column name="agreement_id" type="NUMERIC">
+            <column name="agreement_id" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
             <column name="risk_ic" type="VARCHAR(100)">
                 <constraints nullable="false"/>
             </column>
         </createTable>
+    </changeSet>
+
+    <changeSet author="LesnikBeats" id="23-xx">
+        <addForeignKeyConstraint baseTableName="selected_risks"
+                                 baseColumnNames="agreement_id"
+                                 constraintName="fk_selected_risks_agreement_id"
+                                 referencedTableName="agreements"
+                                 referencedColumnNames="id"/>
     </changeSet>
 
     <changeSet author="LesnikBeats" id="24">

@@ -1,32 +1,22 @@
 package lv.javaguru.travel.insurance.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lv.javaguru.travel.insurance.core.TravelCalculatePremiumService;
 //import lv.javaguru.travel.insurance.core.TravelCalculatePremiumServiceImpl;
 //import lv.javaguru.travel.insurance.core.TravelCalculatePremiumServiceImpl;
-import lv.javaguru.travel.insurance.core.TravelUnderwriting;
-import lv.javaguru.travel.insurance.rest.JsonFileReader;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.MockMvcWebClientAutoConfiguration;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.ImportResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.web.method.support.ModelAndViewContainer;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -49,7 +39,7 @@ public class TravelCalculatePremiumControllerTest {
     TravelUnderwriting underwriting;
 
  */
-/*
+
     @Test
     public void ControllerAllParametersIsCorrectTest() throws Exception {//throws FileNotFoundException, IOException {
 
@@ -58,7 +48,7 @@ public class TravelCalculatePremiumControllerTest {
         String pathResponse = "rest/TravelCalculatePremiumResponse.json";
 
         String responseFromRequest = getResponseFromRequest(pathRequest);
-        String responseFromFile = jsonFileReader.readJsonFile("rest/TravelCalculatePremiumResponse.json");
+        String responseFromFile = jsonFileReader.readJsonFile(pathResponse);
         assertJson(responseFromRequest)
                 .where()
                 .keysInAnyOrder()
@@ -138,7 +128,7 @@ public class TravelCalculatePremiumControllerTest {
                 .isEqualTo(responseFromFile);
         //assertEquals(mapper.readTree(responseFromFile), mapper.readTree(responseFromRequest));
     }
-*/
+
 
     private String getResponseFromRequest(String pathRequest) throws Exception{
         MvcResult result = mockMvc.perform(

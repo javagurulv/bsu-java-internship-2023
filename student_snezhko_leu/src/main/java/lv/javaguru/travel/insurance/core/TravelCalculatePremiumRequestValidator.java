@@ -2,19 +2,16 @@ package lv.javaguru.travel.insurance.core;
 
 
 //import lv.javaguru.travel.insurance.dto.ValidationError;
-import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.rest.TravelRequestValidation;
-import lv.javaguru.travel.insurance.rest.validation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.*;
 
 
 @Component
-class TravelCalculatePremiumRequestValidator {
+public class TravelCalculatePremiumRequestValidator {       //will make default access mod
     @Autowired
     List<TravelRequestValidation> validations;
     public List<ValidationError> validate(TravelCalculatePremiumRequest request) {
@@ -38,6 +35,10 @@ class TravelCalculatePremiumRequestValidator {
                 error = validation.validate(request);
                 if (!error.isEmpty()) {
                     errors.add(error.get());
+                }
+                List<ValidationError> validList = validation.validateList(request);
+                if (validList != null) {
+                    errors.addAll(validList);
                 }
             });
         return errors;

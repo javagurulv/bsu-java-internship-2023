@@ -1,19 +1,16 @@
 package lv.javaguru.travel.insurance.rest.validation;
 
-import lombok.Setter;
 import lv.javaguru.travel.insurance.core.ValidationError;
-import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
-import lv.javaguru.travel.insurance.rest.TravelRequestValidation;
+import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
 import java.util.Optional;
-import java.io.IOException;
 
 
 @Component
-public class TravelRequestDateFromValidation implements TravelRequestValidation {
+public class TravelRequestDateFromValidation extends TravelRequestValidationImpl {
     @Autowired
     ValidationErrorFactory errorFactory;
     /*

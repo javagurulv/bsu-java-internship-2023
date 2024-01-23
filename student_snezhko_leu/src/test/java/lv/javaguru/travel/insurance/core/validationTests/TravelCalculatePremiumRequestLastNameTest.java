@@ -1,9 +1,8 @@
 package lv.javaguru.travel.insurance.core.validationTests;
 
 import lv.javaguru.travel.insurance.core.ValidationError;
-import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.rest.TravelRequestValidation;
-import lv.javaguru.travel.insurance.rest.validation.TravelRequestFirstNameValidation;
 import lv.javaguru.travel.insurance.rest.validation.TravelRequestLastNameValidation;
 import lv.javaguru.travel.insurance.rest.validation.ValidationErrorFactory;
 import org.junit.jupiter.api.Test;

@@ -2,6 +2,7 @@ plugins {
 	id 'org.springframework.boot' version "2.7.5"
 }
 dependencies {
+	implementation ('org.apache.ant:ant:1.10.11')
 	implementation ('org.springdoc:springdoc-openapi-ui:1.6.4')
 
 	implementation('mysql:mysql-connector-java:8.0.22')
@@ -10,6 +11,7 @@ dependencies {
 
 	implementation('org.springframework.boot:spring-boot-starter-data-jpa:2.7.5')
 	implementation('org.springframework.boot:spring-boot-starter-web:2.7.5')
+	implementation('org.springframework.boot:spring-boot-starter-cache:2.7.5')
 
 	implementation('org.springframework.boot:spring-boot-starter-thymeleaf:2.7.5')
 
@@ -30,12 +32,11 @@ dependencies {
 	testImplementation('org.springframework.boot:spring-boot-starter-test:2.7.5')
 	testImplementation('org.hamcrest:hamcrest:2.2')
 	testImplementation('uk.org.webcompere:model-assert:1.0.0')
-
+	testImplementation('com.google.guava:guava:31.0.1-jre')
 
 	test {
 		useJUnitPlatform()
 	}
-
 }
 
 jar {
@@ -47,3 +48,8 @@ bootJar {
 	archiveBaseName = 'insurance-calculator'
 	archiveVersion = '1.0.2'
 }
+
+task cleanLogs(type: Delete) {
+	delete "${projectDir}/logs/"
+}
+clean.dependsOn(cleanLogs)

@@ -1,0 +1,38 @@
+{
+  "uuid": "6783c91a-7de9-4c19-a344-c0214f81d6fa",
+  "travelCost" : 100.00,
+  "agreementDateFrom": "2025-05-25",
+  "agreementDateTo": "2025-05-29",
+  "country": "SPAIN",
+  "agreementPremium": 33.00,
+  "persons": [
+    {
+      "personFirstName": "Vasja",
+      "personLastName": "Pupkin",
+      "birthday": "2000-05-29",
+      "personalCode": "56756f6",
+      "medicalRiskLimitLevel": "LEVEL_50000",
+      "personPremium": 22.00,
+      "personRisks": [
+        {
+          "riskIc": "TRAVEL_MEDICAL",
+          "premium": 22.00
+        }
+      ]
+    },
+    {
+      "personFirstName": "Petja",
+      "personLastName": "Pupkin",
+      "birthday": "2000-02-29",
+      "personalCode": "2423555",
+      "medicalRiskLimitLevel": "LEVEL_10000",
+      "personPremium": 11.00,
+      "personRisks": [
+        {
+          "riskIc": "TRAVEL_MEDICAL",
+          "premium": 11.00
+        }
+      ]
+    }
+  ]
+}

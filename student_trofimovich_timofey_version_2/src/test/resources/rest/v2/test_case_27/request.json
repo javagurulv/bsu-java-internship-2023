@@ -1,0 +1,22 @@
+{
+  "agreementDateFrom" : "2025-05-25",
+  "agreementDateTo" : "2025-05-29",
+  "country" : "",
+  "selected_risks":["TRAVEL_MEDICAL"],
+  "persons" : [
+    {
+      "personUUID" : "1212",
+      "personFirstName" : "Vasja",
+      "personLastName" : "Pupkin",
+      "personBirthDate" : "2000-05-29",
+      "medicalRiskLimitLevel" : "LEVEL_10000"
+    },
+    {
+      "personUUID" : "1212",
+      "personFirstName" : "Petja",
+      "personLastName" : "Pupkin",
+      "personBirthDate" : "1950-02-29",
+      "medicalRiskLimitLevel" : "LEVEL_15000"
+    }
+  ]
+}

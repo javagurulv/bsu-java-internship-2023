@@ -15,8 +15,9 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 public class ErrorCodeUtilTest {
     @Mock
-    Properties properties;
-    @InjectMocks ErrorCodeUtil errorCodeUtil;
+    private Properties properties;
+    @InjectMocks
+    private ErrorCodeUtil errorCodeUtil;
 
 
     @Test

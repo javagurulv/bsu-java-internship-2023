@@ -1,6 +1,6 @@
 package lv.javaguru.travel.insurance.core.underwriting.calculators.medical;
 
-import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
+import lv.javaguru.travel.insurance.core.api.dto.agreement.AgreementDTO;
 import lv.javaguru.travel.insurance.core.util.DateTimeUtil;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -15,8 +15,10 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 public class DayCountCalculatorTest {
     @Mock
-    DateTimeUtil dateTimeUtil;
-    @InjectMocks DayCountCalculator dayCountCalculator;
+    private DateTimeUtil dateTimeUtil;
+    @InjectMocks
+    private DayCountCalculator dayCountCalculator;
+
     @Test
     void shouldReturnCorrectNumberOfDays() {
         AgreementDTO agreement = mock(AgreementDTO.class);

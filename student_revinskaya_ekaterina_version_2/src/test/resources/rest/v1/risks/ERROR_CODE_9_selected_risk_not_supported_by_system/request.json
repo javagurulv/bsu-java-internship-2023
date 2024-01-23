@@ -1,0 +1,12 @@
+{
+  "personFirstName" : "Vasja",
+  "personLastName" : "Pupkin",
+  "travelCost" : 100.00,
+  "agreementDateFrom" : "2025-05-12",
+  "agreementDateTo" : "2025-05-19",
+  "birthday" : "2005-08-03",
+  "selectedRisks":["FAKE_RISK", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"],
+  "country": "SPAIN",
+  "personalCode": "1313131",
+  "medicalRiskLimitLevel": "LEVEL_10000"
+}
