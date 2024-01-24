@@ -5,8 +5,11 @@ import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.Optional;
+
+import static lv.javaguru.travel.insurance.core.util.CheckApplicationPropertiesUtil.checkProperty;
 
 @Component
 public class TravelRequestPersonBirthDateNotInFutureValidation extends TravelRequestValidationImpl{
@@ -20,6 +23,15 @@ public class TravelRequestPersonBirthDateNotInFutureValidation extends TravelReq
 
         if (request.getPersonBirthDate() == null) {
             return result;
+        }
+
+        try {
+            if (!checkProperty("medical.risk.age.enabled")) {
+                return result;
+            }
+        }
+        catch (IOException e) {
+
         }
 
         String errorCode = "ERROR_CODE_13";

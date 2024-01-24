@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.util.Optional;
 import java.util.Properties;
 
+import static lv.javaguru.travel.insurance.core.util.CheckApplicationPropertiesUtil.checkProperty;
+
 @Component
 public class TravelRequestMedicalRiskLimitLevelNotEmptyValidation extends TravelRequestValidationImpl{
     @Autowired
@@ -20,7 +22,8 @@ public class TravelRequestMedicalRiskLimitLevelNotEmptyValidation extends Travel
     public Optional<ValidationError> validate(TravelCalculatePremiumRequest request) {
         Optional<ValidationError> result = Optional.empty();
         try {
-            if (checkMedicalRiskLimitLevelProperty()) {
+            String property = "medical.risk.limit.level.enabled";
+            if (checkProperty(property)) {
                 if (request.getMedicalRiskLimitLevel() == null || request.getMedicalRiskLimitLevel().isEmpty())
                 {
                     String errorCode = "ERROR_CODE_14";
@@ -34,9 +37,12 @@ public class TravelRequestMedicalRiskLimitLevelNotEmptyValidation extends Travel
         return result;
     }
 
+    /*
     private boolean checkMedicalRiskLimitLevelProperty() throws IOException {
         Properties property = PropertiesLoaderUtils.loadProperties(new ClassPathResource("application.properties"));
         String value = property.getProperty("medical.risk.limit.level.enabled");
         return "true".equals(value);
     }
+
+     */
 }
