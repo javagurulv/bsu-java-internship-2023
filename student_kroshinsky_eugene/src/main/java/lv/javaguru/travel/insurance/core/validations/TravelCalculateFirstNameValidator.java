@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 @Component
-class TravelCalculateFirstNameValidator implements TravelRequestValidation {
+class TravelCalculateFirstNameValidator extends TravelRequestValidationImpl {
     @Autowired private ValidationErrorFactory validationErrorFactory;
     @Override
     public Optional<ValidationError> validate(TravelCalculatePremiumRequest request){

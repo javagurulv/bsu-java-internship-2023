@@ -1,14 +1,17 @@
 {
   "errors" : [
     {
-      "field" : "risks",
-      "message" : "Must not be null!"
+      "errorCode" : "ERROR_CODE_8",
+      "description" : "Field selected_risks is null!"
     }
   ],
   "personFirstName": null,
   "personLastName": null,
   "agreementDateFrom": null,
   "agreementDateTo": null,
-  "agreementPrice" : null,
-  "risks" : null
+  "agreementPremium" : null,
+  "risks" : null,
+  "country" : null,
+  "personBirthDate" : null,
+  "medicalRiskLimitLevel" : null
 }

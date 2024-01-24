@@ -5,8 +5,7 @@ import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import lv.javaguru.travel.insurance.core.services.calculators.CalculatorForTotalAgreementPremium;
 import lv.javaguru.travel.insurance.core.services.calculators.CalculatorRiskPremiumsForAllPersons;
-import lv.javaguru.travel.insurance.core.services.savers.entity_savers.AgreementSaver;
-import lv.javaguru.travel.insurance.core.services.savers.PersonSaver;
+import lv.javaguru.travel.insurance.core.services.savers.PolicySaver;
 import lv.javaguru.travel.insurance.core.validations.TravelAgreementValidator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,9 +25,7 @@ public class TravelCalculatePremiumServiceImplTest {
     @InjectMocks
     private TravelCalculatePremiumServiceImpl travelCalculatePremiumService;
     @Mock
-    private PersonSaver personSaver;
-    @Mock
-    private AgreementSaver agreementSaver;
+    private PolicySaver policySaver;
     @Mock
     private TravelAgreementValidator agreementValidator;
     @Mock
@@ -37,12 +34,12 @@ public class TravelCalculatePremiumServiceImplTest {
     private CalculatorRiskPremiumsForAllPersons calculatorRiskPremiumsForAllPersons;
     @Test
     public void calculatePremiumResultWithoutErrorsTest() {
-        AgreementDTO agreement = new AgreementDTO();
-        when(calculatorForTotalAgreementPremium.calculate(agreement)).thenReturn(BigDecimal.valueOf(12));
-        Mockito.doNothing().when(agreementSaver).saveAgreements(agreement);
-        Mockito.doNothing().when(calculatorRiskPremiumsForAllPersons).calculate(agreement);
+        AgreementDTO agreementDTO = new AgreementDTO();
+        when(calculatorForTotalAgreementPremium.calculate(agreementDTO)).thenReturn(BigDecimal.valueOf(12));
+        Mockito.doNothing().when(policySaver).savePolicy(agreementDTO);
+        Mockito.doNothing().when(calculatorRiskPremiumsForAllPersons).calculate(agreementDTO);
         assertEquals(travelCalculatePremiumService
-                .calculatePremium(new TravelCalculatePremiumCoreCommand(agreement)).getAgreement(), agreement);
+                .calculatePremium(new TravelCalculatePremiumCoreCommand(agreementDTO)).getAgreement(), agreementDTO);
 
     }
     @Test

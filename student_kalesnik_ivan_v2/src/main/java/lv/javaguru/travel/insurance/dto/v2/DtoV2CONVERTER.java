@@ -63,6 +63,7 @@ public class DtoV2CONVERTER {
         person.setPersonCode(personDTO.getPersonCode());
         person.setPersonBirthDate(personDTO.getPersonBirthDate());
         person.setMedicalRiskLimitLevel(personDTO.getMedicalRiskLimitLevel());
+        person.setTravelCost(personDTO.getTravelCost());
 
         BigDecimal personPremium = personDTO.getRisks().stream()
                 .map(RiskDto::getPremium)
@@ -84,6 +85,7 @@ public class DtoV2CONVERTER {
                 .personCode(personRequestDTO.getPersonCode())
                 .personBirthDate(personRequestDTO.getPersonBirthDate())
                 .medicalRiskLimitLevel(personRequestDTO.getMedicalRiskLimitLevel())
+                .travelCost(personRequestDTO.getTravelCost())
                 .build();
         return person;
     }

@@ -14,8 +14,9 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class ValidationErrorFactoryImplTest {
     @Mock
-    ErrorCodeUtil propertyReader;
-    @InjectMocks  ValidationErrorFactoryImpl validationErrorFactory;
+    private ErrorCodeUtil propertyReader;
+    @InjectMocks
+    private ValidationErrorFactoryImpl validationErrorFactory;
     @Test
     public void injectedRepositoryAreNotNull() {
         assertNotNull(validationErrorFactory);

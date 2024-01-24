@@ -1,9 +1,17 @@
 {
-  "errors": [{"field" : "personFirstName", "message" : "Must not be empty!"}],
+  "errors": [
+    {
+      "errorCode" : "ERROR_CODE_1",
+      "description" : "Field personFirstName is empty!"
+    }
+  ],
   "personFirstName": null,
   "personLastName": null,
   "agreementDateFrom": null,
   "agreementDateTo": null,
-  "agreementPrice": null,
-  "risks" : null
+  "agreementPremium": null,
+  "risks" : null,
+  "country" : null,
+  "personBirthDate" : null,
+  "medicalRiskLimitLevel" : null
 }

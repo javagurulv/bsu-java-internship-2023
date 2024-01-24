@@ -1,0 +1,12 @@
+{
+  "personFirstName" : "Vasja",
+  "personLastName" : "Pupkin",
+  "travelCost" : 100.00,
+  "agreementDateFrom" : "2025-05-25",
+  "agreementDateTo" : "2025-05-29",
+  "birthday" : "2005-08-03",
+  "personalCode": "1313131",
+  "selectedRisks":["TRAVEL_MEDICAL"],
+  "country": "ENGLAND",
+  "medicalRiskLimitLevel": "LEVEL_10000"
+}

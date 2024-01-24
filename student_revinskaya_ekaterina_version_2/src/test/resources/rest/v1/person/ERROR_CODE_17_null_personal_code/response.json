@@ -1,0 +1,8 @@
+{
+  "errors": [
+    {
+      "errorCode": "ERROR_CODE_17",
+      "description": "Field personalCode mustn't be empty!"
+    }
+  ]
+}

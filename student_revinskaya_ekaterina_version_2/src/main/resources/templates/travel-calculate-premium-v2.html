@@ -52,6 +52,10 @@
 <h1>Travel Insurance Premium Calculator</h1>
 <form action="/insurance/travel/web/v2" th:object="${request}" method="post">
     <div>
+    <label for="travelCost">Cost of travel:</label>
+    <input type="number" id="travelCost" th:field="*{request.travelCost}"><br><br>
+    <div>
+    <div>
         <label for="agreementDateFrom">Agreement Date From:</label>
         <input type="date" id="agreementDateFrom" th:field="*{agreementDateFrom}" />
     </div>

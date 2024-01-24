@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-class TravelRequestDateToNotEmptyValidation implements TravelRequestValidation {
+class TravelRequestDateToNotEmptyValidation extends TravelRequestValidationImpl {
 
     @Autowired
     private ValidationErrorFactory errorFactory;

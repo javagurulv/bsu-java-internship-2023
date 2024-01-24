@@ -1,0 +1,6 @@
+{
+  "error": {
+    "errorCode": "ERROR_CODE_18",
+    "description": "There is no agreement with uuid + 12345-asdf!"
+  }
+}

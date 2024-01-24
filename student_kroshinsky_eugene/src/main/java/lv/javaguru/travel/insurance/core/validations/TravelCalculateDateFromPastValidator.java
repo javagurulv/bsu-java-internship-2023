@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.Optional;
 
 @Component
-class TravelCalculateDateFromPastValidator implements TravelRequestValidation {
+class TravelCalculateDateFromPastValidator extends TravelRequestValidationImpl {
     @Autowired private ValidationErrorFactory validationErrorFactory;
     @Override
     public Optional<ValidationError> validate(TravelCalculatePremiumRequest request) {

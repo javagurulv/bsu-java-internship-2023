@@ -1,0 +1,8 @@
+{
+  "errors": [
+    {
+      "errorCode": "ERROR_CODE_13",
+      "description": "person which personal code is 1434333: Field birthday must not future date!"
+    }
+  ]
+}

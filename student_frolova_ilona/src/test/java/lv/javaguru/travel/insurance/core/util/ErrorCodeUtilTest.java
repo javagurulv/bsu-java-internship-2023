@@ -1,78 +1,42 @@
 package lv.javaguru.travel.insurance.core.util;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Properties;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
 
-@SpringBootTest
+@ExtendWith(MockitoExtension.class)
 public class ErrorCodeUtilTest {
 
-    @Autowired
-    private ErrorCodeUtil errorCodeUtil;
+    private final Properties properties;
 
-    @Test
-    public void dateFromIsFromThePastDescription() {
-        assertEquals(
-                "Field agreementDateFrom must not be from the past!",
-                errorCodeUtil.getErrorDescription("ERROR_CODE_1")
-        );
+    private final ErrorCodeUtil errorCodeUtil;
+
+    ErrorCodeUtilTest() throws IOException {
+        properties = Mockito.mock(Properties.class);
+        errorCodeUtil = new ErrorCodeUtil(properties);
     }
 
     @Test
-    public void dateFromIsEmptyDescription() {
-        assertEquals(
-                "Field agreementDateFrom must not be empty!",
-                errorCodeUtil.getErrorDescription("ERROR_CODE_2")
-        );
+    public void shouldGetErrorDescription() {
+        when(properties.getProperty("ERROR_CODE")).thenReturn("error description");
+        assertEquals(errorCodeUtil.getErrorDescription("ERROR_CODE"), "error description");
     }
 
     @Test
-    public void dateToIsFromThePastDescription() {
-        assertEquals(
-                "Field agreementDateTo must not be from the past!",
-                errorCodeUtil.getErrorDescription("ERROR_CODE_3")
-        );
-    }
-
-    @Test
-    public void dateToIsEmptyDescription() {
-        assertEquals(
-                "Field agreementDateTo must not be empty!",
-                errorCodeUtil.getErrorDescription("ERROR_CODE_4")
-        );
-    }
-
-    @Test
-    public void datesSequenceErrorDescription() {
-        assertEquals(
-                "Field agreementDateTo must be after agreementDateFrom!",
-                errorCodeUtil.getErrorDescription("ERROR_CODE_5")
-        );
-    }
-
-    @Test
-    public void risksAreNotSelectedDescription() {
-        assertEquals(
-                "Field selectedRisks must not be empty!",
-                errorCodeUtil.getErrorDescription("ERROR_CODE_6")
-        );
-    }
-
-    @Test
-    public void firstNameIsEmptyDescription() {
-        assertEquals(
-                "Field personFirstName must not be empty!",
-                errorCodeUtil.getErrorDescription("ERROR_CODE_7")
-        );
-    }
-
-    @Test
-    public void lastNameIsEmptyDescription() {
-        assertEquals(
-                "Field personLastName must not be empty!",
-                errorCodeUtil.getErrorDescription("ERROR_CODE_8")
-        );
+    public void returnErrorDescriptionWithPlaceholder() {
+        Placeholder placeholder = new Placeholder("PLACEHOLDER", "VALUE");
+        when(properties.getProperty("ERROR_CODE")).thenReturn("error {PLACEHOLDER} description");
+        assertEquals(errorCodeUtil.getErrorDescription("ERROR_CODE", List.of(placeholder)),
+                "error VALUE description");
     }
 }

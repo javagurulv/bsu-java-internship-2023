@@ -95,6 +95,6 @@ class TravelCalculatePremiumServiceImplTest {
         when(underwritingCalculator.calculatePremium(request)).thenReturn(BigDecimal.TEN);
 
         TravelCalculatePremiumResponse response = service.calculatePremium(request);
-        assertEquals(response.getAgreementPrice(), BigDecimal.TEN);
+        assertEquals(response.getAgreementPremium(), BigDecimal.TEN);
     }
 }

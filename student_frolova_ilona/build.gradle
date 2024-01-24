@@ -4,6 +4,8 @@ dependencies {
 	implementation('org.hibernate:hibernate-core:5.4.25.Final')
 
 	implementation('org.springframework.boot:spring-boot-starter-web:2.7.5')
+	implementation('org.springframework.boot:spring-boot-starter-data-jpa:2.7.5')
+
 	implementation 'org.projectlombok:lombok:1.18.28'
 	implementation('com.fasterxml.jackson.core:jackson-core:2.14.2')
 	implementation('com.google.guava:guava:31.0.1-jre')

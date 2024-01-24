@@ -2,16 +2,14 @@ package lv.javaguru.travel.insurance.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.StringJoiner;
 
 @Getter
 @Setter
@@ -31,4 +29,5 @@ public class TravelCalculatePremiumRequest {
 
     @JsonProperty("selected_risks")
     private List<String> selectedRisks;
+
 }

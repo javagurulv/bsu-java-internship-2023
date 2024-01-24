@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 @Component
-class TravelCalculateDateToValidator implements TravelRequestValidation {
+class TravelCalculateDateToValidator extends TravelRequestValidationImpl {
     @Autowired private ValidationErrorFactory validationErrorFactory;
     @Override
     public Optional<ValidationError> validate(TravelCalculatePremiumRequest request) {

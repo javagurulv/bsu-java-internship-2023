@@ -1,0 +1,8 @@
+{
+  "errors": [
+    {
+      "errorCode": "ERROR_CODE_12",
+      "description": "person which personal code is 1313131: Field birthday is empty!"
+    }
+  ]
+}

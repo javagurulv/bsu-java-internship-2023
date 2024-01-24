@@ -11,6 +11,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
+import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -26,86 +27,74 @@ public class TravelCalculatePremiumControllerTest {
     private MockMvc mockMvc;
 
     @Test
-    public void simpleRestControllerTestExample() throws Exception {
-        mockMvc.perform(post("/insurance/travel/")
-                        .content("""
-                                {"personFirstName" : "Vasja",
-                                "personLastName" : "Pupkin",
-                                "agreementDateFrom" : "2029-05-25",
-                                "agreementDateTo" : "2029-05-29",
-                                "selectedRisks": ["TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"]
-                                }""")
-                        .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("personFirstName", is("Vasja")))
-                .andExpect(jsonPath("personLastName", is("Pupkin")))
-                .andExpect(jsonPath("agreementDateFrom", is("2029-05-25")))
-                .andExpect(jsonPath("agreementDateTo", is("2029-05-29")))
-                .andExpect(jsonPath("agreementPrice", is("4.00000")))
-                .andReturn();
-    }
-
-    @Test
-    public void simpleRestControllerTest() throws Exception {
-        mockMvc.perform(post("/insurance/travel/")
-                        .content("""
-                                {"personFirstName" : "Name",
-                                "personLastName" : "Surname",
-                                "agreementDateFrom" : "2029-05-20",
-                                "agreementDateTo" : "2029-05-29",
-                                "selectedRisks":["TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"]
-                                }""")
-                        .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("personFirstName", is("Name")))
-                .andExpect(jsonPath("personLastName", is("Surname")))
-                .andExpect(jsonPath("agreementDateFrom", is("2029-05-20")))
-                .andExpect(jsonPath("agreementDateTo", is("2029-05-29")))
-                .andExpect(jsonPath("agreementPrice", is("9.00000")))
-                .andReturn();
-    }
-
-    @Test
-    public void jsonFilesTest() throws Exception {
-
+    public void testCorrectRequest() throws Exception {
         compareResponseToRequestInJsonFiles(
                 "rest/TravelCalculatePremiumRequest_correct.json",
                 "rest/TravelCalculatePremiumResponse_correct.json"
         );
+    }
 
+    @Test
+    public void testTotallyWrongRequest() throws Exception {
         compareResponseToRequestInJsonFiles(
                 "rest/TravelCalculatePremiumRequest_allWrong.json",
                 "rest/TravelCalculatePremiumResponse_allWrong.json"
         );
+    }
 
+    @Test
+    public void testWrongRequestDateFromIsEmpty() throws Exception {
         compareResponseToRequestInJsonFiles(
                 "rest/TravelCalculatePremiumRequest_dateFromEmpty.json",
                 "rest/TravelCalculatePremiumResponse_dateFromEmpty.json"
         );
+    }
 
+    @Test
+    public void testWrongRequestDateToIsEmpty() throws Exception {
         compareResponseToRequestInJsonFiles(
                 "rest/TravelCalculatePremiumRequest_dateToEmpty.json",
                 "rest/TravelCalculatePremiumResponse_dateToEmpty.json"
         );
+    }
 
+    @Test
+    public void testWrongRequestFirstNameIsEmpty() throws Exception {
         compareResponseToRequestInJsonFiles(
                 "rest/TravelCalculatePremiumRequest_firstNameEmpty.json",
                 "rest/TravelCalculatePremiumResponse_firstNameEmpty.json"
         );
+    }
 
+    @Test
+    public void testWrongRequestLastNameIsEmpty() throws Exception {
         compareResponseToRequestInJsonFiles(
                 "rest/TravelCalculatePremiumRequest_lastNameEmpty.json",
                 "rest/TravelCalculatePremiumResponse_lastNameEmpty.json"
         );
+    }
 
+    @Test
+    public void testWrongRequestDateSequenceIsWrong() throws Exception {
         compareResponseToRequestInJsonFiles(
                 "rest/TravelCalculatePremiumRequest_dateSeq.json",
                 "rest/TravelCalculatePremiumResponse_dateSeq.json"
         );
+    }
 
+    @Test
+    public void testWrongRequestRisksNotSelected() throws Exception {
         compareResponseToRequestInJsonFiles(
                 "rest/TravelCalculatePremiumRequest_risksNotSelected.json",
                 "rest/TravelCalculatePremiumResponse_risksNotSelected.json"
+        );
+    }
+
+    @Test
+    public void testWrongRequestRisksNotSupported() throws Exception {
+        compareResponseToRequestInJsonFiles(
+                "rest/TravelCalculatePremiumRequest_unsupportedRisks.json",
+                "rest/TravelCalculatePremiumResponse_unsupportedRisks.json"
         );
     }
 

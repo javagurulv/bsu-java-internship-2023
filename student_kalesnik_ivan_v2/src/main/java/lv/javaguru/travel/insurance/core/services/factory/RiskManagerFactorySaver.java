@@ -2,7 +2,7 @@ package lv.javaguru.travel.insurance.core.services.factory;
 
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDto;
 import lv.javaguru.travel.insurance.core.domain.api.AgreementEntity;
-import lv.javaguru.travel.insurance.core.domain.api.RiskEntity;
+import lv.javaguru.travel.insurance.core.domain.api.SelectedRiskEntity;
 import lv.javaguru.travel.insurance.core.repositories.api.AgreementRepository;
 import lv.javaguru.travel.insurance.core.repositories.api.RiskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +39,7 @@ public class RiskManagerFactorySaver {
     private void saveAllSelectedRisks(AgreementDto agreementDTO,
                                       AgreementEntity agreementEntity) {
         agreementDTO.getSelectedRisks().forEach(riskIc -> {
-            RiskEntity riskEntity = new RiskEntity().builder()
+            SelectedRiskEntity riskEntity = new SelectedRiskEntity().builder()
                             .agreement(agreementEntity)
                             .riskIc(riskIc)
                             .build();

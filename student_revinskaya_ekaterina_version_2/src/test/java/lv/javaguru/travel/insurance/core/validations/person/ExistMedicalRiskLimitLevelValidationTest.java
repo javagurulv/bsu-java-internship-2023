@@ -5,13 +5,14 @@ import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import lv.javaguru.travel.insurance.core.repositories.ClassifierValueRepository;
 import lv.javaguru.travel.insurance.core.validations.ValidationErrorFactory;
-import lv.javaguru.travel.insurance.core.validations.person.ExistMedicalRiskLimitLevelValidation;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.test.util.ReflectionTestUtils;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -35,7 +36,10 @@ public class ExistMedicalRiskLimitLevelValidationTest {
     private PersonDTO personDTO;
     @Test
     public void containErrorNotExistMedRiskLimitLevelWithEnableTest(){
+        ReflectionTestUtils.setField(medicalRiskLimitLevelValidation, "medicalRiskLimitLevelEnabled",
+                true);
         when(personDTO.getMedicalRiskLimitLevel()).thenReturn("FAKE");
+        when(agreementDTO.getSelectedRisks()).thenReturn(List.of("TRAVEL_MEDICAL"));
         when(classifierValueRepository.findByClassifierTitleAndIc("MEDICAL_RISK_LIMIT_LEVEL","FAKE"))
                 .thenReturn(Optional.empty());
         ValidationErrorDTO validationError = mock(ValidationErrorDTO.class);
@@ -46,7 +50,10 @@ public class ExistMedicalRiskLimitLevelValidationTest {
     }
     @Test
     public void containErrorNotExistMedRiskLimitLevelWithNotEnableTest(){
+        ReflectionTestUtils.setField(medicalRiskLimitLevelValidation, "medicalRiskLimitLevelEnabled",
+                true);
         when(personDTO.getMedicalRiskLimitLevel()).thenReturn("FAKE");
+        when(agreementDTO.getSelectedRisks()).thenReturn(List.of("TRAVEL_MEDICAL"));
         when(classifierValueRepository.findByClassifierTitleAndIc("MEDICAL_RISK_LIMIT_LEVEL","FAKE"))
                 .thenReturn(Optional.empty());
         ValidationErrorDTO validationError = mock(ValidationErrorDTO.class);

@@ -1,9 +1,21 @@
 {
-  "errors": [{"field" : "agreementDateFrom", "message" : "Must not be null!"}, {"field" :  "agreementDateTo", "message" :  "Must not be null!"}],
+  "errors": [
+    {
+      "errorCode" :  "ERROR_CODE_5",
+      "description" :  "Field agreementDateTo is empty!"
+    },
+    {
+      "errorCode" : "ERROR_CODE_3",
+      "description" : "Field agreementDateFrom is empty!"
+    }
+  ],
   "personFirstName": null,
   "personLastName": null,
   "agreementDateFrom": null,
   "agreementDateTo": null,
-  "agreementPrice": null,
-  "risks" : null
+  "agreementPremium": null,
+  "risks" : null,
+  "country" : null,
+  "personBirthDate" : null,
+  "medicalRiskLimitLevel" : null
 }

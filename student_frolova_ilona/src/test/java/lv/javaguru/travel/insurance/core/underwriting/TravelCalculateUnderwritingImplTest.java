@@ -1,67 +1,65 @@
 package lv.javaguru.travel.insurance.core.underwriting;
 
-import lv.javaguru.travel.insurance.core.underwriting.TravelCalculateUnderwriting;
-import lv.javaguru.travel.insurance.core.underwriting.TravelCalculateUnderwritingImpl;
-import lv.javaguru.travel.insurance.core.util.DateTimeUtil;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.test.util.ReflectionTestUtils;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+@ExtendWith(MockitoExtension.class)
 public class TravelCalculateUnderwritingImplTest {
 
-    @Mock
-    private TravelCalculatePremiumRequest request;
-
-    @Mock
-    private DateTimeUtil dateTimeUtil;
+    private TravelRiskPremiumCalculator riskPremiumCalculator1;
+    private TravelRiskPremiumCalculator riskPremiumCalculator2;
 
     @InjectMocks
     private TravelCalculateUnderwritingImpl underwritingCalculator;
 
     @BeforeEach
-    public void defineMocksBehavior() {
-        when(dateTimeUtil.getDifferenceInDays(any(), any())).thenReturn(BigDecimal.ZERO);
+    public void init() {
+        riskPremiumCalculator1 = mock(TravelRiskPremiumCalculator.class);
+        riskPremiumCalculator2 = mock(TravelRiskPremiumCalculator.class);
+
+        var riskPremiumCalculators = List.of(riskPremiumCalculator1, riskPremiumCalculator2);
+        ReflectionTestUtils.setField(underwritingCalculator, "riskPremiumCalculators", riskPremiumCalculators);
     }
 
     @Test
-    @ExtendWith(MockitoExtension.class)
-    public void costIsZeroIfDaysAreEqual() {
+    void shouldCalculatePremiumForOneRisk() {
+        when(riskPremiumCalculator1.getRiskIc()).thenReturn("TRAVEL_MEDICAL");
+        when(riskPremiumCalculator2.getRiskIc()).thenReturn("TRAVEL_CANCELLATION");
 
-        when(dateTimeUtil.createDate(any())).thenReturn(new Date(86400000L));
-        Date date = dateTimeUtil.createDate("");
+        when(riskPremiumCalculator1.calculatePremium(any())).thenReturn(BigDecimal.ONE);
 
-        when(request.getAgreementDateFrom()).thenReturn(date);
-        when(request.getAgreementDateTo()).thenReturn(date);
+        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        when(request.getSelectedRisks()).thenReturn(List.of("TRAVEL_MEDICAL"));
 
-        BigDecimal cost = underwritingCalculator.calculatePremium(request);
-
-        assertEquals(cost.compareTo(BigDecimal.ZERO), 0);
+        BigDecimal premium = underwritingCalculator.calculatePremium(request);
+        assertEquals(premium, BigDecimal.ONE);
     }
 
     @Test
-    @ExtendWith(MockitoExtension.class)
-    public void costIsThree() {
+    void shouldCalculatePremiumForTwoRisks() {
+        when(riskPremiumCalculator1.getRiskIc()).thenReturn("TRAVEL_MEDICAL");
+        when(riskPremiumCalculator2.getRiskIc()).thenReturn("TRAVEL_EVACUATION");
 
-        Date date1 = new Date(86400000L);
-        Date date2 = new Date(345600000L);
+        when(riskPremiumCalculator1.calculatePremium(any())).thenReturn(BigDecimal.ONE);
+        when(riskPremiumCalculator2.calculatePremium(any())).thenReturn(BigDecimal.ONE);
 
-        when(request.getAgreementDateFrom()).thenReturn(date1);
-        when(request.getAgreementDateTo()).thenReturn(date2);
-        when(dateTimeUtil.getDifferenceInDays(date1, date2)).thenReturn(BigDecimal.valueOf(3));
+        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        when(request.getSelectedRisks()).thenReturn(List.of("TRAVEL_MEDICAL", "TRAVEL_EVACUATION"));
 
-        BigDecimal cost = underwritingCalculator.calculatePremium(request);
-
-        assertEquals(0, cost.compareTo(BigDecimal.valueOf(3)));
+        BigDecimal premium = underwritingCalculator.calculatePremium(request);
+        assertEquals(premium, new BigDecimal(2));
     }
 }
