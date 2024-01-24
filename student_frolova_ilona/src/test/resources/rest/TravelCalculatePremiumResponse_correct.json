@@ -4,5 +4,19 @@
     "personLastName": "Surname",
     "agreementDateFrom": "2029-11-22",
     "agreementDateTo": "2029-11-29",
-    "agreementPremium": "7.00000"
+    "agreementPremium": "7.00000",
+    "risks": [
+        {
+            "riskIc": "TRAVEL_MEDICAL",
+            "premium": 0
+        },
+        {
+            "riskIc": "TRAVEL_CANCELLATION",
+            "premium": 0
+        },
+        {
+            "riskIc": "TRAVEL_LOSS_BAGGAGE",
+            "premium": 0
+        }
+    ]
 }

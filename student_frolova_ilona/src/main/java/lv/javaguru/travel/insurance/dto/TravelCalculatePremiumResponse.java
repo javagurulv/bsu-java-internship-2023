@@ -28,6 +28,8 @@ public class TravelCalculatePremiumResponse extends CoreResponse {
     @JsonSerialize(using = MoneySerializer.class)
     private BigDecimal agreementPremium;
 
+    private List<RiskPremium> risks;
+
     public TravelCalculatePremiumResponse(List<ValidationError> errors) {
         super(errors);
     }

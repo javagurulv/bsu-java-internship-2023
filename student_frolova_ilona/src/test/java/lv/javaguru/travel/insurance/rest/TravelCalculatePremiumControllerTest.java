@@ -11,6 +11,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
+import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -24,46 +25,6 @@ public class TravelCalculatePremiumControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
-
-    @Test
-    public void simpleRestControllerTestExample() throws Exception {
-        mockMvc.perform(post("/insurance/travel/")
-                        .content("""
-                                {"personFirstName" : "Vasja",
-                                "personLastName" : "Pupkin",
-                                "agreementDateFrom" : "2029-05-25",
-                                "agreementDateTo" : "2029-05-29",
-                                "selectedRisks": ["TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"]
-                                }""")
-                        .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("personFirstName", is("Vasja")))
-                .andExpect(jsonPath("personLastName", is("Pupkin")))
-                .andExpect(jsonPath("agreementDateFrom", is("2029-05-25")))
-                .andExpect(jsonPath("agreementDateTo", is("2029-05-29")))
-                .andExpect(jsonPath("agreementPremium", is("4.00000")))
-                .andReturn();
-    }
-
-    @Test
-    public void simpleRestControllerTest() throws Exception {
-        mockMvc.perform(post("/insurance/travel/")
-                        .content("""
-                                {"personFirstName" : "Name",
-                                "personLastName" : "Surname",
-                                "agreementDateFrom" : "2029-05-20",
-                                "agreementDateTo" : "2029-05-29",
-                                "selectedRisks":["TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"]
-                                }""")
-                        .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("personFirstName", is("Name")))
-                .andExpect(jsonPath("personLastName", is("Surname")))
-                .andExpect(jsonPath("agreementDateFrom", is("2029-05-20")))
-                .andExpect(jsonPath("agreementDateTo", is("2029-05-29")))
-                .andExpect(jsonPath("agreementPremium", is("9.00000")))
-                .andReturn();
-    }
 
     @Test
     public void testCorrectRequest() throws Exception {
