@@ -1,6 +1,7 @@
-package lv.javaguru.travel.insurance.core.underwriting;
+package lv.javaguru.travel.insurance.core.underwriting.calculators;
 
 import lombok.RequiredArgsConstructor;
+import lv.javaguru.travel.insurance.core.underwriting.TravelRiskPremiumCalculator;
 import lv.javaguru.travel.insurance.core.util.DateTimeUtil;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import org.springframework.stereotype.Component;
@@ -9,7 +10,7 @@ import java.math.BigDecimal;
 
 @Component
 @RequiredArgsConstructor
-public class TravelMedicalRiskPremiumCalculator implements TravelRiskPremiumCalculator {
+class TravelMedicalRiskPremiumCalculator implements TravelRiskPremiumCalculator {
 
     private final DateTimeUtil dateTimeUtil;
 
