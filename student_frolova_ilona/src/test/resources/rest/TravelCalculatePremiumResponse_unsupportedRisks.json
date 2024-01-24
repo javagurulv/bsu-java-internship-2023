@@ -1,0 +1,17 @@
+{
+  "errors": [
+    {
+      "errorCode": "ERROR_CODE_9",
+      "description": "Unsupported risk with ic TRAVEL"
+    },
+    {
+      "errorCode": "ERROR_CODE_9",
+      "description": "Unsupported risk with ic BAGGAGE"
+    }
+  ],
+  "personFirstName": null,
+  "personLastName": null,
+  "agreementDateFrom": null,
+  "agreementDateTo": null,
+  "agreementPremium": null
+}
