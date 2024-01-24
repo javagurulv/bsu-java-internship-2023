@@ -1,6 +1,6 @@
 package lv.javaguru.travel.insurance.core.repositories;
 
-import lv.javaguru.travel.insurance.core.domain.AgeCoefficient;
+import lv.javaguru.travel.insurance.core.domain.TMAgeCoefficient;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -17,9 +17,9 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @ExtendWith(SpringExtension.class)
 @DataJpaTest
-public class AgeCoefficentRepositoryTest {
+public class TMAgeCoefficentRepositoryTest {
     @Autowired
-    private AgeCoefficientRepository repository;
+    private TMAgeCoefficientRepository repository;
 
     @Test
     public void injectedRepositoryIsNotNull() {
@@ -29,7 +29,7 @@ public class AgeCoefficentRepositoryTest {
     @ParameterizedTest
     @CsvSource({"1, 1.1", "7, 0.7", "15, 1", "30, 1.1", "50, 1.2", "100, 1.5"})
     public void shouldFindAgeCoefficientForAgeGroup(int age, BigDecimal expectedCoefficient) {
-        Optional<AgeCoefficient> coefficient = repository.findCoefficient(age);
+        Optional<TMAgeCoefficient> coefficient = repository.findCoefficient(age);
         assertThat(coefficient.isPresent());
         assertThat(coefficient.get().getCoefficient().stripTrailingZeros()).isEqualTo(expectedCoefficient);
     }

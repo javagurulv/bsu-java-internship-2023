@@ -6,7 +6,7 @@
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
 
 
-<changeSet author="javaguru" id="44">
+<changeSet author="LesnikBeats" id="44">
     <addColumn tableName="agreement_persons">
         <column name="travel_cost" type="DECIMAL(10,2)">
             <constraints nullable="true"/>

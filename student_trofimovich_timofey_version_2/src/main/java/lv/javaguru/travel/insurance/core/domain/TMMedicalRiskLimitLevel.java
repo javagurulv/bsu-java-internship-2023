@@ -9,21 +9,20 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "country_default_day_rate")
+@Table(name = "travel_medical_risk_limit_level")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CountryDefaultDayRate {
+public class TMMedicalRiskLimitLevel {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="country_ic", nullable = false)
-    private String countryIc;
+    @Column(name = "medical_risk_limit_level_ic", nullable = false)
+    String medicalRiskLimitLevelIc;
 
-    @Column(name = "country_default_day_rate", precision = 10, scale = 2, nullable = false)
-    private BigDecimal countryDefaultDayRate;
-
+    @Column(name = "coefficient", nullable = false, precision = 10, scale = 2)
+    BigDecimal coefficient;
 }

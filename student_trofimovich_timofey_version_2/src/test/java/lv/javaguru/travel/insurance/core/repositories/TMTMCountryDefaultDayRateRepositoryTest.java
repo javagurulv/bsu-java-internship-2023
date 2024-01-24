@@ -1,6 +1,6 @@
 package lv.javaguru.travel.insurance.core.repositories;
 
-import lv.javaguru.travel.insurance.core.domain.CountryDefaultDayRate;
+import lv.javaguru.travel.insurance.core.domain.TMCountryDefaultDayRate;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -15,9 +15,9 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @ExtendWith(SpringExtension.class)
 @DataJpaTest
-class CountryDefaultDayRateRepositoryTest {
+class TMTMCountryDefaultDayRateRepositoryTest {
     @Autowired
-    private CountryDefaultDayRateRepository repository;
+    private TMCountryDefaultDayRateRepository repository;
 
     @Test
     void injectedRepositoryIsNotNull() {
@@ -31,16 +31,16 @@ class CountryDefaultDayRateRepositoryTest {
 
     @Test
     void shouldNotFindCountryRate() {
-        Optional<CountryDefaultDayRate> rate = getCountryRate("DUMMY");
+        Optional<TMCountryDefaultDayRate> rate = getCountryRate("DUMMY");
         assertThat(rate.isEmpty());
     }
 
-    private Optional<CountryDefaultDayRate> getCountryRate(String countryIc) {
+    private Optional<TMCountryDefaultDayRate> getCountryRate(String countryIc) {
         return repository.findByCountryIc(countryIc);
     }
 
     private void checkIfRateForCountryExists(String countryIc) {
-        Optional<CountryDefaultDayRate> rate = getCountryRate(countryIc);
+        Optional<TMCountryDefaultDayRate> rate = getCountryRate(countryIc);
         assertThat(rate.isPresent());
         assertThat(rate.get().getCountryIc()).isEqualTo(countryIc);
     }

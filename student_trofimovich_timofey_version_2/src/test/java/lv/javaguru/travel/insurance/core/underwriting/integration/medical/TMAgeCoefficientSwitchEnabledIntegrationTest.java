@@ -23,12 +23,12 @@ import static lv.javaguru.travel.insurance.core.api.dto.person.PersonDTOBuilder.
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(SpringExtension.class)
-@SpringBootTest(properties = {"age.coefficient.enabled = false"})
+@SpringBootTest(properties = {"age.coefficient.enabled = true"})
 @AutoConfigureMockMvc
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.ANY)
 
-public class AgeCoefficientSwitchDisabledIntegrationTest {
+public class TMAgeCoefficientSwitchEnabledIntegrationTest {
 
     @Autowired
     private TravelPremiumUnderwriting premiumUnderwriting;
@@ -52,7 +52,7 @@ public class AgeCoefficientSwitchDisabledIntegrationTest {
 
         TravelPremiumCalculationResult result = premiumUnderwriting.calculatePremium(agreement, person);
 
-        assertEquals(result.getTotalPremium(), new BigDecimal("15.00"));
+        assertEquals(result.getTotalPremium(), new BigDecimal("16.50"));
     }
 
     private Date createDate(String dateStr) {

@@ -14,6 +14,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Properties;
 
+import static lv.javaguru.travel.insurance.core.util.CheckApplicationPropertiesUtil.checkProperty;
+
 public class TravelRequestMedicalRiskLimitLevelIsCorrectValidation extends TravelRequestValidationImpl{
     @Autowired
     private ValidationErrorFactory errorFactory;
@@ -30,8 +32,9 @@ public class TravelRequestMedicalRiskLimitLevelIsCorrectValidation extends Trave
             return result;
         }
         try {
+            String property = "medical.risk.limit.level.enabled";
             Optional<ClassifierValue> cv = cvRepository.findByClassifierTitleAndIc("MEDICAL_RISK_LIMIT_LEVEL", request.getMedicalRiskLimitLevel());
-            if (checkEnabledProperty() && cv.isEmpty()) {
+            if (checkProperty(property) && cv.isEmpty()) {
                 String errorCode = "ERROR_CODE_15";
                 result = Optional.of(
                         errorFactory.buildError(
@@ -49,12 +52,14 @@ public class TravelRequestMedicalRiskLimitLevelIsCorrectValidation extends Trave
         }
         return result;
     }
-
+/*
     private boolean checkEnabledProperty() throws IOException {
         Properties property = PropertiesLoaderUtils.loadProperties(new ClassPathResource("application.properties"));
         String value = property.getProperty("medical.risk.limit.level.enabled");
         return "true".equals(value);
     }
+
+ */
     private List<Placeholder> initPlaceholders(List<Placeholder> result, String incorrectLimit) {
         Placeholder placeholder = new Placeholder("{NOT_EXISTING_LEVEL}", incorrectLimit);
         result.add(placeholder);

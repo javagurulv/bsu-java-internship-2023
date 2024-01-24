@@ -118,4 +118,39 @@ CREATE TABLE agreement_person_risks
     FOREIGN KEY (agreement_person_id) REFERENCES agreement_persons(id)
 );
 
+CREATE TABLE IF NOT EXISTS travel_cost_coefficient
+(
+    id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+    travel_cost_from DECIMAL(10,2) NOT NULL ,
+    travel_cost_to DECIMAL(10,2) NOT NULL ,
+    coefficient DECIMAL(10,2) NOT NULL
+);
+
+ALTER TABLE age_coefficient
+RENAME to travel_medical_age_coefficient;
+
+ALTER TABLE country_default_day_rate
+RENAME to travel_medical_country_default_day_rate;
+
+ALTER TABLE medical_risk_limit_level
+RENAME to travel_medical_risk_limit_level;
+
+ALTER TABLE travel_cost_coefficient
+RENAME TO travel_cancellation_trip_cost_coefficient;
+
+
+CREATE TABLE travel_cancellation_age_coefficient
+(
+    id         BIGINT         NOT NULL AUTO_INCREMENT,
+    age_from    INT            NOT NULL,
+    age_to      INT            NOT NULL,
+    coefficient DECIMAL(10, 2) NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE INDEX ix_travel_cancellation_age_coefficient_age_from_age_to
+    ON travel_cancellation_age_coefficient(age_from, age_to);
+
+
+
 
