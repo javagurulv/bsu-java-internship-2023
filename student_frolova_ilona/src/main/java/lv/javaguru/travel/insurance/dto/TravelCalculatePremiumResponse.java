@@ -26,7 +26,9 @@ public class TravelCalculatePremiumResponse extends CoreResponse {
     private Date agreementDateTo;
 
     @JsonSerialize(using = MoneySerializer.class)
-    private BigDecimal agreementPrice;
+    private BigDecimal agreementPremium;
+
+    private List<RiskPremium> risks;
 
     public TravelCalculatePremiumResponse(List<ValidationError> errors) {
         super(errors);
