@@ -39,7 +39,7 @@ public class TravelCalculateMedicalCountryDefaultDayCountTest {
         when(request.getCountry()).thenReturn(country);
 
         CountryDefaultDayRate cddrValue = mock(CountryDefaultDayRate.class);
-        when(cddrValue.getCountryDefaultDayRate()).thenReturn(countryCoefficient);
+        when(cddrValue.getCountryDefaultDayRateCoefficient()).thenReturn(countryCoefficient);
         when(cddrValue.getCountryIc()).thenReturn(country);
 
         when(cddrRepository.findByCountryIc(country)).thenReturn(Optional.of(cddrValue));
