@@ -34,6 +34,7 @@ public class TravelCalculatePremiumRequestValidatorImpl implements TravelCalcula
         travelRequestValidations.add(new ValidationDateFromInThePast());
         travelRequestValidations.add(new ValidationDateToInThePast());
         travelRequestValidations.add(new ValidateDateToWithDateFrom());
+        travelRequestValidations.add(new ValidateSelectedRisks());
 
         return travelRequestValidations;
     }

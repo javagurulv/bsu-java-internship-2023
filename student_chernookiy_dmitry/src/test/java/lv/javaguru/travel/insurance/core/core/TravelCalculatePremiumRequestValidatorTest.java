@@ -6,9 +6,7 @@ import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.Test;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
@@ -24,10 +22,11 @@ public class TravelCalculatePremiumRequestValidatorTest {
         when(request.getPersonLastName()).thenReturn(null);
         when(request.getAgreementDateTo()).thenReturn(null);
         when(request.getAgreementDateFrom()).thenReturn(null);
+        when(request.getSelectedRisks()).thenReturn(null);
 
         List<ValidationError> errors = requestValidator.validate(request);
 
-        assertEquals(errors.size(), 4);
+        assertEquals(errors.size(), 5);
         assertEquals(errors.get(0).getField(), "personFirstName");
         assertEquals(errors.get(0).getMessage(), "Must not be empty!");
 
@@ -39,6 +38,9 @@ public class TravelCalculatePremiumRequestValidatorTest {
 
         assertEquals(errors.get(3).getField(), "agreementDateTo");
         assertEquals(errors.get(3).getMessage(), "Must not be empty!");
+
+        assertEquals(errors.get(4).getField(), "selectedRisks");
+        assertEquals(errors.get(4).getMessage(), "Must not be empty!");
     }
 
     @Test
@@ -48,10 +50,11 @@ public class TravelCalculatePremiumRequestValidatorTest {
         when(request.getPersonLastName()).thenReturn("");
         when(request.getAgreementDateTo()).thenReturn(null);
         when(request.getAgreementDateFrom()).thenReturn(null);
+        when(request.getSelectedRisks()).thenReturn(new ArrayList<>());
 
         List<ValidationError> errors = requestValidator.validate(request);
 
-        assertEquals(errors.size(), 4);
+        assertEquals(errors.size(), 5);
         assertEquals(errors.get(0).getField(), "personFirstName");
         assertEquals(errors.get(0).getMessage(), "Must not be empty!");
 
@@ -63,6 +66,9 @@ public class TravelCalculatePremiumRequestValidatorTest {
 
         assertEquals(errors.get(3).getField(), "agreementDateTo");
         assertEquals(errors.get(3).getMessage(), "Must not be empty!");
+
+        assertEquals(errors.get(4).getField(), "selectedRisks");
+        assertEquals(errors.get(4).getMessage(), "Must not be empty!");
     }
 
     @Test
@@ -74,7 +80,7 @@ public class TravelCalculatePremiumRequestValidatorTest {
         when(request.getAgreementDateFrom()).thenReturn(new Date(2029, Calendar.FEBRUARY,3));
 
         List<ValidationError> errors = requestValidator.validate(request);
-        assertEquals(errors.size(), 1);
+        assertEquals(errors.size(), 2);
 
         assertEquals(errors.get(0).getField(), "Date to or date from");
         assertEquals(errors.get(0).getMessage(), "Date to must be after date from");
@@ -89,7 +95,7 @@ public class TravelCalculatePremiumRequestValidatorTest {
         when(request.getAgreementDateFrom()).thenReturn(new Date(2029, Calendar.FEBRUARY,3));
 
         List<ValidationError> errors = requestValidator.validate(request);
-        assertEquals(errors.size(), 1);
+        assertEquals(errors.size(), 2);
 
         assertEquals(errors.get(0).getField(), "Date to or date from");
         assertEquals(errors.get(0).getMessage(), "Date to must be after date from");
@@ -102,6 +108,7 @@ public class TravelCalculatePremiumRequestValidatorTest {
         when(request.getPersonLastName()).thenReturn("null");
         when(request.getAgreementDateTo()).thenReturn(new Date(2029, Calendar.FEBRUARY,5));
         when(request.getAgreementDateFrom()).thenReturn(new Date(2029, Calendar.FEBRUARY,3));
+        when(request.getSelectedRisks()).thenReturn(new ArrayList<>(List.of("string")));
 
         List<ValidationError> errors = requestValidator.validate(request);
         assertEquals(errors.size(), 0);
