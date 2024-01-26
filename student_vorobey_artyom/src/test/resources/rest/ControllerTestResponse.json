@@ -4,5 +4,6 @@
   "personLastName" : "Vorobey",
   "agreementDateFrom" : "2025-12-19",
   "agreementDateTo" : "2025-12-20",
-  "agreementPrice" : 1
+  "agreementPrice" : 1,
+  "selectedRisks" : null
 }

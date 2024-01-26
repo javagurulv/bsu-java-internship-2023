@@ -2,24 +2,18 @@ package lv.javaguru.travel.insurance.core.underwriting.calculators.medical;
 
 import lv.javaguru.travel.insurance.core.domain.AgeCoefficient;
 import lv.javaguru.travel.insurance.core.domain.CountryDefaultDayRate;
-import lv.javaguru.travel.insurance.core.repositories.AgeCoefficientRepository;
-import lv.javaguru.travel.insurance.core.repositories.CountryDefaultDayRateRepository;
-import lv.javaguru.travel.insurance.core.underwriting.calculators.medical.TravelRiskPremiumCalculatorMedical;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
@@ -106,7 +100,7 @@ public class TravelRiskPremiumCalculatorMedicalTest {
 //        cddrRepository = mock(CountryDefaultDayRateRepository.class);
         CountryDefaultDayRate cddr = mock(CountryDefaultDayRate.class);
         when(cddr.getCountryIc()).thenReturn(countryName);
-        when(cddr.getCountryDefaultDayRate()).thenReturn(cddrValue);
+        when(cddr.getCountryDefaultDayRateCoefficient()).thenReturn(cddrValue);
         //when(cddrRepository.findByCountryIc(countryName)).thenReturn(Optional.of(cddr));
 
         AgeCoefficient ac = mock(AgeCoefficient.class);

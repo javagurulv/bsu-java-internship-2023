@@ -9,6 +9,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -17,40 +18,40 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class PersonFirstNameValidationTest {
+class SelectedRisksIsEmptyValidationTest {
+
     @InjectMocks
-    private PersonFirstNameValidation validation = new PersonFirstNameValidation();
+    private SelectedRisksIsEmptyValidation validation = new SelectedRisksIsEmptyValidation();
     @Mock
     private ErrorCodeUtil errorCodeUtil;
 
     @Test
-    public void shouldReturnErrorWhenPersonFirstNameIsNull() {
+    public void shouldReturnErrorWhenSelectedRisksIsEmpty() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
-        when(request.getPersonFirstName()).thenReturn(null);
-        when(errorCodeUtil.getErrorDescription("ERROR_CODE_6")).thenReturn("Field personFirstName is empty");
+        when(request.getSelectedRisks()).thenReturn(List.of());
+        when(errorCodeUtil.getErrorDescription("ERROR_CODE_8")).thenReturn("Field selectedRisks is empty");
         Optional<ValidationError> errorOpt = validation.execute(request);
         assertTrue(errorOpt.isPresent());
-        assertEquals(errorOpt.get().getErrorCode(), "ERROR_CODE_6");
-        assertEquals(errorOpt.get().getDescription(), "Field personFirstName is empty");
+        assertEquals(errorOpt.get().getErrorCode(), "ERROR_CODE_8");
+        assertEquals(errorOpt.get().getDescription(), "Field selectedRisks is empty");
     }
 
     @Test
-    public void shouldReturnErrorWhenPersonFirstNameIsEmpty() {
+    public void shouldReturnErrorWhenSelectedRisksIsNull() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
-        when(request.getPersonFirstName()).thenReturn("");
-        when(errorCodeUtil.getErrorDescription("ERROR_CODE_6")).thenReturn("Field personFirstName is empty");
+        when(request.getSelectedRisks()).thenReturn(null);
+        when(errorCodeUtil.getErrorDescription("ERROR_CODE_8")).thenReturn("Field selectedRisks is empty");
         Optional<ValidationError> errorOpt = validation.execute(request);
         assertTrue(errorOpt.isPresent());
-        assertEquals(errorOpt.get().getErrorCode(), "ERROR_CODE_6");
-        assertEquals(errorOpt.get().getDescription(), "Field personFirstName is empty");
+        assertEquals(errorOpt.get().getErrorCode(), "ERROR_CODE_8");
+        assertEquals(errorOpt.get().getDescription(), "Field selectedRisks is empty");
     }
 
     @Test
-    public void shouldNotReturnErrorWhenPersonFirstNameIsPresent() {
+    public void shouldNotReturnErrorWhenPersonSelectedRisksIsPresent() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
-        when(request.getPersonFirstName()).thenReturn("Vasja");
+        when(request.getSelectedRisks()).thenReturn(List.of("TRAVEL_MEDICAL"));
         Optional<ValidationError> errorOpt = validation.execute(request);
         assertTrue(errorOpt.isEmpty());
     }
-
 }

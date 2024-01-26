@@ -30,11 +30,14 @@ public class TravelRiskPremiumCalculatorMedical implements TravelRiskPremiumCalc
 
     @Override
     public BigDecimal calculatePremium(TravelCalculatePremiumRequest request) {
+//        Double ageCoeff = ageCoefficient.calculatePremium(request);
+        Double mrllValue = mrllCoefficientCalculator.calculatePremium(request);
         BigDecimal result = BigDecimal.valueOf(
-                dayCount.calculatePremium(request)
+                //ageCoeff
+                cddr.calculatePremium(request)
                 * ageCoefficient.calculatePremium(request)
-                * cddr.calculatePremium(request)
-                * mrllCoefficientCalculator.calculatePremium(request)
+                * dayCount.calculatePremium(request)
+                * mrllValue//mrllCoefficientCalculator.calculatePremium(request)
         );
         /*
         BigDecimal result = BigDecimal.valueOf(

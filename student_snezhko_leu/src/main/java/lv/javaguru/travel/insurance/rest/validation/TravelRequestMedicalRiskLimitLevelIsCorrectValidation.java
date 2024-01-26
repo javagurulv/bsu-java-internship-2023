@@ -28,13 +28,17 @@ public class TravelRequestMedicalRiskLimitLevelIsCorrectValidation extends Trave
     @Override
     public Optional<ValidationError> validate(TravelCalculatePremiumRequest request) {
         Optional<ValidationError> result = Optional.empty();
-        if (request.getMedicalRiskLimitLevel() == null || request.getMedicalRiskLimitLevel().isEmpty()) {
+/*        if (request.getMedicalRiskLimitLevel() == null || request.getMedicalRiskLimitLevel().isEmpty()) {
             return result;
         }
-        try {
+
+ */
+//        try {
             String property = "medical.risk.limit.level.enabled";
             Optional<ClassifierValue> cv = cvRepository.findByClassifierTitleAndIc("MEDICAL_RISK_LIMIT_LEVEL", request.getMedicalRiskLimitLevel());
-            if (checkProperty(property) && cv.isEmpty()) {
+            //if (checkProperty(property) && cv.isEmpty()) {
+            if (cv.isEmpty())
+            {
                 String errorCode = "ERROR_CODE_15";
                 result = Optional.of(
                         errorFactory.buildError(
@@ -46,10 +50,10 @@ public class TravelRequestMedicalRiskLimitLevelIsCorrectValidation extends Trave
                         )
                 );
             }
-        }
+      /*  }
         catch (IOException e) {
 
-        }
+        }*/
         return result;
     }
 /*

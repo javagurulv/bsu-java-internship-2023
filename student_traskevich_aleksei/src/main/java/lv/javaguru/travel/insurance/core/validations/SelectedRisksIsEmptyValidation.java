@@ -9,15 +9,14 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-class AgreementDateFromValidation implements TravelRequestValidation {
-    String errorCode = "ERROR_CODE_2";
+class SelectedRisksIsEmptyValidation implements TravelRequestValidation {
+    String errorCode = "ERROR_CODE_8";
     @Autowired private ErrorCodeUtil errorCodeUtil;
 
     @Override
     public Optional<ValidationError> execute(TravelCalculatePremiumRequest request) {
-        return (request.getAgreementDateFrom() == null)
+        return (request.getSelectedRisks() == null || request.getSelectedRisks().isEmpty())
                 ? Optional.of(new ValidationError(errorCode, errorCodeUtil.getErrorDescription(errorCode)))
                 : Optional.empty();
     }
-
 }
