@@ -21,5 +21,6 @@
   "personLastName": null,
   "agreementDateFrom": null,
   "agreementDateTo": null,
-  "agreementPrice": null
+  "agreementPrice": null,
+  "selectedRisks":null
 }
