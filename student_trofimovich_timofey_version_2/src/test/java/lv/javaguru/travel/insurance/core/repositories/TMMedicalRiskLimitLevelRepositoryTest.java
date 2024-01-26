@@ -16,7 +16,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @ExtendWith(SpringExtension.class)
 @DataJpaTest
-public class TMTMMedicalRiskLimitLevelRepositoryTest {
+public class TMMedicalRiskLimitLevelRepositoryTest {
     @Autowired
     private TMMedicalRiskLimitLevelRepository repository;
 
