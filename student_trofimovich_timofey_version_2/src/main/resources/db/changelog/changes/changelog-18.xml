@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
+
+
+    <changeSet id="45" author="Timofey">
+        <sql>
+            INSERT INTO travel_cancellation_country_safety_rating_coefficient(country_ic, coefficient)
+            VALUES ('LATVIA', 5.00),
+                   ('SPAIN', 8.00),
+                   ('JAPAN', 9.00);
+        </sql>
+    </changeSet>
+</databaseChangeLog>

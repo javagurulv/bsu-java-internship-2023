@@ -1,6 +1,7 @@
 package lv.javaguru.travel.insurance.core.services;
 
 import lv.javaguru.travel.insurance.core.underwriting.TravelCalculateUnderwriting;
+import lv.javaguru.travel.insurance.core.underwriting.TravelPremiumCalculationResult;
 import lv.javaguru.travel.insurance.core.validations.TravelCalculatePremiumRequestValidator;
 import lv.javaguru.travel.insurance.dto.RiskPremium;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
@@ -32,17 +33,15 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
         return new TravelCalculatePremiumResponse(errors);
     }
 
-    TravelCalculatePremiumResponse buildResponse(TravelCalculatePremiumRequest request, BigDecimal cost) {
+    TravelCalculatePremiumResponse buildResponse(TravelCalculatePremiumRequest request, TravelPremiumCalculationResult premium) {
 
         return new TravelCalculatePremiumResponse(
                 request.getPersonFirstName(),
                 request.getPersonLastName(),
                 request.getAgreementDateFrom(),
                 request.getAgreementDateTo(),
-                cost,
-                request.getSelectedRisks().stream()
-                        .map(x -> new RiskPremium(x, BigDecimal.ZERO))
-                        .collect(Collectors.toList())
+                premium.getTotalPremium(),
+                premium.getRiskPremiums()
         );
     }
 

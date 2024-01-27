@@ -38,6 +38,8 @@ public class TravelCalculatePremiumControllerTest {
         compareResponseFromRequest("requestWithDateFromMoreThanDateTo.json", "responseWithDateFromMoreThanDateTo.json");
         compareResponseFromRequest("requestEmpty.json", "responseEmpty.json");
         compareResponseFromRequest("requestDateFromInPast.json", "responseDateFromInPast.json");
+        compareResponseFromRequest("requestDateToInPast.json", "responseDateToInPast.json");
+        compareResponseFromRequest("requestWithoutSelectedRisks.json", "responseWithoutSelectedRisks.json");
 
 
     }

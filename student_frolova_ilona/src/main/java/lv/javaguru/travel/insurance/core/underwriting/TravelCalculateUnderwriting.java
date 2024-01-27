@@ -6,5 +6,5 @@ import java.math.BigDecimal;
 
 public interface TravelCalculateUnderwriting {
 
-    public BigDecimal calculatePremium(TravelCalculatePremiumRequest request);
+    public TravelPremiumCalculationResult calculatePremium(TravelCalculatePremiumRequest request);
 }

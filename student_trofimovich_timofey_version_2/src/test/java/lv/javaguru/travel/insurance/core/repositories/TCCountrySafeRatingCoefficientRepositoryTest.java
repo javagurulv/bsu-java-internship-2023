@@ -1,6 +1,6 @@
 package lv.javaguru.travel.insurance.core.repositories;
 
-import lv.javaguru.travel.insurance.core.domain.TMCountryDefaultDayRate;
+import lv.javaguru.travel.insurance.core.domain.TCCountrySafeRatingCoefficient;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -15,9 +15,10 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @ExtendWith(SpringExtension.class)
 @DataJpaTest
-class TMTMCountryDefaultDayRateRepositoryTest {
+public class TCCountrySafeRatingCoefficientRepositoryTest {
+
     @Autowired
-    private TMCountryDefaultDayRateRepository repository;
+    private TCCountrySafeRatingCoefficientRepository repository;
 
     @Test
     void injectedRepositoryIsNotNull() {
@@ -31,16 +32,16 @@ class TMTMCountryDefaultDayRateRepositoryTest {
 
     @Test
     void shouldNotFindCountryRate() {
-        Optional<TMCountryDefaultDayRate> rate = getCountryRate("DUMMY");
+        Optional<TCCountrySafeRatingCoefficient> rate = getCountryRate("DUMMY");
         assertThat(rate.isEmpty());
     }
 
-    private Optional<TMCountryDefaultDayRate> getCountryRate(String countryIc) {
+    private Optional<TCCountrySafeRatingCoefficient> getCountryRate(String countryIc) {
         return repository.findByCountryIc(countryIc);
     }
 
     private void checkIfRateForCountryExists(String countryIc) {
-        Optional<TMCountryDefaultDayRate> rate = getCountryRate(countryIc);
+        Optional<TCCountrySafeRatingCoefficient> rate = getCountryRate(countryIc);
         assertThat(rate.isPresent());
         assertThat(rate.get().getCountryIc()).isEqualTo(countryIc);
     }
