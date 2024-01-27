@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.WhereJoinTable;
 
 import javax.persistence.*;
 
@@ -26,6 +25,6 @@ public class CountryDefaultDayRate {
     private String countryIc;
 
 
-    @Column(name = "country_default_day_rate", nullable = false)
-    private Double countryDefaultDayRate;
+    @Column(name = "country_default_day_rate", precision = 10, scale = 2, nullable = false)
+    private Double countryDefaultDayRateCoefficient;
 }

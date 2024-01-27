@@ -152,3 +152,8 @@ VALUES (0, 9, 5.00),
        (18, 39, 20.00),
        (40, 64, 30.00),
        (65, 150, 50.00);
+
+INSERT INTO travel_cancellation_country_safety_rating_coefficient(country_ic, coefficient)
+VALUES ('LATVIA', 5.00),
+       ('SPAIN', 8.00),
+       ('JAPAN', 9.00);

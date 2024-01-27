@@ -1,6 +1,7 @@
 package lv.javaguru.travel.insurance.core;
 
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.utils.DateTimeService;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -13,13 +14,7 @@ import java.util.Date;
 public class TravelCalculatePremiumServiceUnderwriting {
 
     public BigDecimal calculatePremium(Date dateFrom, Date dateTo) {
-        LocalDate localDateFrom = dateToLocalDate(dateFrom);
-        LocalDate localDateTo = dateToLocalDate(dateTo);
-        Period period = Period.between(localDateFrom, localDateTo);
-        return new BigDecimal(period.getDays());
+        return DateTimeService.getDaysBetween(dateFrom, dateTo);
     }
 
-    private static LocalDate dateToLocalDate(Date date) {
-        return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-    }
 }

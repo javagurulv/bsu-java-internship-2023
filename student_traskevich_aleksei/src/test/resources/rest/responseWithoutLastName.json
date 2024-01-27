@@ -1,8 +1,8 @@
 {
     "errors": [
         {
-            "field": "personLastName",
-            "message": "Must not be empty!"
+            "errorCode": "ERROR_CODE_7",
+            "description": "Field personLastName is empty"
         }
     ],
     "personFirstName": null,

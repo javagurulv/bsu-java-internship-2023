@@ -15,7 +15,7 @@ public class JsonReaderTest {
 
         String json = JsonReader.convertObjectToJson(request);
 
-        assertTrue(json.equals("{\"personFirstName\":null,\"personLastName\":null,\"agreementDateFrom\":null,\"agreementDateTo\":null}"));
+        assertTrue(json.equals("{\"personFirstName\":null,\"personLastName\":null,\"agreementDateFrom\":null,\"agreementDateTo\":null,\"selectedRisks\":null}"));
 
     }
 
@@ -27,7 +27,7 @@ public class JsonReaderTest {
 
         String json = JsonReader.convertObjectToJson(request);
 
-        assertTrue(json.equals("{\"personFirstName\":\"A\",\"personLastName\":\"B\",\"agreementDateFrom\":null,\"agreementDateTo\":null}"));
+        assertTrue(json.equals("{\"personFirstName\":\"A\",\"personLastName\":\"B\",\"agreementDateFrom\":null,\"agreementDateTo\":null,\"selectedRisks\":null}"));
 
     }
 }

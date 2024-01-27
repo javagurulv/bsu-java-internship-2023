@@ -153,4 +153,17 @@ CREATE INDEX ix_travel_cancellation_age_coefficient_age_from_age_to
 
 
 
+CREATE TABLE travel_cancellation_country_safety_rating_coefficient
+(
+    id         BIGINT         NOT NULL AUTO_INCREMENT,
+    country_ic    VARCHAR(100)            NOT NULL,
+    coefficient DECIMAL(10, 2) NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE UNIQUE INDEX ix_travel_cancellation_country_safety_rating_country_ic
+ON travel_cancellation_country_safety_rating_coefficient(country_ic);
+
+
+
 

@@ -43,7 +43,7 @@ class TravelCalculatePremiumServiceImplTest {
         Date dateTo = new Date(2002, Calendar.MARCH, 3);
         Date dateFrom = new Date(2002, Calendar.MARCH, 2);
         TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest(TEST_FIRST_NAME,
-                TEST_LAST_NAME, dateFrom, dateTo);
+                TEST_LAST_NAME, dateFrom, dateTo, new ArrayList<>(List.of(" ")));
 
         TravelCalculatePremiumServiceImpl travelCalculatePremiumService
                 = new TravelCalculatePremiumServiceImpl(new TravelCalculatePremiumRequestValidatorImpl());
@@ -75,7 +75,7 @@ class TravelCalculatePremiumServiceImplTest {
         final int INDEX_OF_TO_DATE = 1;
         final int INDEX_OF_FROM_DATE = 0;
         TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest(TEST_FIRST_NAME,
-                TEST_LAST_NAME, dates.getKey()[INDEX_OF_FROM_DATE], dates.getKey()[INDEX_OF_TO_DATE]);
+                TEST_LAST_NAME, dates.getKey()[INDEX_OF_FROM_DATE], dates.getKey()[INDEX_OF_TO_DATE], new ArrayList<>(List.of(" ")));
 
         TravelCalculatePremiumServiceImpl travelCalculatePremiumService
                 = new TravelCalculatePremiumServiceImpl(new TravelCalculatePremiumRequestValidatorImpl());
