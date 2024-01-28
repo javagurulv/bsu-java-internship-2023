@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lv.javaguru.travel.insurance.core.api.dto.risk.RiskDTO;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -20,4 +21,5 @@ public class PersonDTO {
     private Date personBirthDate;
     private List<RiskDTO> selectedRisks;
     private String medicalRiskLimitLevel;
+    private BigDecimal travelCost;
 }

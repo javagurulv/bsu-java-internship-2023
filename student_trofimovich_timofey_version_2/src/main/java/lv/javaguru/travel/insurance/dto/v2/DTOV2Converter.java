@@ -66,8 +66,10 @@ public class DTOV2Converter {
             return List.of();
         } else {
             return request.getPersons().stream()
-                    .map(person -> new PersonDTO(person.getPersonUUID(), person.getPersonFirstName(), person.getPersonLastName()
-                            , person.getPersonBirthDate(), null, person.getMedicalRiskLimitLevel()))
+                    .map(person ->
+                            new PersonDTO(person.getPersonUUID(), person.getPersonFirstName(), person.getPersonLastName()
+                            , person.getPersonBirthDate(), null, person.getMedicalRiskLimitLevel(),
+                                    person.getTravelCost()))
                     .toList();
         }
     }

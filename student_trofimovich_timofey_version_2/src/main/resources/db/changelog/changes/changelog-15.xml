@@ -5,7 +5,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
 
-    <changeSet author = "Timofey" id = "40">
+    <changeSet author = "javaguru" id = "40">
         <createTable tableName="travel_cancellation_age_coefficient">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true"/>
@@ -22,13 +22,23 @@
         </createTable>
     </changeSet>
 
-    <changeSet author="Timofey" id="41">
-        <createIndex indexName="ix_travel_cancellation_age_coefficient_age_from_age_to"
-                     tableName="travel_cancellation_age_coefficient"
-                     unique="true">
-            <column name="age_from"/>
-            <column name="age_to"/>
-        </createIndex>
+    <changeSet author = "javaguru" id = "41">
+        <sql>
+            INSERT INTO travel_cancellation_age_coefficient(age_from, age_to, coefficient)
+            VALUES(0, 9, 5.0);
+
+            INSERT INTO travel_cancellation_age_coefficient(age_from, age_to, coefficient)
+            VALUES(10, 17, 10.0);
+
+            INSERT INTO travel_cancellation_age_coefficient(age_from, age_to, coefficient)
+            VALUES(18, 39, 20.0);
+
+            INSERT INTO travel_cancellation_age_coefficient(age_from, age_to, coefficient)
+            VALUES(40, 64, 30.0);
+
+            INSERT INTO travel_cancellation_age_coefficient(age_from, age_to, coefficient)
+            VALUES(65, 200, 50.0);
+        </sql>
     </changeSet>
 
 </databaseChangeLog>

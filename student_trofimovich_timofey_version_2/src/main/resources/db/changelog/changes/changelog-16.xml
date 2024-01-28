@@ -5,15 +5,31 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
 
+    <changeSet author = "javaguru" id = "42">
+        <createTable tableName="travel_cancellation_country_safety_rating">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="country_ic" type="VARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="coefficient" type="DECIMAL(10,2)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
 
-    <changeSet id="42" author="Timofey">
+    <changeSet author = "javaguru" id = "43">
         <sql>
-            INSERT INTO travel_cancellation_age_coefficient(age_from, age_to, coefficient)
-            VALUES (0, 9, 5.00),
-                   (10, 17, 10.00),
-                   (18, 39, 20.00),
-                   (40, 64, 30.00),
-                   (65, 150, 50.00);
+            INSERT INTO travel_cancellation_country_safety_rating(country_ic, coefficient)
+            VALUES('LATVIA', 5.0);
+
+            INSERT INTO travel_cancellation_country_safety_rating(country_ic, coefficient)
+            VALUES('SPAIN', 8.0);
+
+            INSERT INTO travel_cancellation_country_safety_rating(country_ic, coefficient)
+            VALUES('JAPAN', 9.0);
         </sql>
     </changeSet>
+
 </databaseChangeLog>

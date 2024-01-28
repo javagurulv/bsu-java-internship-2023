@@ -3,6 +3,7 @@ package lv.javaguru.travel.insurance.core.api.dto.person;
 import lombok.Setter;
 import lv.javaguru.travel.insurance.core.api.dto.risk.RiskDTO;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -15,6 +16,7 @@ public class PersonDTOBuilder {
     private Date personBirthDate;
     private List<RiskDTO> selectedRisks;
     private String medicalRiskLimitLevel;
+    private BigDecimal travelCost;
 
     public PersonDTO build() {
         PersonDTO personDTO = new PersonDTO();
@@ -24,6 +26,7 @@ public class PersonDTOBuilder {
         personDTO.setPersonBirthDate(personBirthDate);
         personDTO.setSelectedRisks(selectedRisks);
         personDTO.setMedicalRiskLimitLevel(medicalRiskLimitLevel);
+        personDTO.setTravelCost(travelCost);
         return personDTO;
     }
 
@@ -54,6 +57,10 @@ public class PersonDTOBuilder {
     }
     public PersonDTOBuilder withMedicalRiskLimitLevel(String medicalRiskLimitLevel) {
         this.setMedicalRiskLimitLevel(medicalRiskLimitLevel);
+        return this;
+    }
+    public PersonDTOBuilder withTravelCost(BigDecimal travelCost) {
+        this.setTravelCost(travelCost);
         return this;
     }
 }

@@ -20,7 +20,7 @@ public class TravelCancellationPremiumCalculation implements TravelRiskPremiumCa
 
     @Override
     public BigDecimal calculatePremium(AgreementDTO agreement, PersonDTO person) {
-        return costCoefficientCalculator.getCostCoefficient(agreement)
+        return costCoefficientCalculator.getCostCoefficient(person)
                 .add(countrySafeRatingCoefficientCalculator.getCountrySafeRatingCoefficient(agreement))
                 .add(tripCancellationAgeCoefficientCalculator.calculateAgeCoefficient(person));
     }

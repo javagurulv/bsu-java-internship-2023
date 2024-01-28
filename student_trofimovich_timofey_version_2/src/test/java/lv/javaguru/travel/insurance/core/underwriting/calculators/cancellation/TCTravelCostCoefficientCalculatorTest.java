@@ -1,7 +1,7 @@
 package lv.javaguru.travel.insurance.core.underwriting.calculators.cancellation;
 
 
-import lv.javaguru.travel.insurance.core.api.dto.agreement.AgreementDTO;
+import lv.javaguru.travel.insurance.core.api.dto.person.PersonDTO;
 import lv.javaguru.travel.insurance.core.domain.TCTravelCostCoefficient;
 import lv.javaguru.travel.insurance.core.repositories.TCTravelCostCoefficientRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -27,21 +27,21 @@ public class TCTravelCostCoefficientCalculatorTest {
     @InjectMocks
     private TravelCostCoefficientCalculator calculator;
 
-    private AgreementDTO agreementDTO;
+    private PersonDTO personDTO;
     private final BigDecimal cost = new BigDecimal("7777.77");
     private final BigDecimal expectedCoefficient = new BigDecimal("100.00");
 
     @BeforeEach
     void init() {
-        agreementDTO = mock(AgreementDTO.class);
-        when(agreementDTO.getAgreementPremium()).thenReturn(cost);
+        personDTO = mock(PersonDTO.class);
+        when(personDTO.getTravelCost()).thenReturn(cost);
     }
     @Test
     void shouldCalculateCoefficient() {
         TCTravelCostCoefficient TCTravelCostCoefficient = mock(TCTravelCostCoefficient.class);
         when(TCTravelCostCoefficient.getCoefficient()).thenReturn(expectedCoefficient);
         when(repository.findCoefficient(cost)).thenReturn(Optional.of(TCTravelCostCoefficient));
-        BigDecimal coefficient = calculator.getCostCoefficient(agreementDTO);
+        BigDecimal coefficient = calculator.getCostCoefficient(personDTO);
         assertThat(coefficient).isEqualTo(expectedCoefficient);
     }
 
@@ -49,7 +49,7 @@ public class TCTravelCostCoefficientCalculatorTest {
     void shouldThrowAnExceptionWhenCostCoefficientNotFound() {
         when(repository.findCoefficient(cost)).thenReturn(Optional.empty());
         RuntimeException exception = assertThrows(RuntimeException.class,
-                () -> calculator.getCostCoefficient(agreementDTO));
+                () -> calculator.getCostCoefficient(personDTO));
         assertThat(exception.getMessage()).isEqualTo("Travel cost coefficient calculator not found for cost: " + cost);
     }
 }

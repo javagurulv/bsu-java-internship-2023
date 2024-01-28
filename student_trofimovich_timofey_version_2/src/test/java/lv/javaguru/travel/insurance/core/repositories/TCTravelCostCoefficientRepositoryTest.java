@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @ExtendWith(SpringExtension.class)
 @DataJpaTest
-public class TCTCTravelCostCoefficientRepositoryTest {
+public class TCTravelCostCoefficientRepositoryTest {
 
     @Autowired
     private TCTravelCostCoefficientRepository repository;
