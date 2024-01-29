@@ -15,7 +15,7 @@ public class TravelRequestCountryIsNotNullValidation extends TravelRequestValida
     @Override
     public Optional<ValidationError> validate(TravelCalculatePremiumRequest request) {
         Optional<ValidationError> result = Optional.empty();
-        if (request.getSelected_risks() == null || request.getSelected_risks().isEmpty()) {
+        if (request.getSelectedRisks() == null || request.getSelectedRisks().isEmpty()) {
             return result;
         }
         /*

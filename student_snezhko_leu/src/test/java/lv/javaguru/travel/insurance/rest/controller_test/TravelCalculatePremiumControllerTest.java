@@ -29,6 +29,7 @@ import static uk.org.webcompere.modelassert.json.JsonAssertions.assertJson;
 public class TravelCalculatePremiumControllerTest {
     @Autowired protected MockMvc mockMvc;
 
+    private static final String BASE_URL = "/insurance/travel/api/";
  //   ModelAssert assert;
     protected JsonFileReader jsonFileReader = new JsonFileReader(); //= new JsonFileReader();
     //    private MockMvc mockMvc;
@@ -136,7 +137,7 @@ public class TravelCalculatePremiumControllerTest {
 */
     protected String getResponseFromRequest(String pathRequest) throws Exception{
         MvcResult result = mockMvc.perform(
-                        post("/insurance/travel/")
+                        post(BASE_URL)
                                 .content(jsonFileReader.readJsonFile(pathRequest))
                                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 )
