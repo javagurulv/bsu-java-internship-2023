@@ -2,5 +2,6 @@
   "personFirstName" : "Artyom",
   "personLastName" : "Vorobey",
   "agreementDateFrom" : "2027-12-20",
-  "agreementDateTo" : "2027-12-20"
+  "agreementDateTo" : "2027-12-20",
+  "selectedRisks" : ["TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"]
 }
