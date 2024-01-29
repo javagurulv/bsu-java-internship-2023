@@ -21,8 +21,8 @@ public class AgreementDateFromLessThanAgreementDateToValidatorTest {
         when(request.getAgreementDateTo()).thenReturn(createDateFromString("12.12.2024"));
         Optional<ValidationError> errorOptional = validator.validateArgs(request);
         assertTrue(errorOptional.isPresent());
-        assertEquals(errorOptional.get().getField(), "agreementDateFrom");
-        assertEquals(errorOptional.get().getMessage(), "Must be less than agreementDateTo");
+        assertEquals(errorOptional.get().getErrorCode(), "agreementDateFrom");
+        assertEquals(errorOptional.get().getDescription(), "Must be less than agreementDateTo");
     }
 
     @Test
@@ -32,7 +32,7 @@ public class AgreementDateFromLessThanAgreementDateToValidatorTest {
         when(request.getAgreementDateTo()).thenReturn(createDateFromString("12.12.2024"));
         Optional<ValidationError> errorOptional = validator.validateArgs(request);
         assertTrue(errorOptional.isPresent());
-        assertEquals(errorOptional.get().getField(), "agreementDateFrom");
-        assertEquals(errorOptional.get().getMessage(), "Must be less than agreementDateTo");
+        assertEquals(errorOptional.get().getErrorCode(), "agreementDateFrom");
+        assertEquals(errorOptional.get().getDescription(), "Must be less than agreementDateTo");
     }
 }

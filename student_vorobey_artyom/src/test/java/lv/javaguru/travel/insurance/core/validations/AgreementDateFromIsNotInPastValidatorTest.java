@@ -19,7 +19,7 @@ public class AgreementDateFromIsNotInPastValidatorTest {
         when(request.getAgreementDateFrom()).thenReturn(createDateFromString("24.11.2023"));
         Optional<ValidationError> errorOptional = validator.validateArgs(request);
         assertTrue(errorOptional.isPresent());
-        assertEquals(errorOptional.get().getField(), "agreementDateFrom");
-        assertEquals(errorOptional.get().getMessage(), "Must not be in past!");
+        assertEquals(errorOptional.get().getErrorCode(), "agreementDateFrom");
+        assertEquals(errorOptional.get().getDescription(), "Must not be in past!");
     }
 }

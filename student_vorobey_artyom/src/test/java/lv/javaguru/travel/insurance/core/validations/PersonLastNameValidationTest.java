@@ -20,8 +20,8 @@ public class PersonLastNameValidationTest {
         when(request.getPersonLastName()).thenReturn(null);
         Optional<ValidationError> errorOptional = validator.validateArgs(request);
         assertTrue(errorOptional.isPresent());
-        assertEquals(errorOptional.get().getField(), "personLastName");
-        assertEquals(errorOptional.get().getMessage(), "Must not be empty!");
+        assertEquals(errorOptional.get().getErrorCode(), "personLastName");
+        assertEquals(errorOptional.get().getDescription(), "Must not be empty!");
     }
 
     @Test
@@ -30,8 +30,8 @@ public class PersonLastNameValidationTest {
         when(request.getPersonLastName()).thenReturn("");
         Optional<ValidationError> errorOptional = validator.validateArgs(request);
         assertTrue(errorOptional.isPresent());
-        assertEquals(errorOptional.get().getField(), "personLastName");
-        assertEquals(errorOptional.get().getMessage(), "Must not be empty!");
+        assertEquals(errorOptional.get().getErrorCode(), "personLastName");
+        assertEquals(errorOptional.get().getDescription(), "Must not be empty!");
     }
 
     @Test

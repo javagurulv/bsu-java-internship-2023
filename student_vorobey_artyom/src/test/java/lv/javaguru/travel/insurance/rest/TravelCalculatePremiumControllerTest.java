@@ -108,10 +108,10 @@ public class TravelCalculatePremiumControllerTest {
 
         String jsonCurrentStringResponse = result.getResponse().getContentAsString();
 
-        assertJson(jsonExpectedStringResponse)
+        assertJson(jsonCurrentStringResponse)
                 .where()
                     .keysInAnyOrder()
                     .arrayInAnyOrder()
-                .isEqualTo(jsonCurrentStringResponse);
+                .isEqualTo(jsonExpectedStringResponse);
     }
 }
