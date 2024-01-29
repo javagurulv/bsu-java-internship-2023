@@ -34,6 +34,7 @@ public class DTOV1Converter {
                 .map(risk -> new RiskPremium(risk.getRiskIc(), risk.getPremium()))
                 .toList();
         response.setRisks(risks);
+        response.setTravelCost(agreement.getPersons().get(0).getTravelCost());
         return response;
     }
 
@@ -69,6 +70,7 @@ public class DTOV1Converter {
         person.setPersonBirthDate(requestV1.getDateOfBirth());
         person.setPersonLastName(requestV1.getPersonLastName());
         person.setMedicalRiskLimitLevel(requestV1.getMedicalRiskLimitLevel());
+        person.setTravelCost(requestV1.getTravelCost());
         return person;
     }
 }

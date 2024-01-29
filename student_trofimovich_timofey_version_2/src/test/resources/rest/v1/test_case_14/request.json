@@ -7,5 +7,6 @@
   "agreementDateTo" : "2025-05-29",
   "selected_risks":[],
   "country": "LATVIA",
-  "medicalRiskLimitLevel": "LEVEL_10000"
+  "medicalRiskLimitLevel": "LEVEL_10000",
+  "travelCost": 7777
 }

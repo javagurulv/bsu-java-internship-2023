@@ -7,12 +7,12 @@ import lv.javaguru.travel.insurance.core.validations.ValidationErrorFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.math.BigDecimal;
+import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -20,13 +20,13 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class PersonUUIDValidationTest {
+public class TravelCostValidationTest {
+
     @Mock
     private ValidationErrorFactory factory;
     @InjectMocks
-    private PersonUUIDValidation validation;
+    private TravelCostValidation validation;
     private PersonDTO person;
-
     private AgreementDTO agreement;
 
     @BeforeEach
@@ -35,23 +35,26 @@ public class PersonUUIDValidationTest {
         agreement = mock(AgreementDTO.class);
     }
 
-    @ParameterizedTest
-    @NullAndEmptySource
-    void shouldReturnErrorWhenPersonUUIDIsNullOrEmpty(String personUUID) {
-        when(person.getPersonUUID()).thenReturn(personUUID);
-        when(factory.buildError("ERROR_CODE_17")).thenReturn(new ValidationErrorDTO("ERROR_CODE_17",
-                "Person uuid is empty!"));
-        Optional<ValidationErrorDTO> ValidationErrorDTO = validation.validate(person, agreement);
-        assertThat(ValidationErrorDTO).isPresent();
-        assertThat(ValidationErrorDTO.get().getErrorCode()).isEqualTo("ERROR_CODE_17");
-        assertThat(ValidationErrorDTO.get().getDescription()).isEqualTo("Person uuid is empty!");
+    @Test
+    void shouldNotReturnErrorWhenCancellationRiskIsNotIncluded() {
+        when(agreement.getSelectedRisks()).thenReturn(List.of());
+        Optional<ValidationErrorDTO> error = validation.validate(person, agreement);
+        assertThat(error).isEmpty();
+    }
+
+    @Test
+    void shouldReturnEmptyOrNullLimitLevelError() {
+        when(agreement.getSelectedRisks()).thenReturn(List.of("TRAVEL_CANCELLATION"));
+        when(person.getTravelCost()).thenReturn(null);
+        when(factory.buildError("ERROR_CODE_19")).thenReturn(new ValidationErrorDTO());
+        assertThat(validation.validate(person, agreement)).isPresent();
     }
 
 
     @Test
     void shouldNotReturnError() {
-        when(person.getPersonUUID()).thenReturn("1212");
-        Optional<ValidationErrorDTO> ValidationErrorDTO = validation.validate(person, agreement);
-        assertThat(ValidationErrorDTO).isEmpty();
+        when(agreement.getSelectedRisks()).thenReturn(List.of("TRAVEL_CANCELLATION"));
+        when(person.getTravelCost()).thenReturn(BigDecimal.ONE);
+        assertThat(validation.validate(person, agreement)).isEmpty();
     }
 }
