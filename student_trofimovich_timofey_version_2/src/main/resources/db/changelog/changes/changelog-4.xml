@@ -5,23 +5,21 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
 
-
-    <changeSet id="8" author="Timofey">
+    <changeSet author = "javaguru" id = "8">
         <createTable tableName="age_coefficient">
-            <column name="id" type="bigint" autoIncrement="true">
+            <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true"/>
             </column>
-            <column name="age_from" type="int">
+            <column name="age_from" type="INT">
                 <constraints nullable="false"/>
             </column>
-            <column name="age_to" type="int">
+            <column name="age_to" type="INT">
                 <constraints nullable="false"/>
             </column>
-            <column name="coefficient" type="decimal(10,2)">
+            <column name="coefficient" type="DECIMAL(10,2)">
                 <constraints nullable="false"/>
             </column>
         </createTable>
     </changeSet>
-
 
 </databaseChangeLog>

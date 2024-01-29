@@ -30,7 +30,7 @@ public class TravelCancellationPremiumCalculationTest {
     void shouldCalculatePremium() {
         AgreementDTO agreement = mock(AgreementDTO.class);
         PersonDTO person = mock(PersonDTO.class);
-        when(costCoefficientCalculator.getCostCoefficient(agreement)).thenReturn(BigDecimal.ONE);
+        when(costCoefficientCalculator.getCostCoefficient(person)).thenReturn(BigDecimal.ONE);
         when(safeRatingCoefficientCalculator.getCountrySafeRatingCoefficient(agreement)).thenReturn(BigDecimal.ONE);
         when(tripCancellationAgeCoefficientCalculator.calculateAgeCoefficient(person)).thenReturn(BigDecimal.ONE);
         BigDecimal calculatedPremium = calculation.calculatePremium(agreement, person);

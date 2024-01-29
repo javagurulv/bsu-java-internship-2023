@@ -5,7 +5,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
 
-    <changeSet author = "Timofey" id = "20">
+    <changeSet author = "javaguru" id = "20">
         <createTable tableName="persons">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true"/>
@@ -16,16 +16,16 @@
             <column name="last_name" type="VARCHAR(200)">
                 <constraints nullable="false"/>
             </column>
-            <column name="person_code" type="VARCHAR(200)">
+            <column name="person_code" type="VARCHAR(100)">
                 <constraints nullable="false"/>
             </column>
-            <column name="birth_date" type="TIMESTAMP">
+            <column name="birth_date" type="DATETIME">
                 <constraints nullable="false"/>
             </column>
         </createTable>
     </changeSet>
 
-    <changeSet author="Timofey" id="21">
+    <changeSet author="javaguru" id="21">
         <createIndex indexName="ix_unique_persons"
                      tableName="persons"
                      unique="true">
