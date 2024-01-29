@@ -18,4 +18,6 @@ public class TravelCalculatePremiumRequest {
     private Date agreementDateTo;
 
     private List<String> selectedRisks;
+
+    private String country;
 }
