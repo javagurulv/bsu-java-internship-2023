@@ -88,7 +88,7 @@ public class TravelRiskPremiumCalculatorMedicalTest {
         risks.add(calculator.getIc());
         when(request.getAgreementDateTo()).thenReturn(java.sql.Date.valueOf("2026-09-12"));
         when(request.getAgreementDateFrom()).thenReturn(java.sql.Date.valueOf("2026-09-11"));
-        when(request.getSelected_risks()).thenReturn(risks);
+        when(request.getSelectedRisks()).thenReturn(risks);
         when(request.getCountry()).thenReturn(countryName);
 
         Date date = new Date();

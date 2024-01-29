@@ -34,7 +34,7 @@ public class TravelCalculatePremiumSelectedRisksTest {
         when(request.getPersonLastName()).thenReturn("Last Name");
         when(request.getAgreementDateFrom()).thenReturn(Date.valueOf("2026-05-03"));
         when(request.getAgreementDateTo()).thenReturn(Date.valueOf("2026-10-03"));
-        when(request.getSelected_risks()).thenReturn(new ArrayList<>());
+        when(request.getSelectedRisks()).thenReturn(new ArrayList<>());
 
         String errorCode = "ERROR_CODE_7";
         String description = "Field selected_risks is empty!";
@@ -52,7 +52,7 @@ public class TravelCalculatePremiumSelectedRisksTest {
         when(request.getPersonLastName()).thenReturn("Last Name");
         when(request.getAgreementDateFrom()).thenReturn(Date.valueOf("2026-05-03"));
         when(request.getAgreementDateTo()).thenReturn(Date.valueOf("2026-10-03"));
-        when(request.getSelected_risks()).thenReturn(null);
+        when(request.getSelectedRisks()).thenReturn(null);
 
         String errorCode = "ERROR_CODE_8";
         String description = "Field selected_risks is null!";

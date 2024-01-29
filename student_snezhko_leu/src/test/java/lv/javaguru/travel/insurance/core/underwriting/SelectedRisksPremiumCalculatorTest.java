@@ -34,7 +34,7 @@ public class SelectedRisksPremiumCalculatorTest {
         risks.add("TRAVEL_SPORT_ACTIVITIES");
         when(request.getAgreementDateTo()).thenReturn(Date.valueOf("2022-09-12"));
         when(request.getAgreementDateFrom()).thenReturn(Date.valueOf("2022-09-11"));
-        when(request.getSelected_risks()).thenReturn(risks);
+        when(request.getSelectedRisks()).thenReturn(risks);
     }
     @Test
     public void findCalculatorByIcCorrectValueTest() {

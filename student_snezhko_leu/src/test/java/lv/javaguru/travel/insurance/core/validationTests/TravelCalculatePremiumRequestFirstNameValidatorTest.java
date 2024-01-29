@@ -37,7 +37,7 @@ public class TravelCalculatePremiumRequestFirstNameValidatorTest {
         when(request.getPersonLastName()).thenReturn("Last Name");
         when(request.getAgreementDateFrom()).thenReturn(Date.valueOf("2026-05-03"));
         when(request.getAgreementDateTo()).thenReturn(Date.valueOf("2026-10-03"));
-        when(request.getSelected_risks()).thenReturn(List.of("MEDICAL RISK"));
+        when(request.getSelectedRisks()).thenReturn(List.of("MEDICAL RISK"));
 
         String errorCode = "ERROR_CODE_1";
         String description = "Field personFirstName is empty!";
