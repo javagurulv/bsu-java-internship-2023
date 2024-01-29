@@ -3,7 +3,6 @@ plugins {
 }
 
 dependencies {
-	implementation('org.springframework.boot:spring-boot-starter-data-jpa:2.7.5')
 
 	implementation('mysql:mysql-connector-java:8.0.22')
 	implementation('org.hibernate:hibernate-core:5.4.25.Final')
@@ -11,6 +10,7 @@ dependencies {
 
 	implementation('org.springframework.boot:spring-boot-starter-data-jpa:2.7.5')
 	implementation('org.springframework.boot:spring-boot-starter-web:2.7.5')
+    implementation('org.springframework.boot:spring-boot-starter-thymeleaf:2.7.5')
 
 	implementation('com.h2database:h2:1.4.200')
 	implementation('com.fasterxml.jackson.core:jackson-core:2.14.2')

@@ -1,6 +1,9 @@
 INSERT INTO classifiers(title, description)
 VALUES('RISK_TYPE', 'Risk type classifier');
 
+INSERT INTO classifiers(title, description)
+VALUES('COUNTRY', 'Country classifier');
+
 INSERT INTO classifier_values(
 	classifier_id,
     ic,
@@ -71,3 +74,41 @@ SELECT
     'Travel policy sport activities risk type'
  FROM classifiers as cl
  WHERE cl.title = 'RISK_TYPE';
+
+INSERT INTO classifier_values(
+    classifier_id,
+    ic,
+    description)
+SELECT
+    cl.id,
+    'JAPAN',
+    'country'
+FROM classifiers as cl
+WHERE cl.title = 'COUNTRY';
+
+INSERT INTO classifier_values(
+    classifier_id,
+    ic,
+    description)
+SELECT
+    cl.id,
+    'LATVIA',
+    'country'
+FROM classifiers as cl
+WHERE cl.title = 'COUNTRY';
+
+INSERT INTO classifier_values(
+    classifier_id,
+    ic,
+    description)
+SELECT
+    cl.id,
+    'SPAIN',
+    'country'
+FROM classifiers as cl
+WHERE cl.title = 'COUNTRY';
+
+INSERT INTO country_default_day_rate (country_ic, default_day_rate) VALUES ('LATVIA', '1.00');
+INSERT INTO country_default_day_rate (country_ic, default_day_rate) VALUES ('SPAIN', '2.50');
+INSERT INTO country_default_day_rate (country_ic, default_day_rate) VALUES ('JAPAN', '3.50');
+

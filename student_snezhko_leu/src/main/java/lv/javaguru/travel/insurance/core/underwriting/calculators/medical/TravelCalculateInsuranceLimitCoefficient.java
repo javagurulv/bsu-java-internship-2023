@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 
 import static lv.javaguru.travel.insurance.core.util.CheckApplicationPropertiesUtil.checkProperty;
 
@@ -14,7 +15,7 @@ class TravelCalculateInsuranceLimitCoefficient {
     @Autowired
     private MedicalRiskLimitLevelRepository mrllRepository;
 
-    public Double calculatePremium(TravelCalculatePremiumRequest request) {
+    public BigDecimal calculatePremium(TravelCalculatePremiumRequest request) {
         try {
             return checkProperty("medical.risk.limit.level.enabled")
                     ? mrllRepository
@@ -24,10 +25,10 @@ class TravelCalculateInsuranceLimitCoefficient {
                                 )
                         .get()
                         .getCoefficient()
-                    : 1d;
+                    : BigDecimal.ONE;
         }
         catch (IOException e) {
-            return 1d;
+            return BigDecimal.ONE;
         }
     }
 }

@@ -42,7 +42,7 @@ public class TravelRequestCorrectSelectedRisksValidation extends TravelRequestVa
     @Override
     public List<ValidationError> validateList(TravelCalculatePremiumRequest request) {
         List<ValidationError> result = new ArrayList<>();
-        List<String> risks = request.getSelected_risks();
+        List<String> risks = request.getSelectedRisks();
         if (risks == null || risks.isEmpty()) {
             return null;
         }

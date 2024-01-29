@@ -32,11 +32,11 @@ public class TravelRequestRisksIsNotNullValidation extends TravelRequestValidati
 
 //        errorFactory = new ValidationErrorFactory();
 
-        if (request.getSelected_risks() == null) {
+        if (request.getSelectedRisks() == null) {
             String errorCode = "ERROR_CODE_8";
             return Optional.of(errorFactory.buildError(errorCode));
         }
-        else if (request.getSelected_risks().isEmpty()) {
+        else if (request.getSelectedRisks().isEmpty()) {
             String errorCode = "ERROR_CODE_7";
             return Optional.of(errorFactory.buildError(errorCode));
         }
