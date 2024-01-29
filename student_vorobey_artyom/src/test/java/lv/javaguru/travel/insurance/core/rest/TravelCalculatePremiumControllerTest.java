@@ -30,62 +30,56 @@ public class TravelCalculatePremiumControllerTest {
 
     @Test
     public void simpleRestControllerTest() throws Exception {
-        executeAndCompare("rest/ControllerTestRequest.json",
-                "rest/ControllerTestResponse.json");
+        executeAndCompare("rest/TravelCalculatePremiumRequest_success.json",
+                "rest/TravelCalculatePremiumResponse_success.json");
     }
 
     @Test
     public void shouldReturnErrorIfFirstNameIsInvalidRestControllerTest() throws Exception {
-        executeAndCompare("rest/firstNameIsInvalidControllerRequest.json",
-                "rest/firstNameIsInvalidControllerResponse.json");
+        executeAndCompare("rest/TravelCalculatePremiumRequest_firstName_empty.json",
+                "rest/TravelCalculatePremiumResponse_firstName_empty.json");
     }
 
     @Test
     public void shouldReturnErrorIfLastNameIsInvalidRestControllerTest() throws Exception {
-        executeAndCompare("rest/lastNameIsInvalidControllerRequest.json",
-                "rest/lastNameIsInvalidControllerResponse.json");
+        executeAndCompare("rest/TravelCalculatePremiumRequest_lastName_empty.json",
+                "rest/TravelCalculatePremiumResponse_lastName_empty.json");
     }
 
     @Test
     public void shouldReturnErrorIfAgreementDateFromIsInvalidRestControllerTest() throws Exception {
-        executeAndCompare("rest/agreementDateFromIsInvalidControllerRequest.json",
-                "rest/agreementDateFromIsInvalidControllerResponse.json");
+        executeAndCompare("rest/TravelCalculatePremiumRequest_dateFrom_null.json",
+                "rest/TravelCalculatePremiumResponse_dateFrom_null.json");
     }
 
     @Test
     public void shouldReturnErrorIfAgreementDateToIsInvalidRestControllerTest() throws Exception {
-        executeAndCompare("rest/agreementDateToIsInvalidControllerRequest.json",
-                "rest/agreementDateToIsInvalidControllerResponse.json");
-    }
-
-    @Test
-    public void shouldReturnValidAgreementPriceControllerTest() throws Exception {
-        executeAndCompare("rest/agreementPriceIsValidRestControllerTestRequest.json",
-                "rest/agreementPriceIsValidRestControllerTestResponse.json");
+        executeAndCompare("rest/TravelCalculatePremiumRequest_dateTo_null.json",
+                "rest/TravelCalculatePremiumResponse_dateTo_null.json");
     }
 
     @Test
     public void shouldReturnErrorIfAgreementDateFromAfterAgreementDateToRestControllerTest() throws Exception {
-        executeAndCompare("rest/agreementDateFromAfterAgreementDateRestControllerTestRequest.json",
-                "rest/agreementDateFromAfterAgreementDateRestControllerTestResponse.json");
+        executeAndCompare("rest/TravelCalculatePremiumRequest_dateFrom_after_dateTo.json",
+                "rest/TravelCalculatePremiumResponse_dateFrom_after_dateTo.json");
     }
 
     @Test
     public void shouldReturnErrorIfAgreementDateFromEqualsAgreementDateToRestControllerTest() throws Exception {
-        executeAndCompare("rest/agreementDateFromEqualsAgreementDateToRestControllerTestRequest.json",
-                "rest/agreementDateFromEqualsAgreementDateToRestControllerTestResponse.json");
+        executeAndCompare("rest/TravelCalculatePremiumRequest_dateFrom_equals_dateTo.json",
+                "rest/TravelCalculatePremiumResponse_dateFrom_equals_dateTo.json");
     }
 
     @Test
     public void shouldReturnErrorIfAgreementDateFromIsInPastRestControllerTest() throws Exception {
-        executeAndCompare("rest/agreementDateFromIsInPastRestControllerTestRequest.json",
-                "rest/agreementDateFromIsInPastRestControllerTestResponse.json");
+        executeAndCompare("rest/TravelCalculatePremiumRequest_dateFrom_inPast.json",
+                "rest/TravelCalculatePremiumResponse_dateFrom_inPast.json");
     }
 
     @Test
     public void shouldReturnErrorIfSelectedRisksIsInvalidControllerTest() throws Exception {
-        executeAndCompare("rest/selectedRisksIsInvalidControllerTestRequest.json",
-                "rest/selectedRisksIsInvalidControllerTestResponse.json");
+        executeAndCompare("rest/TravelCalculatePremiumRequest_selectedRisks_empty.json",
+                "rest/TravelCalculatePremiumResponse_selectedRisks_empty.json");
     }
 
     private void executeAndCompare(String JsonFileRequestPath, String JsonFileResponsePath) throws Exception {
