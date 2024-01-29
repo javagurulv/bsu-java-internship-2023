@@ -10,6 +10,7 @@ import org.mockito.Mock;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Optional;
 
@@ -31,7 +32,7 @@ public class TravelCalculateMedicalAgeCoefficientTest {
     @Test
     public void MedicalAgeCoefficientCalculator() {
         init(15, 1.1);
-        assertEquals(1.1, calculator.calculatePremium(request));
+        assertEquals(BigDecimal.valueOf(1.1), calculator.calculatePremium(request));
     }
 
     private void init(Integer age, Double ageCoefficient)
@@ -44,7 +45,7 @@ public class TravelCalculateMedicalAgeCoefficientTest {
         when(request.getPersonBirthDate()).thenReturn(birthDate);
 
         AgeCoefficient acValue = mock(AgeCoefficient.class);
-        when(acValue.getCoefficient()).thenReturn(ageCoefficient);
+        when(acValue.getCoefficient()).thenReturn(BigDecimal.valueOf(ageCoefficient));
 
         when(acRepository.findByAgeFromAndAgeTo(age)).thenReturn(Optional.of(acValue));
     }
