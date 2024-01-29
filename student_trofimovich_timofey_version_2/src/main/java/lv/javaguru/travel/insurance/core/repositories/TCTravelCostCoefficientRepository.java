@@ -8,12 +8,12 @@ import org.springframework.data.repository.query.Param;
 import java.math.BigDecimal;
 import java.util.Optional;
 
-public interface TCTravelCostCoefficientRepository extends JpaRepository<TCTravelCostCoefficient, Long> {
+public interface TCTravelCostCoefficientRepository
+        extends JpaRepository<TCTravelCostCoefficient, Long> {
 
-    @Query(
-            "SELECT tc FROM TCTravelCostCoefficient tc" +
-            " WHERE tc.travelCostFrom <= :cost " +
-            "AND tc.travelCostTo >= :cost"
-    )
-    Optional<TCTravelCostCoefficient> findCoefficient(@Param("cost") BigDecimal cost);
+    @Query("SELECT tc from TCTravelCostCoefficient tc " +
+           "where tc.travelCostFrom <= :travelCost " +
+           "and tc.travelCostTo >= :travelCost")
+    Optional<TCTravelCostCoefficient> findCoefficient(@Param("travelCost") BigDecimal travelCost);
+
 }

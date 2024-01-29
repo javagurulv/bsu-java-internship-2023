@@ -23,7 +23,7 @@ public class TMCountryDefaultDayRate {
     @Column(name="country_ic", nullable = false)
     private String countryIc;
 
-    @Column(name = "country_default_day_rate", precision = 10, scale = 2, nullable = false)
+    @Column(name = "default_day_rate", precision = 10, scale = 2, nullable = false)
     private BigDecimal countryDefaultDayRate;
 
 }

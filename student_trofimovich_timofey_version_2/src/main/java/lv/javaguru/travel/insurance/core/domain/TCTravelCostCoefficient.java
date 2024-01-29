@@ -9,7 +9,7 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "travel_cancellation_trip_cost_coefficient")
+@Table(name = "travel_cancellation_travel_cost_coefficient")
 @Getter
 @Setter
 @NoArgsConstructor
