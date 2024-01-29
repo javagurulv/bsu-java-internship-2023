@@ -23,7 +23,7 @@ CREATE UNIQUE INDEX ix_classifier_values_ic
 ON classifier_values(ic);
 
 CREATE TABLE country_default_day_rate (
-    id INT NOT NULL AUTO_INCREMENT,
+    id BIGINT NOT NULL AUTO_INCREMENT,
     country_ic VARCHAR(45) NOT NULL,
     default_day_rate DECIMAL(10,5) NOT NULL,
     PRIMARY KEY (id)
