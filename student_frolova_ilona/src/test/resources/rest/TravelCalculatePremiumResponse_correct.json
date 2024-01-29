@@ -4,11 +4,11 @@
     "personLastName": "Surname",
     "agreementDateFrom": "2029-11-22",
     "agreementDateTo": "2029-11-29",
-    "agreementPremium": "7.00000",
+    "agreementPremium": "24.50000",
     "risks": [
         {
             "riskIc": "TRAVEL_MEDICAL",
-            "premium": 7
+            "premium": 24.50000
         },
         {
             "riskIc": "TRAVEL_CANCELLATION",
