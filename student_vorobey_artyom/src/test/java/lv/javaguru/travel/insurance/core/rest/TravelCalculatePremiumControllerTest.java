@@ -29,57 +29,69 @@ public class TravelCalculatePremiumControllerTest {
     ObjectMapper mapper = new ObjectMapper();
 
     @Test
-    public void simpleRestControllerTest() throws Exception {
+    public void successRequest() throws Exception {
         executeAndCompare("rest/TravelCalculatePremiumRequest_success.json",
                 "rest/TravelCalculatePremiumResponse_success.json");
     }
 
     @Test
-    public void shouldReturnErrorIfFirstNameIsInvalidRestControllerTest() throws Exception {
+    public void firstNameIsEmpty() throws Exception {
         executeAndCompare("rest/TravelCalculatePremiumRequest_firstName_empty.json",
                 "rest/TravelCalculatePremiumResponse_firstName_empty.json");
     }
 
     @Test
-    public void shouldReturnErrorIfLastNameIsInvalidRestControllerTest() throws Exception {
+    public void LastNameIsEmpty() throws Exception {
         executeAndCompare("rest/TravelCalculatePremiumRequest_lastName_empty.json",
                 "rest/TravelCalculatePremiumResponse_lastName_empty.json");
     }
 
     @Test
-    public void shouldReturnErrorIfAgreementDateFromIsInvalidRestControllerTest() throws Exception {
+    public void agreementDateFromIsNull() throws Exception {
         executeAndCompare("rest/TravelCalculatePremiumRequest_dateFrom_null.json",
                 "rest/TravelCalculatePremiumResponse_dateFrom_null.json");
     }
 
     @Test
-    public void shouldReturnErrorIfAgreementDateToIsInvalidRestControllerTest() throws Exception {
+    public void agreementDateToIsNull() throws Exception {
         executeAndCompare("rest/TravelCalculatePremiumRequest_dateTo_null.json",
                 "rest/TravelCalculatePremiumResponse_dateTo_null.json");
     }
 
     @Test
-    public void shouldReturnErrorIfAgreementDateFromAfterAgreementDateToRestControllerTest() throws Exception {
+    public void agreementDateFromAfterAgreementDateTo() throws Exception {
         executeAndCompare("rest/TravelCalculatePremiumRequest_dateFrom_after_dateTo.json",
                 "rest/TravelCalculatePremiumResponse_dateFrom_after_dateTo.json");
     }
 
     @Test
-    public void shouldReturnErrorIfAgreementDateFromEqualsAgreementDateToRestControllerTest() throws Exception {
+    public void agreementDateFromEqualsAgreementDateTo() throws Exception {
         executeAndCompare("rest/TravelCalculatePremiumRequest_dateFrom_equals_dateTo.json",
                 "rest/TravelCalculatePremiumResponse_dateFrom_equals_dateTo.json");
     }
 
     @Test
-    public void shouldReturnErrorIfAgreementDateFromIsInPastRestControllerTest() throws Exception {
+    public void agreementDateFromInPast() throws Exception {
         executeAndCompare("rest/TravelCalculatePremiumRequest_dateFrom_inPast.json",
                 "rest/TravelCalculatePremiumResponse_dateFrom_inPast.json");
     }
 
     @Test
-    public void shouldReturnErrorIfSelectedRisksIsInvalidControllerTest() throws Exception {
+    public void selectedRisksIsEmpty() throws Exception {
         executeAndCompare("rest/TravelCalculatePremiumRequest_selectedRisks_empty.json",
                 "rest/TravelCalculatePremiumResponse_selectedRisks_empty.json");
+    }
+
+    @Test
+    public void selectedRisksIsNull() throws Exception {
+        executeAndCompare("rest/TravelCalculatePremiumRequest_selectedRisks_null.json",
+                "rest/TravelCalculatePremiumResponse_selectedRisks_null.json");
+    }
+
+    @Test
+    public void allFieldsNotProvided() throws Exception {
+        executeAndCompare("rest/TravelCalculatePremiumRequest_allFields_notProvided.json",
+                "rest/TravelCalculatePremiumResponse_allFields_notProvided.json");
     }
 
     private void executeAndCompare(String JsonFileRequestPath, String JsonFileResponsePath) throws Exception {
