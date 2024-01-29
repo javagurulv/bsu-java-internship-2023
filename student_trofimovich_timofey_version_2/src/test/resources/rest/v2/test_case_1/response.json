@@ -20,7 +20,7 @@
         }
       ],
       "medicalRiskLimitLevel": "LEVEL_10000",
-      "travelCost": null
+      "travelCost": 100.00
     },
     {
       "personUUID": "1212",
@@ -39,7 +39,7 @@
         }
       ],
       "medicalRiskLimitLevel": "LEVEL_15000",
-      "travelCost": null
+      "travelCost": 100.00
     }
   ],
   "agreementPremium": 135.00,
