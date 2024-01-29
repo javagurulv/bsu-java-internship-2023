@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.core.core.validations;
+package lv.javaguru.travel.insurance.core.validations;
 
 import lv.javaguru.travel.insurance.core.validations.SelectedRisksValidator;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;

@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.core.rest;
+package lv.javaguru.travel.insurance.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
@@ -18,6 +18,8 @@ import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static uk.org.webcompere.modelassert.json.JsonAssertions.assertJson;
+
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -41,7 +43,7 @@ public class TravelCalculatePremiumControllerTest {
     }
 
     @Test
-    public void LastNameIsEmpty() throws Exception {
+    public void lastNameIsEmpty() throws Exception {
         executeAndCompare("rest/TravelCalculatePremiumRequest_lastName_empty.json",
                 "rest/TravelCalculatePremiumResponse_lastName_empty.json");
     }
@@ -106,6 +108,10 @@ public class TravelCalculatePremiumControllerTest {
 
         String jsonCurrentStringResponse = result.getResponse().getContentAsString();
 
-        assertEquals(mapper.readTree(jsonExpectedStringResponse), mapper.readTree(jsonCurrentStringResponse));
+        assertJson(jsonExpectedStringResponse)
+                .where()
+                    .keysInAnyOrder()
+                    .arrayInAnyOrder()
+                .isEqualTo(jsonCurrentStringResponse);
     }
 }
