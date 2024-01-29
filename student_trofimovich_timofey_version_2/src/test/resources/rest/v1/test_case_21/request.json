@@ -7,5 +7,6 @@
   "agreementDateTo": "2025-04-08",
   "selected_risks":["TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"],
   "country": "SPAIN",
-  "medicalRiskLimitLevel": "my_limit"
+  "medicalRiskLimitLevel": "my_limit",
+  "travelCost": 7777
 }

@@ -27,6 +27,10 @@
     {
       "errorCode": "ERROR_CODE_8",
       "description": "Field selectedRisks is empty!"
+    },
+    {
+      "errorCode": "ERROR_CODE_19",
+      "description": "Field travelCost is empty!"
     }
   ]
 }
