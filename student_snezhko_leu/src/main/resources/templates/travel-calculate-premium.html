@@ -41,11 +41,11 @@
 <td th:if="${response.errors != null}">
     <h3>Travel Insurance Premium Calculation ERRORS</h3>
     <tr th:each="error : ${response.errors}">
-<td th:text="${error.errorCode}" />
-<td th:text="${error.description}" />
-<br>
-<br>
-</tr>
+        <td th:text="${error.errorCode}" />
+        <td th:text="${error.description}" />
+    <br>
+    <br>
+    </tr>
 </td>
 
 <br>
