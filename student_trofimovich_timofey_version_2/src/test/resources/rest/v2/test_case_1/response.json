@@ -8,30 +8,40 @@
       "personFirstName": "Vasja",
       "personLastName": "Pupkin",
       "personBirthDate": "2000-05-29",
-      "personPremium": 11.00,
+      "personPremium": 49.00,
       "personRisks": [
+        {
+          "ic": "TRAVEL_CANCELLATION",
+          "premium": 38.00
+        },
         {
           "ic": "TRAVEL_MEDICAL",
           "premium": 11.00
         }
       ],
-      "medicalRiskLimitLevel": "LEVEL_10000"
+      "medicalRiskLimitLevel": "LEVEL_10000",
+      "travelCost": 100.00
     },
     {
       "personUUID": "1212",
       "personFirstName": "Petja",
       "personLastName": "Pupkin",
       "personBirthDate": "1950-03-01",
-      "personPremium": 18.00,
+      "personPremium": 86.00,
       "personRisks": [
+        {
+          "ic": "TRAVEL_CANCELLATION",
+          "premium": 68.00
+        },
         {
           "ic": "TRAVEL_MEDICAL",
           "premium": 18.00
         }
       ],
-      "medicalRiskLimitLevel": "LEVEL_15000"
+      "medicalRiskLimitLevel": "LEVEL_15000",
+      "travelCost": 100.00
     }
   ],
-  "agreementPremium": 29.00,
-  "uuid": ""
+  "agreementPremium": 135.00,
+  "uuid": "98a58b8d-47aa-4645-b98f-26ef1fa3eedb"
 }

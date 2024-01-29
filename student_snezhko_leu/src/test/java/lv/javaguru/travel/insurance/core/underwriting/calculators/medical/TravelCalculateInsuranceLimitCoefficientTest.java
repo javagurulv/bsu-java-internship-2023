@@ -1,5 +1,6 @@
 package lv.javaguru.travel.insurance.core.underwriting.calculators.medical;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 import lv.javaguru.travel.insurance.core.domain.MedicalRiskLimitLevel;
 import lv.javaguru.travel.insurance.core.repositories.MedicalRiskLimitLevelRepository;
@@ -25,7 +26,7 @@ public class TravelCalculateInsuranceLimitCoefficientTest {
     @Test
     public void TravelCalculateInsuranceLimitCoefficientCorrectValueTest() {
         init("LEVEL_10000", 1.0);
-        assertEquals(1.0, calculator.calculatePremium(request));
+        assertEquals(BigDecimal.valueOf(1.0), calculator.calculatePremium(request));
     }
 
     private void init(String requestLimitLevelValue, Double expectedValue) {
@@ -33,7 +34,7 @@ public class TravelCalculateInsuranceLimitCoefficientTest {
 
         MedicalRiskLimitLevel mrll = mock(MedicalRiskLimitLevel.class);
         when(mrll.getMedicalRiskLimitLevelIc()).thenReturn(requestLimitLevelValue);
-        when(mrll.getCoefficient()).thenReturn(expectedValue);
+        when(mrll.getCoefficient()).thenReturn(BigDecimal.valueOf(expectedValue));
 
         when(mrllRepository.findCoefficientByLimitLevelIc(requestLimitLevelValue)).thenReturn(Optional.of(mrll));
 

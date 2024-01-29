@@ -1,5 +1,6 @@
 package lv.javaguru.travel.insurance.core.validations.calculate.premium.person;
 
+import lv.javaguru.travel.insurance.core.api.dto.agreement.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.person.PersonDTO;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import lv.javaguru.travel.insurance.core.validations.ValidationErrorFactory;
@@ -14,7 +15,7 @@ class DateOfBirthIsNotEmptyValidation extends TravelPersonFieldValidationImpl {
     private ValidationErrorFactory errorFactory;
 
     @Override
-    public Optional<ValidationErrorDTO> validate(PersonDTO person) {
+    public Optional<ValidationErrorDTO> validate(PersonDTO person, AgreementDTO agreement) {
         return (person.getPersonBirthDate() == null)
                 ? Optional.of(errorFactory.buildError("ERROR_CODE_12"))
                 : Optional.empty();

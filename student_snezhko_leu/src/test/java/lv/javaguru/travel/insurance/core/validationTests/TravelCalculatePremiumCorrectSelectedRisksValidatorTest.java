@@ -42,7 +42,7 @@ public class TravelCalculatePremiumCorrectSelectedRisksValidatorTest {
         String riskName = "UNCORRECT_RISK";
         risks.add(riskName);
   //      risks.add("UNCORRECT_RISK_2");
-        when(request.getSelected_risks()).thenReturn(risks);
+        when(request.getSelectedRisks()).thenReturn(risks);
 
         String errorCode = "ERROR_CODE_9";
         String description = "Risk with ic = UNCORRECT_RISK is not supported!";

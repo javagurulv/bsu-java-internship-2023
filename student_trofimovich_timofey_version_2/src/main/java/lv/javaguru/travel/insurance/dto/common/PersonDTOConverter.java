@@ -23,6 +23,7 @@ public class PersonDTOConverter {
                 .map(RiskDTO::getPremium)
                 .reduce(BigDecimal.ZERO, BigDecimal::add));
         personResponseDTO.setMedicalRiskLimitLevel(personDTO.getMedicalRiskLimitLevel());
+        personResponseDTO.setTravelCost(personDTO.getTravelCost());
         return personResponseDTO;
     }
 }

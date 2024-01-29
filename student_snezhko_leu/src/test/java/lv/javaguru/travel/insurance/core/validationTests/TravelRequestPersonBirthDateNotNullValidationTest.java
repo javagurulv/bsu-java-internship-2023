@@ -36,7 +36,7 @@ public class TravelRequestPersonBirthDateNotNullValidationTest {
         when(request.getPersonLastName()).thenReturn("Last Name");
         when(request.getAgreementDateFrom()).thenReturn(Date.valueOf("2026-05-03"));
         when(request.getAgreementDateTo()).thenReturn(Date.valueOf("2026-10-03"));
-        when(request.getSelected_risks()).thenReturn(risks);
+        when(request.getSelectedRisks()).thenReturn(risks);
         when(request.getCountry()).thenReturn("LATVIA");
 
 

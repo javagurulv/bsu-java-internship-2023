@@ -22,7 +22,7 @@ public class CountryValidation extends TravelAgreementFieldValidationImpl {
     public Optional<ValidationErrorDTO> validate(AgreementDTO agreement) {
         if (countryIsEmpty(agreement)) {
             return Optional.of(errorFactory.buildError("ERROR_CODE_10"));
-        } else if (!countryIsRecognised(agreement)) {
+        } else if (!countryIsSupported(agreement)) {
             return Optional.of(errorFactory.buildError("ERROR_CODE_11", List.of(new Placeholder("country", agreement.getCountry()))));
         }
         return Optional.empty();
@@ -32,9 +32,14 @@ public class CountryValidation extends TravelAgreementFieldValidationImpl {
         return agreement.getCountry() == null || agreement.getCountry().isBlank();
     }
 
-    private boolean countryIsRecognised(AgreementDTO agreement) {
+    private boolean countryIsSupported(AgreementDTO agreement) {
         String country = agreement.getCountry();
-        return classifierValueRepository.findByClassifierTitleAndIc("COUNTRY", country).isPresent();
-
+        return countryIsSupported(country);
     }
+
+
+    private boolean countryIsSupported(String country) {
+        return classifierValueRepository.findByClassifierTitleAndIc("COUNTRY", country).isPresent();
+    }
+
 }

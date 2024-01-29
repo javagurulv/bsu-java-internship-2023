@@ -13,10 +13,16 @@ public class TravelCancellationPremiumCalculation implements TravelRiskPremiumCa
 
     @Autowired
     private TravelCostCoefficientCalculator costCoefficientCalculator;
+    @Autowired
+    private TCCountrySafeRatingCoefficientCalculator countrySafeRatingCoefficientCalculator;
+    @Autowired
+    private TripCancellationAgeCoefficientCalculator tripCancellationAgeCoefficientCalculator;
 
     @Override
     public BigDecimal calculatePremium(AgreementDTO agreement, PersonDTO person) {
-        return BigDecimal.ZERO;
+        return costCoefficientCalculator.getCostCoefficient(person)
+                .add(countrySafeRatingCoefficientCalculator.getCountrySafeRatingCoefficient(agreement))
+                .add(tripCancellationAgeCoefficientCalculator.calculateAgeCoefficient(person));
     }
 
     @Override

@@ -1,0 +1,13 @@
+{
+  "errors": [
+    {
+      "field" : "agreementDateTo",
+      "message" : "Must be after agreementDateFrom!"
+    }
+  ],
+  "personFirstName" : null,
+  "personLastName" : null,
+  "agreementDateFrom" : null,
+  "agreementDateTo" : null,
+  "agreementPrice" : null
+}

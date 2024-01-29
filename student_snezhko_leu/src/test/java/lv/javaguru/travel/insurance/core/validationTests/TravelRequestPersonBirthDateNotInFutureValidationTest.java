@@ -37,7 +37,7 @@ public class TravelRequestPersonBirthDateNotInFutureValidationTest {
         when(request.getAgreementDateFrom()).thenReturn(Date.valueOf("2030-05-03"));
         when(request.getAgreementDateTo()).thenReturn(Date.valueOf("2030-05-05"));
         when(request.getCountry()).thenReturn("LATVIA");
-        when(request.getSelected_risks()).thenReturn(selectedRisk);
+        when(request.getSelectedRisks()).thenReturn(selectedRisk);
         when(request.getPersonBirthDate()).thenReturn(Date.valueOf("2026-04-05"));
 
         String errorCode = "ERROR_CODE_13";

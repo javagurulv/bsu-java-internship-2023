@@ -43,7 +43,7 @@ public class TravelCalculatePremiumRequestCountryIsCorrectValidationTest {
         //risks.add("TRAVEL_MEDICAL");
         risks.add(riskName);
         //      risks.add("UNCORRECT_RISK_2");
-        when(request.getSelected_risks()).thenReturn(risks);
+        when(request.getSelectedRisks()).thenReturn(risks);
 
         String countryName = "INCORRECT_COUNTRY";
 

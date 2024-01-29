@@ -18,11 +18,10 @@ import java.util.AbstractMap;
 import java.util.Map;
 import java.util.stream.Stream;
 
-import static org.hamcrest.Matchers.is;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static uk.org.webcompere.modelassert.json.JsonAssertions.assertJson;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
@@ -68,13 +67,13 @@ public class TravelCalculatePremiumControllerTest {
                 .andReturn();
 
         String responseBodyContent = result.getResponse().getContentAsString();
-        if (!JsonReader.compareJsonString(correctJsonResponse, responseBodyContent)) {
-            System.out.println(correctJsonResponse);
-            System.out.println(responseBodyContent);
-
-        }
 
         assertTrue(JsonReader.compareJsonString(correctJsonResponse, responseBodyContent));
+
+        assertJson(correctJsonResponse)
+                .where().keysInAnyOrder()
+                .isEqualTo(responseBodyContent);
+
 
     }
 
