@@ -5,7 +5,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
 
-    <changeSet author = "javaguru" id = "29">
+    <changeSet author = "Timofey" id = "29">
         <createTable tableName="agreement_person_risks">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true"/>
@@ -22,7 +22,7 @@
         </createTable>
     </changeSet>
 
-    <changeSet author="javaguru" id="30">
+    <changeSet author="Timofey" id="30">
         <createIndex indexName="ix_agreement_person_risks_person_risk_ic"
                      tableName="agreement_person_risks"
                      unique="true">
@@ -31,7 +31,7 @@
         </createIndex>
     </changeSet>
 
-    <changeSet author="javaguru" id="31">
+    <changeSet author="Timofey" id="31">
         <addForeignKeyConstraint baseTableName="agreement_person_risks"
                                  baseColumnNames="agreement_person_id"
                                  constraintName="fk_agreement_person_risks_agreement_person_id"

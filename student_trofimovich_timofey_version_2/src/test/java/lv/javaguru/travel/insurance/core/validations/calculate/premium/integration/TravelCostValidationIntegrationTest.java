@@ -19,30 +19,30 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class PersonLastNameValidationIntegrationTest {
+public class TravelCostValidationIntegrationTest {
     @Autowired
     private TravelAgreementValidator validator;
 
     @Test
-    public void shouldReturnErrorWhenPersonLastNameIsEmpty() {
+    public void shouldReturnErrorWhenTravelCostIsNul() {
         AgreementDTO agreement = AgreementDTO.builder()
                 .agreementDateFrom(DateTimeUtil.createDate("12.10.2030"))
                 .agreementDateTo(DateTimeUtil.createDate("14.10.2030"))
                 .country("SPAIN")
-                .selectedRisks(List.of("TRAVEL_MEDICAL"))
+                .selectedRisks(List.of("TRAVEL_CANCELLATION"))
                 .persons(
                         List.of(PersonDTO.builder()
                                 .personUUID("1212")
                                 .personFirstName("Vasja")
-                                .personLastName("")
+                                .personLastName("Pupkin")
                                 .personBirthDate(DateTimeUtil.createDate("01.01.2000"))
-                                .medicalRiskLimitLevel("LEVEL_10000")
                                 .build())
                 )
                 .build();
         List<ValidationErrorDTO> errors = validator.validate(agreement);
         assertThat(errors.size()).isEqualTo(1);
-        assertThat(errors.get(0).getErrorCode()).isEqualTo("ERROR_CODE_2");
-        assertThat(errors.get(0).getDescription()).isEqualTo("Field personLastName is empty!");
+        assertThat(errors.get(0).getErrorCode()).isEqualTo("ERROR_CODE_19");
+        assertThat(errors.get(0).getDescription()).isEqualTo("Field travelCost is empty!");
     }
+
 }

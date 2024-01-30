@@ -4,6 +4,7 @@ import lv.javaguru.travel.insurance.core.api.dto.agreement.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.person.PersonDTO;
 import lv.javaguru.travel.insurance.core.underwriting.TravelPremiumCalculationResult;
 import lv.javaguru.travel.insurance.core.underwriting.TravelPremiumUnderwriting;
+import lv.javaguru.travel.insurance.core.util.DateTimeUtil;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,12 +15,8 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.math.BigDecimal;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.List;
 
-import static lv.javaguru.travel.insurance.core.api.dto.agreement.AgreementDTOBuilder.createAgreement;
-import static lv.javaguru.travel.insurance.core.api.dto.person.PersonDTOBuilder.createPerson;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(SpringExtension.class)
@@ -35,19 +32,19 @@ public class TMAgeCoefficientSwitchDisabledIntegrationTest {
 
     @Test
     public void shouldBeDisabledMedicalRiskLimitLevel() {
-        PersonDTO person = createPerson()
-                .withPersonFirstName("Vasja")
-                .withPersonLastName("Pupkin")
-                .withPersonBirthDate(createDate("29.05.2000"))
-                .withMedicalRiskLimitLevel("LEVEL_20000")
+        PersonDTO person = PersonDTO.builder()
+                .personFirstName("Vasja")
+                .personLastName("Pupkin")
+                .personBirthDate(DateTimeUtil.createDate("29.05.2000"))
+                .medicalRiskLimitLevel("LEVEL_20000")
                 .build();
 
-        AgreementDTO agreement = createAgreement()
-                .withAgreementDateFrom(createDate("25.05.2025"))
-                .withAgreementDateTo(createDate("29.05.2025"))
-                .withCountry("SPAIN")
-                .withSelectedRisk("TRAVEL_MEDICAL")
-                .withPerson(person)
+        AgreementDTO agreement = AgreementDTO.builder()
+                .agreementDateFrom(DateTimeUtil.createDate("25.05.2025"))
+                .agreementDateTo(DateTimeUtil.createDate("29.05.2025"))
+                .country("SPAIN")
+                .selectedRisks(List.of("TRAVEL_MEDICAL"))
+                .persons(List.of(person))
                 .build();
 
         TravelPremiumCalculationResult result = premiumUnderwriting.calculatePremium(agreement, person);
@@ -55,12 +52,5 @@ public class TMAgeCoefficientSwitchDisabledIntegrationTest {
         assertEquals(result.getTotalPremium(), new BigDecimal("15.00"));
     }
 
-    private Date createDate(String dateStr) {
-        try {
-            return new SimpleDateFormat("dd.MM.yyyy").parse(dateStr);
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
 }

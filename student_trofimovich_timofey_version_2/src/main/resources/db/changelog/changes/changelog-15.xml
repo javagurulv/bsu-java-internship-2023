@@ -5,7 +5,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
 
-    <changeSet author = "javaguru" id = "40">
+    <changeSet author = "Timofey" id = "40">
         <createTable tableName="travel_cancellation_age_coefficient">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true"/>
@@ -22,7 +22,7 @@
         </createTable>
     </changeSet>
 
-    <changeSet author = "javaguru" id = "41">
+    <changeSet author = "Timofey" id = "41">
         <sql>
             INSERT INTO travel_cancellation_age_coefficient(age_from, age_to, coefficient)
             VALUES(0, 9, 5.0);

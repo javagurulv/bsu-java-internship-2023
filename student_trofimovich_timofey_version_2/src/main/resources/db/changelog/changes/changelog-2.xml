@@ -5,7 +5,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
 
-    <changeSet author="javaguru" id="3">
+    <changeSet author="Timofey" id="3">
         <createTable tableName="classifier_values">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true"/>
@@ -22,7 +22,7 @@
         </createTable>
     </changeSet>
 
-    <changeSet author="javaguru" id="4">
+    <changeSet author="Timofey" id="4">
         <addForeignKeyConstraint baseTableName="classifier_values"
                                  baseColumnNames="classifier_id"
                                  constraintName="fk_classifier_values_classifier_id"
@@ -30,7 +30,7 @@
                                  referencedColumnNames="id"/>
     </changeSet>
 
-    <changeSet author="javaguru" id="5">
+    <changeSet author="Timofey" id="5">
         <createIndex indexName="ix_classifier_values_ic"
                      tableName="classifier_values"
                      unique="true">

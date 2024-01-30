@@ -1,9 +1,6 @@
 package lv.javaguru.travel.insurance.core.api.dto.person;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import lv.javaguru.travel.insurance.core.api.dto.risk.RiskDTO;
 
 import java.math.BigDecimal;
@@ -14,6 +11,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class PersonDTO {
     private String personUUID;
     private String personFirstName;
