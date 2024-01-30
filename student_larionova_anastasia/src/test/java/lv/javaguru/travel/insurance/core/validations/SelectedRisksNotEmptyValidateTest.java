@@ -25,8 +25,8 @@ class SelectedRisksNotEmptyValidateTest {
         when(request.getSelectedRisks()).thenReturn(null);
         Optional<ValidationError> errors = validate.validator(request);
         assertFalse(errors.isEmpty());
-        assertEquals(errors.get().getField(), "selectedRisks");
-        assertEquals(errors.get().getMessage(), "Must not be empty!");
+        assertEquals(errors.get().getErrorCode(), "ERROR_CODE_8");
+        assertEquals(errors.get().getDescription(), validate.errorCode8Message);
     }
 
     @Test
@@ -35,8 +35,8 @@ class SelectedRisksNotEmptyValidateTest {
         when(request.getSelectedRisks()).thenReturn(Collections.emptyList());
         Optional<ValidationError> errors = validate.validator(request);
         assertFalse(errors.isEmpty());
-        assertEquals(errors.get().getField(), "selectedRisks");
-        assertEquals(errors.get().getMessage(), "Must not be empty!");
+        assertEquals(errors.get().getErrorCode(), "ERROR_CODE_8");
+        assertEquals(errors.get().getDescription(), validate.errorCode8Message);
     }
 
     @Test

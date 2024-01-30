@@ -34,7 +34,7 @@ class DateFromLessDateToValidateTest {
         when(request.getAgreementDateTo()).thenReturn(createDate.createDate("10-10-2026"));
         Optional<ValidationError> errors = validation.validator(request);
         assertTrue(errors.isPresent());
-        assertEquals(errors.get().getField(), "agreementDateFrom and agreementDateTo");
-        assertEquals(errors.get().getMessage(), "AgreementDateFrom should be less than AgreementDateTo!");
+        assertEquals(errors.get().getErrorCode(), "ERROR_CODE_2");
+        assertEquals(errors.get().getDescription(), validation.errorCode2Message);
     }
 }

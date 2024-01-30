@@ -37,7 +37,7 @@ class DateFromInThePastValidateTest {
         when(dateTimeService.getCurrentDateTime()).thenReturn(createDate.createDate("10-10-2023"));
         Optional<ValidationError> errors = validate.validator(request);
         assertTrue(errors.isPresent());
-        assertEquals(errors.get().getField(), "agreementDateFrom");
-        assertEquals(errors.get().getMessage(), "AgreementDateFrom should only be from the future");
+        assertEquals(errors.get().getErrorCode(), "ERROR_CODE_1");
+        assertEquals(errors.get().getDescription(), validate.errorCode1Message);
     }
 }

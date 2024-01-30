@@ -25,8 +25,8 @@ class DateToValidateTest {
         when(request.getAgreementDateTo()).thenReturn(null);
         Optional<ValidationError> errors = validate.validator(request);
         assertTrue(errors.isPresent());
-        assertEquals(errors.get().getField(), "agreementDateTo");
-        assertEquals(errors.get().getMessage(), "Must not be empty!");
+        assertEquals(errors.get().getErrorCode(), "ERROR_CODE_5");
+        assertEquals(errors.get().getDescription(), validate.errorCode5Message);
     }
 
     @Test

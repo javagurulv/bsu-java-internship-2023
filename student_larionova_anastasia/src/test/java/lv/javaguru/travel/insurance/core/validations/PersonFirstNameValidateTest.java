@@ -23,8 +23,8 @@ class PersonFirstNameValidateTest {
         when(request.getPersonFirstName()).thenReturn(null);
         Optional<ValidationError> errors = validate.validator(request);
         assertTrue(errors.isPresent());
-        assertEquals(errors.get().getField(), "personFirstName");
-        assertEquals(errors.get().getMessage(), "Must not be empty!");
+        assertEquals(errors.get().getErrorCode(), "ERROR_CODE_6");
+        assertEquals(errors.get().getDescription(), validate.errorCode6Message);
     }
 
     @Test
@@ -33,8 +33,8 @@ class PersonFirstNameValidateTest {
         when(request.getPersonFirstName()).thenReturn("");
         Optional<ValidationError> errors = validate.validator(request);
         assertTrue(errors.isPresent());
-        assertEquals(errors.get().getField(), "personFirstName");
-        assertEquals(errors.get().getMessage(), "Must not be empty!");
+        assertEquals(errors.get().getErrorCode(), "ERROR_CODE_6");
+        assertEquals(errors.get().getDescription(), validate.errorCode6Message);
     }
 
     @Test
