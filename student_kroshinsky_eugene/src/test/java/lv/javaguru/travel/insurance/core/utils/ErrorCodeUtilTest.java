@@ -35,6 +35,6 @@ class ErrorCodeUtilTest {
     }
     @Test
     void getPropertyNOT_EXISTING_RISK() {
-        assertEquals("Ic doesn't exist!", errorCodeUtil.getProperty("NOT_EXISTING_RISK"));
+        assertEquals("{NOT_EXISTING_RISK} is not supported by system!", errorCodeUtil.getProperty("NOT_EXISTING_RISK"));
     }
 }

@@ -27,7 +27,7 @@ public class TravelCalculatePremiumController {
 	public TravelCalculatePremiumResponse calculatePremium(@RequestBody TravelCalculatePremiumRequest request) {
 		Stopwatch stopwatch = Stopwatch.createStarted();
 		requestLogger.logRequest(request);
-		TravelCalculatePremiumResponse response = calculatePremiumService.calculatePremium(request);
+			TravelCalculatePremiumResponse response = calculatePremiumService.calculatePremium(request);
 		responseLogger.logResponse(response);
 		stopwatch.stop();
 		timeLogger.logRequest(stopwatch);
