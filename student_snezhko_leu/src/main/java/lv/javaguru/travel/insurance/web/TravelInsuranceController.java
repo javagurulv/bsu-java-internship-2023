@@ -26,6 +26,7 @@ public class TravelInsuranceController {
     public String processForm(@ModelAttribute(value = "request") TravelCalculatePremiumRequest request,
                               ModelMap modelMap) {
         TravelCalculatePremiumResponse response = service.calculatePremium(request);
+        modelMap.addAttribute("request", request);
         modelMap.addAttribute("response", response);
         return "travel-calculate-premium";
     }

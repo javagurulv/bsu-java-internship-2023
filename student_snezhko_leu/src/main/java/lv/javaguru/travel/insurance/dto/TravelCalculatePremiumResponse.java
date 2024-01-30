@@ -10,6 +10,7 @@ import lombok.*;
 import lv.javaguru.travel.insurance.core.ValidationError;
 import lv.javaguru.travel.insurance.core.util.BigDecimalSerializer;
 import lv.javaguru.travel.insurance.rest.CoreResponse;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Getter
 @Setter
@@ -19,9 +20,13 @@ public class TravelCalculatePremiumResponse extends CoreResponse {
 
     private String personFirstName;
     private String personLastName;
+
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date agreementDateFrom;
+
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date agreementDateTo;
 
     @JsonSerialize(using = BigDecimalSerializer.class)
@@ -31,6 +36,7 @@ public class TravelCalculatePremiumResponse extends CoreResponse {
     private String country;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date personBirthDate;
 
     private String medicalRiskLimitLevel;
