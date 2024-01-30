@@ -4,6 +4,7 @@ import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -17,18 +18,18 @@ import static org.mockito.Mockito.when;
 class DateFromValidateTest {
 
     @Autowired private CreateDate createDate;
-
-    @InjectMocks
-    private DateFromValidate validate;
+    @InjectMocks private DateFromValidate validate;
+    @Mock private ValidationErrorFactory errorFactory;
 
     @Test
     void validatorWhenDateFromIsNull() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getAgreementDateFrom()).thenReturn(null);
+        ValidationError validationError = mock(ValidationError.class);
+        when(errorFactory.buildError("ERROR_CODE_3")).thenReturn(validationError);
         Optional<ValidationError> errors = validate.validator(request);
         assertTrue(errors.isPresent());
-        assertEquals(errors.get().getErrorCode(), "ERROR_CODE_3");
-        assertEquals(errors.get().getDescription(), validate.errorCode3Message);
+        assertSame(errors.get(), validationError);
     }
 
     @Test

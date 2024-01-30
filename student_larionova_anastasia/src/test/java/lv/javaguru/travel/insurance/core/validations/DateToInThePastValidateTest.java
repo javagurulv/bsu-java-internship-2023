@@ -11,9 +11,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -27,6 +24,7 @@ class DateToInThePastValidateTest {
     @Autowired private CreateDate createDate;
 
     @Mock private DateTimeService dateTimeService;
+    @Mock private ValidationErrorFactory errorFactory;
 
     @InjectMocks private DateToInThePastValidate validation;
 
@@ -35,10 +33,20 @@ class DateToInThePastValidateTest {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getAgreementDateTo()).thenReturn(createDate.createDate("10-10-2020"));
         when(dateTimeService.getCurrentDateTime()).thenReturn(createDate.createDate("01-03-2023"));
+        ValidationError validationError = mock(ValidationError.class);
+        when(errorFactory.buildError("ERROR_CODE_4")).thenReturn(validationError);
         Optional<ValidationError> errors = validation.validator(request);
         assertTrue(errors.isPresent());
-        assertEquals(errors.get().getErrorCode(), "ERROR_CODE_4");
-        assertEquals(errors.get().getDescription(), validation.errorCode4Message);
+        assertSame(errors.get(), validationError);
+    }
+
+    @Test
+    void validatorWhenDateToInFuture() {
+        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        when(request.getAgreementDateTo()).thenReturn(createDate.createDate("10-10-2027"));
+        when(dateTimeService.getCurrentDateTime()).thenReturn(createDate.createDate("01-03-2023"));
+        Optional<ValidationError> errors = validation.validator(request);
+        assertFalse(errors.isPresent());
     }
 
 }
