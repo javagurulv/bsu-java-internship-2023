@@ -13,7 +13,7 @@
             <column name="country_ic" type="VARCHAR(200)">
                 <constraints nullable="false"/>
             </column>
-            <column name="default_day_rate" type="DECIMAL(10,2)">
+            <column name="country_default_day_rate" type="DECIMAL(10,2)">
                 <constraints nullable="false"/>
             </column>
         </createTable>
