@@ -6,12 +6,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Component
 class TravelPremiumUnderwritingImpl implements TravelPremiumUnderwriting {
-    @Autowired private DateTimeUtil dateTimeDifference;
+    @Autowired private List<TravelRiskPremiumCalculator> calculators;
     @Override
     public BigDecimal calculatePremium(TravelCalculatePremiumRequest request){
-        return dateTimeDifference.calculateDateDifference(request.getAgreementDateFrom(), request.getAgreementDateTo());
+        BigDecimal result = BigDecimal.ZERO;
+        for (TravelRiskPremiumCalculator calculator : calculators) {
+            result = result.add(calculator.calculatePremium(request));
+        }
+        return result;
     }
 }

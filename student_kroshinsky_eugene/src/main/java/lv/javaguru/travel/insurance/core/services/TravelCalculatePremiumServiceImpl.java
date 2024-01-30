@@ -1,5 +1,6 @@
 package lv.javaguru.travel.insurance.core.services;
 
+import lv.javaguru.travel.insurance.core.underwriting.TravelPremiumUnderwriting;
 import lv.javaguru.travel.insurance.core.utils.DateTimeUtil;
 import lv.javaguru.travel.insurance.rest.loggers.TravelCalculatePremiumRequestLogger;
 import lv.javaguru.travel.insurance.core.validations.TravelCalculatePremiumRequestValidator;
@@ -16,6 +17,7 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
     @Autowired private DateTimeUtil dateTimeService;
     @Autowired private TravelCalculatePremiumRequestValidator requestValidator;
     @Autowired private TravelCalculatePremiumRequestLogger logger;
+    @Autowired private TravelPremiumUnderwriting premiumUnderwriting;
     @Override
     public TravelCalculatePremiumResponse calculatePremium(TravelCalculatePremiumRequest request) {
         List<ValidationError> errors = requestValidator.validate(request);
@@ -30,7 +32,7 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
         response.setPersonLastName(request.getPersonLastName());
         response.setAgreementDateFrom(request.getAgreementDateFrom());
         response.setAgreementDateTo(request.getAgreementDateTo());
-        response.setAgreementPrice(dateTimeService.calculateDateDifference(request.getAgreementDateFrom(),request.getAgreementDateTo()));
+        response.setAgreementPrice(premiumUnderwriting.calculatePremium(request));
         return response;
     }
 }
