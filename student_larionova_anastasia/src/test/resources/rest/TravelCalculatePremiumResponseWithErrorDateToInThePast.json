@@ -1,12 +1,12 @@
 {
   "errors": [
     {
-      "field": "agreementDateFrom and agreementDateTo",
-      "message": "AgreementDateFrom should be less than AgreementDateTo!"
+      "errorCode": "ERROR_CODE_2",
+      "description": "field agreementDateFrom should be less than AgreementDateTo!"
     },
     {
-      "field": "agreementDateTo",
-      "message": "AgreementDateTo should only be from the future"
+      "errorCode": "ERROR_CODE_4",
+      "description": "field agreementDateTo should only be from the future!"
     }
   ],
   "personFirstName": null,

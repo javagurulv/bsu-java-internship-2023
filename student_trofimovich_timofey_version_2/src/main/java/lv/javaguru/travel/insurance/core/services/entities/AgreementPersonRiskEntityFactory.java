@@ -12,12 +12,12 @@ class AgreementPersonRiskEntityFactory {
     @Autowired
     private AgreementPersonRiskEntityRepository repository;
 
-    AgreementPersonRiskEntity createAgreementPersonRiskEntity(AgreementPersonEntity agreementPersonEntity,
-                                                              RiskDTO riskDTO) {
+    void createAgreementPersonRiskEntity(AgreementPersonEntity agreementPersonEntity,
+                                         RiskDTO riskDTO) {
         AgreementPersonRiskEntity agreementPersonRiskEntity = new AgreementPersonRiskEntity();
         agreementPersonRiskEntity.setAgreementPersonEntity(agreementPersonEntity);
         agreementPersonRiskEntity.setRiskIc(riskDTO.getRiskIc());
         agreementPersonRiskEntity.setPremium(riskDTO.getPremium());
-        return repository.save(agreementPersonRiskEntity);
+        repository.save(agreementPersonRiskEntity);
     }
 }

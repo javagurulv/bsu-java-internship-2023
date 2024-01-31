@@ -20,11 +20,10 @@ public class AgreementEntityFactory {
     private AgreementPersonRiskEntityFactory agreementPersonRiskEntityFactory;
 
 
-    public AgreementEntity createAgreementEntity(AgreementDTO agreementDTO) {
+    public void createAgreementEntity(AgreementDTO agreementDTO) {
         AgreementEntity agreementEntity = saveAgreement(agreementDTO);
         saveSelectedRisks(agreementDTO, agreementEntity);
         savePersonAgreements(agreementDTO, agreementEntity);
-        return agreementEntity;
     }
 
     private void savePersonAgreements(AgreementDTO agreementDTO, AgreementEntity agreementEntity) {

@@ -21,6 +21,8 @@ class TravelPersonFieldValidator {
 
     public List<ValidationErrorDTO> validate(AgreementDTO agreement) {
 
+        if (agreement.getPersons() == null) return List.of();
+
         return agreement.getPersons().stream()
                 .map(person -> getPersonErrors(person, agreement))
                 .flatMap(List::stream)

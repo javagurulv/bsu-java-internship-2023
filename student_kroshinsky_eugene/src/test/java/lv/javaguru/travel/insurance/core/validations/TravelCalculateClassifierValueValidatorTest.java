@@ -2,6 +2,7 @@ package lv.javaguru.travel.insurance.core.validations;
 
 import lv.javaguru.travel.insurance.core.domain.ClassifierValue;
 import lv.javaguru.travel.insurance.core.repositories.ClassifierValueRepository;
+import lv.javaguru.travel.insurance.dto.Placeholder;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.Test;
@@ -16,6 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -29,7 +31,7 @@ class TravelCalculateClassifierValueValidatorTest {
     @Mock
     private ValidationError validationError;
     @InjectMocks
-    TravelCalculateClassifierValueValidator validator;
+    private TravelCalculateClassifierValueValidator validator;
     @Test
     public void injectedRepositoryAreNotNull() {
         assertNotNull(validationErrorFactory);
@@ -54,7 +56,7 @@ class TravelCalculateClassifierValueValidatorTest {
                 .thenReturn(Optional.empty());
         when(valueRepository.findByClassifierTitleAndIc("RISK_TYPE","TRAVEL_EVACUATION"))
                 .thenReturn(Optional.of(new ClassifierValue()));
-        when(validationErrorFactory.createValidationError("NOT_EXISTING_RISK"))
+        when(validationErrorFactory.buildError(anyString(), anyList()))
                 .thenReturn(validationError);
         List<ValidationError> actualList = validator.validateList(request);
         assertTrue(!actualList.isEmpty());
