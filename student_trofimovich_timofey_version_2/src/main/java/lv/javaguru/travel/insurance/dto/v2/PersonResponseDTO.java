@@ -37,6 +37,7 @@ public class PersonResponseDTO {
     private List<RiskPremium> personRisks;
 
     private String medicalRiskLimitLevel;
+
     @JsonSerialize(using = BigDecimalSerializer.class)
     private BigDecimal travelCost;
 }

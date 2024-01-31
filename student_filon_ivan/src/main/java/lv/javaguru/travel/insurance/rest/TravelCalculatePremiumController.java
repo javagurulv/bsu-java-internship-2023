@@ -19,7 +19,7 @@ public class TravelCalculatePremiumController {
 			consumes = "application/json",
 			produces = "application/json")
 	public TravelCalculatePremiumResponse calculatePremium(@RequestBody TravelCalculatePremiumRequest request) {
-		return calculatePremiumService.calculatePremium(request);
+		return calculatePremiumService.calculatePremiumResponse(request);
 	}
 
 }

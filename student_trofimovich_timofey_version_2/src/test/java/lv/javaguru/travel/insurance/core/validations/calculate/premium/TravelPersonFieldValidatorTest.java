@@ -16,6 +16,7 @@ import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -44,8 +45,8 @@ public class TravelPersonFieldValidatorTest {
     @Test
     void shouldNotReturnErrors() {
 
-        when(personFieldValidation1.validate(any(PersonDTO.class))).thenReturn(Optional.empty());
-        when(personFieldValidation1.validateList(any())).thenReturn(List.of());
+        when(personFieldValidation1.validate(any(PersonDTO.class), eq(agreement))).thenReturn(Optional.empty());
+        when(personFieldValidation1.validateList(any(), eq(agreement))).thenReturn(List.of());
 
 
         List<PersonDTO> persons = List.of(person1, person2);
@@ -62,13 +63,13 @@ public class TravelPersonFieldValidatorTest {
     void shouldReturnListPersonErrors() {
 
 
-        when(personFieldValidation1.validate(any(PersonDTO.class))).thenReturn(Optional.empty());
-        when(personFieldValidation1.validateList(any(PersonDTO.class))).thenReturn(List.of(mock(ValidationErrorDTO.class),
+        when(personFieldValidation1.validate(any(PersonDTO.class), eq(agreement))).thenReturn(Optional.empty());
+        when(personFieldValidation1.validateList(any(PersonDTO.class), eq(agreement))).thenReturn(List.of(mock(ValidationErrorDTO.class),
                 mock(ValidationErrorDTO.class)));
 
 
-        when(personFieldValidation2.validate(any(PersonDTO.class))).thenReturn(Optional.empty());
-        when(personFieldValidation2.validateList(any(PersonDTO.class))).thenReturn(List.of(mock(ValidationErrorDTO.class),
+        when(personFieldValidation2.validate(any(PersonDTO.class), eq(agreement))).thenReturn(Optional.empty());
+        when(personFieldValidation2.validateList(any(PersonDTO.class), eq(agreement))).thenReturn(List.of(mock(ValidationErrorDTO.class),
                 mock(ValidationErrorDTO.class)));
 
         List<PersonDTO> persons = List.of(person1, person2);
@@ -85,8 +86,8 @@ public class TravelPersonFieldValidatorTest {
     void shouldReturnSinglePersonErrors() {
 
 
-        when(personFieldValidation1.validate(any(PersonDTO.class))).thenReturn(Optional.of(mock(ValidationErrorDTO.class)));
-        when(personFieldValidation2.validate(any(PersonDTO.class))).thenReturn(Optional.of(mock(ValidationErrorDTO.class)));
+        when(personFieldValidation1.validate(any(PersonDTO.class), eq(agreement))).thenReturn(Optional.of(mock(ValidationErrorDTO.class)));
+        when(personFieldValidation2.validate(any(PersonDTO.class), eq(agreement))).thenReturn(Optional.of(mock(ValidationErrorDTO.class)));
 
         List<PersonDTO> persons = List.of(person1, person2);
         when(agreement.getPersons()).thenReturn(persons);

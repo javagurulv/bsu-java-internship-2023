@@ -1,0 +1,14 @@
+{
+  "errors": [
+    {
+      "errorCode": "agreementDateFrom",
+      "description": "Must not be in past!"
+    }
+  ],
+  "personFirstName": null,
+  "personLastName": null,
+  "agreementDateFrom": null,
+  "agreementDateTo": null,
+  "agreementPrice": null,
+  "selectedRisks" : null
+}

@@ -1,7 +1,6 @@
 package lv.javaguru.travel.insurance.core.services;
 
-import lv.javaguru.travel.insurance.core.services.TravelCalculatePremiumServiceImpl;
-import lv.javaguru.travel.insurance.core.utils.DateTimeUtil;
+import lv.javaguru.travel.insurance.core.underwriting.TravelPremiumUnderwriting;
 import lv.javaguru.travel.insurance.core.validations.TravelCalculatePremiumRequestValidator;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumResponse;
@@ -21,13 +20,13 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class TravelCalculatePremiumServiceImplTest {
-    @Mock private DateTimeUtil dateDifferenceService;
     @Mock private TravelCalculatePremiumRequest request;
     @Mock private TravelCalculatePremiumRequestValidator requestValidator;
+    @Mock private TravelPremiumUnderwriting premiumUnderwriting;
     @InjectMocks TravelCalculatePremiumServiceImpl calculator;
     @Test
     public void injectedRepositoryAreNotNull() {
-        assertNotNull(dateDifferenceService);
+        assertNotNull(premiumUnderwriting);
         assertNotNull(request);
         assertNotNull(requestValidator);
         assertNotNull(calculator);
@@ -69,10 +68,9 @@ class TravelCalculatePremiumServiceImplTest {
         when(request.getAgreementDateFrom()).thenReturn(createDate("16.11.2023"));
         when(request.getAgreementDateTo()).thenReturn(createDate("24.11.2023"));
         when(requestValidator.validate(request)).thenReturn(List.of());
-        when(dateDifferenceService.calculateDateDifference(
-                request.getAgreementDateFrom(), request.getAgreementDateTo())).thenReturn(new BigDecimal(8));
+        when(premiumUnderwriting.calculatePremium(request)).thenReturn(new BigDecimal(8));
         TravelCalculatePremiumResponse response = calculator.calculatePremium(request);
-        assertEquals(new BigDecimal(8), response.getAgreementPrice());
+        assertEquals(new BigDecimal(8), response.getAgreementPremium());
         assertFalse(response.hasErrors());
     }
     @Test

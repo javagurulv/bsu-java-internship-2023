@@ -5,7 +5,6 @@
     <title>Travel Insurance Premium Calculation</title>
     <script>
         function removePerson() {
-            let personsContainer = document.getElementById("persons-container");
             let personForms = document.getElementsByClassName("person-form");
             if (personForms.length > 0) {
                personForms[personForms.length - 1].remove();
@@ -39,8 +38,13 @@
                     </div>
                     <br>
                     <div>
-                        <label for="persons[${index}].TMMedicalRiskLimitLevel">Medical Risk Limit Level:</label>
+                        <label for="persons[${index}].medicalRiskLimitLevel">Medical Risk Limit Level:</label>
                         <input type="text" id="persons[${index}].medicalRiskLimitLevel" name="persons[${index}].medicalRiskLimitLevel" />
+                    </div>
+                    <br>
+                    <div>
+                        <label for="persons[${index}].travelCost">Travel cost:</label>
+                        <input type="text" id="persons[${index}].travelCost" name="persons[${index}].travelCost" />
                     </div>
                     <br>
                 </div>`;
@@ -94,6 +98,7 @@
                 <div>
                     <label for="personUUID">Person UUID:</label>
                     <input type="text"
+                           id="personUUID"
                            th:field="*{persons[__${personStat.index}__].personUUID}">
                 </div>
                 <br>
@@ -101,18 +106,21 @@
                 <div>
                     <label for="personFirstName">First Name:</label>
                     <input type="text"
+                           id="personFirstName"
                            th:field="*{persons[__${personStat.index}__].personFirstName}">
                 </div>
                 <br>
                 <div>
                     <label for="personLastName">Last Name:</label>
                     <input type="text"
+                           id="personLastName"
                            th:field="*{persons[__${personStat.index}__].personLastName}">
                 </div>
                 <br>
                 <div>
                     <label for="personBirthDate">Birth Date:</label>
                     <input type="date"
+                           id="personBirthDate"
                            placeholder="yyyy-MM-dd"
                            th:field="*{persons[__${personStat.index}__].personBirthDate}">
                 </div>
@@ -120,7 +128,15 @@
                 <div>
                     <label for="medicalRiskLimitLevel">Medical Risk Limit Level:</label>
                     <input type="text"
+                           id="medicalRiskLimitLevel"
                            th:field="*{persons[__${personStat.index}__].medicalRiskLimitLevel}">
+                </div>
+                <br>
+                <div>
+                    <label for="travelCost">Travel cost:</label>
+                    <input type="text"
+                           id="travelCost"
+                           th:field="*{persons[__${personStat.index}__].travelCost}">
                 </div>
                 <br>
             </div>
@@ -153,6 +169,7 @@
         <p th:text="'Person code: ' + ${person.personUUID}"></p>
         <p th:text="'Birth date ' + ${person.personBirthDate}"></p>
         <p th:text="'Medical risk limit level ' + ${person.medicalRiskLimitLevel}"></p>
+        <p th:text="'Travel cost ' + ${person.travelCost}"></p>
         <p th:text="'Person premium ' + ${person.personPremium}"></p>
         <p>Risks</p>
         <ul>
