@@ -14,14 +14,14 @@ import static org.junit.jupiter.api.Assertions.*;
 public class TravelCalculatePremiumRequestValidatorTest {
     @Test
     public void shouldBeNormal() throws ParseException {
-        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest("Ivan", "Filon", new SimpleDateFormat("dd.MM.yyyy").parse("31.05.2005"), new SimpleDateFormat("dd.MM.yyyy").parse("01.06.2005"));
+        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest("Ivan", "Filon", new SimpleDateFormat("dd.MM.yyyy").parse("31.05.2115"), new SimpleDateFormat("dd.MM.yyyy").parse("01.06.2115"));
         TravelCalculatePremiumRequestValidator validator = new TravelCalculatePremiumRequestValidator();
         assertTrue(validator.validate(request).isEmpty());
     }
 
     @Test
     public void shouldBeEmptyLastName() throws ParseException {
-        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest("Ivan", "", new SimpleDateFormat("dd.MM.yyyy").parse("31.05.2005"), new SimpleDateFormat("dd.MM.yyyy").parse("01.06.2005"));
+        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest("Ivan", "", new SimpleDateFormat("dd.MM.yyyy").parse("31.05.2115"), new SimpleDateFormat("dd.MM.yyyy").parse("01.06.2115"));
         TravelCalculatePremiumRequestValidator validator = new TravelCalculatePremiumRequestValidator();
         assertEquals(validator.validate(request).get(0), new ValidationError("personLastName", "Must not be empty!"));
         assertEquals(validator.validate(request).size(), 1);
@@ -29,7 +29,7 @@ public class TravelCalculatePremiumRequestValidatorTest {
 
     @Test
     public void shouldBeEmptyFirstName() throws ParseException {
-        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest("", "Filon", new SimpleDateFormat("dd.MM.yyyy").parse("31.05.2005"), new SimpleDateFormat("dd.MM.yyyy").parse("01.06.2005"));
+        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest("", "Filon", new SimpleDateFormat("dd.MM.yyyy").parse("31.05.2115"), new SimpleDateFormat("dd.MM.yyyy").parse("01.06.2115"));
         TravelCalculatePremiumRequestValidator validator = new TravelCalculatePremiumRequestValidator();
         assertEquals(validator.validate(request).get(0), new ValidationError("personFirstName", "Must not be empty!"));
         assertEquals(validator.validate(request).size(), 1);
@@ -45,7 +45,7 @@ public class TravelCalculatePremiumRequestValidatorTest {
 
     @Test
     public void shouldBeEmptyDateTo() throws ParseException {
-        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest("Ivan", "Filon", new SimpleDateFormat("dd.MM.yyyy").parse("31.05.2005"), null);
+        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest("Ivan", "Filon", new SimpleDateFormat("dd.MM.yyyy").parse("31.05.2115"), null);
         TravelCalculatePremiumRequestValidator validator = new TravelCalculatePremiumRequestValidator();
         assertEquals(validator.validate(request).get(0), new ValidationError("agreementDateTo", "Must not be empty!"));
         assertEquals(validator.validate(request).size(), 1);
@@ -53,7 +53,7 @@ public class TravelCalculatePremiumRequestValidatorTest {
 
     @Test
     public void shouldBeDateFromGreaterThanDateTo() throws ParseException{
-        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest("Ivan", "Filon", new SimpleDateFormat("dd.MM.yyyy").parse("01.06.2005"), new SimpleDateFormat("dd.MM.yyyy").parse("31.05.2005"));
+        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest("Ivan", "Filon", new SimpleDateFormat("dd.MM.yyyy").parse("01.06.2115"), new SimpleDateFormat("dd.MM.yyyy").parse("31.05.2005"));
         TravelCalculatePremiumRequestValidator validator = new TravelCalculatePremiumRequestValidator();
         assertEquals(validator.validate(request).get(0), new ValidationError("agreementDateFrom", "Must be less than agreementDateTo!"));
         assertEquals(validator.validate(request).size(), 1);
