@@ -2,7 +2,7 @@ package lv.javaguru.travel.insurance.core.validations;
 
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
-import lv.javaguru.travel.insurance.core.DateTimeService;
+import lv.javaguru.travel.insurance.core.util.DateTimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -13,7 +13,8 @@ public class DateFromLessDateToValidate implements TravelRequestValidator {
 
     @Autowired private ValidationErrorFactory validationError;
 
-    @Autowired DateTimeService dateTimeService;
+    @Autowired
+    DateTimeUtil dateTimeService;
 
     @Override
     public Optional<ValidationError> validator(TravelCalculatePremiumRequest request) {

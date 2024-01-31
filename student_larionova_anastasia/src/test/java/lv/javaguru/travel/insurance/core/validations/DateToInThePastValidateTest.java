@@ -1,6 +1,6 @@
 package lv.javaguru.travel.insurance.core.validations;
 
-import lv.javaguru.travel.insurance.core.DateTimeService;
+import lv.javaguru.travel.insurance.core.util.DateTimeUtil;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.Test;
@@ -23,7 +23,7 @@ class DateToInThePastValidateTest {
 
     @Autowired private CreateDate createDate;
 
-    @Mock private DateTimeService dateTimeService;
+    @Mock private DateTimeUtil dateTimeUtil;
     @Mock private ValidationErrorFactory errorFactory;
 
     @InjectMocks private DateToInThePastValidate validation;
@@ -32,7 +32,7 @@ class DateToInThePastValidateTest {
     void validatorWhenDateToInPast() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getAgreementDateTo()).thenReturn(createDate.createDate("10-10-2020"));
-        when(dateTimeService.getCurrentDateTime()).thenReturn(createDate.createDate("01-03-2023"));
+        when(dateTimeUtil.getCurrentDateTime()).thenReturn(createDate.createDate("01-03-2023"));
         ValidationError validationError = mock(ValidationError.class);
         when(errorFactory.buildError("ERROR_CODE_4")).thenReturn(validationError);
         Optional<ValidationError> errors = validation.validator(request);
@@ -44,7 +44,7 @@ class DateToInThePastValidateTest {
     void validatorWhenDateToInFuture() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getAgreementDateTo()).thenReturn(createDate.createDate("10-10-2027"));
-        when(dateTimeService.getCurrentDateTime()).thenReturn(createDate.createDate("01-03-2023"));
+        when(dateTimeUtil.getCurrentDateTime()).thenReturn(createDate.createDate("01-03-2023"));
         Optional<ValidationError> errors = validation.validator(request);
         assertFalse(errors.isPresent());
     }
