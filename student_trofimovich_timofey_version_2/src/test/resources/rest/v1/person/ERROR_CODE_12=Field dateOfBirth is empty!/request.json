@@ -1,0 +1,12 @@
+{
+  "personUUID" : "1212",
+  "personFirstName": "Harry",
+  "personLastName": "Kane",
+  "dateOfBirth": null,
+  "agreementDateFrom": "2025-04-05",
+  "agreementDateTo": "2025-04-08",
+  "selected_risks":["TRAVEL_MEDICAL"],
+  "country": "SPAIN",
+  "medicalRiskLimitLevel": "LEVEL_10000",
+  "travelCost": 7777
+}

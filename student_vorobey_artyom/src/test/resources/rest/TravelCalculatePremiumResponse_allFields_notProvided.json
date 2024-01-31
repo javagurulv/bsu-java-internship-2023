@@ -1,0 +1,30 @@
+{
+  "errors": [
+    {
+      "errorCode": "agreementDateFrom",
+      "description": "Must not be empty!"
+    },
+    {
+      "errorCode": "agreementDateTo",
+      "description": "Must not be empty!"
+    },
+    {
+      "errorCode": "personFirstName",
+      "description": "Must not be empty!"
+    },
+    {
+      "errorCode": "personLastName",
+      "description": "Must not be empty!"
+    },
+    {
+      "errorCode": "selectedRisks",
+      "description": "Must not be empty!"
+    }
+  ],
+  "personFirstName": null,
+  "personLastName": null,
+  "agreementDateFrom": null,
+  "agreementDateTo": null,
+  "agreementPrice": null,
+  "selectedRisks": null
+}

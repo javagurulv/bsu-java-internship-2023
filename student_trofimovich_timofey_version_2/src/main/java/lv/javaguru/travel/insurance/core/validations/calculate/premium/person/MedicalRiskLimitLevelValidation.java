@@ -1,6 +1,7 @@
 package lv.javaguru.travel.insurance.core.validations.calculate.premium.person;
 
 
+import lv.javaguru.travel.insurance.core.api.dto.agreement.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.person.PersonDTO;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import lv.javaguru.travel.insurance.core.domain.ClassifierValue;
@@ -22,9 +23,16 @@ class MedicalRiskLimitLevelValidation extends TravelPersonFieldValidationImpl {
     private ClassifierValueRepository repository;
 
     @Override
-    public Optional<ValidationErrorDTO> validate(PersonDTO person) {
-        Optional<ValidationErrorDTO> emptyError = validateEmpty(person);
-        return emptyError.isPresent() ? emptyError : validateLimitIsSupported(person);
+    public Optional<ValidationErrorDTO> validate(PersonDTO person, AgreementDTO agreement) {
+        if (!travelMedicalRiskIsPresent(agreement)) return Optional.empty();
+        Optional<ValidationErrorDTO> optional = validateEmpty(person);
+        return optional.isPresent() ? optional : validateLimitIsSupported(person);
+    }
+
+    private boolean travelMedicalRiskIsPresent(AgreementDTO agreement) {
+        List<String> risks = agreement.getSelectedRisks();
+        if (risks == null) return false;
+        return risks.contains("TRAVEL_MEDICAL");
     }
 
 

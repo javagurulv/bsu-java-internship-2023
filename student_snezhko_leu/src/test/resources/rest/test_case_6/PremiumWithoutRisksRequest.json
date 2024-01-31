@@ -1,0 +1,10 @@
+{
+  "personFirstName": "Vasja",
+  "personLastName": "Pupkin",
+  "agreementDateFrom": "2026-05-25",
+  "agreementDateTo": "2026-05-29",
+  "selectedRisks" : null,
+  "country" : "SPAIN",
+  "personBirthDate" : "2005-09-03",
+  "medicalRiskLimitLevel" : "LEVEL_10000"
+}

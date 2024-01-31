@@ -5,8 +5,11 @@ import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.Date;
 
+import static lv.javaguru.travel.insurance.core.util.CheckApplicationPropertiesUtil.checkProperty;
 import static lv.javaguru.travel.insurance.core.util.DateTimeUtil.findAge;
 
 @Component
@@ -14,15 +17,22 @@ class TravelCalculateMedicalAgeCoefficient {
     @Autowired
     private AgeCoefficientRepository acRepository;
 
-    public Double calculatePremium(TravelCalculatePremiumRequest request) {
-        return acRepository
-                .findByAgeFromAndAgeTo(
-                        findAge(
-                                new Date(),
-                                request.getPersonBirthDate()
+    public BigDecimal calculatePremium(TravelCalculatePremiumRequest request) {
+        try {
+            return checkProperty("medical.risk.age.enabled")
+                    ? acRepository
+                        .findByAgeFromAndAgeTo(
+                                findAge(
+                                        new Date(),
+                                        request.getPersonBirthDate()
+                                )
                         )
-                )
-                .get()
-                .getCoefficient();
+                        .get()
+                        .getCoefficient()
+                    : BigDecimal.ONE;
+        }
+        catch (IOException e) {
+            return BigDecimal.ONE;
+        }
     }
 }

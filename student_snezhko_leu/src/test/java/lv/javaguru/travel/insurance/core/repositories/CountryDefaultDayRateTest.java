@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -26,7 +28,7 @@ public class CountryDefaultDayRateTest {
     public void returnCorrectValueLatviaTest() {
         String countryName = "LATVIA";
         Optional<CountryDefaultDayRate> cddr = cddrRepository.findByCountryIc(countryName);
-        assertEquals(1.00d, cddr.get().getCountryDefaultDayRate());
+        assertEquals(BigDecimal.valueOf(1.00).setScale(2), cddr.get().getCountryDefaultDayRateCoefficient());
     }
 
     @Test
@@ -34,7 +36,7 @@ public class CountryDefaultDayRateTest {
         String countryName = "SPAIN";
         Double expectedValue = 2.50d;
         Optional<CountryDefaultDayRate> cddr = cddrRepository.findByCountryIc(countryName);
-        assertEquals(expectedValue, cddr.get().getCountryDefaultDayRate());
+        assertEquals(BigDecimal.valueOf(expectedValue).setScale(2, RoundingMode.HALF_UP), cddr.get().getCountryDefaultDayRateCoefficient());
     }
 
     @Test
@@ -42,7 +44,7 @@ public class CountryDefaultDayRateTest {
         String countryName = "JAPAN";
         Double expectedValue = 3.50d;
         Optional<CountryDefaultDayRate> cddr = cddrRepository.findByCountryIc(countryName);
-        assertEquals(expectedValue, cddr.get().getCountryDefaultDayRate());
+        assertEquals(BigDecimal.valueOf(expectedValue).setScale(2, RoundingMode.HALF_UP), cddr.get().getCountryDefaultDayRateCoefficient());
     }
 
     @Test

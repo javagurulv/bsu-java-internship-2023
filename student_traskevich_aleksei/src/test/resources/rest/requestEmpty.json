@@ -2,5 +2,6 @@
   "personFirstName": "",
   "personLastName": "",
   "agreementDateFrom": "",
-  "agreementDateTo": ""
+  "agreementDateTo": "",
+  "selected_risks":[]
 }

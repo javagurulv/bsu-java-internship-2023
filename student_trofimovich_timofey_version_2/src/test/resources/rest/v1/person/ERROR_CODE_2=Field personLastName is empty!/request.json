@@ -1,0 +1,12 @@
+{
+  "personUUID" : "1212",
+  "personFirstName": "Harry",
+  "personLastName": "",
+  "dateOfBirth": "2004-03-02",
+  "agreementDateFrom": "2025-04-05",
+  "agreementDateTo": "2025-04-08",
+  "selected_risks":["TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"],
+  "country": "LATVIA",
+  "medicalRiskLimitLevel": "LEVEL_10000",
+  "travelCost": 7777
+}

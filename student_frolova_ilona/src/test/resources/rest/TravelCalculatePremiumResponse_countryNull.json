@@ -1,0 +1,16 @@
+{
+  "errors": [
+    {
+      "errorCode": "ERROR_CODE_10",
+      "description": "Field Country must not be empty if TRAVEL_MEDICAL risk has been chosen"
+    }
+  ],
+  "personFirstName": null,
+  "personLastName": null,
+  "personBirthDate" : null,
+  "agreementDateFrom": null,
+  "agreementDateTo": null,
+  "agreementPremium": null,
+  "risks": null,
+  "country": null
+}

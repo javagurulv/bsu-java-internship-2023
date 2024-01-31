@@ -1,5 +1,6 @@
 package lv.javaguru.travel.insurance.core.validations.calculate.premium.person;
 
+import lv.javaguru.travel.insurance.core.api.dto.agreement.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.person.PersonDTO;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import lv.javaguru.travel.insurance.core.validations.ValidationErrorFactory;
@@ -25,10 +26,12 @@ public class FirstNameValidationTest {
     @InjectMocks
     private FirstNameValidation validation;
     private PersonDTO person;
+    private AgreementDTO agreement;
 
     @BeforeEach
     void init() {
         person = mock(PersonDTO.class);
+        agreement = mock(AgreementDTO.class);
     }
 
     @ParameterizedTest
@@ -36,7 +39,7 @@ public class FirstNameValidationTest {
     void shouldReturnErrorWhenFirstNameIsNullOrEmpty(String firstName) {
         when(person.getPersonFirstName()).thenReturn(firstName);
         when(factory.buildError("ERROR_CODE_1")).thenReturn(new ValidationErrorDTO("ERROR_CODE_1", "First name must not be empty!"));
-        Optional<ValidationErrorDTO> ValidationErrorDTO = validation.validate(person);
+        Optional<ValidationErrorDTO> ValidationErrorDTO = validation.validate(person, agreement);
         assertThat(ValidationErrorDTO).isPresent();
         assertThat(ValidationErrorDTO.get().getErrorCode()).isEqualTo("ERROR_CODE_1");
         assertThat(ValidationErrorDTO.get().getDescription()).isEqualTo("First name must not be empty!");
@@ -46,7 +49,7 @@ public class FirstNameValidationTest {
     @Test
     void shouldNotReturnError() {
         when(person.getPersonFirstName()).thenReturn("first name");
-        Optional<ValidationErrorDTO> ValidationErrorDTO = validation.validate(person);
+        Optional<ValidationErrorDTO> ValidationErrorDTO = validation.validate(person, agreement);
         assertThat(ValidationErrorDTO).isEmpty();
     }
 }

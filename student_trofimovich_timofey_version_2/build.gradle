@@ -50,4 +50,9 @@ dependencies {
         archiveVersion = '1.0.3'
     }
 
+    clean.doFirst {
+        delete "${projectDir}/logs/"
+        println "${projectDir}/logs/"
+    }
+
 }

@@ -25,13 +25,24 @@ public class TravelRiskPremiumCalculatorMedical implements TravelRiskPremiumCalc
     @Autowired
     private TravelCalculateMedicalCountryDefaultDayRate cddr;
 
+    @Autowired
+    private TravelCalculateInsuranceLimitCoefficient mrllCoefficientCalculator;
+
     @Override
     public BigDecimal calculatePremium(TravelCalculatePremiumRequest request) {
-        BigDecimal result = BigDecimal.valueOf(
-                dayCount.calculatePremium(request)
+//        Double ageCoeff = ageCoefficient.calculatePremium(request);
+        //Double mrllValue = mrllCoefficientCalculator.calculatePremium(request);
+        BigDecimal result = cddr.calculatePremium(request).multiply(ageCoefficient.calculatePremium(request))
+                .multiply(BigDecimal.valueOf(dayCount.calculatePremium(request)))
+                .multiply(mrllCoefficientCalculator.calculatePremium(request));
+        /*BigDecimal.valueOf(
+                //ageCoeff
+                cddr.calculatePremium(request)
                 * ageCoefficient.calculatePremium(request)
-                * cddr.calculatePremium(request)
+                * dayCount.calculatePremium(request)
+                * mrllValue//mrllCoefficientCalculator.calculatePremium(request)
         );
+        */
         /*
         BigDecimal result = BigDecimal.valueOf(
                 cddrRepository.findByCountryIc(

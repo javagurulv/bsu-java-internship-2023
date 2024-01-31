@@ -1,0 +1,23 @@
+test_case_1
+request - all parameters, selected risk - TRAVEL_MEDICAL
+response - without errors
+
+test_case_2
+request - all parameters are correct, but personFirstName is empty
+response - ERROR_CODE_1
+
+test_case_3
+request - all parameters are correct, but personLastName is empty
+response - ERROR_CODE_2
+
+test_case_4
+request - all parameters are correct, but agreementDateFrom and agreementDateTo is empty
+response - ERROR_CODE_5 and ERROR_CODE_3
+
+test_case_5
+request - all parameters are correct, but selectedRisks list is empty
+response - ERROR_CODE_7
+
+test_case_6
+request - all parameters are correct, but selectedRisks list is null
+response - ERROR_CODE_8

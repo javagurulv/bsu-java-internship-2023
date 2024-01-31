@@ -1,0 +1,16 @@
+{
+  "errors": [
+    {
+      "errorCode": "ERROR_CODE_11",
+      "description": "Country FINLAND is not found"
+    }
+  ],
+  "personFirstName": null,
+  "personLastName": null,
+  "personBirthDate" : null,
+  "agreementDateFrom": null,
+  "agreementDateTo": null,
+  "agreementPremium": null,
+  "risks": null,
+  "country": null
+}

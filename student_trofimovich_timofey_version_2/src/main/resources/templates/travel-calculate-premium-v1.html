@@ -10,9 +10,9 @@
 
 <form action="/insurance/travel/web/v1" th:object="${request}" method="post">
 
-    <label for="personUUID">Person UUID:</label>
+    <label for="personCode">Person code:</label>
     <input type="text"
-           id="personUUID"
+           id="personCode"
            th:field="${request.personUUID}"><br><br>
 
 
@@ -47,11 +47,14 @@
     <label for="country">Country:</label>
     <input type="text" id="country" th:field="${request.country}"><br><br>
 
-    <label for="medicalRiskLimitLevel">Medical Risk Limit Level:</label>
-    <input type="text" id="medicalRiskLimitLevel" th:field="${request.medicalRiskLimitLevel}"><br><br>
+    <label for="MedicalRiskLimitLevel">Medical Risk Limit Level:</label>
+    <input type="text" id="MedicalRiskLimitLevel" th:field="${request.medicalRiskLimitLevel}"><br><br>
 
     <label for="selectedRisks">Selected Risks:</label>
     <input type="text" id="selectedRisks" th:field="${request.selectedRisks}"><br><br>
+
+    <label for="travelCost">Travel cost:</label>
+    <input type="text" id="travelCost" th:field="${request.travelCost}"><br><br>
 
     <button type="submit">Calculate Premium</button>
 </form>

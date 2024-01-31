@@ -15,12 +15,14 @@ public class TravelRequestCountryIsNotNullValidation extends TravelRequestValida
     @Override
     public Optional<ValidationError> validate(TravelCalculatePremiumRequest request) {
         Optional<ValidationError> result = Optional.empty();
-        if (request.getSelected_risks() == null || request.getSelected_risks().isEmpty()) {
+        if (request.getSelectedRisks() == null || request.getSelectedRisks().isEmpty()) {
             return result;
         }
+        /*
         if (!request.getSelected_risks().contains("TRAVEL_MEDICAL")) {
             return result;
         }
+         */
         if (request.getCountry() == null || request.getCountry().isEmpty()) {
             String errorCode = "ERROR_CODE_10";
             result = Optional.of(errorFactory.buildError(errorCode));

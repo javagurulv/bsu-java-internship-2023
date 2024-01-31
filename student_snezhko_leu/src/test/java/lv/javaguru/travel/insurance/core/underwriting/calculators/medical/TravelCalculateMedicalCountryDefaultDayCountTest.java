@@ -10,6 +10,7 @@ import org.mockito.Mock;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -29,17 +30,17 @@ public class TravelCalculateMedicalCountryDefaultDayCountTest {
 
     @Test
     public void CalculatorMedicalCddrTest() {
-        init(1.1d);
-        assertEquals(1.1, calculator.calculatePremium(request));
+        init(BigDecimal.valueOf(1.1));
+        assertEquals(BigDecimal.valueOf(1.1), calculator.calculatePremium(request));
     }
 
-    private void init(Double countryCoefficient) {
+    private void init(BigDecimal countryCoefficient) {
         request = mock(TravelCalculatePremiumRequest.class);
         String country = "COUNTRY";
         when(request.getCountry()).thenReturn(country);
 
         CountryDefaultDayRate cddrValue = mock(CountryDefaultDayRate.class);
-        when(cddrValue.getCountryDefaultDayRate()).thenReturn(countryCoefficient);
+        when(cddrValue.getCountryDefaultDayRateCoefficient()).thenReturn(countryCoefficient);
         when(cddrValue.getCountryIc()).thenReturn(country);
 
         when(cddrRepository.findByCountryIc(country)).thenReturn(Optional.of(cddrValue));

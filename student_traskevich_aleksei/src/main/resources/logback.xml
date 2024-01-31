@@ -1,4 +1,6 @@
 <configuration>
+    <property name="LOGS" value="./logs" />
+
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
@@ -7,7 +9,7 @@
 
     <appender name="APPLICATION_FILE_APPENDER"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>student_traskevich_aleksei/logs/application-logger.log</file>
+        <file>${LOGS}/application-logger.log</file>
         <encoder>
             <pattern>%d{ISO8601} [%thread] %-5level %logger{36} - %msg%n</pattern>
         </encoder>
@@ -25,7 +27,7 @@
 
     <appender name="REQUEST_RESPONSE_FILE_APPENDER"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>student_traskevich_aleksei/logs/request-response-logger.log</file>
+        <file>${LOGS}/request-response-logger.log</file>
         <encoder>
             <pattern>%d{ISO8601} [%thread] %-5level %logger{36} - %msg%n</pattern>
         </encoder>

@@ -81,3 +81,9 @@ VALUES (0, 5, 1.1),
         (18, 40, 1.1),
         (41, 65, 1.2),
         (66, 150, 1.5);
+
+INSERT INTO MEDICAL_RISK_LIMIT_LEVEL (MEDICAL_RISK_LIMIT_LEVEL_IC, COEFFICIENT)
+VALUES ('LEVEL_10000', 1.0),
+       ('LEVEL_15000', 1.2),
+       ('LEVEL_20000', 1.5),
+       ('LEVEL_50000', 2.0);

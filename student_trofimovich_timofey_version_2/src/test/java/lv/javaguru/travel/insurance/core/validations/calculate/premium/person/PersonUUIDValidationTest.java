@@ -1,6 +1,7 @@
 package lv.javaguru.travel.insurance.core.validations.calculate.premium.person;
 
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
+import lv.javaguru.travel.insurance.core.api.dto.agreement.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.person.PersonDTO;
 import lv.javaguru.travel.insurance.core.validations.ValidationErrorFactory;
 import org.junit.jupiter.api.BeforeEach;
@@ -26,9 +27,12 @@ public class PersonUUIDValidationTest {
     private PersonUUIDValidation validation;
     private PersonDTO person;
 
+    private AgreementDTO agreement;
+
     @BeforeEach
     void init() {
         person = mock(PersonDTO.class);
+        agreement = mock(AgreementDTO.class);
     }
 
     @ParameterizedTest
@@ -37,7 +41,7 @@ public class PersonUUIDValidationTest {
         when(person.getPersonUUID()).thenReturn(personUUID);
         when(factory.buildError("ERROR_CODE_17")).thenReturn(new ValidationErrorDTO("ERROR_CODE_17",
                 "Person uuid is empty!"));
-        Optional<ValidationErrorDTO> ValidationErrorDTO = validation.validate(person);
+        Optional<ValidationErrorDTO> ValidationErrorDTO = validation.validate(person, agreement);
         assertThat(ValidationErrorDTO).isPresent();
         assertThat(ValidationErrorDTO.get().getErrorCode()).isEqualTo("ERROR_CODE_17");
         assertThat(ValidationErrorDTO.get().getDescription()).isEqualTo("Person uuid is empty!");
@@ -47,7 +51,7 @@ public class PersonUUIDValidationTest {
     @Test
     void shouldNotReturnError() {
         when(person.getPersonUUID()).thenReturn("1212");
-        Optional<ValidationErrorDTO> ValidationErrorDTO = validation.validate(person);
+        Optional<ValidationErrorDTO> ValidationErrorDTO = validation.validate(person, agreement);
         assertThat(ValidationErrorDTO).isEmpty();
     }
 }
