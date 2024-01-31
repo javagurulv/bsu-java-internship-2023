@@ -53,9 +53,17 @@ public class TravelCalculatePremiumRequestValidatorTest {
 
     @Test
     public void shouldBeDateFromGreaterThanDateTo() throws ParseException{
-        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest("Ivan", "Filon", new SimpleDateFormat("dd.MM.yyyy").parse("01.06.2115"), new SimpleDateFormat("dd.MM.yyyy").parse("31.05.2005"));
+        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest("Ivan", "Filon", new SimpleDateFormat("dd.MM.yyyy").parse("01.06.2115"), new SimpleDateFormat("dd.MM.yyyy").parse("31.05.2115"));
         TravelCalculatePremiumRequestValidator validator = new TravelCalculatePremiumRequestValidator();
         assertEquals(validator.validate(request).get(0), new ValidationError("agreementDateFrom", "Must be less than agreementDateTo!"));
+        assertEquals(validator.validate(request).size(), 1);
+    }
+
+    @Test
+    public void shouldBeDateFromLessThanCurrentDate() throws ParseException {
+        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest("Ivan", "Filon", new SimpleDateFormat("dd.MM.yyyy").parse("31.05.2015"), new SimpleDateFormat("dd.MM.yyyy").parse("01.06.2015"));
+        TravelCalculatePremiumRequestValidator validator = new TravelCalculatePremiumRequestValidator();
+        assertEquals(validator.validate(request).get(0), new ValidationError("agreementDateFrom", "Must be greater than currentDate!"));
         assertEquals(validator.validate(request).size(), 1);
     }
 
