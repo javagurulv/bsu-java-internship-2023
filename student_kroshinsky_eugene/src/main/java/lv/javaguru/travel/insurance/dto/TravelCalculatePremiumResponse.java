@@ -25,6 +25,8 @@ public class TravelCalculatePremiumResponse extends CoreResponse{
 
     private BigDecimal agreementPremium;
 
+    private List<TravelRisk> risks;
+
     public TravelCalculatePremiumResponse(List<ValidationError> errors) {
         super(errors);
     }

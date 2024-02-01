@@ -9,9 +9,9 @@ import java.math.BigDecimal;
 @Component
 public class TravelCancellationCalculator implements TravelRiskPremiumCalculator{
     public BigDecimal calculatePremium(TravelCalculatePremiumRequest request) {
-        return BigDecimal.ZERO;
+        return BigDecimal.ONE;
     }
     public String getRiskIc() {
-        return "TRAVEL_LOSS_BAGGAGE";
+        return "TRAVEL_CANCELLATION";
     }
 }

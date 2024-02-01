@@ -14,7 +14,6 @@ import java.util.List;
 
 @Component
 class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService {
-    @Autowired private DateTimeUtil dateTimeService;
     @Autowired private TravelCalculatePremiumRequestValidator requestValidator;
     @Autowired private TravelCalculatePremiumRequestLogger logger;
     @Autowired private TravelPremiumUnderwriting premiumUnderwriting;
@@ -33,6 +32,7 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
         response.setAgreementDateFrom(request.getAgreementDateFrom());
         response.setAgreementDateTo(request.getAgreementDateTo());
         response.setAgreementPremium(premiumUnderwriting.calculatePremium(request));
+        response.setRisks(premiumUnderwriting.calculateTravelRisksList(request));
         return response;
     }
 }

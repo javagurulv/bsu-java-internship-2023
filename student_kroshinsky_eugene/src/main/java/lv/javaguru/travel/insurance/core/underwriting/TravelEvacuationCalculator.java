@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 @Component
 public class TravelEvacuationCalculator implements TravelRiskPremiumCalculator{
     public BigDecimal calculatePremium(TravelCalculatePremiumRequest request) {
-        return BigDecimal.ZERO;
+        return new BigDecimal(2);
     }
     public String getRiskIc() {
         return "TRAVEL_EVACUATION";
