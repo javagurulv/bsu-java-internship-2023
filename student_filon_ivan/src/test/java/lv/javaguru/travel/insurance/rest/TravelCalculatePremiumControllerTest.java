@@ -82,6 +82,7 @@ public class TravelCalculatePremiumControllerTest {
         performTest("rest/RequestDateFromLessCurrentDateAndDateToLessDateFrom.json",
                 "rest/ResponseDateFromLessCurrentDateAndDateToLessDateFrom.json");
     }
+
     public void performTest(String requestPath, String responsePath) throws Exception {
         String request = reader.readJson(requestPath);
 
