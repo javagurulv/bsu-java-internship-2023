@@ -1,6 +1,7 @@
 package lv.javaguru.travel.insurance.core.validations;
 
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,14 +13,14 @@ import java.util.Optional;
 
 @Component
 @Getter
+@RequiredArgsConstructor
 class TravelRequestDateFromNotPastValidation extends TravelRequestValidationImpl {
 
     private final long allowedDelayFromPresent = 5000L;
 
     private final long millisecondsNow =  LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
 
-    @Autowired
-    private ValidationErrorFactory errorFactory;
+    private final ValidationErrorFactory errorFactory;
 
     @Override
     public Optional<ValidationError> check(TravelCalculatePremiumRequest request) {
