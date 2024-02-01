@@ -6,22 +6,21 @@ import lv.javaguru.travel.insurance.dto.TravelRisk;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-
 @Component
-class TravelPremiumUnderwritingImpl implements TravelPremiumUnderwriting {
-    @Autowired private List<TravelRiskPremiumCalculator> calculators;
+public class SelectedRisksPremiumCalculatorImpl implements SelectedRisksPremiumCalculator{
+    @Autowired
+    private List<TravelRiskPremiumCalculator> calculators;
     @Override
-    public BigDecimal calculatePremium(TravelCalculatePremiumRequest request){
-        BigDecimal result = BigDecimal.ZERO;
+    public List<TravelRisk> calculateTravelRisksList(TravelCalculatePremiumRequest request) {
+        List<TravelRisk> risks = new ArrayList<>();
         List<String> selectedRisks = request.getSelectedRisks();
         for (TravelRiskPremiumCalculator calculator : calculators) {
             if (selectedRisks.contains(calculator.getRiskIc())) {
-                result = result.add(calculator.calculatePremium(request));
+                risks.add(new TravelRisk(calculator.getRiskIc(), calculator.calculatePremium(request)));
             }
         }
-        return result;
+        return risks;
     }
 }
