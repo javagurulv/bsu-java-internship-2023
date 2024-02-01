@@ -5,6 +5,7 @@ import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,8 +17,9 @@ class TravelCalculatePremiumRequestValidator {
         validatePersonFirstName(request).ifPresent(errors::add);
         validatePersonLastName(request).ifPresent(errors::add);
         validateDateFrom(request).ifPresent(errors::add);
+        validateDateFromLessThanCurrentDate(request).ifPresent(errors::add);
         validateDateTo(request).ifPresent(errors::add);
-        validateDateToGreaterThanDateFrom(request).ifPresent(errors::add);
+        validateDateFromGreaterThanDateTo(request).ifPresent(errors::add);
 
         return errors;
     }
@@ -46,9 +48,15 @@ class TravelCalculatePremiumRequestValidator {
                 : Optional.empty();
     }
 
-    private Optional<ValidationError> validateDateToGreaterThanDateFrom(TravelCalculatePremiumRequest request){
+    private Optional<ValidationError> validateDateFromGreaterThanDateTo(TravelCalculatePremiumRequest request){
         return (request.getAgreementDateFrom() != null && request.getAgreementDateTo() != null && request.getAgreementDateTo().compareTo(request.getAgreementDateFrom()) < 0)
                 ? Optional.of(new ValidationError("agreementDateFrom", "Must be less than agreementDateTo!"))
+                : Optional.empty();
+    }
+
+    private Optional<ValidationError> validateDateFromLessThanCurrentDate(TravelCalculatePremiumRequest request){
+        return (request.getAgreementDateFrom() != null && new Date().compareTo(request.getAgreementDateFrom()) > 0)
+                ? Optional.of(new ValidationError("agreementDateFrom", "Must be greater than currentDate!"))
                 : Optional.empty();
     }
 }

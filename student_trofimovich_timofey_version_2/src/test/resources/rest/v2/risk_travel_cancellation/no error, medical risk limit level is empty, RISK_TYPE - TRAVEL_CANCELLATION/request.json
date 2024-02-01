@@ -1,0 +1,24 @@
+{
+  "agreementDateFrom" : "2025-05-25",
+  "agreementDateTo" : "2025-05-29",
+  "country" : "SPAIN",
+  "selected_risks":["TRAVEL_CANCELLATION"],
+  "persons" : [
+    {
+      "personUUID" : "1212",
+      "personFirstName" : "Vasja",
+      "personLastName" : "Pupkin",
+      "personBirthDate" : "2000-05-29",
+      "medicalRiskLimitLevel" : null,
+      "travelCost" :  "100.00"
+    },
+    {
+      "personUUID" : "1212",
+      "personFirstName" : "Petja",
+      "personLastName" : "Pupkin",
+      "personBirthDate" : "1950-02-29",
+      "medicalRiskLimitLevel" : "LEVEL_15000",
+      "travelCost" :  "100.00"
+    }
+  ]
+}
