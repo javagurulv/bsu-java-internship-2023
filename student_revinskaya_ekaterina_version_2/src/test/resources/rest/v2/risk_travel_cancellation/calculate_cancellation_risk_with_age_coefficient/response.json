@@ -1,0 +1,24 @@
+{
+  "uuid": "e3cdf02a-2899-4bda-987f-9077da69aa1b",
+  "travelCost": 2000.00,
+  "agreementDateFrom": "2025-05-25",
+  "agreementDateTo": "2025-05-29",
+  "country": "SPAIN",
+  "agreementPremium": 310.00,
+  "persons": [
+    {
+      "personFirstName": "Vasja",
+      "personLastName": "Pupkin",
+      "birthday": "1954-05-29",
+      "personalCode": "35h5325",
+      "medicalRiskLimitLevel": "LEVEL_10000",
+      "personPremium": 310.00,
+      "personRisks": [
+        {
+          "riskIc": "TRAVEL_CANCELLATION",
+          "premium": 310.00
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
+
+
+    <changeSet author = "katierevinska" id = "32">
+        <createTable tableName="person_agreement_risks">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="person_agreement_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="risk_ic" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="premium" type="DECIMAL(10,2)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="katierevinska" id="33">
+        <addForeignKeyConstraint baseTableName="person_agreement_risks"
+                                 baseColumnNames="person_agreement_id"
+                                 constraintName="fk_person_agreement_risks_person_agreement_id"
+                                 referencedTableName="person_agreements"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+    <changeSet author="katierevinska" id="34">
+        <createIndex indexName="ix_person_agreement_id_risk_ic"
+                     tableName="person_agreement_risks"
+                     unique="true">
+            <column name="person_agreement_id"/>
+            <column name="risk_ic"/>
+        </createIndex>
+    </changeSet>
+
+</databaseChangeLog>

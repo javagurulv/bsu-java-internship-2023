@@ -1,0 +1,8 @@
+{
+  "errors": [
+    {
+      "errorCode": "ERROR_CODE_9",
+      "description": "Selected risk my_risk is not supported by the system!"
+    }
+  ]
+}

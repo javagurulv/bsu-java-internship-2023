@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
+
+    <changeSet author = "katierevinska" id = "43">
+        <sql>
+            INSERT INTO travel_cancellation_age_coefficient(age_from, age_to, coefficient)
+            VALUES
+            (0, 9, 5),
+            (10, 17, 10),
+            (18, 39, 20),
+            (40, 64, 30),
+            (65, 150, 50);
+        </sql>
+    </changeSet>
+    <changeSet author = "katierevinska" id = "44">
+        <sql>
+            INSERT INTO travel_cost_coefficient(cost_from, cost_to, coefficient)
+            VALUES
+            (0, 5000, 10),
+            (5000, 10000, 30),
+            (10000, 20000, 100),
+            (20000, 1000000, 500);
+        </sql>
+    </changeSet>
+    <changeSet author = "katierevinska" id = "45">
+        <sql>
+            INSERT INTO country_safety_rating_coefficient(country_ic, rating)
+            VALUES
+            ('LATVIA', 5),
+            ('SPAIN', 8),
+            ('JAPAN', 9);
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>

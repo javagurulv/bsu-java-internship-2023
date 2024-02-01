@@ -2,7 +2,7 @@ package lv.javaguru.travel.insurance.core.validations;
 
 import lv.javaguru.travel.insurance.core.domain.ClassifierValue;
 import lv.javaguru.travel.insurance.core.repositories.ClassifierValueRepository;
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -28,9 +28,10 @@ public class TravelRequestRiskValidationTest {
     @Mock
     private ClassifierValueRepository valueRepository;
     @Mock
-    private TravelCalculatePremiumRequest request;
+    private TravelCalculatePremiumRequestV1 request;
+
     @Test
-    public void requestWithExistSelectedRiskTest(){
+    public void requestWithExistSelectedRiskTest() {
         ClassifierValue classifierValue = mock(ClassifierValue.class);
         when(request.getSelectedRisks()).thenReturn(List.of("EXIST_RISK_1", "EXIST_RISK_2"));
         when(valueRepository.findByClassifierTitleAndIc("RISK_TYPE", "EXIST_RISK_1")).thenReturn(Optional.of(classifierValue));
@@ -38,8 +39,9 @@ public class TravelRequestRiskValidationTest {
         List<ValidationError> errors = validation.validateList(request);
         assertTrue(errors.isEmpty());
     }
+
     @Test
-    public void requestWithNotExistSelectedRiskTest(){
+    public void requestWithNotExistSelectedRiskTest() {
         ValidationError error1 = mock(ValidationError.class);
         when(request.getSelectedRisks()).thenReturn(List.of("NOT_EXIST_RISK_1", "NOT_EXIST_RISK_2"));
         when(valueRepository.findByClassifierTitleAndIc("RISK_TYPE", "NOT_EXIST_RISK_1")).thenReturn(Optional.empty());
@@ -48,6 +50,6 @@ public class TravelRequestRiskValidationTest {
                 .thenReturn(error1);
         List<ValidationError> errors = validation.validateList(request);
         assertFalse(errors.isEmpty());
-        assertEquals(errors.size(),2);
+        assertEquals(errors.size(), 2);
     }
 }

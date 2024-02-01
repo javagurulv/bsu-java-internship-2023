@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Agreement</title>
+</head>
+<body>
+
+<div th:switch="${response.error}">
+    <div th:case="null">
+        <h1>Agreement</h1>
+        <h3>
+            <label th:text="'UUID: ' + ${response.uuid}"></label>
+        </h3>
+        <h3>
+            <label th:text="'DateFrom: ' + ${response.agreementDateFrom}"></label>
+        </h3>
+        <h3>
+            <label th:text="'Date to: ' + ${response.agreementDateTo}"></label>
+        </h3>
+        <h3>
+            <label th:text="'Country: ' + ${response.country}"></label>
+        </h3>
+        <h3>
+            <label th:text="'Agreement Premium: ' + ${response.agreementPremium}"></label>
+        </h3>
+        <div th:each="person : ${response.persons}">
+            <h3 th:text="${person.personFirstName} + ' ' + ${person.personLastName}"></h3>
+            <p th:text="'Person code: ' + ${person.personUUID}"></p>
+            <p th:text="'Birth date ' + ${person.personBirthDate}"></p>
+            <p th:text="'Medical risk limit level ' + ${person.medicalRiskLimitLevel}"></p>
+            <p th:text="'Travel cost ' + ${person.travelCost}"></p>
+            <p th:text="'Person premium ' + ${person.personPremium}"></p>
+            <p>Risks</p>
+            <ul>
+                <li th:each="risk : ${person.personRisks}" th:text="${risk.ic} + ' : ' + ${risk.premium}"></li>
+            </ul>
+        </div>
+    </div>
+    <div th:case="*">
+        <h3 th:text="'NO SUCH AGREEMENT EXISTS WITH UUID: ' + ${uuid}"></h3>
+    </div>
+</div>
+
+</body>
+</html>

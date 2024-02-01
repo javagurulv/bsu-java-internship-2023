@@ -1,0 +1,16 @@
+{
+  "agreementDateFrom" : "2025-05-25",
+  "agreementDateTo" : "2025-05-29",
+  "travelCost" : 2000.00,
+  "country" : "SPAIN",
+  "selected_risks":["TRAVEL_CANCELLATION"],
+  "persons" : [
+    {
+      "personFirstName" : "Vasja",
+      "personLastName" : "Pupkin",
+      "personBirthDate" : "1954-05-29",
+      "personalCode": "35h5325",
+      "medicalRiskLimitLevel" : "LEVEL_10000"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "personUUID" : null,
+  "personFirstName": null,
+  "personLastName": null,
+  "dateOfBirth": null,
+  "agreementDateFrom": null,
+  "agreementDateTo": null,
+  "selected_risks" : null,
+  "country" : null,
+  "medicalRiskLimitLevel": null,
+  "travelCost": null
+}

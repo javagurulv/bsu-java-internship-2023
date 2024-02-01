@@ -30,7 +30,7 @@ public class TravelCalculatePremiumRequestValidatorTest {
     private final TravelCalculatePremiumRequestValidatorImpl requestValidator = new TravelCalculatePremiumRequestValidatorImpl();
 
     @Test
-    public void shouldReturnErrors() {
+    public void shouldReturnTwoErrors() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(firstValidation.execute(request)).thenReturn(Optional.of(new ValidationError()));
         when(secondValidation.execute(request)).thenReturn(Optional.of(new ValidationError()));
@@ -39,6 +39,18 @@ public class TravelCalculatePremiumRequestValidatorTest {
         List<ValidationError> validationErrors = requestValidator.validate(request);
 
         assertEquals(2, validationErrors.size());
+    }
+
+    @Test
+    public void shouldReturnOneError() {
+        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        when(firstValidation.execute(request)).thenReturn(Optional.of(new ValidationError()));
+        when(secondValidation.execute(request)).thenReturn(Optional.empty());
+        ReflectionTestUtils.setField(requestValidator, "validations", List.of(firstValidation, secondValidation));
+
+        List<ValidationError> validationErrors = requestValidator.validate(request);
+
+        assertEquals(1, validationErrors.size());
     }
 
     @Test

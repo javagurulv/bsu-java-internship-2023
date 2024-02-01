@@ -1,0 +1,8 @@
+{
+  "errors": [
+    {
+      "errorCode": "ERROR_CODE_20",
+      "description": "Agreement with uuid 11bef5e1-d079-4421-9e3c-3329b1e3c836 isn't exist!"
+    }
+  ]
+}

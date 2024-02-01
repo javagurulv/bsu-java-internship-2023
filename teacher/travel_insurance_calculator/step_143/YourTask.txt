@@ -1,0 +1,38 @@
+На взгляд ментора в структуре acceptance тестов
+есть следующие проблемы:
+
+- в коде много почти одинаковых классов:
+TravelCalculatePremiumControllerTestCase1
+TravelCalculatePremiumControllerTestCase2
+TravelCalculatePremiumControllerTestCase3
+...
+
+- названия тестовых сценариев никак не связаны с бизнес правилами:
+TestCase1
+TestCase2
+TestCase3
+...
+
+- в тестах нет структуры, всё свалено в одну большую кучу
+(внутри каждой версии /v1, /v2)!
+По хорошему требуется создание определённой структуры,
+например разделить все тесты на уровни:
+    agreement_level
+    person_level
+    risk_travel_medical
+    risk_travel_cancellation
+Эта структура позволит лучше ориентироваться в тестах.
+
+
+Давайте решим все эти проблемы одну за другой!
+
+
+Ваша задача:
+- в коде много почти одинаковых классов:
+TravelCalculatePremiumControllerTestCase1
+TravelCalculatePremiumControllerTestCase2
+TravelCalculatePremiumControllerTestCase3
+...
+
+Придумайте решение этой проблемы и реализуйте его
+для тестов в папках rest/v1 и rest/v2!

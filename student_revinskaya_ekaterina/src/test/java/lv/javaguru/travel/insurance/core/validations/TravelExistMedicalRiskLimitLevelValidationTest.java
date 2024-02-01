@@ -1,7 +1,7 @@
 package lv.javaguru.travel.insurance.core.validations;
 
 import lv.javaguru.travel.insurance.core.repositories.ClassifierValueRepository;
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -22,21 +22,35 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 public class TravelExistMedicalRiskLimitLevelValidationTest {
     @InjectMocks
-    TravelRequestExistMedicalRiskLimitLevelValidation medicalRiskLimitLevelValidation;
+    private TravelRequestExistMedicalRiskLimitLevelValidation medicalRiskLimitLevelValidation;
     @Mock
-    ValidationErrorFactory validationErrorFactory;
+    private ValidationErrorFactory validationErrorFactory;
     @Mock
-    ClassifierValueRepository classifierValueRepository;
+    private ClassifierValueRepository classifierValueRepository;
     @Mock
-    TravelCalculatePremiumRequest request;
+    private TravelCalculatePremiumRequestV1 request;
+
     @Test
-    public void shouldContainErrorNotExistMedicalRiskLimitLevelTest(){
+    public void containErrorNotExistMedRiskLimitLevelWithEnableTest() {
         when(request.getMedicalRiskLimitLevel()).thenReturn("FAKE");
         ReflectionTestUtils.setField(medicalRiskLimitLevelValidation, "medicalRiskLimitLevelEnabled", true);
-        when(classifierValueRepository.findByClassifierTitleAndIc("MEDICAL_RISK_LIMIT_LEVEL","FAKE"))
+        when(classifierValueRepository.findByClassifierTitleAndIc("MEDICAL_RISK_LIMIT_LEVEL", "FAKE"))
                 .thenReturn(Optional.empty());
         ValidationError validationError = mock(ValidationError.class);
-        when(validationErrorFactory.buildError(eq("ERROR_CODE_15"),anyList())).thenReturn(validationError);
+        when(validationErrorFactory.buildError(eq("ERROR_CODE_15"), anyList())).thenReturn(validationError);
+        Optional<ValidationError> error = medicalRiskLimitLevelValidation.validate(request);
+        assertTrue(error.isPresent());
+        assertEquals(error.get(), validationError);
+    }
+
+    @Test
+    public void containErrorNotExistMedRiskLimitLevelWithNotEnableTest() {
+        when(request.getMedicalRiskLimitLevel()).thenReturn("FAKE");
+        ReflectionTestUtils.setField(medicalRiskLimitLevelValidation, "medicalRiskLimitLevelEnabled", false);
+        when(classifierValueRepository.findByClassifierTitleAndIc("MEDICAL_RISK_LIMIT_LEVEL", "FAKE"))
+                .thenReturn(Optional.empty());
+        ValidationError validationError = mock(ValidationError.class);
+        when(validationErrorFactory.buildError(eq("ERROR_CODE_15"), anyList())).thenReturn(validationError);
         Optional<ValidationError> error = medicalRiskLimitLevelValidation.validate(request);
         assertTrue(error.isPresent());
         assertEquals(error.get(), validationError);

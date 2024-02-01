@@ -1,0 +1,11 @@
+Ваша задача:
+
+1. Скопируйте в /version_2 класс SelectedRisksPremiumCalculator.
+
+2. В классе SelectedRisksPremiumCalculator поменяйте сигнатуру
+List<RiskPremium> calculatePremiumForAllRisks(TravelCalculatePremiumRequestV1 request)
+на
+List<RiskDTO> calculatePremiumForAllRisks(AgreementDTO agreement, PersonDTO person)
+а так же сделайте нужные изменения в коде класса.
+Данный класс должен по полису и персоне рассчитывать все выбранные
+риски для переданной в качестве параметра персоне.

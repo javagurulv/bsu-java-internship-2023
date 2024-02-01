@@ -1,0 +1,12 @@
+{
+  "errors": [
+    {
+      "errorCode": "ERROR_CODE_7",
+      "description": "Field agreementDateFrom must be less than field agreementDateTo!"
+    },
+    {
+      "errorCode": "ERROR_CODE_6",
+      "description": "Field agreementDateTo must be future date!"
+    }
+  ]
+}

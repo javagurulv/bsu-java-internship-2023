@@ -1,19 +1,41 @@
 package lv.javaguru.travel.insurance.rest.validation;
 
 import lv.javaguru.travel.insurance.core.ValidationError;
-import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
-import lv.javaguru.travel.insurance.rest.TravelRequestValidation;
+import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
-public class TravelRequestDateToValidation implements TravelRequestValidation {
+@Component
+public class TravelRequestDateToValidation extends TravelRequestValidationImpl {
+    @Autowired
+    ValidationErrorFactory errorFactory;
+    /*
+    @Autowired
+
+    ValidationErrorsUtil util;
+     */
     @Override
     public Optional<ValidationError> validate(TravelCalculatePremiumRequest request) {
+//        ValidationErrorsUtil util = new ValidationErrorsUtil();
+ /*       ValidationErrorsUtil util;
+        try {
+            util = new ValidationErrorsUtil();
+        }
+        catch (IOException e) {
+            return Optional.of(new ValidationError("ERROR_CODE_0", "IOException is errorCode.properties!"));//util.buildError("ERROR_CODE_3"));
+        }
+*/
+
+//        errorFactory = new ValidationErrorFactory();
         if (request.getAgreementDateTo() == null) {
-            return Optional.of(new ValidationError("agreementDateTo", "Must not be null!"));
+            String errorCode = "ERROR_CODE_5";
+            return Optional.of(errorFactory.buildError(errorCode));
         }
         else if (request.getAgreementDateTo().before(request.getAgreementDateFrom())) {
-            return Optional.of(new ValidationError("agreementDateTo", "Must not be before agreementDateFrom!!!"));
+            String errorCode = "ERROR_CODE_6";
+            return Optional.of(errorFactory.buildError(errorCode));
         }
         return Optional.empty();
     }

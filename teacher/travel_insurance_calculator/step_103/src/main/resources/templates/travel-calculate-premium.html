@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Travel Insurance Premium Calculation</title>
+</head>
+<body>
+
+<h1>Travel Insurance Premium Calculation</h1>
+
+<form action="/insurance/travel/web" th:object="${request}" method="post">
+    <label for="personFirstName">First Name:</label>
+    <input type="text" id="personFirstName" th:field="${request.personFirstName}"><br><br>
+
+    <label for="personLastName">Last Name:</label>
+    <input type="text" id="personLastName" th:field="${request.personLastName}"><br><br>
+
+    <label for="personBirthDate">Birth Date:</label>
+    <input type="date" id="personBirthDate"
+           th:field="${request.personBirthDate}"><br><br>
+
+    <label for="agreementDateFrom">Agreement Date From:</label>
+    <input type="date" id="agreementDateFrom" th:field="${request.agreementDateFrom}"><br><br>
+
+    <label for="agreementDateTo">Agreement Date To:</label>
+    <input type="date" id="agreementDateTo" th:field="${request.agreementDateTo}"><br><br>
+
+    <label for="country">Country:</label>
+    <input type="text" id="country" th:field="${request.country}"><br><br>
+
+    <label for="medicalRiskLimitLevel">Medical Risk Limit Level:</label>
+    <input type="text" id="medicalRiskLimitLevel" th:field="${request.medicalRiskLimitLevel}"><br><br>
+
+    <label for="selectedRisks">Selected Risks:</label>
+    <input type="text" id="selectedRisks" th:field="${request.selectedRisks}"><br><br>
+
+    <button type="submit">Calculate Premium</button>
+</form>
+
+
+<td th:if="${response.errors != null}">
+    <h3>Travel Insurance Premium Calculation ERRORS</h3>
+    <tr th:each="error : ${response.errors}">
+        <td th:text="${error.errorCode}" />
+        <td th:text="${error.description}" />
+        <br>
+        <br>
+    </tr>
+</td>
+
+<br>
+
+<h3>
+    <label th:if="${response.agreementPremium != null}"
+           th:text="'AGREEMENT PREMIUM: ' + ${response.agreementPremium}"></label>
+</h3>
+
+<br>
+
+<td th:if="${response.risks != null}">
+    <h3>Travel Insurance Premium Calculation RISKS</h3>
+    <tr th:each="risk : ${response.risks}">
+        <td th:text="${risk.riskIc}" />
+        <td th:text="${risk.premium}" />
+        <br>
+    </tr>
+</td>
+
+</body>
+</html>

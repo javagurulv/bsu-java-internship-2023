@@ -1,0 +1,64 @@
+1. Добавить feature flag cancellation.risk.enabled в application.properties
+
+2. Добавить валидацию на присутствие риска отмены путешествия среди остальных selected_risks поля запроса
+только при условии что значение cancellation.risk.enabled  true
+
+3. Добавить в запрос секцию TravelCost, в которой
+можно будет указывать стоимость поездки клиента.
+
+4. Реализовать валидацию, которая будет проверять, что в секции
+TravelCost указано корректное значение. Иначе запрос должен считаться некорректным.
+
+5. Внести изменение в функционал получения информации о страховке по uuid
+
+пункт 1-5 2-3 часа
+
+6. Добавить в базу данных таблицу travel_cost.
+
+7. Создать пакет cancellation_of_travel и перенести туда TravelCancellationRiskPremiumCalculator
+
+8. Создать в пакете класс TravelCostPremiumCalculator с методом
+calculate который будет возвращать коэффициент из travel_cost
+
+9. Внести изменения в TravelCancellationRiskPremiumCalculator.
+Его метод вместо дефолтного значения
+должен возвращать значение согласно формуле
+TRAVEL_CANCELLATION premium = TravelCostCoefficient
+
+пункт 6-7 1 час
+
+10. Написать тесты на валидаторы и калькуляторы, проверить подсчёт премии.
+
+1-2 часа
+
+11. Добавить в базу данных таблицу country_safety_rating.
+
+12. Создать  CountrySafetyRatingCalculator в пакете cancellation_of_travel
+с методом calculate который будет возвращать коэффициент исходя из формулы
+CountrySafetyRatingCoefficient = стоимость путешествия / рейтинг безопасности страны,
+
+13. Внести изменения в TravelCancellationRiskPremiumCalculator:
+TRAVEL_CANCELLATION premium =
+TravelCostCoefficient + CountrySafetyRatingCoefficient
+
+пункт 11-13 1 час
+
+14. Добавить в базу данных таблицу для задания зависимости
+между возрастом клиента и AgeCoefficient.
+
+15. (изменить название существуещего класса AgeCoefficientCalculator)
+Создать  AgeCoefficientCancellationRiskCalculator в пакете cancellation_of_travel
+с методом calculate,
+который в зависимости от age.coefficient.enabled флага, УЖЕ СОЗДАННОГО РАНЕЕ
+будет либо возвращать дефолтное значение 0,
+либо коэффициент из таблицы.
+
+16. Реализовать полный расчёт премии для риска отмены путешествия:
+TRAVEL_CANCELLATION premium =
+                 TravelCostCoefficient + CountrySafetyRatingCoefficient + AgeCoefficient
+
+пункт 15-16 1 час
+
+17. Дописать тесты на все колькуляторы и общий расчёт премии, проверить при разных значениях флагов.
+
+2 часа

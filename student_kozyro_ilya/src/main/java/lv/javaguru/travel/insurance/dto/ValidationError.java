@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ValidationError {
-    private String field;
-    private String error;
+    private String errorCode;
+    private String errorDescription;
+
 }

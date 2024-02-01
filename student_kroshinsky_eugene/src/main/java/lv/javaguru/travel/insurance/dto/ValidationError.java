@@ -1,9 +1,6 @@
 package lv.javaguru.travel.insurance.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Objects;
 
@@ -11,21 +8,11 @@ import java.util.Objects;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
 public class ValidationError {
 
-    private String field;
-    private String message;
+    private String errorCode;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ValidationError that = (ValidationError) o;
-        return Objects.equals(field, that.field) && Objects.equals(message, that.message);
-    }
+    private String description;
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(field, message);
-    }
 }

@@ -1,6 +1,6 @@
 package lv.javaguru.travel.insurance.core.validations;
 
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,10 +17,11 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class TravelCalculatePremiumRequestValidatorTest {
-@InjectMocks
-private TravelCalculatePremiumRequestValidatorImpl requestValidator;
+    @InjectMocks
+    private TravelCalculatePremiumRequestValidatorImpl requestValidator;
     @Mock
-    private TravelCalculatePremiumRequest request;
+    private TravelCalculatePremiumRequestV1 request;
+
     @Test
     public void responseShouldContainSingleErrorsTest() {
         TravelRequestValidation requestSingleValidation = mock(TravelRequestValidation.class);
@@ -34,6 +35,7 @@ private TravelCalculatePremiumRequestValidatorImpl requestValidator;
         List<ValidationError> errors = requestValidator.validate(request);
         assertEquals(errors.size(), 1);
     }
+
     @Test
     public void responseShouldContainListErrorsTest() {
         TravelRequestValidation requestSingleValidation = mock(TravelRequestValidation.class);
@@ -47,6 +49,7 @@ private TravelCalculatePremiumRequestValidatorImpl requestValidator;
         List<ValidationError> errors = requestValidator.validate(request);
         assertEquals(errors.size(), 1);
     }
+
     @Test
     public void responseShouldContainSingleAndListErrorsTest() {
         TravelRequestValidation requestSingleValidation = mock(TravelRequestValidation.class);

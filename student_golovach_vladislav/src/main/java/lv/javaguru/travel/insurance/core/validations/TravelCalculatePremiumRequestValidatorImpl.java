@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 @Component
 class TravelCalculatePremiumRequestValidatorImpl
-        implements TravelCalculatePremiumRequestValidator {
+    implements TravelCalculatePremiumRequestValidator {
 
     @Autowired
     private List<TravelRequestValidation> travelValidations;
