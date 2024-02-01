@@ -2,17 +2,13 @@ package lv.javaguru.travel.insurance.dto;
 
 import lombok.*;
 
-import java.util.Objects;
-
+import java.math.BigDecimal;
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class ValidationError {
-
-    private String errorCode;
-
-    private String description;
-
+public class TravelRisk {
+    String riskIc;
+    BigDecimal premium;
 }
