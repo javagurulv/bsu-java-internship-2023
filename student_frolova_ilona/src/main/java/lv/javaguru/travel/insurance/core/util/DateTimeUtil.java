@@ -6,6 +6,9 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.Date;
 
 @Component
@@ -25,5 +28,11 @@ public class DateTimeUtil {
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public Date getCurrentTime() {
+        ZoneId zone = ZoneId.of("Europe/Minsk");
+        ZonedDateTime zonedDateTime = ZonedDateTime.now(zone);
+        return Date.from(zonedDateTime.toInstant());
     }
 }
