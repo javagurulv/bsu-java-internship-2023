@@ -1,8 +1,8 @@
 {
   "errors": [
     {
-      "errorCode": "ERROR_CODE_6",
-      "description": "Field personLastName is empty!"
+      "errorCode": "ERROR_CODE_8",
+      "description": "You chose medical risk, field country can't be empty!"
     }
   ],
   "personFirstName": null,
@@ -10,6 +10,6 @@
   "agreementDateFrom": null,
   "agreementDateTo": null,
   "agreementPremium": null,
-  "risks": null,
-  "country" : null
+  "country": null,
+  "risks": null
 }
