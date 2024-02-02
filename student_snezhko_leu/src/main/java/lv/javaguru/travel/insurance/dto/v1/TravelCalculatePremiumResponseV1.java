@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.dto;
+package lv.javaguru.travel.insurance.dto.v1;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -8,7 +8,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.*;
 import lv.javaguru.travel.insurance.core.ValidationError;
-import lv.javaguru.travel.insurance.core.util.BigDecimalSerializer;
+import lv.javaguru.travel.insurance.dto.util.BigDecimalSerializer;
+import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRisk;
 import lv.javaguru.travel.insurance.rest.CoreResponse;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -16,7 +17,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class TravelCalculatePremiumResponse extends CoreResponse {
+public class TravelCalculatePremiumResponseV1 extends CoreResponse {
 
     private String personFirstName;
     private String personLastName;
@@ -40,7 +41,7 @@ public class TravelCalculatePremiumResponse extends CoreResponse {
     private Date personBirthDate;
 
     private String medicalRiskLimitLevel;
-    public TravelCalculatePremiumResponse(List<ValidationError> errors) {
+    public TravelCalculatePremiumResponseV1(List<ValidationError> errors) {
         super(errors);
     }
     /*

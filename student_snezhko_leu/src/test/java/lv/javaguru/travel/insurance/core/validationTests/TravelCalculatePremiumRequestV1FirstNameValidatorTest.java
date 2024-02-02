@@ -1,6 +1,6 @@
 package lv.javaguru.travel.insurance.core.validationTests;
 
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -21,8 +21,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.test.util.ReflectionTestUtils;
 
-public class TravelCalculatePremiumRequestFirstNameValidatorTest {
-    private TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+public class TravelCalculatePremiumRequestV1FirstNameValidatorTest {
+    private TravelCalculatePremiumRequestV1 request = mock(TravelCalculatePremiumRequestV1.class);
     @InjectMocks
     private TravelRequestValidation validator = new TravelRequestFirstNameValidation();
     @Mock

@@ -2,7 +2,7 @@ package lv.javaguru.travel.insurance.core.validationTests;
 
 import lv.javaguru.travel.insurance.core.ValidationError;
 import lv.javaguru.travel.insurance.core.repositories.ClassifierValueRepository;
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import lv.javaguru.travel.insurance.rest.placeholder.Placeholder;
 import lv.javaguru.travel.insurance.rest.validation.TravelRequestCorrectCountryValueValidation;
 import lv.javaguru.travel.insurance.rest.validation.ValidationErrorFactory;
@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class TravelCalculatePremiumRequestCountryIsCorrectValidationTest {
+public class TravelCalculatePremiumRequestV1CountryIsCorrectValidationTest {
     @InjectMocks
     private TravelRequestCorrectCountryValueValidation validator = new TravelRequestCorrectCountryValueValidation();
 
@@ -30,7 +30,7 @@ public class TravelCalculatePremiumRequestCountryIsCorrectValidationTest {
     @Mock
     private ClassifierValueRepository classifierValueRepository = mock(ClassifierValueRepository.class);
 
-    private TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+    private TravelCalculatePremiumRequestV1 request = mock(TravelCalculatePremiumRequestV1.class);
 
     @Test
     public void TravelCalculatePremiumRequestValidatorCountryUncorrectTest() {

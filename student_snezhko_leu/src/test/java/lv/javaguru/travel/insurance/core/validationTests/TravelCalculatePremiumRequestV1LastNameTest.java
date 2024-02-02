@@ -1,7 +1,7 @@
 package lv.javaguru.travel.insurance.core.validationTests;
 
 import lv.javaguru.travel.insurance.core.ValidationError;
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import lv.javaguru.travel.insurance.rest.TravelRequestValidation;
 import lv.javaguru.travel.insurance.rest.validation.TravelRequestLastNameValidation;
 import lv.javaguru.travel.insurance.rest.validation.ValidationErrorFactory;
@@ -14,13 +14,13 @@ import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
-import static lv.javaguru.travel.insurance.core.validationTests.TravelCalculatePremiumRequestFirstNameValidatorTest.isEqual;
+import static lv.javaguru.travel.insurance.core.validationTests.TravelCalculatePremiumRequestV1FirstNameValidatorTest.isEqual;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.util.AssertionErrors.assertTrue;
 
-public class TravelCalculatePremiumRequestLastNameTest {
-    private TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+public class TravelCalculatePremiumRequestV1LastNameTest {
+    private TravelCalculatePremiumRequestV1 request = mock(TravelCalculatePremiumRequestV1.class);
     @InjectMocks
     private TravelRequestValidation validator = new TravelRequestLastNameValidation();
     @Mock
