@@ -1,6 +1,6 @@
 package lv.javaguru.travel.insurance.core;
 
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import lv.javaguru.travel.insurance.rest.TravelRequestValidation;
 import lv.javaguru.travel.insurance.rest.validation.*;
 import org.junit.jupiter.api.Test;
@@ -15,10 +15,10 @@ import java.util.*;
 
 import java.util.List;
 
-public class TravelCalculatePremiumRequestValidatorTest {
+public class TravelCalculatePremiumRequestV1ValidatorTest {
     @InjectMocks
     private TravelCalculatePremiumRequestValidator validator = new TravelCalculatePremiumRequestValidator();
-    private TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+    private TravelCalculatePremiumRequestV1 request = mock(TravelCalculatePremiumRequestV1.class);
 
     @Test
     public void TravelCalculatePremiumRequestValidatorOneErrorTest() {
