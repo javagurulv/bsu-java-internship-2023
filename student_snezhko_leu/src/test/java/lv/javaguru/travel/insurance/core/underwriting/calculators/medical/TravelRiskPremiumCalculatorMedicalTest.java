@@ -2,7 +2,7 @@ package lv.javaguru.travel.insurance.core.underwriting.calculators.medical;
 
 import lv.javaguru.travel.insurance.core.domain.AgeCoefficient;
 import lv.javaguru.travel.insurance.core.domain.CountryDefaultDayRate;
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -39,7 +39,7 @@ public class TravelRiskPremiumCalculatorMedicalTest {
     @Mock
     private TravelCalculateInsuranceLimitCoefficient mrllCoefficientCalculator = mock(TravelCalculateInsuranceLimitCoefficient.class);
 
-    TravelCalculatePremiumRequest request;
+    TravelCalculatePremiumRequestV1 request;
     /*
     @BeforeEach
     public void init() {
@@ -82,7 +82,7 @@ public class TravelRiskPremiumCalculatorMedicalTest {
     }
 
     private void init(String countryName, BigDecimal cddrValue, int age) {
-        request = mock(TravelCalculatePremiumRequest.class);
+        request = mock(TravelCalculatePremiumRequestV1.class);
         //String countryName = "LATVIA";
         //Double cddrValue = 1.00d;
         List<String> risks = new ArrayList<>();

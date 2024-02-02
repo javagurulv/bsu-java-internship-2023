@@ -5,8 +5,8 @@ import lv.javaguru.travel.insurance.core.TravelCalculatePremiumRequestValidator;
 import lv.javaguru.travel.insurance.core.ValidationError;
 import lv.javaguru.travel.insurance.core.underwriting.TravelUnderwriting;
 //import lv.javaguru.travel.insurance.core.underwriting.TravelUnderwritingImpl;
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumResponse;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumResponseV1;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRiskFactory;
 import lv.javaguru.travel.insurance.rest.loggers.TravelCalculatePremiumRequestExecutionTimeLogger;
 import lv.javaguru.travel.insurance.rest.loggers.TravelCalculatePremiumRequestLogger;
@@ -28,12 +28,12 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
     @Autowired private TravelCalculatePremiumRiskFactory riskFactory;
 
     @Override
-    public TravelCalculatePremiumResponse calculatePremium(TravelCalculatePremiumRequest request) {
+    public TravelCalculatePremiumResponseV1 calculatePremium(TravelCalculatePremiumRequestV1 request) {
 //        validator = new TravelCalculatePremiumRequestValidator();
         final Stopwatch stopWatch = Stopwatch.createStarted();
         List<ValidationError> errors = validator.validate(request);
         requestLogger.log(request);
-        TravelCalculatePremiumResponse response = !errors.isEmpty()
+        TravelCalculatePremiumResponseV1 response = !errors.isEmpty()
                 ? buildResponse(errors)
                 : buildResponse(request);
         stopWatch.stop();
@@ -41,8 +41,8 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
         responseLogger.log(response);
         return response;
     }
-    public TravelCalculatePremiumResponse buildResponse(TravelCalculatePremiumRequest request) {
-        TravelCalculatePremiumResponse response = new TravelCalculatePremiumResponse();
+    public TravelCalculatePremiumResponseV1 buildResponse(TravelCalculatePremiumRequestV1 request) {
+        TravelCalculatePremiumResponseV1 response = new TravelCalculatePremiumResponseV1();
         response.setPersonFirstName(request.getPersonFirstName());
         response.setPersonLastName(request.getPersonLastName());
         response.setAgreementDateFrom(request.getAgreementDateFrom());
@@ -60,7 +60,7 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
         response.setMedicalRiskLimitLevel(request.getMedicalRiskLimitLevel());
         return response;
     }
-    public TravelCalculatePremiumResponse buildResponse(List<ValidationError> errors) {
-        return new TravelCalculatePremiumResponse(errors);
+    public TravelCalculatePremiumResponseV1 buildResponse(List<ValidationError> errors) {
+        return new TravelCalculatePremiumResponseV1(errors);
     }
 }

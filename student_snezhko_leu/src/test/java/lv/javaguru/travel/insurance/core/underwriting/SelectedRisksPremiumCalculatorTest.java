@@ -2,7 +2,7 @@ package lv.javaguru.travel.insurance.core.underwriting;
 
 import lv.javaguru.travel.insurance.core.underwriting.calculators.medical.TravelRiskPremiumCalculatorMedical;
 import lv.javaguru.travel.insurance.core.underwriting.calculators.TravelRiskPremiumCalculatorSportActivities;
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRisk;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,12 +23,12 @@ public class SelectedRisksPremiumCalculatorTest {
     private SelectedRisksPremiumCalculator calculator = new SelectedRisksPremiumCalculator();
 
     @Mock
-    private TravelCalculatePremiumRequest request;
+    private TravelCalculatePremiumRequestV1 request;
 
 
     @BeforeEach
     public void init() {
-        request = mock(TravelCalculatePremiumRequest.class);
+        request = mock(TravelCalculatePremiumRequestV1.class);
         List<String> risks = new ArrayList<>();
         risks.add("TRAVEL_MEDICAL");
         risks.add("TRAVEL_SPORT_ACTIVITIES");
@@ -105,7 +105,7 @@ public class SelectedRisksPremiumCalculatorTest {
     }
     private boolean compareCalculators(TravelRiskPremiumCalculator calculator1,
                                     TravelRiskPremiumCalculator calculator2,
-                                    TravelCalculatePremiumRequest request) {
+                                    TravelCalculatePremiumRequestV1 request) {
         return calculator2.getIc().equals(calculator1.getIc())
                 && calculator1.calculatePremium(request)
                 .equals(

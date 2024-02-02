@@ -2,7 +2,7 @@ package lv.javaguru.travel.insurance.core.validationTests;
 
 
 import lv.javaguru.travel.insurance.core.ValidationError;
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import lv.javaguru.travel.insurance.rest.validation.TravelRequestCountryIsNotNullValidation;
 import lv.javaguru.travel.insurance.rest.validation.ValidationErrorFactory;
 import org.junit.jupiter.api.Test;
@@ -26,7 +26,7 @@ public class TravelRequestCountryIsNotNullValidationTest {
     @Mock
     private ValidationErrorFactory errorFactory = mock(ValidationErrorFactory.class);
 
-    private TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+    private TravelCalculatePremiumRequestV1 request = mock(TravelCalculatePremiumRequestV1.class);
     public static boolean isEqual(ValidationError e1, ValidationError e2) {
         return e1.getErrorCode().equals(e2.getErrorCode()) && e1.getDescription().equals(e2.getDescription());
     }

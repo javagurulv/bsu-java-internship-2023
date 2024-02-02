@@ -2,7 +2,7 @@ package lv.javaguru.travel.insurance.core;
 
 
 //import lv.javaguru.travel.insurance.dto.ValidationError;
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import lv.javaguru.travel.insurance.rest.TravelRequestValidation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -14,7 +14,7 @@ import java.util.*;
 public class TravelCalculatePremiumRequestValidator {       //will make default access mod
     @Autowired
     List<TravelRequestValidation> validations;
-    public List<ValidationError> validate(TravelCalculatePremiumRequest request) {
+    public List<ValidationError> validate(TravelCalculatePremiumRequestV1 request) {
   //      List<TravelRequestValidation> validations = new ArrayList<>();
         List<ValidationError> errors = new ArrayList<>();
         /*

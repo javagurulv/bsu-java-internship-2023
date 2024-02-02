@@ -1,11 +1,10 @@
 package lv.javaguru.travel.insurance.dto;
 
-import lv.javaguru.travel.insurance.core.underwriting.TravelRiskPremiumCalculator;
 import lv.javaguru.travel.insurance.core.underwriting.SelectedRisksPremiumCalculator;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -17,7 +16,7 @@ public class TravelCalculatePremiumRiskFactory {
         return request.getSelected_risks().contains(calculator.getIc()) ? new TravelCalculatePremiumRisk(calculator.getIc(), calculator.calculatePremium(request)) : null; //return calculator.findCalculatorByIc(ic);
     }
 */
-    public List<TravelCalculatePremiumRisk> buildRisksList(TravelCalculatePremiumRequest request) {//List<TravelRiskPremiumCalculator> calculators, TravelCalculatePremiumRequest request) {
+    public List<TravelCalculatePremiumRisk> buildRisksList(TravelCalculatePremiumRequestV1 request) {//List<TravelRiskPremiumCalculator> calculators, TravelCalculatePremiumRequest request) {
         //List<TravelCalculatePremiumRisk> result = new ArrayList<>();
 
         /*

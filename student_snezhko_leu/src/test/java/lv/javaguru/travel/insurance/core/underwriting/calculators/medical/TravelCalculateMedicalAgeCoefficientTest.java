@@ -2,7 +2,7 @@ package lv.javaguru.travel.insurance.core.underwriting.calculators.medical;
 
 import lv.javaguru.travel.insurance.core.domain.AgeCoefficient;
 import lv.javaguru.travel.insurance.core.repositories.AgeCoefficientRepository;
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -27,7 +27,7 @@ public class TravelCalculateMedicalAgeCoefficientTest {
     @Mock
     private AgeCoefficientRepository acRepository = mock(AgeCoefficientRepository.class);
 
-    TravelCalculatePremiumRequest request;
+    TravelCalculatePremiumRequestV1 request;
 
     @Test
     public void MedicalAgeCoefficientCalculator() {
@@ -37,7 +37,7 @@ public class TravelCalculateMedicalAgeCoefficientTest {
 
     private void init(Integer age, Double ageCoefficient)
     {
-        request = mock(TravelCalculatePremiumRequest.class);
+        request = mock(TravelCalculatePremiumRequestV1.class);
 
         Date birthDate = new Date();
         birthDate.setYear(birthDate.getYear() - age);
