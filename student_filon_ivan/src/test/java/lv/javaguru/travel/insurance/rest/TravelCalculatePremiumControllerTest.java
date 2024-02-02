@@ -41,6 +41,48 @@ public class TravelCalculatePremiumControllerTest {
                    "rest/Response.json");
     }
 
+    @Test
+    public void withoutFirstNameTest() throws Exception {
+        performTest("rest/RequestWithoutFirstName.json",
+                "rest/ResponseWithoutFirstName.json");
+    }
+
+    @Test
+    public void withoutLastNameTest() throws Exception{
+        performTest("rest/RequestWithoutLastName.json",
+                "rest/ResponseWithoutLastName.json");
+    }
+
+    @Test
+    public void withoutAgreementDateTo() throws Exception {
+        performTest("rest/RequestWithoutAgreementDateTo.json",
+                "rest/ResponseWithoutAgreementDateTo.json");
+    }
+
+    @Test
+    public void withoutAgreementDateFrom() throws Exception {
+        performTest("rest/RequestWithoutAgreementDateFrom.json",
+                "rest/ResponseWithoutAgreementDateFrom.json");
+    }
+
+    @Test
+    public  void dateToLessFromTest() throws Exception {
+        performTest("rest/RequestDateToLessFrom.json",
+                "rest/ResponseDateToLessFrom.json");
+    }
+
+    @Test
+    public void dateFromLessCurrentDate() throws Exception {
+        performTest("rest/RequestDateFromLessCurrentDate.json",
+                "rest/ResponseDateFromLessCurrentDate.json");
+    }
+
+    @Test
+    public void dateFromLessCurrentDateAndDateToLessDateFrom() throws Exception {
+        performTest("rest/RequestDateFromLessCurrentDateAndDateToLessDateFrom.json",
+                "rest/ResponseDateFromLessCurrentDateAndDateToLessDateFrom.json");
+    }
+
     public void performTest(String requestPath, String responsePath) throws Exception {
         String request = reader.readJson(requestPath);
 

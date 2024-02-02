@@ -51,11 +51,11 @@ Request: country is not supported, RISK_TYPE - TRAVEL_MEDICAL.
 Response: error code = ERROR_CODE_11.
 
 Test Case 14:
-Request: medicalRiskLimit is empty.
+Request: medicalRiskLimit is empty, RISK_TYPE - TRAVEL_MEDICAL.
 Response: error code = ERROR_CODE_14.
 
 Test Case 15:
-Request: medicalRiskLimit is not supported.
+Request: medicalRiskLimit is not supported, RISK_TYPE - TRAVEL_MEDICAL.
 Response: error code = ERROR_CODE_15.
 
 Test Case 16:
@@ -109,5 +109,18 @@ Response: error code = ERROR_CODE_10.
 Test Case 28:
 Request: personUUID is empty, RISK_TYPE - TRAVEL_MEDICAL.
 Response: error code = ERROR_CODE_17.
+
+Test Case 29:
+Request: medical risk limit level is empty, RISK_TYPE - TRAVEL_CANCELLATION.
+Response: successful response.
+
+Test Case 30:
+Request: travelCost is empty, RISK_TYPE - TRAVEL_MEDICAL.
+Response: successful response.
+
+Test Case 31:
+Request: travelCost is empty, RISK_TYPE - TRAVEL_CANCELLATION.
+Response: error code = ERROR_CODE_19.
+
 
 

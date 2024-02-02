@@ -1,5 +1,6 @@
 package lv.javaguru.travel.insurance.core.services;
 
+import lv.javaguru.travel.insurance.core.underwriting.SelectedRisksPremiumCalculator;
 import lv.javaguru.travel.insurance.core.underwriting.TravelPremiumUnderwriting;
 import lv.javaguru.travel.insurance.core.validations.TravelCalculatePremiumRequestValidator;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
@@ -23,6 +24,7 @@ class TravelCalculatePremiumServiceImplTest {
     @Mock private TravelCalculatePremiumRequest request;
     @Mock private TravelCalculatePremiumRequestValidator requestValidator;
     @Mock private TravelPremiumUnderwriting premiumUnderwriting;
+    @Mock private SelectedRisksPremiumCalculator selectedRisksCalculator;
     @InjectMocks TravelCalculatePremiumServiceImpl calculator;
     @Test
     public void injectedRepositoryAreNotNull() {

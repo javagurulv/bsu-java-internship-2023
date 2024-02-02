@@ -1,0 +1,19 @@
+{
+  "personUUID": "1212",
+  "personFirstName": "Harry",
+  "personLastName": "Kane",
+  "dateOfBirth": "2004-03-02",
+  "agreementDateFrom": "2025-04-05",
+  "agreementDateTo": "2025-04-08",
+  "agreementPremium": 58.00,
+  "risks": [
+    {
+      "ic": "TRAVEL_CANCELLATION",
+      "premium": 58.00
+    }
+  ],
+  "country": "SPAIN",
+  "medicalRiskLimitLevel": "",
+  "uuid": "acec40c5-6e86-42f5-841b-8174e8bc315f",
+  "travelCost": 7777.00
+}
