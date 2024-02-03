@@ -4,5 +4,6 @@
   "agreementDateFrom" : "2024-05-25",
   "agreementDateTo" : "2024-05-29",
   "country": "",
+  "dateOfBirth": "1999-05-29",
   "selected_risks":["TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"]
 }
