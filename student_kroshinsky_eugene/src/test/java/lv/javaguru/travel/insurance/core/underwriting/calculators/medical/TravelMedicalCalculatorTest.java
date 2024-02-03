@@ -4,6 +4,7 @@ import lv.javaguru.travel.insurance.core.domain.AgeCoefficient;
 import lv.javaguru.travel.insurance.core.domain.CountryDefaultDayRate;
 import lv.javaguru.travel.insurance.core.repositories.AgeCoefficientRepository;
 import lv.javaguru.travel.insurance.core.repositories.CountryDefaultDayRateRepository;
+import lv.javaguru.travel.insurance.core.underwriting.calculators.medical.TravelMedicalCalculator;
 import lv.javaguru.travel.insurance.core.utils.DateTimeUtil;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import org.junit.jupiter.api.Test;
@@ -12,12 +13,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.math.BigDecimal;
-import java.util.Optional;
-
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.Mockito.when;
+
 @ExtendWith(MockitoExtension.class)
 class TravelMedicalCalculatorTest {
     @Mock private AgeCoefficientRepository ageCoefficientRepository;
