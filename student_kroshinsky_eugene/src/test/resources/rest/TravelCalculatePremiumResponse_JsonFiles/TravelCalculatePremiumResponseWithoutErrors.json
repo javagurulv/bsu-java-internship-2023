@@ -4,7 +4,7 @@
   "personLastName": "Pupkin",
   "agreementDateFrom": "2024-05-25",
   "agreementDateTo": "2024-05-29",
-  "agreementPremium": 11,
+  "agreementPremium": 17.00,
   "country": "SPAIN",
   "risks": [
     {
@@ -17,7 +17,7 @@
     },
     {
       "riskIc": "TRAVEL_MEDICAL",
-      "premium": 4
+      "premium": 10.00
     }
   ]
 }
