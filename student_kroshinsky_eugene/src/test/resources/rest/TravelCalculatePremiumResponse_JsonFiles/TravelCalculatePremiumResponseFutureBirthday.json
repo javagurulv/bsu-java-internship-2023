@@ -1,8 +1,8 @@
 {
   "errors": [
     {
-      "errorCode": "ERROR_CODE_1",
-      "description": "DateTo must be greater than DateFrom!"
+      "errorCode": "ERROR_CODE_10",
+      "description": "Field dateOfBirth from future!"
     }
   ],
   "personFirstName": null,
@@ -10,7 +10,7 @@
   "agreementDateFrom": null,
   "agreementDateTo": null,
   "agreementPremium": null,
+  "country": null,
   "risks": null,
-  "country" : null,
-  "dateOfBirth" : null
+  "dateOfBirth": null
 }

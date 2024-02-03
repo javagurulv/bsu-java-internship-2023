@@ -31,6 +31,9 @@ public class TravelCalculatePremiumResponse extends CoreResponse{
     private String country;
 
     private List<TravelRisk> risks;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private Date dateOfBirth;
     public TravelCalculatePremiumResponse(List<ValidationError> errors) {
         super(errors);
     }

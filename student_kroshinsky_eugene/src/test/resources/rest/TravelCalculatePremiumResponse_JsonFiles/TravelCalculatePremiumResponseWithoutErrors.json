@@ -6,6 +6,7 @@
   "agreementDateTo": "2024-05-29",
   "agreementPremium": 17.00,
   "country": "SPAIN",
+  "dateOfBirth": "1999-05-29",
   "risks": [
     {
       "riskIc": "TRAVEL_CANCELLATION",
