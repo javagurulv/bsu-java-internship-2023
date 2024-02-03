@@ -32,7 +32,7 @@ public class TravelCalculatePremiumRequestValidatorTest {
     }
 @Test
     public void TravelCalculatePremiumRequestValidatorTest2() {
-        TravelCalculatePremiumRequest premiumRequest = new TravelCalculatePremiumRequest("", "", new Date(2022, 11, 19), new Date(2022, 11, 20));
+        TravelCalculatePremiumRequest premiumRequest = new TravelCalculatePremiumRequest("", "", new Date(1999, 11, 19), new Date(1999, 11, 20));
         List<ValidationError> errorsList = requestValidator.validate(premiumRequest);
         assertEquals(errorsList.size(), 2);
 

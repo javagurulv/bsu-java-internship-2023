@@ -1,13 +1,11 @@
 package lv.javaguru.travel.insurance.core.validations;
 
-import lv.javaguru.travel.insurance.core.validator.DateFromGreaterThanCurrentDateValidation;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.Test;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Optional;
 
@@ -21,7 +19,7 @@ public class DateFromGreaterThanCurrentDateValidationTest {
     private TravelCalculatePremiumRequest request;
 
     @Test
-    public void lessThanCurrentDate() throws ParseException {
+    public void lessThanCurrentDate() {
         request = mock(TravelCalculatePremiumRequest.class);
         when(request.getAgreementDateFrom()).thenReturn(createDate("2015-10-10"));
         Optional<ValidationError> errors = validation.execute(request);
@@ -31,7 +29,7 @@ public class DateFromGreaterThanCurrentDateValidationTest {
     }
 
     @Test
-    public void normalTest() throws ParseException {
+    public void normalTest() {
         request = mock(TravelCalculatePremiumRequest.class);
         when(request.getAgreementDateFrom()).thenReturn(createDate("2115-10-10"));
         Optional<ValidationError> errors = validation.execute(request);

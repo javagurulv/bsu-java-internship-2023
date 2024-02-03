@@ -30,4 +30,5 @@ public class TravelCalculatePremiumRequest {
     @JsonProperty("selected_risks")
     private List<String> selectedRisks;
 
+    private String country;
 }

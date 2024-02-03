@@ -89,6 +89,14 @@ public class TravelCalculatePremiumControllerTest {
                 "rest/TravelCalculatePremiumResponse_JsonFiles/TravelCalculatePremiumResponseEmptySelectedRisk.json"
         );
     }
+
+    @Test
+    public void controllerTestEmptyCountryRisk() throws Exception {
+        simpleRestControllerTest(
+                "rest/TravelCalculatePremiumRequest_JsonFiles/TravelCalculatePremiumRequestEmptyCountry.json",
+                "rest/TravelCalculatePremiumResponse_JsonFiles/TravelCalculatePremiumResponseEmptyCountry.json"
+        );
+    }
     private void simpleRestControllerTest(String requestPath, String responsePath) throws Exception {
         String requestJson = reader.readJsonFile(requestPath);
         String responseJson = reader.readJsonFile(responsePath);
