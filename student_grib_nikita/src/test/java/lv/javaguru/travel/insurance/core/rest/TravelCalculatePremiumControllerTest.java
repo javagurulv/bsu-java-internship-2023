@@ -62,6 +62,12 @@ public class TravelCalculatePremiumControllerTest {
                 "jsonRestFiles/ResponseWhenDateToLessThanDateFrom.json");
     }
 
+    @Test
+    public void TestWhenDatesInPast() throws Exception{
+        compareResponses("jsonRestFiles/RequestWhenDatesInPast.json",
+                "jsonRestFiles/ResponseWhenDatesInPast.json");
+    }
+
     private void compareResponses(String jsonRequestFilePath, String jsonResponseFilePath) throws Exception{
         MvcResult mvcResult = mockMvc.perform(post("/insurance/travel/")
                         .content(JsonFileReader.readFile(jsonRequestFilePath))
