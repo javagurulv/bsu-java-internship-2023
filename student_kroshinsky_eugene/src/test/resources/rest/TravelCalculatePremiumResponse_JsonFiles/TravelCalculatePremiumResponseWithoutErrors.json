@@ -9,11 +9,11 @@
   "risks": [
     {
       "riskIc": "TRAVEL_CANCELLATION",
-      "premium": 1
+      "premium": 1.00
     },
     {
       "riskIc": "TRAVEL_LOSS_BAGGAGE",
-      "premium": 6
+      "premium": 6.00
     },
     {
       "riskIc": "TRAVEL_MEDICAL",
