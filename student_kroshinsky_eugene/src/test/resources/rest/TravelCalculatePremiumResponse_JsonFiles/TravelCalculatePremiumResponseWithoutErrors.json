@@ -4,9 +4,8 @@
   "personLastName": "Pupkin",
   "agreementDateFrom": "2024-05-25",
   "agreementDateTo": "2024-05-29",
-  "agreementPremium": 17.00,
+  "agreementPremium": 18.00,
   "country": "SPAIN",
-  "dateOfBirth": "1999-05-29",
   "risks": [
     {
       "riskIc": "TRAVEL_CANCELLATION",
@@ -18,7 +17,8 @@
     },
     {
       "riskIc": "TRAVEL_MEDICAL",
-      "premium": 10.00
+      "premium": 11.00
     }
-  ]
+  ],
+  "dateOfBirth": "1999-05-29"
 }
