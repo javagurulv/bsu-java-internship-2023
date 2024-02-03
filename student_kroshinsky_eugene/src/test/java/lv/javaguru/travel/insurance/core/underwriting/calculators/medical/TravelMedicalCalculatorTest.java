@@ -1,11 +1,5 @@
-package lv.javaguru.travel.insurance.core.underwriting.calculators;
+package lv.javaguru.travel.insurance.core.underwriting.calculators.medical;
 
-import lv.javaguru.travel.insurance.core.domain.AgeCoefficient;
-import lv.javaguru.travel.insurance.core.domain.CountryDefaultDayRate;
-import lv.javaguru.travel.insurance.core.repositories.AgeCoefficientRepository;
-import lv.javaguru.travel.insurance.core.repositories.CountryDefaultDayRateRepository;
-import lv.javaguru.travel.insurance.core.underwriting.calculators.medical.TravelMedicalCalculator;
-import lv.javaguru.travel.insurance.core.utils.DateTimeUtil;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -13,43 +7,36 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.math.BigDecimal;
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class TravelMedicalCalculatorTest {
-    @Mock private AgeCoefficientRepository ageCoefficientRepository;
-    @Mock private AgeCoefficient ageCoefficient;
-    @Mock private DateTimeUtil dateTimeDifference;
-    @Mock private CountryDefaultDayRateRepository repository;
-    @Mock private CountryDefaultDayRate countryDefaultDayRate;
+    @Mock
+    private AgeCoefficientCalculator ageCoefficientCalculator;
+    @Mock private DayCountCalculator dayCountCalculator;
+    @Mock private CountryDefaultDayRateCalculator countryDefaultDayRateCalculator;
     @Mock private TravelCalculatePremiumRequest request;
     @InjectMocks private TravelMedicalCalculator travelMedicalCalculator;
     @Test
-    public void injectedRepositoryAreNotNull() {
-        assertNotNull(dateTimeDifference);
+    void injectedRepositoryAreNotNull() {
+        assertNotNull(ageCoefficientCalculator);
         assertNotNull(request);
-        assertNotNull(repository);
+        assertNotNull(dayCountCalculator);
         assertNotNull(travelMedicalCalculator);
-        assertNotNull(countryDefaultDayRate);
-    }
-/*    @Test
-    void calculatePremiumTest1() {
-        when(request.getCountry()).thenReturn("Latvia");
-        when(repository.findByIc(anyString())).thenReturn(Optional.of(countryDefaultDayRate));
-        when(ageCoefficientRepository.findByAge(anyInt())).thenReturn(Optional.of(ageCoefficient));
-        when(ageCoefficient.getCoefficient()).thenReturn(BigDecimal.valueOf(2));
-        when(countryDefaultDayRate.getDayRate()).thenReturn(new BigDecimal(10));
-        when(dateTimeDifference.calculateDateDifference(any(),any())).thenReturn(new BigDecimal(4));
-        BigDecimal result = travelMedicalCalculator.calculatePremium(request);
-        assertEquals(new BigDecimal(80), result);
+        assertNotNull(countryDefaultDayRateCalculator);
     }
     @Test
-    void calculatePremiumTest2() {
-        when(request.getCountry()).thenReturn("Spain");
-        when(repository.findByIc(anyString())).thenReturn(Optional.of(countryDefaultDayRate));
-        when(countryDefaultDayRate.getDayRate()).thenReturn(new BigDecimal(2.5));
-        when(dateTimeDifference.calculateDateDifference(any(),any())).thenReturn(new BigDecimal(4));
-        BigDecimal result = travelMedicalCalculator.calculatePremium(request).setScale(0);
-        assertEquals(new BigDecimal(10), result);
-    }*/
+    void calculatePremiumTest1() {
+        when(ageCoefficientCalculator.calculate(request)).thenReturn(BigDecimal.valueOf(10));
+        when(dayCountCalculator.calculate(request)).thenReturn(BigDecimal.valueOf(5));
+        when(countryDefaultDayRateCalculator.calculate(request)).thenReturn(BigDecimal.valueOf(4));
+
+        BigDecimal result = travelMedicalCalculator.calculatePremium(request);
+        assertEquals(new BigDecimal(200), result);
+    }
 }
