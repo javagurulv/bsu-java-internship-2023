@@ -6,11 +6,11 @@
   "agreementPrice" : null,
   "errors" : [
     {
-      "field": "agreementDateTo",
+      "field": "agreementDateFrom",
       "message": "A date must be in future!"
     },
     {
-      "field": "agreementDateFrom",
+      "field": "agreementDateTo",
       "message": "A date must be in future!"
     }
   ]
