@@ -1,8 +1,8 @@
 package lv.javaguru.travel.insurance.rest;
 
 import lv.javaguru.travel.insurance.core.services.TravelCalculatePremiumService;
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumResponse;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumResponseV1;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,7 +18,7 @@ public class TravelCalculatePremiumController {
 	@PostMapping(path = "/",
 			consumes = "application/json",
 			produces = "application/json")
-	public TravelCalculatePremiumResponse calculatePremium(@RequestBody TravelCalculatePremiumRequest request) {
+	public TravelCalculatePremiumResponseV1 calculatePremium(@RequestBody TravelCalculatePremiumRequestV1 request) {
 		return calculatePremiumService.calculatePremium(request);
 	}
 

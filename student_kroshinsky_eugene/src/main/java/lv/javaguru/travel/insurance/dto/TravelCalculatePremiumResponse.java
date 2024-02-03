@@ -4,10 +4,12 @@ import java.util.Date;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lv.javaguru.travel.insurance.core.utils.BigDecimalSerializer;
 @Getter
 @Setter
 @NoArgsConstructor
@@ -23,8 +25,15 @@ public class TravelCalculatePremiumResponse extends CoreResponse{
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date agreementDateTo;
 
+    @JsonSerialize(using = BigDecimalSerializer.class)
     private BigDecimal agreementPremium;
 
+    private String country;
+
+    private List<TravelRisk> risks;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private Date dateOfBirth;
     public TravelCalculatePremiumResponse(List<ValidationError> errors) {
         super(errors);
     }

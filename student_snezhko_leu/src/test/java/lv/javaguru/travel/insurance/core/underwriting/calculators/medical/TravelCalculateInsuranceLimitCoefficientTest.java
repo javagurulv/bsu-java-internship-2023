@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.Optional;
 import lv.javaguru.travel.insurance.core.domain.MedicalRiskLimitLevel;
 import lv.javaguru.travel.insurance.core.repositories.MedicalRiskLimitLevelRepository;
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -21,7 +21,7 @@ public class TravelCalculateInsuranceLimitCoefficientTest {
     @Mock
     private MedicalRiskLimitLevelRepository mrllRepository = mock(MedicalRiskLimitLevelRepository.class);
 
-    TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+    TravelCalculatePremiumRequestV1 request = mock(TravelCalculatePremiumRequestV1.class);
 
     @Test
     public void TravelCalculateInsuranceLimitCoefficientCorrectValueTest() {

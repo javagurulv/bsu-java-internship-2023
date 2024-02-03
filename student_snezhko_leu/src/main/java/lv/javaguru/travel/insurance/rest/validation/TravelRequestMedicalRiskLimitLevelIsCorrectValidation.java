@@ -3,18 +3,12 @@ package lv.javaguru.travel.insurance.rest.validation;
 import lv.javaguru.travel.insurance.core.ValidationError;
 import lv.javaguru.travel.insurance.core.domain.ClassifierValue;
 import lv.javaguru.travel.insurance.core.repositories.ClassifierValueRepository;
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import lv.javaguru.travel.insurance.rest.placeholder.Placeholder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.support.PropertiesLoaderUtils;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
-import java.util.Properties;
-
-import static lv.javaguru.travel.insurance.core.util.CheckApplicationPropertiesUtil.checkProperty;
 
 public class TravelRequestMedicalRiskLimitLevelIsCorrectValidation extends TravelRequestValidationImpl{
     @Autowired
@@ -26,7 +20,7 @@ public class TravelRequestMedicalRiskLimitLevelIsCorrectValidation extends Trave
     List<Placeholder> placeholders;
 
     @Override
-    public Optional<ValidationError> validate(TravelCalculatePremiumRequest request) {
+    public Optional<ValidationError> validate(TravelCalculatePremiumRequestV1 request) {
         Optional<ValidationError> result = Optional.empty();
 /*        if (request.getMedicalRiskLimitLevel() == null || request.getMedicalRiskLimitLevel().isEmpty()) {
             return result;

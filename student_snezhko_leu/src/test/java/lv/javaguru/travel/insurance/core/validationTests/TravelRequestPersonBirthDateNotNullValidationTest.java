@@ -1,7 +1,7 @@
 package lv.javaguru.travel.insurance.core.validationTests;
 
 import lv.javaguru.travel.insurance.core.ValidationError;
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import lv.javaguru.travel.insurance.rest.validation.TravelRequestPersonBirthDateNotNullValidation;
 import lv.javaguru.travel.insurance.rest.validation.ValidationErrorFactory;
 import org.junit.jupiter.api.Test;
@@ -26,7 +26,7 @@ public class TravelRequestPersonBirthDateNotNullValidationTest {
     @Mock
     private ValidationErrorFactory errorFactory = mock(ValidationErrorFactory.class);
 
-    private TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+    private TravelCalculatePremiumRequestV1 request = mock(TravelCalculatePremiumRequestV1.class);
     @Test
     public void personBirthDateNotNullValidationTest() {
         List<String> risks = new ArrayList<>();

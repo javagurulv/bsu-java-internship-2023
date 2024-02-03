@@ -7,6 +7,10 @@
     {
       "field" : "agreementDateFrom",
       "message" : "Must be less than agreementDateTo!"
+    },
+    {
+      "field":"agreementDateTo",
+      "message":"Must be greater than currentDate!"
     }
   ],
   "personFirstName" : null,

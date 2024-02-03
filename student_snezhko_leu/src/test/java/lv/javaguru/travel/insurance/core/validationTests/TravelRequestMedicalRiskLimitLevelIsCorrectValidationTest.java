@@ -2,7 +2,7 @@ package lv.javaguru.travel.insurance.core.validationTests;
 
 import lv.javaguru.travel.insurance.core.ValidationError;
 import lv.javaguru.travel.insurance.core.repositories.ClassifierValueRepository;
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import lv.javaguru.travel.insurance.rest.placeholder.Placeholder;
 import lv.javaguru.travel.insurance.rest.validation.TravelRequestMedicalRiskLimitLevelIsCorrectValidation;
 import lv.javaguru.travel.insurance.rest.validation.ValidationErrorFactory;
@@ -29,7 +29,7 @@ public class TravelRequestMedicalRiskLimitLevelIsCorrectValidationTest {
     @Mock
     private ClassifierValueRepository cvRepository = mock(ClassifierValueRepository.class);
 
-    private TravelCalculatePremiumRequest request;
+    private TravelCalculatePremiumRequestV1 request;
 
     private String errorCode;
     private String description;
@@ -44,7 +44,7 @@ public class TravelRequestMedicalRiskLimitLevelIsCorrectValidationTest {
     private void init(String incorrectLimitValue) {
         errorCode = "ERROR_CODE_15";
         description = "Medical risk limit level "+ incorrectLimitValue + " is not supported!";
-        request = mock(TravelCalculatePremiumRequest.class);
+        request = mock(TravelCalculatePremiumRequestV1.class);
         when(request.getMedicalRiskLimitLevel()).thenReturn(incorrectLimitValue);
 
         Placeholder placeholder = new Placeholder("{NOT_EXISTING_LIMIT}", incorrectLimitValue);

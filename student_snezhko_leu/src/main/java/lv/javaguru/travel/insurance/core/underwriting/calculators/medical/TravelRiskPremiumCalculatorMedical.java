@@ -1,18 +1,11 @@
 package lv.javaguru.travel.insurance.core.underwriting.calculators.medical;
 
-import lv.javaguru.travel.insurance.core.repositories.AgeCoefficientRepository;
-import lv.javaguru.travel.insurance.core.repositories.CountryDefaultDayRateRepository;
 import lv.javaguru.travel.insurance.core.underwriting.TravelRiskPremiumCalculator;
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.util.Date;
-
-import static lv.javaguru.travel.insurance.core.util.DateTimeUtil.findAge;
-import static lv.javaguru.travel.insurance.core.util.DateTimeUtil.findDiffBetweenTwoDate;
 
 @Component
 public class TravelRiskPremiumCalculatorMedical implements TravelRiskPremiumCalculator {
@@ -29,7 +22,7 @@ public class TravelRiskPremiumCalculatorMedical implements TravelRiskPremiumCalc
     private TravelCalculateInsuranceLimitCoefficient mrllCoefficientCalculator;
 
     @Override
-    public BigDecimal calculatePremium(TravelCalculatePremiumRequest request) {
+    public BigDecimal calculatePremium(TravelCalculatePremiumRequestV1 request) {
 //        Double ageCoeff = ageCoefficient.calculatePremium(request);
         //Double mrllValue = mrllCoefficientCalculator.calculatePremium(request);
         BigDecimal result = cddr.calculatePremium(request).multiply(ageCoefficient.calculatePremium(request))
