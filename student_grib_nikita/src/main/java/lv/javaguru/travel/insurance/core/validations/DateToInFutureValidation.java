@@ -15,7 +15,7 @@ public class DateToInFutureValidation implements TravelRequestValidation{
         Date curDate = new Date();
         DataTimeService timeService = new DataTimeService();
 
-        return ((agreementDateTo != null) && timeService.getDaysBetween(curDate, agreementDateTo) < 0)
+        return ((agreementDateTo != null) && agreementDateTo.before(curDate))
                 ? Optional.of(new ValidationError("agreementDateTo", "A date must be in future!"))
                 : Optional.empty();
     }

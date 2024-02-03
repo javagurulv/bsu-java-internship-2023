@@ -1,26 +1,23 @@
-package lv.javaguru.travel.insurance.core;
+package lv.javaguru.travel.insurance.core.validations;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lv.javaguru.travel.insurance.core.validations.TravelRequestValidation;
+import lombok.Setter;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 @Component
 @AllArgsConstructor
 @NoArgsConstructor
-class TravelCalculatePremiumRequestValidator {
+class TravelCalculatePremiumRequestValidatorImpl implements TravelCalculatePremiumRequestValidator {
     @Autowired
     private List<TravelRequestValidation> validations;
-
+@Override
     public List<ValidationError> validate(TravelCalculatePremiumRequest request) {
         List<ValidationError> errors = new ArrayList<>();
         for (TravelRequestValidation validation : validations) {
