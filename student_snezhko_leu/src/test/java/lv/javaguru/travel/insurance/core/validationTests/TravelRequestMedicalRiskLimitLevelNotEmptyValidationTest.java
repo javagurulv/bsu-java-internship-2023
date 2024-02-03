@@ -1,7 +1,7 @@
 package lv.javaguru.travel.insurance.core.validationTests;
 
 import lv.javaguru.travel.insurance.core.ValidationError;
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import lv.javaguru.travel.insurance.rest.validation.TravelRequestMedicalRiskLimitLevelNotEmptyValidation;
 import lv.javaguru.travel.insurance.rest.validation.ValidationErrorFactory;
 import org.junit.jupiter.api.Test;
@@ -20,7 +20,7 @@ public class TravelRequestMedicalRiskLimitLevelNotEmptyValidationTest {
     @Mock
     private ValidationErrorFactory errorFactory = mock(ValidationErrorFactory.class);
 
-    TravelCalculatePremiumRequest request;
+    TravelCalculatePremiumRequestV1 request;
 
     private String errorCode = "ERROR_CODE_14";
     private String description = "Field medicalRiskLimitLevel is empty!";
@@ -44,7 +44,7 @@ public class TravelRequestMedicalRiskLimitLevelNotEmptyValidationTest {
                 && e1.getDescription().equals(e2.getDescription());
     }
     private void init(String medicalRiskLimitLevelValue) {
-        request = mock(TravelCalculatePremiumRequest.class);
+        request = mock(TravelCalculatePremiumRequestV1.class);
 
         when(request.getMedicalRiskLimitLevel()).thenReturn(medicalRiskLimitLevelValue);
 

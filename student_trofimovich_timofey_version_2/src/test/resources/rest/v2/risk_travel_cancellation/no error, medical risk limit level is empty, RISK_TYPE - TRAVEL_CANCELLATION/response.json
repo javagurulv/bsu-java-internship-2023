@@ -1,0 +1,39 @@
+{
+  "agreementDateFrom": "2025-05-25",
+  "agreementDateTo": "2025-05-29",
+  "country": "SPAIN",
+  "persons": [
+    {
+      "personUUID": "1212",
+      "personFirstName": "Vasja",
+      "personLastName": "Pupkin",
+      "personBirthDate": "2000-05-29",
+      "personPremium": 38.00,
+      "personRisks": [
+        {
+          "ic": "TRAVEL_CANCELLATION",
+          "premium": 38.00
+        }
+      ],
+      "medicalRiskLimitLevel": null,
+      "travelCost": 100.00
+    },
+    {
+      "personUUID": "1212",
+      "personFirstName": "Petja",
+      "personLastName": "Pupkin",
+      "personBirthDate": "1950-03-01",
+      "personPremium": 68.00,
+      "personRisks": [
+        {
+          "ic": "TRAVEL_CANCELLATION",
+          "premium": 68.00
+        }
+      ],
+      "medicalRiskLimitLevel": "LEVEL_15000",
+      "travelCost": 100.00
+    }
+  ],
+  "agreementPremium": 106.00,
+  "uuid": "1a4c191a-2638-483e-bb47-1e78be61de68"
+}

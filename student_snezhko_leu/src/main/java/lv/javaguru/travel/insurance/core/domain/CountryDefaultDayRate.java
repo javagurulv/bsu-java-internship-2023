@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Getter
 @Setter
@@ -26,5 +27,5 @@ public class CountryDefaultDayRate {
 
 
     @Column(name = "country_default_day_rate", precision = 10, scale = 2, nullable = false)
-    private Double countryDefaultDayRateCoefficient;
+    private BigDecimal countryDefaultDayRateCoefficient;
 }

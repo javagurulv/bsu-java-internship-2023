@@ -2,7 +2,7 @@ package lv.javaguru.travel.insurance.core.underwriting.calculators.medical;
 
 import lv.javaguru.travel.insurance.core.domain.CountryDefaultDayRate;
 import lv.javaguru.travel.insurance.core.repositories.CountryDefaultDayRateRepository;
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -10,6 +10,7 @@ import org.mockito.Mock;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -25,16 +26,16 @@ public class TravelCalculateMedicalCountryDefaultDayCountTest {
     @Mock
     private CountryDefaultDayRateRepository cddrRepository = mock(CountryDefaultDayRateRepository.class);
 
-    TravelCalculatePremiumRequest request;
+    TravelCalculatePremiumRequestV1 request;
 
     @Test
     public void CalculatorMedicalCddrTest() {
-        init(1.1d);
-        assertEquals(1.1, calculator.calculatePremium(request));
+        init(BigDecimal.valueOf(1.1));
+        assertEquals(BigDecimal.valueOf(1.1), calculator.calculatePremium(request));
     }
 
-    private void init(Double countryCoefficient) {
-        request = mock(TravelCalculatePremiumRequest.class);
+    private void init(BigDecimal countryCoefficient) {
+        request = mock(TravelCalculatePremiumRequestV1.class);
         String country = "COUNTRY";
         when(request.getCountry()).thenReturn(country);
 

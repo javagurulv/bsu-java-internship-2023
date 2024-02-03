@@ -2,7 +2,7 @@ package lv.javaguru.travel.insurance.core.validationTests;
 
 import lv.javaguru.travel.insurance.core.ValidationError;
 import lv.javaguru.travel.insurance.core.repositories.ClassifierValueRepository;
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import lv.javaguru.travel.insurance.rest.TravelRequestValidation;
 import lv.javaguru.travel.insurance.rest.placeholder.Placeholder;
 import lv.javaguru.travel.insurance.rest.validation.TravelRequestCorrectSelectedRisksValidation;
@@ -21,7 +21,7 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.util.AssertionErrors.assertTrue;
 
 public class TravelCalculatePremiumCorrectSelectedRisksValidatorTest {
-    private TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+    private TravelCalculatePremiumRequestV1 request = mock(TravelCalculatePremiumRequestV1.class);
     @InjectMocks
     private TravelRequestValidation validator = new TravelRequestCorrectSelectedRisksValidation();
     @Mock
@@ -42,7 +42,7 @@ public class TravelCalculatePremiumCorrectSelectedRisksValidatorTest {
         String riskName = "UNCORRECT_RISK";
         risks.add(riskName);
   //      risks.add("UNCORRECT_RISK_2");
-        when(request.getSelected_risks()).thenReturn(risks);
+        when(request.getSelectedRisks()).thenReturn(risks);
 
         String errorCode = "ERROR_CODE_9";
         String description = "Risk with ic = UNCORRECT_RISK is not supported!";

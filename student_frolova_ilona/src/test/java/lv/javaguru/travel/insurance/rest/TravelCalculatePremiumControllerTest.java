@@ -98,6 +98,38 @@ public class TravelCalculatePremiumControllerTest {
         );
     }
 
+    @Test
+    public void testWrongRequestCountryIsNullWhenTravelMedicalRiskIsPresent() throws Exception {
+        compareResponseToRequestInJsonFiles(
+                "rest/TravelCalculatePremiumRequest_countryNull.json",
+                "rest/TravelCalculatePremiumResponse_countryNull.json"
+        );
+    }
+
+    @Test
+    public void testWrongRequestCountryIsNotRegistered() throws Exception {
+        compareResponseToRequestInJsonFiles(
+                "rest/TravelCalculatePremiumRequest_countryUnknown.json",
+                "rest/TravelCalculatePremiumResponse_countryUnknown.json"
+        );
+    }
+
+    @Test
+    public void testWrongRequestBirthDateIsNull() throws Exception {
+        compareResponseToRequestInJsonFiles(
+                "rest/TravelCalculatePremiumRequest_birthDateNull.json",
+                "rest/TravelCalculatePremiumResponse_birthDateNull.json"
+        );
+    }
+
+    @Test
+    public void testWrongRequestBirthDateIsNotPast() throws Exception {
+        compareResponseToRequestInJsonFiles(
+                "rest/TravelCalculatePremiumRequest_birthDateNotPast.json",
+                "rest/TravelCalculatePremiumResponse_birthDateNotPast.json"
+        );
+    }
+
     public void compareResponseToRequestInJsonFiles(
             String fileNameRequest, String fileNameResponse
     ) throws Exception {
@@ -112,6 +144,9 @@ public class TravelCalculatePremiumControllerTest {
         String responseBodyContent = result.getResponse().getContentAsString();
 
         String jsonResponse = JsonReader.read(fileNameResponse);
+
+        System.out.println(responseBodyContent);
+        System.out.println(jsonResponse);
 
         assertJson(responseBodyContent)
                 .where()

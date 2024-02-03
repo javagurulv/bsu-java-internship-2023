@@ -1,7 +1,7 @@
 package lv.javaguru.travel.insurance.core.validationTests;
 
 import lv.javaguru.travel.insurance.core.ValidationError;
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import lv.javaguru.travel.insurance.rest.TravelRequestValidation;
 import lv.javaguru.travel.insurance.rest.validation.TravelRequestDateToValidation;
 import lv.javaguru.travel.insurance.rest.validation.ValidationErrorFactory;
@@ -19,7 +19,7 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.util.AssertionErrors.assertTrue;
 
 public class TravelCalculatePremiumDateToTest {
-    private TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+    private TravelCalculatePremiumRequestV1 request = mock(TravelCalculatePremiumRequestV1.class);
     @InjectMocks
     private TravelRequestValidation validator = new TravelRequestDateToValidation();
     @Mock
@@ -34,7 +34,7 @@ public class TravelCalculatePremiumDateToTest {
         when(request.getPersonLastName()).thenReturn("Last Name");
         when(request.getAgreementDateFrom()).thenReturn(Date.valueOf("2026-05-03"));
         when(request.getAgreementDateTo()).thenReturn(null);
-        when(request.getSelected_risks()).thenReturn(List.of("MEDICAL RISK"));
+        when(request.getSelectedRisks()).thenReturn(List.of("MEDICAL RISK"));
 
         String errorCode = "ERROR_CODE_5";
         String description = "Field agreementDateTo is empty!";
@@ -52,7 +52,7 @@ public class TravelCalculatePremiumDateToTest {
         when(request.getPersonLastName()).thenReturn("Last Name");
         when(request.getAgreementDateFrom()).thenReturn(Date.valueOf("2029-01-01"));
         when(request.getAgreementDateTo()).thenReturn(Date.valueOf("2027-10-03"));
-        when(request.getSelected_risks()).thenReturn(List.of("MEDICAL RISK"));
+        when(request.getSelectedRisks()).thenReturn(List.of("MEDICAL RISK"));
 
         String errorCode = "ERROR_CODE_6";
         String description = "Field agreementDateTo is before the value of field agreementDateFrom!";

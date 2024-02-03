@@ -1,7 +1,7 @@
 package lv.javaguru.travel.insurance.rest.validation;
 
 import lv.javaguru.travel.insurance.core.ValidationError;
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -13,9 +13,9 @@ public class TravelRequestCountryIsNotNullValidation extends TravelRequestValida
     private ValidationErrorFactory errorFactory;
 
     @Override
-    public Optional<ValidationError> validate(TravelCalculatePremiumRequest request) {
+    public Optional<ValidationError> validate(TravelCalculatePremiumRequestV1 request) {
         Optional<ValidationError> result = Optional.empty();
-        if (request.getSelected_risks() == null || request.getSelected_risks().isEmpty()) {
+        if (request.getSelectedRisks() == null || request.getSelectedRisks().isEmpty()) {
             return result;
         }
         /*

@@ -1,7 +1,7 @@
 package lv.javaguru.travel.insurance.core.validationTests;
 
 import lv.javaguru.travel.insurance.core.ValidationError;
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import lv.javaguru.travel.insurance.rest.TravelRequestValidation;
 import lv.javaguru.travel.insurance.rest.validation.TravelRequestRisksIsNotNullValidation;
 import lv.javaguru.travel.insurance.rest.validation.ValidationErrorFactory;
@@ -19,7 +19,7 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.util.AssertionErrors.assertTrue;
 
 public class TravelCalculatePremiumSelectedRisksTest {
-    private TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+    private TravelCalculatePremiumRequestV1 request = mock(TravelCalculatePremiumRequestV1.class);
     @InjectMocks
     private TravelRequestValidation validator = new TravelRequestRisksIsNotNullValidation();
     @Mock
@@ -34,7 +34,7 @@ public class TravelCalculatePremiumSelectedRisksTest {
         when(request.getPersonLastName()).thenReturn("Last Name");
         when(request.getAgreementDateFrom()).thenReturn(Date.valueOf("2026-05-03"));
         when(request.getAgreementDateTo()).thenReturn(Date.valueOf("2026-10-03"));
-        when(request.getSelected_risks()).thenReturn(new ArrayList<>());
+        when(request.getSelectedRisks()).thenReturn(new ArrayList<>());
 
         String errorCode = "ERROR_CODE_7";
         String description = "Field selected_risks is empty!";
@@ -52,7 +52,7 @@ public class TravelCalculatePremiumSelectedRisksTest {
         when(request.getPersonLastName()).thenReturn("Last Name");
         when(request.getAgreementDateFrom()).thenReturn(Date.valueOf("2026-05-03"));
         when(request.getAgreementDateTo()).thenReturn(Date.valueOf("2026-10-03"));
-        when(request.getSelected_risks()).thenReturn(null);
+        when(request.getSelectedRisks()).thenReturn(null);
 
         String errorCode = "ERROR_CODE_8";
         String description = "Field selected_risks is null!";

@@ -11,8 +11,10 @@
   ],
   "personFirstName": null,
   "personLastName": null,
+  "personBirthDate" : null,
   "agreementDateFrom": null,
   "agreementDateTo": null,
   "agreementPremium": null,
-  "risks": null
+  "risks": null,
+  "country": null
 }

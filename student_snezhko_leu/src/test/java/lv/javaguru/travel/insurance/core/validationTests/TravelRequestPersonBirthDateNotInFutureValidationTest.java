@@ -1,7 +1,7 @@
 package lv.javaguru.travel.insurance.core.validationTests;
 
 import lv.javaguru.travel.insurance.core.ValidationError;
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import lv.javaguru.travel.insurance.rest.validation.TravelRequestPersonBirthDateNotInFutureValidation;
 import lv.javaguru.travel.insurance.rest.validation.ValidationErrorFactory;
 import org.junit.jupiter.api.Test;
@@ -24,7 +24,7 @@ public class TravelRequestPersonBirthDateNotInFutureValidationTest {
     @Mock
     private ValidationErrorFactory errorFactory = mock(ValidationErrorFactory.class);
 
-    private TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+    private TravelCalculatePremiumRequestV1 request = mock(TravelCalculatePremiumRequestV1.class);
 
     @Test
     public void personBirthDateNotInFutureValidationTest() {
@@ -37,7 +37,7 @@ public class TravelRequestPersonBirthDateNotInFutureValidationTest {
         when(request.getAgreementDateFrom()).thenReturn(Date.valueOf("2030-05-03"));
         when(request.getAgreementDateTo()).thenReturn(Date.valueOf("2030-05-05"));
         when(request.getCountry()).thenReturn("LATVIA");
-        when(request.getSelected_risks()).thenReturn(selectedRisk);
+        when(request.getSelectedRisks()).thenReturn(selectedRisk);
         when(request.getPersonBirthDate()).thenReturn(Date.valueOf("2026-04-05"));
 
         String errorCode = "ERROR_CODE_13";

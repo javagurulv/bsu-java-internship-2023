@@ -1,7 +1,9 @@
 {
   "personFirstName" : "  ",
   "personLastName" : "",
+  "personBirthDate" : null,
   "agreementDateFrom" : null,
   "agreementDateTo" : null,
-  "selectedRisks" : null
+  "selectedRisks" : null,
+  "country": null
 }

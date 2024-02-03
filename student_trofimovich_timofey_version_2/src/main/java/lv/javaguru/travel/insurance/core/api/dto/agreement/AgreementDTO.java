@@ -1,9 +1,6 @@
 package lv.javaguru.travel.insurance.core.api.dto.agreement;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import lv.javaguru.travel.insurance.core.api.dto.person.PersonDTO;
 
 import java.math.BigDecimal;
@@ -14,6 +11,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class AgreementDTO {
 
     private Date agreementDateFrom;

@@ -3,7 +3,7 @@
   "personLastName" : "Pupkin",
   "agreementDateFrom" : "",
   "agreementDateTo" : "",
-  "selected_risks" :
+  "selectedRisks" :
   [
     "TRAVEL_MEDICAL"
   ],

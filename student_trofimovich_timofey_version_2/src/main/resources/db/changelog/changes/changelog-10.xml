@@ -22,6 +22,14 @@
         </createTable>
     </changeSet>
 
+    <changeSet author="Timofey" id="26">
+        <createIndex indexName="ix_agreement_person_agreement_id_person_id"
+                     tableName="agreement_persons"
+                     unique="true">
+            <column name="agreement_id"/>
+            <column name="person_id"/>
+        </createIndex>
+    </changeSet>
 
     <changeSet author="Timofey" id="27">
         <addForeignKeyConstraint baseTableName="agreement_persons"

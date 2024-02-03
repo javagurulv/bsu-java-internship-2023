@@ -1,8 +1,0 @@
-{
-  "errors": [
-    {
-      "errorCode": "ERROR_CODE_17",
-      "description": "PersonUUID is empty!"
-    }
-  ]
-}

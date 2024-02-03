@@ -1,7 +1,7 @@
 package lv.javaguru.travel.insurance.core.underwriting;
 
 //import lv.javaguru.travel.insurance.core.underwriting.TravelUnderwritingImpl;
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRisk;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -31,11 +31,11 @@ public class TravelUnterwritingTest {
         risks.add("TRAVEL_MEDICAL");
 
         //TravelCalculatePremiumResponse response = mock(TravelCalculatePremiumResponse.class);
-        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        TravelCalculatePremiumRequestV1 request = mock(TravelCalculatePremiumRequestV1.class);
 
         when(request.getAgreementDateTo()).thenReturn(Date.valueOf("2022-09-12"));
        when(request.getAgreementDateFrom()).thenReturn(Date.valueOf("2022-09-11"));
-       when(request.getSelected_risks()).thenReturn(risks);
+       when(request.getSelectedRisks()).thenReturn(risks);
        /*
         List<TravelRiskPremiumCalculator> calculatorList = new ArrayList<>();
         calculatorList.add(new TravelRiskPremiumCalculatorMedical());

@@ -5,13 +5,10 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
 
-
-    <changeSet id="45" author="Timofey">
-        <sql>
-            INSERT INTO travel_cancellation_country_safety_rating_coefficient(country_ic, coefficient)
-            VALUES ('LATVIA', 5.00),
-                   ('SPAIN', 8.00),
-                   ('JAPAN', 9.00);
-        </sql>
+    <changeSet author="Timofey" id="45">
+        <dropNotNullConstraint tableName="agreement_persons"
+                               columnName="medical_risk_limit_level"
+                               columnDataType="varchar(100)"/>
     </changeSet>
+
 </databaseChangeLog>

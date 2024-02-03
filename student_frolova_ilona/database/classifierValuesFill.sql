@@ -4,3 +4,7 @@ INSERT INTO `classifier_values` (`id`,`classifier_id`,`ic`,`description`) VALUES
 INSERT INTO `classifier_values` (`id`,`classifier_id`,`ic`,`description`) VALUES (1005,1002,'TRAVEL_THIRD_PARTY_LIABILITY','no');
 INSERT INTO `classifier_values` (`id`,`classifier_id`,`ic`,`description`) VALUES (1006,1002,'TRAVEL_EVACUATION','no');
 INSERT INTO `classifier_values` (`id`,`classifier_id`,`ic`,`description`) VALUES (1007,1002,'TRAVEL_SPORT_ACTIVITIES','no');
+
+INSERT INTO `insurance`.`classifier_values` (`id`, `classifier_id`, `ic`, `description`) VALUES ('1009', '1008', 'LATVIA', 'no');
+INSERT INTO `insurance`.`classifier_values` (`id`, `classifier_id`, `ic`, `description`) VALUES ('1010', '1008', 'SPAIN', 'no');
+INSERT INTO `insurance`.`classifier_values` (`id`, `classifier_id`, `ic`, `description`) VALUES ('1011', '1008', 'JAPAN', 'no');

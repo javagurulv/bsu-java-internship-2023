@@ -1,7 +1,7 @@
 package lv.javaguru.travel.insurance.rest.validation;
 
 import lv.javaguru.travel.insurance.core.ValidationError;
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -15,7 +15,7 @@ public class TravelRequestLastNameValidation extends TravelRequestValidationImpl
 @Autowired
 ValidationErrorFactory errorFactory;
     @Override
-    public Optional<ValidationError> validate(TravelCalculatePremiumRequest request) {
+    public Optional<ValidationError> validate(TravelCalculatePremiumRequestV1 request) {
         //errorFactory = new ValidationErrorFactory();
         if (request.getPersonLastName() == null || request.getPersonLastName().isEmpty()) {
            /*

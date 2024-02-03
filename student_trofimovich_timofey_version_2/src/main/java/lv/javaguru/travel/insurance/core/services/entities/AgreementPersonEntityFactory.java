@@ -20,6 +20,7 @@ class AgreementPersonEntityFactory {
         PersonEntity personEntity = personEntityFactory.createPersonEntity(personDTO);
         agreementPersonEntity.setPerson(personEntity);
         agreementPersonEntity.setMedicalRiskLimitLevel(personDTO.getMedicalRiskLimitLevel());
+        agreementPersonEntity.setTravelCost(personDTO.getTravelCost());
         return repository.save(agreementPersonEntity);
     }
 }

@@ -33,6 +33,18 @@ ALTER TABLE `classifier_values`
 CREATE UNIQUE INDEX `ix_classifier_values_ic`
     ON `classifier_values` (`ic`);
 
+CREATE TABLE `insurance`.`country_default_day_rate` (
+                                                        `id` BIGINT NOT NULL AUTO_INCREMENT,
+                                                        `country_ic` VARCHAR(45) NOT NULL,
+                                                        `default_day_rate` DECIMAL(10,5) NOT NULL,
+                                                        PRIMARY KEY (`id`),
+                                                        UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
+                                                        UNIQUE INDEX `country_ic_UNIQUE` (`country_ic` ASC) VISIBLE);
+
+CREATE TABLE `insurance`.`age_coefficient` (
+                                               `age_from` INT NOT NULL,
+                                               `age_to` INT NOT NULL,
+                                               `coefficient` DECIMAL(5,2) NOT NULL);
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

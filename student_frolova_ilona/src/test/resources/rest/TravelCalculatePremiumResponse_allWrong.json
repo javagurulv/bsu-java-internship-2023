@@ -1,6 +1,10 @@
 {
   "errors": [
     {
+      "errorCode": "ERROR_CODE_12",
+      "description": "Field personBirthDate must not be empty!"
+    },
+    {
       "errorCode": "ERROR_CODE_2",
       "description": "Field agreementDateFrom must not be empty!"
     },
@@ -23,8 +27,10 @@
   ],
   "personFirstName": null,
   "personLastName": null,
+  "personBirthDate": null,
   "agreementDateFrom": null,
   "agreementDateTo": null,
   "agreementPremium": null,
-  "risks": null
+  "risks": null,
+  "country": null
 }

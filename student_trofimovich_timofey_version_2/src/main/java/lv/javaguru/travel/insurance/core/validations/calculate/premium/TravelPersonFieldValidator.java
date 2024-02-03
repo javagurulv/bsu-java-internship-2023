@@ -21,28 +21,30 @@ class TravelPersonFieldValidator {
 
     public List<ValidationErrorDTO> validate(AgreementDTO agreement) {
 
+        if (agreement.getPersons() == null) return List.of();
+
         return agreement.getPersons().stream()
-                .map(this::getPersonErrors)
+                .map(person -> getPersonErrors(person, agreement))
                 .flatMap(List::stream)
                 .collect(Collectors.toList());
     }
 
-    private List<ValidationErrorDTO> getPersonErrors(PersonDTO person) {
-        List<ValidationErrorDTO> singlePersonErrors = getSinglePersonErrors(person);
-        List<ValidationErrorDTO> listPersonErrors = getListPersonErrors(person);
+    private List<ValidationErrorDTO> getPersonErrors(PersonDTO person, AgreementDTO agreement) {
+        List<ValidationErrorDTO> singlePersonErrors = getSinglePersonErrors(person, agreement);
+        List<ValidationErrorDTO> listPersonErrors = getListPersonErrors(person, agreement);
         return concatLists(singlePersonErrors, listPersonErrors);
     }
 
-    private List<ValidationErrorDTO> getSinglePersonErrors(PersonDTO person) {
+    private List<ValidationErrorDTO> getSinglePersonErrors(PersonDTO person, AgreementDTO agreement) {
         return personValidations.stream()
-                .map(validation -> validation.validate(person))
+                .map(validation -> validation.validate(person, agreement))
                 .filter(Optional::isPresent)
                 .map(Optional::get)
                 .toList();
     }
-    private List<ValidationErrorDTO> getListPersonErrors(PersonDTO person) {
+    private List<ValidationErrorDTO> getListPersonErrors(PersonDTO person, AgreementDTO agreement) {
         return personValidations.stream()
-                .map(validation -> validation.validateList(person))
+                .map(validation -> validation.validateList(person, agreement))
                 .filter(Objects::nonNull)
                 .flatMap(Collection::stream)
                 .toList();
