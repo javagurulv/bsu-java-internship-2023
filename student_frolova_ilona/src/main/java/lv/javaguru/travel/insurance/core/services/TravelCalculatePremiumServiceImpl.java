@@ -43,7 +43,8 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
                 request.getAgreementDateTo(),
                 premium.getTotalPremium(),
                 premium.getRiskPremiums(),
-                request.getCountry()
+                request.getCountry(),
+                request.getMedicalRiskLimitLevel()
         );
     }
 

@@ -20,5 +20,6 @@
             "premium": "0.00"
         }
     ],
-    "country": "JAPAN"
+    "country": "JAPAN",
+    "medicalRiskLimitLevel": "10000"
 }
