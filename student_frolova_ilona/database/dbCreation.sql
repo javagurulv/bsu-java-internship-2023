@@ -42,6 +42,7 @@ CREATE TABLE `insurance`.`country_default_day_rate` (
                                                         UNIQUE INDEX `country_ic_UNIQUE` (`country_ic` ASC) VISIBLE);
 
 CREATE TABLE `insurance`.`age_coefficient` (
+                                               `id` BIGINT(5) AUTO_INCREMENT,
                                                `age_from` INT NOT NULL,
                                                `age_to` INT NOT NULL,
                                                `coefficient` DECIMAL(5,2) NOT NULL);

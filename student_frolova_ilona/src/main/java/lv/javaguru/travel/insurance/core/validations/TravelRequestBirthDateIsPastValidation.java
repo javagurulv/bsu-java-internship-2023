@@ -21,7 +21,7 @@ class TravelRequestBirthDateIsPastValidation extends TravelRequestValidationImpl
 
         if (request.getPersonBirthDate() == null) return Optional.empty();
 
-        return (request.getPersonBirthDate().after(dateTimeUtil.getCurrentTime()))
+        return (request.getPersonBirthDate().after(dateTimeUtil.getCurrentDateTime()))
                 ? Optional.of(errorFactory.buildError("ERROR_CODE_13"))
                 : Optional.empty();
     }
