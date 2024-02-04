@@ -1,8 +1,8 @@
 INSERT INTO classifiers(title, description)
 VALUES('RISK_TYPE', 'Risk type classifier');
 
-INSERT INTO classifiers(title, description)
-VALUES('COUNTRY', 'Country classifier');
+INSERT INTO classifiers(title, description) VALUES('COUNTRY', 'Country classifier');
+INSERT INTO classifiers(title, description) VALUES ('MEDICAL_RISK_LIMIT_LEVEL', 'no');
 
 INSERT INTO classifier_values(
 	classifier_id,
@@ -107,6 +107,51 @@ SELECT
     'country'
 FROM classifiers as cl
 WHERE cl.title = 'COUNTRY';
+
+INSERT INTO classifier_values(
+    classifier_id,
+    ic,
+    description)
+SELECT
+    cl.id,
+    'LEVEL_10000',
+    'limit'
+FROM classifiers as cl
+WHERE cl.title = 'MEDICAL_RISK_LIMIT_LEVEL';
+
+INSERT INTO classifier_values(
+    classifier_id,
+    ic,
+    description)
+SELECT
+    cl.id,
+    'LEVEL_15000',
+    'limit'
+FROM classifiers as cl
+WHERE cl.title = 'MEDICAL_RISK_LIMIT_LEVEL';
+
+INSERT INTO classifier_values(
+    classifier_id,
+    ic,
+    description)
+SELECT
+    cl.id,
+    'LEVEL_20000',
+    'limit'
+FROM classifiers as cl
+WHERE cl.title = 'MEDICAL_RISK_LIMIT_LEVEL';
+
+INSERT INTO classifier_values(
+    classifier_id,
+    ic,
+    description)
+SELECT
+    cl.id,
+    'LEVEL_50000',
+    'limit'
+FROM classifiers as cl
+WHERE cl.title = 'MEDICAL_RISK_LIMIT_LEVEL';
+
 
 INSERT INTO country_default_day_rate (country_ic, default_day_rate) VALUES ('LATVIA', '1.00');
 INSERT INTO country_default_day_rate (country_ic, default_day_rate) VALUES ('SPAIN', '2.50');
