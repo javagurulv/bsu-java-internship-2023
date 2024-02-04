@@ -33,7 +33,7 @@ class CountryDefaultDayRateRepositoryTest {
         shouldFindByIc("JAPAN");
     }
     @Test
-    public void shouldNotFind_RiskType_FAKE() {
+    public void findFake() {
         Optional<CountryDefaultDayRate> valueOpt = countryDefaultDayRateRepository.findByIc("FAKE");
         assertTrue(valueOpt.isEmpty());
     }

@@ -5,5 +5,6 @@
   "agreementDateTo" : "2024-05-29",
   "country" : "SPAIN",
   "dateOfBirth": "1999-05-29",
+  "medicalRiskLimitLevel": "LEVEL_10000",
   "selected_risks": []
 }

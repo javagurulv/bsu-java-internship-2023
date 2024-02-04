@@ -18,6 +18,7 @@ import lv.javaguru.travel.insurance.dto.common.EntitiesToDtoConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -60,29 +61,39 @@ public class TravelGetAgreementServiceImpl implements TravelGetAgreementService 
     }
 
     private void findPersonsForAgreement(AgreementDTO agreementDTO) {
+
         List<AgreementPersonEntity> agreementPersonEntities = agreementPersonEntityRepository.findByAgreement_Uuid(agreementDTO.getUuid());
-        List<PersonEntity> personEntities = agreementPersonEntities.stream().map(AgreementPersonEntity::getPerson).toList();
+        List<PersonDTO> persons = new ArrayList<>();
+        agreementPersonEntities.forEach(
+                agreementPersonEntity -> {
+                    PersonEntity personEntity = agreementPersonEntity.getPerson();
+                    PersonDTO personDTO = converter.transformPersonEntity(personEntity, agreementPersonEntity);
+                    addMedicalRiskLimitLevel(personDTO, agreementPersonEntity);
+                    addPersonRisks(agreementPersonEntity, personDTO);
+                    persons.add(personDTO);
+                }
+        );
+        /*List<PersonEntity> personEntities = agreementPersonEntities.stream().map(AgreementPersonEntity::getPerson).toList();
         List<PersonDTO> personDTOS = personEntities.stream().map(converter::transformPersonEntity).toList();
         addMedicalRiskLimitLevel(personDTOS, agreementPersonEntities);
-        addPersonRisks(personDTOS);
-        agreementDTO.setPersons(personDTOS);
+        addPersonRisks(agreementPersonEntities, personDTOS);*/
+        agreementDTO.setPersons(persons);
     }
 
-    private void addPersonRisks(List<PersonDTO> personDTOS) {
-        personDTOS.forEach(personDTO -> {
+    private void addPersonRisks(AgreementPersonEntity agreementPersonEntity, PersonDTO personDTO) {
+
             List<AgreementPersonRiskEntity> agreementPersonRiskEntities = agreementPersonRiskEntityRepository
-                    .findByPersonUniqueInfo(personDTO.getPersonUUID(), personDTO.getPersonFirstName(), personDTO.getPersonLastName());
+                    .findByAgreementAndPersonUniqueInfo(personDTO.getPersonUUID(), personDTO.getPersonFirstName(),
+                            personDTO.getPersonLastName(), agreementPersonEntity.getId());
             List<RiskDTO> riskDTOS = agreementPersonRiskEntities.stream().map(converter::transformRiskEntity).toList();
             personDTO.setSelectedRisks(riskDTOS);
-        });
+
     }
 
 
 
-    private void addMedicalRiskLimitLevel(List<PersonDTO> personDTOS, List<AgreementPersonEntity> agreementPersonEntities) {
-        for (int i = 0; i < personDTOS.size(); i++) {
-            personDTOS.get(i).setMedicalRiskLimitLevel(agreementPersonEntities.get(i).getMedicalRiskLimitLevel());
-        }
+    private void addMedicalRiskLimitLevel(PersonDTO personDTO, AgreementPersonEntity agreementPersonEntity) {
+            personDTO.setMedicalRiskLimitLevel(agreementPersonEntity.getMedicalRiskLimitLevel());
     }
 
 

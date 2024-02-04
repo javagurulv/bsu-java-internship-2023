@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class TravelCalculatePremiumRequestLogger {
-    private final Logger logger = LoggerFactory.getLogger(TravelCalculatePremiumRequest.class);
+    private static final Logger logger = LoggerFactory.getLogger(TravelCalculatePremiumRequestLogger.class);
 
     void toLog(TravelCalculatePremiumRequest request){
         ObjectMapper mapper = new ObjectMapper();

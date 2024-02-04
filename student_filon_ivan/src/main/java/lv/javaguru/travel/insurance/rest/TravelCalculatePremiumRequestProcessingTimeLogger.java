@@ -7,7 +7,7 @@ import org.springframework.util.StopWatch;
 
 @Component
 public class TravelCalculatePremiumRequestProcessingTimeLogger {
-    private final Logger logger = LoggerFactory.getLogger(TravelCalculatePremiumRequestProcessingTimeLogger.class);
+    private static final Logger logger = LoggerFactory.getLogger(TravelCalculatePremiumRequestProcessingTimeLogger.class);
 
     void toLog(StopWatch stopWatch){
         stopWatch.stop();

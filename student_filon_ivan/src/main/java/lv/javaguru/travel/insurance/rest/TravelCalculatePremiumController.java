@@ -24,7 +24,6 @@ public class TravelCalculatePremiumController {
 	private TravelCalculatePremiumRequestProcessingTimeLogger timeLogger;
 	private final StopWatch stopWatch = new StopWatch();
 
-
 	@PostMapping(path = "/",
 			consumes = "application/json",
 			produces = "application/json")
