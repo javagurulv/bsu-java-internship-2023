@@ -19,15 +19,20 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
-public class DateFromInFutureValidationTest {
+@ExtendWith(MockitoExtension.class)
+class DateFromInFutureValidationTest {
 
+    @Mock
+    private DataTimeService timeService;
 
-    private DateFromInFutureValidation validation = new DateFromInFutureValidation();
+    @InjectMocks
+    private DateFromInFutureValidation validation;
 
     @Test
     public void testWhenDateFromInPast() {
         TravelCalculatePremiumRequest request = Mockito.mock(TravelCalculatePremiumRequest.class);
         when(request.getAgreementDateFrom()).thenReturn(createDate("1999.12.12"));
+        when(timeService.getCurrentDate()).thenReturn(createDate("2024.02.04"));
         Optional<ValidationError> error = validation.validate(request);
         assertTrue(error.isPresent());
         assertEquals(error.get().getField(), "agreementDateFrom");
@@ -38,18 +43,18 @@ public class DateFromInFutureValidationTest {
     public void testWhenDateFromInFuture() {
         TravelCalculatePremiumRequest request = Mockito.mock(TravelCalculatePremiumRequest.class);
         when(request.getAgreementDateFrom()).thenReturn(createDate("2100.12.12"));
+        when(timeService.getCurrentDate()).thenReturn(createDate("2024.02.04"));
         Optional<ValidationError> error = validation.validate(request);
         assertTrue(error.isEmpty());
     }
 
     @Test
-    public void testWhenDateFromIsPresent(){
+    public void testWhenDateFromIsPresent() {
         TravelCalculatePremiumRequest request = Mockito.mock(TravelCalculatePremiumRequest.class);
-        when(request.getAgreementDateFrom()).thenReturn(new Date());
+        when(request.getAgreementDateFrom()).thenReturn(createDate("2024.02.04"));
+        when(timeService.getCurrentDate()).thenReturn(createDate("2024.02.04"));
         Optional<ValidationError> error = validation.validate(request);
-        assertTrue(error.isPresent());
-        assertEquals(error.get().getField(), "agreementDateFrom");
-        assertEquals(error.get().getMessage(), "A date must be in future!");
+        assertTrue(error.isEmpty());
     }
 
     private Date createDate(String dateStr) {
