@@ -22,6 +22,8 @@ class TravelMedicalRiskPremiumCalculatorTest {
 
     @Mock private AgeCoefficientCalculator ageCoefficientCalculator;
 
+    @Mock private MedicalRiskLimitLevelCalculator limitLevelCalculator;
+
     @InjectMocks private TravelMedicalRiskPremiumCalculator calculator;
 
     @Test
@@ -31,10 +33,11 @@ class TravelMedicalRiskPremiumCalculatorTest {
         when(dayCountCalculator.calculate(any())).thenReturn(BigDecimal.valueOf(2));
         when(countryDefaultDayRateCalculator.calculate(any())).thenReturn(BigDecimal.TEN);
         when(ageCoefficientCalculator.calculate(any())).thenReturn(BigDecimal.valueOf(1.20));
+        when(limitLevelCalculator.calculate(any())).thenReturn(BigDecimal.valueOf(2));
 
         BigDecimal premium = calculator.calculatePremium(request);
         assertEquals(premium.stripTrailingZeros(),
-                new BigDecimal("24").stripTrailingZeros());
+                new BigDecimal("48").stripTrailingZeros());
     }
 
 }

@@ -5,11 +5,11 @@
     "personBirthDate" : "2003-01-01",
     "agreementDateFrom": "2029-11-22",
     "agreementDateTo": "2029-11-29",
-    "agreementPremium": "26.95",
+    "agreementPremium": "40.42",
     "risks": [
         {
             "riskIc": "TRAVEL_MEDICAL",
-            "premium": "26.95"
+            "premium": "40.42"
         },
         {
             "riskIc": "TRAVEL_CANCELLATION",
@@ -21,5 +21,5 @@
         }
     ],
     "country": "JAPAN",
-    "medicalRiskLimitLevel": "LEVEL_10000"
+    "medicalRiskLimitLevel": "LEVEL_20000"
 }

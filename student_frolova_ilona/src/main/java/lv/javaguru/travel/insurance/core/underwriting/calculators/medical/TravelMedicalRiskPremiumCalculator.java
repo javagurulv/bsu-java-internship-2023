@@ -18,6 +18,7 @@ class TravelMedicalRiskPremiumCalculator implements TravelRiskPremiumCalculator 
     private final DayCountCalculator dayCountCalculator;
     private final CountryDefaultDayRateCalculator countryDefaultDayRateCalculator;
     private final AgeCoefficientCalculator ageCoefficientCalculator;
+    private final MedicalRiskLimitLevelCalculator limitLevelCalculator;
 
     @Override
     public BigDecimal calculatePremium(TravelCalculatePremiumRequest request) {
@@ -25,9 +26,11 @@ class TravelMedicalRiskPremiumCalculator implements TravelRiskPremiumCalculator 
         BigDecimal dayCount = dayCountCalculator.calculate(request);
         BigDecimal dayRate = countryDefaultDayRateCalculator.calculate(request);
         BigDecimal ageCoefficient = ageCoefficientCalculator.calculate(request);
+        BigDecimal limitLevelCoefficient = limitLevelCalculator.calculate(request);
 
         return dayRate.multiply(dayCount)
                 .multiply(ageCoefficient)
+                .multiply(limitLevelCoefficient)
                 .setScale(2, RoundingMode.HALF_EVEN);
     }
 
