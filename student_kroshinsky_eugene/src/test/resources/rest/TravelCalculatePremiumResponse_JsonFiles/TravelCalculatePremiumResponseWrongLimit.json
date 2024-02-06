@@ -1,0 +1,17 @@
+{
+  "errors": [
+    {
+      "errorCode": "NOT_EXISTING_RISK",
+      "description": "LIMIT_ERROR is not supported by system!"
+    }
+  ],
+  "personFirstName": null,
+  "personLastName": null,
+  "agreementDateFrom": null,
+  "agreementDateTo": null,
+  "agreementPremium": null,
+  "country": null,
+  "risks": null,
+  "dateOfBirth": null,
+  "medicalRiskLimitLevel": null
+}
