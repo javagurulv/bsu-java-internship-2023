@@ -16,8 +16,8 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class TravelMedicalCalculatorTest {
-    @Mock
-    private AgeCoefficientCalculator ageCoefficientCalculator;
+    @Mock private LimitLevelCalculator limitLevelCalculator;
+    @Mock private AgeCoefficientCalculator ageCoefficientCalculator;
     @Mock private DayCountCalculator dayCountCalculator;
     @Mock private CountryDefaultDayRateCalculator countryDefaultDayRateCalculator;
     @Mock private TravelCalculatePremiumRequest request;
@@ -29,14 +29,15 @@ class TravelMedicalCalculatorTest {
         assertNotNull(dayCountCalculator);
         assertNotNull(travelMedicalCalculator);
         assertNotNull(countryDefaultDayRateCalculator);
+        assertNotNull(limitLevelCalculator);
     }
     @Test
     void calculatePremiumTest1() {
         when(ageCoefficientCalculator.calculate(request)).thenReturn(BigDecimal.valueOf(10));
         when(dayCountCalculator.calculate(request)).thenReturn(BigDecimal.valueOf(5));
         when(countryDefaultDayRateCalculator.calculate(request)).thenReturn(BigDecimal.valueOf(4));
-
+        when(limitLevelCalculator.calculate(request)).thenReturn(BigDecimal.valueOf(2));
         BigDecimal result = travelMedicalCalculator.calculatePremium(request);
-        assertEquals(new BigDecimal(200), result);
+        assertEquals(new BigDecimal(400), result);
     }
 }

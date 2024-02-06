@@ -132,3 +132,9 @@ VALUES ((SELECT id FROM `classifiers` WHERE title = 'MEDICAL_RISK_LIMIT_LEVEL'),
  ((SELECT id FROM `classifiers` WHERE title = 'MEDICAL_RISK_LIMIT_LEVEL'), 'LEVEL_15000', 'Limit is 15000'),
  ((SELECT id FROM `classifiers` WHERE title = 'MEDICAL_RISK_LIMIT_LEVEL'), 'LEVEL_20000', 'Limit is 20000'),
  ((SELECT id FROM `classifiers` WHERE title = 'MEDICAL_RISK_LIMIT_LEVEL'), 'LEVEL_50000', 'Limit is 50000');
+
+INSERT INTO medical_risk_limit_level(medical_risk_limit_level_ic, coefficient)
+VALUES ('LEVEL_10000', 1.0),
+('LEVEL_15000', 1.2),
+('LEVEL_20000', 1.5),
+('LEVEL_50000', 2.0);
