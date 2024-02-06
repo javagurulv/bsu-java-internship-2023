@@ -1,8 +1,6 @@
 package lv.javaguru.travel.insurance.core.underwriting.calculators.medical;
 
-import lv.javaguru.travel.insurance.core.domain.CountryDefaultDayRate;
 import lv.javaguru.travel.insurance.core.domain.LimitLevel;
-import lv.javaguru.travel.insurance.core.repositories.CountryDefaultDayRateRepository;
 import lv.javaguru.travel.insurance.core.repositories.LimitLevelRepository;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import org.junit.jupiter.api.Test;
@@ -10,6 +8,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.test.util.ReflectionTestUtils;
 
 import java.math.BigDecimal;
 import java.util.Optional;
@@ -31,11 +30,20 @@ class LimitLevelCalculatorTest {
         assertNotNull(limitLevel);
     }
     @Test
-    void calculateTest() {
+    void calculateEnableTrueTest() {
+        ReflectionTestUtils.setField(calculator, "medicalRiskLimitLevelEnabled", true);
         when(request.getMedicalRiskLimitLevel()).thenReturn("limit");
         when(repository.findByIc(anyString())).thenReturn(Optional.of(limitLevel));
         BigDecimal expectedResult = BigDecimal.valueOf(10);
         when(limitLevel.getCoefficient()).thenReturn(expectedResult);
+
+        BigDecimal result = calculator.calculate(request);
+        assertEquals(expectedResult, result);
+    }
+    @Test
+    void calculateEnableFalseTest() {
+        ReflectionTestUtils.setField(calculator, "medicalRiskLimitLevelEnabled", false);
+        BigDecimal expectedResult = BigDecimal.ONE;
 
         BigDecimal result = calculator.calculate(request);
         assertEquals(expectedResult, result);

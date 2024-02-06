@@ -6,7 +6,6 @@
   "agreementDateTo": "2024-05-29",
   "agreementPremium": 18.00,
   "country": "SPAIN",
-  "medicalRiskLimitLevel": "LEVEL_10000",
   "risks": [
     {
       "riskIc": "TRAVEL_CANCELLATION",
@@ -21,5 +20,6 @@
       "premium": 11.00
     }
   ],
-  "dateOfBirth": "1999-05-29"
+  "dateOfBirth": "1999-05-29",
+  "medicalRiskLimitLevel": "LEVEL_10000"
 }

@@ -11,6 +11,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.test.util.ReflectionTestUtils;
 
 import java.math.BigDecimal;
 import java.util.Optional;
@@ -37,12 +38,20 @@ class AgeCoefficientCalculatorTest {
         assertNotNull(ageCoefficient);
     }
     @Test
-    void calculateTest() {
+    void  calculateEnabledTrueTest() {
+        ReflectionTestUtils.setField(calculator, "ageCoefficientEnabled", true);
         when(ageUtil.calculateAge(request)).thenReturn(10);
         when(repository.findByAge(anyInt())).thenReturn(Optional.of(ageCoefficient));
         BigDecimal expectedResult = BigDecimal.valueOf(1);
         when(ageCoefficient.getCoefficient()).thenReturn(expectedResult);
 
+        BigDecimal result = calculator.calculate(request);
+        assertEquals(expectedResult, result);
+    }
+    @Test
+    void  calculateEnabledFalseTest() {
+        ReflectionTestUtils.setField(calculator, "ageCoefficientEnabled", false);
+        BigDecimal expectedResult = BigDecimal.valueOf(1);
         BigDecimal result = calculator.calculate(request);
         assertEquals(expectedResult, result);
     }

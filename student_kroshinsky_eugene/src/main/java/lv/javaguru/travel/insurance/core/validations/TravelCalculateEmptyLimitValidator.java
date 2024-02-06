@@ -13,7 +13,7 @@ public class TravelCalculateEmptyLimitValidator extends TravelRequestValidationI
     @Autowired
     private ValidationErrorFactory validationErrorFactory;
 
-    @Value("${medical.risk.limit.level.enabled:true}")
+    @Value("${medical.risk.limit.level.enabled:false}")
     private boolean medicalRiskLimitLevelEnabled;
     @Override
     public Optional<ValidationError> validate(TravelCalculatePremiumRequest request){
