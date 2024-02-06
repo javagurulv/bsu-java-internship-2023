@@ -6,5 +6,5 @@
   "agreementDateTo" : "2029-11-29",
   "selectedRisks":["TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"],
   "country": "JAPAN",
-  "medicalRiskLimitLevel": "10000"
+  "medicalRiskLimitLevel": "LEVEL_10000"
 }

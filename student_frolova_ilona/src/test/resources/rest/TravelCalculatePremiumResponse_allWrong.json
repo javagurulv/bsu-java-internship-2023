@@ -1,6 +1,10 @@
 {
   "errors": [
     {
+      "errorCode": "ERROR_CODE_14",
+      "description": "Field medicalRiskLimitLevel must not be empty!"
+    },
+    {
       "errorCode": "ERROR_CODE_12",
       "description": "Field personBirthDate must not be empty!"
     },

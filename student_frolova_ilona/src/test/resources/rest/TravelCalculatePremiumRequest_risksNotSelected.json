@@ -6,5 +6,5 @@
   "agreementDateTo" : "2029-11-29",
   "selectedRisks": [],
   "country": "SPAIN",
-  "medicalRiskLimitLevel": "10000"
+  "medicalRiskLimitLevel": "LEVEL_10000"
 }

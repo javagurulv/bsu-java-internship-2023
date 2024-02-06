@@ -42,3 +42,11 @@ CREATE TABLE age_coefficient (
     coefficient DECIMAL(5,2) NOT NULL
  );
 
+CREATE TABLE medical_risk_limit_level (
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    MEDICAL_RISK_LIMIT_LEVEL_IC VARCHAR(45) NOT NULL,
+    COEFFICIENT DECIMAL(10,5) NOT NULL,
+    PRIMARY KEY (id)
+);
+
+
