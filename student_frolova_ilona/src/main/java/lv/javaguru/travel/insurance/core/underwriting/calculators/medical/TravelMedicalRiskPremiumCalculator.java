@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.core.underwriting.calculators;
+package lv.javaguru.travel.insurance.core.underwriting.calculators.medical;
 
 import lombok.RequiredArgsConstructor;
 import lv.javaguru.travel.insurance.core.domain.CountryDefaultDayRate;
@@ -9,24 +9,26 @@ import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 @Component
 @RequiredArgsConstructor
 class TravelMedicalRiskPremiumCalculator implements TravelRiskPremiumCalculator {
 
-    private final DateTimeUtil dateTimeUtil;
-
-    private final CountryDefaultDayRateRepository repository;
+    private final DayCountCalculator dayCountCalculator;
+    private final CountryDefaultDayRateCalculator countryDefaultDayRateCalculator;
+    private final AgeCoefficientCalculator ageCoefficientCalculator;
 
     @Override
     public BigDecimal calculatePremium(TravelCalculatePremiumRequest request) {
 
-        BigDecimal dayCount = dateTimeUtil.getDifferenceInDays(request.getAgreementDateFrom(), request.getAgreementDateTo());
+        BigDecimal dayCount = dayCountCalculator.calculate(request);
+        BigDecimal dayRate = countryDefaultDayRateCalculator.calculate(request);
+        BigDecimal ageCoefficient = ageCoefficientCalculator.calculate(request);
 
-        return repository.findByCountryIc(request.getCountry())
-                .map(CountryDefaultDayRate::getDefaultDayRate)
-                .orElseThrow(() -> new RuntimeException("Country day rate not found by country id = " + request.getCountry()))
-                .multiply(dayCount);
+        return dayRate.multiply(dayCount)
+                .multiply(ageCoefficient)
+                .setScale(2, RoundingMode.HALF_EVEN);
     }
 
     @Override
