@@ -2,7 +2,7 @@ package lv.javaguru.travel.insurance.core.services;
 
 import lv.javaguru.travel.insurance.core.underwriting.SelectedRisksPremiumCalculator;
 import lv.javaguru.travel.insurance.core.underwriting.TravelPremiumUnderwriting;
-import lv.javaguru.travel.insurance.core.validations.TravelCalculatePremiumRequestValidator;
+import lv.javaguru.travel.insurance.core.validations.PremiumRequestValidator;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumResponse;
 import lv.javaguru.travel.insurance.dto.ValidationError;
@@ -22,7 +22,7 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class TravelCalculatePremiumServiceImplTest {
     @Mock private TravelCalculatePremiumRequest request;
-    @Mock private TravelCalculatePremiumRequestValidator requestValidator;
+    @Mock private PremiumRequestValidator requestValidator;
     @Mock private TravelPremiumUnderwriting premiumUnderwriting;
     @Mock private SelectedRisksPremiumCalculator selectedRisksCalculator;
     @InjectMocks TravelCalculatePremiumServiceImpl calculator;

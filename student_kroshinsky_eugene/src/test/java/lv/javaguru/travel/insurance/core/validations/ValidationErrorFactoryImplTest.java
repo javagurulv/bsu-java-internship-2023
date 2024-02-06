@@ -13,12 +13,10 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class ValidationErrorFactoryImplTest {
-    @Mock
-    private ErrorCodeUtil propertyReader;
-    @InjectMocks
-    private ValidationErrorFactoryImpl validationErrorFactory;
+    @Mock private ErrorCodeUtil propertyReader;
+    @InjectMocks private ValidationErrorFactoryImpl validationErrorFactory;
     @Test
-    public void injectedRepositoryAreNotNull() {
+    void injectedRepositoryAreNotNull() {
         assertNotNull(validationErrorFactory);
         assertNotNull(propertyReader);
     }
