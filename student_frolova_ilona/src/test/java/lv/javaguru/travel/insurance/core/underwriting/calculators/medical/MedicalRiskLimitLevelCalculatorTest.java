@@ -2,9 +2,7 @@ package lv.javaguru.travel.insurance.core.underwriting.calculators.medical;
 
 import lv.javaguru.travel.insurance.core.domain.MedicalRiskLimitLevel;
 import lv.javaguru.travel.insurance.core.repositories.MedicalRiskLimitLevelRepository;
-import lv.javaguru.travel.insurance.core.util.DateTimeUtil;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -13,9 +11,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -46,5 +41,11 @@ public class MedicalRiskLimitLevelCalculatorTest {
         ReflectionTestUtils.setField(calculator, "medicalRiskLimitLevelEnabled", true);
 
         assertEquals(BigDecimal.valueOf(1.5), calculator.calculate(request));
+    }
+
+    @Test
+    public void shouldCalculateLimitLevelDefaultCoefficientCorrectly() {
+        ReflectionTestUtils.setField(calculator, "medicalRiskLimitLevelEnabled", false);
+        assertEquals(BigDecimal.ONE, calculator.calculate(request));
     }
 }

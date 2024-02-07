@@ -9,6 +9,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.test.util.ReflectionTestUtils;
 
 import java.math.BigDecimal;
 import java.text.ParseException;
@@ -34,6 +35,8 @@ public class AgeCoefficientCalculatorTest {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         AgeCoefficient ageCoefficient = mock(AgeCoefficient.class);
 
+        ReflectionTestUtils.setField(calculator, "ageCoefficientEnabled", true);
+
         when(request.getPersonBirthDate()).thenReturn(createDate("01.01.2000"));
         when(dateTimeUtil.getCurrentDateTime()).thenReturn(createDate("01.01.2070"));
 
@@ -42,6 +45,15 @@ public class AgeCoefficientCalculatorTest {
 
         BigDecimal result = calculator.calculate(request);
         assertEquals(BigDecimal.valueOf(1.5), result);
+    }
+
+    @Test
+    public void shouldCalculateDefaultAgeCoefficientCorrectly() {
+        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        ReflectionTestUtils.setField(calculator, "ageCoefficientEnabled", false);
+
+        BigDecimal result = calculator.calculate(request);
+        assertEquals(BigDecimal.ONE, result);
     }
 
     private Date createDate(String dateStr) {
