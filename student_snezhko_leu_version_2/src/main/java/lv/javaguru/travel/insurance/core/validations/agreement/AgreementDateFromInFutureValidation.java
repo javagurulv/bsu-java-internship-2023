@@ -13,7 +13,7 @@ import java.util.Optional;
 public class AgreementDateFromInFutureValidation extends TravelAgreementFieldValidationImpl {
     @Override
     public Optional<ValidationErrorDTO> validate(AgreementDTO request) {
-        if (request.getAgreementDateFrom().before(new Date())) {
+        if (request.getAgreementDateFrom() != null && request.getAgreementDateFrom().before(new Date())) {
             String errorCode = "ERROR_CODE_1";
             return Optional.of(errorFactory.buildError(errorCode));
         }
