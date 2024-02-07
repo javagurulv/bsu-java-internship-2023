@@ -8,19 +8,18 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
 @Component
 public class SelectedRisksPremiumCalculatorImpl implements SelectedRisksPremiumCalculator{
     @Autowired
     private List<TravelRiskPremiumCalculator> calculators;
     @Override
     public List<TravelRisk> calculateTravelRisksList(TravelCalculatePremiumRequest request) {
-        List<TravelRisk> risks = new ArrayList<>();
         List<String> selectedRisks = request.getSelectedRisks();
-        for (TravelRiskPremiumCalculator calculator : calculators) {
-            if (selectedRisks.contains(calculator.getRiskIc())) {
-                risks.add(new TravelRisk(calculator.getRiskIc(), calculator.calculatePremium(request)));
-            }
-        }
-        return risks;
+        return calculators.stream()
+                .filter(c->selectedRisks.contains(c.getRiskIc()))
+                .map(m -> new TravelRisk(m.getRiskIc(), m.calculatePremium(request)))
+                .collect(Collectors.toList());
     }
 }

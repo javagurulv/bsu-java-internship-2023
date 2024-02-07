@@ -7,19 +7,16 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Component
 class PremiumRequestValidatorImp implements PremiumRequestValidator {
     @Autowired List<TravelRequestValidation> validations;
     public List<ValidationError> validate(TravelCalculatePremiumRequest request) {
-        List<ValidationError> errors = new ArrayList<>();
-        for (TravelRequestValidation validator : validations){
-            validator.validate(request).ifPresent(errors::add);
-            List<ValidationError> validationErrors = validator.validateList(request);
-            if (!validationErrors.isEmpty()) {
-                errors.addAll(validationErrors);
-            }
-        }
-        return errors;
+        return validations.stream().flatMap(validator -> Stream.concat(
+                validator.validateList(request).stream(),
+                validator.validate(request).stream()
+        )).collect(Collectors.toList());
     }
 }
