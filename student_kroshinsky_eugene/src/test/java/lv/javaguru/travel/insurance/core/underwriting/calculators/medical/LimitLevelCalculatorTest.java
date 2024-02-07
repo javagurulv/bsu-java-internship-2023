@@ -48,4 +48,11 @@ class LimitLevelCalculatorTest {
         BigDecimal result = calculator.calculate(request);
         assertEquals(expectedResult, result);
     }
+    @Test
+    void calculateEmptyOptionalTest() {
+        ReflectionTestUtils.setField(calculator, "medicalRiskLimitLevelEnabled", true);
+        when(request.getMedicalRiskLimitLevel()).thenReturn("level");
+        when(repository.findByIc(anyString())).thenReturn(Optional.empty());
+        assertThrows(RuntimeException.class, () -> calculator.calculate(request));
+    }
 }

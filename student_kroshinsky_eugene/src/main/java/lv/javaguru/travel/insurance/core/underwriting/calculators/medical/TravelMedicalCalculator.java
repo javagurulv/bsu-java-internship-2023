@@ -30,7 +30,8 @@ class TravelMedicalCalculator implements TravelRiskPremiumCalculator {
         BigDecimal ageCoefficient = ageCoefficientCalculator.calculate(request);
         BigDecimal countryDefaultDayPremium = countryDefaultDayRateCalculator.calculate(request);
         BigDecimal dayCount = dayCountCalculator.calculate(request);
-        return countryDefaultDayPremium.multiply(dayCount.multiply(ageCoefficient.multiply(insuranceLimitCoefficient)));
+        return countryDefaultDayPremium.multiply(dayCount)
+                .multiply(ageCoefficient).multiply(insuranceLimitCoefficient);
     }
     @Override
     public String getRiskIc() {
