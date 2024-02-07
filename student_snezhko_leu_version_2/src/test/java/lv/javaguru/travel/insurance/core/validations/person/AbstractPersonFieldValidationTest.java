@@ -10,7 +10,6 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class AbstractPersonFieldValidationTest {
-    @InjectMocks
     protected TravelPersonFieldValidationImpl validation;
 
     protected ValidationErrorFactory errorFactory;

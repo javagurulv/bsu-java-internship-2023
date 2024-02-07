@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 import java.util.Optional;
 
-public class TravelAgreementFieldValidationImpl implements TravelAgreementFieldValidation {
+public abstract class TravelAgreementFieldValidationImpl implements TravelAgreementFieldValidation {
     @Autowired
     protected ValidationErrorFactory errorFactory;
     @Override

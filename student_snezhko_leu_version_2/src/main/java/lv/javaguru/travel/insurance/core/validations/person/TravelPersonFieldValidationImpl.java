@@ -8,7 +8,7 @@ import lv.javaguru.travel.insurance.core.validations.TravelPersonFieldValidation
 import java.util.List;
 import java.util.Optional;
 
-public class TravelPersonFieldValidationImpl implements TravelPersonFieldValidation {
+public abstract class TravelPersonFieldValidationImpl implements TravelPersonFieldValidation {
     @Override
     public Optional<ValidationErrorDTO> validate(PersonDTO person) {
         return Optional.empty();
