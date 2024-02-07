@@ -2,43 +2,42 @@ package lv.javaguru.travel.insurance.core.util;
 
 import org.junit.jupiter.api.Test;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class DateTimeUtilTest {
 
-    private DateTimeUtil service;
-
-    public DateTimeUtilTest() {
-        service = new DateTimeUtil();
-    }
+    private final DateTimeUtil dateTimeUtil = new DateTimeUtil();
 
     @Test
     public void differenceBetweenTwoSameDaysIsZero() {
-        Date date1 = service.createDate("12.01.2005");
-        Date date2 = service.createDate("12.01.2005");
-
-        assertEquals(0, service.getDifferenceInDays(date1, date2).compareTo(BigDecimal.ZERO));
+        Date date1 = dateTimeUtil.createDate("12.01.2005");
+        Date date2 = dateTimeUtil.createDate("12.01.2005");
+        assertEquals(0L, dateTimeUtil.getDifferenceInDays(date1, date2));
     }
 
     @Test
     public void OneDayDifference() {
-        Date date1 = service.createDate("12.01.2005");
-        Date date2 = service.createDate("13.01.2005");
+        Date date1 = dateTimeUtil.createDate("12.01.2005");
+        Date date2 = dateTimeUtil.createDate("13.01.2005");
 
-        assertEquals(0, service.getDifferenceInDays(date1, date2).compareTo(BigDecimal.ONE));
+        assertEquals(1L, dateTimeUtil.getDifferenceInDays(date1, date2));
     }
 
     @Test
-    public void OneAndAHalfDayDifference() {
-        Date date1 = new Date(12L);
-        Date date2 = new Date(129600018L);
+    public void TenDayDifference() {
+        Date date1 = dateTimeUtil.createDate("12.01.2005");
+        Date date2 = dateTimeUtil.createDate("22.01.2005");
 
-        BigDecimal result = service.getDifferenceInDays(date1, date2).setScale(5, RoundingMode.HALF_EVEN);
-        assertEquals(result.compareTo(new BigDecimal("1.5")), 0);
+        assertEquals(10L, dateTimeUtil.getDifferenceInDays(date1, date2));
+    }
+
+    @Test
+    public void negativeDayDifference() {
+        Date date1 = dateTimeUtil.createDate("22.01.2005");
+        Date date2 = dateTimeUtil.createDate("12.01.2005");
+
+        assertEquals(-10L, dateTimeUtil.getDifferenceInDays(date1, date2));
     }
 }

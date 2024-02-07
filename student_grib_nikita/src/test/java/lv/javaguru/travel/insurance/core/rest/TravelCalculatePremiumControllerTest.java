@@ -39,15 +39,15 @@ public class TravelCalculatePremiumControllerTest {
     }
 
     @Test
-    public void TestWhenDateToIsNull() throws Exception{
-        compareResponses("jsonRestFiles/RequestWhenDateToIsNull.json",
-                "jsonRestFiles/ResponseWhenDateToIsNull.json");
-    }
-
-    @Test
     public void TestWhenFirstNameIsNull() throws Exception{
         compareResponses("jsonRestFiles/RequestWhenFirstNameIsNull.json",
                 "jsonRestFiles/ResponseWhenFirstNameIsNull.json");
+    }
+
+    @Test
+    public void TestWhenDateToIsNull() throws Exception{
+        compareResponses("jsonRestFiles/RequestWhenDateToIsNull.json",
+                "jsonRestFiles/ResponseWhenDateToIsNull.json");
     }
 
     @Test

@@ -34,7 +34,7 @@ public class TravelRequestBirthDateIsPastValidationTest {
     @Test
     public void returnErrorIfBirthDateIsNotFromPast() {
         when(request.getPersonBirthDate()).thenReturn(new Date(4546941147000L));
-        when(dateTimeUtil.getCurrentTime()).thenReturn(new Date(1000L));
+        when(dateTimeUtil.getCurrentDateTime()).thenReturn(new Date(1000L));
         when(errorFactory.buildError(any())).thenReturn(new ValidationError());
 
         Optional<ValidationError> expected = Optional.of(new ValidationError());
@@ -46,7 +46,7 @@ public class TravelRequestBirthDateIsPastValidationTest {
     @Test
     public void returnNothingIfBirthDateIsFromThePast() {
         when(request.getPersonBirthDate()).thenReturn(new Date(500L));
-        when(dateTimeUtil.getCurrentTime()).thenReturn(new Date(1000L));
+        when(dateTimeUtil.getCurrentDateTime()).thenReturn(new Date(1000L));
 
         Optional<ValidationError> error = validation.check(request);
         assertEquals(Optional.empty(), error);

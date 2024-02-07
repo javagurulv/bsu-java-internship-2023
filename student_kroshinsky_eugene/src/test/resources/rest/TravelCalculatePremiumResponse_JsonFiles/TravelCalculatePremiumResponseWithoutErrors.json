@@ -4,20 +4,22 @@
   "personLastName": "Pupkin",
   "agreementDateFrom": "2024-05-25",
   "agreementDateTo": "2024-05-29",
-  "agreementPremium": 17.00,
+  "agreementPremium": 18.00,
   "country": "SPAIN",
   "risks": [
     {
       "riskIc": "TRAVEL_CANCELLATION",
-      "premium": 1
+      "premium": 1.00
     },
     {
       "riskIc": "TRAVEL_LOSS_BAGGAGE",
-      "premium": 6
+      "premium": 6.00
     },
     {
       "riskIc": "TRAVEL_MEDICAL",
-      "premium": 10.00
+      "premium": 11.00
     }
-  ]
+  ],
+  "dateOfBirth": "1999-05-29",
+  "medicalRiskLimitLevel": "LEVEL_10000"
 }

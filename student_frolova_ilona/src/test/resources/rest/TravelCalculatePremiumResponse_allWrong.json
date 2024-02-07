@@ -1,6 +1,10 @@
 {
   "errors": [
     {
+      "errorCode": "ERROR_CODE_14",
+      "description": "Field medicalRiskLimitLevel must not be empty!"
+    },
+    {
       "errorCode": "ERROR_CODE_12",
       "description": "Field personBirthDate must not be empty!"
     },
@@ -32,5 +36,6 @@
   "agreementDateTo": null,
   "agreementPremium": null,
   "risks": null,
-  "country": null
+  "country": null,
+  "medicalRiskLimitLevel": null
 }
