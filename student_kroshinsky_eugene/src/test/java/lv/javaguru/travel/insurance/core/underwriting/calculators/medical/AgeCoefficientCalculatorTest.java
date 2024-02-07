@@ -1,9 +1,7 @@
 package lv.javaguru.travel.insurance.core.underwriting.calculators.medical;
 
 import lv.javaguru.travel.insurance.core.domain.AgeCoefficient;
-import lv.javaguru.travel.insurance.core.domain.CountryDefaultDayRate;
 import lv.javaguru.travel.insurance.core.repositories.AgeCoefficientRepository;
-import lv.javaguru.travel.insurance.core.repositories.CountryDefaultDayRateRepository;
 import lv.javaguru.travel.insurance.core.utils.AgeUtil;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import org.junit.jupiter.api.Test;
@@ -19,7 +17,6 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -49,10 +46,17 @@ class AgeCoefficientCalculatorTest {
         assertEquals(expectedResult, result);
     }
     @Test
-    void  calculateEnabledFalseTest() {
+    void calculateEnabledFalseTest() {
         ReflectionTestUtils.setField(calculator, "ageCoefficientEnabled", false);
         BigDecimal expectedResult = BigDecimal.valueOf(1);
         BigDecimal result = calculator.calculate(request);
         assertEquals(expectedResult, result);
+    }
+    @Test
+    void  calculateEmptyOptionalTest() {
+        ReflectionTestUtils.setField(calculator, "ageCoefficientEnabled", true);
+        when(ageUtil.calculateAge(request)).thenReturn(1);
+        when(repository.findByAge(anyInt())).thenReturn(Optional.empty());
+        assertThrows(RuntimeException.class, () -> calculator.calculate(request));
     }
 }

@@ -9,6 +9,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.test.util.ReflectionTestUtils;
 
 import java.math.BigDecimal;
 import java.util.Optional;
@@ -39,6 +40,12 @@ class CountryDefaultDayRateCalculatorTest {
 
         BigDecimal result = calculator.calculate(request);
         assertEquals(expectedResult, result);
+    }
+    @Test
+    void calculateEmptyOptionalTest() {
+        when(request.getCountry()).thenReturn("country");
+        when(repository.findByIc(anyString())).thenReturn(Optional.empty());
+        assertThrows(RuntimeException.class, () -> calculator.calculate(request));
     }
 
 }

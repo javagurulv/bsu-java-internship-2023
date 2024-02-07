@@ -28,13 +28,13 @@ class SelectedRisksPremiumCalculatorImplTest {
     }
     @Test
     void calculateTravelRisksList() {
-        when(riskCalculator.calculatePremium(request)).thenReturn(new BigDecimal(10));
+        when(riskCalculator.calculatePremium(request)).thenReturn(BigDecimal.valueOf(10));
         when(riskCalculator.getRiskIc()).thenReturn("ic");
         when(request.getSelectedRisks()).thenReturn(List.of("ic"));
         List<TravelRiskPremiumCalculator> expextedList = List.of(riskCalculator);
         ReflectionTestUtils.setField(selectedRisksCalculator, "calculators", expextedList);
 
-        List<TravelRisk> result = List.of(new TravelRisk("ic", new BigDecimal(10)));
+        List<TravelRisk> result = List.of(new TravelRisk("ic",BigDecimal.valueOf(10)));
         assertEquals(result, selectedRisksCalculator.calculateTravelRisksList(request));
     }
 }
