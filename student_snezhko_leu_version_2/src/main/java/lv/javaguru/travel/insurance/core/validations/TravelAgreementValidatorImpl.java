@@ -15,26 +15,33 @@ import java.util.Optional;
 
 @Component
 public class TravelAgreementValidatorImpl {       //will make default access mod
+    /*
     @Autowired
     List<TravelAgreementFieldValidation> agreementValidations;
+*/
+    @Autowired
+    private TravelOnlyAgreementValidator agreementValidator;
 
     @Autowired
+    private TravelOnlyPersonValidator personValidator;
+    /*
+    @Autowired
     List<TravelPersonFieldValidation> personValidations;
+     */
 
     public List<ValidationErrorDTO> validate(AgreementDTO request) {
-        List<ValidationErrorDTO> errors = new ArrayList<>();
+        /*
             agreementValidations.forEach(validation -> {
                 Optional<ValidationErrorDTO> error = null;
                 error = validation.validate(request);
-                if (!error.isEmpty()) {
-                    errors.add(error.get());
-                }
+                error.ifPresent(errors::add);
                 List<ValidationErrorDTO> validList = validation.validateList(request);
                 if (validList != null) {
                     errors.addAll(validList);
                 }
             });
-
+*/
+        /*
             if(request.getPersons() != null && !request.getPersons().isEmpty()) {
                 request.getPersons().forEach(person -> {
                     personValidations.forEach(validation -> {
@@ -48,7 +55,11 @@ public class TravelAgreementValidatorImpl {       //will make default access mod
                 });
             }
 
-        return errors;
+
+         */
+        List<ValidationErrorDTO> result = agreementValidator.validate(request);
+        result.addAll(personValidator.validate(request));
+        return result;
     }
 
     /*

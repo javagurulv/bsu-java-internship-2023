@@ -17,7 +17,7 @@ public class PersonBirthDateInPastValidationTest extends AbstractPersonFieldVali
     @Test
     public void personBirthDateInFuture() {
         init();
-        when(person.getPersonBitrhDate()).thenReturn(Date.valueOf("2050-02-02"));
+        when(person.getPersonBirthDate()).thenReturn(Date.valueOf("2050-02-02"));
         Optional<ValidationErrorDTO> error = validation.validate(person);
         assertEquals("", errorCode, error.get().getErrorCode());
         assertEquals("", description, error.get().getDescription());
@@ -26,7 +26,7 @@ public class PersonBirthDateInPastValidationTest extends AbstractPersonFieldVali
     @Test
     public void personCorrectBirthDateTest() {
         init();
-        when(person.getPersonBitrhDate()).thenReturn(Date.valueOf("2005-02-20"));
+        when(person.getPersonBirthDate()).thenReturn(Date.valueOf("2005-02-20"));
         assertEquals("", Optional.empty(), validation.validate(person));
     }
 }

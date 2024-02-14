@@ -10,6 +10,7 @@ import org.mockito.InjectMocks;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,6 +24,9 @@ public class TravelAgreementValidatorImplTest {
     private TravelAgreementValidatorImpl validator = new TravelAgreementValidatorImpl();
 
 
+    private TravelOnlyAgreementValidator agreementValidator = mock(TravelOnlyAgreementValidator.class);
+    private TravelOnlyPersonValidator personValidator = mock(TravelOnlyPersonValidator.class);
+
     private AgreementDTO agreement = mock(AgreementDTO.class);
 
     private PersonDTO person = mock(PersonDTO.class);
@@ -32,24 +36,23 @@ public class TravelAgreementValidatorImplTest {
                       Optional<ValidationErrorDTO> v4) {
         when(agreement.getPersons()).thenReturn(List.of(person));
 
-        TravelAgreementFieldValidation agreementValidation1 = mock(TravelAgreementFieldValidationImpl.class);
-        when(agreementValidation1.validate(agreement)).thenReturn(v1);
-        when(agreementValidation1.validateList(agreement)).thenReturn(List.of());
+//        ReflectionTestUtils.setField(validator, "agreementValidations", List.of(agreementValidation1, agreementValidation2));
+  //      ReflectionTestUtils.setField(validator, "personValidations", List.of(personValidation1, personValidation2));
 
-        TravelAgreementFieldValidation agreementValidation2 = mock(TravelAgreementFieldValidationImpl.class);
-        when(agreementValidation2.validate(agreement)).thenReturn(v2);
-        when(agreementValidation2.validateList(agreement)).thenReturn(List.of());
+        List<ValidationErrorDTO> agreementErrors = new ArrayList<>();
+        v1.ifPresent(agreementErrors::add);
+        v2.ifPresent(agreementErrors::add);
 
-        TravelPersonFieldValidation personValidation1 = mock(TravelPersonFieldValidationImpl.class);
-        when(personValidation1.validate(person)).thenReturn(v3);
-        when(personValidation1.validateList(person)).thenReturn(List.of());
+        List<ValidationErrorDTO> personErrors = new ArrayList<>();
+        v3.ifPresent(personErrors::add);
+        v4.ifPresent(personErrors::add);
 
-        TravelPersonFieldValidation personValidation2 = mock(TravelPersonFieldValidationImpl.class);
-        when(personValidation2.validate(person)).thenReturn(v4);
-        when(personValidation2.validateList(person)).thenReturn(List.of());
+        when(agreementValidator.validate(agreement)).thenReturn(agreementErrors);
+        when(personValidator.validate(agreement)).thenReturn(personErrors);
 
-        ReflectionTestUtils.setField(validator, "agreementValidations", List.of(agreementValidation1, agreementValidation2));
-        ReflectionTestUtils.setField(validator, "personValidations", List.of(personValidation1, personValidation2));
+        ReflectionTestUtils.setField(validator, "agreementValidator", agreementValidator);
+        ReflectionTestUtils.setField(validator, "personValidator", personValidator);
+        //ReflectionTestUtils.setField(validator, "personValidator", personValidator);
     }
     @Test
     public void shouldNotReturnErrors() {

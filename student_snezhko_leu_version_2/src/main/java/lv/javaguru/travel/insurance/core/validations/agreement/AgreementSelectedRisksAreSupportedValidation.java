@@ -8,7 +8,6 @@ import lv.javaguru.travel.insurance.core.validations.ValidationErrorFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,7 +22,7 @@ public class AgreementSelectedRisksAreSupportedValidation extends TravelAgreemen
     private List<Placeholder> placeholders;
     @Override
     public List<ValidationErrorDTO> validateList(AgreementDTO request) {
-        return request.getSelectedRisk().stream()
+        return request.getSelectedRisks().stream()
                 .map(this::validateRiskIc)
                 .filter(Optional::isPresent)
                 .map(Optional::get)

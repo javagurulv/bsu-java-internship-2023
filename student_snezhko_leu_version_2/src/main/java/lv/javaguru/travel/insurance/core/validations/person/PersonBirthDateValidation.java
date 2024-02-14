@@ -15,7 +15,7 @@ public class PersonBirthDateValidation extends TravelPersonFieldValidationImpl{
 
     @Override
     public Optional<ValidationErrorDTO> validate(PersonDTO person) {
-        return person.getPersonBitrhDate() == null
+        return person.getPersonBirthDate() == null
                 ? Optional.of(errorFactory.buildError("ERROR_CODE_11"))
                 : Optional.empty();
     }

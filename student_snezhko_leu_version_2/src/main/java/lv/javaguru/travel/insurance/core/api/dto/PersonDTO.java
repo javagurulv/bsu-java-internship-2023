@@ -18,7 +18,7 @@ public class PersonDTO {
 
     private String personLastName;
 
-    private Date personBitrhDate;
+    private Date personBirthDate;
 
     private List<RiskDTO> risks;
 }

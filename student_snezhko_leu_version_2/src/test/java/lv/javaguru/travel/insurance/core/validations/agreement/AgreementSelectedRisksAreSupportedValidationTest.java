@@ -5,7 +5,6 @@ import lv.javaguru.travel.insurance.core.util.Placeholder;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.util.ReflectionTestUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.mockito.Mockito.when;
@@ -30,7 +29,7 @@ public class AgreementSelectedRisksAreSupportedValidationTest extends AbstractAg
         List<Placeholder> placeholders = List.of(new Placeholder("NOT_EXISTING_RISK", risk));
         ReflectionTestUtils.setField(validation, "placeholders", placeholders);
         when(errorFactory.buildError(errorCode, placeholders)).thenReturn(new ValidationErrorDTO(errorCode, description));
-        when(agreement.getSelectedRisk()).thenReturn(List.of(risk));
+        when(agreement.getSelectedRisks()).thenReturn(List.of(risk));
         assertEquals("", errorCode, validation.validateList(agreement).get(0).getErrorCode());
     }
 

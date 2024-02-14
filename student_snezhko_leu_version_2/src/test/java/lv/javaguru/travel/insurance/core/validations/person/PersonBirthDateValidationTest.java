@@ -25,7 +25,7 @@ public class PersonBirthDateValidationTest extends AbstractPersonFieldValidation
     @Test
     public void notNullPersonBirthDateTest() {
         init();
-        when(person.getPersonBitrhDate()).thenReturn(Date.valueOf("2005-02-20"));
+        when(person.getPersonBirthDate()).thenReturn(Date.valueOf("2005-02-20"));
         assertEquals("", Optional.empty(), validation.validate(person));
     }
 }

@@ -18,7 +18,7 @@ public class AgreementSelectedRisksValidationTest extends AbstractAgreementValid
     @Test
     public void AgreementSelectedRisksExistsTest() {
         init();
-        when(agreement.getSelectedRisk()).thenReturn(List.of("SELECTED_RISK"));
+        when(agreement.getSelectedRisks()).thenReturn(List.of("SELECTED_RISK"));
         assertEquals("", Optional.empty(), validation.validate(agreement));
     }
     @Test
@@ -33,7 +33,7 @@ public class AgreementSelectedRisksValidationTest extends AbstractAgreementValid
     @Test
     public void AgreementSelectedRiskIsEmptyTest() {
         init();
-        when(agreement.getSelectedRisk()).thenReturn(List.of());
+        when(agreement.getSelectedRisks()).thenReturn(List.of());
         ValidationErrorDTO error = validation.validate(agreement).get();
         assertEquals("", errorCode, error.getErrorCode());
         assertEquals("", description, error.getDescription());
