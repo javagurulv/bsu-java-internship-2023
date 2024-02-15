@@ -1,21 +1,24 @@
-package lv.javaguru.travel.insurance.core.core;
+package lv.javaguru.travel.insurance.service;
 
-import lv.javaguru.travel.insurance.core.TravelCalculatePremiumService;
-import lv.javaguru.travel.insurance.core.TravelCalculatePremiumServiceImpl;
-import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.core.TravelCalculatePremiumRequestValidator;
+import lv.javaguru.travel.insurance.model.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.service.impl.TravelCalculatePremiumServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.test.mock.mockito.MockBeans;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.math.BigDecimal;
 
-import static lv.javaguru.travel.insurance.core.utils.ConverterTestUtils.buildPojo;
+import static lv.javaguru.travel.insurance.utils.ConverterTestUtils.buildPojo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = TravelCalculatePremiumServiceImpl.class)
+@MockBeans(@MockBean(TravelCalculatePremiumRequestValidator.class))
 class TravelCalculatePremiumServiceImplTest {
 
     @Autowired
