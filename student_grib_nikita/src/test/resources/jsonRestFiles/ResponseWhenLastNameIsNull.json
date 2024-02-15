@@ -1,0 +1,13 @@
+{
+  "personFirstName" : null,
+  "personLastName" : null,
+  "agreementDateFrom" : null,
+  "agreementDateTo" : null,
+  "agreementPrice" : null,
+  "errors" : [
+    {
+      "field": "personLastName",
+      "message": "Must not be empty!"
+    }
+  ]
+}

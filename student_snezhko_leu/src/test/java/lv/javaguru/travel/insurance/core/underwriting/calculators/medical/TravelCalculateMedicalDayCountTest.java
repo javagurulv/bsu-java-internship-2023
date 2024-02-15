@@ -1,10 +1,9 @@
 package lv.javaguru.travel.insurance.core.underwriting.calculators.medical;
 
 
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDate;
 import java.sql.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -14,7 +13,7 @@ import static org.mockito.Mockito.when;
 public class TravelCalculateMedicalDayCountTest {
     private TravelCalculateDayCount calculator = new TravelCalculateDayCount();
 
-    TravelCalculatePremiumRequest request;
+    TravelCalculatePremiumRequestV1 request;
 
     @Test
     public void calculatorMedicalDayCountTest() {
@@ -22,7 +21,7 @@ public class TravelCalculateMedicalDayCountTest {
         assertEquals(3, calculator.calculatePremium(request));
     }
     private void init() {
-        request = mock(TravelCalculatePremiumRequest.class);
+        request = mock(TravelCalculatePremiumRequestV1.class);
 
         //Date dateTo = new Date();
         //Date dateFrom = new Date(dateTo.getYear(), dateTo.getMonth(), dateTo.getDay() - dayCount);

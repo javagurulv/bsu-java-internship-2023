@@ -3,7 +3,7 @@ package lv.javaguru.travel.insurance.core.underwriting;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRisk;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -22,7 +22,7 @@ class TravelUnderwritingImpl implements TravelUnderwriting{
 
     @Autowired
     SelectedRisksPremiumCalculator calculator;
-    public BigDecimal calculatePremium(TravelCalculatePremiumRequest request) {
+    public BigDecimal calculatePremium(TravelCalculatePremiumRequestV1 request) {
 
         BigDecimal result = BigDecimal.ZERO;
         List<TravelCalculatePremiumRisk> risks = calculator.calculatePremiumForAllRisks(request);

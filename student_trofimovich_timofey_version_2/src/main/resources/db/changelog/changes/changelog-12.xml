@@ -5,7 +5,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
 
-    <changeSet author = "javaguru" id = "32">
+    <changeSet author = "Timofey" id = "32">
         <addColumn tableName="agreements">
             <column name="uuid" type="VARCHAR(255)">
                 <constraints nullable="false"/>
@@ -13,7 +13,7 @@
         </addColumn>
     </changeSet>
 
-    <changeSet author="javaguru" id="33">
+    <changeSet author="Timofey" id="33">
         <createIndex indexName="ix_agreements_uuid"
                      tableName="agreements"
                      unique="true">

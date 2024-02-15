@@ -1,8 +1,10 @@
 {
   "personFirstName" : "  ",
   "personLastName" : "",
+  "personBirthDate" : null,
   "agreementDateFrom" : null,
   "agreementDateTo" : null,
   "selectedRisks" : null,
-  "country": null
+  "country": null,
+  "medicalRiskLimitLevel": null
 }

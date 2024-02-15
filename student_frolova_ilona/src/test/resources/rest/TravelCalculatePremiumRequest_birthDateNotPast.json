@@ -1,0 +1,10 @@
+{
+  "personFirstName" : "Name",
+  "personLastName" : "Surname",
+  "personBirthDate" : "2500-11-22",
+  "agreementDateFrom" : "2029-11-22",
+  "agreementDateTo" : "2029-11-29",
+  "selectedRisks":["TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"],
+  "country": "JAPAN",
+  "medicalRiskLimitLevel": "LEVEL_10000"
+}

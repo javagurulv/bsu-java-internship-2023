@@ -1,0 +1,36 @@
+package lv.javaguru.travel.insurance.core.underwriting.calculators.medical;
+
+import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
+import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
+import lv.javaguru.travel.insurance.core.repositories.MedicalRiskLimitLevelRepository;
+import lv.javaguru.travel.insurance.core.util.CheckApplicationPropertiesUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import java.io.IOException;
+import java.math.BigDecimal;
+
+import static lv.javaguru.travel.insurance.core.util.CheckApplicationPropertiesUtil.checkProperty;
+
+@Component
+class TravelCalculateInsuranceLimitCoefficient {
+    @Autowired
+    private MedicalRiskLimitLevelRepository mrllRepository;
+
+    public BigDecimal calculatePremium(AgreementDTO agreement, PersonDTO person) {
+        try {
+            return checkProperty("medical.risk.limit.level.enabled")
+                    ? mrllRepository
+                        .findByMedicalRiskLimitLevelIc
+                                (
+                                    agreement.getMedicalRiskLimitLevel()
+                                )
+                        .get()
+                        .getCoefficient()
+                    : BigDecimal.ONE;
+        }
+        catch (IOException e) {
+            return BigDecimal.ONE;
+        }
+    }
+}

@@ -1,6 +1,7 @@
 package lv.javaguru.travel.insurance.core.repositories;
 
 import lv.javaguru.travel.insurance.core.domain.TCTravelCostCoefficient;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -14,6 +15,7 @@ public interface TCTravelCostCoefficientRepository
     @Query("SELECT tc from TCTravelCostCoefficient tc " +
            "where tc.travelCostFrom <= :travelCost " +
            "and tc.travelCostTo >= :travelCost")
+    @Cacheable(value = "travel_cost_coefficient", key = "#travelCost", unless = "#result == null ")
     Optional<TCTravelCostCoefficient> findCoefficient(@Param("travelCost") BigDecimal travelCost);
 
 }

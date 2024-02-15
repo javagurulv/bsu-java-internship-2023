@@ -1,8 +1,8 @@
 {
   "errors": [
     {
-      "field": "agreementDateTo",
-      "message": "Must not be empty!"
+      "errorCode": "ERROR_CODE_5",
+      "description": "field agreementDateTo must not be empty!"
     }
   ],
   "personFirstName": null,

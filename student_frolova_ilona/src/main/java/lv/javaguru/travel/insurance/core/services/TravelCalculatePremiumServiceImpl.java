@@ -38,11 +38,13 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
         return new TravelCalculatePremiumResponse(
                 request.getPersonFirstName(),
                 request.getPersonLastName(),
+                request.getPersonBirthDate(),
                 request.getAgreementDateFrom(),
                 request.getAgreementDateTo(),
                 premium.getTotalPremium(),
                 premium.getRiskPremiums(),
-                request.getCountry()
+                request.getCountry(),
+                request.getMedicalRiskLimitLevel()
         );
     }
 

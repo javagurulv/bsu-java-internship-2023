@@ -2,18 +2,14 @@ package lv.javaguru.travel.insurance.core.validations.calculate.premium.agreemen
 
 import lv.javaguru.travel.insurance.core.api.dto.agreement.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
+import lv.javaguru.travel.insurance.core.util.DateTimeUtil;
 import lv.javaguru.travel.insurance.core.validations.ValidationErrorFactory;
-import lv.javaguru.travel.insurance.core.validations.calculate.premium.agreement.DateFromIsInFutureValidation;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -35,7 +31,7 @@ public class DateFromIsInFutureValidationTest {
 
     @Test
     public void shouldReturnErrorWhenDateFromIsInThePast() {
-        when(agreement.getAgreementDateFrom()).thenReturn(createDate("20.12.2020"));
+        when(agreement.getAgreementDateFrom()).thenReturn(DateTimeUtil.createDate("20.12.2020"));
         when(factory.buildError("ERROR_CODE_5")).thenReturn(new ValidationErrorDTO("ERROR_CODE_5", "Date from must be in the future!"));
         Optional<ValidationErrorDTO> validationError = validation.validate(agreement);
         assertThat(validationError).isPresent();
@@ -45,16 +41,9 @@ public class DateFromIsInFutureValidationTest {
 
     @Test
     void shouldNotReturnError() {
-        when(agreement.getAgreementDateFrom()).thenReturn(createDate("12.03.2025"));
+        when(agreement.getAgreementDateFrom()).thenReturn(DateTimeUtil.createDate("12.03.2025"));
         Optional<ValidationErrorDTO> validationError = validation.validate(agreement);
         assertThat(validationError).isEmpty();
     }
-
-    private Date createDate(String str) {
-        try {
-            return new SimpleDateFormat("dd.MM.yyyy").parse(str);
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
-    }
+    
 }

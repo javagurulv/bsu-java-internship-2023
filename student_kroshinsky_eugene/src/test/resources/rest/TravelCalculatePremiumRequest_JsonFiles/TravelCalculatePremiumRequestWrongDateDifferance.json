@@ -3,5 +3,8 @@
   "personLastName" : "Pupkin",
   "agreementDateFrom" : "2024-05-25",
   "agreementDateTo" : "2024-05-20",
+  "country" : "SPAIN",
+  "dateOfBirth": "1999-05-29",
+  "medicalRiskLimitLevel": "LEVEL_10000",
   "selected_risks":["TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"]
 }

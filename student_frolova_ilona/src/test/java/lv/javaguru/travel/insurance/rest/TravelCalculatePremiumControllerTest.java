@@ -114,6 +114,22 @@ public class TravelCalculatePremiumControllerTest {
         );
     }
 
+    @Test
+    public void testWrongRequestBirthDateIsNull() throws Exception {
+        compareResponseToRequestInJsonFiles(
+                "rest/TravelCalculatePremiumRequest_birthDateNull.json",
+                "rest/TravelCalculatePremiumResponse_birthDateNull.json"
+        );
+    }
+
+    @Test
+    public void testWrongRequestBirthDateIsNotPast() throws Exception {
+        compareResponseToRequestInJsonFiles(
+                "rest/TravelCalculatePremiumRequest_birthDateNotPast.json",
+                "rest/TravelCalculatePremiumResponse_birthDateNotPast.json"
+        );
+    }
+
     public void compareResponseToRequestInJsonFiles(
             String fileNameRequest, String fileNameResponse
     ) throws Exception {

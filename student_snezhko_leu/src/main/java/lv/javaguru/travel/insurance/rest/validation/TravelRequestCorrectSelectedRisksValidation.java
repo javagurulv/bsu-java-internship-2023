@@ -3,7 +3,7 @@ package lv.javaguru.travel.insurance.rest.validation;
 import lv.javaguru.travel.insurance.core.ValidationError;
 import lv.javaguru.travel.insurance.core.domain.ClassifierValue;
 import lv.javaguru.travel.insurance.core.repositories.ClassifierValueRepository;
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import lv.javaguru.travel.insurance.rest.placeholder.Placeholder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -40,7 +40,7 @@ public class TravelRequestCorrectSelectedRisksValidation extends TravelRequestVa
      */
 
     @Override
-    public List<ValidationError> validateList(TravelCalculatePremiumRequest request) {
+    public List<ValidationError> validateList(TravelCalculatePremiumRequestV1 request) {
         List<ValidationError> result = new ArrayList<>();
         List<String> risks = request.getSelectedRisks();
         if (risks == null || risks.isEmpty()) {

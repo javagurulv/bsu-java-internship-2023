@@ -41,6 +41,22 @@ CREATE TABLE `insurance`.`country_default_day_rate` (
                                                         UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
                                                         UNIQUE INDEX `country_ic_UNIQUE` (`country_ic` ASC) VISIBLE);
 
+CREATE TABLE `insurance`.`age_coefficient` (
+    `id` BIGINT(5) AUTO_INCREMENT,
+    `age_from` INT NOT NULL,
+    `age_to` INT NOT NULL,
+    `coefficient` DECIMAL(5,2) NOT NULL
+);
+
+CREATE TABLE `insurance`.`medical_risk_limit_level` (
+    `id` BIGINT NOT NULL AUTO_INCREMENT,
+    `MEDICAL_RISK_LIMIT_LEVEL_IC` VARCHAR(45) NOT NULL,
+    `COEFFICIENT` DECIMAL(10,5) NOT NULL,
+    PRIMARY KEY (`id`),
+    UNIQUE INDEX `MEDICAL_RISK_LIMIT_LEVEL_IC_UNIQUE` (`MEDICAL_RISK_LIMIT_LEVEL_IC` ASC) VISIBLE
+);
+
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

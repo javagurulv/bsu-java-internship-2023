@@ -1,8 +1,8 @@
 {
   "errors": [
     {
-      "field": "agreementDateFrom",
-      "message": "AgreementDateFrom should only be from the future"
+      "errorCode" : "ERROR_CODE_1",
+      "description": "field agreementDateFrom should only be from the future!"
     }
   ],
   "personFirstName": null,
