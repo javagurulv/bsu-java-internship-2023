@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.core.utils;
+package lv.javaguru.travel.insurance.utils;
 
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;

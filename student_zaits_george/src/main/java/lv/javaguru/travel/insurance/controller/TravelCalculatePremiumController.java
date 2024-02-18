@@ -1,7 +1,9 @@
-package lv.javaguru.travel.insurance.rest;
+package lv.javaguru.travel.insurance.controller;
 
 import lombok.RequiredArgsConstructor;
-import lv.javaguru.travel.insurance.core.TravelCalculatePremiumService;
+import lv.javaguru.travel.insurance.model.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.model.TravelCalculatePremiumResponse;
+import lv.javaguru.travel.insurance.service.TravelCalculatePremiumService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
