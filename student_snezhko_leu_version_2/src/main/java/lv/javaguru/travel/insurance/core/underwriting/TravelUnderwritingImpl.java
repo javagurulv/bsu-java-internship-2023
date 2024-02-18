@@ -23,6 +23,7 @@ class TravelUnderwritingImpl implements TravelUnderwriting{
 
     @Autowired
     private SelectedRisksPremiumCalculator calculator;
+    /*
     public BigDecimal calculatePremium(AgreementDTO agreement, PersonDTO person) {
 
         BigDecimal result = BigDecimal.ZERO;
@@ -33,5 +34,15 @@ class TravelUnderwritingImpl implements TravelUnderwriting{
         }
 
         return result;
+    }
+    */
+    public TravelPremiumCalculationResult calculatePremium(AgreementDTO agreement, PersonDTO person) {
+        BigDecimal result = BigDecimal.ZERO;
+        List<RiskDTO> risks = calculator.calculatePremiumForAllRisks(agreement, person);
+
+        for (RiskDTO risk : risks) {
+            result = result.add(risk.getPremium());
+        }
+        return new TravelPremiumCalculationResult(result, risks);
     }
 }

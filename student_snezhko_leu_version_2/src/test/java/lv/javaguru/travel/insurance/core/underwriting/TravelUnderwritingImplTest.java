@@ -47,6 +47,8 @@ public class TravelUnderwritingImplTest {
             risksPremium.add(new RiskDTO("TRAVEL_MEDICAL", BigDecimal.valueOf(1)));
             when(calculator.calculatePremiumForAllRisks(agreement, person)).thenReturn(risksPremium);
 
-            assertEquals(BigDecimal.valueOf(1),underwriting.calculatePremium(agreement, person));
+            assertEquals(BigDecimal.valueOf(1),underwriting.calculatePremium(agreement, person).getTotalPremium());
+            assertEquals(risksPremium.get(0).getRiskIc(),underwriting.calculatePremium(agreement, person).getRisks().get(0).getRiskIc());
+            assertEquals(risksPremium.get(0).getPremium(),underwriting.calculatePremium(agreement, person).getRisks().get(0).getPremium());
         }
     }

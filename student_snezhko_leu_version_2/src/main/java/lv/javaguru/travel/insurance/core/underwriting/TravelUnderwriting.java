@@ -6,6 +6,6 @@ import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import java.math.BigDecimal;
 
 public interface TravelUnderwriting {
-    public BigDecimal calculatePremium(AgreementDTO agreement, PersonDTO person);//TravelCalculatePremiumResponse response);
+    public TravelPremiumCalculationResult calculatePremium(AgreementDTO agreement, PersonDTO person);//TravelCalculatePremiumResponse response);
     //public List<TravelRiskPremiumCalculator> getRiskCalculators();
 }
