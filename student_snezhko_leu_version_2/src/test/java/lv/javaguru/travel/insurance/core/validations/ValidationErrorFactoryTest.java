@@ -4,8 +4,10 @@ import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import lv.javaguru.travel.insurance.core.util.ErrorCodeUtil;
 import lv.javaguru.travel.insurance.core.util.Placeholder;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import java.util.List;
@@ -14,10 +16,13 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.util.AssertionErrors.assertEquals;
 
+@ExtendWith(SpringExtension.class)
 public class ValidationErrorFactoryTest {
     @InjectMocks
-    private ValidationErrorFactory errorFactory = new ValidationErrorFactory();
-    private ErrorCodeUtil errorCodeUtil = mock(ErrorCodeUtil.class);
+    private ValidationErrorFactory errorFactory;
+
+    @Mock
+    private ErrorCodeUtil errorCodeUtil;
     @Test
     public void simpleErrorCodeTest() {
         String errorCode = "TEST_ERROR_CODE";

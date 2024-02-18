@@ -19,7 +19,7 @@ import static lv.javaguru.travel.insurance.core.util.CheckApplicationPropertiesU
 
 
 @Component
-class TravelCalculateMedicalAgeCoefficient {
+class TravelCalculateMedicalAgeCoefficient implements TravelRiskPremiumCalculatorMedicalComponent{
     @Autowired
     private AgeCoefficientRepository acRepository;
 

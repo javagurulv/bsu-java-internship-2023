@@ -22,12 +22,15 @@ import static org.mockito.Mockito.when;
 @DataJpaTest
 public class TravelCalculateMedicalCountryDefaultDayCountTest {
     @InjectMocks
-    private TravelCalculateMedicalCountryDefaultDayRate calculator = new TravelCalculateMedicalCountryDefaultDayRate();
+    private TravelCalculateMedicalCountryDefaultDayRate calculator;
 
     @Mock
-    private CountryDefaultDayRateRepository cddrRepository = mock(CountryDefaultDayRateRepository.class);
+    private CountryDefaultDayRateRepository cddrRepository;
 
+    @Mock
     private AgreementDTO agreement;
+
+    @Mock
     private PersonDTO person;
 
     @Test
@@ -37,9 +40,6 @@ public class TravelCalculateMedicalCountryDefaultDayCountTest {
     }
 
     private void init(BigDecimal countryCoefficient) {
-        agreement = mock(AgreementDTO.class);
-        person = mock(PersonDTO.class);
-
         String country = "COUNTRY";
         when(agreement.getCountry()).thenReturn(country);
 

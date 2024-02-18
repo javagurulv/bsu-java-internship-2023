@@ -31,10 +31,5 @@ public class SelectedRisksPremiumCalculator {
             }
         }
         throw new RuntimeException("Risk with ic = " + riskIc + " is not supported!");
-/*        return calculators.stream()
-                .filter(calc -> calc.getIc().equals(riskIc))
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException("Risk with ic = " + riskIc + " is not supported!"));
-*/
     }
 }

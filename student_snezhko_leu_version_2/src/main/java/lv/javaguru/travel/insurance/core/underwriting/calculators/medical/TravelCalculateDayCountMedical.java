@@ -7,12 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import lv.javaguru.travel.insurance.core.util.DateTimeUtil;
 
+import java.math.BigDecimal;
+
 @Component
-class TravelCalculateDayCount {
+class TravelCalculateDayCountMedical implements TravelRiskPremiumCalculatorMedicalComponent {
     @Autowired
     private DateTimeUtil dateTimeUtil;
 
-    public long calculatePremium(AgreementDTO agreement, PersonDTO person) {
-        return dateTimeUtil.getDaysBetween(agreement.getAgreementDateTo(), agreement.getAgreementDateFrom());
+    public BigDecimal calculatePremium(AgreementDTO agreement, PersonDTO person) {
+        return BigDecimal.valueOf(dateTimeUtil.getDaysBetween(agreement.getAgreementDateTo(), agreement.getAgreementDateFrom()));
     }
 }

@@ -5,8 +5,10 @@ import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.domain.MedicalRiskLimitLevel;
 import lv.javaguru.travel.insurance.core.repositories.MedicalRiskLimitLevelRepository;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import java.math.BigDecimal;
@@ -16,15 +18,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+@ExtendWith(SpringExtension.class)
 public class TravelCalculateInsuranceLimitCoefficientTest {
     @InjectMocks
-    private TravelCalculateInsuranceLimitCoefficient calculator = new TravelCalculateInsuranceLimitCoefficient();
+    private TravelCalculateInsuranceLimitCoefficientMedical calculator;
 
     @Mock
-    private MedicalRiskLimitLevelRepository mrllRepository = mock(MedicalRiskLimitLevelRepository.class);
+    private MedicalRiskLimitLevelRepository mrllRepository;
 
-    private AgreementDTO agreement = mock(AgreementDTO.class);
-    private PersonDTO person = mock(PersonDTO.class);
+    @Mock
+    private AgreementDTO agreement;
+    @Mock
+    private PersonDTO person;
 
     @Test
     public void TravelCalculateInsuranceLimitCoefficientCorrectValueTest() {

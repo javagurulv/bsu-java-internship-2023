@@ -21,17 +21,21 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-//@ExtendWith(SpringExtension.class)
+@ExtendWith(SpringExtension.class)
 @DataJpaTest
 public class TravelCalculateMedicalAgeCoefficientTest {
     @InjectMocks
-    private TravelCalculateMedicalAgeCoefficient calculator = new TravelCalculateMedicalAgeCoefficient();
+    private TravelCalculateMedicalAgeCoefficient calculator;
+
+    @Mock
     private AgreementDTO agreement;
+    @Mock
     private PersonDTO person;
     @Mock
-    private AgeCoefficientRepository acRepository = mock(AgeCoefficientRepository.class);
+    private AgeCoefficientRepository acRepository;
 
-    private DateTimeUtil dateTimeUtil = mock(DateTimeUtil.class);
+    @Mock
+    private DateTimeUtil dateTimeUtil;
 
     @Test
     public void MedicalAgeCoefficientCalculator() {
@@ -41,8 +45,8 @@ public class TravelCalculateMedicalAgeCoefficientTest {
 
     private void init(Integer age, Double ageCoefficient)
     {
-        agreement = mock(AgreementDTO.class);
-        person = mock(PersonDTO.class);
+        //agreement = mock(AgreementDTO.class);
+        //person = mock(PersonDTO.class);
 
         Date birthDate = new Date();
         Date currentDate = birthDate;
@@ -57,7 +61,7 @@ public class TravelCalculateMedicalAgeCoefficientTest {
 
         when(acRepository.findCoefficient(age)).thenReturn(Optional.of(acValue));
 
-        ReflectionTestUtils.setField(calculator, "acRepository", acRepository);
-        ReflectionTestUtils.setField(calculator, "dateTimeUtil", dateTimeUtil);
+//        ReflectionTestUtils.setField(calculator, "acRepository", acRepository);
+//        ReflectionTestUtils.setField(calculator, "dateTimeUtil", dateTimeUtil);
     }
 }

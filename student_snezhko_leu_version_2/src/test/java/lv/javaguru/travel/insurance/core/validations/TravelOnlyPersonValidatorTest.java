@@ -10,7 +10,10 @@ import lv.javaguru.travel.insurance.core.validations.TravelPersonFieldValidation
 import lv.javaguru.travel.insurance.core.validations.agreement.TravelAgreementFieldValidationImpl;
 import lv.javaguru.travel.insurance.core.validations.person.TravelPersonFieldValidationImpl;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import java.util.List;
@@ -21,12 +24,16 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.util.AssertionErrors.assertEquals;
 import static org.springframework.test.util.AssertionErrors.assertTrue;
 
+@ExtendWith(SpringExtension.class)
 public class TravelOnlyPersonValidatorTest {
     @InjectMocks
-    private TravelOnlyPersonValidator validator = new TravelOnlyPersonValidator();
-    private AgreementDTO agreement = mock(AgreementDTO.class);
+    private TravelOnlyPersonValidator validator;
 
-    private PersonDTO person = mock(PersonDTO.class);
+    @Mock
+    private AgreementDTO agreement;
+
+    @Mock
+    private PersonDTO person;
     private void init(Optional<ValidationErrorDTO> v1,
                       Optional<ValidationErrorDTO> v2) {
         when(agreement.getPersons()).thenReturn(List.of(person));
