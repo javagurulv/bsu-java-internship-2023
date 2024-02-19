@@ -9,7 +9,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
 @Component
-public class DateFunctions {
+public class DateTimeService {
     public static long daysBetween (Date firstDate, Date secondDate) {
         if (firstDate != null && secondDate != null)
             return ChronoUnit.DAYS.between(firstDate.toInstant(), secondDate.toInstant());

@@ -10,7 +10,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
 
-import static lv.javaguru.travel.insurance.core.util.DateFunctions.createDateFromString;
+import static lv.javaguru.travel.insurance.core.util.DateTimeService.createDateFromString;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 

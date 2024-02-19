@@ -9,7 +9,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import static lv.javaguru.travel.insurance.core.util.DateFunctions.createDateFromString;
+import static lv.javaguru.travel.insurance.core.util.DateTimeService.createDateFromString;
 
 import java.math.BigDecimal;
 import java.util.List;
