@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 import java.util.Optional;
 
 @Component
-class TravelCalculateMedicalCountryDefaultDayRate {
+class TravelCalculateMedicalCountryDefaultDayRate implements TravelRiskPremiumCalculatorMedicalComponent{
     @Autowired
     private CountryDefaultDayRateRepository cddrRepository;
 
@@ -19,13 +19,5 @@ class TravelCalculateMedicalCountryDefaultDayRate {
         Optional<CountryDefaultDayRate> optional = cddrRepository.findByCountryIc(agreement.getCountry());
         CountryDefaultDayRate cddr = optional.get();
         return cddr.getDefaultDayRate();
-        /*return cddrRepository
-                .findByCountryIc(
-                        request.getCountry()
-                )
-                .get()
-                .getCountryDefaultDayRate();
-
-         */
     }
 }

@@ -7,7 +7,10 @@ import lv.javaguru.travel.insurance.core.underwriting.calculators.TravelRiskPrem
 import lv.javaguru.travel.insurance.core.underwriting.calculators.medical.TravelRiskPremiumCalculatorMedical;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import java.math.BigDecimal;
@@ -20,17 +23,21 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+@ExtendWith(SpringExtension.class)
 public class SelectedRiskPremiumCalculatorTest {
     @InjectMocks
-    private SelectedRisksPremiumCalculator calculator = new SelectedRisksPremiumCalculator();
+    private SelectedRisksPremiumCalculator calculator;
 
+    @Mock
     private AgreementDTO agreement;
+
+    @Mock
     private PersonDTO person;
 
     @BeforeEach
     public void init() {
-        agreement = mock(AgreementDTO.class);
-        person = mock(PersonDTO.class);
+     //   agreement = mock(AgreementDTO.class);
+      //  person = mock(PersonDTO.class);
         List<String> risks = new ArrayList<>();
         risks.add("TRAVEL_MEDICAL");
         risks.add("TRAVEL_SPORT_ACTIVITIES");

@@ -24,44 +24,26 @@ import static org.mockito.Mockito.when;
 @ExtendWith(SpringExtension.class)
 //@DataJpaTest
 public class TravelRiskPremiumCalculatorMedicalTest {
+    @Mock
+    private TravelCalculateDayCountMedical dayCountCalculator;
+
+    @Mock
+    private TravelCalculateMedicalAgeCoefficient ageCoefficientCalculator;
+
+    @Mock
+    private TravelCalculateMedicalCountryDefaultDayRate cddrCalculator;
+
+    @Mock
+    private TravelCalculateInsuranceLimitCoefficientMedical mrllCoefficientCalculator;
+
+    @Mock
+    private AgreementDTO agreement;
+
+    @Mock
+    private PersonDTO person;
     @InjectMocks
-    private TravelRiskPremiumCalculatorMedical calculator = new TravelRiskPremiumCalculatorMedical();
-    @Mock
-    private TravelCalculateDayCount dayCountCalculator = mock(TravelCalculateDayCount.class);
-    //CountryDefaultDayRateRepository cddrRepository = mock(CountryDefaultDayRateRepository.class);
+    private TravelRiskPremiumCalculatorMedical calculator;
 
-    @Mock
-    private TravelCalculateMedicalAgeCoefficient ageCoefficientCalculator = mock(TravelCalculateMedicalAgeCoefficient.class);
-    //private AgeCoefficientRepository acRepository = mock(AgeCoefficientRepository.class);
-
-    @Mock
-    private TravelCalculateMedicalCountryDefaultDayRate cddrCalculator = mock(TravelCalculateMedicalCountryDefaultDayRate.class);
-
-    @Mock
-    private TravelCalculateInsuranceLimitCoefficient mrllCoefficientCalculator = mock(TravelCalculateInsuranceLimitCoefficient.class);
-
-    private AgreementDTO agreement = mock(AgreementDTO.class);
-    private PersonDTO person = mock(PersonDTO.class);
-    /*
-    @BeforeEach
-    public void init() {
-        request = mock(TravelCalculatePremiumRequest.class);
-        String countryName = "LATVIA";
-        Double cddrValue = 1.00d;
-        List<String> risks = new ArrayList<>();
-        risks.add(calculator.getIc());
-        when(request.getAgreementDateTo()).thenReturn(Date.valueOf("2026-09-12"));
-        when(request.getAgreementDateFrom()).thenReturn(Date.valueOf("2026-09-11"));
-        when(request.getSelected_risks()).thenReturn(risks);
-        when(request.getCountry()).thenReturn(countryName);
-
-//        cddrRepository = mock(CountryDefaultDayRateRepository.class);
-        CountryDefaultDayRate cddr = mock(CountryDefaultDayRate.class);
-        when(cddr.getCountryIc()).thenReturn(countryName);
-        when(cddr.getCountryDefaultDayRate()).thenReturn(cddrValue);
-        when(cddrRepository.findByCountryIc(countryName)).thenReturn(Optional.of(cddr));
-    }
-*/
     @Test
     public void calculatePremiumForMedicalRiskLatviaTest() {
         init("LATVIA", BigDecimal.valueOf(1.00), 18);
@@ -84,8 +66,6 @@ public class TravelRiskPremiumCalculatorMedicalTest {
     }
 
     private void init(String countryName, BigDecimal cddrValue, int age) {
-        //String countryName = "LATVIA";
-        //Double cddrValue = 1.00d;
         List<String> risks = new ArrayList<>();
         risks.add(calculator.getIc());
         when(agreement.getAgreementDateTo()).thenReturn(java.sql.Date.valueOf("2026-09-12"));
@@ -108,13 +88,16 @@ public class TravelRiskPremiumCalculatorMedicalTest {
         AgeCoefficient ac = mock(AgeCoefficient.class);
         when(ac.getCoefficient()).thenReturn(BigDecimal.valueOf(1.1));
         //when(acRepository.findByAgeFromAndAgeTo(age)).thenReturn(Optional.of(ac));
-        when(dayCountCalculator.calculatePremium(agreement, person)).thenReturn(1l);
+        when(dayCountCalculator.calculatePremium(agreement, person)).thenReturn(BigDecimal.valueOf(1));
         when(ageCoefficientCalculator.calculatePremium(agreement, person)).thenReturn(BigDecimal.valueOf(1.1));
         when(cddrCalculator.calculatePremium(agreement, person)).thenReturn(cddrValue);
+
+        List<TravelRiskPremiumCalculatorMedicalComponent> calculators = List.of(dayCountCalculator, cddrCalculator, ageCoefficientCalculator, mrllCoefficientCalculator);
+        ReflectionTestUtils.setField(calculator, "calculators", calculators);
     }
 
     private void initMrllCoefficientCalculator(BigDecimal mrllValue) {
         when(mrllCoefficientCalculator.calculatePremium(agreement, person)).thenReturn(mrllValue);
-        ReflectionTestUtils.setField(calculator, "mrllCoefficientCalculator", mrllCoefficientCalculator);
+        //ReflectionTestUtils.setField(calculator, "mrllCoefficientCalculator", mrllCoefficientCalculator);
     }
 }

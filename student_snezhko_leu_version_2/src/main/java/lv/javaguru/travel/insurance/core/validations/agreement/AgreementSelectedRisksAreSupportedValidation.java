@@ -40,7 +40,6 @@ public class AgreementSelectedRisksAreSupportedValidation extends TravelAgreemen
         return errorFactory.buildError(
                 "ERROR_CODE_9",
                 placeholders
-                //List.of(new Placeholder("NOT_EXISTING_RISK", riskIc)
         );
     }
     private boolean existInDatabase(String riskIc) {

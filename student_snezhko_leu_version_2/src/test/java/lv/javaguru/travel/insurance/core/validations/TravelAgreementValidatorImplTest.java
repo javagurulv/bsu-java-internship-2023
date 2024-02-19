@@ -6,7 +6,10 @@ import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import lv.javaguru.travel.insurance.core.validations.agreement.TravelAgreementFieldValidationImpl;
 import lv.javaguru.travel.insurance.core.validations.person.TravelPersonFieldValidationImpl;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import java.sql.Date;
@@ -19,17 +22,23 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.util.AssertionErrors.assertEquals;
 import static org.springframework.test.util.AssertionErrors.assertTrue;
 
+@ExtendWith(SpringExtension.class)
 public class TravelAgreementValidatorImplTest {
+
+    @Mock
+    private TravelOnlyPersonValidator personValidator;
+
+
+    @Mock
+    private AgreementDTO agreement;
+
+    @Mock
+    private PersonDTO person;
     @InjectMocks
     private TravelAgreementValidatorImpl validator = new TravelAgreementValidatorImpl();
 
-
-    private TravelOnlyAgreementValidator agreementValidator = mock(TravelOnlyAgreementValidator.class);
-    private TravelOnlyPersonValidator personValidator = mock(TravelOnlyPersonValidator.class);
-
-    private AgreementDTO agreement = mock(AgreementDTO.class);
-
-    private PersonDTO person = mock(PersonDTO.class);
+    @Mock
+    private TravelOnlyAgreementValidator agreementValidator;
     private void init(Optional<ValidationErrorDTO> v1,
                       Optional<ValidationErrorDTO> v2,
                       Optional<ValidationErrorDTO> v3,
@@ -50,8 +59,8 @@ public class TravelAgreementValidatorImplTest {
         when(agreementValidator.validate(agreement)).thenReturn(agreementErrors);
         when(personValidator.validate(agreement)).thenReturn(personErrors);
 
-        ReflectionTestUtils.setField(validator, "agreementValidator", agreementValidator);
-        ReflectionTestUtils.setField(validator, "personValidator", personValidator);
+        //ReflectionTestUtils.setField(validator, "agreementValidator", agreementValidator);
+        //ReflectionTestUtils.setField(validator, "personValidator", personValidator);
         //ReflectionTestUtils.setField(validator, "personValidator", personValidator);
     }
     @Test

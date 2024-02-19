@@ -15,87 +15,17 @@ import java.util.Optional;
 
 @Component
 public class TravelAgreementValidatorImpl {       //will make default access mod
-    /*
-    @Autowired
-    List<TravelAgreementFieldValidation> agreementValidations;
-*/
+
     @Autowired
     private TravelOnlyAgreementValidator agreementValidator;
 
     @Autowired
     private TravelOnlyPersonValidator personValidator;
-    /*
-    @Autowired
-    List<TravelPersonFieldValidation> personValidations;
-     */
 
     public List<ValidationErrorDTO> validate(AgreementDTO request) {
-        /*
-            agreementValidations.forEach(validation -> {
-                Optional<ValidationErrorDTO> error = null;
-                error = validation.validate(request);
-                error.ifPresent(errors::add);
-                List<ValidationErrorDTO> validList = validation.validateList(request);
-                if (validList != null) {
-                    errors.addAll(validList);
-                }
-            });
-*/
-        /*
-            if(request.getPersons() != null && !request.getPersons().isEmpty()) {
-                request.getPersons().forEach(person -> {
-                    personValidations.forEach(validation -> {
-                        Optional<ValidationErrorDTO> error = validation.validate(person);
-                        error.ifPresent(errors::add);
-                        List<ValidationErrorDTO> validList = validation.validateList(person);
-                        if (validList != null) {
-                            errors.addAll(validList);
-                        }
-                    });
-                });
-            }
-
-
-         */
         List<ValidationErrorDTO> result = agreementValidator.validate(request);
         result.addAll(personValidator.validate(request));
         return result;
     }
 
-    /*
-    private Optional<ValidationError> validatePersonFirstName(TravelCalculatePremiumRequest request) {
-        return (request.getPersonFirstName() == null || request.getPersonFirstName().isEmpty())
-                ? Optional.of(new ValidationError("personFirstName", "Must not be empty!"))
-                : Optional.empty();
-    }
-     */
-    /*
-    private Optional<ValidationError> validatePersonLastName(TravelCalculatePremiumRequest request) {
-        return (request.getPersonLastName() == null || request.getPersonLastName().isEmpty())
-                ? Optional.of(new ValidationError("personLastName", "Must not be empty!"))
-                : Optional.empty();
-    }
-    */
-    /*
-    private Optional<ValidationError> validateAgreementDateFrom(TravelCalculatePremiumRequest request) {
-        if (request.getAgreementDateFrom() == null) {
-            return Optional.of(new ValidationError("agreementDateFrom", "Must not be null!"));
-        }
-        else if (request.getAgreementDateFrom().compareTo(new Date()) <= 0) {
-            return Optional.of(new ValidationError("agreementDateFrom", "Must not be in the past!"));
-        }
-        return Optional.empty();
-    }
-    */
-    /*
-    private Optional<ValidationError> validateAgreementDateTo(TravelCalculatePremiumRequest request) {
-        if (request.getAgreementDateTo() == null) {
-            return Optional.of(new ValidationError("agreementDateTo", "Must not be null!"));
-        }
-        else if (request.getAgreementDateTo().before(request.getAgreementDateFrom())) {
-            return Optional.of(new ValidationError("agreementDateTo", "Must not be before agreementDateFrom!!!"));
-        }
-        return Optional.empty();
-    }
-     */
 }

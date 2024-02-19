@@ -1,11 +1,13 @@
 dependencies {
 
-	implementation('org.springframework.boot:spring-boot-starter-web:2.7.5')
+	implementation('org.springframework.boot:spring-boot-starter-web:3.2.0')
+	implementation 'jakarta.validation:jakarta.validation-api:3.0.2'
+	implementation 'org.hibernate:hibernate-validator:8.0.0.Final'
 	compileOnly 'org.projectlombok:lombok:1.18.30'
 
 	testCompileOnly('org.projectlombok:lombok:1.18.30')
-	testImplementation('org.springframework.boot:spring-boot-starter-test:2.7.5')
-	testImplementation 'uk.co.jemos.podam:podam:8.0.0.RELEASE'
+	testImplementation('org.springframework.boot:spring-boot-starter-test:3.2.0')
+	testImplementation 'uk.co.jemos.podam:podam:8.0.1.RELEASE'
 
 	annotationProcessor('org.projectlombok:lombok:1.18.30')
 
