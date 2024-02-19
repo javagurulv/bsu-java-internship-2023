@@ -1,8 +1,8 @@
 {
   "errors": [
     {
-      "errorCode": "selectedRisks",
-      "description": "Must not be empty!"
+      "errorCode": "ERROR_CODE_8",
+      "description": "Field selectedRisks must not be empty!"
     }
   ],
   "personFirstName": null,
