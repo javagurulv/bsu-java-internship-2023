@@ -5,18 +5,22 @@ import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
 import java.util.Optional;
 
 @Component
-public class SelectedRisksValidator implements TravelRequestValidation{
+public class AgreementDateTo_InFuture_Validator implements TravelRequestValidation{
 
     @Autowired
     private ValidationErrorFactory factory;
 
     @Override
-    public Optional<ValidationError> validateArgs (TravelCalculatePremiumRequest request) {
-        return (request.getSelectedRisks() == null || request.getSelectedRisks().isEmpty())
-                ? Optional.of(factory.buildError("ERROR_CODE_8"))
+    public Optional<ValidationError> validateArgs(TravelCalculatePremiumRequest request) {
+        Date dateNow = new Date();
+        Date requestDateTo = request.getAgreementDateTo();
+        return requestDateTo != null && dateNow.getTime() > requestDateTo.getTime()
+                ? Optional.of(factory.buildError("ERROR_CODE_7"))
                 : Optional.empty();
+
     }
 }

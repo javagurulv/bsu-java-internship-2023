@@ -36,7 +36,7 @@ class TravelCalculatePremiumRequestValidatorTest {
 
     @Test
     void validateTravelCalculatePremiumRequestShouldThrowConstraintViolationExceptionWhenRequestInvalid() {
-        var request = TravelCalculatePremiumRequest.builder().build();
+        var request = new TravelCalculatePremiumRequest();
 
         assertThrows(ConstraintViolationException.class, () -> validator.validateTravelCalculatePremiumRequest(request));
     }

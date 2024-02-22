@@ -1,8 +1,8 @@
 package lv.javaguru.travel.insurance.core;
 
+import lv.javaguru.travel.insurance.core.services.TravelCalculatePremiumServiceImpl;
+import lv.javaguru.travel.insurance.core.underwriting.TravelPremiumUnderwriting;
 import lv.javaguru.travel.insurance.core.validations.TravelCalculatePremiumRequestValidator;
-import lv.javaguru.travel.insurance.core.TravelCalculatePremiumServiceImpl;
-import lv.javaguru.travel.insurance.core.TravelPremiumUnderwriting;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumResponse;
 import lv.javaguru.travel.insurance.dto.ValidationError;
@@ -11,7 +11,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import static lv.javaguru.travel.insurance.core.DateFunctions.createDateFromString;
+import static lv.javaguru.travel.insurance.core.util.DateTimeService.createDateFromString;
 
 import java.math.BigDecimal;
 import java.util.List;
