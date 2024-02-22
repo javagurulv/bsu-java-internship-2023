@@ -3,16 +3,12 @@ package lv.javaguru.travel.insurance.core.validations;
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
-import lv.javaguru.travel.insurance.core.validations.agreement.TravelAgreementFieldValidationImpl;
-import lv.javaguru.travel.insurance.core.validations.person.TravelPersonFieldValidationImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.util.ReflectionTestUtils;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -26,7 +22,7 @@ import static org.springframework.test.util.AssertionErrors.assertTrue;
 public class TravelAgreementValidatorImplTest {
 
     @Mock
-    private TravelOnlyPersonValidator personValidator;
+    private TravelOnlyPersonValidatorImpl personValidator;
 
 
     @Mock
@@ -38,7 +34,7 @@ public class TravelAgreementValidatorImplTest {
     private TravelAgreementValidatorImpl validator = new TravelAgreementValidatorImpl();
 
     @Mock
-    private TravelOnlyAgreementValidator agreementValidator;
+    private TravelOnlyAgreementValidatorImpl agreementValidator;
     private void init(Optional<ValidationErrorDTO> v1,
                       Optional<ValidationErrorDTO> v2,
                       Optional<ValidationErrorDTO> v3,

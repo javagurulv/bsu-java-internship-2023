@@ -10,11 +10,13 @@ import lv.javaguru.travel.insurance.core.underwriting.TravelPremiumCalculationRe
 import lv.javaguru.travel.insurance.core.underwriting.TravelUnderwriting;
 import lv.javaguru.travel.insurance.core.validations.TravelAgreementValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.List;
 
+@Component
 public class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService{
     @Autowired
     private TravelAgreementValidator validator;

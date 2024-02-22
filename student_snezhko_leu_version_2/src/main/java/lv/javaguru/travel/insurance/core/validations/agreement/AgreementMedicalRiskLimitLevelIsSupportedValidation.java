@@ -19,6 +19,9 @@ public class AgreementMedicalRiskLimitLevelIsSupportedValidation extends TravelA
 
     @Override
     public Optional<ValidationErrorDTO> validate(AgreementDTO agreement) {
+        if (agreement.getMedicalRiskLimitLevel() == null || agreement.getMedicalRiskLimitLevel().isEmpty()) {
+            return Optional.empty();
+        }
         return !existMedicalRiskLimitLevelIc(agreement.getMedicalRiskLimitLevel())
                 ? Optional.of(errorFactory.buildError("ERROR_CODE_14"))
                 : Optional.empty();

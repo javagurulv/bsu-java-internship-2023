@@ -19,6 +19,9 @@ public class AgreementCountryIsSupportedValidation extends TravelAgreementFieldV
 
     @Override
     public Optional<ValidationErrorDTO> validate(AgreementDTO agreement) {
+        if (agreement.getCountry() == null || agreement.getCountry().isEmpty()) {
+            return Optional.empty();
+        }
         return !existCountry(agreement.getCountry())
                 ? Optional.of(errorFactory.buildError("ERROR_CODE_15"))
                 : Optional.empty();

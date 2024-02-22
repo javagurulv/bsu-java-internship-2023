@@ -8,13 +8,11 @@ import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 
 @Component
-public class TravelAgreementValidatorImpl {       //will make default access mod
+public class TravelAgreementValidatorImpl implements TravelAgreementValidator{       //will make default access mod
 
     @Autowired
     private TravelOnlyAgreementValidator agreementValidator;

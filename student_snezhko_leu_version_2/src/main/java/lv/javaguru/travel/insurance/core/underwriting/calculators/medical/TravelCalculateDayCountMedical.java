@@ -15,6 +15,6 @@ class TravelCalculateDayCountMedical implements TravelRiskPremiumCalculatorMedic
     private DateTimeUtil dateTimeUtil;
 
     public BigDecimal calculatePremium(AgreementDTO agreement, PersonDTO person) {
-        return BigDecimal.valueOf(dateTimeUtil.getDaysBetween(agreement.getAgreementDateTo(), agreement.getAgreementDateFrom()));
+        return BigDecimal.valueOf(dateTimeUtil.getDaysBetween(agreement.getAgreementDateTo(), agreement.getAgreementDateFrom())).abs();
     }
 }

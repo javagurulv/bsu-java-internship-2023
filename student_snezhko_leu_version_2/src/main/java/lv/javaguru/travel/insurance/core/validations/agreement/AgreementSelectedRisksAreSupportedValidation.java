@@ -8,8 +8,10 @@ import lv.javaguru.travel.insurance.core.validations.ValidationErrorFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Component
 public class AgreementSelectedRisksAreSupportedValidation extends TravelAgreementFieldValidationImpl{
@@ -22,6 +24,9 @@ public class AgreementSelectedRisksAreSupportedValidation extends TravelAgreemen
     private List<Placeholder> placeholders;
     @Override
     public List<ValidationErrorDTO> validateList(AgreementDTO request) {
+        if (request.getSelectedRisks() == null || request.getSelectedRisks().isEmpty()) {
+            return null;
+        }
         return request.getSelectedRisks().stream()
                 .map(this::validateRiskIc)
                 .filter(Optional::isPresent)
@@ -36,7 +41,7 @@ public class AgreementSelectedRisksAreSupportedValidation extends TravelAgreemen
     }
 
     private ValidationErrorDTO buildError(String riskIc) {
-        initPlaceholders(placeholders, riskIc);
+        placeholders = initPlaceholders(placeholders, riskIc);
         return errorFactory.buildError(
                 "ERROR_CODE_9",
                 placeholders
@@ -46,9 +51,17 @@ public class AgreementSelectedRisksAreSupportedValidation extends TravelAgreemen
         return classifierValueRepository.findByClassifierTitleAndIc("RISK_TYPE", riskIc).isPresent();
     }
 
-    private void initPlaceholders(List<Placeholder> placeholders, String riskIc) {
+    private List<Placeholder> initPlaceholders(List<Placeholder> placeholders, String riskIc) {
         if (placeholders == null) {
-            placeholders = List.of(new Placeholder("NOT_EXISTING_RISK", riskIc));
+            placeholders = new ArrayList<>();
+            placeholders.add(new Placeholder("NOT_EXISTING_RISK_TYPE", riskIc));
+            //List.of(new Placeholder("NOT_EXISTING_RISK_TYPE", riskIc));
+            return placeholders;
         }
+        if (!placeholders.stream().map(Placeholder::getPlaceholderValue).toList().contains(riskIc)) {
+            placeholders.clear();
+            placeholders.add(new Placeholder("NOT_EXISTING_RISK_TYPE", riskIc));
+        }
+        return placeholders;
     }
 }

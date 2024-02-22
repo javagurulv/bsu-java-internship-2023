@@ -14,6 +14,9 @@ import java.util.Optional;
 public class DateFromLessThanDateToValidation extends TravelAgreementFieldValidationImpl {
     @Override
     public Optional<ValidationErrorDTO> validate(AgreementDTO request) {
+        if (request.getAgreementDateTo() == null || request.getAgreementDateFrom() == null) {
+            return Optional.empty();
+        }
         return request.getAgreementDateFrom().after(request.getAgreementDateTo())
                 ? Optional.of(errorFactory.buildError("ERROR_CODE_5"))
                 : Optional.empty();

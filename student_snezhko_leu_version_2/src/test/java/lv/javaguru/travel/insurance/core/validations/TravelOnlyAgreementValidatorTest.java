@@ -4,7 +4,6 @@ import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import lv.javaguru.travel.insurance.core.validations.agreement.TravelAgreementFieldValidationImpl;
-import lv.javaguru.travel.insurance.core.validations.person.TravelPersonFieldValidationImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -23,7 +22,7 @@ import static org.springframework.test.util.AssertionErrors.assertTrue;
 @ExtendWith(SpringExtension.class)
 public class TravelOnlyAgreementValidatorTest {
     @InjectMocks
-    private TravelOnlyAgreementValidator validator;
+    private TravelOnlyAgreementValidatorImpl validator;
 
     @Mock
     private AgreementDTO agreement;
