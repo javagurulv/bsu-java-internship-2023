@@ -4,22 +4,26 @@ import java.math.BigDecimal;
 import java.util.Optional;
 import lv.javaguru.travel.insurance.core.domain.MedicalRiskLimitLevel;
 import lv.javaguru.travel.insurance.core.repositories.MedicalRiskLimitLevelRepository;
+import lv.javaguru.travel.insurance.core.util.CheckApplicationPropertiesUtil;
 import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+@ExtendWith(SpringExtension.class)
 public class TravelCalculateInsuranceLimitCoefficientTest {
-    @InjectMocks
-    private TravelCalculateInsuranceLimitCoefficient calculator = new TravelCalculateInsuranceLimitCoefficient();
-
     @Mock
-    private MedicalRiskLimitLevelRepository mrllRepository = mock(MedicalRiskLimitLevelRepository.class);
+    private MedicalRiskLimitLevelRepository mrllRepository;
+
+    @InjectMocks
+    private TravelCalculateInsuranceLimitCoefficient calculator;
 
     TravelCalculatePremiumRequestV1 request = mock(TravelCalculatePremiumRequestV1.class);
 
@@ -38,6 +42,6 @@ public class TravelCalculateInsuranceLimitCoefficientTest {
 
         when(mrllRepository.findCoefficientByLimitLevelIc(requestLimitLevelValue)).thenReturn(Optional.of(mrll));
 
-        ReflectionTestUtils.setField(calculator, "mrllRepository", mrllRepository);
+//        ReflectionTestUtils.setField(calculator, "mrllRepository", mrllRepository);
     }
 }

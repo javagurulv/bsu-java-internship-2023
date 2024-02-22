@@ -48,5 +48,7 @@ public class TravelCalculateMedicalAgeCoefficientTest {
         when(acValue.getCoefficient()).thenReturn(BigDecimal.valueOf(ageCoefficient));
 
         when(acRepository.findByAgeFromAndAgeTo(age)).thenReturn(Optional.of(acValue));
+
+
     }
 }
