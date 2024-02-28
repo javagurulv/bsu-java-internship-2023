@@ -1,0 +1,25 @@
+{
+  "agreement" : {
+    "agreementDateFrom" : null,
+    "agreementDateTo" : null,
+    "country" : null,
+    "medicalRiskLimitLevel" : null,
+    "selected_risks":null,
+    "persons" : [
+      {
+        "personFirstName" : null,
+        "personLastName" : null,
+        "personBirthDate" : null,
+        "personPremium" : null,
+        "personRisks" : null
+      },
+      {
+        "personFirstName" : null,
+        "personLastName" : null,
+        "personBirthDate" : null,
+        "personPremium" : null,
+        "personRisks" : null
+      }
+    ]
+  }
+}

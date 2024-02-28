@@ -1,0 +1,13 @@
+{
+  "errors": [
+    {
+      "errorCode": "ERROR_CODE_7",
+      "description": "Field personFirstName must not be empty!"
+    },
+    {
+      "errorCode": "ERROR_CODE_7",
+      "description": "Field personFirstName must not be empty!"
+    }
+  ],
+  "agreement" : null
+}

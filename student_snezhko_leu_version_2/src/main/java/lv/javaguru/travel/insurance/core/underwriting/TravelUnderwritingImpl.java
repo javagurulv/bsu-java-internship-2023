@@ -42,7 +42,9 @@ class TravelUnderwritingImpl implements TravelUnderwriting{
 
         for (RiskDTO risk : risks) {
             result = result.add(risk.getPremium());
+
         }
+
         return new TravelPremiumCalculationResult(result, risks);
     }
 }

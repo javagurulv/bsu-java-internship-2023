@@ -38,7 +38,7 @@ public class TravelCalculateMedicalAgeCoefficientTest {
     private DateTimeUtil dateTimeUtil;
 
     @Test
-    public void MedicalAgeCoefficientCalculator() {
+    public void MedicalAgeCoefficientCalculatorTest() {
         init(15, 1.1);
         assertEquals(BigDecimal.valueOf(1.1), calculator.calculatePremium(agreement, person));
     }
@@ -60,6 +60,8 @@ public class TravelCalculateMedicalAgeCoefficientTest {
         when(acValue.getCoefficient()).thenReturn(BigDecimal.valueOf(ageCoefficient));
 
         when(acRepository.findCoefficient(age)).thenReturn(Optional.of(acValue));
+        when(acRepository.findCoefficient(age + 1)).thenReturn(Optional.of(acValue));
+        when(acRepository.findCoefficient(age-1)).thenReturn(Optional.of(acValue));
 
 //        ReflectionTestUtils.setField(calculator, "acRepository", acRepository);
 //        ReflectionTestUtils.setField(calculator, "dateTimeUtil", dateTimeUtil);

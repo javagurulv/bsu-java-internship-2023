@@ -50,7 +50,8 @@ class TravelCalculateMedicalAgeCoefficient implements TravelRiskPremiumCalculato
     private int calculateAge(PersonDTO person) {
         LocalDate personBirthDate = toLocalDate(person.getPersonBirthDate());
         LocalDate now = toLocalDate(dateTimeUtil.getCurrentDateTime());
-        return Period.between(personBirthDate, now).getYears();
+        int res = Period.between(personBirthDate, now).getYears();
+        return res;
     }
     private LocalDate toLocalDate(Date date) {
         return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();

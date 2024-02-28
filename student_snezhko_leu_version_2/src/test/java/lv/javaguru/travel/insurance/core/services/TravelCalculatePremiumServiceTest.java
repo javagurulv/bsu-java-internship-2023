@@ -8,9 +8,7 @@ import lv.javaguru.travel.insurance.core.api.dto.RiskDTO;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import lv.javaguru.travel.insurance.core.underwriting.TravelPremiumCalculationResult;
 import lv.javaguru.travel.insurance.core.underwriting.TravelUnderwriting;
-import lv.javaguru.travel.insurance.core.underwriting.TravelUnderwritingImplTest;
 import lv.javaguru.travel.insurance.core.validations.TravelAgreementValidator;
-import lv.javaguru.travel.insurance.core.validations.TravelAgreementValidatorImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -18,12 +16,10 @@ import org.mockito.Mock;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.math.BigDecimal;
-import java.sql.Date;
 import java.util.List;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.test.util.AssertionErrors.assertEquals;
-import static org.springframework.test.util.AssertionErrors.assertTrue;
 
 @ExtendWith(SpringExtension.class)
 public class TravelCalculatePremiumServiceTest {
@@ -51,7 +47,7 @@ public class TravelCalculatePremiumServiceTest {
         BigDecimal riskPremium = BigDecimal.ONE;
         BigDecimal totalPremium = BigDecimal.ONE;
         List<RiskDTO> risks = List.of(risk);
-        person.setRisks(risks);
+        person.setPersonRisks(risks);
         when(risk.getPremium()).thenReturn(riskPremium);
         agreement.setPersons(List.of(person));
         when(underwriting.calculatePremium(agreement, person)).thenReturn(new TravelPremiumCalculationResult(totalPremium, risks));
@@ -61,7 +57,7 @@ public class TravelCalculatePremiumServiceTest {
 
         TravelCalculatePremiumCoreResult result = service.calculatePremium(new TravelCalculatePremiumCoreCommand(agreement));
         assertEquals("", totalPremium, result.getAgreement().getAgreementPremium());
-        assertEquals("", riskPremium, result.getAgreement().getPersons().get(0).getRisks().get(0).getPremium());
+        assertEquals("", riskPremium, result.getAgreement().getPersons().get(0).getPersonRisks().get(0).getPremium());
     }
 
     @Test

@@ -3,10 +3,6 @@
     {
       "errorCode": "ERROR_CODE_3",
       "description": "Field agreementDateTo must be in the future!"
-    },
-    {
-      "errorCode": "ERROR_CODE_5",
-      "description": "Field agreementDateFrom must be less than agreementDateTo!"
     }
   ],
   "personFirstName": null,
