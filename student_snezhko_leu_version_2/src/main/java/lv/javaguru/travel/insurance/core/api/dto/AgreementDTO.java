@@ -30,8 +30,6 @@ public class AgreementDTO {
 
     private String country;
 
-    private String medicalRiskLimitLevel;
-
     @JsonSerialize(using = BigDecimalSerializer.class)
     private BigDecimal agreementPremium;
 

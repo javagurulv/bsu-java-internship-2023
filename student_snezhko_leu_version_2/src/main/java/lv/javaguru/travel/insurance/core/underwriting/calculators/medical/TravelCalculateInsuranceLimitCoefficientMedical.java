@@ -21,8 +21,7 @@ class TravelCalculateInsuranceLimitCoefficientMedical implements TravelRiskPremi
             return checkProperty("medical.risk.limit.level.enabled")
                     ? mrllRepository
                         .findByMedicalRiskLimitLevelIc
-                                (
-                                    agreement.getMedicalRiskLimitLevel()
+                                (person.getMedicalRiskLimitLevel()
                                 )
                         .get()
                         .getCoefficient()

@@ -38,7 +38,7 @@ public class TravelCalculateInsuranceLimitCoefficientTest {
     }
 
     private void init(String requestLimitLevelValue, Double expectedValue) {
-        when(agreement.getMedicalRiskLimitLevel()).thenReturn(requestLimitLevelValue);
+        when(person.getMedicalRiskLimitLevel()).thenReturn(requestLimitLevelValue);
 
         MedicalRiskLimitLevel mrll = mock(MedicalRiskLimitLevel.class);
         when(mrll.getMedicalRiskLimitLevelIc()).thenReturn(requestLimitLevelValue);

@@ -1,16 +1,17 @@
-package lv.javaguru.travel.insurance.core.validations.agreement;
+package lv.javaguru.travel.insurance.core.validations.person;
 
-import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
+import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import lv.javaguru.travel.insurance.core.repositories.ClassifierValueRepository;
 import lv.javaguru.travel.insurance.core.validations.ValidationErrorFactory;
+import lv.javaguru.travel.insurance.core.validations.agreement.TravelAgreementFieldValidationImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
 @Component
-public class AgreementMedicalRiskLimitLevelIsSupportedValidation extends TravelAgreementFieldValidationImpl{
+public class PersonMedicalRiskLimitLevelIsSupportedValidation extends TravelPersonFieldValidationImpl {
     @Autowired
     private ValidationErrorFactory errorFactory;
 
@@ -18,11 +19,11 @@ public class AgreementMedicalRiskLimitLevelIsSupportedValidation extends TravelA
     private ClassifierValueRepository classifierValueRepository;
 
     @Override
-    public Optional<ValidationErrorDTO> validate(AgreementDTO agreement) {
-        if (agreement.getMedicalRiskLimitLevel() == null || agreement.getMedicalRiskLimitLevel().isEmpty()) {
+    public Optional<ValidationErrorDTO> validate(PersonDTO person) {
+        if (person.getMedicalRiskLimitLevel() == null || person.getMedicalRiskLimitLevel().isEmpty()) {
             return Optional.empty();
         }
-        return !existMedicalRiskLimitLevelIc(agreement.getMedicalRiskLimitLevel())
+        return !existMedicalRiskLimitLevelIc(person.getMedicalRiskLimitLevel())
                 ? Optional.of(errorFactory.buildError("ERROR_CODE_14"))
                 : Optional.empty();
     }

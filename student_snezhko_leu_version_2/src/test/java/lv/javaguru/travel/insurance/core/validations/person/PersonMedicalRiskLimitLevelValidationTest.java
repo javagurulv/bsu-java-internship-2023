@@ -1,30 +1,31 @@
-package lv.javaguru.travel.insurance.core.validations.agreement;
+package lv.javaguru.travel.insurance.core.validations.person;
 
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
+import lv.javaguru.travel.insurance.core.validations.agreement.AbstractAgreementValidationTest;
+import lv.javaguru.travel.insurance.core.validations.person.PersonMedicalRiskLimitLevelValidation;
 import org.junit.jupiter.api.Test;
 
-import java.sql.Date;
 import java.util.Optional;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.test.util.AssertionErrors.assertEquals;
 
-public class AgreementMedicalRiskLimitLevelValidationTest extends AbstractAgreementValidationTest{
+public class PersonMedicalRiskLimitLevelValidationTest extends AbstractPersonFieldValidationTest {
     private void init() {
         errorCode = "ERROR_CODE_13";
         description = "description";
-        baseInit(errorCode, description, new AgreementMedicalRiskLimitLevelValidation());
+        init(errorCode, description, new PersonMedicalRiskLimitLevelValidation());
     }
     @Test
     public void AgreementMedicalRiskLimitLevelExistsTest() {
         init();
-        when(agreement.getMedicalRiskLimitLevel()).thenReturn("MEDICAL_RISK_LIMIT_LEVEL");
-        assertEquals("", Optional.empty(), validation.validate(agreement));
+        when(person.getMedicalRiskLimitLevel()).thenReturn("MEDICAL_RISK_LIMIT_LEVEL");
+        assertEquals("", Optional.empty(), validation.validate(person));
     }
     @Test
     public void AgreementMedicalRiskLimitLevelIsNullTest() {
         init();
-        ValidationErrorDTO error = validation.validate(agreement).get();
+        ValidationErrorDTO error = validation.validate(person).get();
         assertEquals("", errorCode, error.getErrorCode());
         assertEquals("", description, error.getDescription());
         //assertTrue("", compareErrors(new ValidationErrorDTO(errorCode, description), validation.validate(agreement).get()));

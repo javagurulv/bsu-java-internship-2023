@@ -3,13 +3,13 @@
     "agreementDateFrom" : "2025-05-25",
     "agreementDateTo" : "2025-05-29",
     "country" : "SPAIN",
-    "medicalRiskLimitLevel" : "LEVEL_10000",
     "selected_risks":["NOT_SUPPORTED_RISK_1", "NOT_SUPPORTED_RISK_2"],
     "persons" : [
       {
         "personFirstName" : "Vasja",
         "personLastName" : "Pupkin",
         "personBirthDate" : "2000-05-29",
+        "medicalRiskLimitLevel" : "LEVEL_10000",
         "personPremium" : null,
         "personRisks" : null
       },
@@ -17,6 +17,7 @@
         "personFirstName" : "Petja",
         "personLastName" : "Pupkin",
         "personBirthDate" : "1950-02-29",
+        "medicalRiskLimitLevel" : "LEVEL_10000",
         "personPremium" : null,
         "personRisks" : null
       }

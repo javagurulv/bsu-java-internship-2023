@@ -48,7 +48,7 @@ public class DtoV1Converter {
         response.setAgreementPremium(agreement.getAgreementPremium());
         response.setPersonFirstName(person.getPersonFirstName());
         response.setPersonLastName(person.getPersonLastName());
-        response.setMedicalRiskLimitLevel(agreement.getMedicalRiskLimitLevel());
+        response.setMedicalRiskLimitLevel(person.getMedicalRiskLimitLevel());
 
         return response;
     }
@@ -59,7 +59,7 @@ public class DtoV1Converter {
         agreement.setAgreementDateFrom(request.getAgreementDateFrom());
         agreement.setAgreementDateTo(request.getAgreementDateTo());
         agreement.setCountry(request.getCountry());
-        agreement.setMedicalRiskLimitLevel(request.getMedicalRiskLimitLevel());
+        //agreement.setMedicalRiskLimitLevel(request.getMedicalRiskLimitLevel());
         agreement.setSelectedRisks(request.getSelectedRisks());
         return agreement;
     }
@@ -70,6 +70,7 @@ public class DtoV1Converter {
         person.setPersonFirstName(request.getPersonFirstName());
         person.setPersonLastName(request.getPersonLastName());
         person.setPersonBirthDate(request.getPersonBirthDate());
+        person.setMedicalRiskLimitLevel(request.getMedicalRiskLimitLevel());
         return person;
     }
     /*
