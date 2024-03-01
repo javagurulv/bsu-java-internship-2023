@@ -2,14 +2,14 @@
   "agreement" : {
     "agreementDateFrom" : "2025-05-25",
     "agreementDateTo" : "2025-05-29",
-    "country" : "MY_COUNTRY",
-    "selected_risks":["TRAVEL_EVACUATION"],
+    "country" : "SPAIN",
+    "selected_risks":["TRAVEL_MEDICAL"],
     "persons" : [
       {
         "personFirstName" : "Vasja",
         "personLastName" : "Pupkin",
         "personBirthDate" : "2000-05-29",
-        "medicalRiskLimitLevel" : "LEVEL_10000",
+        "medicalRiskLimitLevel" : "MY_COEFFICIENT_1",
         "personPremium" : null,
         "personRisks" : null
       },
@@ -17,7 +17,7 @@
         "personFirstName" : "Petja",
         "personLastName" : "Pupkin",
         "personBirthDate" : "1950-02-29",
-        "medicalRiskLimitLevel" : "LEVEL_10000",
+        "medicalRiskLimitLevel" : "MY_COEFFICIENT_2",
         "personPremium" : null,
         "personRisks" : null
       }

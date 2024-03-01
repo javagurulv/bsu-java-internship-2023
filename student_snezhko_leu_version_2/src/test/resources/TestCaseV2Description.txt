@@ -80,9 +80,13 @@ Request: all fields not provided, two persons,
 Response: multiple error codes.
 
 Test Case 21:
-Request: country is null, two persons, RISK_TYPE - TRAVEL_EVACUATION.
-Response: error code = ERROR_CODE_10.
+Request: country is not supported, two persons, RISK_TYPE - TRAVEL_EVACUATION.
+Response: error code = ERROR_CODE_15.
 
 Test Case 22:
 Request: country is empty, two persons, RISK_TYPE - TRAVEL_EVACUATION.
 Response: error code = ERROR_CODE_10.
+
+Test Case 23:
+Request: medical risk limit level ic is not supported for two persons, RISK_TYPE = TRAVEL_EVACUATION.
+Response: error code = ERROR_CODE_14

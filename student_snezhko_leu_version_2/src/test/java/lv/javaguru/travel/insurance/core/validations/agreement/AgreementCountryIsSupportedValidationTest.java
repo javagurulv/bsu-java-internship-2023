@@ -1,8 +1,12 @@
 package lv.javaguru.travel.insurance.core.validations.agreement;
 
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
+import lv.javaguru.travel.insurance.core.util.Placeholder;
 import org.junit.jupiter.api.Test;
+import org.springframework.test.util.ReflectionTestUtils;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static org.mockito.Mockito.when;
@@ -23,7 +27,10 @@ public class AgreementCountryIsSupportedValidationTest extends AbstractAgreement
     @Test
     public void notExistingCountryTest() {
         init();
+        List<Placeholder> placeholders = new ArrayList<>();
+        ReflectionTestUtils.setField(validation, "placeholders", placeholders);
         when(agreement.getCountry()).thenReturn(incorrectCountry);
+        when(errorFactory.buildError(errorCode, placeholders)).thenReturn(new ValidationErrorDTO(errorCode, description));
         Optional<ValidationErrorDTO> error = validation.validate(agreement);
         assertEquals("", errorCode, error.get().getErrorCode());
         assertEquals("", description, error.get().getDescription());

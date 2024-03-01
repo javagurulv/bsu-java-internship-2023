@@ -1,0 +1,13 @@
+{
+  "agreement" : null,
+  "errors" : [
+    {
+      "errorCode" : "ERROR_CODE_14",
+      "description" : "MedicalRiskLimitLevel value = MY_COEFFICIENT_1 not supported!"
+    },
+    {
+      "errorCode" : "ERROR_CODE_14",
+      "description" : "MedicalRiskLimitLevel value = MY_COEFFICIENT_2 not supported!"
+    }
+  ]
+}

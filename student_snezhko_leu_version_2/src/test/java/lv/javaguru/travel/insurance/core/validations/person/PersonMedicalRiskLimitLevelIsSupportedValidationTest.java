@@ -3,6 +3,7 @@ package lv.javaguru.travel.insurance.core.validations.person;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import lv.javaguru.travel.insurance.core.domain.ClassifierValue;
 import lv.javaguru.travel.insurance.core.repositories.ClassifierValueRepository;
+import lv.javaguru.travel.insurance.core.util.Placeholder;
 import lv.javaguru.travel.insurance.core.validations.agreement.AbstractAgreementValidationTest;
 import lv.javaguru.travel.insurance.core.validations.person.PersonMedicalRiskLimitLevelIsSupportedValidation;
 import org.junit.jupiter.api.Test;
@@ -11,6 +12,8 @@ import org.mockito.Mock;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.util.ReflectionTestUtils;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static org.mockito.Mockito.mock;
@@ -44,6 +47,9 @@ public class PersonMedicalRiskLimitLevelIsSupportedValidationTest extends Abstra
     @Test
     public void notExistingMedicalRiskLimitLevel() {
         init();
+        List<Placeholder> placeholders = new ArrayList<>();
+        when(errorFactory.buildError(errorCode, placeholders)).thenReturn(new ValidationErrorDTO(errorCode, description));
+        ReflectionTestUtils.setField(validation, "placeholders", placeholders);
         when(person.getMedicalRiskLimitLevel()).thenReturn(mrllIc);
         Optional<ValidationErrorDTO> error = validation.validate(person);
         assertEquals("", errorCode, error.get().getErrorCode());
