@@ -57,7 +57,7 @@ public class AgreementDateFromValidationIntegrationTest {
 
     @Test
     public void shouldReturnErrorsWhenDateFromIsInThePast() {
-        errorCode = "ERROR_CODE_1";
+       errorCode = "ERROR_CODE_1";
         description = "Field agreementDateFrom must be in the future!";
         AgreementDTO agreement = createAgreementDTO()
                 .withDateFrom(createDate("2010-02-02"))
@@ -77,5 +77,7 @@ public class AgreementDateFromValidationIntegrationTest {
         assertEquals(1, errors.size());
         assertEquals(errorCode, errors.get(0).getErrorCode());
         assertEquals(description, errors.get(0).getDescription());
+
+
     }
 }

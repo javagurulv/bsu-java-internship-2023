@@ -1,10 +1,12 @@
-INSERT INTO classifiers(title, description)
+MERGE INTO classifiers(title, description)
+KEY(title)
 VALUES('RISK_TYPE', 'Risk type classifier');
 
-INSERT INTO classifier_values(
+MERGE INTO classifier_values(
 	classifier_id,
     ic,
     description)
+KEY (ic)
 SELECT
 	cl.id,
     'TRAVEL_MEDICAL',
@@ -13,10 +15,11 @@ SELECT
  WHERE cl.title = 'RISK_TYPE';
 
 
-INSERT INTO classifier_values(
+MERGE INTO classifier_values(
 	classifier_id,
     ic,
     description)
+    KEY (ic)
 SELECT
 	cl.id,
     'TRAVEL_CANCELLATION',
@@ -25,10 +28,11 @@ SELECT
  WHERE cl.title = 'RISK_TYPE';
 
 
-INSERT INTO classifier_values(
+MERGE INTO classifier_values(
 	classifier_id,
     ic,
     description)
+    KEY(ic)
 SELECT
 	cl.id,
     'TRAVEL_LOSS_BAGGAGE',
@@ -37,10 +41,11 @@ SELECT
  WHERE cl.title = 'RISK_TYPE';
 
 
-INSERT INTO classifier_values(
+MERGE INTO classifier_values(
 	classifier_id,
     ic,
     description)
+    KEY(ic)
 SELECT
 	cl.id,
     'TRAVEL_THIRD_PARTY_LIABILITY',
@@ -49,10 +54,11 @@ SELECT
  WHERE cl.title = 'RISK_TYPE';
 
 
-INSERT INTO classifier_values(
+MERGE INTO classifier_values(
 	classifier_id,
     ic,
     description)
+    KEY(ic)
 SELECT
 	cl.id,
     'TRAVEL_EVACUATION',
@@ -61,10 +67,11 @@ SELECT
  WHERE cl.title = 'RISK_TYPE';
 
 
-INSERT INTO classifier_values(
+MERGE INTO classifier_values(
 	classifier_id,
     ic,
     description)
+    KEY(ic)
 SELECT
 	cl.id,
     'TRAVEL_SPORT_ACTIVITIES',
@@ -73,13 +80,15 @@ SELECT
  WHERE cl.title = 'RISK_TYPE';
 
 
-INSERT INTO classifiers(title, description)
+MERGE INTO classifiers(title, description)
+KEY(title)
 VALUES('COUNTRY', 'Country classifier');
 
-INSERT INTO classifier_values(
+MERGE INTO classifier_values(
 	classifier_id,
     ic,
     description)
+    KEY(ic)
 SELECT
 	cl.id,
     'LATVIA',
@@ -87,10 +96,11 @@ SELECT
  FROM classifiers as cl
  WHERE cl.title = 'COUNTRY';
 
-INSERT INTO classifier_values(
+MERGE INTO classifier_values(
 	classifier_id,
     ic,
     description)
+    KEY(ic)
 SELECT
 	cl.id,
     'SPAIN',
@@ -98,10 +108,11 @@ SELECT
  FROM classifiers as cl
  WHERE cl.title = 'COUNTRY';
 
-INSERT INTO classifier_values(
+MERGE INTO classifier_values(
 	classifier_id,
     ic,
     description)
+    KEY(ic)
 SELECT
 	cl.id,
     'JAPAN',
@@ -110,43 +121,54 @@ SELECT
  WHERE cl.title = 'COUNTRY';
 
 
-INSERT INTO country_default_day_rate(country_ic, default_day_rate)
+MERGE INTO country_default_day_rate(country_ic, default_day_rate)
+KEY(country_ic)
 VALUES('LATVIA', 1.00);
 
-INSERT INTO country_default_day_rate(country_ic, default_day_rate)
+MERGE INTO country_default_day_rate(country_ic, default_day_rate)
+KEY(country_ic)
 VALUES('SPAIN', 2.50);
 
-INSERT INTO country_default_day_rate(country_ic, default_day_rate)
+MERGE INTO country_default_day_rate(country_ic, default_day_rate)
+KEY(country_ic)
 VALUES('JAPAN', 3.50);
 
 
 
-INSERT INTO age_coefficient(age_from, age_to, coefficient)
+MERGE INTO age_coefficient(age_from, age_to, coefficient)
+KEY(age_from, age_to)
 VALUES(0, 5, 1.1);
 
-INSERT INTO age_coefficient(age_from, age_to, coefficient)
+MERGE INTO age_coefficient(age_from, age_to, coefficient)
+KEY(age_from, age_to)
 VALUES(6, 10, 0.7);
 
-INSERT INTO age_coefficient(age_from, age_to, coefficient)
+MERGE INTO age_coefficient(age_from, age_to, coefficient)
+KEY(age_from, age_to)
 VALUES(11, 17, 1.0);
 
-INSERT INTO age_coefficient(age_from, age_to, coefficient)
+MERGE INTO age_coefficient(age_from, age_to, coefficient)
+KEY(age_from, age_to)
 VALUES(18, 40, 1.1);
 
-INSERT INTO age_coefficient(age_from, age_to, coefficient)
+MERGE INTO age_coefficient(age_from, age_to, coefficient)
+KEY(age_from, age_to)
 VALUES(41, 65, 1.2);
 
-INSERT INTO age_coefficient(age_from, age_to, coefficient)
+MERGE INTO age_coefficient(age_from, age_to, coefficient)
+KEY(age_from, age_to)
 VALUES(65, 150, 1.5);
 
 
-INSERT INTO classifiers(title, description)
+MERGE INTO classifiers(title, description)
+KEY(title)
 VALUES('MEDICAL_RISK_LIMIT_LEVEL', 'Medical Risk limit level classifier');
 
-INSERT INTO classifier_values(
+MERGE INTO classifier_values(
 	classifier_id,
     ic,
     description)
+    KEY(ic)
 SELECT
 	cl.id,
     'LEVEL_10000',
@@ -154,10 +176,11 @@ SELECT
  FROM classifiers as cl
  WHERE cl.title = 'MEDICAL_RISK_LIMIT_LEVEL';
 
-INSERT INTO classifier_values(
+MERGE INTO classifier_values(
 	classifier_id,
     ic,
     description)
+    KEY(ic)
 SELECT
 	cl.id,
     'LEVEL_15000',
@@ -165,10 +188,11 @@ SELECT
  FROM classifiers as cl
  WHERE cl.title = 'MEDICAL_RISK_LIMIT_LEVEL';
 
-INSERT INTO classifier_values(
+MERGE INTO classifier_values(
 	classifier_id,
     ic,
     description)
+    KEY(ic)
 SELECT
 	cl.id,
     'LEVEL_20000',
@@ -177,10 +201,11 @@ SELECT
  WHERE cl.title = 'MEDICAL_RISK_LIMIT_LEVEL';
 
 
-INSERT INTO classifier_values(
+MERGE INTO classifier_values(
 	classifier_id,
     ic,
     description)
+    KEY(ic)
 SELECT
 	cl.id,
     'LEVEL_50000',
@@ -189,14 +214,18 @@ SELECT
  WHERE cl.title = 'MEDICAL_RISK_LIMIT_LEVEL';
 
 
-INSERT INTO medical_risk_limit_level(medical_risk_limit_level_ic, coefficient)
+MERGE INTO medical_risk_limit_level(medical_risk_limit_level_ic, coefficient)
+KEY(medical_risk_limit_level_ic)
 VALUES('LEVEL_10000', 1.0);
 
-INSERT INTO medical_risk_limit_level(medical_risk_limit_level_ic, coefficient)
+MERGE INTO medical_risk_limit_level(medical_risk_limit_level_ic, coefficient)
+KEY(medical_risk_limit_level_ic)
 VALUES('LEVEL_15000', 1.2);
 
-INSERT INTO medical_risk_limit_level(medical_risk_limit_level_ic, coefficient)
+MERGE INTO medical_risk_limit_level(medical_risk_limit_level_ic, coefficient)
+KEY(medical_risk_limit_level_ic)
 VALUES('LEVEL_20000', 1.5);
 
-INSERT INTO medical_risk_limit_level(medical_risk_limit_level_ic, coefficient)
+MERGE INTO medical_risk_limit_level(medical_risk_limit_level_ic, coefficient)
+KEY(medical_risk_limit_level_ic)
 VALUES('LEVEL_50000', 2.0);

@@ -51,6 +51,7 @@ public class AgreementSelectedRisksValidationIntegrationTest {
 
     @Test
     public void shouldReturnErrorsWhenSelectedRisksAreNotSupported() {
+
         errorCode = "ERROR_CODE_9";
         description = "Risk Type ic = MY_RISK not supported!";
         AgreementDTO agreement = createAgreementDTO()
@@ -70,5 +71,7 @@ public class AgreementSelectedRisksValidationIntegrationTest {
         assertEquals("", 1, errors.size());
         assertEquals("", errorCode, errors.get(0).getErrorCode());
         assertEquals("", description, errors.get(0).getDescription());
+
+
     }
 }
