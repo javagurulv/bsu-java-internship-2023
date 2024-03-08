@@ -15,14 +15,14 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+import static lv.javaguru.travel.insurance.core.api.dto.AgreementDTOBuilder.createAgreementDTO;
+import static lv.javaguru.travel.insurance.core.validations.integration.CreateDateUtil.createDate;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
 public class TravelUnderwritingImplTest {
-        @InjectMocks
-        TravelUnderwriting underwriting = new TravelUnderwritingImpl();
         @Mock
         SelectedRisksPremiumCalculator calculator;
 
@@ -32,9 +32,17 @@ public class TravelUnderwritingImplTest {
         @Mock
         private PersonDTO person;
 
+    @InjectMocks
+    TravelUnderwriting underwriting = new TravelUnderwritingImpl();
+
         @Test
         public void calculatePremiumTest() {
 
+            agreement = createAgreementDTO().withDateFrom(createDate("2022-09-11"))
+                    .withDateTo(createDate("2022-09-12"))
+                    .withSelectedRisks("TRAVEL_MEDICAL")
+                    .build();
+/*
             List<String> risks = new ArrayList<>();
             risks.add("TRAVEL_MEDICAL");
 
@@ -42,7 +50,7 @@ public class TravelUnderwritingImplTest {
             when(agreement.getAgreementDateTo()).thenReturn(Date.valueOf("2022-09-12"));
             when(agreement.getAgreementDateFrom()).thenReturn(Date.valueOf("2022-09-11"));
             when(agreement.getSelectedRisks()).thenReturn(risks);
-
+*/
             List<RiskDTO> risksPremium = new ArrayList<>();
             risksPremium.add(new RiskDTO("TRAVEL_MEDICAL", BigDecimal.valueOf(1)));
             when(calculator.calculatePremiumForAllRisks(agreement, person)).thenReturn(risksPremium);

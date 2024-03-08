@@ -4,6 +4,7 @@ import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.domain.AgeCoefficient;
 import lv.javaguru.travel.insurance.core.domain.CountryDefaultDayRate;
+import lv.javaguru.travel.insurance.core.domain.MedicalRiskLimitLevel;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -16,7 +17,13 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
+import static lv.javaguru.travel.insurance.core.api.dto.AgreementDTOBuilder.createAgreementDTO;
+import static lv.javaguru.travel.insurance.core.api.dto.PersonDTOBuilder.createPersonDTO;
+import static lv.javaguru.travel.insurance.core.domain.CountryDefaultDayRateBuilder.createCountryDefaultDayRate;
+import static lv.javaguru.travel.insurance.core.domain.MedicalRiskLimitLevelBuilder.createMedicalRiskLimitLevel;
+import static lv.javaguru.travel.insurance.core.validations.integration.CreateDateUtil.createDate;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -44,6 +51,31 @@ public class TravelRiskPremiumCalculatorMedicalTest {
     @InjectMocks
     private TravelRiskPremiumCalculatorMedical calculator;
 
+    @Test
+    public void calculatePremiumForMedicalRiskLatviaIntegrationTest() {
+        PersonDTO personDTO = createPersonDTO().withBirthDate(createDate("2005-08-03")).build();
+        AgreementDTO agreementDTO = createAgreementDTO()
+                .withCountry("LATVIA")
+                .withPersons(personDTO)
+                .build();
+
+        CountryDefaultDayRate cddr = createCountryDefaultDayRate()
+                .withCountryIc("LATVIA")
+                .withCoefficient(BigDecimal.valueOf(1.00))
+                .build();
+        MedicalRiskLimitLevel mrll = createMedicalRiskLimitLevel()
+                .withIc("LEVEL_10000")
+                .withCoefficient(BigDecimal.valueOf(1.0))
+                .build();
+        when(dayCountCalculator.calculatePremium(agreementDTO, personDTO)).thenReturn(BigDecimal.valueOf(1));
+        when(ageCoefficientCalculator.calculatePremium(agreementDTO, personDTO)).thenReturn(BigDecimal.valueOf(1.1));
+        when(cddrCalculator.calculatePremium(agreementDTO, personDTO)).thenReturn(BigDecimal.valueOf(1.0));
+        when(mrllCoefficientCalculator.calculatePremium(agreementDTO, personDTO)).thenReturn(BigDecimal.valueOf(1.0));
+        List<TravelRiskPremiumCalculatorMedicalComponent> calculators = List.of(dayCountCalculator, cddrCalculator, ageCoefficientCalculator, mrllCoefficientCalculator);
+        ReflectionTestUtils.setField(calculator, "calculators", calculators);
+
+        assertEquals(BigDecimal.valueOf(1.10).setScale(2, RoundingMode.HALF_UP), calculator.calculatePremium(agreementDTO, personDTO).setScale(2));
+    }
     @Test
     public void calculatePremiumForMedicalRiskLatviaTest() {
         init("LATVIA", BigDecimal.valueOf(1.00), 18);

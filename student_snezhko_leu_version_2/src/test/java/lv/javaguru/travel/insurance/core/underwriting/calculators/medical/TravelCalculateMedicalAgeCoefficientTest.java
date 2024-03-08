@@ -17,6 +17,10 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Optional;
 
+import static lv.javaguru.travel.insurance.core.api.dto.AgreementDTOBuilder.createAgreementDTO;
+import static lv.javaguru.travel.insurance.core.api.dto.PersonDTOBuilder.createPersonDTO;
+import static lv.javaguru.travel.insurance.core.domain.AgeCoefficientBuilder.createAgeCoefficient;
+import static lv.javaguru.travel.insurance.core.validations.integration.CreateDateUtil.createDate;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -24,9 +28,6 @@ import static org.mockito.Mockito.when;
 @ExtendWith(SpringExtension.class)
 @DataJpaTest
 public class TravelCalculateMedicalAgeCoefficientTest {
-    @InjectMocks
-    private TravelCalculateMedicalAgeCoefficient calculator;
-
     @Mock
     private AgreementDTO agreement;
     @Mock
@@ -36,6 +37,8 @@ public class TravelCalculateMedicalAgeCoefficientTest {
 
     @Mock
     private DateTimeUtil dateTimeUtil;
+    @InjectMocks
+    private TravelCalculateMedicalAgeCoefficient calculator;
 
     @Test
     public void MedicalAgeCoefficientCalculatorTest() {
@@ -65,5 +68,23 @@ public class TravelCalculateMedicalAgeCoefficientTest {
 
 //        ReflectionTestUtils.setField(calculator, "acRepository", acRepository);
 //        ReflectionTestUtils.setField(calculator, "dateTimeUtil", dateTimeUtil);
+    }
+
+    @Test
+    public void MedicalAgeCoefficientCalculatorIntegrationTest() {
+        AgeCoefficient ac = createAgeCoefficient()
+                .withAgeFrom(10)
+                .withAgeTo(18)
+                .withCoefficient(BigDecimal.valueOf(1.1))
+                .build();
+
+        PersonDTO personDTO = createPersonDTO().withBirthDate(createDate("2009-03-05")).build();
+        AgreementDTO agreementDTO = createAgreementDTO().withPersons(personDTO).build();
+        when(acRepository.findCoefficient(14)).thenReturn(Optional.of(ac));
+        when(acRepository.findCoefficient(15)).thenReturn(Optional.of(ac));
+        when(acRepository.findCoefficient(16)).thenReturn(Optional.of(ac));
+        when(dateTimeUtil.getCurrentDateTime()).thenReturn(new Date());
+
+        assertEquals(BigDecimal.valueOf(1.1), calculator.calculatePremium(agreementDTO, personDTO));
     }
 }

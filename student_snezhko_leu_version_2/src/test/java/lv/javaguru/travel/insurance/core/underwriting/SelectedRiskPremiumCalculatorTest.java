@@ -18,6 +18,8 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+import static lv.javaguru.travel.insurance.core.api.dto.AgreementDTOBuilder.createAgreementDTO;
+import static lv.javaguru.travel.insurance.core.validations.integration.CreateDateUtil.createDate;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
@@ -25,25 +27,31 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
 public class SelectedRiskPremiumCalculatorTest {
-    @InjectMocks
-    private SelectedRisksPremiumCalculator calculator;
-
-    @Mock
     private AgreementDTO agreement;
 
-    @Mock
     private PersonDTO person;
+
+    @InjectMocks
+    private SelectedRisksPremiumCalculator calculator;
 
     @BeforeEach
     public void init() {
      //   agreement = mock(AgreementDTO.class);
       //  person = mock(PersonDTO.class);
+        agreement = createAgreementDTO().withDateTo(createDate("2022-09-12"))
+                .withDateFrom(createDate("2022-09-11"))
+                .withSelectedRisks("TRAVEL_MEDICAL")
+                .withSelectedRisks("TRAVEL_SPORT_ACTIVITIES")
+                .build();
+        /*
         List<String> risks = new ArrayList<>();
         risks.add("TRAVEL_MEDICAL");
         risks.add("TRAVEL_SPORT_ACTIVITIES");
         when(agreement.getAgreementDateTo()).thenReturn(Date.valueOf("2022-09-12"));
         when(agreement.getAgreementDateFrom()).thenReturn(Date.valueOf("2022-09-11"));
         when(agreement.getSelectedRisks()).thenReturn(risks);
+
+         */
     }
     @Test
     public void findCalculatorByIcCorrectValueTest() {

@@ -14,6 +14,9 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.math.BigDecimal;
 import java.util.Optional;
 
+import static lv.javaguru.travel.insurance.core.api.dto.AgreementDTOBuilder.createAgreementDTO;
+import static lv.javaguru.travel.insurance.core.api.dto.PersonDTOBuilder.createPersonDTO;
+import static lv.javaguru.travel.insurance.core.domain.CountryDefaultDayRateBuilder.createCountryDefaultDayRate;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -21,9 +24,6 @@ import static org.mockito.Mockito.when;
 @ExtendWith(SpringExtension.class)
 @DataJpaTest
 public class TravelCalculateMedicalCountryDefaultDayCountTest {
-    @InjectMocks
-    private TravelCalculateMedicalCountryDefaultDayRate calculator;
-
     @Mock
     private CountryDefaultDayRateRepository cddrRepository;
 
@@ -32,6 +32,9 @@ public class TravelCalculateMedicalCountryDefaultDayCountTest {
 
     @Mock
     private PersonDTO person;
+
+    @InjectMocks
+    private TravelCalculateMedicalCountryDefaultDayRate calculator;
 
     @Test
     public void CalculatorMedicalCddrTest() {
@@ -48,5 +51,18 @@ public class TravelCalculateMedicalCountryDefaultDayCountTest {
         when(cddrValue.getCountryIc()).thenReturn(country);
 
         when(cddrRepository.findByCountryIc(country)).thenReturn(Optional.of(cddrValue));
+    }
+
+    @Test
+    public void CalculatorMedicalCddrIntegrationTest() {
+        AgreementDTO agreementDTO = createAgreementDTO().withCountry("SPAIN").build();
+        PersonDTO personDTO = createPersonDTO().build();
+        CountryDefaultDayRate cddr = createCountryDefaultDayRate()
+                .withCountryIc("SPAIN")
+                .withCoefficient(BigDecimal.valueOf(1.1))
+                .build();
+
+        when(cddrRepository.findByCountryIc("SPAIN")).thenReturn(Optional.of(cddr));
+        assertEquals(BigDecimal.valueOf(1.1), calculator.calculatePremium(agreementDTO, personDTO));
     }
 }

@@ -9,10 +9,14 @@ import org.mockito.Mock;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.math.BigDecimal;
-import java.sql.Date;
+import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import static lv.javaguru.travel.insurance.core.api.dto.AgreementDTOBuilder.createAgreementDTO;
+import static lv.javaguru.travel.insurance.core.api.dto.PersonDTOBuilder.createPersonDTO;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -20,23 +24,23 @@ import static org.mockito.Mockito.when;
 @ExtendWith(SpringExtension.class)
 class TravelRiskPremiumCalculatorCancellationTest {
     TravelRiskPremiumCalculatorCancellation calculator = new TravelRiskPremiumCalculatorCancellation();
-    @Mock
-    private AgreementDTO agreement;
-    @Mock
-    private PersonDTO person;
-
-    @BeforeEach
-    public void init() {
-        List<String> risks = new ArrayList<>();
-        risks.add(calculator.getIc());
-        when(agreement.getAgreementDateTo()).thenReturn(Date.valueOf("2026-09-12"));
-        when(agreement.getAgreementDateFrom()).thenReturn(Date.valueOf("2026-09-11"));
-        when(agreement.getSelectedRisks()).thenReturn(risks);
-
-    }
-
     @Test
     public void calculatePremiumTest() {
+        PersonDTO person = createPersonDTO().build();
+        AgreementDTO agreement = createAgreementDTO()
+                .withDateFrom(createDate("2026-09-11"))
+                .withDateTo(createDate("2026-09-12"))
+                .withSelectedRisks("TRAVEL_CANCELLATION")
+                .build();
         assertEquals(calculator.calculatePremium(agreement, person), BigDecimal.ZERO);
+    }
+
+    private Date createDate(String date) {
+        try {
+            return new SimpleDateFormat("yyyy-MM-dd").parse(date);
+        }
+        catch (ParseException e) {
+            throw new RuntimeException();
+        }
     }
 }

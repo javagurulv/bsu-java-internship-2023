@@ -14,17 +14,19 @@ import org.springframework.test.util.ReflectionTestUtils;
 import java.math.BigDecimal;
 import java.util.Optional;
 
+import static lv.javaguru.travel.insurance.core.api.dto.AgreementDTOBuilder.createAgreementDTO;
+import static lv.javaguru.travel.insurance.core.api.dto.PersonDTOBuilder.createPersonDTO;
+import static lv.javaguru.travel.insurance.core.domain.MedicalRiskLimitLevelBuilder.createMedicalRiskLimitLevel;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
 public class TravelCalculateInsuranceLimitCoefficientTest {
-    @InjectMocks
-    private TravelCalculateInsuranceLimitCoefficientMedical calculator;
-
     @Mock
     private MedicalRiskLimitLevelRepository mrllRepository;
+    @InjectMocks
+    private TravelCalculateInsuranceLimitCoefficientMedical calculator;
 
     @Mock
     private AgreementDTO agreement;
@@ -46,6 +48,17 @@ public class TravelCalculateInsuranceLimitCoefficientTest {
 
         when(mrllRepository.findByMedicalRiskLimitLevelIc(requestLimitLevelValue)).thenReturn(Optional.of(mrll));
 
-        ReflectionTestUtils.setField(calculator, "mrllRepository", mrllRepository);
+//        ReflectionTestUtils.setField(calculator, "mrllRepository", mrllRepository);
+    }
+    @Test
+    public void TravelCalculateInsuranceLimitCoefficientCorrectValueIntegrationTest() {
+        PersonDTO p = createPersonDTO().withMedicalRiskLimitLevel("LEVEL_10000").build();
+        AgreementDTO a = createAgreementDTO().build();
+        MedicalRiskLimitLevel mrll = createMedicalRiskLimitLevel()
+                .withIc(p.getMedicalRiskLimitLevel())
+                .withCoefficient(BigDecimal.valueOf(1.0))
+                .build();
+        when(mrllRepository.findByMedicalRiskLimitLevelIc(p.getMedicalRiskLimitLevel())).thenReturn(Optional.of(mrll));
+
     }
 }

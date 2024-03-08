@@ -10,39 +10,37 @@ import java.util.ArrayList;
 import java.util.List;
 import lv.javaguru.travel.insurance.core.api.dto.*;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 
+import static lv.javaguru.travel.insurance.core.api.dto.AgreementDTOBuilder.createAgreementDTO;
+import static lv.javaguru.travel.insurance.core.api.dto.PersonDTOBuilder.createPersonDTO;
+import static lv.javaguru.travel.insurance.core.validations.integration.CreateDateUtil.createDate;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
 public class TravelRiskPremiumCalculatorThirdPartyLiabilityTest {
-
-    TravelRiskPremiumCalculatorThirdPartyLiability calculator = new TravelRiskPremiumCalculatorThirdPartyLiability();
-
     @Mock
     private AgreementDTO agreement;
 
     @Mock
     private PersonDTO person;
 
-    @BeforeEach
-    public void init() {
-        agreement = mock(AgreementDTO.class);
-        List<String> risks = new ArrayList<>();
-        risks.add(calculator.getIc());
-        when(agreement.getAgreementDateTo()).thenReturn(Date.valueOf("2026-09-12"));
-        when(agreement.getAgreementDateFrom()).thenReturn(Date.valueOf("2026-09-11"));
-        when(agreement.getSelectedRisks()).thenReturn(risks);
-
-        person = mock(PersonDTO.class);
-    }
+    @InjectMocks
+    TravelRiskPremiumCalculatorThirdPartyLiability calculator;
 
     @Test
-    public void calculatePremiumTest() {
+    public void calculatePremiumIntegrationTest() {
+        PersonDTO person = createPersonDTO().build();
+        AgreementDTO agreement = createAgreementDTO()
+                .withDateFrom(createDate("2026-09-11"))
+                .withDateTo(createDate("2026-09-12"))
+                .withSelectedRisks("TRAVEL_THIRD_PARTY_LIABILITIES")
+                .build();
         assertEquals(calculator.calculatePremium(agreement, person), BigDecimal.ZERO);
     }
 }

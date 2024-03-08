@@ -14,15 +14,15 @@ import org.springframework.test.util.ReflectionTestUtils;
 import java.math.BigDecimal;
 import java.sql.Date;
 
+import static lv.javaguru.travel.insurance.core.api.dto.AgreementDTOBuilder.createAgreementDTO;
+import static lv.javaguru.travel.insurance.core.api.dto.PersonDTOBuilder.createPersonDTO;
+import static lv.javaguru.travel.insurance.core.validations.integration.CreateDateUtil.createDate;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
 public class TravelCalculateMedicalDayCountTest {
-    @InjectMocks
-    private TravelCalculateDayCountMedical calculator;
-
     @Mock
     private AgreementDTO agreement;
 
@@ -31,6 +31,9 @@ public class TravelCalculateMedicalDayCountTest {
 
     @Mock
     private DateTimeUtil dateTimeUtil;
+
+    @InjectMocks
+    private TravelCalculateDayCountMedical calculator;
     @Test
     public void calculatorMedicalDayCountTest() {
         init();
@@ -47,5 +50,17 @@ public class TravelCalculateMedicalDayCountTest {
         when(agreement.getAgreementDateFrom()).thenReturn(Date.valueOf("2030-05-02"));
         when(dateTimeUtil.getDaysBetween(agreement.getAgreementDateTo(), agreement.getAgreementDateFrom())).thenReturn(3L);
 
+    }
+
+    @Test
+    public void calculatorMedicalDayCountIntegrationTest() {
+        AgreementDTO agreementDTO = createAgreementDTO()
+                .withDateFrom(createDate("2030-05-02"))
+                .withDateTo(createDate("2030-05-05"))
+                .build();
+        when(dateTimeUtil.getDaysBetween(agreementDTO.getAgreementDateTo(), agreementDTO.getAgreementDateFrom())).thenReturn(3L);
+
+        PersonDTO personDTO = createPersonDTO().build();
+        assertEquals(BigDecimal.valueOf(3), calculator.calculatePremium(agreementDTO, personDTO));
     }
 }
