@@ -12,9 +12,9 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static uk.org.webcompere.modelassert.json.JsonAssertions.assertJson;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -22,7 +22,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class TravelCalculatePremiumControllerTest {
 
     @Autowired private MockMvc mockMvc;
-    private ObjectMapper mapper = new ObjectMapper();
+
     @Autowired private JsonFileToString jsonReader;
 
     private void executeAndCompare(String jsonRequestFilePath, String jsonResponseFilePath) throws Exception {
@@ -37,7 +37,11 @@ public class TravelCalculatePremiumControllerTest {
 
         String responseBodyContent = result.getResponse().getContentAsString();
 
-        assertEquals(mapper.readTree(responseBodyContent), mapper.readTree(jsonResponse));
+        assertJson(responseBodyContent)
+                .where()
+                .keysInAnyOrder()
+                .arrayInAnyOrder()
+                .isEqualTo(jsonResponse);
     }
 
     @Test
@@ -48,17 +52,31 @@ public class TravelCalculatePremiumControllerTest {
         );
     }
     @Test
-    public void simpleRestControllerTest_firstNameField_Is_Blank() throws Exception {
+    public void simpleRestControllerTest_firstNameField_Is_Null() throws Exception {
         executeAndCompare(
-                "rest/TravelCalculatePremiumRequest_firstNameField_Is_Blank.json",
-                "rest/TravelCalculatePremiumResponse_firstNameField_Is_Blank.json"
+                "rest/TravelCalculatePremiumRequest_firstNameField_Is_Null.json",
+                "rest/TravelCalculatePremiumResponse_firstNameField_Is_Null.json"
         );
     }
     @Test
-    public void simpleRestControllerTest_lastNameField_Is_Blank() throws Exception {
+    public void simpleRestControllerTest_firstNameField_Is_Empty() throws Exception {
         executeAndCompare(
-                "rest/TravelCalculatePremiumRequest_lastNameField_Is_Blank.json",
-                "rest/TravelCalculatePremiumResponse_lastNameField_Is_Blank.json"
+                "rest/TravelCalculatePremiumRequest_firstNameField_Is_Empty.json",
+                "rest/TravelCalculatePremiumResponse_firstNameField_Is_Empty.json"
+        );
+    }
+    @Test
+    public void simpleRestControllerTest_lastNameField_Is_Null() throws Exception {
+        executeAndCompare(
+                "rest/TravelCalculatePremiumRequest_lastNameField_Is_Null.json",
+                "rest/TravelCalculatePremiumResponse_lastNameField_Is_Null.json"
+        );
+    }
+    @Test
+    public void simpleRestControllerTest_lastNameField_Is_Empty() throws Exception {
+        executeAndCompare(
+                "rest/TravelCalculatePremiumRequest_lastNameField_Is_Empty.json",
+                "rest/TravelCalculatePremiumResponse_lastNameField_Is_Empty.json"
         );
     }
     @Test
@@ -76,6 +94,20 @@ public class TravelCalculatePremiumControllerTest {
         );
     }
     @Test
+    public void simpleRestControllerTest_agreementDateFrom_In_The_Past() throws Exception {
+        executeAndCompare(
+                "rest/TravelCalculatePremiumRequest_agreementDateFrom_In_The_Past.json",
+                "rest/TravelCalculatePremiumResponse_agreementDateFrom_In_The_Past.json"
+        );
+    }
+    @Test
+    public void simpleRestControllerTest_agreementDateTo_In_The_Past() throws Exception {
+        executeAndCompare(
+                "rest/TravelCalculatePremiumRequest_agreementDateTo_In_The_Past.json",
+                "rest/TravelCalculatePremiumResponse_agreementDateTo_In_The_Past.json"
+        );
+    }
+    @Test
     public void simpleRestControllerTest_AllFields_Are_Blank() throws Exception {
         executeAndCompare(
                 "rest/TravelCalculatePremiumRequest_AllFields_Are_Blank.json",
@@ -87,6 +119,20 @@ public class TravelCalculatePremiumControllerTest {
         executeAndCompare(
                 "rest/TravelCalculatePremiumRequest_DateTo_Is_Less_DateFrom.json",
                 "rest/TravelCalculatePremiumResponse_DateTo_Is_Less_DateFrom.json"
+        );
+    }
+    @Test
+    public void simpleRestControllerTest_selectedRisksField_Is_Null() throws Exception {
+        executeAndCompare(
+                "rest/TravelCalculatePremiumRequest_selectedRisksField_Is_Null.json",
+                "rest/TravelCalculatePremiumResponse_selectedRisksField_Is_Null.json"
+        );
+    }
+    @Test
+    public void simpleRestControllerTest_selectedRisksField_Is_Empty() throws Exception {
+        executeAndCompare(
+                "rest/TravelCalculatePremiumRequest_selectedRisksField_Is_Empty.json",
+                "rest/TravelCalculatePremiumResponse_selectedRisksField_Is_Empty.json"
         );
     }
 }

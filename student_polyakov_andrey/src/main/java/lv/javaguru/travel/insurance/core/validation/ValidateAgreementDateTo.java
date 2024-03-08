@@ -2,16 +2,19 @@ package lv.javaguru.travel.insurance.core.validation;
 
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
 @Component
-public class ValidateAgreementDateTo implements TravelRequestValidation{
+class ValidateAgreementDateTo extends TravelRequestValidationImpl {
+    @Autowired
+    private ValidationErrorFactory factory;
     @Override
-    public Optional<ValidationError> validation(TravelCalculatePremiumRequest request) {
+    public Optional<ValidationError> validate(TravelCalculatePremiumRequest request) {
         return (request.getAgreementDateTo() == null)
-                ? Optional.of(new ValidationError("agreementDateTo", "Must not be empty!"))
+                ? Optional.of(factory.createError("ERROR_CODE_2"))
                 : Optional.empty();
     }
 }

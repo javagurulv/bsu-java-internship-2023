@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -14,6 +15,8 @@ import java.util.Date;
 public class TravelCalculatePremiumRequest {
     private String personFirstName;
     private String personLastName;
+    @JsonFormat(shape = JsonFormat.Shape.ARRAY)
+    private List<String> selected_risks;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date agreementDateFrom;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")

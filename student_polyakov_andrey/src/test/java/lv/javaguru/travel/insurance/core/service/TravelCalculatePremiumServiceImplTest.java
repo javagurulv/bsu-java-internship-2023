@@ -1,5 +1,6 @@
-package lv.javaguru.travel.insurance.core;
+package lv.javaguru.travel.insurance.core.service;
 
+import lv.javaguru.travel.insurance.core.underwriting.TravelUnderwritingProcess;
 import lv.javaguru.travel.insurance.core.validation.TravelCalculatePremiumRequestValidator;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumResponse;
@@ -26,6 +27,8 @@ class TravelCalculatePremiumServiceImplTest {
     private TravelUnderwritingProcess underwritingProcess;
     @Mock
     private TravelCalculatePremiumRequestValidator requestValidator;
+    @Mock
+    private TravelCalculatePremiumRequest reqMock;
     @InjectMocks
     private TravelCalculatePremiumServiceImpl service;
 
@@ -45,7 +48,6 @@ class TravelCalculatePremiumServiceImplTest {
 
     @Test
     public void checkResponseFirstName() {
-        TravelCalculatePremiumRequest reqMock = mock(TravelCalculatePremiumRequest.class);
         when(reqMock.getPersonFirstName()).thenReturn("Vasya");
         when(requestValidator.validate(reqMock)).thenReturn(List.of());
         TravelCalculatePremiumResponse response = service.calculatePremium(reqMock);
@@ -54,7 +56,6 @@ class TravelCalculatePremiumServiceImplTest {
 
     @Test
     public void checkResponseLastName() {
-        TravelCalculatePremiumRequest reqMock = mock(TravelCalculatePremiumRequest.class);
         when(reqMock.getPersonLastName()).thenReturn("Pupkin");
         when(requestValidator.validate(reqMock)).thenReturn(List.of());
         TravelCalculatePremiumResponse response = service.calculatePremium(reqMock);
@@ -63,7 +64,6 @@ class TravelCalculatePremiumServiceImplTest {
 
     @Test
     public void checkResponseAgreementDateFrom() {
-        TravelCalculatePremiumRequest reqMock = mock(TravelCalculatePremiumRequest.class);
         Date dateFrom = new Date();
         when(reqMock.getAgreementDateFrom()).thenReturn(dateFrom);
         when(requestValidator.validate(reqMock)).thenReturn(List.of());
@@ -73,7 +73,6 @@ class TravelCalculatePremiumServiceImplTest {
 
     @Test
     public void checkResponseAgreementDateTo() {
-        TravelCalculatePremiumRequest reqMock = mock(TravelCalculatePremiumRequest.class);
         Date dateTo = new Date();
         when(reqMock.getAgreementDateTo()).thenReturn(dateTo);
         when(requestValidator.validate(reqMock)).thenReturn(List.of());
@@ -83,7 +82,6 @@ class TravelCalculatePremiumServiceImplTest {
 
     @Test
     public void checkResponseAgreementPrice() {
-        TravelCalculatePremiumRequest reqMock = mock(TravelCalculatePremiumRequest.class);
         when(reqMock.getAgreementDateFrom()).thenReturn(createDate("01.01.2023"));
         when(reqMock.getAgreementDateTo()).thenReturn(createDate("11.01.2023"));
         when(requestValidator.validate(reqMock)).thenReturn(List.of());
@@ -94,7 +92,6 @@ class TravelCalculatePremiumServiceImplTest {
 
     @Test
     public void shouldReturnResponseWithErrors() {
-        TravelCalculatePremiumRequest reqMock = mock(TravelCalculatePremiumRequest.class);
         List<ValidationError> errors = createValidationErrorList();
         when(requestValidator.validate(reqMock)).thenReturn(errors);
         TravelCalculatePremiumResponse response = service.calculatePremium(reqMock);
@@ -103,23 +100,21 @@ class TravelCalculatePremiumServiceImplTest {
 
     @Test
     public void shouldReturnResponseWithValidationErrors() {
-        TravelCalculatePremiumRequest reqMock = mock(TravelCalculatePremiumRequest.class);
         List<ValidationError> errors = createValidationErrorList();
         when(requestValidator.validate(reqMock)).thenReturn(errors);
         TravelCalculatePremiumResponse response = service.calculatePremium(reqMock);
         assertEquals(response.getErrors().size(), 1);
-        assertEquals(response.getErrors().get(0).getField(), "field");
-        assertEquals(response.getErrors().get(0).getMessage(), "errorMessage");
+        assertEquals(response.getErrors().get(0).getErrorCode(), "field");
+        assertEquals(response.getErrors().get(0).getDescription(), "errorMessage");
     }
 
     @Test
     public void shouldNotInvokeDateTimeUtilWhenValidationErrors() {
-        TravelCalculatePremiumRequest reqMock = mock(TravelCalculatePremiumRequest.class);
         List<ValidationError> errors = createValidationErrorList();
         when(requestValidator.validate(reqMock)).thenReturn(errors);
         TravelCalculatePremiumResponse response = service.calculatePremium(reqMock);
         assertEquals(response.getErrors().size(), 1);
-        assertEquals(response.getErrors().get(0).getField(), "field");
-        assertEquals(response.getErrors().get(0).getMessage(), "errorMessage");
+        assertEquals(response.getErrors().get(0).getErrorCode(), "field");
+        assertEquals(response.getErrors().get(0).getDescription(), "errorMessage");
     }
 }

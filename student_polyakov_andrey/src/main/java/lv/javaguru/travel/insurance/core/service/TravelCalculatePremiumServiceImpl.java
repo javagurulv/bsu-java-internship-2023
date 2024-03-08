@@ -1,5 +1,6 @@
-package lv.javaguru.travel.insurance.core;
+package lv.javaguru.travel.insurance.core.service;
 
+import lv.javaguru.travel.insurance.core.underwriting.TravelUnderwritingProcess;
 import lv.javaguru.travel.insurance.core.validation.TravelCalculatePremiumRequestValidator;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumResponse;
