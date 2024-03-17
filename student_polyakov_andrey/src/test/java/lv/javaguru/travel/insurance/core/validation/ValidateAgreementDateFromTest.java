@@ -20,7 +20,11 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 public class ValidateAgreementDateFromTest {
     @Mock
-    private ValidationErrorFactory factory;
+    private ValidationErrorFactory factoryMock;
+    @Mock
+    private TravelCalculatePremiumRequest requestMock;
+    @Mock
+    private ValidationError validationErrorMock;
     @InjectMocks
     private ValidateAgreementDateFrom validator = new ValidateAgreementDateFrom();
 
@@ -34,10 +38,8 @@ public class ValidateAgreementDateFromTest {
 
     @Test
     public void agreementDateFromShouldNotBeNull() {
-        TravelCalculatePremiumRequest requestMock = mock(TravelCalculatePremiumRequest.class);
-        ValidationError validationErrorMock = mock(ValidationError.class);
         when(requestMock.getAgreementDateFrom()).thenReturn(null);
-        when(factory.createError("ERROR_CODE_1")).thenReturn(validationErrorMock);
+        when(factoryMock.createError("ERROR_CODE_1")).thenReturn(validationErrorMock);
         Optional<ValidationError> errorOptional = validator.validate(requestMock);
         assertTrue(errorOptional.isPresent());
         assertEquals(errorOptional.get(), validationErrorMock);
@@ -45,10 +47,9 @@ public class ValidateAgreementDateFromTest {
 
     @Test
     public void shouldNotReturnErrorWhenAgreementDateFromIsPresent() {
-        TravelCalculatePremiumRequest requestMock = mock(TravelCalculatePremiumRequest.class);
         when(requestMock.getAgreementDateFrom()).thenReturn(createDate("01.01.2027"));
         Optional<ValidationError> errorOptional = validator.validate(requestMock);
         assertTrue(errorOptional.isEmpty());
-        verifyNoInteractions(factory);
+        verifyNoInteractions(factoryMock, validationErrorMock);
     }
 }

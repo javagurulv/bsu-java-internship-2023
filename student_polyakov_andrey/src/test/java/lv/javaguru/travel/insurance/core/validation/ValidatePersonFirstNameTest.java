@@ -19,14 +19,16 @@ public class ValidatePersonFirstNameTest {
     @InjectMocks
     private ValidatePersonFirstName validator = new ValidatePersonFirstName();
     @Mock
-    private ValidationErrorFactory factory;
+    private ValidationErrorFactory factoryMock;
+    @Mock
+    private TravelCalculatePremiumRequest requestMock;
+    @Mock
+    private ValidationError validationErrorMock;
 
     @Test
     public void firstNameShouldNotBeNull() {
-        TravelCalculatePremiumRequest requestMock = mock(TravelCalculatePremiumRequest.class);
-        ValidationError validationErrorMock = mock(ValidationError.class);
         when(requestMock.getPersonFirstName()).thenReturn(null);
-        when(factory.createError("ERROR_CODE_6")).thenReturn(validationErrorMock);
+        when(factoryMock.createError("ERROR_CODE_6")).thenReturn(validationErrorMock);
         Optional<ValidationError> errorOptional = validator.validate(requestMock);
         assertTrue(errorOptional.isPresent());
         assertEquals(errorOptional.get(), validationErrorMock);
@@ -34,10 +36,8 @@ public class ValidatePersonFirstNameTest {
 
     @Test
     public void firstNameShouldNotBeEmpty() {
-        TravelCalculatePremiumRequest requestMock = mock(TravelCalculatePremiumRequest.class);
-        ValidationError validationErrorMock = mock(ValidationError.class);
         when(requestMock.getPersonFirstName()).thenReturn("");
-        when(factory.createError("ERROR_CODE_6")).thenReturn(validationErrorMock);
+        when(factoryMock.createError("ERROR_CODE_6")).thenReturn(validationErrorMock);
         Optional<ValidationError> errorOptional = validator.validate(requestMock);
         assertTrue(errorOptional.isPresent());
         assertEquals(errorOptional.get(), validationErrorMock);
@@ -45,10 +45,9 @@ public class ValidatePersonFirstNameTest {
 
     @Test
     public void shouldNotReturnErrorWhenPersonFirstNameIsPresent() {
-        TravelCalculatePremiumRequest requestMock = mock(TravelCalculatePremiumRequest.class);
         when(requestMock.getPersonFirstName()).thenReturn("Vasya");
         Optional<ValidationError> errorOptional = validator.validate(requestMock);
         assertTrue(errorOptional.isEmpty());
-        verifyNoInteractions(factory);
+        verifyNoInteractions(factoryMock, validationErrorMock);
     }
 }

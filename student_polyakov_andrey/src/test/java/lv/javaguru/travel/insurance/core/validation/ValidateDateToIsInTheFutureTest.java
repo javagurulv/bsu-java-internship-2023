@@ -24,9 +24,13 @@ public class ValidateDateToIsInTheFutureTest {
     @InjectMocks
     private ValidateDateToIsInTheFuture validator = new ValidateDateToIsInTheFuture();
     @Mock
-    private ValidationErrorFactory factory;
+    private ValidationErrorFactory factoryMock;
     @Mock
-    private DateTimeUtil dateTimeUtil;
+    private DateTimeUtil dateTimeUtilMock;
+    @Mock
+    private TravelCalculatePremiumRequest requestMock;
+    @Mock
+    private ValidationError validationErrorMock;
 
     private Date createDate(String dateStr) {
         try {
@@ -38,11 +42,9 @@ public class ValidateDateToIsInTheFutureTest {
 
     @Test
     public void shouldReturnErrorWhenAgreementDateToInThePast() {
-        TravelCalculatePremiumRequest requestMock = mock(TravelCalculatePremiumRequest.class);
-        ValidationError validationErrorMock = mock(ValidationError.class);
         when(requestMock.getAgreementDateTo()).thenReturn(createDate("02.01.2007"));
-        when(dateTimeUtil.getTodaysDateAndTime()).thenReturn(createDate("01.01.2024"));
-        when(factory.createError("ERROR_CODE_4")).thenReturn(validationErrorMock);
+        when(dateTimeUtilMock.getTodaysDateAndTime()).thenReturn(createDate("01.01.2024"));
+        when(factoryMock.createError("ERROR_CODE_4")).thenReturn(validationErrorMock);
         Optional<ValidationError> errorOptional = validator.validate(requestMock);
         assertTrue(errorOptional.isPresent());
         assertEquals(errorOptional.get(), validationErrorMock);
@@ -50,11 +52,10 @@ public class ValidateDateToIsInTheFutureTest {
 
     @Test
     public void shouldNotReturnErrorWhenAgreementDateToInFuture() {
-        TravelCalculatePremiumRequest requestMock = mock(TravelCalculatePremiumRequest.class);
         when(requestMock.getAgreementDateTo()).thenReturn(createDate("02.01.2027"));
-        when(dateTimeUtil.getTodaysDateAndTime()).thenReturn(createDate("01.01.2024"));
+        when(dateTimeUtilMock.getTodaysDateAndTime()).thenReturn(createDate("01.01.2024"));
         Optional<ValidationError> errorOptional = validator.validate(requestMock);
         assertTrue(errorOptional.isEmpty());
-        verifyNoInteractions(factory);
+        verifyNoInteractions(factoryMock, validationErrorMock);
     }
 }

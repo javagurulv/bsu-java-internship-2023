@@ -17,17 +17,19 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class ValidateSelectedRisksTest {
+public class ValidateIfSelectedRisksEmptyTest {
     @InjectMocks
-    private ValidateSelectedRisks validator = new ValidateSelectedRisks();
+    private ValidateIfSelectedRisksEmpty validator = new ValidateIfSelectedRisksEmpty();
     @Mock
-    private ValidationErrorFactory factory;
+    private ValidationErrorFactory factoryMock;
+    @Mock
+    private TravelCalculatePremiumRequest requestMock;
+    @Mock
+    private ValidationError validationErrorMock;
     @Test
     public void selectedRisksShouldNotBeNull() {
-        TravelCalculatePremiumRequest requestMock = mock(TravelCalculatePremiumRequest.class);
-        ValidationError validationErrorMock = mock(ValidationError.class);
         when(requestMock.getSelected_risks()).thenReturn(null);
-        when(factory.createError("ERROR_CODE_8")).thenReturn(validationErrorMock);
+        when(factoryMock.createError("ERROR_CODE_8")).thenReturn(validationErrorMock);
         Optional<ValidationError> errorOptional = validator.validate(requestMock);
         assertTrue(errorOptional.isPresent());
         assertEquals(errorOptional.get(), validationErrorMock);
@@ -35,10 +37,8 @@ public class ValidateSelectedRisksTest {
 
     @Test
     public void selectedRisksShouldNotBeEmpty() {
-        TravelCalculatePremiumRequest requestMock = mock(TravelCalculatePremiumRequest.class);
-        ValidationError validationErrorMock = mock(ValidationError.class);
         when(requestMock.getSelected_risks()).thenReturn(Collections.emptyList());
-        when(factory.createError("ERROR_CODE_8")).thenReturn(validationErrorMock);
+        when(factoryMock.createError("ERROR_CODE_8")).thenReturn(validationErrorMock);
         Optional<ValidationError> errorOptional = validator.validate(requestMock);
         assertTrue(errorOptional.isPresent());
         assertEquals(errorOptional.get(), validationErrorMock);
@@ -46,10 +46,9 @@ public class ValidateSelectedRisksTest {
 
     @Test
     public void shouldNotReturnErrorWhenselectedRisksIsPresent() {
-        TravelCalculatePremiumRequest requestMock = mock(TravelCalculatePremiumRequest.class);
         when(requestMock.getSelected_risks()).thenReturn(List.of("TRAVEL_MEDICAL", "TRAVEL_SPORT_ACTIVITIES"));
         Optional<ValidationError> errorOptional = validator.validate(requestMock);
         assertTrue(errorOptional.isEmpty());
-        verifyNoInteractions(factory);
+        verifyNoInteractions(factoryMock, validationErrorMock);
     }
 }

@@ -20,11 +20,13 @@ public class ValidatePersonLastNameTest {
     private ValidatePersonLastName validator = new ValidatePersonLastName();
     @Mock
     private ValidationErrorFactory factory;
+    @Mock
+    private TravelCalculatePremiumRequest requestMock;
+    @Mock
+    private ValidationError validationErrorMock;
 
     @Test
     public void lastNameShouldNotBeNull() {
-        TravelCalculatePremiumRequest requestMock = mock(TravelCalculatePremiumRequest.class);
-        ValidationError validationErrorMock = mock(ValidationError.class);
         when(requestMock.getPersonLastName()).thenReturn(null);
         when(factory.createError("ERROR_CODE_7")).thenReturn(validationErrorMock);
         Optional<ValidationError> errorOptional = validator.validate(requestMock);
@@ -34,8 +36,6 @@ public class ValidatePersonLastNameTest {
 
     @Test
     public void lastNameShouldNotBeEmpty() {
-        TravelCalculatePremiumRequest requestMock = mock(TravelCalculatePremiumRequest.class);
-        ValidationError validationErrorMock = mock(ValidationError.class);
         when(requestMock.getPersonLastName()).thenReturn("");
         when(factory.createError("ERROR_CODE_7")).thenReturn(validationErrorMock);
         Optional<ValidationError> errorOptional = validator.validate(requestMock);
@@ -45,10 +45,9 @@ public class ValidatePersonLastNameTest {
 
     @Test
     public void shouldNotReturnErrorWhenPersonFirstNameIsPresent() {
-        TravelCalculatePremiumRequest requestMock = mock(TravelCalculatePremiumRequest.class);
         when(requestMock.getPersonLastName()).thenReturn("Vasya");
         Optional<ValidationError> errorOptional = validator.validate(requestMock);
         assertTrue(errorOptional.isEmpty());
-        verifyNoInteractions(factory);
+        verifyNoInteractions(factory, validationErrorMock);
     }
 }

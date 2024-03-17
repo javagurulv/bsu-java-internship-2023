@@ -24,9 +24,13 @@ public class ValidateDateFromIsInTheFutureTest {
     @InjectMocks
     private ValidateDateFromIsInTheFuture validator = new ValidateDateFromIsInTheFuture();
     @Mock
-    private ValidationErrorFactory factory;
+    private ValidationErrorFactory factoryMock;
     @Mock
     private DateTimeUtil dateTimeUtil;
+    @Mock
+    private TravelCalculatePremiumRequest requestMock;
+    @Mock
+    private ValidationError validationErrorMock;
 
     private Date createDate(String dateStr) {
         try {
@@ -38,11 +42,9 @@ public class ValidateDateFromIsInTheFutureTest {
 
     @Test
     public void shouldReturnErrorWhenAgreementDateFromInThePast() {
-        TravelCalculatePremiumRequest requestMock = mock(TravelCalculatePremiumRequest.class);
-        ValidationError validationErrorMock = mock(ValidationError.class);
         when(requestMock.getAgreementDateFrom()).thenReturn(createDate("01.01.2007"));
         when(dateTimeUtil.getTodaysDateAndTime()).thenReturn(createDate("01.01.2024"));
-        when(factory.createError("ERROR_CODE_3")).thenReturn(validationErrorMock);
+        when(factoryMock.createError("ERROR_CODE_3")).thenReturn(validationErrorMock);
         Optional<ValidationError> errorOptional = validator.validate(requestMock);
         assertTrue(errorOptional.isPresent());
         assertEquals(errorOptional.get(), validationErrorMock);
@@ -50,11 +52,10 @@ public class ValidateDateFromIsInTheFutureTest {
 
     @Test
     public void shouldNotReturnErrorWhenAgreementDateFromInFuture() {
-        TravelCalculatePremiumRequest requestMock = mock(TravelCalculatePremiumRequest.class);
         when(requestMock.getAgreementDateFrom()).thenReturn(createDate("01.01.2027"));
         when(dateTimeUtil.getTodaysDateAndTime()).thenReturn(createDate("01.01.2024"));
         Optional<ValidationError> errorOptional = validator.validate(requestMock);
         assertTrue(errorOptional.isEmpty());
-        verifyNoInteractions(factory);
+        verifyNoInteractions(factoryMock, validationErrorMock);
     }
 }

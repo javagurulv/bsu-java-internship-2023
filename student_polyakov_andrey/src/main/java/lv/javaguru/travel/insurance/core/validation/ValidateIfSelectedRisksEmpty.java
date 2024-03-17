@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-class ValidateSelectedRisks extends TravelRequestValidationImpl {
+class ValidateIfSelectedRisksEmpty extends TravelRequestValidationImpl {
     @Autowired
     private ValidationErrorFactory factory;
     @Override

@@ -1,6 +1,5 @@
 package lv.javaguru.travel.insurance.rest;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,10 +44,10 @@ public class TravelCalculatePremiumControllerTest {
     }
 
     @Test
-    public void simpleRestControllerTest_normal() throws Exception {
+    public void simpleRestControllerTest_TravelMedical_Sucess() throws Exception {
         executeAndCompare(
-                "rest/TravelCalculatePremiumRequest_normal.json",
-                "rest/TravelCalculatePremiumResponse_normal.json"
+                "rest/TravelCalculatePremiumRequest_TravelMedical_Sucess.json",
+                "rest/TravelCalculatePremiumResponse_TravelMedical_Sucess.json"
         );
     }
     @Test
@@ -133,6 +132,27 @@ public class TravelCalculatePremiumControllerTest {
         executeAndCompare(
                 "rest/TravelCalculatePremiumRequest_selectedRisksField_Is_Empty.json",
                 "rest/TravelCalculatePremiumResponse_selectedRisksField_Is_Empty.json"
+        );
+    }
+    @Test
+    public void simpleRestControllerTest_selectedRisksField_Is_Not_Supported() throws Exception {
+        executeAndCompare(
+                "rest/TravelCalculatePremiumRequest_selectedRisksField_Not_Supported.json",
+                "rest/TravelCalculatePremiumResponse_selectedRisksField_Not_Supported.json"
+        );
+    }
+    @Test
+    public void simpleRestControllerTest_countryField_is_Empty_selectedRisks_contains_MEDICAL() throws Exception {
+        executeAndCompare(
+                "rest/TravelCalculatePremiumRequest_countryField_is_Empty_selectedRisks_contains_MEDICAL.json",
+                "rest/TravelCalculatePremiumResponse_countryField_is_Empty_selectedRisks_contains_MEDICAL.json"
+        );
+    }
+    @Test
+    public void simpleRestControllerTest_countryField_is_Null_selectedRisks_contains_MEDICAL() throws Exception {
+        executeAndCompare(
+                "rest/TravelCalculatePremiumRequest_countryField_is_Null_selectedRisks_contains_MEDICAL.json",
+                "rest/TravelCalculatePremiumResponse_countryField_is_Null_selectedRisks_contains_MEDICAL.json"
         );
     }
 }

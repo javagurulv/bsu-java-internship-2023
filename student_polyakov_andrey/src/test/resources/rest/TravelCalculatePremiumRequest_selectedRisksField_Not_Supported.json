@@ -1,0 +1,7 @@
+{
+  "personFirstName" : "Vasya",
+  "personLastName" : "Pupkin",
+  "agreementDateFrom" : "2027-09-19",
+  "agreementDateTo" : "2027-09-29",
+  "selected_risks": ["FAKE_RISK_IC_1", "FAKE_RISK_IC_2"]
+}
