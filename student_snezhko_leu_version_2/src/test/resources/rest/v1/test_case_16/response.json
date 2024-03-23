@@ -11,6 +11,7 @@
   ],
   "personFirstName": null,
   "personLastName": null,
+  "personIc" : null,
   "personBirthDate": null,
   "agreementDateFrom": null,
   "agreementDateTo": null,

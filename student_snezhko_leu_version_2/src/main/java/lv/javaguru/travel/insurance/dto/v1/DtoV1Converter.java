@@ -49,6 +49,7 @@ public class DtoV1Converter {
         response.setPersonFirstName(person.getPersonFirstName());
         response.setPersonLastName(person.getPersonLastName());
         response.setMedicalRiskLimitLevel(person.getMedicalRiskLimitLevel());
+        response.setPersonIc(person.getPersonIc());
 
         return response;
     }
@@ -71,6 +72,7 @@ public class DtoV1Converter {
         person.setPersonLastName(request.getPersonLastName());
         person.setPersonBirthDate(request.getPersonBirthDate());
         person.setMedicalRiskLimitLevel(request.getMedicalRiskLimitLevel());
+        person.setPersonIc(request.getPersonIc());
         return person;
     }
     /*

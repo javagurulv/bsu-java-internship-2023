@@ -7,6 +7,7 @@
   ],
   "personFirstName": null,
   "personLastName": null,
+  "personIc" : null,
   "agreementDateFrom": null,
   "agreementDateTo": null,
   "agreementPremium" : null,

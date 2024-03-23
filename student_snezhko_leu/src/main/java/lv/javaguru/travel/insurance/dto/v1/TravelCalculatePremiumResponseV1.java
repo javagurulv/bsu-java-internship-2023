@@ -22,6 +22,7 @@ public class TravelCalculatePremiumResponseV1 extends CoreResponse {
     private String personFirstName;
     private String personLastName;
 
+    private String personIc;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date agreementDateFrom;

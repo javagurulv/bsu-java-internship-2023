@@ -8,6 +8,7 @@
     {
       "personFirstName" : "Vasja",
       "personLastName" : "Pupkin",
+      "personIc" : "PERSON_0",
       "personBirthDate" : "2000-05-29",
       "medicalRiskLimitLevel" : "LEVEL_10000",
       "personPremium" : null,
@@ -16,6 +17,7 @@
     {
       "personFirstName" : "Petja",
       "personLastName" : "Pupkin",
+      "personIc" : "PERSON_1",
       "personBirthDate" : "1950-02-29",
       "medicalRiskLimitLevel" : "LEVEL_10000",
       "personPremium" : null,

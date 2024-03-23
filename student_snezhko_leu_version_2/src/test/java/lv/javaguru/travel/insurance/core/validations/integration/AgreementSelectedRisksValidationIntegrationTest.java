@@ -39,6 +39,7 @@ public class AgreementSelectedRisksValidationIntegrationTest {
                         .withLastName("Last")
                         .withMedicalRiskLimitLevel("LEVEL_10000")
                         .withBirthDate(createDate("2005-02-02"))
+                        .withIc("PERSON_0")
                         .build()
                 )
                 .build();
@@ -64,6 +65,7 @@ public class AgreementSelectedRisksValidationIntegrationTest {
                         .withLastName("Last")
                         .withMedicalRiskLimitLevel("LEVEL_10000")
                         .withBirthDate(createDate("2005-02-02"))
+                        .withIc("PERSON_0")
                         .build()
                 )
                 .build();

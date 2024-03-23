@@ -58,6 +58,7 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
         response.setCountry(request.getCountry());
         response.setPersonBirthDate(request.getPersonBirthDate());
         response.setMedicalRiskLimitLevel(request.getMedicalRiskLimitLevel());
+        response.setPersonIc(request.getPersonIc());
         return response;
     }
     public TravelCalculatePremiumResponseV1 buildResponse(List<ValidationError> errors) {

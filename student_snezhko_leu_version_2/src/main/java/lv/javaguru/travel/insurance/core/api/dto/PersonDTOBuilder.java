@@ -8,6 +8,8 @@ import java.util.List;
 public class PersonDTOBuilder {
     private String personFirstName;
     private String personLastName;
+
+    private String personIc;
     private Date birthDate;
     private BigDecimal personPremium;
     private String medicalRiskLimitLevel;
@@ -17,7 +19,7 @@ public class PersonDTOBuilder {
         return new PersonDTOBuilder();
     }
     public PersonDTO build() {
-        return new PersonDTO(personFirstName, personLastName, medicalRiskLimitLevel, birthDate, personPremium, personRisks);
+        return new PersonDTO(personFirstName, personLastName, personIc, medicalRiskLimitLevel, birthDate, personPremium, personRisks);
     }
 
     public PersonDTOBuilder withFirstName(String firstName) {
@@ -30,6 +32,10 @@ public class PersonDTOBuilder {
         return this;
     }
 
+    public PersonDTOBuilder withIc(String ic) {
+        this.personIc = ic;
+        return this;
+    }
     public PersonDTOBuilder withMedicalRiskLimitLevel(String medicalRiskLimitLevel) {
         this.medicalRiskLimitLevel = medicalRiskLimitLevel;
         return this;

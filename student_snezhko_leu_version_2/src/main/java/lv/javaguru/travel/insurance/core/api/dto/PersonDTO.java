@@ -22,6 +22,8 @@ public class PersonDTO {
     private String personFirstName;
 
     private String personLastName;
+
+    private String personIc;
     private String medicalRiskLimitLevel;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
