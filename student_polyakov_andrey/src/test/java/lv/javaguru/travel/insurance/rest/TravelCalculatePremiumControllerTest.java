@@ -155,4 +155,18 @@ public class TravelCalculatePremiumControllerTest {
                 "rest/TravelCalculatePremiumResponse_countryField_is_Null_selectedRisks_contains_MEDICAL.json"
         );
     }
+    @Test
+    public void simpleRestControllerTest_personBirthDateField_Is_Empty() throws Exception {
+        executeAndCompare(
+                "rest/TravelCalculatePremiumRequest_personBirthDateField_Is_Empty.json",
+                "rest/TravelCalculatePremiumResponse_personBirthDateField_Is_Empty.json"
+        );
+    }
+    @Test
+    public void simpleRestControllerTest_personBirthDateField_Is_Null() throws Exception {
+        executeAndCompare(
+                "rest/TravelCalculatePremiumRequest_personBirthDateField_Is_Null.json",
+                "rest/TravelCalculatePremiumResponse_personBirthDateField_Is_Null.json"
+        );
+    }
 }

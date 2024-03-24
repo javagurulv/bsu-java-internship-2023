@@ -1,7 +1,9 @@
 {
   "personFirstName" : "Vasya",
   "personLastName" : "Pupkin",
+  "personBirthDate" : "2000-05-29",
   "agreementDateFrom" : "2027-09-19",
   "agreementDateTo" : "2027-09-29",
+  "medicalRiskLimitLevel" : "LEVEL_10000",
   "selected_risks": ["FAKE_RISK_IC_1", "FAKE_RISK_IC_2"]
 }

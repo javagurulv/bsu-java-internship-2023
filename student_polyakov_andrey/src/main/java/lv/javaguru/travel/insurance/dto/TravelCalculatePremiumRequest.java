@@ -15,11 +15,14 @@ import java.util.List;
 public class TravelCalculatePremiumRequest {
     private String personFirstName;
     private String personLastName;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+    private Date personBirthDate;
     @JsonFormat(shape = JsonFormat.Shape.ARRAY)
     private List<String> selected_risks;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date agreementDateFrom;
     private String country;
+    private String medicalRiskLimitLevel;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date agreementDateTo;
 

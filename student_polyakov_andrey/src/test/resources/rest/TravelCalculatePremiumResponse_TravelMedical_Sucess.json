@@ -1,15 +1,17 @@
 {
+  "errors" : null,
   "personFirstName" : "Vasya",
   "personLastName" : "Pupkin",
+  "personBirthDate": "2000-05-29",
   "agreementDateFrom" : "2027-05-25",
   "agreementDateTo" : "2027-05-29",
-  "errors" : null,
   "country": "SPAIN",
-  "agreementPremium" : 10.00,
+  "medicalRiskLimitLevel" : "LEVEL_10000",
+  "agreementPremium" : 11.00,
   "risks" : [
     {
       "riskIc" : "TRAVEL_MEDICAL",
-      "premium" : 10.00
+      "premium" : 11.00
     },
     {
       "riskIc": "TRAVEL_CANCELLATION",
