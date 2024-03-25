@@ -1,0 +1,13 @@
+test_case_empty_birthday - entry birthday date is empty.
+test_case_empty_country - selected country is empty.
+test_case_empty_date_from - fateFrom field  is empty
+test_case_empty_date_to - fateTo field  is empty
+test_case_empty_first_name - firstName field  is empty
+test_case_empty_last_name - lastName field  is empty
+test_case_empty_selected_risk - selected Risk field  is empty
+test_case_future_birthday - birthday date bigger, than current date
+test_case_null_first_name - first name field is null
+test_case_null_last_name - last name field is null
+test_case_without_errors - right request
+test_case_wrong_day_difference - dateTo is bigger, than dateFrom
+test_case_wrong_limit - wrong limit field value

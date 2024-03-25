@@ -16,12 +16,12 @@ public class LimitLevelCalculator {
     private boolean medicalRiskLimitLevelEnabled;
     @Autowired private LimitLevelRepository limitLevelRepository;
     public BigDecimal calculate(TravelCalculatePremiumRequest request) {
-        if (medicalRiskLimitLevelEnabled) {
-            String requestLimitLevel = request.getMedicalRiskLimitLevel();
-            Optional<LimitLevel> limitLevel = limitLevelRepository.findByIc(requestLimitLevel);
-            return limitLevel.orElseThrow(()->new RuntimeException("Optional is empty")).getCoefficient();
-        } else {
-            return BigDecimal.ONE;
-        }
+        return (medicalRiskLimitLevelEnabled)
+                ? calculatePresentOptional(request)
+                : BigDecimal.ONE;
+    }
+    private BigDecimal calculatePresentOptional(TravelCalculatePremiumRequest request) {
+        return limitLevelRepository.findByIc(request.getMedicalRiskLimitLevel())
+                .orElseThrow(()->new RuntimeException("Optional is empty")).getCoefficient();
     }
 }

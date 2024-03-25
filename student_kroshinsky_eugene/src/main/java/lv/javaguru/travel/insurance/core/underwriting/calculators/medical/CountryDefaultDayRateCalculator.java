@@ -15,8 +15,7 @@ class CountryDefaultDayRateCalculator {
     @Autowired
     private CountryDefaultDayRateRepository repository;
     public BigDecimal calculate(TravelCalculatePremiumRequest request) {
-        String country = request.getCountry();
-        Optional<CountryDefaultDayRate> countryOptional = repository.findByIc(country);
-        return countryOptional.orElseThrow(()->new RuntimeException("Optional is empty")).getDayRate();
+        return repository.findByIc(request.getCountry())
+                .orElseThrow(()->new RuntimeException("Optional is empty")).getDayRate();
     }
 }

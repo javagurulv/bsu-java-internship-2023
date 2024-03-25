@@ -15,13 +15,9 @@ class TravelPremiumUnderwritingImpl implements TravelPremiumUnderwriting {
     @Autowired private List<TravelRiskPremiumCalculator> calculators;
     @Override
     public BigDecimal calculatePremium(TravelCalculatePremiumRequest request){
-        BigDecimal result = BigDecimal.ZERO;
-        List<String> selectedRisks = request.getSelectedRisks();
-        for (TravelRiskPremiumCalculator calculator : calculators) {
-            if (selectedRisks.contains(calculator.getRiskIc())) {
-                result = result.add(calculator.calculatePremium(request));
-            }
-        }
-        return result;
+        return calculators.stream()
+                .filter(c -> request.getSelectedRisks().contains(c.getRiskIc()))
+                .map(c -> c.calculatePremium(request))
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 }

@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 public class TravelSportCalculator implements TravelRiskPremiumCalculator {
     @Override
     public BigDecimal calculatePremium(TravelCalculatePremiumRequest request) {
-        return new BigDecimal(5);
+        return BigDecimal.valueOf(5);
     }
     @Override
     public String getRiskIc() {

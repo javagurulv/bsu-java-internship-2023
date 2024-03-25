@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 class TravelLossBagageCalculator implements TravelRiskPremiumCalculator {
     @Override
     public BigDecimal calculatePremium(TravelCalculatePremiumRequest request) {
-        return new BigDecimal(6);
+        return BigDecimal.valueOf(6);
     }
     @Override
     public String getRiskIc() {

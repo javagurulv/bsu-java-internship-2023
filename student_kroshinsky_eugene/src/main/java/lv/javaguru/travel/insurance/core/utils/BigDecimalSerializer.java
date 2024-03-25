@@ -17,5 +17,4 @@ public class BigDecimalSerializer extends JsonSerializer<BigDecimal> {
         value = value.setScale(2, RoundingMode.HALF_UP);
         gen.writeNumber(value.toPlainString());
     }
-
 }

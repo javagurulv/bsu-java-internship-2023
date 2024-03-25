@@ -25,9 +25,7 @@ class AgeCoefficientCalculator {
                 : BigDecimal.ONE;
     }
     private BigDecimal calculatePresentOptional(TravelCalculatePremiumRequest request) {
-        int age = ageUtil.calculateAge(request);
-        Optional<AgeCoefficient> ageCoefficientOptional = repository.findByAge(age);
-        return ageCoefficientOptional
+        return repository.findByAge(ageUtil.calculateAge(request))
                 .orElseThrow(()->new RuntimeException("Optional is empty")).getCoefficient();
     }
 }
