@@ -40,7 +40,7 @@ public class DtoV1Converter {
         PersonDTO person = agreement.getPersons().get(0);
 
         response.setAgreementPremium(result.getAgreement().getAgreementPremium().setScale(2, RoundingMode.HALF_UP));
-        response.setRisks(person.getPersonRisks().stream().map(this::fromRiskDTO).collect(Collectors.toList()));
+        response.setRisks(person.getSelectedRisks().stream().map(this::fromRiskDTO).collect(Collectors.toList()));
         response.setCountry(result.getAgreement().getCountry());
         response.setPersonBirthDate(person.getPersonBirthDate());
         response.setAgreementDateTo(agreement.getAgreementDateTo());
