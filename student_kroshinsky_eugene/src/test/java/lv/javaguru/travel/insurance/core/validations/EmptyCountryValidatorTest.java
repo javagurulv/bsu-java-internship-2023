@@ -31,8 +31,8 @@ class EmptyCountryValidatorTest {
     @Test
     void validateNullFirstNameTest() {
         when(request.getCountry()).thenReturn(null);
-        when(request.getSelectedRisks()).thenReturn(List.of("TRAVEL_MEDICAL"));
-        when(validationErrorFactory.createValidationError("ERROR_CODE_8")).thenReturn(expectedError);
+        when(validationErrorFactory.createValidationError("ERROR_CODE_8"))
+                .thenReturn(expectedError);
 
         Optional<ValidationError> validationError = validator.validate(request);
         assertTrue(validationError.isPresent());
@@ -41,15 +41,18 @@ class EmptyCountryValidatorTest {
     @Test
     void validateNoErrorsTest() {
         when(request.getCountry()).thenReturn("SPAIN");
-        when(request.getSelectedRisks()).thenReturn(List.of("TRAVEL_MEDICAL"));
         Optional<ValidationError> validationError = validator.validate(request);
         assertTrue(validationError.isEmpty());
     }
 
     @Test
     void validateNoErrorsNullTest() {
-        when(request.getSelectedRisks()).thenReturn(null);
+        when(request.getCountry()).thenReturn("");
+        when(validationErrorFactory.createValidationError("ERROR_CODE_8"))
+                .thenReturn(expectedError);
+
         Optional<ValidationError> validationError = validator.validate(request);
-        assertTrue(validationError.isEmpty());
+        assertTrue(validationError.isPresent());
+        assertEquals(expectedError, validationError.get());
     }
 }
