@@ -16,7 +16,7 @@ class EmptyAgeCoefficientValidator extends TravelRequestValidationImpl {
     private boolean ageCoefficientEnabled;
     @Override
     public Optional<ValidationError> validate(TravelCalculatePremiumRequest request) {
-        return (ageCoefficientEnabled && request.getDateOfBirth() != null && checkAge(request))
+        return (ageCoefficientEnabled && request.getPersonBirthDate() != null && checkAge(request))
                 ? Optional.of(validationErrorFactory.createValidationError("ERROR_CODE_11"))
                 : Optional.empty();
     }

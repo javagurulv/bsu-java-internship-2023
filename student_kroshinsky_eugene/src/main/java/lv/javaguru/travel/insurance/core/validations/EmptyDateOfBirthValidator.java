@@ -12,7 +12,7 @@ class EmptyDateOfBirthValidator extends TravelRequestValidationImpl {
     private ValidationErrorFactory validationErrorFactory;
     @Override
     public Optional<ValidationError> validate(TravelCalculatePremiumRequest request){
-        return (request.getDateOfBirth() == null)
+        return (request.getPersonBirthDate() == null)
                 ? Optional.of(validationErrorFactory.createValidationError("ERROR_CODE_9"))
                 : Optional.empty();
     }

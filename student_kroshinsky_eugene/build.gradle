@@ -3,13 +3,15 @@ plugins {
 }
 
 dependencies {
-	implementation ('org.liquibase:liquibase-core:4.2.2')
 	implementation('mysql:mysql-connector-java:8.0.22')
 	implementation('org.hibernate:hibernate-core:5.4.25.Final')
+	implementation ('org.liquibase:liquibase-core:4.2.2')
 
 	implementation('org.springframework.boot:spring-boot-starter-data-jpa:2.7.5')
 
 	implementation('org.springframework.boot:spring-boot-starter-web:2.7.5')
+
+	implementation('org.springframework.boot:spring-boot-starter-thymeleaf:2.7.5')
 
 	implementation('com.fasterxml.jackson.core:jackson-core:2.14.2')
 	implementation('com.google.guava:guava:31.0.1-jre')

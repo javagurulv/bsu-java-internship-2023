@@ -10,7 +10,7 @@ import java.time.ZoneId;
 @Component
 public class AgeUtil {
     public int calculateAge(TravelCalculatePremiumRequest request) {
-        LocalDate dateOfBirth = request.getDateOfBirth().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDate dateOfBirth = request.getPersonBirthDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         LocalDate currentDate = LocalDate.now();
         return Period.between(dateOfBirth, currentDate).getYears();
     }

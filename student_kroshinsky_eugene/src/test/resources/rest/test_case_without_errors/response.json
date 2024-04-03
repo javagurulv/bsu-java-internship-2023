@@ -20,6 +20,6 @@
       "premium": 11.00
     }
   ],
-  "dateOfBirth": "1999-05-29",
+  "personBirthDate": "1999-05-29",
   "medicalRiskLimitLevel": "LEVEL_10000"
 }

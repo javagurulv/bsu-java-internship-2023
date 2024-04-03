@@ -32,7 +32,7 @@ class EmptyDateOfBirthValidatorTest {
     }
     @Test
     void validateNullDateOfBirthTest() {
-        when(request.getDateOfBirth()).thenReturn(null);
+        when(request.getPersonBirthDate()).thenReturn(null);
         when(validationErrorFactory.createValidationError("ERROR_CODE_9")).thenReturn(expectedError);
         Optional<ValidationError> validationError = validator.validate(request);
         assertTrue(validationError.isPresent());
@@ -40,7 +40,7 @@ class EmptyDateOfBirthValidatorTest {
     }
     @Test
     void validateNoErrorsDateOfBirthTest() {
-        when(request.getDateOfBirth()).thenReturn(createDate("24.11.2030"));
+        when(request.getPersonBirthDate()).thenReturn(createDate("24.11.2030"));
         Optional<ValidationError> validationError = validator.validate(request);
         assertTrue(validationError.isEmpty());
     }

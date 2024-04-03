@@ -38,14 +38,14 @@ class EmptyAgeCoefficientValidatorTest {
     @Test
     void validateNoErrorsTest() {
         ReflectionTestUtils.setField(validator, "ageCoefficientEnabled", true);
-        when(request.getDateOfBirth()).thenReturn(createDate("12.11.2020"));
+        when(request.getPersonBirthDate()).thenReturn(createDate("12.11.2020"));
         Optional<ValidationError> validationError = validator.validate(request);
         assertTrue(validationError.isEmpty());
     }
     @Test
     void validateNegativeAgeTest() {
         ReflectionTestUtils.setField(validator, "ageCoefficientEnabled", true);
-        when(request.getDateOfBirth()).thenReturn(createDate("28.11.1900"));
+        when(request.getPersonBirthDate()).thenReturn(createDate("28.11.1900"));
         when(ageUtil.calculateAge(request)).thenReturn(-5);
         when(validationErrorFactory.createValidationError("ERROR_CODE_11")).thenReturn(expectedError);
         Optional<ValidationError> validationError = validator.validate(request);
@@ -55,7 +55,7 @@ class EmptyAgeCoefficientValidatorTest {
     @Test
     void validateBigAgeTest(){
         ReflectionTestUtils.setField(validator, "ageCoefficientEnabled", true);
-        when(request.getDateOfBirth()).thenReturn(createDate("28.11.1900"));
+        when(request.getPersonBirthDate()).thenReturn(createDate("28.11.1900"));
         when(ageUtil.calculateAge(request)).thenReturn(195);
         when(validationErrorFactory.createValidationError("ERROR_CODE_11")).thenReturn(expectedError);
         Optional<ValidationError> validationError = validator.validate(request);

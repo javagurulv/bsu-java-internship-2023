@@ -32,13 +32,13 @@ class FutureDateOfBirthValidatorTest {
     }
     @Test
     void validateNullDateFromPast() {
-        when(request.getDateOfBirth()).thenReturn(null);
+        when(request.getPersonBirthDate()).thenReturn(null);
         Optional<ValidationError> validationError = validator.validate(request);
         assertTrue(validationError.isEmpty());
     }
     @Test
     void validateDateFromPast() {
-        when(request.getDateOfBirth()).thenReturn(createDate("15.11.2030"));
+        when(request.getPersonBirthDate()).thenReturn(createDate("15.11.2030"));
         when(validationErrorFactory.createValidationError("ERROR_CODE_10")).thenReturn(expectedError);
         Optional<ValidationError> validationError = validator.validate(request);
         assertTrue(validationError.isPresent());
@@ -46,7 +46,7 @@ class FutureDateOfBirthValidatorTest {
     }
     @Test
     void validateNoErrorsDateFromPast() {
-        when(request.getDateOfBirth()).thenReturn(createDate("30.11.1999"));
+        when(request.getPersonBirthDate()).thenReturn(createDate("30.11.1999"));
         Optional<ValidationError> validationError = validator.validate(request);
         assertTrue(validationError.isEmpty());
     }

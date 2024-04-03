@@ -14,11 +14,11 @@ class FutureDateOfBirthValidator extends TravelRequestValidationImpl{
     private ValidationErrorFactory validationErrorFactory;
     @Override
     public Optional<ValidationError> validate(TravelCalculatePremiumRequest request) {
-        return (request.getDateOfBirth() != null && isDateOfBirthAfterCurrentDate(request))
+        return (request.getPersonBirthDate() != null && isDateOfBirthAfterCurrentDate(request))
                 ? Optional.of(validationErrorFactory.createValidationError("ERROR_CODE_10"))
                 : Optional.empty();
     }
     private Boolean isDateOfBirthAfterCurrentDate(TravelCalculatePremiumRequest request) {
-        return request.getDateOfBirth().after(new Date());
+        return request.getPersonBirthDate().after(new Date());
     }
 }

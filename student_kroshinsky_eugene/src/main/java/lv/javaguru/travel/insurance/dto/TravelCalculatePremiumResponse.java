@@ -10,6 +10,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lv.javaguru.travel.insurance.core.utils.BigDecimalSerializer;
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -20,9 +22,11 @@ public class TravelCalculatePremiumResponse extends CoreResponse{
     private String personLastName;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date agreementDateFrom;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date agreementDateTo;
 
     @JsonSerialize(using = BigDecimalSerializer.class)
@@ -33,7 +37,8 @@ public class TravelCalculatePremiumResponse extends CoreResponse{
     private List<TravelRisk> risks;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    private Date dateOfBirth;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date personBirthDate;
 
     private String medicalRiskLimitLevel;
 
