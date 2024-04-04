@@ -2,7 +2,7 @@ package lv.javaguru.travel.insurance.rest.loggers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumResponse;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumResponseV1;
 import org.slf4j.LoggerFactory;
 
 import org.slf4j.Logger;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 public class TravelCalculatePremiumResponseLogger {
     private static final Logger logger = LoggerFactory.getLogger(TravelCalculatePremiumResponseLogger.class);
 
-    public void logResponse(TravelCalculatePremiumResponse response) {
+    public void logResponse(TravelCalculatePremiumResponseV1 response) {
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             String json = objectMapper.writeValueAsString(response);

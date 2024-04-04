@@ -1,9 +1,6 @@
 package lv.javaguru.travel.insurance.rest.loggers;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Stopwatch;
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;

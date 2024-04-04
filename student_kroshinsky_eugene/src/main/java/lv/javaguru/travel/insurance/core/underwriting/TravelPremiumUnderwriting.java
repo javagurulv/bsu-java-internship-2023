@@ -1,11 +1,9 @@
 package lv.javaguru.travel.insurance.core.underwriting;
 
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
-import lv.javaguru.travel.insurance.dto.TravelRisk;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 public interface TravelPremiumUnderwriting {
-    BigDecimal calculatePremium(TravelCalculatePremiumRequest request);
+    BigDecimal calculatePremium(TravelCalculatePremiumRequestV1 request);
 }

@@ -1,7 +1,7 @@
 package lv.javaguru.travel.insurance.core.underwriting;
 
 import lv.javaguru.travel.insurance.core.underwriting.calculators.TravelRiskPremiumCalculator;
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import lv.javaguru.travel.insurance.dto.TravelRisk;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -13,7 +13,7 @@ public class SelectedRisksPremiumCalculatorImpl implements SelectedRisksPremiumC
     @Autowired
     private List<TravelRiskPremiumCalculator> calculators;
     @Override
-    public List<TravelRisk> calculateTravelRisksList(TravelCalculatePremiumRequest request) {
+    public List<TravelRisk> calculateTravelRisksList(TravelCalculatePremiumRequestV1 request) {
         List<TravelRisk> risks = new ArrayList<>();
         List<String> selectedRisks = request.getSelectedRisks();
         for (TravelRiskPremiumCalculator calculator : calculators) {

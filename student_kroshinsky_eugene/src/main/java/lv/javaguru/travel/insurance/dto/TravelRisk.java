@@ -2,7 +2,7 @@ package lv.javaguru.travel.insurance.dto;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.*;
-import lv.javaguru.travel.insurance.core.utils.BigDecimalSerializer;
+import lv.javaguru.travel.insurance.dto.util.BigDecimalSerializer;
 import java.math.BigDecimal;
 @Getter
 @Setter
