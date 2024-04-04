@@ -13,13 +13,13 @@ public class PersonDTOBuilder {
     private Date birthDate;
     private BigDecimal personPremium;
     private String medicalRiskLimitLevel;
-    private List<RiskDTO> personRisks = new ArrayList<>();
+    private List<RiskDTO> selectedRisks = new ArrayList<>();
 
     public static PersonDTOBuilder createPersonDTO() {
         return new PersonDTOBuilder();
     }
     public PersonDTO build() {
-        return new PersonDTO(personFirstName, personLastName, personIc, medicalRiskLimitLevel, birthDate, personPremium, personRisks);
+        return new PersonDTO(personFirstName, personLastName, personIc, medicalRiskLimitLevel, birthDate, personPremium, selectedRisks);
     }
 
     public PersonDTOBuilder withFirstName(String firstName) {
@@ -51,13 +51,13 @@ public class PersonDTOBuilder {
         return this;
     }
 
-    public PersonDTOBuilder withPersonRisks(RiskDTO risk) {
-        this.personRisks.add(risk);
+    public PersonDTOBuilder withSelectedRisks(RiskDTO risk) {
+        this.selectedRisks.add(risk);
         return this;
     }
 
     public PersonDTOBuilder withPersonRisk(RiskDTOBuilder risk) {
-        this.personRisks.add(risk.build());
+        this.selectedRisks.add(risk.build());
         return this;
     }
 }

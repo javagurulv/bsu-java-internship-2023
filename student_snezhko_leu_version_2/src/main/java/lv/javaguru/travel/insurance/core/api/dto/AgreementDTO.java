@@ -2,6 +2,7 @@ package lv.javaguru.travel.insurance.core.api.dto;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -33,8 +34,10 @@ public class AgreementDTO {
     @JsonSerialize(using = BigDecimalSerializer.class)
     private BigDecimal agreementPremium;
 
-    @JsonAlias(value = "selected_risks")
+    //@JsonAlias(value = "selected_risks")
+    @JsonProperty("selected_risks")
     private List<String> selectedRisks;
 
+    @JsonAlias("persons")
     private List<PersonDTO> persons;
 }
