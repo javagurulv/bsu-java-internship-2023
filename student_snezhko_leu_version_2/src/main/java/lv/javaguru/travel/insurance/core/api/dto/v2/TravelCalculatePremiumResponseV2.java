@@ -1,13 +1,13 @@
-package lv.javaguru.travel.insurance.core.api.dto;
+package lv.javaguru.travel.insurance.core.api.dto.v2;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lv.javaguru.travel.insurance.core.api.dto.RiskDTO;
+import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import lv.javaguru.travel.insurance.dto.util.BigDecimalSerializer;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -19,25 +19,24 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class AgreementDTO {
+public class TravelCalculatePremiumResponseV2 {
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date agreementDateFrom;
-
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private List<ValidationErrorDTO> errors;
+    @JsonAlias("agreement_date_to")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date agreementDateTo;
 
+    @JsonAlias("agreement_date_from")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date agreementDateFrom;
+
+    @JsonAlias("selected_risks")
+    private List<String> selectedRisks;
+
     private String country;
+
+    private List<PersonResponseV2DTO> persons;
 
     @JsonSerialize(using = BigDecimalSerializer.class)
     private BigDecimal agreementPremium;
-
-    //@JsonAlias(value = "selected_risks")
-    @JsonProperty("selected_risks")
-    private List<String> selectedRisks;
-
-    @JsonAlias("persons")
-    private List<PersonDTO> persons;
 }

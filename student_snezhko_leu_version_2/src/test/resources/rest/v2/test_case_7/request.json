@@ -12,7 +12,7 @@
         "personBirthDate" : "2056-05-29",
         "medicalRiskLimitLevel" : "LEVEL_10000",
         "personPremium" : null,
-        "personRisks" : null
+        "selected_risks" : null
       },
       {
         "personFirstName" : "Petja",
@@ -21,7 +21,7 @@
         "personBirthDate" : "1950-02-29",
         "medicalRiskLimitLevel" : "LEVEL_10000",
         "personPremium" : null,
-        "personRisks" : null
+        "selected_risks" : null
       }
     ]
   }

@@ -46,14 +46,14 @@ public class TravelCalculatePremiumServiceImpl implements TravelCalculatePremium
     private void calculatePremiumForEachRisk(AgreementDTO agreement) {
         agreement.getPersons().forEach(person -> {
             TravelPremiumCalculationResult result = underwriting.calculatePremium(agreement, person);
-            person.setPersonRisks(result.getRisks());
+            person.setSelectedRisks(result.getRisks());
             person.setPersonPremium(result.getTotalPremium());
         });
     }
 
     private BigDecimal calculateTotalPremium(AgreementDTO agreement) {
         return agreement.getPersons().stream()
-                .map(PersonDTO::getPersonRisks)
+                .map(PersonDTO::getSelectedRisks)
                 .flatMap(Collection::stream)
                 .map(RiskDTO::getPremium)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);

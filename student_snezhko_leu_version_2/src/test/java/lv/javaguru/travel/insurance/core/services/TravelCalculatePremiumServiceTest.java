@@ -47,7 +47,7 @@ public class TravelCalculatePremiumServiceTest {
         BigDecimal riskPremium = BigDecimal.ONE;
         BigDecimal totalPremium = BigDecimal.ONE;
         List<RiskDTO> risks = List.of(risk);
-        person.setPersonRisks(risks);
+        person.setSelectedRisks(risks);
         when(risk.getPremium()).thenReturn(riskPremium);
         agreement.setPersons(List.of(person));
         when(underwriting.calculatePremium(agreement, person)).thenReturn(new TravelPremiumCalculationResult(totalPremium, risks));
@@ -57,7 +57,7 @@ public class TravelCalculatePremiumServiceTest {
 
         TravelCalculatePremiumCoreResult result = service.calculatePremium(new TravelCalculatePremiumCoreCommand(agreement));
         assertEquals("", totalPremium, result.getAgreement().getAgreementPremium());
-        assertEquals("", riskPremium, result.getAgreement().getPersons().get(0).getPersonRisks().get(0).getPremium());
+        assertEquals("", riskPremium, result.getAgreement().getPersons().get(0).getSelectedRisks().get(0).getPremium());
     }
 
     @Test

@@ -12,7 +12,7 @@
         "personBirthDate" : null,
         "medicalRiskLimitLevel" : null,
         "personPremium" : null,
-        "personRisks" : null
+        "selected_risks" : null
       },
       {
         "personFirstName" : null,
@@ -21,7 +21,7 @@
         "personBirthDate" : null,
         "medicalRiskLimitLevel" : null,
         "personPremium" : null,
-        "personRisks" : null
+        "selected_risks" : null
       }
     ]
   }
