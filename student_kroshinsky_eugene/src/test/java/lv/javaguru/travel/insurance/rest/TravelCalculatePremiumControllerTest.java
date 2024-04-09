@@ -20,109 +20,23 @@ import static uk.org.webcompere.modelassert.json.JsonAssertions.assertJson;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class TravelCalculatePremiumControllerTest {
+public abstract class TravelCalculatePremiumControllerTest {
 
     @Autowired private MockMvc mockMvc;
     @Autowired private JsonFileService reader;
     private ObjectMapper mapper = new ObjectMapper();
+    private final String path = "rest/";
+    abstract protected String getPath();
 
-    @Test
-    public void controllerTestWithoutErrors() throws Exception {
-       simpleRestControllerTest(
-               "rest/TravelCalculatePremiumRequest_JsonFiles/TravelCalculatePremiumRequestWithoutErrors.json",
-               "rest/TravelCalculatePremiumResponse_JsonFiles/TravelCalculatePremiumResponseWithoutErrors.json"
-       );
-    }
-    @Test
-    public void controllerTestEmptyDateFrom() throws Exception {
-        simpleRestControllerTest(
-                "rest/TravelCalculatePremiumRequest_JsonFiles/TravelCalculatePremiumRequestEmptyDateFrom.json",
-                "rest/TravelCalculatePremiumResponse_JsonFiles/TravelCalculatePremiumResponseEmptyDateFrom.json"
-        );
-    }
-    @Test
-    public void controllerTestEmptyDateTo() throws Exception {
-        simpleRestControllerTest(
-                "rest/TravelCalculatePremiumRequest_JsonFiles/TravelCalculatePremiumRequestEmptyDateTo.json",
-                "rest/TravelCalculatePremiumResponse_JsonFiles/TravelCalculatePremiumResponseEmptyDateTo.json"
-        );
-    }
-    @Test
-    public void controllerTestEmptyFirstName() throws Exception {
-        simpleRestControllerTest(
-                "rest/TravelCalculatePremiumRequest_JsonFiles/TravelCalculatePremiumRequestEmptyFirstName.json",
-                "rest/TravelCalculatePremiumResponse_JsonFiles/TravelCalculatePremiumResponseEmptyFirstName.json"
-        );
-    }
-    @Test
-    public void controllerTestEmptyLastName() throws Exception {
-        simpleRestControllerTest(
-                "rest/TravelCalculatePremiumRequest_JsonFiles/TravelCalculatePremiumRequestEmptyLastName.json",
-                "rest/TravelCalculatePremiumResponse_JsonFiles/TravelCalculatePremiumResponseEmptyLastName.json"
-        );
-    }
-    @Test
-    public void controllerTestEmptyNullFirstName() throws Exception {
-        simpleRestControllerTest(
-                "rest/TravelCalculatePremiumRequest_JsonFiles/TravelCalculatePremiumRequestNullFirstName.json",
-                "rest/TravelCalculatePremiumResponse_JsonFiles/TravelCalculatePremiumResponseNullFirstName.json"
-        );
-    }
-    @Test
-    public void controllerTestEmptyNullLastName() throws Exception {
-        simpleRestControllerTest(
-                "rest/TravelCalculatePremiumRequest_JsonFiles/TravelCalculatePremiumRequestNullLastName.json",
-                "rest/TravelCalculatePremiumResponse_JsonFiles/TravelCalculatePremiumResponseNullLastName.json"
-        );
-    }
-    @Test
-    public void controllerTestEmptyWrongDateDifferance() throws Exception {
-        simpleRestControllerTest(
-                "rest/TravelCalculatePremiumRequest_JsonFiles/TravelCalculatePremiumRequestWrongDateDifferance.json",
-                "rest/TravelCalculatePremiumResponse_JsonFiles/TravelCalculatePremiumResponseWrongDateDifferance.json"
-        );
-    }
-    @Test
-    public void controllerTestEmptySelectedRisk() throws Exception {
-        simpleRestControllerTest(
-                "rest/TravelCalculatePremiumRequest_JsonFiles/TravelCalculatePremiumRequestEmptySelectedRisk.json",
-                "rest/TravelCalculatePremiumResponse_JsonFiles/TravelCalculatePremiumResponseEmptySelectedRisk.json"
-        );
-    }
-
-    @Test
-    public void controllerTestEmptyCountryRisk() throws Exception {
-        simpleRestControllerTest(
-                "rest/TravelCalculatePremiumRequest_JsonFiles/TravelCalculatePremiumRequestEmptyCountry.json",
-                "rest/TravelCalculatePremiumResponse_JsonFiles/TravelCalculatePremiumResponseEmptyCountry.json"
-        );
-    }
-    @Test
-    public void controllerTestEmptyBirthday() throws Exception {
-        simpleRestControllerTest(
-                "rest/TravelCalculatePremiumRequest_JsonFiles/TravelCalculatePremiumRequestEmptyBirthday.json",
-                "rest/TravelCalculatePremiumResponse_JsonFiles/TravelCalculatePremiumResponseEmptyBirthday.json"
-        );
-    }
-    @Test
-    public void controllerTestFutureBirthday() throws Exception {
-        simpleRestControllerTest(
-                "rest/TravelCalculatePremiumRequest_JsonFiles/TravelCalculatePremiumRequestFutureBirthday.json",
-                "rest/TravelCalculatePremiumResponse_JsonFiles/TravelCalculatePremiumResponseFutureBirthday.json"
-        );
-    }
-    @Test
-    public void controllerTestWrongLimit() throws Exception {
-        simpleRestControllerTest(
-                "rest/TravelCalculatePremiumRequest_JsonFiles/TravelCalculatePremiumRequestWrongLimit.json",
-                "rest/TravelCalculatePremiumResponse_JsonFiles/TravelCalculatePremiumResponseWrongLimit.json"
-        );
+    public void Test() throws Exception{
+        simpleRestControllerTest(path + getPath() + "/request.json",
+                path + getPath() + "/response.json");
     }
     private void simpleRestControllerTest(String requestPath, String responsePath) throws Exception {
         String requestJson = reader.readJsonFile(requestPath);
         String responseJson = reader.readJsonFile(responsePath);
 
-        MvcResult result = mockMvc.perform(post("/insurance/travel/")
+        MvcResult result = mockMvc.perform(post("/insurance/travel/api/")
                         .content(requestJson)
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())

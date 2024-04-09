@@ -1,6 +1,6 @@
 package lv.javaguru.travel.insurance.core.validations;
 
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -14,14 +14,13 @@ import java.util.Date;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class EmptyDateOfBirthValidatorTest {
     @Mock private ValidationError expectedError;
     @Mock private ValidationErrorFactory validationErrorFactory;
-    @Mock private TravelCalculatePremiumRequest request;
+    @Mock private TravelCalculatePremiumRequestV1 request;
     @InjectMocks private EmptyDateOfBirthValidator validator;
     @Test
     void injectedRepositoryAreNotNull() {
@@ -32,7 +31,7 @@ class EmptyDateOfBirthValidatorTest {
     }
     @Test
     void validateNullDateOfBirthTest() {
-        when(request.getDateOfBirth()).thenReturn(null);
+        when(request.getPersonBirthDate()).thenReturn(null);
         when(validationErrorFactory.createValidationError("ERROR_CODE_9")).thenReturn(expectedError);
         Optional<ValidationError> validationError = validator.validate(request);
         assertTrue(validationError.isPresent());
@@ -40,7 +39,7 @@ class EmptyDateOfBirthValidatorTest {
     }
     @Test
     void validateNoErrorsDateOfBirthTest() {
-        when(request.getDateOfBirth()).thenReturn(createDate("24.11.2030"));
+        when(request.getPersonBirthDate()).thenReturn(createDate("24.11.2030"));
         Optional<ValidationError> validationError = validator.validate(request);
         assertTrue(validationError.isEmpty());
     }

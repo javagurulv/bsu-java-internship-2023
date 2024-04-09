@@ -1,0 +1,17 @@
+{
+  "errors": [
+    {
+      "errorCode": "ERROR_CODE_8",
+      "description": "Field country can't be empty!"
+    }
+  ],
+  "personFirstName": null,
+  "personLastName": null,
+  "agreementDateFrom": null,
+  "agreementDateTo": null,
+  "agreementPremium": null,
+  "country": null,
+  "risks": null,
+  "personBirthDate": null,
+  "medicalRiskLimitLevel": null
+}

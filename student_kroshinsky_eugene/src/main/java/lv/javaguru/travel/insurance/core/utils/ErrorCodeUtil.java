@@ -23,12 +23,10 @@ public class ErrorCodeUtil {
         return properties.getProperty(key);
     }
     public String getErrorDescription(String errorCode, List<Placeholder> placeholders) {
-        String description = properties.getProperty(errorCode);
-        for (Placeholder placeholder : placeholders) {
-            String placeholderName = "{" + placeholder.getPlaceholderName() + "}";
-            String placeholderValue = placeholder.getPlaceholderValue();
-            description = description.replace(placeholderName, placeholderValue);
-        }
-        return description;
+        return placeholders.stream()
+                .reduce(properties.getProperty(errorCode),
+                        (desc, placeholder) ->
+                                desc.replace("{" + placeholder.getPlaceholderName() + "}",
+                                        placeholder.getPlaceholderValue()), (desc1, desc2) -> desc2);
     }
 }

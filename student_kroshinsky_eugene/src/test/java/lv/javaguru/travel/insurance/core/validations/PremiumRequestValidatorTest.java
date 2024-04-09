@@ -1,6 +1,6 @@
 package lv.javaguru.travel.insurance.core.validations;
 
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,7 +18,7 @@ import static org.mockito.Mockito.when;
 class PremiumRequestValidatorTest {
     @Mock private ValidationError expectedError;
     @Mock private TravelRequestValidation validationObject;
-    @Mock private  TravelCalculatePremiumRequest request;
+    @Mock private TravelCalculatePremiumRequestV1 request;
     @InjectMocks private PremiumRequestValidatorImp validator;
     @Test
     void injectedRepositoryAreNotNull() {

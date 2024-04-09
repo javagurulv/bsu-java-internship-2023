@@ -1,7 +1,7 @@
 package lv.javaguru.travel.insurance.core.underwriting.calculators.medical;
 
 import lv.javaguru.travel.insurance.core.underwriting.calculators.TravelRiskPremiumCalculator;
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,7 +14,7 @@ class TravelMedicalCalculator implements TravelRiskPremiumCalculator {
     @Autowired private DayCountCalculator dayCountCalculator;
     @Autowired private CountryDefaultDayRateCalculator countryDefaultDayRateCalculator;
     @Override
-    public BigDecimal calculatePremium(TravelCalculatePremiumRequest request) {
+    public BigDecimal calculatePremium(TravelCalculatePremiumRequestV1 request) {
         BigDecimal insuranceLimitCoefficient = limitLevelCalculator.calculate(request);
         BigDecimal ageCoefficient = ageCoefficientCalculator.calculate(request);
         BigDecimal countryDefaultDayPremium = countryDefaultDayRateCalculator.calculate(request);
