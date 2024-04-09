@@ -32,6 +32,8 @@ public class TravelCalculatePremiumServiceTest {
     @Mock
     private TravelUnderwriting underwriting;
 
+    @Mock
+    private PersonEntityService personEntityService;
     private AgreementDTO agreement = new AgreementDTO();
 
 

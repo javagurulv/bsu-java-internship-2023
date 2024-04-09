@@ -70,6 +70,17 @@ AUTO_INCREMENT = 1002;
 CREATE UNIQUE INDEX `ix_medical_risk_limit_level_limit_level_ic`
 ON `medical_risk_limit_level` (`medical_risk_limit_level_ic`);
 
+CREATE TABLE IF NOT EXISTS persons (
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    first_name VARCHAR(200) NOT NULL,
+    last_name VARCHAR(200) NOT NULL,
+    ic VARCHAR(200) NOT NULL UNIQUE,
+    birth_date DATE NOT NULL,
+    PRIMARY KEY(id)
+);
+
+CREATE UNIQUE INDEX ix_persons
+ON persons (first_name, last_name, ic);
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

@@ -229,3 +229,7 @@ VALUES('LEVEL_20000', 1.5);
 MERGE INTO medical_risk_limit_level(medical_risk_limit_level_ic, coefficient)
 KEY(medical_risk_limit_level_ic)
 VALUES('LEVEL_50000', 2.0);
+
+MERGE INTO persons(first_name, last_name, ic, birth_date)
+KEY(ic)
+VALUES('CorrectFirstName', 'CorrectLastName', 'CORRECT_IC', '2001-01-01');

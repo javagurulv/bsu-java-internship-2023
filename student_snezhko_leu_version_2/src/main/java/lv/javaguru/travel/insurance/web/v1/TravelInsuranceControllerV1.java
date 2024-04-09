@@ -1,9 +1,9 @@
 package lv.javaguru.travel.insurance.web.v1;
 
 import lv.javaguru.travel.insurance.core.services.TravelCalculatePremiumService;
-import lv.javaguru.travel.insurance.dto.v1.DtoV1Converter;
-import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
-import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumResponseV1;
+import lv.javaguru.travel.insurance.core.api.dto.v1.DtoV1Converter;
+import lv.javaguru.travel.insurance.core.api.dto.v1.TravelCalculatePremiumRequestV1;
+import lv.javaguru.travel.insurance.core.api.dto.v1.TravelCalculatePremiumResponseV1;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;

@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.dto.v1;
+package lv.javaguru.travel.insurance.core.api.dto.v1;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonFormat;

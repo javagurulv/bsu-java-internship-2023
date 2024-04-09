@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.dto.v1;
+package lv.javaguru.travel.insurance.core.api.dto.v1;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -6,10 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lv.javaguru.travel.insurance.dto.CoreResponse;
-import lv.javaguru.travel.insurance.dto.ValidationError;
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRisk;
-import lv.javaguru.travel.insurance.dto.util.BigDecimalSerializer;
+import lv.javaguru.travel.insurance.core.api.dto.util.BigDecimalSerializer;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;

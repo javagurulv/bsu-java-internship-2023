@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
+    <changeSet id="20" author="Leu">
+        <createTable tableName="persons">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="first_name" type="VARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_name" type="VARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ic" type="VARCHAR(200)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="birth_date" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="21" author="Leu">
+        <createIndex tableName="persons" indexName="ix_persons" unique="true">
+            <column name="first_name"/>
+            <column name="last_name"/>
+            <column name="ic"/>
+        </createIndex>
+    </changeSet>
+</databaseChangeLog>

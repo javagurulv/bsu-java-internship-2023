@@ -6,9 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lv.javaguru.travel.insurance.core.api.dto.RiskDTO;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
-import lv.javaguru.travel.insurance.dto.util.BigDecimalSerializer;
+import lv.javaguru.travel.insurance.core.api.dto.util.BigDecimalSerializer;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;

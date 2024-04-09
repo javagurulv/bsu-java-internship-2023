@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.dto;
+package lv.javaguru.travel.insurance.core.api.dto.v1;
 
 import lombok.*;
 import org.springframework.boot.context.properties.ConfigurationProperties;

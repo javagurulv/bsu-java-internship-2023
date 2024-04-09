@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.dto.v1;
+package lv.javaguru.travel.insurance.core.api.dto.v1;
 
 import lv.javaguru.travel.insurance.core.api.command.TravelCalculatePremiumCoreCommand;
 import lv.javaguru.travel.insurance.core.api.command.TravelCalculatePremiumCoreResult;
@@ -7,8 +7,6 @@ import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.api.dto.RiskDTO;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import lv.javaguru.travel.insurance.core.services.TravelCalculatePremiumService;
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRisk;
-import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.springframework.stereotype.Component;
 
 import java.math.RoundingMode;

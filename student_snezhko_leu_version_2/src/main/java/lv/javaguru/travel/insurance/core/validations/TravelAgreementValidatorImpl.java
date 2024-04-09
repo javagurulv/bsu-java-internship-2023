@@ -1,7 +1,7 @@
 package lv.javaguru.travel.insurance.core.validations;
 
 
-//import lv.javaguru.travel.insurance.dto.ValidationError;
+//import lv.javaguru.travel.insurance.dto.v1.ValidationError;
 
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;

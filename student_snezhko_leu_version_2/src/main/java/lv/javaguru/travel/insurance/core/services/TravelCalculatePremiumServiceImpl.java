@@ -24,6 +24,9 @@ public class TravelCalculatePremiumServiceImpl implements TravelCalculatePremium
     @Autowired
     private TravelUnderwriting underwriting;
 
+    @Autowired
+    private PersonEntityService personEntityService;
+
     @Override
     public TravelCalculatePremiumCoreResult calculatePremium(TravelCalculatePremiumCoreCommand command) {
         List<ValidationErrorDTO> errors = validator.validate(command.getAgreement());
@@ -36,6 +39,8 @@ public class TravelCalculatePremiumServiceImpl implements TravelCalculatePremium
     private TravelCalculatePremiumCoreResult buildResult(AgreementDTO agreement) {
         TravelCalculatePremiumCoreResult result = new TravelCalculatePremiumCoreResult();
         calculatePremiumForEachRisk(agreement);
+
+        agreement.getPersons().forEach(person -> personEntityService.getPersonEntity(person));
 
         BigDecimal totalPremium = calculateTotalPremium(agreement);
         agreement.setAgreementPremium(totalPremium);

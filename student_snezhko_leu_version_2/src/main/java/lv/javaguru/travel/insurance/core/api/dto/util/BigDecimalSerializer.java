@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.dto.util;
+package lv.javaguru.travel.insurance.core.api.dto.util;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
