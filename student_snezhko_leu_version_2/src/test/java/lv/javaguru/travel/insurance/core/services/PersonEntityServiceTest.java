@@ -2,8 +2,9 @@ package lv.javaguru.travel.insurance.core.services;
 
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTOBuilder;
-import lv.javaguru.travel.insurance.core.domain.PersonDTODomain;
-import lv.javaguru.travel.insurance.core.repositories.PersonRepository;
+import lv.javaguru.travel.insurance.core.domain.agreement.PersonDTODomain;
+import lv.javaguru.travel.insurance.core.repositories.agreement.PersonRepository;
+import lv.javaguru.travel.insurance.core.services.agreement.PersonEntityService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

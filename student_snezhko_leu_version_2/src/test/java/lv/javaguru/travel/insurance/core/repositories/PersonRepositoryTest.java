@@ -1,6 +1,7 @@
 package lv.javaguru.travel.insurance.core.repositories;
 
-import lv.javaguru.travel.insurance.core.domain.PersonDTODomain;
+import lv.javaguru.travel.insurance.core.domain.agreement.PersonDTODomain;
+import lv.javaguru.travel.insurance.core.repositories.agreement.PersonRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,6 @@
-package lv.javaguru.travel.insurance.core.domain;
+package lv.javaguru.travel.insurance.core.domain.calculate.builders;
+
+import lv.javaguru.travel.insurance.core.domain.calculate.CountryDefaultDayRate;
 
 import java.math.BigDecimal;
 

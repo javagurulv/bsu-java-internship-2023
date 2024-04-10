@@ -6,8 +6,10 @@ import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.api.dto.RiskDTO;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
+import lv.javaguru.travel.insurance.core.services.agreement.PersonEntityService;
 import lv.javaguru.travel.insurance.core.underwriting.TravelPremiumCalculationResult;
 import lv.javaguru.travel.insurance.core.underwriting.TravelUnderwriting;
+import lv.javaguru.travel.insurance.core.util.AgreementSaveUtil;
 import lv.javaguru.travel.insurance.core.validations.TravelAgreementValidator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -33,7 +35,7 @@ public class TravelCalculatePremiumServiceTest {
     private TravelUnderwriting underwriting;
 
     @Mock
-    private PersonEntityService personEntityService;
+    private AgreementSaveUtil agreementSaveUtil;
     private AgreementDTO agreement = new AgreementDTO();
 
 

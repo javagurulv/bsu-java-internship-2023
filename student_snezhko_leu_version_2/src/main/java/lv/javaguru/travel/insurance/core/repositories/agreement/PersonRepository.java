@@ -1,6 +1,6 @@
-package lv.javaguru.travel.insurance.core.repositories;
+package lv.javaguru.travel.insurance.core.repositories.agreement;
 
-import lv.javaguru.travel.insurance.core.domain.PersonDTODomain;
+import lv.javaguru.travel.insurance.core.domain.agreement.PersonDTODomain;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

@@ -2,21 +2,20 @@ package lv.javaguru.travel.insurance.core.underwriting.calculators.medical;
 
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
-import lv.javaguru.travel.insurance.core.domain.MedicalRiskLimitLevel;
-import lv.javaguru.travel.insurance.core.repositories.MedicalRiskLimitLevelRepository;
+import lv.javaguru.travel.insurance.core.domain.calculate.MedicalRiskLimitLevel;
+import lv.javaguru.travel.insurance.core.repositories.calculate.MedicalRiskLimitLevelRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.util.ReflectionTestUtils;
 
 import java.math.BigDecimal;
 import java.util.Optional;
 
 import static lv.javaguru.travel.insurance.core.api.dto.AgreementDTOBuilder.createAgreementDTO;
 import static lv.javaguru.travel.insurance.core.api.dto.PersonDTOBuilder.createPersonDTO;
-import static lv.javaguru.travel.insurance.core.domain.MedicalRiskLimitLevelBuilder.createMedicalRiskLimitLevel;
+import static lv.javaguru.travel.insurance.core.domain.calculate.builders.MedicalRiskLimitLevelBuilder.createMedicalRiskLimitLevel;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;

@@ -2,9 +2,9 @@ package lv.javaguru.travel.insurance.core.underwriting.calculators.medical;
 
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
-import lv.javaguru.travel.insurance.core.domain.AgeCoefficient;
-import lv.javaguru.travel.insurance.core.domain.CountryDefaultDayRate;
-import lv.javaguru.travel.insurance.core.domain.MedicalRiskLimitLevel;
+import lv.javaguru.travel.insurance.core.domain.calculate.AgeCoefficient;
+import lv.javaguru.travel.insurance.core.domain.calculate.CountryDefaultDayRate;
+import lv.javaguru.travel.insurance.core.domain.calculate.MedicalRiskLimitLevel;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -17,12 +17,11 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 import static lv.javaguru.travel.insurance.core.api.dto.AgreementDTOBuilder.createAgreementDTO;
 import static lv.javaguru.travel.insurance.core.api.dto.PersonDTOBuilder.createPersonDTO;
-import static lv.javaguru.travel.insurance.core.domain.CountryDefaultDayRateBuilder.createCountryDefaultDayRate;
-import static lv.javaguru.travel.insurance.core.domain.MedicalRiskLimitLevelBuilder.createMedicalRiskLimitLevel;
+import static lv.javaguru.travel.insurance.core.domain.calculate.builders.CountryDefaultDayRateBuilder.createCountryDefaultDayRate;
+import static lv.javaguru.travel.insurance.core.domain.calculate.builders.MedicalRiskLimitLevelBuilder.createMedicalRiskLimitLevel;
 import static lv.javaguru.travel.insurance.core.validations.integration.CreateDateUtil.createDate;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;

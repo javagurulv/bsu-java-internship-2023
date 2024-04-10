@@ -1,7 +1,8 @@
-package lv.javaguru.travel.insurance.core.domain;
+package lv.javaguru.travel.insurance.core.domain.calculate.builders;
+
+import lv.javaguru.travel.insurance.core.domain.calculate.AgeCoefficient;
 
 import java.math.BigDecimal;
-import java.util.Date;
 
 public class AgeCoefficientBuilder {
 

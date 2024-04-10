@@ -2,8 +2,7 @@ package lv.javaguru.travel.insurance.core.validations.agreement;
 
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
-import lv.javaguru.travel.insurance.core.repositories.ClassifierValueRepository;
-import lv.javaguru.travel.insurance.core.repositories.CountryDefaultDayRateRepository;
+import lv.javaguru.travel.insurance.core.repositories.calculate.ClassifierValueRepository;
 import lv.javaguru.travel.insurance.core.util.Placeholder;
 import lv.javaguru.travel.insurance.core.validations.ValidationErrorFactory;
 import org.springframework.beans.factory.annotation.Autowired;

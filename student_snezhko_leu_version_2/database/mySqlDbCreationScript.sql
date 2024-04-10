@@ -82,6 +82,14 @@ CREATE TABLE IF NOT EXISTS persons (
 CREATE UNIQUE INDEX ix_persons
 ON persons (first_name, last_name, ic);
 
+CREATE TABLE IF NOT EXISTS agreements (
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    date_from DATE not null,
+    date_to DATE not null,
+    country VARCHAR(30) not null,
+    premium DECIMAL(19,2) not null,
+    PRIMARY KEY(id)
+);
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

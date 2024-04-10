@@ -1,13 +1,12 @@
-package lv.javaguru.travel.insurance.core.services;
+package lv.javaguru.travel.insurance.core.services.agreement;
 
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
-import lv.javaguru.travel.insurance.core.domain.PersonDTODomain;
-import lv.javaguru.travel.insurance.core.repositories.PersonRepository;
+import lv.javaguru.travel.insurance.core.domain.agreement.PersonDTODomain;
+import lv.javaguru.travel.insurance.core.repositories.agreement.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.sql.Date;
-import java.util.List;
 import java.util.Optional;
 
 @Component

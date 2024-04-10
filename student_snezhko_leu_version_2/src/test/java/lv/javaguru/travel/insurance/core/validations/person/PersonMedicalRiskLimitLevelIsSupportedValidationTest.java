@@ -1,11 +1,9 @@
 package lv.javaguru.travel.insurance.core.validations.person;
 
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
-import lv.javaguru.travel.insurance.core.domain.ClassifierValue;
-import lv.javaguru.travel.insurance.core.repositories.ClassifierValueRepository;
+import lv.javaguru.travel.insurance.core.domain.calculate.ClassifierValue;
+import lv.javaguru.travel.insurance.core.repositories.calculate.ClassifierValueRepository;
 import lv.javaguru.travel.insurance.core.util.Placeholder;
-import lv.javaguru.travel.insurance.core.validations.agreement.AbstractAgreementValidationTest;
-import lv.javaguru.travel.insurance.core.validations.person.PersonMedicalRiskLimitLevelIsSupportedValidation;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;

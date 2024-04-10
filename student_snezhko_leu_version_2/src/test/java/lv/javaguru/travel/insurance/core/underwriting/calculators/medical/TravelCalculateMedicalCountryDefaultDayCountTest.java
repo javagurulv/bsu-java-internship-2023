@@ -2,8 +2,8 @@ package lv.javaguru.travel.insurance.core.underwriting.calculators.medical;
 
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
-import lv.javaguru.travel.insurance.core.domain.CountryDefaultDayRate;
-import lv.javaguru.travel.insurance.core.repositories.CountryDefaultDayRateRepository;
+import lv.javaguru.travel.insurance.core.domain.calculate.CountryDefaultDayRate;
+import lv.javaguru.travel.insurance.core.repositories.calculate.CountryDefaultDayRateRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -16,7 +16,7 @@ import java.util.Optional;
 
 import static lv.javaguru.travel.insurance.core.api.dto.AgreementDTOBuilder.createAgreementDTO;
 import static lv.javaguru.travel.insurance.core.api.dto.PersonDTOBuilder.createPersonDTO;
-import static lv.javaguru.travel.insurance.core.domain.CountryDefaultDayRateBuilder.createCountryDefaultDayRate;
+import static lv.javaguru.travel.insurance.core.domain.calculate.builders.CountryDefaultDayRateBuilder.createCountryDefaultDayRate;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
