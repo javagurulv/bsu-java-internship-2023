@@ -7,6 +7,7 @@ import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.api.dto.RiskDTO;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 public class ConverterV2DTO {
     public static TravelCalculatePremiumCoreCommand buildCommand(TravelCalculatePremiumRequestV2 request) {
@@ -56,11 +57,18 @@ public class ConverterV2DTO {
         agreement.setAgreementDateFrom(request.getAgreementDateFrom());
         agreement.setCountry(request.getCountry());
         agreement.setSelectedRisks(request.getSelectedRisks());
-        agreement.setPersons(request.getPersons().stream().map(ConverterV2DTO::buildPerson).toList());
+        if (request.getPersons() == null || request.getPersons().isEmpty()) {
+            agreement.setPersons(List.of());
+        } else{
+                agreement.setPersons(request.getPersons().stream().map(ConverterV2DTO::buildPerson).toList());
+            }
         return agreement;
     }
 
     private static TravelCalculatePremiumRequestV2 prepareRequest(TravelCalculatePremiumRequestV2 request) {
+        if (request.getPersons() == null || request.getPersons().isEmpty()) {
+            return request;
+        }
         request.getPersons().forEach(p -> p.setSelectedRisks(request.getSelectedRisks()));
         for (int i = 0; i < request.getPersons().size(); i++) {
             request.getPersons().get(i).setPersonIc("PERSON_#"+i);

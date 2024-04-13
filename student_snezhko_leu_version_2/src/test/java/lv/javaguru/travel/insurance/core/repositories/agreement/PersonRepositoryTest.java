@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.core.repositories;
+package lv.javaguru.travel.insurance.core.repositories.agreement;
 
 import lv.javaguru.travel.insurance.core.domain.agreement.PersonDTODomain;
 import lv.javaguru.travel.insurance.core.repositories.agreement.PersonRepository;

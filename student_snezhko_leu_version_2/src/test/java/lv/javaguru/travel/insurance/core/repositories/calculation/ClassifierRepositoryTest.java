@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.core.repositories;
+package lv.javaguru.travel.insurance.core.repositories.calculation;
 
 import lv.javaguru.travel.insurance.core.domain.calculate.Classifier;
 import lv.javaguru.travel.insurance.core.repositories.calculate.ClassifierRepository;

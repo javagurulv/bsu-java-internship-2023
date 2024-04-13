@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
+    <changeSet id="23" author="Leu">
+        <createTable tableName="selected_risks">
+            <column name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="risk_ic" type="VARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="agreement" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="24" author="Leu">
+        <addForeignKeyConstraint baseTableName="selected_risks"
+                                 baseColumnNames="agreement"
+                                 constraintName="ix_selected_risks_agreement_id"
+                                 referencedTableName="agreements"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+    <changeSet id="25" author="Leu">
+        <addAutoIncrement tableName="selected_risks" columnDataType="BIGINT" columnName="id"/>
+    </changeSet>
+</databaseChangeLog>

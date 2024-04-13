@@ -73,3 +73,13 @@ CREATE TABLE IF NOT EXISTS agreements (
     premium DECIMAL(19,2) not null,
     PRIMARY KEY(id)
 );
+
+CREATE TABLE IF NOT EXISTS selected_risks(
+    id BIGINT not null AUTO_INCREMENT,
+    risk_ic VARCHAR(200) NOT NULL,
+    agreement BIGINT NOT NULL,
+    PRIMARY KEY(id)
+);
+
+ALTER TABLE selected_risks
+add foreign key(agreement) references agreements(id);

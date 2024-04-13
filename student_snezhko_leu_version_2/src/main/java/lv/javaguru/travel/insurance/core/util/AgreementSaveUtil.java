@@ -1,6 +1,7 @@
 package lv.javaguru.travel.insurance.core.util;
 
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
+import lv.javaguru.travel.insurance.core.services.agreement.AgreementRiskEntityService;
 import lv.javaguru.travel.insurance.core.services.agreement.PersonEntityService;
 import lv.javaguru.travel.insurance.core.services.agreement.AgreementEntityService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +15,11 @@ public class AgreementSaveUtil {
     @Autowired
     private PersonEntityService personEntityService;
 
+    @Autowired
+    private AgreementRiskEntityService riskEntityService;
     public void saveAll(AgreementDTO agreementDTO) {
         agreementEntityService.saveAgreement(agreementDTO);
         agreementDTO.getPersons().forEach(person-> personEntityService.getPersonEntity(person));
+        riskEntityService.saveRisks(agreementDTO);
     }
 }

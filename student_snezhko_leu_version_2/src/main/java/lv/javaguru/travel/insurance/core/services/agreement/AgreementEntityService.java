@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
+import java.util.Optional;
 
 @Service
 public class AgreementEntityService {
@@ -14,12 +15,20 @@ public class AgreementEntityService {
     private AgreementEntityRepository agreementEntityRepository;
 
     public AgreementEntityDomain saveAgreement(AgreementDTO agreement) {
-        AgreementEntityDomain domain = new AgreementEntityDomain();
-        domain.setDateFrom(new Date(agreement.getAgreementDateFrom().getTime()));
-        domain.setDateTo(new Date(agreement.getAgreementDateTo().getTime()));
-        domain.setCountry(agreement.getCountry());
-        domain.setPremium(agreement.getAgreementPremium());
-        agreementEntityRepository.save(domain);
-        return domain;
+        Optional<AgreementEntityDomain> domainOptional = agreementEntityRepository.findBy(
+                new Date(agreement.getAgreementDateFrom().getTime()),
+                new Date(agreement.getAgreementDateTo().getTime()),
+                agreement.getCountry(),
+                agreement.getAgreementPremium());
+        if (domainOptional.isEmpty()) {
+            AgreementEntityDomain domain = new AgreementEntityDomain();
+            domain.setDateFrom(new Date(agreement.getAgreementDateFrom().getTime()));
+            domain.setDateTo(new Date(agreement.getAgreementDateTo().getTime()));
+            domain.setCountry(agreement.getCountry());
+            domain.setPremium(agreement.getAgreementPremium());
+            agreementEntityRepository.save(domain);
+            return domain;
+        }
+        return domainOptional.get();
     }
 }
