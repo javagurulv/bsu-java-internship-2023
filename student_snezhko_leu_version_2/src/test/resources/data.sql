@@ -242,3 +242,20 @@ KEY (risk_ic)
 SELECT 'CORRECT_RISK_IC',
         agr.id
 FROM agreements AS agr;
+
+MERGE into agreement_persons(first_name,
+                            last_name,
+                            person_ic,
+                            agreement,
+                            birth_date,
+                            medical_risk_limit_level,
+                            premium)
+KEY(person_ic)
+SELECT 'CorrectFirstName',
+        'CorrectLastName',
+        'CORRECT_PERSON_IC',
+        agr.id,
+        '2005-02-02',
+        'CORRECT_MEDICAL_RISK_LIMIT_LEVEL',
+        10
+FROM agreements AS agr;

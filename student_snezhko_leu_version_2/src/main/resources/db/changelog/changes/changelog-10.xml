@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
+        <changeSet id="26" author="Leu">
+            <createTable tableName="agreement_persons">
+                <column name = "id" type="BIGINT">
+                    <constraints primaryKey="true"/>
+                </column>
+
+                <column name="first_name" type="VARCHAR(200)">
+                    <constraints nullable="false"/>
+                </column>
+
+                <column name="last_name" type="VARCHAR(200)">
+                    <constraints nullable="false"/>
+                </column>
+
+                <column name="birth_date" type="DATE">
+                    <constraints nullable="false"/>
+                </column>
+
+                <column name="agreement" type="BIGINT">
+                    <constraints nullable="false"/>
+                </column>
+
+                <column name="person_ic" type="VARCHAR(200)">
+                    <constraints nullable="false" unique="true"/>
+                </column>
+
+                <column name="medical_risk_limit_level" type="VARCHAR(200)">
+                    <constraints nullable="false"/>
+                </column>
+
+                <column name="premium" type="DECIMAL(10,2)">
+                    <constraints nullable="false"/>
+                </column>
+            </createTable>
+        </changeSet>
+
+    <changeSet id="27" author="Leu">
+        <addForeignKeyConstraint baseTableName="agreement_persons" baseColumnNames="agreement"
+                                 constraintName="ix_persons_agreement_id"
+                                 referencedTableName="agreements"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+    <changeSet id="28" author="Leu">
+        <addAutoIncrement tableName="agreement_persons" columnDataType="BIGINT" columnName="id"/>
+    </changeSet>
+</databaseChangeLog>

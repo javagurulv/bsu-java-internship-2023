@@ -83,3 +83,18 @@ CREATE TABLE IF NOT EXISTS selected_risks(
 
 ALTER TABLE selected_risks
 add foreign key(agreement) references agreements(id);
+
+CREATE TABLE IF NOT EXISTS agreement_persons(
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    first_name VARCHAR(200) NOT NULL,
+    last_name VARCHAR(200) NOT NULL,
+    birth_date DATE NOT NULL,
+    agreement BIGINT NOT NULL,
+    medical_risk_limit_level VARCHAR(200) NOT NULL,
+    premium DECIMAL(10,2) NOT NULL,
+    person_ic VARCHAR(200) NOT NULL UNIQUE,
+    PRIMARY KEY(id)
+);
+
+ALTER TABLE agreement_persons
+ADD FOREIGN KEY(agreement) REFERENCES agreements(id);
