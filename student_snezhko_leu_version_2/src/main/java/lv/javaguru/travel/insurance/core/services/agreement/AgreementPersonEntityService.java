@@ -1,6 +1,7 @@
 package lv.javaguru.travel.insurance.core.services.agreement;
 
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
+import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.domain.agreement.AgreementEntityDomain;
 import lv.javaguru.travel.insurance.core.domain.agreement.AgreementPersonEntityDomain;
 import lv.javaguru.travel.insurance.core.repositories.agreement.AgreementPersonEntityRepository;
@@ -19,6 +20,30 @@ public class AgreementPersonEntityService {
     @Autowired
     private AgreementEntityService agreementEntityService;
 
+    public AgreementPersonEntityDomain savePerson(PersonDTO person, AgreementEntityDomain agreementDomain) {
+        Optional<AgreementPersonEntityDomain> optional = agreementPersonEntityRepository.findByName(
+                person.getPersonFirstName(),
+                person.getPersonLastName(),
+                person.getPersonIc()
+        );
+
+        if (optional.isPresent()) {
+            return optional.get();
+        }
+
+        AgreementPersonEntityDomain newDomain = new AgreementPersonEntityDomain();
+        newDomain.setFirstName(person.getPersonFirstName());
+        newDomain.setLastName(person.getPersonLastName());
+        newDomain.setPersonIc(person.getPersonIc() + "_AGR_#" + agreementDomain.getId());
+        newDomain.setBirthDate(new Date(person.getPersonBirthDate().getTime()));
+        newDomain.setMedicalRiskLimitLevel(person.getMedicalRiskLimitLevel());
+        newDomain.setPremium(person.getPersonPremium());
+        newDomain.setAgreement(agreementDomain);
+
+        agreementPersonEntityRepository.save(newDomain);
+
+        return newDomain;
+    }
     public List<AgreementPersonEntityDomain> savePersons(AgreementDTO agreementDTO) {
         AgreementEntityDomain agreementDomain = agreementEntityService.saveAgreement(agreementDTO);
         return agreementDTO.getPersons().stream().map(person -> {
@@ -36,7 +61,6 @@ public class AgreementPersonEntityService {
             newDomain.setBirthDate(new Date(person.getPersonBirthDate().getTime()));
             newDomain.setMedicalRiskLimitLevel(person.getMedicalRiskLimitLevel());
             newDomain.setPremium(person.getPersonPremium());
-
             newDomain.setAgreement(agreementDomain);
 
             agreementPersonEntityRepository.save(newDomain);

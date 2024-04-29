@@ -232,7 +232,7 @@ VALUES('LEVEL_50000', 2.0);
 
 MERGE INTO persons(first_name, last_name, ic, birth_date)
 KEY(ic)
-VALUES('CorrectFirstName', 'CorrectLastName', 'CORRECT_IC', '2001-01-01');
+VALUES('CorrectFirstName', 'CorrectLastName', 'CORRECT_IC_AGR_#1', '2001-01-01');
 
 insert INTO agreements(date_from, date_to, country, premium)
 VALUES('2050-02-02', '2050-02-03', 'SPAIN', 1);
@@ -259,3 +259,11 @@ SELECT 'CorrectFirstName',
         'CORRECT_MEDICAL_RISK_LIMIT_LEVEL',
         10
 FROM agreements AS agr;
+
+MERGE INTO person_risks(risk_ic, premium, person)
+KEY(risk_ic, person)
+SELECT
+    'CORRECT_RISK_IC',
+    2,
+    p.id
+from persons as p;

@@ -1,12 +1,15 @@
 package lv.javaguru.travel.insurance.core.util;
 
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
-import lv.javaguru.travel.insurance.core.services.agreement.AgreementPersonEntityService;
-import lv.javaguru.travel.insurance.core.services.agreement.AgreementRiskEntityService;
-import lv.javaguru.travel.insurance.core.services.agreement.PersonEntityService;
-import lv.javaguru.travel.insurance.core.services.agreement.AgreementEntityService;
+import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
+import lv.javaguru.travel.insurance.core.domain.agreement.*;
+import lv.javaguru.travel.insurance.core.services.agreement.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.LinkedList;
+import java.util.List;
+
 /*
     risk service saves it's agreement if it hasn't saved
     agreement service saves each its person
@@ -25,10 +28,37 @@ public class AgreementSaveUtil {
 
     @Autowired
     private AgreementPersonEntityService agreementPersonEntityService;
-    public void saveAll(AgreementDTO agreementDTO) {
-        agreementEntityService.saveAgreement(agreementDTO);
-        agreementDTO.getPersons().forEach(person-> personEntityService.getPersonEntity(person));
-        agreementPersonEntityService.savePersons(agreementDTO);
-        riskEntityService.saveRisks(agreementDTO);
+    @Autowired
+    private PersonRiskEntityService personRiskEntityService;
+    public void saveAgreement(AgreementDTO agreementDTO) {
+        AgreementEntityDomain agreementEntityDomain = agreementEntityService.saveAgreement(agreementDTO);
+
+        List<PersonDTODomain> personDTOs = agreementDTO.getPersons().stream().map(person-> personEntityService.getPersonEntity(person, agreementEntityDomain)).toList();
+        List<PersonRiskEntityDomain> personRisks = new LinkedList<>();
+        List<AgreementPersonEntityDomain> personDomains =
+                agreementDTO.getPersons().stream().map(
+                        person -> {
+                            AgreementPersonEntityDomain personEntityDomain =
+                                    agreementPersonEntityService.savePerson(
+                                            person, agreementEntityDomain
+                                    );
+                            personRisks.addAll(
+                                person.getSelectedRisks().stream().map(
+                                        risk -> {
+                                            return personRiskEntityService.savePersonRisk(risk, personEntityDomain);
+                                        })
+                                        .toList()
+                            );
+                       return personEntityDomain;
+                        })
+                        .toList();
+
+        List<AgreementRiskEntityDomain> agreementRisks = agreementDTO.getSelectedRisks().stream().map(riskIc -> {
+            return riskEntityService.saveRisk(riskIc, agreementEntityDomain);
+        }).toList();
+
+//        List<AgreementPersonEntityDomain> persons = agreementPersonEntityService.savePersons(agreementDTO);
+        //riskEntityService.saveRisks(agreementDTO, agreementEntityDomain);
+
     }
 }

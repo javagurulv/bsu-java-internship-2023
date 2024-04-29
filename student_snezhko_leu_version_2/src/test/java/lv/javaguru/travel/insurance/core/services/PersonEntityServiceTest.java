@@ -2,6 +2,7 @@ package lv.javaguru.travel.insurance.core.services;
 
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTOBuilder;
+import lv.javaguru.travel.insurance.core.domain.agreement.AgreementEntityDomain;
 import lv.javaguru.travel.insurance.core.domain.agreement.PersonDTODomain;
 import lv.javaguru.travel.insurance.core.repositories.agreement.PersonRepository;
 import lv.javaguru.travel.insurance.core.services.agreement.PersonEntityService;
@@ -27,6 +28,8 @@ public class PersonEntityServiceTest {
 
     PersonDTO personDTO;
 
+    AgreementEntityDomain agreementDomain = new AgreementEntityDomain();
+
     @Test
     public void correctCreatePersonDomainTest() {
         String firstName = "FirstName";
@@ -40,11 +43,11 @@ public class PersonEntityServiceTest {
                 .withIc(ic)
                 .build();
         when(personRepository.findBy(firstName, lastName, ic)).thenReturn(Optional.empty());
-
-        PersonDTODomain domain = service.getPersonEntity(personDTO);
+        agreementDomain.setId(1L);
+        PersonDTODomain domain = service.getPersonEntity(personDTO, agreementDomain);
         assertEquals("", firstName, domain.getPersonFirstName());
         assertEquals("", lastName, domain.getPersonLastName());
         assertEquals("", birthDate, domain.getPersonBirthDate());
-        assertEquals("", ic, domain.getPersonIc());
+        assertEquals("", ic + "_AGR_#" + agreementDomain.getId(), domain.getPersonIc());
     }
 }

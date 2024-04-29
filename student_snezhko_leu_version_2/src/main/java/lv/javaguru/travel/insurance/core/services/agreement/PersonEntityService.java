@@ -1,6 +1,7 @@
 package lv.javaguru.travel.insurance.core.services.agreement;
 
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
+import lv.javaguru.travel.insurance.core.domain.agreement.AgreementEntityDomain;
 import lv.javaguru.travel.insurance.core.domain.agreement.PersonDTODomain;
 import lv.javaguru.travel.insurance.core.repositories.agreement.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,7 @@ public class PersonEntityService {
     @Autowired
     private PersonRepository personRepository;
 
-    public PersonDTODomain getPersonEntity(PersonDTO person) {
+    public PersonDTODomain getPersonEntity(PersonDTO person, AgreementEntityDomain agreement) {
         Optional<PersonDTODomain> entity = personRepository.findBy(
                 person.getPersonFirstName(),
                 person.getPersonLastName(),
@@ -26,7 +27,7 @@ public class PersonEntityService {
         PersonDTODomain result = new PersonDTODomain();
         result.setPersonFirstName(person.getPersonFirstName());
         result.setPersonLastName(person.getPersonLastName());
-        result.setPersonIc(person.getPersonIc());
+        result.setPersonIc(person.getPersonIc() + "_AGR_#" + agreement.getId());
         result.setPersonBirthDate(new Date(person.getPersonBirthDate().getTime()));
         personRepository.save(result);
         return result;

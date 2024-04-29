@@ -98,3 +98,14 @@ CREATE TABLE IF NOT EXISTS agreement_persons(
 
 ALTER TABLE agreement_persons
 ADD FOREIGN KEY(agreement) REFERENCES agreements(id);
+
+CREATE TABLE IF NOT EXISTS person_risks(
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    risk_ic VARCHAR(200) NOT NULL,
+    premium DECIMAL(10, 2) NOT NULL,
+    person BIGINT NOT NULL,
+    PRIMARY KEY(id)
+);
+
+ALTER TABLE person_risks
+ADD FOREIGN KEY(person) REFERENCES persons(id);

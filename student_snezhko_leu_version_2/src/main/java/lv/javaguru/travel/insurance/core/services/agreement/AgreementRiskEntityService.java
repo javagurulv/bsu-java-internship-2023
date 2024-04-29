@@ -1,6 +1,8 @@
 package lv.javaguru.travel.insurance.core.services.agreement;
 
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
+import lv.javaguru.travel.insurance.core.api.dto.RiskDTO;
+import lv.javaguru.travel.insurance.core.domain.agreement.AgreementEntityDomain;
 import lv.javaguru.travel.insurance.core.domain.agreement.AgreementRiskEntityDomain;
 import lv.javaguru.travel.insurance.core.repositories.agreement.AgreementRiskEntityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,15 +16,25 @@ public class AgreementRiskEntityService {
     @Autowired
     private AgreementRiskEntityRepository agreementRiskEntityRepository;
 
-    @Autowired
-    private AgreementEntityService agreementEntityService;
-    public List<AgreementRiskEntityDomain> saveRisks(AgreementDTO agreementDTO) {
+    public AgreementRiskEntityDomain saveRisk(String riskIc, AgreementEntityDomain agreementDomain) {
+        Optional<AgreementRiskEntityDomain> optional = agreementRiskEntityRepository.findByRiskIc(riskIc);
+        if (optional.isPresent()) {
+            return optional.get();
+        }
+
+        AgreementRiskEntityDomain domain = new AgreementRiskEntityDomain();
+        domain.setRiskIc(riskIc);
+        domain.setAgreement(agreementDomain);
+        agreementRiskEntityRepository.save(domain);
+        return domain;
+    }
+    public List<AgreementRiskEntityDomain> saveRisks(AgreementDTO agreementDTO, AgreementEntityDomain agreementEntityDomain) {
         return agreementDTO.getSelectedRisks().stream().map(riskIc -> {
             Optional<AgreementRiskEntityDomain> optional = agreementRiskEntityRepository.findByRiskIc(riskIc);
             if (optional.isEmpty()) {
                 AgreementRiskEntityDomain domain = new AgreementRiskEntityDomain();
                 domain.setRiskIc(riskIc);
-                domain.setAgreement(agreementEntityService.saveAgreement(agreementDTO));
+                domain.setAgreement(agreementEntityDomain);
                 agreementRiskEntityRepository.save(domain);
                 return domain;
             }
