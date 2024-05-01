@@ -10,7 +10,7 @@
       {
         "personFirstName": "Vasja",
         "personLastName": "Pupkin",
-        "personIc" : "PERSON_0",
+        "personIc" : "Person_0",
         "personBirthDate": "2000-05-29",
         "medicalRiskLimitLevel" : "LEVEL_10000",
         "personPremium": 11.00,

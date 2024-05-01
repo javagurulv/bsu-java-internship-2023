@@ -6,6 +6,7 @@ import lv.javaguru.travel.insurance.core.domain.agreement.AgreementEntityDomain;
 import lv.javaguru.travel.insurance.core.domain.agreement.PersonDTODomain;
 import lv.javaguru.travel.insurance.core.repositories.agreement.PersonRepository;
 import lv.javaguru.travel.insurance.core.services.agreement.PersonEntityService;
+import lv.javaguru.travel.insurance.core.util.generate_ic.PersonIcGenerator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -26,6 +27,8 @@ public class PersonEntityServiceTest {
     @Mock
     private PersonRepository personRepository;
 
+    @Mock private PersonIcGenerator personIcGenerator;
+
     PersonDTO personDTO;
 
     AgreementEntityDomain agreementDomain = new AgreementEntityDomain();
@@ -43,11 +46,12 @@ public class PersonEntityServiceTest {
                 .withIc(ic)
                 .build();
         when(personRepository.findBy(firstName, lastName, ic)).thenReturn(Optional.empty());
+        when(personIcGenerator.generate(agreementDomain, personDTO)).thenReturn(ic);
         agreementDomain.setId(1L);
         PersonDTODomain domain = service.getPersonEntity(personDTO, agreementDomain);
         assertEquals("", firstName, domain.getPersonFirstName());
         assertEquals("", lastName, domain.getPersonLastName());
         assertEquals("", birthDate, domain.getPersonBirthDate());
-        assertEquals("", ic + "_AGR_#" + agreementDomain.getId(), domain.getPersonIc());
+        assertEquals("", ic, domain.getPersonIc());
     }
 }

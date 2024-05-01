@@ -5,6 +5,7 @@ import lv.javaguru.travel.insurance.core.domain.agreement.AgreementEntityDomain;
 import lv.javaguru.travel.insurance.core.repositories.agreement.AgreementEntityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Date;
 import java.util.Optional;
@@ -13,6 +14,7 @@ import java.util.Optional;
 public class AgreementEntityService {
     @Autowired
     private AgreementEntityRepository agreementEntityRepository;
+
 
     public AgreementEntityDomain saveAgreement(AgreementDTO agreement) {
         Optional<AgreementEntityDomain> domainOptional = agreementEntityRepository.findBy(

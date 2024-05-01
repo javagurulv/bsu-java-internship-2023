@@ -5,6 +5,7 @@ import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.domain.agreement.AgreementEntityDomain;
 import lv.javaguru.travel.insurance.core.domain.agreement.AgreementPersonEntityDomain;
 import lv.javaguru.travel.insurance.core.repositories.agreement.AgreementPersonEntityRepository;
+import lv.javaguru.travel.insurance.core.util.generate_ic.PersonIcGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,9 +18,9 @@ public class AgreementPersonEntityService {
     @Autowired
     private AgreementPersonEntityRepository agreementPersonEntityRepository;
 
-    @Autowired
-    private AgreementEntityService agreementEntityService;
 
+    @Autowired
+    private PersonIcGenerator personIcGenerator;
     public AgreementPersonEntityDomain savePerson(PersonDTO person, AgreementEntityDomain agreementDomain) {
         Optional<AgreementPersonEntityDomain> optional = agreementPersonEntityRepository.findByName(
                 person.getPersonFirstName(),
@@ -34,7 +35,7 @@ public class AgreementPersonEntityService {
         AgreementPersonEntityDomain newDomain = new AgreementPersonEntityDomain();
         newDomain.setFirstName(person.getPersonFirstName());
         newDomain.setLastName(person.getPersonLastName());
-        newDomain.setPersonIc(person.getPersonIc() + "_AGR_#" + agreementDomain.getId());
+        newDomain.setPersonIc(personIcGenerator.generate(agreementDomain, person));
         newDomain.setBirthDate(new Date(person.getPersonBirthDate().getTime()));
         newDomain.setMedicalRiskLimitLevel(person.getMedicalRiskLimitLevel());
         newDomain.setPremium(person.getPersonPremium());
@@ -44,6 +45,7 @@ public class AgreementPersonEntityService {
 
         return newDomain;
     }
+    /*
     public List<AgreementPersonEntityDomain> savePersons(AgreementDTO agreementDTO) {
         AgreementEntityDomain agreementDomain = agreementEntityService.saveAgreement(agreementDTO);
         return agreementDTO.getPersons().stream().map(person -> {
@@ -67,4 +69,6 @@ public class AgreementPersonEntityService {
             return newDomain;
         }).toList();
     }
+
+     */
 }

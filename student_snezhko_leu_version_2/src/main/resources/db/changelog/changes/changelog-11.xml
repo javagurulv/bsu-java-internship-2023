@@ -25,7 +25,7 @@
         <addForeignKeyConstraint baseTableName="person_risks"
                                  baseColumnNames="person"
                                  constraintName="ix_person_id_in_person_risks"
-                                 referencedTableName="persons"
+                                 referencedTableName="agreement_persons"
                                  referencedColumnNames="id"
                                  />
     </changeSet>
