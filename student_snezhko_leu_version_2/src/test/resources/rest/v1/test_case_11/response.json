@@ -4,15 +4,5 @@
       "errorCode": "ERROR_CODE_3",
       "description": "Field agreementDateTo must be in the future!"
     }
-  ],
-  "personFirstName": null,
-  "personLastName": null,
-  "personIc" : null,
-  "personBirthDate": null,
-  "agreementDateFrom": null,
-  "agreementDateTo": null,
-  "country": null,
-  "medicalRiskLimitLevel" : null,
-  "agreementPremium": null,
-  "risks": null
+  ]
 }

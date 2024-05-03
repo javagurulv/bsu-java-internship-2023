@@ -1,5 +1,6 @@
 package lv.javaguru.travel.insurance.core.api.command;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,6 +14,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class TravelCalculatePremiumCoreResult {
 
     private List<ValidationErrorDTO> errors;

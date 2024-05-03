@@ -30,7 +30,7 @@ public class PersonRepositoryTest {
     public void correctPersonTest() {
         String firstName = "CorrectFirstName";
         String lastName = "CorrectLastName";
-        String ic = "CORRECT_IC_AGR_#1";
+        String ic = "CORRECT_IC";
         Optional<PersonDTODomain> optional = personRepository.findBy(firstName, lastName, ic);
         assertTrue("", optional.isPresent());
         assertEquals("", firstName, optional.get().getPersonFirstName());
@@ -51,7 +51,7 @@ public class PersonRepositoryTest {
     public void wrongPersonFirstNameTest() {
         String firstName = "WrongFirstName";
         String lastName = "CorrectLastName";
-        String ic = "CORRECT_IC_AGR_#1";
+        String ic = "CORRECT_IC";
         Optional<PersonDTODomain> optional = personRepository.findBy(firstName, lastName, ic);
         assertFalse("", optional.isPresent());
     }
@@ -60,7 +60,7 @@ public class PersonRepositoryTest {
     public void wrongPersonLastNameTest() {
         String firstName = "CorrectFirstName";
         String lastName = "WrongLastName";
-        String ic = "CORRECT_IC_AGR_#1";
+        String ic = "CORRECT_IC";
         Optional<PersonDTODomain> optional = personRepository.findBy(firstName, lastName, ic);
         assertFalse("", optional.isPresent());
     }

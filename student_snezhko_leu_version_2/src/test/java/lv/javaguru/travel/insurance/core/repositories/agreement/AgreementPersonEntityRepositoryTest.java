@@ -36,15 +36,14 @@ public class AgreementPersonEntityRepositoryTest {
     public void correctPerson() {
         String firstName = "CorrectFirstName";
         String lastName = "CorrectLastName";
-        String ic = "CORRECT_PERSON_IC";
-
+        String ic = "CORRECT_IC";
         Optional<AgreementPersonEntityDomain> op = agreementPersonEntityRepository.findByName(firstName, lastName, ic);
 
         assertTrue("", op.isPresent());
-        assertEquals("", firstName, op.get().getFirstName());
-        assertEquals("", lastName, op.get().getLastName());
-        assertEquals("", ic, op.get().getPersonIc());
-        assertEquals("", Date.valueOf("2005-02-02"), op.get().getBirthDate());
+        assertEquals("", firstName, op.get().getPerson().getPersonFirstName());
+        assertEquals("", lastName, op.get().getPerson().getPersonLastName());
+        assertEquals("", ic, op.get().getPerson().getPersonIc());
+        assertEquals("", Date.valueOf("2001-01-01"), op.get().getPerson().getPersonBirthDate());
         assertEquals("", "CORRECT_MEDICAL_RISK_LIMIT_LEVEL", op.get().getMedicalRiskLimitLevel());
         assertEquals("", BigDecimal.valueOf(10).setScale(2, RoundingMode.HALF_DOWN), op.get().getPremium());
     }
@@ -53,7 +52,7 @@ public class AgreementPersonEntityRepositoryTest {
     public void incorrectFirstNameTest() {
         String firstName = "IncorrectFirstName";
         String lastName = "CorrectLastName";
-        String ic = "CORRECT_PERSON_IC";
+        String ic = "CORRECT_IC";
 
         Optional<AgreementPersonEntityDomain> op = agreementPersonEntityRepository.findByName(firstName, lastName, ic);
 
@@ -64,7 +63,7 @@ public class AgreementPersonEntityRepositoryTest {
     public void incorrectLastNameTest() {
         String firstName = "CorrectFirstName";
         String lastName = "IncorrectLastName";
-        String ic = "CORRECT_PERSON_IC";
+        String ic = "CORRECT_IC";
 
         Optional<AgreementPersonEntityDomain> op = agreementPersonEntityRepository.findByName(firstName, lastName, ic);
 

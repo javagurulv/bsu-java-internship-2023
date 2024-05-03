@@ -4,6 +4,5 @@
       "errorCode": "ERROR_CODE_15",
       "description": "Country value = MY_COUNTRY not supported!"
     }
-  ],
-  "agreement" : null
+  ]
 }

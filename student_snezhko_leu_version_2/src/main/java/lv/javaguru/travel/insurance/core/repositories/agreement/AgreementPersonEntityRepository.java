@@ -11,10 +11,11 @@ import java.util.Optional;
 
 public interface AgreementPersonEntityRepository extends JpaRepository<AgreementPersonEntityDomain, Long> {
 
-    @Query("SELECT person FROM AgreementPersonEntityDomain person " +
-            "where person.firstName = :fname " +
-            "AND person.lastName = :lname " +
-            "AND person.personIc = :ic")
+    @Query("SELECT pers FROM AgreementPersonEntityDomain pers " +
+            "left join pers.person personDomain " +
+            "where personDomain.personFirstName = :fname " +
+            "AND personDomain.personLastName = :lname " +
+            "AND personDomain.personIc = :ic")
     Optional<AgreementPersonEntityDomain> findByName(@Param("fname") String firstName,
                                                      @Param("lname") String lastName,
                                                      @Param("ic") String ic);

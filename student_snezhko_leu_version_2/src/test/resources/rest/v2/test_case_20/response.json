@@ -56,6 +56,5 @@
       "errorCode": "ERROR_CODE_13",
       "description": "Field medicalRiskLimitLevel must not be empty!"
     }
-  ],
-  "agreement" : null
+  ]
 }

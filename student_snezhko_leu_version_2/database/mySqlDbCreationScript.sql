@@ -103,18 +103,18 @@ ADD FOREIGN KEY(agreement) REFERENCES agreements(id);
 
 CREATE TABLE IF NOT EXISTS agreement_persons(
     id BIGINT NOT NULL AUTO_INCREMENT,
-    first_name VARCHAR(200) NOT NULL,
-    last_name VARCHAR(200) NOT NULL,
-    birth_date DATE NOT NULL,
     agreement BIGINT NOT NULL,
+    person BIGINT NOT NULL,
     medical_risk_limit_level VARCHAR(200) NOT NULL,
     premium DECIMAL(10,2) NOT NULL,
-    person_ic VARCHAR(200) NOT NULL UNIQUE,
     PRIMARY KEY(id)
 );
 
 ALTER TABLE agreement_persons
 ADD FOREIGN KEY(agreement) REFERENCES agreements(id);
+
+ALTER TABLE agreement_persons
+ADD FOREIGN KEY(person) REFERENCES persons(id);
 
 CREATE TABLE IF NOT EXISTS person_risks(
     id BIGINT NOT NULL AUTO_INCREMENT,
@@ -125,7 +125,7 @@ CREATE TABLE IF NOT EXISTS person_risks(
 );
 
 ALTER TABLE person_risks
-ADD FOREIGN KEY(person) REFERENCES persons(id);
+ADD FOREIGN KEY(person) REFERENCES agreement_persons(id);
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

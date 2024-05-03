@@ -4,7 +4,6 @@ import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.domain.agreement.AgreementEntityDomain;
 import lv.javaguru.travel.insurance.core.domain.agreement.PersonDTODomain;
 import lv.javaguru.travel.insurance.core.repositories.agreement.PersonRepository;
-import lv.javaguru.travel.insurance.core.util.generate_ic.PersonIcGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,8 +15,6 @@ public class PersonEntityService {
     @Autowired
     private PersonRepository personRepository;
 
-    @Autowired
-    private PersonIcGenerator personIcGenerator;
 
     public PersonDTODomain getPersonEntity(PersonDTO person, AgreementEntityDomain agreement) {
         Optional<PersonDTODomain> entity = personRepository.findBy(
@@ -33,7 +30,7 @@ public class PersonEntityService {
         result.setPersonLastName(person.getPersonLastName());
 
 
-        result.setPersonIc(personIcGenerator.generate(agreement, person));
+        result.setPersonIc(person.getPersonIc());
         result.setPersonBirthDate(new Date(person.getPersonBirthDate().getTime()));
         personRepository.save(result);
         return result;

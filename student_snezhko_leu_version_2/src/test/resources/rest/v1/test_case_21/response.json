@@ -4,15 +4,5 @@
       "errorCode": "ERROR_CODE_15",
       "description": "Country value = MY_COUNTRY not supported!"
     }
-  ],
-  "personFirstName": null,
-  "personLastName": null,
-  "personIc" : null,
-  "personBirthDate": null,
-  "agreementDateFrom": null,
-  "agreementDateTo": null,
-  "country": null,
-  "medicalRiskLimitLevel" : null,
-  "agreementPremium": null,
-  "risks": null
+  ]
 }

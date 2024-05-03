@@ -33,16 +33,17 @@ public class AgreementSaveUtil {
     public void saveAgreement(AgreementDTO agreementDTO) {
         AgreementEntityDomain agreementEntityDomain = agreementEntityService.saveAgreement(agreementDTO);
 
-        List<PersonDTODomain> personDTOs = agreementDTO.getPersons().stream().map(person-> personEntityService.getPersonEntity(person, agreementEntityDomain)).toList();
+//        List<PersonDTODomain> personDTOs = agreementDTO.getPersons().stream().map(person-> personEntityService.getPersonEntity(person, agreementEntityDomain)).toList();
         List<PersonRiskEntityDomain> personRisks = new LinkedList<>();
 
 
         List<AgreementPersonEntityDomain> personDomains =
                 agreementDTO.getPersons().stream().map(
                         person -> {
+                            PersonDTODomain personDomain = personEntityService.getPersonEntity(person, agreementEntityDomain);
                             AgreementPersonEntityDomain personEntityDomain =
                                     agreementPersonEntityService.savePerson(
-                                            person, agreementEntityDomain
+                                            personDomain, person, agreementEntityDomain
                                     );
                             personRisks.addAll(
                                 person.getSelectedRisks().stream().map(

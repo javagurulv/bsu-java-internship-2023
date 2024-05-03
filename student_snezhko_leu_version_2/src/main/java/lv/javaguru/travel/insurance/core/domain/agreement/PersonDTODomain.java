@@ -34,4 +34,5 @@ public class PersonDTODomain {
 
     @Column(name = "birth_date", nullable = false)
     private Date personBirthDate;
+
 }

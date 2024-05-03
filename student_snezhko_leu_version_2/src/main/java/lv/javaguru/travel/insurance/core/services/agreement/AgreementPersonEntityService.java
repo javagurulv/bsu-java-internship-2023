@@ -4,8 +4,8 @@ import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.domain.agreement.AgreementEntityDomain;
 import lv.javaguru.travel.insurance.core.domain.agreement.AgreementPersonEntityDomain;
+import lv.javaguru.travel.insurance.core.domain.agreement.PersonDTODomain;
 import lv.javaguru.travel.insurance.core.repositories.agreement.AgreementPersonEntityRepository;
-import lv.javaguru.travel.insurance.core.util.generate_ic.PersonIcGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,9 +19,7 @@ public class AgreementPersonEntityService {
     private AgreementPersonEntityRepository agreementPersonEntityRepository;
 
 
-    @Autowired
-    private PersonIcGenerator personIcGenerator;
-    public AgreementPersonEntityDomain savePerson(PersonDTO person, AgreementEntityDomain agreementDomain) {
+    public AgreementPersonEntityDomain savePerson(PersonDTODomain personDomain, PersonDTO person, AgreementEntityDomain agreementDomain) {
         Optional<AgreementPersonEntityDomain> optional = agreementPersonEntityRepository.findByName(
                 person.getPersonFirstName(),
                 person.getPersonLastName(),
@@ -33,10 +31,8 @@ public class AgreementPersonEntityService {
         }
 
         AgreementPersonEntityDomain newDomain = new AgreementPersonEntityDomain();
-        newDomain.setFirstName(person.getPersonFirstName());
-        newDomain.setLastName(person.getPersonLastName());
-        newDomain.setPersonIc(personIcGenerator.generate(agreementDomain, person));
-        newDomain.setBirthDate(new Date(person.getPersonBirthDate().getTime()));
+
+        newDomain.setPerson(personDomain);
         newDomain.setMedicalRiskLimitLevel(person.getMedicalRiskLimitLevel());
         newDomain.setPremium(person.getPersonPremium());
         newDomain.setAgreement(agreementDomain);
