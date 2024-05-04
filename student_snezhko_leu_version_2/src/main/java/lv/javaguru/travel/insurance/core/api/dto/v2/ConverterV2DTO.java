@@ -5,22 +5,32 @@ import lv.javaguru.travel.insurance.core.api.command.TravelCalculatePremiumCoreR
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.api.dto.RiskDTO;
+import lv.javaguru.travel.insurance.core.util.GenerateAgreementUUID;
 
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
+import lv.javaguru.travel.insurance.core.util.GenerateAgreementUUID;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Component
 public class ConverterV2DTO {
-    public static TravelCalculatePremiumCoreCommand buildCommand(TravelCalculatePremiumRequestV2 request) {
+
+    @Autowired
+    private GenerateAgreementUUID generateAgreementUUID;
+
+    public TravelCalculatePremiumCoreCommand buildCommand(TravelCalculatePremiumRequestV2 request) {
         return new TravelCalculatePremiumCoreCommand(buildAgreement(prepareRequest(request)));
     }
 
 
-    public static TravelCalculatePremiumResponseV2 buildResponse(TravelCalculatePremiumCoreResult result) {
+    public TravelCalculatePremiumResponseV2 buildResponse(TravelCalculatePremiumCoreResult result) {
         return result.hasErrors() ? buildResponseWithErrors(result) : buildSuccessfulResponse(result);
     }
 
-    private static TravelCalculatePremiumResponseV2 buildSuccessfulResponse(TravelCalculatePremiumCoreResult result) {
+    private TravelCalculatePremiumResponseV2 buildSuccessfulResponse(TravelCalculatePremiumCoreResult result) {
         TravelCalculatePremiumResponseV2 response = new TravelCalculatePremiumResponseV2();
         AgreementDTO agreement = result.getAgreement();
 
@@ -29,12 +39,12 @@ public class ConverterV2DTO {
         response.setCountry(agreement.getCountry());
         response.setAgreementPremium(agreement.getAgreementPremium());
         response.setSelectedRisks(agreement.getSelectedRisks());
-        response.setPersons(agreement.getPersons().stream().map(ConverterV2DTO::buildPersonResponse).toList());
+        response.setPersons(agreement.getPersons().stream().map(this::buildPersonResponse).toList());
 
         return response;
     }
 
-    private static PersonResponseV2DTO buildPersonResponse(PersonDTO personDTO) {
+    private PersonResponseV2DTO buildPersonResponse(PersonDTO personDTO) {
         PersonResponseV2DTO response = new PersonResponseV2DTO();
         response.setPersonIc(personDTO.getPersonIc());
         response.setPersonFirstName(personDTO.getPersonFirstName());
@@ -46,13 +56,13 @@ public class ConverterV2DTO {
 
         return response;
     }
-    private static TravelCalculatePremiumResponseV2 buildResponseWithErrors(TravelCalculatePremiumCoreResult result) {
+    private TravelCalculatePremiumResponseV2 buildResponseWithErrors(TravelCalculatePremiumCoreResult result) {
         TravelCalculatePremiumResponseV2 response = new TravelCalculatePremiumResponseV2();
         response.setErrors(result.getErrors());
         return response;
     }
 
-    private static AgreementDTO buildAgreement(TravelCalculatePremiumRequestV2 request) {
+    private AgreementDTO buildAgreement(TravelCalculatePremiumRequestV2 request) {
         AgreementDTO agreement = new AgreementDTO();
         agreement.setAgreementDateTo(request.getAgreementDateTo());
         agreement.setAgreementDateFrom(request.getAgreementDateFrom());
@@ -61,12 +71,15 @@ public class ConverterV2DTO {
         if (request.getPersons() == null || request.getPersons().isEmpty()) {
             agreement.setPersons(List.of());
         } else{
-                agreement.setPersons(request.getPersons().stream().map(ConverterV2DTO::buildPerson).toList());
+                agreement.setPersons(request.getPersons().stream().map(this::buildPerson).toList());
             }
+
+        agreement.setUuid(generateAgreementUUID.generate(agreement));
+
         return agreement;
     }
 
-    private static TravelCalculatePremiumRequestV2 prepareRequest(TravelCalculatePremiumRequestV2 request) {
+    private TravelCalculatePremiumRequestV2 prepareRequest(TravelCalculatePremiumRequestV2 request) {
         if (request.getPersons() == null || request.getPersons().isEmpty()) {
             return request;
         }
@@ -76,11 +89,11 @@ public class ConverterV2DTO {
         }
         return request;
     }
-    private static PersonDTO buildPerson(PersonRequestV2DTO requestPerson) {
+    private PersonDTO buildPerson(PersonRequestV2DTO requestPerson) {
         PersonDTO person = new PersonDTO();
         person.setPersonIc(requestPerson.getPersonIc());
         person.setSelectedRisks(requestPerson.getSelectedRisks()
-                .stream().map(ConverterV2DTO::buildRisk)
+                .stream().map(this::buildRisk)
                 .toList()
         );
         person.setPersonFirstName(requestPerson.getPersonFirstName());
@@ -91,7 +104,7 @@ public class ConverterV2DTO {
         return person;
     }
 
-    private static RiskDTO buildRisk(String riskIc) {
+    private RiskDTO buildRisk(String riskIc) {
         return new RiskDTO(riskIc, BigDecimal.ZERO);
     }
 }

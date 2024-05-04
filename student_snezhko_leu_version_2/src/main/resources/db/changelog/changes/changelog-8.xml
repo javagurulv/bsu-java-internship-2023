@@ -9,6 +9,9 @@
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true"/>
             </column>
+            <column name="uuid" type="BINARY(16)">
+                <constraints unique="true"/>
+            </column>
             <column name="date_from" type="DATE">
                 <constraints nullable="false"/>
             </column>

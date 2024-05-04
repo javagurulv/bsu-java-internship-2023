@@ -14,6 +14,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -28,6 +29,9 @@ public class AgreementDTO {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date agreementDateTo;
+
+    @JsonAlias(value = "agreement_UUID")
+    private UUID uuid;
 
     private String country;
 

@@ -234,8 +234,9 @@ MERGE INTO persons(first_name, last_name, ic, birth_date)
 KEY(ic)
 VALUES('CorrectFirstName', 'CorrectLastName', 'CORRECT_IC', '2001-01-01');
 
-insert INTO agreements(date_from, date_to, country, premium)
-VALUES('2050-02-02', '2050-02-03', 'SPAIN', 1);
+MERGE INTO agreements(uuid, date_from, date_to, country, premium)
+key (uuid)
+VALUES(0x00, '2050-02-02', '2050-02-03', 'SPAIN', 1);
 
 MERGE into selected_risks(risk_ic, agreement)
 KEY (risk_ic)

@@ -84,6 +84,7 @@ ON persons (first_name, last_name, ic);
 
 CREATE TABLE IF NOT EXISTS agreements (
     id BIGINT NOT NULL AUTO_INCREMENT,
+    uuid UUID NOT NULL UNIQUE,
     date_from DATE not null,
     date_to DATE not null,
     country VARCHAR(30) not null,

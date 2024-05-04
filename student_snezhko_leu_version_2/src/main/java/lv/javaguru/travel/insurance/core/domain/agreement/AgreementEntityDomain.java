@@ -5,10 +5,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.util.UUID;
 
 @Entity
 @Table(name = "agreements")
@@ -22,6 +24,9 @@ public class AgreementEntityDomain {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @GenericGenerator(name = "generator", strategy = "increment")
     private Long id;
+
+    @Column(name = "uuid", unique = true, nullable = false)
+    private UUID uuid;
 
     @Column(name = "date_from", nullable = false)
     private Date dateFrom;

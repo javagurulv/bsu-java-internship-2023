@@ -9,6 +9,7 @@ import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import lv.javaguru.travel.insurance.core.underwriting.TravelPremiumCalculationResult;
 import lv.javaguru.travel.insurance.core.underwriting.TravelUnderwriting;
 import lv.javaguru.travel.insurance.core.util.AgreementSaveUtil;
+import lv.javaguru.travel.insurance.core.util.GenerateAgreementUUID;
 import lv.javaguru.travel.insurance.core.validations.TravelAgreementValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -17,6 +18,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.List;
+
+import lv.javaguru.travel.insurance.core.util.GenerateAgreementUUID;
 
 @Transactional
 @Component
@@ -30,6 +33,7 @@ public class TravelCalculatePremiumServiceImpl implements TravelCalculatePremium
     @Autowired
     private AgreementSaveUtil agreementSaveUtil;
 
+
     @Override
     public TravelCalculatePremiumCoreResult calculatePremium(TravelCalculatePremiumCoreCommand command) {
         List<ValidationErrorDTO> errors = validator.validate(command.getAgreement());
@@ -42,6 +46,8 @@ public class TravelCalculatePremiumServiceImpl implements TravelCalculatePremium
 
     private TravelCalculatePremiumCoreResult buildResult(AgreementDTO agreement) {
         TravelCalculatePremiumCoreResult result = new TravelCalculatePremiumCoreResult();
+        agreement.setUuid(agreement.getUuid());
+
         calculatePremiumForEachRisk(agreement);
 
 //        agreement.getPersons().forEach(person -> personEntityService.getPersonEntity(person));

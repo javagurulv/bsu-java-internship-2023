@@ -7,14 +7,21 @@ import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.api.dto.RiskDTO;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import lv.javaguru.travel.insurance.core.services.TravelCalculatePremiumService;
+import lv.javaguru.travel.insurance.core.util.GenerateAgreementUUID;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.math.RoundingMode;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Component
 public class DtoV1Converter {
+
+    @Autowired
+    private GenerateAgreementUUID generateAgreementUUID;
+
     public TravelCalculatePremiumResponseV1 processRequest(TravelCalculatePremiumRequestV1 request, TravelCalculatePremiumService service) {
         TravelCalculatePremiumCoreCommand command = buildCoreCommand(request);
         TravelCalculatePremiumCoreResult result = service.calculatePremium(command);
@@ -60,6 +67,7 @@ public class DtoV1Converter {
         agreement.setCountry(request.getCountry());
         //agreement.setMedicalRiskLimitLevel(request.getMedicalRiskLimitLevel());
         agreement.setSelectedRisks(request.getSelectedRisks());
+        agreement.setUuid(generateAgreementUUID.generate(agreement));
         return agreement;
     }
 

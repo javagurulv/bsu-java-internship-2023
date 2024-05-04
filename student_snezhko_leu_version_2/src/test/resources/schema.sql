@@ -67,12 +67,16 @@ ON persons (first_name, last_name, ic);
 
 CREATE TABLE IF NOT EXISTS agreements (
     id BIGINT NOT NULL AUTO_INCREMENT,
+    uuid UUID NOT NULL UNIQUE,
     date_from DATE not null,
     date_to DATE not null,
     country VARCHAR(30) not null,
     premium DECIMAL(19,2) not null,
     PRIMARY KEY(id)
 );
+
+CREATE UNIQUE INDEX IF NOT EXISTS ix_agreements_uuid_unique
+ON agreements(uuid);
 
 CREATE TABLE IF NOT EXISTS selected_risks(
     id BIGINT not null AUTO_INCREMENT,

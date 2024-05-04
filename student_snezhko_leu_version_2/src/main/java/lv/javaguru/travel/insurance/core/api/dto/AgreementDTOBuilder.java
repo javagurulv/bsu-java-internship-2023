@@ -4,10 +4,12 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 public class AgreementDTOBuilder {
     private Date agreementDateTo;
     private Date agreementDateFrom;
+    private UUID agreementUUID;
     private String country;
     private BigDecimal agreementPremium;
     private List<String> selectedRisks = new ArrayList<>();
@@ -21,6 +23,7 @@ public class AgreementDTOBuilder {
         return new AgreementDTO(
                 agreementDateFrom,
                 agreementDateTo,
+                agreementUUID,
                 country,
                 agreementPremium,
                 selectedRisks,
@@ -63,6 +66,11 @@ public class AgreementDTOBuilder {
 
     public AgreementDTOBuilder withPersons(PersonDTOBuilder personBuilder) {
         this.persons.add(personBuilder.build());
+        return this;
+    }
+
+    public AgreementDTOBuilder withAgreementUUID(UUID uuid) {
+        this.agreementUUID = uuid;
         return this;
     }
 }

@@ -23,6 +23,8 @@ public class TravelInsuranceWebControllerV2 {
     private TravelCalculatePremiumService service;
 
     @Autowired
+    private ConverterV2DTO converterV2DTO;
+    @Autowired
     private TravelCalculatePremiumRequestExecutionTimeLogger timeLogger;
     /*
     .NullPointerException:
@@ -43,9 +45,9 @@ public class TravelInsuranceWebControllerV2 {
     public String processForm(@ModelAttribute("request")TravelCalculatePremiumRequestV2 request,
                               ModelMap modelMap) {
         final Stopwatch stopwatch = Stopwatch.createStarted();
-        TravelCalculatePremiumCoreCommand command = ConverterV2DTO.buildCommand(request);
+        TravelCalculatePremiumCoreCommand command = converterV2DTO.buildCommand(request);
         TravelCalculatePremiumCoreResult result = service.calculatePremium(command);
-        TravelCalculatePremiumResponseV2 response = ConverterV2DTO.buildResponse(result);
+        TravelCalculatePremiumResponseV2 response = converterV2DTO.buildResponse(result);
 
         stopwatch.stop();
         timeLogger.log(stopwatch);

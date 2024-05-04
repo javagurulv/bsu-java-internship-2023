@@ -28,6 +28,7 @@ public class AgreementEntityService {
             domain.setDateTo(new Date(agreement.getAgreementDateTo().getTime()));
             domain.setCountry(agreement.getCountry());
             domain.setPremium(agreement.getAgreementPremium());
+            domain.setUuid(agreement.getUuid());
             agreementEntityRepository.save(domain);
             return domain;
         }
