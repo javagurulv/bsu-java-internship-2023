@@ -84,14 +84,14 @@ public class ConverterV2DTO {
         if (request.getPersons() == null || request.getPersons().isEmpty()) {
             return request;
         }
-        /*
+
         request.getPersons().forEach(p -> p.setSelectedRisks(request.getSelectedRisks()));
 
         for (int i = 0; i < request.getPersons().size(); i++) {
             request.getPersons().get(i).setPersonIc("PERSON_#"+new Date().getTime());
         }
 
-         */
+
         return request;
     }
     private PersonDTO buildPerson(PersonRequestV2DTO requestPerson) {
