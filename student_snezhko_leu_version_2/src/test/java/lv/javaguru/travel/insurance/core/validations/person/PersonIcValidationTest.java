@@ -29,7 +29,7 @@ public class PersonIcValidationTest extends AbstractPersonFieldValidationTest {
 
     private PersonDTO person;
 
-    @Test
+//    @Test
     public void personIcIsNull() {
         String errorCode = "ERROR_CODE_16";
         String description = "Field personIc is empty!";
@@ -44,7 +44,7 @@ public class PersonIcValidationTest extends AbstractPersonFieldValidationTest {
         assertEquals("", description, expectedError.get().getDescription());
     }
 
-    @Test
+//    @Test
     public void personIcIsEmpty() {
         String errorCode = "ERROR_CODE_16";
         String description = "Field personIc is empty!";
@@ -59,7 +59,7 @@ public class PersonIcValidationTest extends AbstractPersonFieldValidationTest {
         assertEquals("", description, expectedError.get().getDescription());
     }
 
-    @Test
+  //  @Test
     public void personIcIsCorrect() {
         String errorCode = "ERROR_CODE_16";
         String description = "Field personIc is empty!";

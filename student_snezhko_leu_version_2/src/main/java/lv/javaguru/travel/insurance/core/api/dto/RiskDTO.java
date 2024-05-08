@@ -19,4 +19,5 @@ public class RiskDTO {
 
     @JsonSerialize(using = BigDecimalSerializer.class)
     private BigDecimal premium;
+
 }

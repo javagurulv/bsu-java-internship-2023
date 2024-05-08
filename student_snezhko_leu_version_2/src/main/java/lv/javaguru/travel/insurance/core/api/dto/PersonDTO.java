@@ -1,5 +1,6 @@
 package lv.javaguru.travel.insurance.core.api.dto;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -24,14 +25,15 @@ public class PersonDTO {
     private String personLastName;
     private String personIc;
     private String medicalRiskLimitLevel;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+  //  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+  //  @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date personBirthDate;
 
-    @JsonSerialize(using = BigDecimalSerializer.class)
+ //   @JsonSerialize(using = BigDecimalSerializer.class)
     private BigDecimal personPremium;
 
-//    @JsonAlias("selected_risks")
-    @JsonProperty("selected_risks")
+ //   @JsonAlias("selected_risks")
+ //   @JsonProperty("selected_risks")
     private List<RiskDTO> selectedRisks;
+
 }

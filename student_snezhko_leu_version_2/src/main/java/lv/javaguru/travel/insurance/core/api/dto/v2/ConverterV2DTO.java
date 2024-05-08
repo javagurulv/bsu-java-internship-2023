@@ -40,6 +40,7 @@ public class ConverterV2DTO {
         response.setAgreementPremium(agreement.getAgreementPremium());
         response.setSelectedRisks(agreement.getSelectedRisks());
         response.setPersons(agreement.getPersons().stream().map(this::buildPersonResponse).toList());
+        response.setUuid(agreement.getUuid());
 
         return response;
     }
@@ -83,19 +84,29 @@ public class ConverterV2DTO {
         if (request.getPersons() == null || request.getPersons().isEmpty()) {
             return request;
         }
+        /*
         request.getPersons().forEach(p -> p.setSelectedRisks(request.getSelectedRisks()));
+
         for (int i = 0; i < request.getPersons().size(); i++) {
             request.getPersons().get(i).setPersonIc("PERSON_#"+new Date().getTime());
         }
+
+         */
         return request;
     }
     private PersonDTO buildPerson(PersonRequestV2DTO requestPerson) {
         PersonDTO person = new PersonDTO();
         person.setPersonIc(requestPerson.getPersonIc());
-        person.setSelectedRisks(requestPerson.getSelectedRisks()
+        if (requestPerson.getSelectedRisks() != null && !requestPerson.getSelectedRisks().isEmpty()) {
+            person.setSelectedRisks(requestPerson.getSelectedRisks()
                 .stream().map(this::buildRisk)
                 .toList()
         );
+        }
+        else {
+            person.setSelectedRisks(List.of());
+        }
+
         person.setPersonFirstName(requestPerson.getPersonFirstName());
         person.setPersonLastName(requestPerson.getPersonLastName());
         person.setMedicalRiskLimitLevel(requestPerson.getMedicalRiskLimitLevel());

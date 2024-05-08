@@ -1,6 +1,7 @@
 {
   "personFirstName": "Vasja",
   "personLastName": "Pupkin",
+  "uuid" : null,
   "personIc" : "PERSON_0",
   "personBirthDate": "2000-05-29",
   "agreementDateFrom": "2025-05-25",

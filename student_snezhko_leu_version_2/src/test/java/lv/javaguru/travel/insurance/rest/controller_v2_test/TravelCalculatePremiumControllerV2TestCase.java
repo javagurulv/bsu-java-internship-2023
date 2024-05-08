@@ -45,7 +45,9 @@ public abstract class TravelCalculatePremiumControllerV2TestCase {
                 .andExpect(status().isOk())
                 .andReturn();
 
-        String responseBodyContent = result.getResponse().getContentAsString();
+
+
+        String responseBodyContent = result.getResponse().getContentAsString().replaceAll("\"uuid\":\".{36}\"", "\"uuid\" : null");
 
         String jsonResponse = jsonFileReader.readJsonFromFile(jsonResponseFilePath);
 

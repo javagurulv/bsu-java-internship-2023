@@ -79,4 +79,5 @@ public class TravelCalculatePremiumServiceImpl implements TravelCalculatePremium
         result.setErrors(errors);
         return result;
     }
+
 }

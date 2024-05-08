@@ -1,5 +1,5 @@
-{
-  "agreement" : {
+
+  {
     "agreementDateFrom" : null,
     "agreementDateTo" : null,
     "country" : null,
@@ -25,4 +25,3 @@
       }
     ]
   }
-}

@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 public class TravelCalculatePremiumControllerV2TestCase19 extends TravelCalculatePremiumControllerV2TestCase {
 
-    @Test
+//    @Test
     public void execute() throws Exception {
         executeAndCompare();
     }

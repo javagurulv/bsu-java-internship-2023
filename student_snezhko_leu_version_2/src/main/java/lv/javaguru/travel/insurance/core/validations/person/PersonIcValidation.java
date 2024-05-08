@@ -8,12 +8,14 @@ import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
-@Component
-public class PersonIcValidation extends TravelPersonFieldValidationImpl{
+//class will remove
+
+//@Component
+public class PersonIcValidation {//extends TravelPersonFieldValidationImpl{
     @Autowired
     private ValidationErrorFactory errorFactory;
 
-    @Override
+  //  @Override
     public Optional<ValidationErrorDTO> validate(PersonDTO person) {
         if (person.getPersonIc() == null || person.getPersonIc().isEmpty()) {
             return Optional.of(errorFactory.buildError("ERROR_CODE_16"));

@@ -2,6 +2,8 @@ package lv.javaguru.travel.insurance.core.api.dto.v2;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,6 +21,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class PersonResponseV2DTO {
     private String personFirstName;
     private String personLastName;
@@ -30,9 +33,10 @@ public class PersonResponseV2DTO {
     private String personIc;
     private String medicalRiskLimitLevel;
 
-    @JsonAlias("selected_risks")
+    @JsonProperty("selected_risks")
     private List<RiskDTO> selectedRisks;
 
     @JsonSerialize(using = BigDecimalSerializer.class)
+    //@JsonAlias("premium")
     private BigDecimal personPremium;
 }

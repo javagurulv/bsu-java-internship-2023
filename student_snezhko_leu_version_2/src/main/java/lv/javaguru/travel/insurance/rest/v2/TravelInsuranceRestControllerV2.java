@@ -3,6 +3,9 @@ package lv.javaguru.travel.insurance.rest.v2;
 import com.google.common.base.Stopwatch;
 import lv.javaguru.travel.insurance.core.api.command.TravelCalculatePremiumCoreCommand;
 import lv.javaguru.travel.insurance.core.api.command.TravelCalculatePremiumCoreResult;
+import lv.javaguru.travel.insurance.core.api.dto.v2.ConverterV2DTO;
+import lv.javaguru.travel.insurance.core.api.dto.v2.TravelCalculatePremiumRequestV2;
+import lv.javaguru.travel.insurance.core.api.dto.v2.TravelCalculatePremiumResponseV2;
 import lv.javaguru.travel.insurance.core.services.TravelCalculatePremiumService;
 import lv.javaguru.travel.insurance.rest.common.TravelCalculatePremiumRequestExecutionTimeLogger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,18 +21,24 @@ public class TravelInsuranceRestControllerV2 {
     private TravelCalculatePremiumService service;
 
     @Autowired
+    private ConverterV2DTO converterV2;
+
+    @Autowired
     private TravelCalculatePremiumRequestExecutionTimeLogger timeLogger;
 
     @PostMapping(path = "/",
             consumes = "application/json",
             produces = "application/json")
-    public TravelCalculatePremiumCoreResult calculatePremium(@RequestBody TravelCalculatePremiumCoreCommand command) {
+    public TravelCalculatePremiumResponseV2 calculatePremium(@RequestBody TravelCalculatePremiumRequestV2 request) {
         final Stopwatch stopwatch = Stopwatch.createStarted();
+
+        TravelCalculatePremiumCoreCommand command = converterV2.buildCommand(request);
         TravelCalculatePremiumCoreResult result = service.calculatePremium(command);
+        TravelCalculatePremiumResponseV2 response = converterV2.buildResponse(result);
         stopwatch.stop();
 
         timeLogger.log(stopwatch);
 
-        return result;
+        return response;//result;
     }
 }
