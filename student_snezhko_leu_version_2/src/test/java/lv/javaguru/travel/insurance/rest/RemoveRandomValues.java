@@ -9,6 +9,6 @@ public class RemoveRandomValues {
     }
 
     public static String removePersonIc(String jsonContent) {
-        return jsonContent.replaceAll("\"personIc\":\"PERSON_#[0-9]*\",", "\"personIc\" : null,");
+        return jsonContent.replaceAll("\"personIc\":\"PERSON_#[0-9]*_AGR_.{36}\",", "\"personIc\" : null,");
     }
 }

@@ -9,7 +9,7 @@ import java.util.UUID;
 @Component
 public class GenerateAgreementUUID {
     public UUID generate(AgreementDTO agreement) {
-     //   return UUID.fromString();
+//        return UUID.fromString("12345678-1234-1234-1234-123456789102");
 //        return UUID.fromString(agreement.getAgreementDateTo().toString()
 //                + agreement.getAgreementDateFrom().toString()
 //                );

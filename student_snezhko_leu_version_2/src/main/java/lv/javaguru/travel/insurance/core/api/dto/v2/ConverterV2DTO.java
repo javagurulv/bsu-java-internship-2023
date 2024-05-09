@@ -15,6 +15,8 @@ import lv.javaguru.travel.insurance.core.util.GenerateAgreementUUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import static lv.javaguru.travel.insurance.core.util.GeneratePersonIc.generatePersonIcs;
+
 @Component
 public class ConverterV2DTO {
 
@@ -69,13 +71,13 @@ public class ConverterV2DTO {
         agreement.setAgreementDateFrom(request.getAgreementDateFrom());
         agreement.setCountry(request.getCountry());
         agreement.setSelectedRisks(request.getSelectedRisks());
+        agreement.setUuid(generateAgreementUUID.generate(agreement));
         if (request.getPersons() == null || request.getPersons().isEmpty()) {
             agreement.setPersons(List.of());
         } else{
                 agreement.setPersons(request.getPersons().stream().map(this::buildPerson).toList());
             }
-
-        agreement.setUuid(generateAgreementUUID.generate(agreement));
+        agreement.setPersons(generatePersonIcs(agreement));
 
         return agreement;
     }
@@ -87,10 +89,11 @@ public class ConverterV2DTO {
 
         request.getPersons().forEach(p -> p.setSelectedRisks(request.getSelectedRisks()));
 
+        /*
         for (int i = 0; i < request.getPersons().size(); i++) {
             request.getPersons().get(i).setPersonIc("PERSON_#"+new Date().getTime());
         }
-
+*/
 
         return request;
     }
@@ -118,4 +121,6 @@ public class ConverterV2DTO {
     private RiskDTO buildRisk(String riskIc) {
         return new RiskDTO(riskIc, BigDecimal.ZERO);
     }
+
+
 }

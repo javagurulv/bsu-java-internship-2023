@@ -36,7 +36,7 @@ public class PersonEntityServiceTest {
         String firstName = "FirstName";
         String lastName = "LastName";
         Date birthDate = Date.valueOf("2005-02-03");
-        String ic = "PERSON_IC";
+        String ic = "PERSON_IC_SERVICE_TEST";
         personDTO = PersonDTOBuilder.createPersonDTO()
                 .withFirstName("FirstName")
                 .withLastName("LastName")
@@ -44,7 +44,7 @@ public class PersonEntityServiceTest {
                 .withIc(ic)
                 .build();
         when(personRepository.findBy(firstName, lastName, ic)).thenReturn(Optional.empty());
-        agreementDomain.setId(1L);
+        agreementDomain.setId(0L);
         PersonDTODomain domain = service.getPersonEntity(personDTO, agreementDomain);
         assertEquals("", firstName, domain.getPersonFirstName());
         assertEquals("", lastName, domain.getPersonLastName());

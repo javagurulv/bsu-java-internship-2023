@@ -12,9 +12,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.math.RoundingMode;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
+
+import static lv.javaguru.travel.insurance.core.util.GeneratePersonIc.generatePersonIcs;
 
 @Component
 public class DtoV1Converter {
@@ -29,6 +32,7 @@ public class DtoV1Converter {
     }
 
     private TravelCalculatePremiumCoreCommand buildCoreCommand(TravelCalculatePremiumRequestV1 request) {
+        //request.setPersonIc("PERSON_#" + new Date().getTime());
         TravelCalculatePremiumCoreCommand command = new TravelCalculatePremiumCoreCommand();
 
         command.setAgreement(buildAgreement(request));
@@ -69,6 +73,7 @@ public class DtoV1Converter {
         //agreement.setMedicalRiskLimitLevel(request.getMedicalRiskLimitLevel());
         agreement.setSelectedRisks(request.getSelectedRisks());
         agreement.setUuid(generateAgreementUUID.generate(agreement));
+        agreement.setPersons(generatePersonIcs(agreement));
         return agreement;
     }
 
