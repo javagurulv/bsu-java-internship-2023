@@ -99,7 +99,7 @@ public class ConverterV2DTO {
     }
     private PersonDTO buildPerson(PersonRequestV2DTO requestPerson) {
         PersonDTO person = new PersonDTO();
-        person.setPersonIc(requestPerson.getPersonIc());
+//        person.setPersonIc(requestPerson.getPersonIc());
         if (requestPerson.getSelectedRisks() != null && !requestPerson.getSelectedRisks().isEmpty()) {
             person.setSelectedRisks(requestPerson.getSelectedRisks()
                 .stream().map(this::buildRisk)

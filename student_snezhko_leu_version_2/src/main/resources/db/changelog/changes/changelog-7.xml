@@ -15,7 +15,7 @@
             <column name="last_name" type="VARCHAR(200)">
                 <constraints nullable="false"/>
             </column>
-            <column name="ic" type="VARCHAR(200)">
+            <column name="ic" type="BINARY(16)">
                 <constraints nullable="false" unique="true"/>
             </column>
             <column name="birth_date" type="DATE">

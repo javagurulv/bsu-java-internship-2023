@@ -14,6 +14,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.sql.Date;
 import java.util.Optional;
+import java.util.UUID;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.test.util.AssertionErrors.assertEquals;
@@ -36,7 +37,7 @@ public class PersonEntityServiceTest {
         String firstName = "FirstName";
         String lastName = "LastName";
         Date birthDate = Date.valueOf("2005-02-03");
-        String ic = "PERSON_IC_SERVICE_TEST";
+        UUID ic = UUID.fromString("12345678-1234-1234-1234-123456789101");
         personDTO = PersonDTOBuilder.createPersonDTO()
                 .withFirstName("FirstName")
                 .withLastName("LastName")

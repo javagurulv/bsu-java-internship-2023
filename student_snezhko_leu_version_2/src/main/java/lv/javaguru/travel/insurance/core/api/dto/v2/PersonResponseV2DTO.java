@@ -16,6 +16,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -30,7 +31,7 @@ public class PersonResponseV2DTO {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date personBirthDate;
 
-    private String personIc;
+    private UUID personIc;
     private String medicalRiskLimitLevel;
 
     @JsonProperty("selected_risks")

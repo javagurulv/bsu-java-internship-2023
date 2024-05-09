@@ -11,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
+import java.util.UUID;
 
 import static lv.javaguru.travel.insurance.core.api.dto.AgreementDTOBuilder.createAgreementDTO;
 import static lv.javaguru.travel.insurance.core.validations.integration.CreateDateUtil.createDate;
@@ -25,6 +26,7 @@ public class AgreementSelectedRisksValidationIntegrationTest {
     private String errorCode;
     private String description;
 
+    private UUID personIc = UUID.fromString("12345678-1234-1234-1234-123456789101");
     @Test
     public void shouldReturnErrorsWhenAgreementSelectedRisksAreNull() {
         errorCode = "ERROR_CODE_6";
@@ -39,7 +41,7 @@ public class AgreementSelectedRisksValidationIntegrationTest {
                         .withLastName("Last")
                         .withMedicalRiskLimitLevel("LEVEL_10000")
                         .withBirthDate(createDate("2005-02-02"))
-                        .withIc("PERSON_0")
+                        .withIc(personIc)
                         .build()
                 )
                 .build();
@@ -65,7 +67,7 @@ public class AgreementSelectedRisksValidationIntegrationTest {
                         .withLastName("Last")
                         .withMedicalRiskLimitLevel("LEVEL_10000")
                         .withBirthDate(createDate("2005-02-02"))
-                        .withIc("PERSON_0")
+                        .withIc(personIc)
                         .build()
                 )
                 .build();

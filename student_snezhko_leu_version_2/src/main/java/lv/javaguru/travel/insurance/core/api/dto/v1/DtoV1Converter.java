@@ -84,7 +84,7 @@ public class DtoV1Converter {
         person.setPersonLastName(request.getPersonLastName());
         person.setPersonBirthDate(request.getPersonBirthDate());
         person.setMedicalRiskLimitLevel(request.getMedicalRiskLimitLevel());
-        person.setPersonIc(request.getPersonIc());
+        //person.setPersonIc();
         return person;
     }
     /*

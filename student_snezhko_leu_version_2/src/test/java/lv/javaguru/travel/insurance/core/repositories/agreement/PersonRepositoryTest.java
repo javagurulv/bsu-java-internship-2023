@@ -9,6 +9,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Optional;
+import java.util.UUID;
 
 import static org.springframework.test.util.AssertionErrors.*;
 
@@ -30,7 +31,7 @@ public class PersonRepositoryTest {
     public void correctPersonTest() {
         String firstName = "CorrectFirstName";
         String lastName = "CorrectLastName";
-        String ic = "CORRECT_IC";
+        UUID ic = UUID.fromString("12345678-1234-1234-1234-123456789101");
         Optional<PersonDTODomain> optional = personRepository.findBy(firstName, lastName, ic);
         assertTrue("", optional.isPresent());
         assertEquals("", firstName, optional.get().getPersonFirstName());
@@ -42,7 +43,7 @@ public class PersonRepositoryTest {
     public void wrongPersonTest() {
         String firstName = "WrongFirstName";
         String lastName = "WrongLastName";
-        String ic = "WRONG_IC";
+        UUID ic = UUID.fromString("22222222-1234-1234-1234-123456789101");
         Optional<PersonDTODomain> optional = personRepository.findBy(firstName, lastName, ic);
         assertFalse("", optional.isPresent());
     }
@@ -51,7 +52,7 @@ public class PersonRepositoryTest {
     public void wrongPersonFirstNameTest() {
         String firstName = "WrongFirstName";
         String lastName = "CorrectLastName";
-        String ic = "CORRECT_IC";
+        UUID ic = UUID.fromString("12345678-1234-1234-1234-123456789101");
         Optional<PersonDTODomain> optional = personRepository.findBy(firstName, lastName, ic);
         assertFalse("", optional.isPresent());
     }
@@ -60,7 +61,7 @@ public class PersonRepositoryTest {
     public void wrongPersonLastNameTest() {
         String firstName = "CorrectFirstName";
         String lastName = "WrongLastName";
-        String ic = "CORRECT_IC";
+        UUID ic = UUID.fromString("12345678-1234-1234-1234-123456789101");
         Optional<PersonDTODomain> optional = personRepository.findBy(firstName, lastName, ic);
         assertFalse("", optional.isPresent());
     }
@@ -69,7 +70,7 @@ public class PersonRepositoryTest {
     public void wrongPersonIcTest() {
         String firstName = "CorrectFirstName";
         String lastName = "CorrectLastName";
-        String ic = "WRONG_IC";
+        UUID ic = UUID.fromString("22222222-1234-1234-1234-123456789101");
         Optional<PersonDTODomain> optional = personRepository.findBy(firstName, lastName, ic);
         assertFalse("", optional.isPresent());
     }

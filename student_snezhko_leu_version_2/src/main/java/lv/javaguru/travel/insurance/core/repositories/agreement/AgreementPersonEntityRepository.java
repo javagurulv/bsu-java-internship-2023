@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 public interface AgreementPersonEntityRepository extends JpaRepository<AgreementPersonEntityDomain, Long> {
 
@@ -18,5 +19,5 @@ public interface AgreementPersonEntityRepository extends JpaRepository<Agreement
             "AND personDomain.personIc = :ic")
     Optional<AgreementPersonEntityDomain> findByName(@Param("fname") String firstName,
                                                      @Param("lname") String lastName,
-                                                     @Param("ic") String ic);
+                                                     @Param("ic") UUID ic);
 }

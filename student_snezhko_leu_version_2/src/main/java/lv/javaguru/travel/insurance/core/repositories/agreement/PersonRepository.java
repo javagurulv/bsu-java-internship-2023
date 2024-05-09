@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.Optional;
+import java.util.UUID;
 
 public interface PersonRepository extends JpaRepository<PersonDTODomain, Long> {
 
@@ -15,6 +16,6 @@ public interface PersonRepository extends JpaRepository<PersonDTODomain, Long> {
             " AND p.personIc = :i")
     Optional<PersonDTODomain> findBy(@Param("fn") String firstName,
                                             @Param("ln") String lastName,
-                                            @Param("i") String ic
+                                            @Param("i") UUID ic
     );
 }

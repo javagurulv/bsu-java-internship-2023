@@ -8,6 +8,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.UUID;
 
 @Entity
 @Table(name = "persons")
@@ -30,7 +31,7 @@ public class PersonDTODomain {
     private String personLastName;
 
     @Column(name = "ic", nullable = false, unique = true)
-    private String personIc;
+    private UUID personIc;
 
     @Column(name = "birth_date", nullable = false)
     private Date personBirthDate;

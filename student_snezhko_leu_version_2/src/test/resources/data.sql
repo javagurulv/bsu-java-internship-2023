@@ -231,8 +231,8 @@ KEY(medical_risk_limit_level_ic)
 VALUES('LEVEL_50000', 2.0);
 
 MERGE INTO persons(first_name, last_name, ic, birth_date)
-KEY(ic)
-VALUES('CorrectFirstName', 'CorrectLastName', 'CORRECT_IC', '2001-01-01');
+KEY(first_name, last_name, ic)
+VALUES('CorrectFirstName', 'CorrectLastName', '12345678-1234-1234-1234-123456789101', '2001-01-01');
 
 MERGE INTO agreements(uuid, date_from, date_to, country, premium)
 key (uuid)

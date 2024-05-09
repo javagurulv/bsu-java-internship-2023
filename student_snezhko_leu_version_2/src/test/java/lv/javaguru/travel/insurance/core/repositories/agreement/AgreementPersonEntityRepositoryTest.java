@@ -15,6 +15,7 @@ import java.math.RoundingMode;
 import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import static org.springframework.test.util.AssertionErrors.*;
 
@@ -36,7 +37,7 @@ public class AgreementPersonEntityRepositoryTest {
     public void correctPerson() {
         String firstName = "CorrectFirstName";
         String lastName = "CorrectLastName";
-        String ic = "CORRECT_IC";
+        UUID ic = UUID.fromString("12345678-1234-1234-1234-123456789101");
         Optional<AgreementPersonEntityDomain> op = agreementPersonEntityRepository.findByName(firstName, lastName, ic);
 
         assertTrue("", op.isPresent());
@@ -52,7 +53,7 @@ public class AgreementPersonEntityRepositoryTest {
     public void incorrectFirstNameTest() {
         String firstName = "IncorrectFirstName";
         String lastName = "CorrectLastName";
-        String ic = "CORRECT_IC";
+        UUID ic = UUID.fromString("12345678-1234-1234-1234-123456789101");
 
         Optional<AgreementPersonEntityDomain> op = agreementPersonEntityRepository.findByName(firstName, lastName, ic);
 
@@ -63,7 +64,7 @@ public class AgreementPersonEntityRepositoryTest {
     public void incorrectLastNameTest() {
         String firstName = "CorrectFirstName";
         String lastName = "IncorrectLastName";
-        String ic = "CORRECT_IC";
+        UUID ic = UUID.fromString("12345678-1234-1234-1234-123456789101");
 
         Optional<AgreementPersonEntityDomain> op = agreementPersonEntityRepository.findByName(firstName, lastName, ic);
 
@@ -74,7 +75,7 @@ public class AgreementPersonEntityRepositoryTest {
     public void incorrectPersonIcTest() {
         String firstName = "CorrectFirstName";
         String lastName = "CorrectLastName";
-        String ic = "INCORRECT_PERSON_IC";
+        UUID ic = UUID.fromString("22222222-1234-1234-1234-123456789101");
 
         Optional<AgreementPersonEntityDomain> op = agreementPersonEntityRepository.findByName(firstName, lastName, ic);
 

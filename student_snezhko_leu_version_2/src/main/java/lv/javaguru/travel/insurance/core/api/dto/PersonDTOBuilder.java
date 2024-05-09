@@ -4,12 +4,13 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 public class PersonDTOBuilder {
     private String personFirstName;
     private String personLastName;
 
-    private String personIc;
+    private UUID personIc;
     private Date birthDate;
     private BigDecimal personPremium;
     private String medicalRiskLimitLevel;
@@ -32,7 +33,7 @@ public class PersonDTOBuilder {
         return this;
     }
 
-    public PersonDTOBuilder withIc(String ic) {
+    public PersonDTOBuilder withIc(UUID ic) {
         this.personIc = ic;
         return this;
     }

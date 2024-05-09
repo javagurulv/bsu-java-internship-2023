@@ -17,6 +17,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import static lv.javaguru.travel.insurance.core.api.dto.AgreementDTOBuilder.createAgreementDTO;
 import static lv.javaguru.travel.insurance.core.validations.integration.CreateDateUtil.createDate;
@@ -31,6 +32,7 @@ public class AgreementDateFromValidationIntegrationTest {
 
     private String errorCode;
     private String description;
+    private UUID personIc = UUID.fromString("12345678-1234-1234-1234-123456789101");
     @Test
     public void shouldReturnErrorsWhenDateFromIsNull() throws RuntimeException{
         errorCode = "ERROR_CODE_2";
@@ -47,7 +49,7 @@ public class AgreementDateFromValidationIntegrationTest {
                                 .withLastName("last")
                                 .withBirthDate(createDate("2005-02-02"))
                                 .withMedicalRiskLimitLevel("LEVEL_10000")
-                                .withIc("PERSON_0")
+                                .withIc(personIc)
                 )
                 .build();
         List<ValidationErrorDTO> errors = validator.validate(agreement);
@@ -72,7 +74,7 @@ public class AgreementDateFromValidationIntegrationTest {
                                 .withLastName("last")
                                 .withBirthDate(createDate("2005-02-02"))
                                 .withMedicalRiskLimitLevel("LEVEL_10000")
-                                .withIc("PERSON_0")
+                                .withIc(personIc)
                 )
                 .build();
         List<ValidationErrorDTO> errors = validator.validate(agreement);

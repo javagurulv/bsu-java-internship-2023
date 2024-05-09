@@ -12,6 +12,7 @@ import org.mockito.Mock;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Optional;
+import java.util.UUID;
 
 import static lv.javaguru.travel.insurance.core.api.dto.AgreementDTOBuilder.createAgreementDTO;
 import static lv.javaguru.travel.insurance.core.api.dto.PersonDTOBuilder.createPersonDTO;
@@ -49,7 +50,7 @@ public class PersonIcValidationTest extends AbstractPersonFieldValidationTest {
         String errorCode = "ERROR_CODE_16";
         String description = "Field personIc is empty!";
         person = createPersonDTO()
-                .withIc("")
+                .withIc(null)
                 .build();
 
         when(errorFactory.buildError(errorCode)).thenReturn(new ValidationErrorDTO(errorCode, description));
@@ -64,7 +65,7 @@ public class PersonIcValidationTest extends AbstractPersonFieldValidationTest {
         String errorCode = "ERROR_CODE_16";
         String description = "Field personIc is empty!";
         person = createPersonDTO()
-                .withIc("PERSON_VALID")
+                .withIc(UUID.fromString("12345678-1234-1234-1234-123456789101"))
                 .build();
 
         when(errorFactory.buildError(errorCode)).thenReturn(new ValidationErrorDTO(errorCode, description));
