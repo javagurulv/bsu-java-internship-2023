@@ -1,5 +1,6 @@
 package lv.javaguru.travel.insurance.core.repositories.agreement;
 
+import lv.javaguru.travel.insurance.core.domain.agreement.AgreementPersonEntityDomain;
 import lv.javaguru.travel.insurance.core.domain.agreement.PersonDTODomain;
 import lv.javaguru.travel.insurance.core.repositories.agreement.PersonRepository;
 import org.junit.jupiter.api.Test;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.sql.Date;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -74,4 +76,5 @@ public class PersonRepositoryTest {
         Optional<PersonDTODomain> optional = personRepository.findBy(firstName, lastName, ic);
         assertFalse("", optional.isPresent());
     }
+
 }

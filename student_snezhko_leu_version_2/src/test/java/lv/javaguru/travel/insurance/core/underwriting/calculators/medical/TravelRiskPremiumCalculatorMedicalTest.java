@@ -22,7 +22,7 @@ import static lv.javaguru.travel.insurance.core.api.dto.AgreementDTOBuilder.crea
 import static lv.javaguru.travel.insurance.core.api.dto.PersonDTOBuilder.createPersonDTO;
 import static lv.javaguru.travel.insurance.core.domain.calculate.builders.CountryDefaultDayRateBuilder.createCountryDefaultDayRate;
 import static lv.javaguru.travel.insurance.core.domain.calculate.builders.MedicalRiskLimitLevelBuilder.createMedicalRiskLimitLevel;
-import static lv.javaguru.travel.insurance.core.validations.integration.CreateDateUtil.createDate;
+import static lv.javaguru.travel.insurance.core.validations.calculate.integration.CreateDateUtil.createDate;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;

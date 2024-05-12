@@ -56,7 +56,7 @@ public class PersonRiskEntityRepositoryTest {
         String ic = "CORRECT_RISK_IC";
         BigDecimal premium = BigDecimal.valueOf(2).setScale(2, RoundingMode.HALF_UP);
         AgreementPersonEntityDomain domain = new AgreementPersonEntityDomain();
-        domain.setId(2L);
+        domain.setId(0L);
         Optional<PersonRiskEntityDomain> risk = personRiskEntityRepository.findByIcAndPerson(ic, domain);
         assertFalse("", risk.isPresent());
     }

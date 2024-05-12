@@ -1,20 +1,18 @@
 package lv.javaguru.travel.insurance.core.api.dto.v1;
 
-import lv.javaguru.travel.insurance.core.api.command.TravelCalculatePremiumCoreCommand;
-import lv.javaguru.travel.insurance.core.api.command.TravelCalculatePremiumCoreResult;
+import lv.javaguru.travel.insurance.core.api.command.calculate.TravelCalculatePremiumCoreCommand;
+import lv.javaguru.travel.insurance.core.api.command.calculate.TravelCalculatePremiumCoreResult;
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.api.dto.RiskDTO;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
-import lv.javaguru.travel.insurance.core.services.TravelCalculatePremiumService;
+import lv.javaguru.travel.insurance.core.services.calculate.TravelCalculatePremiumService;
 import lv.javaguru.travel.insurance.core.util.GenerateAgreementUUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.math.RoundingMode;
-import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 import static lv.javaguru.travel.insurance.core.util.GeneratePersonIc.generatePersonIcs;

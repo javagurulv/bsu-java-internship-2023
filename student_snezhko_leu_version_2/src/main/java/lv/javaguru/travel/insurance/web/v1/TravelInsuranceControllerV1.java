@@ -1,6 +1,6 @@
 package lv.javaguru.travel.insurance.web.v1;
 
-import lv.javaguru.travel.insurance.core.services.TravelCalculatePremiumService;
+import lv.javaguru.travel.insurance.core.services.calculate.TravelCalculatePremiumService;
 import lv.javaguru.travel.insurance.core.api.dto.v1.DtoV1Converter;
 import lv.javaguru.travel.insurance.core.api.dto.v1.TravelCalculatePremiumRequestV1;
 import lv.javaguru.travel.insurance.core.api.dto.v1.TravelCalculatePremiumResponseV1;

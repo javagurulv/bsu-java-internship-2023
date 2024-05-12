@@ -4,6 +4,7 @@ import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTOBuilder;
 import lv.javaguru.travel.insurance.core.domain.agreement.AgreementEntityDomain;
 import lv.javaguru.travel.insurance.core.domain.agreement.AgreementPersonEntityDomain;
+import lv.javaguru.travel.insurance.core.domain.agreement.PersonDTODomain;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,5 +81,13 @@ public class AgreementPersonEntityRepositoryTest {
         Optional<AgreementPersonEntityDomain> op = agreementPersonEntityRepository.findByName(firstName, lastName, ic);
 
         assertFalse("", op.isPresent());
+    }
+
+    @Test
+    public void twoPersons() {
+        AgreementEntityDomain agreementEntityDomain =new AgreementEntityDomain();
+        agreementEntityDomain.setId(1L);
+        List<AgreementPersonEntityDomain> personDTODomains = agreementPersonEntityRepository.findByAgreement(agreementEntityDomain);
+        assertEquals("", 2, personDTODomains.size());
     }
 }

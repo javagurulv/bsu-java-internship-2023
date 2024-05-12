@@ -232,11 +232,18 @@ VALUES('LEVEL_50000', 2.0);
 
 MERGE INTO persons(first_name, last_name, ic, birth_date)
 KEY(first_name, last_name, ic)
-VALUES('CorrectFirstName', 'CorrectLastName', '12345678-1234-1234-1234-123456789101', '2001-01-01');
+VALUES('CorrectFirstName', 'CorrectLastName', '12345678-1234-1234-1234-123456789101', '2001-01-01'),
+('First', 'Last', '87654321-4321-4321-4321-098765432109', '2005-02-02');
+
 
 MERGE INTO agreements(uuid, date_from, date_to, country, premium)
 key (uuid)
-VALUES(0x00, '2050-02-02', '2050-02-03', 'SPAIN', 1);
+VALUES(0x00, '2050-02-02', '2050-02-03', 'SPAIN', 1),
+('11111111-1111-1111-1111-111111111111',
+'2050-02-02',
+'2050-02-05',
+'LATVIA',
+2);
 
 MERGE into selected_risks(risk_ic, agreement)
 KEY (risk_ic)
@@ -251,10 +258,17 @@ MERGE into agreement_persons(agreement,
 KEY(agreement, person)
 SELECT
         agr.id,
-        1,
+        pers.id,
         'CORRECT_MEDICAL_RISK_LIMIT_LEVEL',
         10
-FROM agreements AS agr ;
+FROM agreements AS agr JOIN persons AS pers ON agr.id = pers.id;
+
+MERGE into agreement_persons(agreement,
+                            person,
+                            medical_risk_limit_level,
+                            premium)
+KEY(agreement, person)
+VALUES(1, 2, 'Medical_risk_limit_level', 5);
 
 MERGE INTO person_risks(risk_ic, premium, person)
 KEY(risk_ic, person)

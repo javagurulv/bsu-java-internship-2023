@@ -1,17 +1,15 @@
 package lv.javaguru.travel.insurance.web.v2;
 
 import com.google.common.base.Stopwatch;
-import lv.javaguru.travel.insurance.core.api.command.TravelCalculatePremiumCoreCommand;
-import lv.javaguru.travel.insurance.core.api.command.TravelCalculatePremiumCoreResult;
-import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
+import lv.javaguru.travel.insurance.core.api.command.calculate.TravelCalculatePremiumCoreCommand;
+import lv.javaguru.travel.insurance.core.api.command.calculate.TravelCalculatePremiumCoreResult;
 import lv.javaguru.travel.insurance.core.api.dto.v2.ConverterV2DTO;
 import lv.javaguru.travel.insurance.core.api.dto.v2.TravelCalculatePremiumRequestV2;
 import lv.javaguru.travel.insurance.core.api.dto.v2.TravelCalculatePremiumResponseV2;
-import lv.javaguru.travel.insurance.core.services.TravelCalculatePremiumService;
+import lv.javaguru.travel.insurance.core.services.calculate.TravelCalculatePremiumService;
 import lv.javaguru.travel.insurance.rest.common.TravelCalculatePremiumRequestExecutionTimeLogger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;

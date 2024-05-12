@@ -19,7 +19,7 @@ import java.util.Optional;
 import static lv.javaguru.travel.insurance.core.api.dto.AgreementDTOBuilder.createAgreementDTO;
 import static lv.javaguru.travel.insurance.core.api.dto.PersonDTOBuilder.createPersonDTO;
 import static lv.javaguru.travel.insurance.core.domain.calculate.builders.AgeCoefficientBuilder.createAgeCoefficient;
-import static lv.javaguru.travel.insurance.core.validations.integration.CreateDateUtil.createDate;
+import static lv.javaguru.travel.insurance.core.validations.calculate.integration.CreateDateUtil.createDate;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;

@@ -1,0 +1,10 @@
+package lv.javaguru.travel.insurance.core;
+
+public enum RISKS {
+    TRAVEL_MEDICAL,
+    TRAVEL_CANCELLATION,
+    TRAVEL_EVACUATION,
+    TRAVEL_LOSS_BAGGAGE,
+    TRAVEL_THIRD_PARTY_LIABILITY,
+    TRAVEL_SPORT_ACTIVITIES
+}
