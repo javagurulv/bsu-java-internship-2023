@@ -17,7 +17,7 @@ public class AgreementRiskEntityService {
     private AgreementRiskEntityRepository agreementRiskEntityRepository;
 
     public AgreementRiskEntityDomain saveRisk(String riskIc, AgreementEntityDomain agreementDomain) {
-        Optional<AgreementRiskEntityDomain> optional = agreementRiskEntityRepository.findByRiskIc(riskIc);
+        Optional<AgreementRiskEntityDomain> optional = agreementRiskEntityRepository.findByIcAndAgreement(riskIc, agreementDomain);
         if (optional.isPresent()) {
             return optional.get();
         }
@@ -30,7 +30,7 @@ public class AgreementRiskEntityService {
     }
     public List<AgreementRiskEntityDomain> saveRisks(AgreementDTO agreementDTO, AgreementEntityDomain agreementEntityDomain) {
         return agreementDTO.getSelectedRisks().stream().map(riskIc -> {
-            Optional<AgreementRiskEntityDomain> optional = agreementRiskEntityRepository.findByRiskIc(riskIc);
+            Optional<AgreementRiskEntityDomain> optional = agreementRiskEntityRepository.findByIcAndAgreement(riskIc, agreementEntityDomain);
             if (optional.isEmpty()) {
                 AgreementRiskEntityDomain domain = new AgreementRiskEntityDomain();
                 domain.setRiskIc(riskIc);

@@ -26,15 +26,16 @@ public class PersonDTO {
     private String personLastName;
     private UUID personIc;
     private String medicalRiskLimitLevel;
-  //  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-  //  @DateTimeFormat(pattern = "yyyy-MM-dd")
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Europe/Minsk")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date personBirthDate;
 
- //   @JsonSerialize(using = BigDecimalSerializer.class)
+    @JsonSerialize(using = BigDecimalSerializer.class)
     private BigDecimal personPremium;
 
- //   @JsonAlias("selected_risks")
- //   @JsonProperty("selected_risks")
+    @JsonAlias("selected_risks")
+    @JsonProperty("selected_risks")
     private List<RiskDTO> selectedRisks;
 
 }

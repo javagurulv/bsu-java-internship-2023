@@ -1,0 +1,11 @@
+Test Case 1:
+Request: correct uuid, belongs to DB
+Response: correct agreement with risks, premium, persons from DB. Status - "SUCCESS". No errors
+
+Test Case 2:
+Request: correct uuid, but DB hasn't it
+Response: agreement is null, errors is null. Status - "NO_FOUND_UUID"
+
+Test Case 3:
+Request: invalid uuid
+Response: agreement is null, one error - "ERROR_CODE_18=Invalid agreement UUID!". Status - "COMPLETED_WITH_ERRORS"

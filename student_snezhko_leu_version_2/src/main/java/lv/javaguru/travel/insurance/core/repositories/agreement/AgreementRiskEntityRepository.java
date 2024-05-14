@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 import java.util.Optional;
 
 public interface AgreementRiskEntityRepository extends JpaRepository<AgreementRiskEntityDomain, Long> {
-    Optional<AgreementRiskEntityDomain> findByRiskIc(String riskIc);
+ //   Optional<AgreementRiskEntityDomain> findByRiskIc(String riskIc);
 
     @Query("SELECT risk FROM AgreementRiskEntityDomain risk " +
             "LEFT JOIN risk.agreement a " +

@@ -1,5 +1,6 @@
 package lv.javaguru.travel.insurance.core.repositories.agreement;
 
+import lv.javaguru.travel.insurance.core.domain.agreement.AgreementEntityDomain;
 import lv.javaguru.travel.insurance.core.domain.agreement.AgreementRiskEntityDomain;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -25,7 +26,9 @@ public class SelectedRisksEntityRepositoryTest {
     @Test
     public void correctRiskIc() {
         String riskIc = "CORRECT_RISK_IC";
-        Optional<AgreementRiskEntityDomain> domain = agreementRiskEntityRepository.findByRiskIc(riskIc);
+        AgreementEntityDomain agreementEntityDomain = new AgreementEntityDomain();
+        agreementEntityDomain.setId(1L);
+        Optional<AgreementRiskEntityDomain> domain = agreementRiskEntityRepository.findByIcAndAgreement(riskIc, agreementEntityDomain);
         assertTrue("", domain.isPresent());
         assertEquals("", riskIc, domain.get().getRiskIc());
     }
@@ -33,7 +36,9 @@ public class SelectedRisksEntityRepositoryTest {
     @Test
     public void incorrectRiskIc() {
         String riskIc = "WRONG_RISK_IC";
-        Optional<AgreementRiskEntityDomain> domain = agreementRiskEntityRepository.findByRiskIc(riskIc);
+        AgreementEntityDomain agreementEntityDomain = new AgreementEntityDomain();
+        agreementEntityDomain.setId(1L);
+        Optional<AgreementRiskEntityDomain> domain = agreementRiskEntityRepository.findByIcAndAgreement(riskIc, agreementEntityDomain);
         assertFalse("", domain.isPresent());
     }
 }

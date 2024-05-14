@@ -246,10 +246,14 @@ VALUES(0x00, '2050-02-02', '2050-02-03', 'SPAIN', 1),
 2);
 
 MERGE into selected_risks(risk_ic, agreement)
-KEY (risk_ic)
+KEY (risk_ic, agreement)
 SELECT 'CORRECT_RISK_IC',
         agr.id
 FROM agreements AS agr;
+
+MERGE INTO selected_risks(risk_ic, agreement)
+KEY(risk_ic, agreement)
+VALUES('TRAVEL_CANCELLATION', 2);
 
 MERGE into agreement_persons(agreement,
                             person,
@@ -277,3 +281,7 @@ SELECT
     2,
     p.id
 from agreement_persons as p;
+
+MERGE INTO person_risks(risk_ic, premium, person)
+KEY(risk_ic, person)
+VALUES ('TRAVEL_CANCELLATION', 2, 2);

@@ -1,0 +1,10 @@
+{
+  "errors" : [
+    {
+      "errorCode":"ERROR_CODE_18",
+      "description":"Invalid agreement UUID!"
+    }
+  ],
+  "agreementDTO" : null,
+  "status" : "COMPLETED_WITH_ERRORS"
+}

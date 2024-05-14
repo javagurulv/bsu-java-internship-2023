@@ -22,12 +22,12 @@ import java.util.UUID;
 @NoArgsConstructor
 public class AgreementDTO {
 
-    //@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    //@DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Europe/Minsk")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date agreementDateFrom;
 
-    //@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    //@DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Europe/Minsk")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date agreementDateTo;
 
     //@JsonAlias(value = "uuid")
@@ -35,14 +35,14 @@ public class AgreementDTO {
 
     private String country;
 
-    //@JsonSerialize(using = BigDecimalSerializer.class)
+    @JsonSerialize(using = BigDecimalSerializer.class)
     private BigDecimal agreementPremium;
 
-    //@JsonAlias(value = "selected_risks")
-    //@JsonProperty("selected_risks")
+    @JsonAlias(value = "selected_risks")
+    @JsonProperty("selected_risks")
     private List<String> selectedRisks;
 
-    //@JsonAlias("persons")
+    @JsonProperty("persons")
     private List<PersonDTO> persons;
 
 

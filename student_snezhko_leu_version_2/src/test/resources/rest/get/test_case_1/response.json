@@ -1,0 +1,30 @@
+{
+  "errors" : null,
+  "status" : "SUCCESS",
+  "agreementDTO" : {
+    "agreementDateFrom" : "2050-02-02",
+    "agreementDateTo" : "2050-02-05",
+    "uuid" : "11111111-1111-1111-1111-111111111111",
+    "country" : "LATVIA",
+    "agreementPremium" : 2.00,
+    "selected_risks" : [
+      "TRAVEL_CANCELLATION"
+    ],
+    "persons" : [
+      {
+        "personFirstName": "First",
+        "personLastName" : "Last",
+        "personIc" : "87654321-4321-4321-4321-098765432109",
+        "medicalRiskLimitLevel" : "CORRECT_MEDICAL_RISK_LIMIT_LEVEL",
+        "personBirthDate" : "2005-02-02",
+        "personPremium" : 10.00,
+        "selected_risks": [
+          {
+            "riskIc" : "TRAVEL_CANCELLATION",
+            "premium" : 2.00
+          }
+        ]
+      }
+    ]
+  }
+}
