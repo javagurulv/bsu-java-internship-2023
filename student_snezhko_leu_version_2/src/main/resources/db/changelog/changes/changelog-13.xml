@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
+    <changeSet id="33" author="Leu">
+        <sql>
+            INSERT INTO travel_cost_coefficient(cost_from, cost_to, cost_coefficient)
+            VALUES
+            (0, 5000, 10),
+            (5000, 10000, 30),
+            (10000, 20000, 100),
+            (20000, 99999999, 500);
+        </sql>
+    </changeSet>
+</databaseChangeLog>

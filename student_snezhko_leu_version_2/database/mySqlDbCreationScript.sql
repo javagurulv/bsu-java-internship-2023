@@ -128,6 +128,20 @@ CREATE TABLE IF NOT EXISTS person_risks(
 ALTER TABLE person_risks
 ADD FOREIGN KEY(person) REFERENCES agreement_persons(id);
 
+CREATE TABLE travel_cost_coefficient(
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    cost_from DECIMAL(10,2) NOT NULL,
+    cost_to DECIMAL(10,2) NOT NULL,
+    cost_coefficient DECIMAL(10, 2) NOT NULL,
+    PRIMARY KEY(id)
+);
+
+CREATE UNIQUE INDEX ix_travel_cost_coefficient_from_and_to
+ON travel_cost_coefficient(cost_from, cost_to);
+
+ALTER TABLE travel_cost_coefficient
+ADD CONSTRAINT tc_cost_from_must_be_less_than_cost_to CHECK(cost_from < cost_to);
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

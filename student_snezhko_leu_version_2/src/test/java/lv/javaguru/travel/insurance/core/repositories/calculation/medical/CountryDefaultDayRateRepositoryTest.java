@@ -1,7 +1,7 @@
-package lv.javaguru.travel.insurance.core.repositories.calculation;
+package lv.javaguru.travel.insurance.core.repositories.calculation.medical;
 
-import lv.javaguru.travel.insurance.core.domain.calculate.CountryDefaultDayRate;
-import lv.javaguru.travel.insurance.core.repositories.calculate.CountryDefaultDayRateRepository;
+import lv.javaguru.travel.insurance.core.domain.calculate.medical.CountryDefaultDayRate;
+import lv.javaguru.travel.insurance.core.repositories.calculate.medical.CountryDefaultDayRateRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -2,12 +2,14 @@ package lv.javaguru.travel.insurance.core.api.dto.v1;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -37,5 +39,6 @@ public class TravelCalculatePremiumRequestV1 {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date personBirthDate;
 
+    private BigDecimal cost;
     private String medicalRiskLimitLevel;
 }

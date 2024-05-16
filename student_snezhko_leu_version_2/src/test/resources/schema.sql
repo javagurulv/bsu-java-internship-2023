@@ -72,6 +72,7 @@ CREATE TABLE IF NOT EXISTS agreements (
     date_to DATE not null,
     country VARCHAR(30) not null,
     premium DECIMAL(19,2) not null,
+    cost DECIMAL(10, 2) NOT NULL,
     PRIMARY KEY(id)
 );
 
@@ -113,3 +114,17 @@ CREATE TABLE IF NOT EXISTS person_risks(
 
 ALTER TABLE person_risks
 ADD FOREIGN KEY(person) REFERENCES agreement_persons(id);
+
+CREATE TABLE IF NOT EXISTS travel_cost_coefficient(
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    cost_from DECIMAL(10,2) NOT NULL,
+    cost_to DECIMAL(10,2) NOT NULL,
+    cost_coefficient DECIMAL(10, 2) NOT NULL,
+    PRIMARY KEY(id)
+);
+
+CREATE UNIQUE INDEX IF NOT EXISTS ix_travel_cost_coefficient_from_and_to
+ON travel_cost_coefficient(cost_from, cost_to);
+
+ALTER TABLE travel_cost_coefficient
+ADD CONSTRAINT IF NOT EXISTS tc_cost_from_must_be_less_than_cost_to CHECK(cost_from < cost_to);

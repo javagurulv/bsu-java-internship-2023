@@ -39,4 +39,7 @@ public class AgreementEntityDomain {
 
     @Column(name = "premium", precision = 10, scale = 2, nullable = false)
     private BigDecimal premium;
+
+    @Column(name = "cost", precision = 10, scale = 2, nullable = false)
+    private BigDecimal cost;
 }

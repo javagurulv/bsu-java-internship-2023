@@ -10,6 +10,7 @@ import lombok.Setter;
 import lv.javaguru.travel.insurance.core.api.dto.RiskDTO;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -33,4 +34,6 @@ public class TravelCalculatePremiumRequestV2 {
     private String country;
 
     private List<PersonRequestV2DTO> persons;
+
+    private BigDecimal cost;
 }

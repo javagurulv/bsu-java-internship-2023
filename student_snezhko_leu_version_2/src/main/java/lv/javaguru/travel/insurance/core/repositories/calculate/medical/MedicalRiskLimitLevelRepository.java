@@ -1,6 +1,6 @@
-package lv.javaguru.travel.insurance.core.repositories.calculate;
+package lv.javaguru.travel.insurance.core.repositories.calculate.medical;
 
-import lv.javaguru.travel.insurance.core.domain.calculate.MedicalRiskLimitLevel;
+import lv.javaguru.travel.insurance.core.domain.calculate.medical.MedicalRiskLimitLevel;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

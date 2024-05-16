@@ -24,6 +24,9 @@
             <column name="premium" type="DECIMAL(19,2)">
                 <constraints nullable="false"/>
             </column>
+            <column name="cost" type="DECIMAL(10,2)">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
     </changeSet>
 </databaseChangeLog>

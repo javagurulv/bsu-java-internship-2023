@@ -2,9 +2,9 @@ package lv.javaguru.travel.insurance.core.underwriting.calculators.medical;
 
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
-import lv.javaguru.travel.insurance.core.domain.calculate.AgeCoefficient;
-import lv.javaguru.travel.insurance.core.domain.calculate.CountryDefaultDayRate;
-import lv.javaguru.travel.insurance.core.domain.calculate.MedicalRiskLimitLevel;
+import lv.javaguru.travel.insurance.core.domain.calculate.medical.AgeCoefficient;
+import lv.javaguru.travel.insurance.core.domain.calculate.medical.CountryDefaultDayRate;
+import lv.javaguru.travel.insurance.core.domain.calculate.medical.MedicalRiskLimitLevel;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

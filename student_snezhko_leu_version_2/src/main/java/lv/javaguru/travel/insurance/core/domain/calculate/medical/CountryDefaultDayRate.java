@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.core.domain.calculate;
+package lv.javaguru.travel.insurance.core.domain.calculate.medical;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

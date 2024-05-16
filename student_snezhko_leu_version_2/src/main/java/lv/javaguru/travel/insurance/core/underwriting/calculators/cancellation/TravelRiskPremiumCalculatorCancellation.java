@@ -1,14 +1,19 @@
-package lv.javaguru.travel.insurance.core.underwriting.calculators;
+package lv.javaguru.travel.insurance.core.underwriting.calculators.cancellation;
 
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.underwriting.TravelRiskPremiumCalculator;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Component
-class TravelRiskPremiumCalculatorCancellation implements TravelRiskPremiumCalculator {
+public class TravelRiskPremiumCalculatorCancellation implements TravelRiskPremiumCalculator {
+    @Autowired
+    private List<TravelRiskPremiumCalculatorCancellationComponent> components;
+
     @Override
     public BigDecimal calculatePremium(AgreementDTO agreement, PersonDTO person) {
         return BigDecimal.ZERO;

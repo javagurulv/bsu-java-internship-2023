@@ -2,6 +2,7 @@
   "personFirstName" : "Vasja",
   "personLastName" : "Pupkin",
   "personIc" : "PERSON_0",
+  "cost" : 5.00,
   "personBirthDate" : "2000-05-29",
   "agreementDateFrom" : "2025-05-25",
   "agreementDateTo" : "2025-05-29",

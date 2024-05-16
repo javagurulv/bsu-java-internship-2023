@@ -236,14 +236,14 @@ VALUES('CorrectFirstName', 'CorrectLastName', '12345678-1234-1234-1234-123456789
 ('First', 'Last', '87654321-4321-4321-4321-098765432109', '2005-02-02');
 
 
-MERGE INTO agreements(uuid, date_from, date_to, country, premium)
+MERGE INTO agreements(uuid, date_from, date_to, country, premium, cost)
 key (uuid)
-VALUES(0x00, '2050-02-02', '2050-02-03', 'SPAIN', 1),
+VALUES(0x00, '2050-02-02', '2050-02-03', 'SPAIN', 1, 10),
 ('11111111-1111-1111-1111-111111111111',
 '2050-02-02',
 '2050-02-05',
 'LATVIA',
-2);
+2, 10);
 
 MERGE into selected_risks(risk_ic, agreement)
 KEY (risk_ic, agreement)
@@ -285,3 +285,11 @@ from agreement_persons as p;
 MERGE INTO person_risks(risk_ic, premium, person)
 KEY(risk_ic, person)
 VALUES ('TRAVEL_CANCELLATION', 2, 2);
+
+MERGE INTO travel_cost_coefficient(cost_from, cost_to, cost_coefficient)
+KEY(cost_from, cost_to)
+VALUES
+(0, 5000, 10),
+(5000, 10000, 30),
+(10000, 20000, 100),
+(20000, 99999999, 500);

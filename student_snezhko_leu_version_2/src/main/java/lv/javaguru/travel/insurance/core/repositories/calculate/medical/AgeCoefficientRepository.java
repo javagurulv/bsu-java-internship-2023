@@ -1,6 +1,6 @@
-package lv.javaguru.travel.insurance.core.repositories.calculate;
+package lv.javaguru.travel.insurance.core.repositories.calculate.medical;
 
-import lv.javaguru.travel.insurance.core.domain.calculate.AgeCoefficient;
+import lv.javaguru.travel.insurance.core.domain.calculate.medical.AgeCoefficient;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

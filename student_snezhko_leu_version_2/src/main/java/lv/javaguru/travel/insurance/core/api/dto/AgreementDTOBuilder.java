@@ -15,6 +15,7 @@ public class AgreementDTOBuilder {
     private List<String> selectedRisks = new ArrayList<>();
     private List<PersonDTO> persons = new ArrayList<>();
 
+    private BigDecimal cost;
     public static AgreementDTOBuilder createAgreementDTO() {
         return new AgreementDTOBuilder();
     }
@@ -27,7 +28,8 @@ public class AgreementDTOBuilder {
                 country,
                 agreementPremium,
                 selectedRisks,
-                persons
+                persons,
+                cost
         );
     }
 
@@ -71,6 +73,11 @@ public class AgreementDTOBuilder {
 
     public AgreementDTOBuilder withAgreementUUID(UUID uuid) {
         this.agreementUUID = uuid;
+        return this;
+    }
+
+    public AgreementDTOBuilder withCost(BigDecimal cost) {
+        this.cost = cost;
         return this;
     }
 }

@@ -2,8 +2,8 @@ package lv.javaguru.travel.insurance.core.underwriting.calculators.medical;
 
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
-import lv.javaguru.travel.insurance.core.domain.calculate.MedicalRiskLimitLevel;
-import lv.javaguru.travel.insurance.core.repositories.calculate.MedicalRiskLimitLevelRepository;
+import lv.javaguru.travel.insurance.core.domain.calculate.medical.MedicalRiskLimitLevel;
+import lv.javaguru.travel.insurance.core.repositories.calculate.medical.MedicalRiskLimitLevelRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

@@ -41,6 +41,7 @@ public class ConverterV2DTO {
         response.setSelectedRisks(agreement.getSelectedRisks());
         response.setPersons(agreement.getPersons().stream().map(this::buildPersonResponse).toList());
         response.setUuid(agreement.getUuid());
+        response.setCost(agreement.getCost());
 
         return response;
     }
@@ -77,6 +78,7 @@ public class ConverterV2DTO {
             }
         agreement.setPersons(generatePersonIcs(agreement));
 
+        agreement.setCost(request.getCost());
         return agreement;
     }
 

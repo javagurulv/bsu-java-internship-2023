@@ -43,6 +43,7 @@ public class BuildAgreementService {
         agreementDTO.setPersons(
                 buildPersons(agreementEntityDomain)
         );
+        agreementDTO.setCost(agreementEntityDomain.getCost());
         return agreementDTO;
     }
 

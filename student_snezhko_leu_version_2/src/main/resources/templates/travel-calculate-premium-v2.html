@@ -83,6 +83,19 @@
         <br>
 
         <div>
+            <label for="cost">Travel cost</label>
+            <input type="number"
+                   id="cost"
+                   min="1"
+                   max="999999998"
+                   step="1"
+                   value="1"
+                   size="6"
+                   th:field="*{cost}"
+            />
+        </div>
+        <br>
+        <div>
             <label for="selectedRisk">Selected Risk</label>
             <textarea id="selectedRisk" th:field="*{selectedRisks}"></textarea>
         </div>

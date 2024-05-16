@@ -47,4 +47,7 @@ public class TravelCalculatePremiumResponseV2 {
     private BigDecimal agreementPremium;
 
     private UUID uuid;
+
+    @JsonSerialize(using = BigDecimalSerializer.class)
+    private BigDecimal cost;
 }

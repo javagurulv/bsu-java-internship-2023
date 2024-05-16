@@ -45,5 +45,6 @@ public class AgreementDTO {
     @JsonProperty("persons")
     private List<PersonDTO> persons;
 
-
+    @JsonSerialize(using = BigDecimalSerializer.class)
+    private BigDecimal cost;
 }

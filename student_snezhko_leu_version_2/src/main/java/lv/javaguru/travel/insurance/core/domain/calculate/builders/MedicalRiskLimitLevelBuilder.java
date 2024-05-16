@@ -1,6 +1,6 @@
 package lv.javaguru.travel.insurance.core.domain.calculate.builders;
 
-import lv.javaguru.travel.insurance.core.domain.calculate.MedicalRiskLimitLevel;
+import lv.javaguru.travel.insurance.core.domain.calculate.medical.MedicalRiskLimitLevel;
 
 import java.math.BigDecimal;
 

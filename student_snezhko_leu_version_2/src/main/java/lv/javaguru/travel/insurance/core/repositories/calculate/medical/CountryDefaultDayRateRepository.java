@@ -1,6 +1,6 @@
-package lv.javaguru.travel.insurance.core.repositories.calculate;
+package lv.javaguru.travel.insurance.core.repositories.calculate.medical;
 
-import lv.javaguru.travel.insurance.core.domain.calculate.CountryDefaultDayRate;
+import lv.javaguru.travel.insurance.core.domain.calculate.medical.CountryDefaultDayRate;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
