@@ -6,7 +6,7 @@
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
 
     <changeSet author = "javaguru" id = "8">
-        <createTable tableName="age_coefficient">
+        <createTable tableName="travel_medical_age_coefficient">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true"/>
             </column>

@@ -15,7 +15,7 @@ public class TravelCalculateCostCoefficientCancellation implements TravelRiskPre
     private TravelCostCoefficientRepository travelCostCoefficientRepository;
 
     @Override
-    public BigDecimal calculatePremium(AgreementDTO agreement) {
+    public BigDecimal calculatePremium(AgreementDTO agreement, PersonDTO person) {
         return travelCostCoefficientRepository.findCoefficientByCost(agreement.getCost())
                 .get().getCoefficient();
     }

@@ -135,27 +135,27 @@ VALUES('JAPAN', 3.50);
 
 
 
-MERGE INTO age_coefficient(age_from, age_to, coefficient)
+MERGE INTO travel_medical_age_coefficient(age_from, age_to, coefficient)
 KEY(age_from, age_to)
 VALUES(0, 5, 1.1);
 
-MERGE INTO age_coefficient(age_from, age_to, coefficient)
+MERGE INTO travel_medical_age_coefficient(age_from, age_to, coefficient)
 KEY(age_from, age_to)
 VALUES(6, 10, 0.7);
 
-MERGE INTO age_coefficient(age_from, age_to, coefficient)
+MERGE INTO travel_medical_age_coefficient(age_from, age_to, coefficient)
 KEY(age_from, age_to)
 VALUES(11, 17, 1.0);
 
-MERGE INTO age_coefficient(age_from, age_to, coefficient)
+MERGE INTO travel_medical_age_coefficient(age_from, age_to, coefficient)
 KEY(age_from, age_to)
 VALUES(18, 40, 1.1);
 
-MERGE INTO age_coefficient(age_from, age_to, coefficient)
+MERGE INTO travel_medical_age_coefficient(age_from, age_to, coefficient)
 KEY(age_from, age_to)
 VALUES(41, 65, 1.2);
 
-MERGE INTO age_coefficient(age_from, age_to, coefficient)
+MERGE INTO travel_medical_age_coefficient(age_from, age_to, coefficient)
 KEY(age_from, age_to)
 VALUES(65, 150, 1.5);
 
@@ -293,3 +293,13 @@ VALUES
 (5000, 10000, 30),
 (10000, 20000, 100),
 (20000, 99999999, 500);
+
+
+MERGE INTO travel_cancellation_age_coefficient(age_from, age_to, coefficient)
+KEY(age_from, age_to)
+VALUES
+(0,9,5.00),
+(10,17,10),
+(18, 39, 20),
+(40, 64, 30),
+(65, 130, 50);

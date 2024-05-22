@@ -2,7 +2,7 @@ package lv.javaguru.travel.insurance.core.underwriting.calculators.medical;
 
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
-import lv.javaguru.travel.insurance.core.domain.calculate.medical.AgeCoefficient;
+import lv.javaguru.travel.insurance.core.domain.calculate.medical.TMAgeCoefficient;
 import lv.javaguru.travel.insurance.core.domain.calculate.medical.CountryDefaultDayRate;
 import lv.javaguru.travel.insurance.core.domain.calculate.medical.MedicalRiskLimitLevel;
 import org.junit.jupiter.api.Test;
@@ -116,7 +116,7 @@ public class TravelRiskPremiumCalculatorMedicalTest {
         when(cddr.getDefaultDayRate()).thenReturn(cddrValue);
         //when(cddrRepository.findByCountryIc(countryName)).thenReturn(Optional.of(cddr));
 
-        AgeCoefficient ac = mock(AgeCoefficient.class);
+        TMAgeCoefficient ac = mock(TMAgeCoefficient.class);
         when(ac.getCoefficient()).thenReturn(BigDecimal.valueOf(1.1));
         //when(acRepository.findByAgeFromAndAgeTo(age)).thenReturn(Optional.of(ac));
         when(dayCountCalculator.calculatePremium(agreement, person)).thenReturn(BigDecimal.valueOf(1));

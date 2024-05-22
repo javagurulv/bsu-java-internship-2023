@@ -2,7 +2,8 @@ package lv.javaguru.travel.insurance.core.underwriting.calculators.medical;
 
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
-import lv.javaguru.travel.insurance.core.repositories.calculate.medical.AgeCoefficientRepository;
+import lv.javaguru.travel.insurance.core.repositories.calculate.medical.TMAgeCoefficientRepository;
+import lv.javaguru.travel.insurance.core.util.CalculateAgeUtil;
 import lv.javaguru.travel.insurance.core.util.DateTimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -20,18 +21,24 @@ import static lv.javaguru.travel.insurance.core.util.CheckApplicationPropertiesU
 @Component
 class TravelCalculateMedicalAgeCoefficient implements TravelRiskPremiumCalculatorMedicalComponent{
     @Autowired
-    private AgeCoefficientRepository acRepository;
+    private TMAgeCoefficientRepository acRepository;
 
+/*
     @Autowired
     private DateTimeUtil dateTimeUtil;
+
+ */
+
+    @Autowired
+    private CalculateAgeUtil calculateAgeUtil;
 
     public BigDecimal calculatePremium(AgreementDTO agreement, PersonDTO person) {
         try {
             return checkProperty("medical.risk.age.coefficient.enabled")
                     ? acRepository
                         .findCoefficient(
-                                calculateAge(
-                                        person
+                                calculateAgeUtil.calculateAge(
+                                        person.getPersonBirthDate()
                                 )
                         )
                         .get()
@@ -46,6 +53,7 @@ class TravelCalculateMedicalAgeCoefficient implements TravelRiskPremiumCalculato
     public BigDecimal calculatePremium(PersonDTO person) {
         return calculatePremium(null, person);
     }
+    /*
     private int calculateAge(PersonDTO person) {
         LocalDate personBirthDate = toLocalDate(person.getPersonBirthDate());
         LocalDate now = toLocalDate(dateTimeUtil.getCurrentDateTime());
@@ -55,4 +63,6 @@ class TravelCalculateMedicalAgeCoefficient implements TravelRiskPremiumCalculato
     private LocalDate toLocalDate(Date date) {
         return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
     }
+
+     */
 }

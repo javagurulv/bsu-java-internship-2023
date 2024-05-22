@@ -2,8 +2,9 @@ package lv.javaguru.travel.insurance.core.underwriting.calculators.medical;
 
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
-import lv.javaguru.travel.insurance.core.domain.calculate.medical.AgeCoefficient;
-import lv.javaguru.travel.insurance.core.repositories.calculate.medical.AgeCoefficientRepository;
+import lv.javaguru.travel.insurance.core.domain.calculate.medical.TMAgeCoefficient;
+import lv.javaguru.travel.insurance.core.repositories.calculate.medical.TMAgeCoefficientRepository;
+import lv.javaguru.travel.insurance.core.util.CalculateAgeUtil;
 import lv.javaguru.travel.insurance.core.util.DateTimeUtil;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,18 +27,20 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
 @DataJpaTest
-public class TravelCalculateMedicalAgeCoefficientTest {
+public class TravelCalculateMedicalTMAgeCoefficientTest {
+    @InjectMocks
+    private TravelCalculateMedicalAgeCoefficient calculator;
     @Mock
     private AgreementDTO agreement;
     @Mock
     private PersonDTO person;
     @Mock
-    private AgeCoefficientRepository acRepository;
+    private TMAgeCoefficientRepository acRepository;
+
 
     @Mock
-    private DateTimeUtil dateTimeUtil;
-    @InjectMocks
-    private TravelCalculateMedicalAgeCoefficient calculator;
+    private CalculateAgeUtil calculateAgeUtil;
+
 
     @Test
     public void MedicalAgeCoefficientCalculatorTest() {
@@ -56,9 +59,9 @@ public class TravelCalculateMedicalAgeCoefficientTest {
         birthDate.setYear(birthDate.getYear() - age);
 
         when(person.getPersonBirthDate()).thenReturn(birthDate);
-        when(dateTimeUtil.getCurrentDateTime()).thenReturn(new Date());
+        when(calculateAgeUtil.calculateAge(birthDate)).thenReturn(age);
 
-        AgeCoefficient acValue = mock(AgeCoefficient.class);
+        TMAgeCoefficient acValue = mock(TMAgeCoefficient.class);
         when(acValue.getCoefficient()).thenReturn(BigDecimal.valueOf(ageCoefficient));
 
         when(acRepository.findCoefficient(age)).thenReturn(Optional.of(acValue));
@@ -71,18 +74,20 @@ public class TravelCalculateMedicalAgeCoefficientTest {
 
     @Test
     public void MedicalAgeCoefficientCalculatorIntegrationTest() {
-        AgeCoefficient ac = createAgeCoefficient()
+        TMAgeCoefficient ac = createAgeCoefficient()
                 .withAgeFrom(10)
                 .withAgeTo(18)
                 .withCoefficient(BigDecimal.valueOf(1.1))
                 .build();
 
+        Date date = createDate("2009-03-05");
+        Integer age = 15;
         PersonDTO personDTO = createPersonDTO().withBirthDate(createDate("2009-03-05")).build();
         AgreementDTO agreementDTO = createAgreementDTO().withPersons(personDTO).build();
-        when(acRepository.findCoefficient(14)).thenReturn(Optional.of(ac));
+  //      when(acRepository.findCoefficient(14)).thenReturn(Optional.of(ac));
         when(acRepository.findCoefficient(15)).thenReturn(Optional.of(ac));
-        when(acRepository.findCoefficient(16)).thenReturn(Optional.of(ac));
-        when(dateTimeUtil.getCurrentDateTime()).thenReturn(new Date());
+//        when(acRepository.findCoefficient(16)).thenReturn(Optional.of(ac));
+        when(calculateAgeUtil.calculateAge(date)).thenReturn(age);
 
         assertEquals(BigDecimal.valueOf(1.1), calculator.calculatePremium(agreementDTO, personDTO));
     }

@@ -1,8 +1,9 @@
-package lv.javaguru.travel.insurance.core.underwriting.calculators.cancellation;
+package lv.javaguru.travel.insurance.core.underwriting.calculators;
 
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.underwriting.TravelRiskPremiumCalculator;
+import lv.javaguru.travel.insurance.core.underwriting.calculators.cancellation.TravelRiskPremiumCalculatorCancellationComponent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -10,7 +11,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @Component
-public class TravelRiskPremiumCalculatorCancellation implements TravelRiskPremiumCalculator {
+class TravelRiskPremiumCalculatorCancellation implements TravelRiskPremiumCalculator {
     @Autowired
     private List<TravelRiskPremiumCalculatorCancellationComponent> components;
 

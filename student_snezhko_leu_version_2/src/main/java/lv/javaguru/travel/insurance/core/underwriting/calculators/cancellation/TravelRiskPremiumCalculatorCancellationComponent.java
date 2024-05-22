@@ -6,5 +6,5 @@ import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import java.math.BigDecimal;
 
 public interface TravelRiskPremiumCalculatorCancellationComponent {
-    public BigDecimal calculatePremium(AgreementDTO agreement);
+    public BigDecimal calculatePremium(AgreementDTO agreement, PersonDTO person);
 }

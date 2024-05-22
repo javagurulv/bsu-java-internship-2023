@@ -47,7 +47,7 @@ CREATE UNIQUE INDEX `ix_country_default_day_rate_country_ic`
 ON `country_default_day_rate` (`country_ic`);
 
 
-CREATE TABLE IF NOT EXISTS `age_coefficient` (
+CREATE TABLE IF NOT EXISTS `travel_medical_age_coefficient` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
   `age_from` INT NOT NULL,
   `age_to` INT NOT NULL,

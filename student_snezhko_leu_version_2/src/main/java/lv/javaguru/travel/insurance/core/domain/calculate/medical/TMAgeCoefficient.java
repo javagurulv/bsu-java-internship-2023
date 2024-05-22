@@ -9,12 +9,12 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "age_coefficient")
+@Table(name = "travel_medical_age_coefficient")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class AgeCoefficient {
+public class TMAgeCoefficient {
 
     @Id
     @Column(name = "id")
