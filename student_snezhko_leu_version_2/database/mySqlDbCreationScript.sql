@@ -142,6 +142,20 @@ ON travel_cost_coefficient(cost_from, cost_to);
 ALTER TABLE travel_cost_coefficient
 ADD CONSTRAINT tc_cost_from_must_be_less_than_cost_to CHECK(cost_from < cost_to);
 
+CREATE TABLE travel_cancellation_age_coefficient(
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    age_from INT NOT NULL,
+    age_to INT NOT NULL,
+    coefficient DECIMAL(10,2) NOT NULL,
+    PRIMARY KEY(id)
+);
+
+CREATE UNIQUE INDEX ix_travel_cancellation_age_coefficient_from_and_to
+ON travel_cancellation_age_coefficient(age_from, age_to);
+
+ALTER TABLE travel_cancellation_age_coefficient
+ADD CONSTRAINT IF NOT EXISTS tc_age_from_must_be_less_than_age_to CHECK(age_from < age_to);
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

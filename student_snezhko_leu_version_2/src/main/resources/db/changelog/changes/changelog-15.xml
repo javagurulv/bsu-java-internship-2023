@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
+    <changeSet id="36" author="Leu">
+        <sql>
+            INSERT INTO travel_cancellation_age_coefficient(age_from, age_to, coefficient)
+            VALUES
+            (0,9,5.00),
+            (10,17,10),
+            (18, 39, 20),
+            (40, 64, 30),
+            (65, 130, 50);
+        </sql>
+    </changeSet>
+</databaseChangeLog>

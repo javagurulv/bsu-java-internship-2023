@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
+    <changeSet id="34" author="Leu">
+        <createTable tableName="travel_cancellation_age_coefficient">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="age_from" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="age_to" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="coefficient" type="DECIMAL(10,2)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="35" author="Leu">
+        <createIndex
+                tableName="travel_cancellation_age_coefficient"
+                indexName="ix_travel_cancellation_age_coefficient_from_and_to"
+                unique="true">
+            <column name="age_from"/>
+            <column name="age_to"/>
+        </createIndex>
+    </changeSet>
+
+</databaseChangeLog>
