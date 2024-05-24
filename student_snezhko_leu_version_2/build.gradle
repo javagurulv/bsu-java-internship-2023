@@ -49,5 +49,5 @@ bootJar {
 }
 
 clean {
-	delete "logs\\"
+	delete "logs"
 }
