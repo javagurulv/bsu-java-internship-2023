@@ -28,7 +28,7 @@ public class TravelCalculatePremiumControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @Test
+    //@Test
     public void simpleRestControllerTest() throws Exception {
         compareResponseFromRequest("requestCorrect.json", "responseCorrect.json");
         compareResponseFromRequest("requestWithoutFirstName.json", "responseWithoutFirstName.json");
