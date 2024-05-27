@@ -142,3 +142,17 @@ ON travel_cancellation_age_coefficient(age_from, age_to);
 
 ALTER TABLE travel_cancellation_age_coefficient
 ADD CONSTRAINT IF NOT EXISTS tc_age_from_must_be_less_than_age_to CHECK(age_from < age_to);
+
+CREATE TABLE IF NOT EXISTS travel_cancellation_country_safety_rating_coefficient
+(
+    id BIGINT AUTO_INCREMENT,
+    country VARCHAR(30) NOT NULL UNIQUE,
+    rating INT NOT NULL,
+    PRIMARY KEY(id)
+);
+
+CREATE UNIQUE INDEX IF NOT EXISTS ix_country_for_safety_rating_unique
+ON travel_cancellation_country_safety_rating_coefficient(country);
+
+ALTER TABLE travel_cancellation_country_safety_rating_coefficient
+ADD CONSTRAINT IF NOT EXISTS tc_correct_safety_rating CHECK(rating > 0 and rating <= 10);

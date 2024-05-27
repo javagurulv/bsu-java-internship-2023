@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
+    <changeSet id="37" author="Leu">
+        <createTable tableName="travel_cancellation_country_safety_rating_coefficient">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="country" type="VARCHAR(30)">
+                <constraints unique="true" nullable="false"/>
+            </column>
+            <column name="rating" type="INT">
+                <constraints nullable="false" checkConstraint="CHECK(rating &gt;=1 AND rating &lt;=10)"/>
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

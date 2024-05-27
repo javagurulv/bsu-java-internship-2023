@@ -216,3 +216,9 @@ VALUES
 (18, 39, 20),
 (40, 64, 30),
 (65, 130, 50);
+
+INSERT INTO travel_cancellation_country_safety_rating_coefficient(country, rating)
+VALUES
+('LATVIA',5),
+('SPAIN',8),
+('JAPAN', 9);
