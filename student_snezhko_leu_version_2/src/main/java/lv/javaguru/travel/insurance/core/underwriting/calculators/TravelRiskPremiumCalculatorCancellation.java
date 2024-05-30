@@ -17,7 +17,14 @@ class TravelRiskPremiumCalculatorCancellation implements TravelRiskPremiumCalcul
 
     @Override
     public BigDecimal calculatePremium(AgreementDTO agreement, PersonDTO person) {
-        return BigDecimal.ZERO;
+
+        return components.stream()
+                .map(
+                        component ->
+                                component.calculatePremium(agreement, person)
+                )
+                .reduce(BigDecimal::add)
+                .get();
     }
 
     @Override

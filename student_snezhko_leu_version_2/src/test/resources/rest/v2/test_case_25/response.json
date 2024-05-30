@@ -1,0 +1,47 @@
+{
+  "agreementDateFrom": "2025-05-25",
+  "agreementDateTo": "2025-05-29",
+  "uuid" : null,
+  "agreementPremium" : 120.00,
+  "cost" : 16.00,
+  "country": "SPAIN",
+  "selected_risks":["TRAVEL_CANCELLATION", "TRAVEL_MEDICAL"],
+  "persons": [
+    {
+      "personFirstName": "Vasja",
+      "personLastName": "Pupkin",
+      "personIc" : null,
+      "personBirthDate": "2000-05-29",
+      "medicalRiskLimitLevel" : "LEVEL_10000",
+      "personPremium" : 43.00,
+      "selected_risks" : [
+        {
+          "riskIc" : "TRAVEL_CANCELLATION",
+          "premium" : 32.00
+        },
+        {
+          "riskIc" : "TRAVEL_MEDICAL",
+          "premium" : 11.00
+        }
+      ]
+    },
+    {
+      "personFirstName": "Petja",
+      "personLastName": "Pupkin",
+      "personIc" : null,
+      "personBirthDate": "1950-03-01",
+      "medicalRiskLimitLevel" : "LEVEL_10000",
+      "personPremium" : 77.00,
+      "selected_risks" : [
+        {
+          "riskIc" : "TRAVEL_CANCELLATION",
+          "premium" : 62.00
+        },
+        {
+          "riskIc" : "TRAVEL_MEDICAL",
+          "premium" : 15.00
+        }
+      ]
+    }
+  ]
+}
