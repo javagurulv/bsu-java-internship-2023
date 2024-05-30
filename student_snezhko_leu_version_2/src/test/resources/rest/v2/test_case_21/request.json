@@ -3,6 +3,7 @@
     "agreementDateFrom" : "2025-05-25",
     "agreementDateTo" : "2025-05-29",
     "country" : "MY_COUNTRY",
+    "cost" : 1.00,
     "selected_risks":["TRAVEL_EVACUATION"],
     "persons" : [
       {

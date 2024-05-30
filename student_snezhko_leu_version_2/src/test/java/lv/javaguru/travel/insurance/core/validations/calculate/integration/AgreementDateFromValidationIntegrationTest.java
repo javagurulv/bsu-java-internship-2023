@@ -46,6 +46,7 @@ public class AgreementDateFromValidationIntegrationTest {
                                 .withMedicalRiskLimitLevel("LEVEL_10000")
                                 .withIc(personIc)
                 )
+                .withCost(BigDecimal.ONE)
                 .build();
         List<ValidationErrorDTO> errors = validator.validate(agreement);
         assertEquals(1, errors.size());
@@ -63,6 +64,7 @@ public class AgreementDateFromValidationIntegrationTest {
                 .withCountry("SPAIN")
                 .withPremium(BigDecimal.valueOf(1))
                 .withSelectedRisks("TRAVEL_MEDICAL")
+                .withCost(BigDecimal.ONE)
                 .withPersons(
                         PersonDTOBuilder.createPersonDTO()
                                 .withFirstName("first")

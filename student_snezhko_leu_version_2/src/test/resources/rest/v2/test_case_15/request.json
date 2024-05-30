@@ -3,6 +3,8 @@
     "agreementDateFrom" : "2025-05-25",
     "agreementDateTo" : "2025-05-29",
     "country" : "SPAIN",
+
+     "cost" : 1.00,
     "selected_risks":["NOT_SUPPORTED_RISK"],
     "persons" : [
       {

@@ -3,6 +3,7 @@
     "agreementDateFrom" : null,
     "agreementDateTo" : null,
     "country" : null,
+    "cost" : 1.00,
     "selected_risks": ["TRAVEL_MEDICAL"],
     "persons" : [
       {

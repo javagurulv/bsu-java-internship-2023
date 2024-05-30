@@ -3,6 +3,7 @@
     "agreementDateFrom" : null,
     "agreementDateTo" : null,
     "country" : null,
+    "cost" : null,
     "selected_risks":null,
     "persons" : [
       {

@@ -90,3 +90,11 @@ Response: error code = ERROR_CODE_10.
 Test Case 23:
 Request: medical risk limit level ic is not supported for two persons, RISK_TYPE = TRAVEL_EVACUATION.
 Response: error code = ERROR_CODE_14
+
+Test Case 24
+Request: correct, selected risk - TRAVEL_CANCELLATION, 2 persons
+Response: success
+
+Test Case 25:
+Request: correct, selected risks: TRAVEL_MEDICAL, TRAVEL_CANCELLATION, 2 persons
+Response: success

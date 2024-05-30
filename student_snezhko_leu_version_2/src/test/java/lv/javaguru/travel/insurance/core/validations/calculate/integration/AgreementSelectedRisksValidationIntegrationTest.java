@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
@@ -34,6 +35,7 @@ public class AgreementSelectedRisksValidationIntegrationTest {
                 .withDateFrom(CreateDateUtil.createDate("2050-02-02"))
                 .withDateTo(CreateDateUtil.createDate("2050-04-04"))
                 .withCountry("SPAIN")
+                .withCost(BigDecimal.ONE)
                 .withSelectedRisks((List<String>)null)
                 .withPersons(PersonDTOBuilder.createPersonDTO()
                         .withFirstName("First")
@@ -60,6 +62,7 @@ public class AgreementSelectedRisksValidationIntegrationTest {
                 .withDateFrom(CreateDateUtil.createDate("2050-02-02"))
                 .withDateTo(CreateDateUtil.createDate("2050-04-04"))
                 .withCountry("SPAIN")
+                .withCost(BigDecimal.ONE)
                 .withSelectedRisks("MY_RISK")
                 .withPersons(PersonDTOBuilder.createPersonDTO()
                         .withFirstName("First")

@@ -1,5 +1,6 @@
 {
-  "personFirstName" : "Vasja",
+  "personFirstName": "Vasja",
+  "cost" : 1.00,
   "personLastName" : null,
   "personIc" : "PERSON_0",
   "personBirthDate" : "2000-05-29",
