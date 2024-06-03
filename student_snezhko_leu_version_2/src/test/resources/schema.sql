@@ -93,7 +93,7 @@ CREATE TABLE IF NOT EXISTS agreement_persons(
     id BIGINT NOT NULL AUTO_INCREMENT,
     agreement BIGINT NOT NULL,
     person BIGINT NOT NULL,
-    medical_risk_limit_level VARCHAR(200) NOT NULL,
+    medical_risk_limit_level VARCHAR(200),
     premium DECIMAL(10,2) NOT NULL,
     PRIMARY KEY(id)
 );

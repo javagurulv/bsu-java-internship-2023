@@ -29,7 +29,7 @@ public class AgreementPersonEntityDomain {
     @JoinColumn(name = "agreement", nullable = false)
     private AgreementEntityDomain agreement;
 
-    @Column(name = "medical_risk_limit_level", nullable = false)
+    @Column(name = "medical_risk_limit_level")
     private String medicalRiskLimitLevel;
 
 

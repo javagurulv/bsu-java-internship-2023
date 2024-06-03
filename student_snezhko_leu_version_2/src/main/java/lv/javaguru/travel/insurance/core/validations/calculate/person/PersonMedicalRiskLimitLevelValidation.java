@@ -11,6 +11,8 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.util.Optional;
 
+//import static lv.javaguru.travel.insurance.core.validations.calculate.TravelAgreementValidatorImpl.hasTravelMedicalRisk;
+
 @Component
 public class PersonMedicalRiskLimitLevelValidation extends TravelPersonFieldValidationImpl {
     @Autowired
@@ -19,7 +21,8 @@ public class PersonMedicalRiskLimitLevelValidation extends TravelPersonFieldVali
     @Override
     public Optional<ValidationErrorDTO> validate(PersonDTO person) {
         try {
-            if (CheckApplicationPropertiesUtil.checkProperty("medical.risk.limit.level.enabled")) {
+            if (CheckApplicationPropertiesUtil.checkProperty("medical.risk.limit.level.enabled"))
+            { //&& hasTravelMedicalRisk()) {
                 return (person.getMedicalRiskLimitLevel() == null || person.getMedicalRiskLimitLevel().isEmpty())
                         ? Optional.of(errorFactory.buildError("ERROR_CODE_13"))
                         : Optional.empty();

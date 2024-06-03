@@ -29,6 +29,7 @@ public class AbstractPersonFieldValidationTest {
 
         ReflectionTestUtils.setField(validation, "errorFactory", errorFactory);
 
+
         person = mock(PersonDTO.class);
     }
 
