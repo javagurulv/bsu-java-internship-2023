@@ -28,15 +28,22 @@ public abstract class TravelCalculatePremiumControllerTestCase {
     private static final String BASE_URL = "/insurance/travel/api/v1/";
 
 
-    protected abstract String getTestCaseFolderName();
+ //   protected abstract String getTestCaseFolderName();
 
+    protected void executeAndCompare(String testCaseFolderName) throws Exception{
+        executeAndCompare(
+                "rest/v1/" + testCaseFolderName + "/request.json",
+                "rest/v1/" + testCaseFolderName + "/response.json"
+        );
+    }
+    /*
     protected void executeAndCompare() throws Exception {
         executeAndCompare(
                 "rest/v1/" + getTestCaseFolderName() + "/request.json",
                 "rest/v1/" + getTestCaseFolderName() + "/response.json"
         );
     }
-
+*/
 
         protected void executeAndCompare(String jsonRequestFilePath,
                                      String jsonResponseFilePath) throws Exception {

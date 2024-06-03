@@ -26,15 +26,13 @@ public abstract class TravelCalculatePremiumControllerV2TestCase {
     @Autowired private JsonFileReader jsonFileReader;
 
     private static final String BASE_URL = "/insurance/travel/api/v2/";
-    protected abstract String getTestCaseFolderName();
 
-    protected void executeAndCompare() throws Exception {
+    protected void executeAndCompare(String testCaseFolderName) throws Exception{
         executeAndCompare(
-                "rest/v2/" + getTestCaseFolderName() + "/request.json",
-                "rest/v2/" + getTestCaseFolderName() + "/response.json"
+                "rest/v2/" + testCaseFolderName + "/request.json",
+                "rest/v2/" + testCaseFolderName + "/response.json"
         );
     }
-
 
     protected void executeAndCompare(String jsonRequestFilePath,
                                      String jsonResponseFilePath) throws Exception {
