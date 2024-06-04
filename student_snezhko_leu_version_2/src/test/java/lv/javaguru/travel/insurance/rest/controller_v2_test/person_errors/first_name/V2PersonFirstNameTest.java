@@ -8,13 +8,13 @@ public class V2PersonFirstNameTest extends TravelCalculatePremiumControllerV2Tes
     //firstName is empty
     @Test
     public void execute3() throws Exception {
-        executeAndCompare("test_case_3");
+        executeAndCompare("first_name is empty");
     }
 
     //firstName is null
     @Test
     public void execute2() throws Exception {
-        executeAndCompare("test_case_2");
+        executeAndCompare("first_name is null");
     }
 
     @Override

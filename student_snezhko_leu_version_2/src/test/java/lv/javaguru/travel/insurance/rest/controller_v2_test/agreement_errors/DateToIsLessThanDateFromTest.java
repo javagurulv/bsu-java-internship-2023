@@ -8,7 +8,7 @@ public class DateToIsLessThanDateFromTest extends TravelCalculatePremiumControll
     //dateTo less than dateFrom
     @Test
     public void execute12() throws Exception {
-        executeAndCompare("test_case_12");
+        executeAndCompare("date_to less than date_from");
     }
 
     @Override

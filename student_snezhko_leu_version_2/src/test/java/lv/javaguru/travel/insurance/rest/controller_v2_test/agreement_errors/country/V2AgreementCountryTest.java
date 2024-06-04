@@ -9,25 +9,25 @@ public class V2AgreementCountryTest extends TravelCalculatePremiumControllerV2Te
     //Country is empty, selected risk - TRAVEL_MEDICAL
     @Test
     public void execute17() throws Exception {
-        executeAndCompare("test_case_17");
+        executeAndCompare("country is empty TM");
     }
 
     //Country is null, selected risk - TRAVEL_MEDICAL
     @Test
     public void execute18() throws Exception {
-        executeAndCompare("test_case_18");
+        executeAndCompare("country is null TM");
     }
 
     //country is not supported
     @Test
     public void execute21() throws Exception {
-        executeAndCompare("test_case_21");
+        executeAndCompare("country is not supported");
     }
 
     //Country is empty, selected risk - TRAVEL_EVACUATION
     @Test
     public void execute22() throws Exception {
-        executeAndCompare("test_case_22");
+        executeAndCompare("country is empty TE");
     }
 
     @Override

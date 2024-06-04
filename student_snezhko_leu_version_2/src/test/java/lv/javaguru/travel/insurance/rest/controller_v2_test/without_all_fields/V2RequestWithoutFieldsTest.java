@@ -8,13 +8,13 @@ public class V2RequestWithoutFieldsTest extends TravelCalculatePremiumController
     //all fields not provided, but selected risk is TRAVEL_MEDICAL
     @Test
     public void execute19() throws Exception {
-        executeAndCompare("test_case_19");
+        executeAndCompare("all fields not provided TM");
     }
 
     //all fields not provided
     @Test
     public void execute20() throws Exception {
-        executeAndCompare("test_case_20");
+        executeAndCompare("all fields not provided");
     }
 
     @Override

@@ -8,13 +8,13 @@ public class V2PersonLastNameTest extends TravelCalculatePremiumControllerV2Test
     //lastName is null
     @Test
     public void execute4() throws Exception {
-        executeAndCompare("test_case_4");
+        executeAndCompare("last_name is null");
     }
 
     //lastName is empty
     @Test
     public void execute5() throws Exception {
-        executeAndCompare("test_case_5");
+        executeAndCompare("last_name is empty");
     }
 
     @Override

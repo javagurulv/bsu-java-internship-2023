@@ -7,19 +7,19 @@ public class V2CorrectRequestTest extends TravelCalculatePremiumControllerV2Test
     //All fields filled. Selected risk - TRAVEL_MEDICAL
     @Test
     public void execute1() throws Exception {
-        executeAndCompare("test_case_1");
+        executeAndCompare("correct request TM");
     }
 
     //All fields filled. Selected risk - TRAVEL_CANCELLATION
     @Test
     public void execute24() throws Exception {
-        executeAndCompare("test_case_24");
+        executeAndCompare("correct request TC");
     }
 
     //All fields filled. Selected risks: TRAVEL_CANCELLATION, TRAVEL_MEDICAL
     @Test
     public void execute25() throws Exception {
-        executeAndCompare("test_case_25");
+        executeAndCompare("correct request TM, TC");
     }
 
     @Override

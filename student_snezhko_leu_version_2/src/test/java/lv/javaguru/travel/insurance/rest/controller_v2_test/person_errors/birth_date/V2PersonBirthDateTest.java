@@ -8,13 +8,13 @@ public class V2PersonBirthDateTest extends TravelCalculatePremiumControllerV2Tes
     //birthDate is null
     @Test
     public void execute6() throws Exception {
-        executeAndCompare("test_case_6");
+        executeAndCompare("birth_date is null");
     }
 
     //birthDate is in the future
     @Test
     public void execute7() throws Exception {
-        executeAndCompare("test_case_7");
+        executeAndCompare("birth_date is in the future");
     }
 
     @Override

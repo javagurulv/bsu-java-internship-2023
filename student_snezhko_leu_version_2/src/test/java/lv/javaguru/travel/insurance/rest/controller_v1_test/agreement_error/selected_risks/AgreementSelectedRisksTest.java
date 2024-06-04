@@ -9,25 +9,25 @@ public class AgreementSelectedRisksTest extends TravelCalculatePremiumController
     @DisplayName("Field selected_risks is null test")
     @Test
     public void execute13() throws Exception {
-        executeAndCompare("test_case_13");
+        executeAndCompare("selected_risks is null");
     }
 
     @DisplayName("Field selected_risks is empty test")
     @Test
     public void execute14() throws Exception {
-        executeAndCompare("test_case_14");
+        executeAndCompare("selected_risks is empty");
     }
 
     @DisplayName("one of selected risks is not supported test")
     @Test
     public void execute15() throws Exception {
-        executeAndCompare("test_case_15");
+        executeAndCompare("one not supported selected risk");
     }
 
     @DisplayName("two of selected risks is not supported test")
     @Test
     public void execute16() throws Exception {
-        executeAndCompare("test_case_16");
+        executeAndCompare("two not supported selected risks");
     }
 
     @Override

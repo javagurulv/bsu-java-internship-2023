@@ -14,24 +14,24 @@ public class V1AgreementCountryTest extends TravelCalculatePremiumControllerTest
     @DisplayName("Country is empty. TM")
     @Test
     public void executeTest17() throws Exception {
-        executeAndCompare("test_case_17");
+        executeAndCompare("country is empty, TM");
     }
 
     @DisplayName("Country is null. TM")
     @Test
     public void executeTest18() throws Exception {
-        executeAndCompare("test_case_18");
+        executeAndCompare("country is null TM");
     }
 
     @DisplayName("Country is null. TE")
     @Test
     public void executeTest21() throws Exception {
-        executeAndCompare("test_case_21");
+        executeAndCompare("country is null TE");
     }
 
     @DisplayName("Country is empty. TE")
     @Test
     public void executeTest22() throws Exception {
-        executeAndCompare("test_case_22");
+        executeAndCompare("country is empty TE");
     }
 }

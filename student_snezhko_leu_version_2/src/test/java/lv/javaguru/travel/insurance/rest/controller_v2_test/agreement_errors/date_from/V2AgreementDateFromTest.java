@@ -8,13 +8,13 @@ public class V2AgreementDateFromTest extends TravelCalculatePremiumControllerV2T
     //date_from is null
     @Test
     public void execute8() throws Exception {
-        executeAndCompare("test_case_8");
+        executeAndCompare("date_from is null");
     }
 
     //date_from is in the past
     @Test
     public void execute10() throws Exception {
-        executeAndCompare("test_case_10");
+        executeAndCompare("date_from is in the past");
     }
 
     @Override

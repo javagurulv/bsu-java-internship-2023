@@ -9,13 +9,13 @@ public class V1AgreementDateFromTest extends TravelCalculatePremiumControllerTes
     @DisplayName("Date from is in the past test")
     @Test
     public void execute10() throws Exception {
-        executeAndCompare("test_case_10");
+        executeAndCompare("date_from is in the past");
     }
 
     @DisplayName("Date from is null test")
     @Test
     public void execute8() throws Exception {
-        executeAndCompare("test_case_8");
+        executeAndCompare("date_from is null");
     }
 
     @Override

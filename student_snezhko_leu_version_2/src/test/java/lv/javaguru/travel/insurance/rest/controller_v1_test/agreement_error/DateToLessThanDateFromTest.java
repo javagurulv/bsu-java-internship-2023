@@ -9,7 +9,7 @@ public class DateToLessThanDateFromTest extends TravelCalculatePremiumController
     @DisplayName("Date_to less than date_from test")
     @Test
     public void execute12() throws Exception {
-        executeAndCompare("test_case_12");
+        executeAndCompare("date_to less than date_from");
     }
 
     @Override

@@ -8,13 +8,13 @@ public class RequestWithoutFieldsTest extends TravelCalculatePremiumControllerTe
     //without any field
     @Test
     public void execute20() throws Exception {
-        executeAndCompare("test_case_20");
+        executeAndCompare("all fields not provided");
     }
 
     //without any field, but selected risk is travel_medical
     @Test
     public void execute19() throws Exception {
-        executeAndCompare("test_case_19");
+        executeAndCompare("all fields not provided TM");
     }
 
     @Override

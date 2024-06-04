@@ -7,7 +7,7 @@ public class AllFieldFilledTest extends TravelCalculatePremiumControllerTestCase
 
     @Test
     public void execute1() throws Exception {
-        executeAndCompare("test_case_1");
+        executeAndCompare("all fields filled");
     }
 
     @Override

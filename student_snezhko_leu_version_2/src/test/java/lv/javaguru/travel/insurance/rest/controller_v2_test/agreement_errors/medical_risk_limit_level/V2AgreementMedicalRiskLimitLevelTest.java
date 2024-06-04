@@ -8,7 +8,7 @@ public class V2AgreementMedicalRiskLimitLevelTest extends TravelCalculatePremium
     //medicalRiskLimitLevelIc is not supported. Selected risk - TRAVEL_MEDICAL
     @Test
     public void execute23() throws Exception {
-        executeAndCompare("test_case_23");
+        executeAndCompare("not supported ic");
     }
 
     @Override
