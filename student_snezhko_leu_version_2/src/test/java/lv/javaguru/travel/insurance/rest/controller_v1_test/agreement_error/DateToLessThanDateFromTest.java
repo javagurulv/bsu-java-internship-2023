@@ -11,4 +11,9 @@ public class DateToLessThanDateFromTest extends TravelCalculatePremiumController
     public void execute12() throws Exception {
         executeAndCompare("test_case_12");
     }
+
+    @Override
+    protected String getPathToTestCaseFolder() {
+        return "agreement_error/";
+    }
 }

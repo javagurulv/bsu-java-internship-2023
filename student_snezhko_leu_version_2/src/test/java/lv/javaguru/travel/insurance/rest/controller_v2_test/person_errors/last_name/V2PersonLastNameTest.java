@@ -16,4 +16,9 @@ public class V2PersonLastNameTest extends TravelCalculatePremiumControllerV2Test
     public void execute5() throws Exception {
         executeAndCompare("test_case_5");
     }
+
+    @Override
+    protected String getTestCaseFolderPath() {
+        return "person_errors/last_name/";
+    }
 }

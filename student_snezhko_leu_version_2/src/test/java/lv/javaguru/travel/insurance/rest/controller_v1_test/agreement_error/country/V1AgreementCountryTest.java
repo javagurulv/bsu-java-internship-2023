@@ -6,6 +6,11 @@ import org.junit.jupiter.api.Test;
 
 public class V1AgreementCountryTest extends TravelCalculatePremiumControllerTestCase {
 
+    @Override
+    protected String getPathToTestCaseFolder() {
+        return "agreement_error/country/";
+    }
+
     @DisplayName("Country is empty. TM")
     @Test
     public void executeTest17() throws Exception {

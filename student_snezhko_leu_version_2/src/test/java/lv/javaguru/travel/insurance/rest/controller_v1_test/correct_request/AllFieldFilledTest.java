@@ -9,4 +9,9 @@ public class AllFieldFilledTest extends TravelCalculatePremiumControllerTestCase
     public void execute1() throws Exception {
         executeAndCompare("test_case_1");
     }
+
+    @Override
+    protected String getPathToTestCaseFolder() {
+        return "correct_request/";
+    }
 }

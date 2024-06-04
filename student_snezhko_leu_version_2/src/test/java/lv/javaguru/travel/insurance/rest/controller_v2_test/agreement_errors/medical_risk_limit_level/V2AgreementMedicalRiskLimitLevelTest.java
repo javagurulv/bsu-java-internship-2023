@@ -10,4 +10,9 @@ public class V2AgreementMedicalRiskLimitLevelTest extends TravelCalculatePremium
     public void execute23() throws Exception {
         executeAndCompare("test_case_23");
     }
+
+    @Override
+    protected String getTestCaseFolderPath() {
+        return "agreement_error/medical_risk_limit_level/";
+    }
 }

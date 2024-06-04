@@ -30,10 +30,12 @@ public abstract class TravelCalculatePremiumControllerTestCase {
 
  //   protected abstract String getTestCaseFolderName();
 
+    protected abstract String getPathToTestCaseFolder();
+
     protected void executeAndCompare(String testCaseFolderName) throws Exception{
         executeAndCompare(
-                "rest/v1/" + testCaseFolderName + "/request.json",
-                "rest/v1/" + testCaseFolderName + "/response.json"
+                "rest/v1/" + getPathToTestCaseFolder() + testCaseFolderName + "/request.json",
+                "rest/v1/" + getPathToTestCaseFolder() + testCaseFolderName + "/response.json"
         );
     }
     /*

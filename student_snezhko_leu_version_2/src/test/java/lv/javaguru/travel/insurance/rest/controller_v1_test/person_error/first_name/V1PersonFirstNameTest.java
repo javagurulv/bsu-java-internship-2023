@@ -16,4 +16,9 @@ public class V1PersonFirstNameTest extends TravelCalculatePremiumControllerTestC
     public void execute3() throws Exception {
         executeAndCompare("test_case_3");
     }
+
+    @Override
+    protected String getPathToTestCaseFolder() {
+        return "person_error/first_name/";
+    }
 }

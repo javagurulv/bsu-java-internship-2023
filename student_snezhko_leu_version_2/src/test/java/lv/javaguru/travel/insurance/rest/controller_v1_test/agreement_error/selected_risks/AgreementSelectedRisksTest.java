@@ -29,4 +29,9 @@ public class AgreementSelectedRisksTest extends TravelCalculatePremiumController
     public void execute16() throws Exception {
         executeAndCompare("test_case_16");
     }
+
+    @Override
+    protected String getPathToTestCaseFolder() {
+        return "agreement_error/selected_risks/";
+    }
 }

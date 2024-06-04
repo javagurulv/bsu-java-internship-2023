@@ -17,4 +17,9 @@ public class V1AgreementDateFromTest extends TravelCalculatePremiumControllerTes
     public void execute8() throws Exception {
         executeAndCompare("test_case_8");
     }
+
+    @Override
+    protected String getPathToTestCaseFolder() {
+        return "agreement_error/date_from/";
+    }
 }

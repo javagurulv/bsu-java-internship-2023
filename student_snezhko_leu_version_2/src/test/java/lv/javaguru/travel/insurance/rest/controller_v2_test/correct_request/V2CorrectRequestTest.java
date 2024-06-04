@@ -21,4 +21,9 @@ public class V2CorrectRequestTest extends TravelCalculatePremiumControllerV2Test
     public void execute25() throws Exception {
         executeAndCompare("test_case_25");
     }
+
+    @Override
+    protected String getTestCaseFolderPath() {
+        return "correct_request/";
+    }
 }

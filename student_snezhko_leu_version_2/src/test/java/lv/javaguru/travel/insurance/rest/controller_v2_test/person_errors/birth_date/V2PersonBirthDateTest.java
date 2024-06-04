@@ -16,4 +16,9 @@ public class V2PersonBirthDateTest extends TravelCalculatePremiumControllerV2Tes
     public void execute7() throws Exception {
         executeAndCompare("test_case_7");
     }
+
+    @Override
+    protected String getTestCaseFolderPath() {
+        return "person_errors/birth_date/";
+    }
 }

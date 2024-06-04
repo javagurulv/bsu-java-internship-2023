@@ -10,4 +10,9 @@ public class DateToIsLessThanDateFromTest extends TravelCalculatePremiumControll
     public void execute12() throws Exception {
         executeAndCompare("test_case_12");
     }
+
+    @Override
+    protected String getTestCaseFolderPath() {
+        return "agreement_error/";
+    }
 }

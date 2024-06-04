@@ -16,4 +16,9 @@ public class RequestWithoutFieldsTest extends TravelCalculatePremiumControllerTe
     public void execute19() throws Exception {
         executeAndCompare("test_case_19");
     }
+
+    @Override
+    protected String getPathToTestCaseFolder() {
+        return "without_all_fields/";
+    }
 }

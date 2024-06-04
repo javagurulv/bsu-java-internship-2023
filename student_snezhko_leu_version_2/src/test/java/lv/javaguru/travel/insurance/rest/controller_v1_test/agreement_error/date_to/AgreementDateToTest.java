@@ -17,4 +17,9 @@ public class AgreementDateToTest extends TravelCalculatePremiumControllerTestCas
     public void execute11() throws Exception {
         executeAndCompare("test_case_11");
     }
+
+    @Override
+    protected String getPathToTestCaseFolder() {
+        return "agreement_error/date_to/";
+    }
 }

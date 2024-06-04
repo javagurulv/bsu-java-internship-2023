@@ -29,4 +29,9 @@ public class V2AgreementCountryTest extends TravelCalculatePremiumControllerV2Te
     public void execute22() throws Exception {
         executeAndCompare("test_case_22");
     }
+
+    @Override
+    protected String getTestCaseFolderPath() {
+        return "agreement_error/country/";
+    }
 }
