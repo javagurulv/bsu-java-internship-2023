@@ -17,22 +17,27 @@ import static lv.javaguru.travel.insurance.rest.RemoveRandomValues.removeRandomV
 
 public class RestCallExample {
     public static void main(String[] args) {
-        try {
-            Thread v1 = new Thread(new V1Call());
-            Thread v2 = new Thread(new V2Call());
+       // try {
 
-            Stopwatch stopwatch = Stopwatch.createStarted();
-            v1.start();
-            v2.start();
+            for (int i = 0; i < 50; i++) {
+                Thread v1 = new Thread(new V1Call());
+                Thread v2 = new Thread(new V2Call());
 
-            v1.join();
+                Stopwatch stopwatch = Stopwatch.createStarted();
+                v1.start();
+                v2.start();
+            }
+/*            v1.join();
             v2.join();
 
             stopwatch.stop();
             System.out.println("General time : " + stopwatch.elapsed().toMillis() + " ms");
+
+
         }
         catch (InterruptedException e) {
             e.printStackTrace();
         }
+ */
     }
 }
