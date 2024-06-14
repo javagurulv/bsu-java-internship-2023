@@ -46,9 +46,17 @@ public class RestCallExample {
 
             RestTemplate restTemplate = new RestTemplate();
 
-            String responseV1Body = removeRandomValues(restTemplate.postForObject(urlV1, httpEntityV1, String.class));
-            String responseV2Body = removeRandomValues(restTemplate.postForObject(urlV2, httpEntityV2, String.class));
+            Stopwatch stopwatch = Stopwatch.createStarted();
+            String responseV1Body = restTemplate.postForObject(urlV1, httpEntityV1, String.class);
+            stopwatch.stop();
+            System.out.println("V1 :" + stopwatch.elapsed().toMillis() + " ms");
+            responseV1Body = removeRandomValues(responseV1Body);
 
+            stopwatch = Stopwatch.createStarted();
+            String responseV2Body = restTemplate.postForObject(urlV2, httpEntityV2, String.class);
+            stopwatch.stop();
+            System.out.println("V2 : " + stopwatch.elapsed().toMillis() + " ms");
+            responseV2Body = removeRandomValues(responseV2Body);
 
             JSONAssert.assertEquals(expectedResponseV1Body, responseV1Body, JSONCompareMode.LENIENT);
             JSONAssert.assertEquals(expectedResponseV2Body, responseV2Body, JSONCompareMode.LENIENT);
