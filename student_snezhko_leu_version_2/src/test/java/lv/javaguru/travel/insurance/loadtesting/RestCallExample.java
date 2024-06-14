@@ -11,33 +11,39 @@ import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import static lv.javaguru.travel.insurance.rest.RemoveRandomValues.removeRandomValues;
 
 
 public class RestCallExample {
     public static void main(String[] args) {
-       // try {
+       List<Thread> threads = new ArrayList<>();
+       LoadTestingStatistic statisticV1 = new LoadTestingStatistic();
+       LoadTestingStatistic statisticV2 = new LoadTestingStatistic();
 
-            for (int i = 0; i < 50; i++) {
-                Thread v1 = new Thread(new V1Call());
-                Thread v2 = new Thread(new V2Call());
+       for (int i = 0; i < 50; i++) {
+           threads.add(new Thread(new V1Call(statisticV1)));
+           threads.add(new Thread(new V2Call(statisticV2)));
+       }
 
-                Stopwatch stopwatch = Stopwatch.createStarted();
-                v1.start();
-                v2.start();
-            }
-/*            v1.join();
-            v2.join();
+       threads.forEach(Thread::start);
+       threads.forEach(thread -> {
+           try {
+               thread.join();
+           }
+           catch (InterruptedException e) {
+               throw new RuntimeException(e);
+           }
+       });
 
-            stopwatch.stop();
-            System.out.println("General time : " + stopwatch.elapsed().toMillis() + " ms");
+        System.out.println("Maximal time V1 : " + statisticV1.max() + " ms");
+        System.out.println("Minimal time V1 : " + statisticV1.min() + " ms");
+        System.out.println("Average time V1 : " + statisticV1.avg() + " ms\n");
 
-
-        }
-        catch (InterruptedException e) {
-            e.printStackTrace();
-        }
- */
+        System.out.println("Maximal time V2 : " + statisticV2.max() + " ms");
+        System.out.println("Minimal time V2 : " + statisticV2.min() + " ms");
+        System.out.println("Average time V2 : " + statisticV2.avg() + " ms");
     }
 }

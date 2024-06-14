@@ -18,7 +18,7 @@ public class CommonCall {
     private static final JsonFileReader jsonFileReader = new JsonFileReader();
     private static final RestTemplate restTemplate = new RestTemplate();
 
-    protected long executeAndCompare(String url, String requestPath, String responsePath) throws IOException, JSONException {
+    protected void executeAndCompare(String url, String requestPath, String responsePath, LoadTestingStatistic statistics) throws IOException, JSONException {
         String requestBody = jsonFileReader.readJsonFromFile(requestPath);
         String expectedResponseBody = jsonFileReader.readJsonFromFile(responsePath);
 
@@ -34,6 +34,7 @@ public class CommonCall {
 
         JSONAssert.assertEquals(expectedResponseBody, responseBody, JSONCompareMode.LENIENT);
 
-        return stopwatch.elapsed().toMillis();
+        statistics.add(stopwatch.elapsed().toMillis());
+        //return stopwatch.elapsed().toMillis();
     }
 }
